@@ -8,7 +8,8 @@
   - `/` 랜딩, `/demo` 예시 리스트(서버 연결 없이 동작)
   - `/@handle` 큐레이터 홈, `/@handle/slug` 리스트 화면(지도/목록 전환)
   - `/login`, `/auth/callback` 로그인(구글, 이메일 링크)
-- `src/components` — `ListExplorer`(리스트 화면), `PlaceMap`(MapLibre 지도)
+  - `/me` 내 프로필(핸들)과 내 리스트, `/me/lists/[id]` 리스트 편집(장소 검색·추가, 섹션, 메모, 순서)
+- `src/components` — `ListExplorer`(리스트 화면), `PlaceMap`(MapLibre 지도), `ListEditor`·`PlacePicker`(편집, 구글 장소 검색), `MyPage`
 - `src/lib` — Supabase 클라이언트, 데이터 조회, 외부 지도 링크, 탭 기록
 - `supabase/migrations` — DB 스키마와 행 단위 권한(RLS)
 
@@ -27,3 +28,9 @@ npm run dev
 ```
 
 환경 변수가 비어 있으면 `/demo`만 동작한다.
+
+## Supabase 로그인 설정
+
+대시보드 → Authentication → URL Configuration에서
+Site URL과 Redirect URLs에 `http://localhost:3000/**`(배포 후에는 서비스 주소)를 넣는다.
+이메일 링크 로그인은 기본으로 켜져 있고, 구글 로그인은 Providers에서 Google을 켜야 한다.

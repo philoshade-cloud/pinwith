@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "sent" | "error">("idle");
 
-  const next = () => new URLSearchParams(window.location.search).get("next") ?? "/";
+  const next = () => new URLSearchParams(window.location.search).get("next") ?? "/me";
   const redirectTo = () => `${window.location.origin}/auth/callback?next=${encodeURIComponent(next())}`;
 
   async function withGoogle() {

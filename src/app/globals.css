@@ -62,6 +62,23 @@ body {
   background: var(--color-surface);
 }
 
+.field {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-rule);
+  background: #ffffff;
+  padding: 0.55rem 0.75rem;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--color-ink);
+}
+
+.field:focus {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 0;
+  border-color: transparent;
+}
+
 /* 지도 핀: 물방울 모양, 선택되면 커지고 테두리가 진해진다 */
 .pin {
   width: 26px;
