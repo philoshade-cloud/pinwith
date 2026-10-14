@@ -4,8 +4,8 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/env";
 
-// Supabase에서 Google 로그인을 켠 뒤 Vercel 환경 변수로 true를 넣으면 버튼이 보인다.
-const GOOGLE_LOGIN_ENABLED = process.env.NEXT_PUBLIC_GOOGLE_LOGIN_ENABLED === "true";
+// 구글 로그인 버튼. 끄려면 환경 변수에 false를 넣는다.
+const GOOGLE_LOGIN_ENABLED = process.env.NEXT_PUBLIC_GOOGLE_LOGIN_ENABLED !== "false";
 
 // 로그인: 구글 또는 이메일 링크. 로그인 후 원래 보던 화면(next)으로 돌아간다.
 export default function LoginPage() {
@@ -25,6 +25,10 @@ export default function LoginPage() {
     // 버튼을 두 번 누르거나 Enter와 클릭이 겹치면 요청이 동시에 두 번 가서 두 번째가 실패한다.
     if (state === "sending") return;
     const address = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address)) {
+      setState("error");
+      return;
+    }
     setState("sending");
     const { error } = await createClient().auth.signInWithOtp({
       email: address,
@@ -61,7 +65,13 @@ export default function LoginPage() {
         </label>
         <input
           id="email"
-          type="email"
+          name="email"
+          type="text"
+          inputMode="email"
+          autoComplete="email"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}

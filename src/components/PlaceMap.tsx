@@ -27,6 +27,10 @@ export function PlaceMap({ items, selectedId, onSelect, showRoute }: Props) {
 
   useEffect(() => {
     if (!container.current || map.current) return;
+    // 번들된 상태에서는 워커 경로를 스스로 찾지 못하므로 public/의 사본을 알려준다.
+    if (!maplibregl.getWorkerUrl().startsWith(window.location.origin + "/maplibre")) {
+      maplibregl.setWorkerUrl(`${window.location.origin}/maplibre-gl-worker.mjs`);
+    }
     const m = new maplibregl.Map({
       container: container.current,
       style: MAP_STYLE_URL,
@@ -75,7 +79,13 @@ export function PlaceMap({ items, selectedId, onSelect, showRoute }: Props) {
     if (located.length > 0) {
       const bounds = new maplibregl.LngLatBounds();
       located.forEach((i) => bounds.extend([i.lng!, i.lat!]));
-      m.fitBounds(bounds, { padding: 64, maxZoom: 15, duration: 0 });
+      const narrow = window.innerWidth < 1024;
+      // 모바일에서는 위쪽 제목 줄과 아래쪽 지도/목록 전환 버튼을 피해서 맞춘다.
+      m.fitBounds(bounds, {
+        padding: narrow ? { top: 90, bottom: 110, left: 40, right: 40 } : 64,
+        maxZoom: 15,
+        duration: 0,
+      });
     }
 
     const drawRoute = () => {

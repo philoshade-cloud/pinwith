@@ -183,7 +183,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
       </aside>
 
       {/* 지도: 모바일에서는 '지도' 보기일 때, 데스크톱에서는 항상 */}
-      <main className={`${view === "map" ? "block" : "hidden"} relative min-h-0 flex-1 lg:block`}>
+      <main className={`${view === "map" ? "block" : "hidden"} map-under-header relative min-h-0 flex-1 lg:block`}>
         <div className="absolute inset-x-0 top-0 z-10 flex items-center gap-2 bg-white/95 px-4 py-3 shadow-[0_1px_0_var(--color-rule)] lg:hidden">
           <Avatar name={list.curator.displayName} url={list.curator.avatarUrl} size={28} />
           <p className="min-w-0 truncate text-[15px] font-semibold text-ink">{list.title}</p>
