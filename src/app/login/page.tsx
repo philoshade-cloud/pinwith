@@ -13,7 +13,7 @@ export default function LoginPage() {
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error" | "rate">("idle");
   const [sentTo, setSentTo] = useState("");
 
-  const next = () => new URLSearchParams(window.location.search).get("next") ?? "/me";
+  const next = () => new URLSearchParams(window.location.search).get("next") ?? "/me?welcome=1";
   const redirectTo = () => `${window.location.origin}/auth/callback?next=${encodeURIComponent(next())}`;
 
   async function withGoogle() {

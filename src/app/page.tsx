@@ -13,7 +13,7 @@ export default function Home() {
         로그인 없이 바로 보고, 구글 지도나 네이버 지도로 길을 찾아갑니다.
       </p>
       <div className="mt-10 flex flex-wrap gap-3">
-        <Link href="/me" className="btn-primary !px-5 !py-3 !text-[15px]">
+        <Link href="/me?welcome=1" className="btn-primary !px-5 !py-3 !text-[15px]">
           내 지도 만들기
         </Link>
         <Link href="/demo" className="btn-quiet !px-5 !py-3 !text-[15px]">

@@ -264,7 +264,7 @@ export function ListEditor({ listId }: { listId: string }) {
     if (!window.confirm("이 리스트를 지울까요? 담긴 장소와 메모도 함께 지워집니다.")) return;
     const { error } = await supabase.from("lists").delete().eq("id", listId);
     if (error) return flash("리스트를 지우지 못했습니다.");
-    router.push("/me");
+    router.push(handle ? `/@${handle}` : "/me");
   }
 
   async function copyLink() {
@@ -314,7 +314,7 @@ export function ListEditor({ listId }: { listId: string }) {
     <div className="lg:grid lg:h-dvh lg:grid-cols-[minmax(0,560px)_1fr]">
       <div className="overflow-y-auto px-5 pb-24 pt-5 lg:border-r lg:border-rule">
         <nav className="flex items-center gap-2">
-          <Link href="/me" className="text-[14px] text-muted hover:text-ink">← 내 리스트</Link>
+          <Link href={handle ? `/@${handle}` : "/me"} className="text-[14px] text-muted hover:text-ink">← 내 지도</Link>
           <span className="ml-auto" />
           <button type="button" onClick={copyLink} className="btn-quiet">링크 복사</button>
           <Link href={viewHref} target="_blank" className="btn-quiet">보기</Link>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { createEmptyList } from "@/lib/lists";
 import type { Visibility } from "@/lib/types";
 
 type Profile = { id: string; handle: string; display_name: string; bio: string };
@@ -19,9 +20,6 @@ type MyList = {
 const VIS: Record<Visibility, string> = { public: "공개", unlisted: "링크 공개", private: "나만 보기" };
 const HANDLE_RE = /^[a-z0-9_]{3,24}$/;
 
-function newSlug() {
-  return `list-${Math.random().toString(36).slice(2, 8)}`;
-}
 
 export function MyPage() {
   const router = useRouter();
@@ -48,6 +46,13 @@ export function MyPage() {
           .order("updated_at", { ascending: false }),
       ]);
       if (p) {
+        // 로그인 직후(welcome)이고 핸들을 이미 정했으면 곧장 내 지도로 보낸다.
+        const welcome = new URLSearchParams(window.location.search).has("welcome");
+        const tempHandle = p.handle.startsWith("u") && p.handle.length > 20;
+        if (welcome && !tempHandle) {
+          router.replace(`/@${p.handle}`);
+          return;
+        }
         setProfile(p);
         setDraft(p);
       }
@@ -77,20 +82,19 @@ export function MyPage() {
     const saved = { ...draft, handle, display_name: draft.display_name.trim(), bio: draft.bio.trim() };
     setProfile(saved);
     setDraft(saved);
-    setMsg("저장했습니다.");
+    // 저장하면 내 지도로 이동. 거기서 새 리스트를 만든다.
+    router.push(`/@${handle}`);
   }
 
   async function createList() {
-    if (!profile) return;
     setCreating(true);
-    const { data, error } = await supabase
-      .from("lists")
-      .insert({ owner_id: profile.id, slug: newSlug(), title: "새 리스트" })
-      .select("id")
-      .single();
-    setCreating(false);
-    if (error || !data) return setMsg("리스트를 만들지 못했습니다. 다시 시도하세요.");
-    router.push(`/me/lists/${data.id}`);
+    try {
+      const id = await createEmptyList();
+      router.push(`/me/lists/${id}`);
+    } catch {
+      setCreating(false);
+      setMsg("리스트를 만들지 못했습니다. 새로고침 후 다시 시도하세요.");
+    }
   }
 
   async function signOut() {
@@ -115,7 +119,7 @@ export function MyPage() {
         </h1>
         {needsHandle && (
           <p className="mt-2 text-[15px] text-teal">
-            먼저 핸들을 정하세요. 내 지도의 주소가 됩니다: pinwith/@핸들
+            핸들을 정하면 내 지도의 주소가 됩니다: /@핸들. 나중에 언제든 바꿀 수 있습니다.
           </p>
         )}
         <form onSubmit={saveProfile} className="mt-5 grid gap-4">
@@ -130,6 +134,11 @@ export function MyPage() {
                 autoComplete="username"
               />
             </span>
+            {!needsHandle && (
+              <span className="text-[12px] font-normal text-muted">
+                핸들은 언제든 바꿀 수 있습니다. 바꾸면 이전 주소로 공유한 링크는 열리지 않습니다.
+              </span>
+            )}
           </label>
           <label className="grid gap-1 text-[13px] font-semibold text-ink">
             이름
@@ -152,14 +161,12 @@ export function MyPage() {
             />
           </label>
           <div className="flex items-center gap-3">
-            <button type="submit" disabled={!dirty} className="btn-primary disabled:opacity-40">
-              프로필 저장
+            <button type="submit" disabled={!dirty && !needsHandle} className="btn-primary disabled:opacity-40">
+              {needsHandle ? "저장하고 내 지도로" : "프로필 저장"}
             </button>
-            {!needsHandle && (
-              <Link href={`/@${profile.handle}`} className="btn-quiet">
-                내 프로필 보기
-              </Link>
-            )}
+            <Link href={`/@${profile.handle}`} className="btn-quiet">
+              내 지도 보기
+            </Link>
             {msg && <span role="status" className="text-[14px] text-muted">{msg}</span>}
           </div>
         </form>
@@ -171,7 +178,7 @@ export function MyPage() {
           <button
             type="button"
             onClick={createList}
-            disabled={creating || !!needsHandle}
+            disabled={creating}
             className="btn-primary ml-auto disabled:opacity-40"
           >
             새 리스트 만들기

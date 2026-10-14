@@ -31,25 +31,47 @@ async function getCurator(handle: string): Promise<Curator | null> {
 
 export async function getCuratorPage(
   rawHandle: string,
-): Promise<{ curator: Curator; lists: ListSummary[] } | null> {
+): Promise<{ curator: Curator; lists: ListSummary[]; isOwner: boolean } | null> {
   const curator = await getCurator(normalizeHandle(rawHandle));
   if (!curator) return null;
   const supabase = await createClient();
-  const { data } = await supabase
+  const { data: auth } = await supabase.auth.getUser();
+  const isOwner = auth.user?.id === curator.id;
+
+  // 다른 사람에게는 공개 리스트만, 주인에게는 비공개·링크 공개까지 모두 보인다.
+  let query = supabase
     .from("lists")
-    .select("id, slug, title, themes, like_count, list_items(count)")
+    .select(
+      "id, slug, title, visibility, themes, like_count," +
+        " list_items(id, place_id, custom_title, places(lat, lng))",
+    )
     .eq("owner_id", curator.id)
-    .eq("visibility", "public")
     .order("updated_at", { ascending: false });
-  const lists: ListSummary[] = (data ?? []).map((l) => ({
+  if (!isOwner) query = query.eq("visibility", "public");
+  const { data } = await query;
+
+  type Row = {
+    id: string; slug: string; title: string; visibility: ListSummary["visibility"];
+    themes: string[]; like_count: number;
+    list_items: { id: string; place_id: string; custom_title: string; places: { lat: number | null; lng: number | null } | null }[];
+  };
+  const lists: ListSummary[] = ((data ?? []) as unknown as Row[]).map((l) => ({
     id: l.id,
     slug: l.slug,
     title: l.title,
+    visibility: l.visibility,
     themes: l.themes,
     likeCount: l.like_count,
-    itemCount: (l.list_items as unknown as { count: number }[])[0]?.count ?? 0,
+    itemCount: l.list_items.length,
+    pins: l.list_items.map((i) => ({
+      id: i.id,
+      title: i.custom_title,
+      placeId: i.place_id,
+      lat: i.places?.lat ?? null,
+      lng: i.places?.lng ?? null,
+    })),
   }));
-  return { curator, lists };
+  return { curator, lists, isOwner };
 }
 
 export async function getCuratedList(

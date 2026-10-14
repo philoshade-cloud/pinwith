@@ -44,7 +44,9 @@ export type ListSummary = {
   id: string;
   slug: string;
   title: string;
+  visibility: Visibility;
   themes: string[];
   likeCount: number;
   itemCount: number;
+  pins: { id: string; title: string; placeId: string; lat: number | null; lng: number | null }[];
 };
