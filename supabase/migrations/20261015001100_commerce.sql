@@ -396,3 +396,7 @@ begin
 end; $$;
 revoke all on function public.biz_dashboard(uuid, integer) from public, anon;
 grant execute on function public.biz_dashboard(uuid, integer) to authenticated;
+
+-- 보안 점검 후: 로그인한 사람만 쓰는 조회는 비로그인 호출을 막고, 예전 노출 기록 함수는 닫는다
+revoke execute on function public.curator_dashboard(), public.my_offer_stats(integer), public.offer_market(), public.my_monetization(), public.record_ad_view(uuid, text) from public, anon;
+revoke execute on function public.record_ad_view(uuid, text) from authenticated;
