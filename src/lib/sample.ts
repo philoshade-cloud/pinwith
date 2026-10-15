@@ -120,8 +120,10 @@ async function resolve(seed: Seed): Promise<{ placeId: string; lat: number; lng:
 
 export async function getSampleList(): Promise<CuratedList> {
   "use cache";
-  cacheLife("weeks");
   const resolved = await Promise.all(seeds.map(resolve));
+  // 모두 찾았으면 1주 캐시(좌표는 30일 안에 만료). 하나라도 못 찾았으면 곧 다시 시도한다.
+  if (resolved.every(Boolean)) cacheLife("weeks");
+  else cacheLife("minutes");
   return {
     ...base,
     items: seeds.map((s, n) => {
