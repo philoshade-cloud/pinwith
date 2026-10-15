@@ -124,7 +124,7 @@ export function ReserveForm({ itemId }: { itemId: string }) {
               <label className="grid gap-1 text-[13px] font-semibold">이름<input value={f.name} onChange={set("name")} className="field" autoComplete="name" required /></label>
               <label className="grid gap-1 text-[13px] font-semibold">연락처<input value={f.phone} onChange={set("phone")} className="field" inputMode="tel" autoComplete="tel" required /></label>
             </div>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-[1.4fr_1fr_0.6fr] gap-2">
               <label className="grid gap-1 text-[13px] font-semibold">날짜<input type="date" min={today()} value={f.date} onChange={set("date")} className="field" required /></label>
               <label className="grid gap-1 text-[13px] font-semibold">시간<input type="time" value={f.time} onChange={set("time")} className="field" /></label>
               <label className="grid gap-1 text-[13px] font-semibold">인원<input inputMode="numeric" value={f.party} onChange={set("party")} className="field" /></label>

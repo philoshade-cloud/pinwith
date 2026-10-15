@@ -114,7 +114,7 @@ export default function LoginPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="mt-2 w-full rounded-lg border border-rule px-3 py-2.5 text-[15px]"
-          placeholder={TEST_LOGIN ? "you@example.com  ·  테스트: test1~test6" : "you@example.com"}
+          placeholder={TEST_LOGIN ? "you@example.com  ·  테스트: test1~6, 가게 test7~9" : "you@example.com"}
         />
         <button
           type="submit"
