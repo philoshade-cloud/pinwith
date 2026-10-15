@@ -1,16 +1,22 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/env";
 import { GOOGLE_CLIENT_ID, GoogleSignIn } from "@/components/GoogleSignIn";
 import { Panel } from "@/components/shell/Panel";
 
+// 임시 테스트 계정(test1~test6@pinwith.test). 끄려면 환경 변수에 false를 넣는다.
+const TEST_LOGIN = process.env.NEXT_PUBLIC_TEST_LOGIN !== "false";
+const TEST_PASSWORD = "pinwith-test-2026";
+
 // 구글 로그인 버튼. 끄려면 환경 변수에 false를 넣는다.
 const GOOGLE_LOGIN_ENABLED = process.env.NEXT_PUBLIC_GOOGLE_LOGIN_ENABLED !== "false";
 
 // 로그인: 구글 또는 이메일 링크. 로그인 후 원래 보던 화면(next)으로 돌아간다.
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error" | "rate">("idle");
   const [sentTo, setSentTo] = useState("");
@@ -35,6 +41,21 @@ export default function LoginPage() {
     // 버튼을 두 번 누르거나 Enter와 클릭이 겹치면 요청이 동시에 두 번 가서 두 번째가 실패한다.
     if (state === "sending") return;
     const address = email.trim();
+
+    // 임시 테스트 로그인: "test1"처럼 치면 그 테스트 계정으로 바로 들어간다(출시 전에 지운다).
+    const test = /^test(\d{1,2})$/i.exec(address);
+    if (TEST_LOGIN && test) {
+      setState("sending");
+      const { error } = await createClient().auth.signInWithPassword({
+        email: `test${Number(test[1])}@pinwith.test`,
+        password: TEST_PASSWORD,
+      });
+      if (error) return setState("error");
+      router.push(next() === "/me?welcome=1" ? "/" : next());
+      router.refresh();
+      return;
+    }
+
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address)) {
       setState("error");
       return;
@@ -92,7 +113,7 @@ export default function LoginPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="mt-2 w-full rounded-lg border border-rule px-3 py-2.5 text-[15px]"
-          placeholder="you@example.com"
+          placeholder={TEST_LOGIN ? "you@example.com  ·  테스트: test1~test6" : "you@example.com"}
         />
         <button
           type="submit"

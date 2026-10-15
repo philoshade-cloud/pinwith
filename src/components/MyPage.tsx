@@ -10,6 +10,8 @@ import { useShell } from "./shell/context";
 
 type Profile = { id: string; handle: string; display_name: string; bio: string };
 const HANDLE_RE = /^[a-z0-9_]{3,24}$/;
+// 가입 때 자동으로 붙는 임시 핸들(u + 12자리)
+const TEMP_HANDLE = /^u[0-9a-f]{12}$/;
 
 
 export function MyPage() {
@@ -35,7 +37,7 @@ export function MyPage() {
       if (p) {
         // 로그인 직후(welcome)이고 핸들을 이미 정했으면 곧장 내 지도로 보낸다.
         const welcome = new URLSearchParams(window.location.search).has("welcome");
-        const tempHandle = p.handle.startsWith("u") && p.handle.length > 20;
+        const tempHandle = TEMP_HANDLE.test(p.handle);
         if (welcome && !tempHandle) {
           router.replace("/");
           return;
@@ -46,7 +48,7 @@ export function MyPage() {
     })();
   }, [router, supabase]);
 
-  const needsHandle = profile?.handle.startsWith("u") && profile.handle.length > 20;
+  const needsHandle = !!profile && TEMP_HANDLE.test(profile.handle);
   const dirty = draft && profile && JSON.stringify(draft) !== JSON.stringify(profile);
 
   async function saveProfile(e: React.FormEvent) {
