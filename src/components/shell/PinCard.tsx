@@ -40,10 +40,16 @@ export function PinCard({
       </div>
       {item.memo && <p className="mt-1.5 text-[14px] leading-relaxed text-ink/80">{item.memo}</p>}
       <Tags tags={item.tags} />
-      <div className="mt-3 flex flex-wrap gap-2">
-        <ReserveButton placeId={item.placeId} itemId={listId && !listId.startsWith("demo") ? item.id : undefined} />
-        <ExternalLinks item={item} onEvent={log} />
-        <button type="button" onClick={() => onSave(item)} className="btn-quiet">
+      {/* 버튼이 많으면 줄바꿈 없이 옆으로 밀어서 본다 */}
+      <div className="-mx-4 mt-3 flex gap-1.5 overflow-x-auto px-4 pb-1 [scrollbar-width:none]">
+        <ReserveButton
+          placeId={item.placeId}
+          itemId={listId && !listId.startsWith("demo") ? item.id : undefined}
+          onOpen={onClose}
+          className="btn-primary shrink-0 whitespace-nowrap !px-3 !py-1.5 !text-[13px]"
+        />
+        <ExternalLinks item={item} onEvent={log} compact />
+        <button type="button" onClick={() => onSave(item)} className="btn-quiet shrink-0 whitespace-nowrap !px-3 !py-1.5 !text-[13px]">
           내 리스트에 담기
         </button>
       </div>

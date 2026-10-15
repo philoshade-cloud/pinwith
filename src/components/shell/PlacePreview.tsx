@@ -37,9 +37,9 @@ export function PlacePreview({
           }}
         />
       </div>
-      <div className="mt-3 flex flex-wrap gap-2">
-        <ReserveButton placeId={placeId} />
-        {place && <ExternalLinks item={{ title: place.name, placeId, lat: place.lat, lng: place.lng }} />}
+      <div className="-mx-4 mt-3 flex gap-1.5 overflow-x-auto px-4 pb-1 [scrollbar-width:none]">
+        <ReserveButton placeId={placeId} onOpen={onClose} className="btn-primary shrink-0 whitespace-nowrap !px-3 !py-1.5 !text-[13px]" />
+        {place && <ExternalLinks item={{ title: place.name, placeId, lat: place.lat, lng: place.lng }} compact />}
       </div>
       <button
         type="button"

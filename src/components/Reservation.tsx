@@ -40,7 +40,7 @@ function today() {
 }
 
 // 장소 카드의 '예약 문의' 버튼: 가게가 예약 기능을 켜 두었으면 어디서 보든(리스트·검색) 보인다.
-export function ReserveButton({ placeId, itemId }: { placeId: string; itemId?: string }) {
+export function ReserveButton({ placeId, itemId, onOpen, className = "btn-primary" }: { placeId: string; itemId?: string; onOpen?: () => void; className?: string }) {
   const [offer, setOffer] = useState<OfferInfo | null>(null);
   useEffect(() => {
     let alive = true;
@@ -53,7 +53,8 @@ export function ReserveButton({ placeId, itemId }: { placeId: string; itemId?: s
   }, [placeId]);
   if (!offer) return null;
   return (
-    <Link href={`/reserve/${encodeURIComponent(placeId)}${itemId ? `?item=${itemId}` : ""}`} className="btn-primary">
+    // 누르면 장소 카드·미리보기를 닫아 예약 화면을 가리지 않게 한다
+    <Link href={`/reserve/${encodeURIComponent(placeId)}${itemId ? `?item=${itemId}` : ""}`} onClick={onOpen} className={className}>
       예약 문의
     </Link>
   );
