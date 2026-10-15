@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SignOutButton } from "./SignOutButton";
+import { AvatarPicker } from "./AvatarPicker";
 import { APP_VERSION } from "@/lib/version";
 import { useMonetization } from "@/lib/monetization";
 import { Panel, PanelLoading } from "./shell/Panel";
@@ -100,6 +101,9 @@ export function MyPage() {
             핸들을 정하면 내 지도의 주소가 됩니다: /@핸들. 나중에 언제든 바꿀 수 있습니다.
           </p>
         )}
+        <div className="mt-4">
+          <AvatarPicker userId={profile.id} name={draft.display_name || profile.handle} onChange={refreshMine} />
+        </div>
         <form onSubmit={saveProfile} className="mt-4 grid gap-4">
           <label className="grid gap-1 text-[13px] font-semibold text-ink">
             핸들
