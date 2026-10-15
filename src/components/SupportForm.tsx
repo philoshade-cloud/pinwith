@@ -34,6 +34,16 @@ function SupportFormInner() {
     typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("from") ?? document.referrer,
   );
 
+  // 리스트 화면의 '이 리스트 신고'로 들어오면 어떤 리스트인지 함께 보낸다
+  const [listId] = useState(() =>
+    typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("list") ?? "",
+  );
+  const [listTitle, setListTitle] = useState("");
+  useEffect(() => {
+    if (!listId) return;
+    supabase.from("lists").select("title").eq("id", listId).maybeSingle().then(({ data }) => data && setListTitle(data.title as string));
+  }, [supabase, listId]);
+
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => data.user?.email && setEmail((e) => e || data.user!.email!));
   }, [supabase]);
@@ -45,7 +55,7 @@ function SupportFormInner() {
     const res = await fetch("/api/support", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ category, email, body, pageUrl: from }),
+      body: JSON.stringify({ category, email, body, pageUrl: from, listId: listId || undefined }),
     }).catch(() => null);
     setState(res?.ok ? "sent" : "error");
   }
@@ -62,6 +72,12 @@ function SupportFormInner() {
         ) : (
           <form onSubmit={send} className="grid gap-4">
             <p className="text-[14px] text-ink/80">이용하면서 궁금한 점, 불편한 점, 오류, 부적절한 리스트·댓글 신고를 운영자에게 보내 주세요.</p>
+            {listTitle && (
+              <p className="rounded-lg bg-surface px-3 py-2 text-[14px] text-ink">
+                신고할 리스트: <b>{listTitle}</b>
+                <span className="block text-[12px] text-muted">리스트 정보는 자동으로 함께 보내져요.</span>
+              </p>
+            )}
             <label className="grid gap-1 text-[13px] font-semibold text-ink">
               종류
               <select value={category} onChange={(e) => setCategory(e.target.value)} className="field">
@@ -83,7 +99,7 @@ function SupportFormInner() {
                 maxLength={4000}
                 required
                 className="field"
-                placeholder={category === "report" ? "신고할 리스트·댓글의 주소와 이유를 적어 주세요." : "자세히 적어 주실수록 빨리 도와드릴 수 있어요."}
+                placeholder={category === "report" ? (listTitle ? "신고하는 이유를 적어 주세요." : "신고할 리스트·댓글의 주소와 이유를 적어 주세요.") : "자세히 적어 주실수록 빨리 도와드릴 수 있어요."}
               />
             </label>
             {state === "error" && <p role="alert" className="text-[14px] text-pin">보내지 못했습니다. 잠시 후 다시 시도하세요.</p>}

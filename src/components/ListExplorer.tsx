@@ -284,7 +284,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
         <AdSlot slot="list-end" variant={isDemo ? 0 : 1} listId={isDemo ? undefined : list.id} />
         {!isDemo && !isOwner && (
           <p className="px-5 pb-2 text-right">
-            <Link href={`/support?type=report&from=${encodeURIComponent(`/@${list.curator.handle}/${list.slug}`)}`} className="text-[12px] text-muted underline">
+            <Link href={`/support?type=report&list=${list.id}&from=${encodeURIComponent(`/@${list.curator.handle}/${list.slug}`)}`} className="text-[12px] text-muted underline">
               이 리스트 신고
             </Link>
           </p>

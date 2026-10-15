@@ -6,7 +6,7 @@ import { serviceDb } from "@/lib/placeCoords";
 const CATEGORIES = { question: "이용 문의", bug: "오류·불편 신고", report: "부적절한 내용 신고", partnership: "제휴·광고 문의", other: "기타" } as const;
 
 export async function POST(req: Request) {
-  let body: { category?: string; email?: string; body?: string; pageUrl?: string };
+  let body: { category?: string; email?: string; body?: string; pageUrl?: string; listId?: string };
   try {
     body = await req.json();
   } catch {
@@ -21,9 +21,30 @@ export async function POST(req: Request) {
   const supabase = await createServerSupabase();
   const { data: claims } = await supabase.auth.getClaims();
   const userId = (claims?.claims?.sub as string | undefined) ?? null;
-  const row = { user_id: userId, category, email, body: text, page_url: pageUrl };
   // 로그인 여부와 관계없이 저장: 서버 키가 있으면 그걸로, 없으면 사용자 권한으로
   const db = serviceDb() ?? supabase;
+
+  // 신고 대상 리스트: 제목·주인·주소·공개 범위를 메일에 자동으로 붙인다
+  const origin = new URL(req.url).origin;
+  let listId: string | null = null;
+  let target = "";
+  if (body.listId && /^[0-9a-f-]{36}$/i.test(body.listId)) {
+    const { data: l } = await db
+      .from("lists")
+      .select("id, title, slug, visibility, owner:profiles!lists_owner_id_fkey(handle, display_name)")
+      .eq("id", body.listId)
+      .maybeSingle();
+    if (l) {
+      const o = l.owner as unknown as { handle: string; display_name: string } | null;
+      listId = l.id as string;
+      target =
+        `신고 대상 리스트: ${l.title}\n` +
+        `만든 사람: ${o ? `${o.display_name} (@${o.handle})` : "-"}\n` +
+        `주소: ${o ? `${origin}/@${o.handle}/${l.slug}` : "-"}\n` +
+        `공개 범위: ${l.visibility}\n리스트 ID: ${l.id}\n`;
+    }
+  }
+  const row = { user_id: userId, category, email, body: text, page_url: pageUrl, list_id: listId };
   const { error } = await db.from("support_requests").insert(row);
   if (error) return Response.json({ ok: false }, { status: 500 });
 
@@ -42,8 +63,10 @@ export async function POST(req: Request) {
         from: process.env.SUPPORT_FROM || "PinWith <onboarding@resend.dev>",
         to: [to],
         reply_to: email ?? undefined,
-        subject: `[PinWith ${CATEGORIES[category]}] ${text.slice(0, 40)}`,
-        text: `분류: ${CATEGORIES[category]}\n보낸 사람: ${who}\n답장 받을 메일: ${email ?? "(없음)"}\n화면: ${pageUrl ?? "-"}\n\n${text}`,
+        subject: `[PinWith ${CATEGORIES[category]}] ${target ? `리스트 신고 · ` : ""}${text.slice(0, 40)}`,
+        text:
+          `분류: ${CATEGORIES[category]}\n보낸 사람: ${who}\n답장 받을 메일: ${email ?? "(없음)"}\n` +
+          `화면: ${pageUrl ? (pageUrl.startsWith("/") ? origin + pageUrl : pageUrl) : "-"}\n${target}\n${text}`,
       }),
     }).catch(() => {});
   }
