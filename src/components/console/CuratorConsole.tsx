@@ -16,7 +16,8 @@ const TABS: { id: Tab; label: string }[] = [
 type Dash = {
   currency: string; est_rpm: number; rate_pct: number; platform_fee_pct: number; min_payout: number; eligible: boolean;
   lists: { id: string; title: string; slug: string; monetize: boolean; visibility: string; paid_month: number; all_month: number; all_30d: number; est_month: number }[];
-  display_total: number; offer_total: number; offer_month: number; requested: number; paid: number; available: number; has_profile: boolean;
+  display_total: number; offer_total: number; offer_month: number; reservation_month: number; reservations_month: number;
+  reservations_confirmed_month: number; requested: number; paid: number; available: number; has_profile: boolean;
 };
 
 // 큐레이터 콘솔: 디스플레이 광고 예상 수익, 가게 제휴 고르기·성과, 지급 정보·요청
@@ -38,10 +39,15 @@ export function CuratorConsole() {
   return (
     <div>
       <h1 className="font-display text-[26px] font-semibold text-ink">큐레이터 콘솔</h1>
-      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         <Stat label="받을 수 있는 금액" value={money(dash.available, dash.currency)} hint={`최소 ${money(dash.min_payout, dash.currency)}부터 요청`} />
         <Stat label="이번 달 광고 예상" value={money(dash.lists.filter((l) => l.monetize).reduce((s, l) => s + Number(l.est_month), 0), dash.currency)} hint="수익화한 리스트" />
-        <Stat label="이번 달 제휴 수익" value={money(dash.offer_month, dash.currency)} />
+        <Stat label="이번 달 길찾기·방문 제휴" value={money(dash.offer_month, dash.currency)} />
+        <Stat
+          label="이번 달 예약 제휴"
+          value={money(dash.reservation_month, dash.currency)}
+          hint={`예약 문의 ${count(dash.reservations_month)}건 · 확정 ${count(dash.reservations_confirmed_month)}건`}
+        />
         <Stat label="지급 받은 금액" value={money(dash.paid, dash.currency)} hint={dash.requested > 0 ? `요청 중 ${money(dash.requested, dash.currency)}` : undefined} />
       </div>
       <div className="mt-6">
@@ -160,7 +166,7 @@ function Market({ currency }: { currency: string }) {
   return (
     <section className="grid gap-4">
       <p className="text-[13px] text-muted">
-        가게들이 내건 보상 조건이에요. 내 리스트에 그 가게가 들어 있으면 붙일 수 있고, 붙인 뒤부터 조건에 맞는 손님 행동마다 수익이 쌓여요(같은 사람은 하루 1회,
+        가게들이 내건 보상 조건이에요. ‘예약 확정’ 조건을 붙이면 내 리스트의 장소 카드에서 들어온 예약 문의를 가게가 확정할 때마다 받아요. 내 리스트에 그 가게가 들어 있으면 붙일 수 있고, 붙인 뒤부터 조건에 맞는 손님 행동마다 수익이 쌓여요(같은 사람은 하루 1회,
         나와 가게 주인 본인은 제외). 표시된 금액은 PinWith 수수료를 뺀 내 몫이에요.
       </p>
       <label className="flex items-center gap-2 text-[14px]">
@@ -207,7 +213,7 @@ function Market({ currency }: { currency: string }) {
 // ── 내 제휴 성과 ─────────────────────────
 type MineRow = {
   attachment_id: string; active: boolean; offer_active: boolean; model: string; curator_rate: number; place_name: string; business: string;
-  list_id: string; list_title: string; count: number; earned: number; earned_total: number;
+  list_id: string; list_title: string; count: number; inquiries: number; earned: number; earned_total: number;
 };
 
 function Mine({ currency }: { currency: string }) {
@@ -268,7 +274,10 @@ function Mine({ currency }: { currency: string }) {
                     {money(r.curator_rate, currency)} · {MODEL[r.model]?.label}
                     {!r.offer_active && <span className="block text-[12px] text-pin">가게가 조건을 내렸어요</span>}
                   </td>
-                  <td className="tabular-nums">{count(r.count)}</td>
+                  <td className="tabular-nums">
+                    {count(r.count)}
+                    {r.model === "reservation" && <span className="block text-[11px] text-muted">문의 {count(r.inquiries)}건 중 확정</span>}
+                  </td>
                   <td className="font-semibold tabular-nums">{money(r.earned, currency)}</td>
                   <td className="tabular-nums">{money(r.earned_total, currency)}</td>
                   <td>
