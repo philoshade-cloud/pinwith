@@ -15,6 +15,8 @@ export async function fetchLocation(placeId: string): Promise<{ lat: number; lng
   const key = process.env.GOOGLE_MAPS_SERVER_KEY || process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   if (!key) return null;
   try {
+    // 사용량 기록(운영자 콘솔 → 서비스 사용량)
+    serviceDb()?.rpc("log_usage", { p_kind: "place_details", p_n: 1, p_key: "server" }).then(() => {});
     const res = await fetch(`https://places.googleapis.com/v1/places/${encodeURIComponent(placeId)}`, {
       headers: { "X-Goog-Api-Key": key, "X-Goog-FieldMask": "location", Referer: `${SITE}/` },
       cache: "no-store",

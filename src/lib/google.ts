@@ -36,6 +36,7 @@ export function loadPlacesLibrary(): Promise<Record<string, unknown>> {
     script.src = `https://maps.googleapis.com/maps/api/js?${params}`;
     script.async = true;
     script.onerror = () => reject(new Error("load-failed"));
+    script.onload = () => import("./usage").then((u) => u.logUsage("maps_js")).catch(() => {});
     document.head.append(script);
   })
     .then(() => window.google!.maps.importLibrary("places"))

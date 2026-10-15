@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { loadPlacesLibrary, type UiKitPlace } from "@/lib/google";
+import { logUsage } from "@/lib/usage";
 
 export type FoundPlace = { id: string; name: string; address: string; lat: number; lng: number };
 
@@ -121,6 +122,8 @@ export function PlaceSearchBox({
   function pick(s: Suggestion) {
     // 휴대폰 키보드를 내려 지도가 보이게 한다
     input.current?.blur();
+    // 제안 세션 하나(글자 입력 ~ 고르기)가 요금 1건
+    if (token.current) logUsage("autocomplete");
     token.current = null;
     setOpen(false);
     setText(s.main);
@@ -160,6 +163,8 @@ export function PlaceSearchBox({
     setOpen(false);
     setBusy(true);
     try {
+      logUsage("text_search");
+      if (token.current) logUsage("autocomplete");
       onResults(q, await googleSearch(q));
     } finally {
       token.current = null;
@@ -287,6 +292,7 @@ export function PlaceCard({ placeId, onLoaded }: { placeId: string; onLoaded: (p
       }
       card.append(req, config);
       card.addEventListener("gmp-load", () => {
+        logUsage("maps_card");
         const loc = card.place?.location;
         if (!loc) return;
         onLoadedRef.current({ lat: loc.lat(), lng: loc.lng(), name: card.place?.displayName ?? "" });

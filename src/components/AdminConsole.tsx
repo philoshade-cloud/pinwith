@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Blocks, BizReview, Disputes, PayoutRequests, StoreQuality, Topups } from "./AdminCommerce";
+import { ErrorsPanel, UsagePanel } from "./AdminOps";
 
-type Tab = "payout" | "curators" | "settings" | "support" | "biz" | "topups" | "requests" | "disputes" | "quality" | "blocks";
+type Tab = "payout" | "curators" | "settings" | "support" | "biz" | "topups" | "requests" | "disputes" | "quality" | "blocks" | "usage" | "errors";
 const TABS: { id: Tab; label: string }[] = [
   { id: "payout", label: "정산" },
   { id: "requests", label: "지급 요청" },
@@ -17,6 +18,8 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "curators", label: "큐레이터·분배율" },
   { id: "settings", label: "수익화 기준" },
   { id: "support", label: "문의·신고" },
+  { id: "usage", label: "서비스 사용량" },
+  { id: "errors", label: "오류" },
 ];
 
 const num = (v: number | string | null | undefined) => Number(v ?? 0).toLocaleString("ko-KR", { maximumFractionDigits: 2 });
@@ -69,6 +72,8 @@ export function AdminConsole() {
         {tab === "disputes" && <Disputes />}
         {tab === "quality" && <StoreQuality />}
         {tab === "blocks" && <Blocks />}
+        {tab === "usage" && <UsagePanel />}
+        {tab === "errors" && <ErrorsPanel />}
       </div>
     </div>
   );
