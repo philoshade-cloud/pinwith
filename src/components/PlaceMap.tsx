@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { MAP_STYLE_URL } from "@/lib/env";
@@ -221,5 +221,55 @@ export function PlaceMap({
     m.flyTo({ center: [candidate.lng, candidate.lat], zoom: Math.max(m.getZoom(), 15), offset: centerOffset(padding), duration: 600 });
   }, [candidate?.lat, candidate?.lng, candidate?.name]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return <div ref={container} className="h-full w-full" role="region" aria-label="장소 지도" />;
+  // 내 위치: 누를 때만 위치를 묻고, 파란 점을 찍어 그곳으로 옮긴다(위치는 저장하거나 보내지 않음)
+  const meMarker = useRef<maplibregl.Marker | null>(null);
+  const [locating, setLocating] = useState<"idle" | "busy" | "denied">("idle");
+  function locate() {
+    const m = map.current;
+    if (!m || !("geolocation" in navigator)) return setLocating("denied");
+    setLocating("busy");
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setLocating("idle");
+        const at: [number, number] = [pos.coords.longitude, pos.coords.latitude];
+        if (!meMarker.current) {
+          const el = document.createElement("div");
+          el.className = "me-dot";
+          el.setAttribute("aria-label", "내 위치");
+          meMarker.current = new maplibregl.Marker({ element: el }).setLngLat(at).addTo(m);
+        } else meMarker.current.setLngLat(at);
+        m.flyTo({ center: at, zoom: Math.max(m.getZoom(), 15), offset: centerOffset(padding), duration: 700 });
+      },
+      (err) => setLocating(err.code === err.PERMISSION_DENIED ? "denied" : "idle"),
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 },
+    );
+  }
+
+  return (
+    <div className="relative h-full w-full">
+      <div ref={container} className="h-full w-full" role="region" aria-label="장소 지도" />
+      <button
+        type="button"
+        onClick={locate}
+        aria-label="내 위치로 이동"
+        title={locating === "denied" ? "위치 권한이 꺼져 있어요. 브라우저 설정에서 허용해 주세요." : "내 위치로 이동"}
+        className="absolute right-2 top-[112px] z-10 grid h-11 w-11 place-items-center rounded-xl bg-white text-teal shadow-[0_2px_10px_rgba(24,34,47,0.15)] lg:bottom-[86px] lg:right-[10px] lg:top-auto lg:h-[29px] lg:w-[29px] lg:rounded-md"
+      >
+        {locating === "busy" ? (
+          <span className="h-4 w-4 animate-spin rounded-full border-2 border-teal border-t-transparent" />
+        ) : (
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+            <circle cx="12" cy="12" r="4" fill={locating === "denied" ? "none" : "currentColor"} />
+            <path d="M12 2v3M12 19v3M2 12h3M19 12h3" strokeLinecap="round" />
+            <circle cx="12" cy="12" r="8" />
+          </svg>
+        )}
+      </button>
+      {locating === "denied" && (
+        <p role="status" className="absolute right-2 top-[160px] z-10 max-w-[220px] rounded-lg bg-white px-3 py-2 text-[12px] text-ink shadow lg:bottom-[122px] lg:top-auto">
+          위치 권한이 꺼져 있어요. 브라우저 설정에서 이 사이트의 위치를 허용해 주세요.
+        </p>
+      )}
+    </div>
+  );
 }
