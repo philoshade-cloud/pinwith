@@ -23,6 +23,10 @@ const PlaceMap = dynamic(() => import("./PlaceMap").then((m) => m.PlaceMap), {
   ssr: false,
   loading: () => <div className="h-full w-full bg-surface" />,
 });
+const SearchableMap = dynamic(() => import("./SearchableMap").then((m) => m.SearchableMap), {
+  ssr: false,
+  loading: () => <div className="h-full w-full bg-surface" />,
+});
 
 type View = "map" | "list";
 type Sort = "curator" | "nearest";
@@ -61,6 +65,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
   }, [list, section]);
   const selected = visibleItems.find((i) => i.id === selectedId) ?? null;
   const isCourse = list.kind === "course";
+  const numbering = useMemo(() => new Map(list.items.map((i, n) => [i.id, n + 1])), [list]);
 
   const groups = useMemo(() => {
     if (sort === "nearest" && here) {
@@ -101,8 +106,8 @@ export function ListExplorer({ list }: { list: CuratedList }) {
   }
 
   async function startSave(item: ListItem) {
-    if (isDemo) {
-      setNotice("예시 리스트의 장소는 담을 수 없습니다. 실제 리스트에서 담아보세요.");
+    if (!item.placeId) {
+      setNotice("이 장소는 지금 구글 장소 정보와 연결되지 않아 담을 수 없습니다.");
       return;
     }
     const { data } = await createClient().auth.getUser();
@@ -215,6 +220,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
             </select>
           </label>
         </div>
+        {isDemo && <DemoGuide />}
         {sectionChips && <div className="border-b border-rule px-5 py-2.5">{sectionChips}</div>}
 
         <div className="pb-28 lg:pb-8">
@@ -244,6 +250,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
                       {item.memo && (
                         <span className="mt-1 block text-[14px] leading-relaxed text-ink/75">{item.memo}</span>
                       )}
+                      <Tags tags={item.tags} />
                     </button>
                     {item.id === selectedId && (
                       <div className="bg-surface px-5 pb-4">
@@ -270,9 +277,31 @@ export function ListExplorer({ list }: { list: CuratedList }) {
             <Link href={`/me/lists/${list.id}`} className="btn-quiet shrink-0 !px-3 !py-1">편집</Link>
           )}
         </div>
-        {sectionChips && <div className="absolute inset-x-0 top-[52px] z-10 px-3 py-2 lg:hidden">{sectionChips}</div>}
-        {sectionChips && <div className="absolute left-4 top-4 z-10 hidden max-w-[70%] lg:block">{sectionChips}</div>}
-        <PlaceMap items={visibleItems} selectedId={selectedId} onSelect={select} showRoute={isCourse} />
+        {sectionChips && (
+          <div className={`absolute inset-x-0 z-10 px-3 py-2 lg:hidden ${isOwner ? "top-[112px]" : "top-[52px]"}`}>{sectionChips}</div>
+        )}
+        {sectionChips && (
+          <div className={`absolute z-10 hidden max-w-[70%] lg:block ${isOwner ? "left-[436px] top-4" : "left-4 top-4"}`}>{sectionChips}</div>
+        )}
+        {isOwner ? (
+          // 내 리스트: 지도에서 바로 검색해 이 리스트에 추가
+          <SearchableMap
+            items={visibleItems}
+            selectedId={selectedId}
+            onSelect={select}
+            showRoute={isCourse}
+            numbering={numbering}
+            topOffsetClass="top-[60px] lg:top-3"
+            sheetBottomPadClass="pb-24 lg:pb-4"
+            target={{ mode: "fixed", listId: list.id, sections: list.sections }}
+            onAdded={(_listId, item) => {
+              setNotice(`${item.custom_title}을(를) 추가했습니다.`);
+              router.refresh();
+            }}
+          />
+        ) : (
+          <PlaceMap items={visibleItems} selectedId={selectedId} onSelect={select} showRoute={isCourse} numbering={numbering} />
+        )}
         {selected && (
           <div className="absolute inset-x-3 bottom-20 z-10 rounded-xl bg-white p-4 shadow-[0_8px_30px_rgba(24,34,47,0.18)] lg:bottom-6 lg:left-6 lg:right-auto lg:w-[360px]">
             <div className="flex items-start justify-between gap-3">
@@ -287,6 +316,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
               </button>
             </div>
             {selected.memo && <p className="mt-1.5 text-[14px] leading-relaxed text-ink/80">{selected.memo}</p>}
+            <Tags tags={selected.tags} />
             <div className="mt-3">
               <PlaceActions item={selected} listId={list.id} onSave={startSave} />
             </div>
@@ -381,5 +411,40 @@ function Avatar({ name, url, size = 40 }: { name: string; url: string | null; si
     >
       {name.slice(0, 1)}
     </span>
+  );
+}
+
+function Tags({ tags }: { tags: string[] }) {
+  if (tags.length === 0) return null;
+  return (
+    <span className="mt-2 flex flex-wrap gap-1">
+      {tags.map((t) => (
+        <span key={t} className="rounded bg-surface px-1.5 py-0.5 text-[12px] text-teal">{t}</span>
+      ))}
+    </span>
+  );
+}
+
+// 예시 리스트에서 해볼 수 있는 기능 안내
+function DemoGuide() {
+  const tips = [
+    ["섹션", "아침·점심·오후·저녁을 누르면 그 시간대 핀만 지도에 남아요."],
+    ["코스", "번호 순서대로 경로가 이어집니다. 정렬을 ‘가까운 순’으로 바꿀 수도 있어요."],
+    ["길찾기", "장소를 누르면 구글 길찾기, 네이버 지도, 카카오맵으로 바로 열려요."],
+    ["담기", "마음에 드는 곳은 ‘내 리스트에 담기’로 내 지도에 옮겨요."],
+    ["공유", "링크 하나로 보내면 받는 사람은 로그인 없이 봅니다."],
+  ];
+  return (
+    <div className="mx-5 mt-4 rounded-xl bg-surface p-4">
+      <p className="text-[13px] font-semibold text-ink">예시 리스트예요. 이렇게 써보세요</p>
+      <ul className="mt-2 grid gap-1.5">
+        {tips.map(([k, v]) => (
+          <li key={k} className="flex gap-2 text-[13px] leading-snug text-ink/80">
+            <span className="w-11 shrink-0 font-semibold text-teal">{k}</span>
+            <span>{v}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

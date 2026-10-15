@@ -49,7 +49,8 @@ export function SaveToListSheet({ item, onClose }: { item: ListItem; onClose: ()
         title: title.trim(),
         memo: memo.trim(),
         sectionId: null,
-        copiedFromItemId: item.id,
+        // 예시 리스트 항목은 DB에 없으므로 출처를 남기지 않는다
+        copiedFromItemId: item.id.startsWith("demo") ? null : item.id,
       });
       setSavedTo(target);
       setState("done");

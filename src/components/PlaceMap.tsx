@@ -11,12 +11,14 @@ type Props = {
   selectedId: string | null;
   onSelect: (id: string) => void;
   showRoute: boolean;
+  // 코스 번호(전체 리스트 기준). 섹션으로 일부만 보여도 번호가 유지된다.
+  numbering?: Map<string, number>;
   // 검색으로 고른, 아직 리스트에 넣지 않은 장소
   candidate?: { lat: number; lng: number } | null;
 };
 
 // 큐레이터의 핀만 보여주는 가벼운 지도. 자세한 정보와 길찾기는 구글·네이버 지도로 넘긴다.
-export function PlaceMap({ items, selectedId, onSelect, showRoute, candidate = null }: Props) {
+export function PlaceMap({ items, selectedId, onSelect, showRoute, candidate = null, numbering }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
   const markers = useRef(new Map<string, { marker: maplibregl.Marker; el: HTMLButtonElement }>());
@@ -69,7 +71,7 @@ export function PlaceMap({ items, selectedId, onSelect, showRoute, candidate = n
       if (showRoute) {
         const n = document.createElement("span");
         n.className = "pin-num";
-        n.textContent = String(index + 1);
+        n.textContent = String(numbering?.get(item.id) ?? index + 1);
         shape.appendChild(n);
       }
       el.appendChild(shape);
@@ -118,7 +120,7 @@ export function PlaceMap({ items, selectedId, onSelect, showRoute, candidate = n
     if (m.isStyleLoaded()) drawRoute();
     else m.once("load", drawRoute);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items, showRoute]);
+  }, [items, showRoute, numbering]);
 
   // 선택 강조
   useEffect(() => {

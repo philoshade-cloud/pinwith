@@ -4,11 +4,13 @@ import type { ListItem } from "./types";
 const enc = encodeURIComponent;
 
 export function googleMapsUrl(item: Pick<ListItem, "title" | "placeId">) {
-  return `https://www.google.com/maps/search/?api=1&query=${enc(item.title)}&query_place_id=${enc(item.placeId)}`;
+  const id = item.placeId ? `&query_place_id=${enc(item.placeId)}` : "";
+  return `https://www.google.com/maps/search/?api=1&query=${enc(item.title)}${id}`;
 }
 
 export function googleDirectionsUrl(item: Pick<ListItem, "title" | "placeId">) {
-  return `https://www.google.com/maps/dir/?api=1&destination=${enc(item.title)}&destination_place_id=${enc(item.placeId)}`;
+  const id = item.placeId ? `&destination_place_id=${enc(item.placeId)}` : "";
+  return `https://www.google.com/maps/dir/?api=1&destination=${enc(item.title)}${id}`;
 }
 
 export function naverMapUrl(item: Pick<ListItem, "title">) {

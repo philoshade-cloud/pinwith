@@ -1,67 +1,135 @@
-// 데모용 예시 데이터. Supabase가 연결되기 전 화면 확인에 쓴다.
-// place_id는 형식만 맞춘 가짜 값이다.
-import type { CuratedList } from "./types";
+import "server-only";
+import { cacheLife } from "next/cache";
+import type { CuratedList, ListItem } from "./types";
 
-export const sampleList: CuratedList = {
-  id: "demo-osaka",
-  slug: "osaka-ep3",
-  title: "오사카 이틀, 줄 서도 아깝지 않은 곳",
+// 예시 리스트: 성수동 하루 코스. 장소는 실제 장소이고, 메모는 공개 후기·소개 글을 바탕으로 썼다.
+// 큐레이터는 가상의 인물이다.
+// place_id는 서버에서 구글 Text Search로 찾는다(결과는 캐시). 좌표는 30일 안에서만 캐시한다.
+// 구글 조회가 안 되면 아래의 대략적인 좌표로 보여주고, 그 장소는 '내 리스트에 담기'를 막는다.
+
+type Seed = Omit<ListItem, "placeId" | "position"> & { query: string };
+
+const seeds: Seed[] = [
+  {
+    id: "demo-1", query: "서울숲 성동구", title: "서울숲",
+    memo: "성수역 쪽보다 서울숲역 3번 출구로 들어가면 바로 은행나무길이에요. 아침 9시 전엔 사람이 거의 없어요.",
+    sectionId: "s1", tags: ["무료", "산책"], videoUrl: null, lat: 37.5444, lng: 127.0374,
+  },
+  {
+    id: "demo-2", query: "블루보틀 성수 카페 아차산로 7", title: "블루보틀 성수",
+    memo: "블루보틀 한국 1호점. 붉은 벽돌 건물 안 높은 층고가 좋아요. 핸드드립은 싱글 오리진으로.",
+    sectionId: "s1", tags: ["핸드드립"], videoUrl: null, lat: 37.5482, lng: 127.0455,
+  },
+  {
+    id: "demo-3", query: "소문난성수감자탕 연무장길 45", title: "소문난 성수 감자탕",
+    memo: "24시간이라 언제 가도 되지만 점심엔 줄이 길어요. 혼자면 감자국 식사, 둘 이상이면 감자탕 중자에 수제비 추가.",
+    sectionId: "s2", tags: ["24시간", "웨이팅"], videoUrl: null, lat: 37.5437, lng: 127.0555,
+  },
+  {
+    id: "demo-4", query: "포인트오브뷰 성수 연무장길 18", title: "포인트 오브 뷰",
+    memo: "작업 도구와 문구를 모은 편집숍. 12시에 열고, 매달 마지막 월요일은 쉬어요.",
+    sectionId: "s3", tags: ["문구", "마지막 월 휴무"], videoUrl: null, lat: 37.5434, lng: 127.0518,
+  },
+  {
+    id: "demo-5", query: "대림창고 성수이로 78", title: "대림창고",
+    memo: "정미소였던 창고를 갤러리 카페로. 트러플 머쉬룸 포카치아와 딸기우유가 인기예요. 캐치테이블로 예약됩니다.",
+    sectionId: "s3", tags: ["예약 가능", "주차 불가"], videoUrl: null, lat: 37.5419, lng: 127.0566,
+  },
+  {
+    id: "demo-6", query: "성수족발 아차산로7길 7", title: "성수족발",
+    memo: "달짝지근한 조림 족발. 자리가 적어 늘 줄이 있으니 포장해서 한강으로 가는 것도 방법이에요.",
+    sectionId: "s4", tags: ["좌식", "포장 가능"], videoUrl: null, lat: 37.5452, lng: 127.0548,
+  },
+  {
+    id: "demo-7", query: "뚝섬한강공원", title: "뚝섬한강공원",
+    memo: "자양역(뚝섬유원지역) 2·3번 출구 바로 앞. 해 질 무렵 청담대교 쪽 노을로 하루를 마무리하세요.",
+    sectionId: "s4", tags: ["야경", "돗자리"], videoUrl: null, lat: 37.5294, lng: 127.0665,
+  },
+];
+
+const base: Omit<CuratedList, "items"> = {
+  id: "demo-seongsu",
+  slug: "seongsu-day",
+  title: "성수동 하루, 걸어서 도는 일곱 군데",
   description:
-    "EP3 영상에 나온 곳을 전부 모았어요. 난바 쪽에 숙소를 잡았다면 걸어서 다 갈 수 있습니다.",
+    "아침 숲 산책부터 한강 노을까지, 지하철 없이 걸어서 이어지는 순서예요. 섹션을 누르면 시간대별 장소만 지도에 보입니다.",
   visibility: "public",
-  kind: "collection",
-  themes: ["먹방", "가성비", "혼자여행"],
-  likeCount: 1284,
-  updatedAt: "2026-10-12T09:00:00Z",
+  kind: "course",
+  themes: ["서울", "성수", "하루코스", "걷기좋은"],
+  likeCount: 3120,
+  updatedAt: "2026-10-14T09:00:00Z",
   curator: {
     id: "demo-curator",
-    handle: "hana.eats",
-    displayName: "하나의 먹는 여행",
+    handle: "minji.walks",
+    displayName: "민지의 걷는 서울",
     avatarUrl: null,
-    bio: "일본 소도시와 골목 식당을 다닙니다.",
-    followerCount: 48200,
+    bio: "서울을 걸어서 다니며 동네별 하루 코스를 만듭니다.",
+    followerCount: 21400,
   },
   sections: [
     { id: "s1", name: "아침", position: 0 },
-    { id: "s2", name: "점심·저녁", position: 1 },
-    { id: "s3", name: "카페와 디저트", position: 2 },
-  ],
-  items: [
-    {
-      id: "i1", placeId: "ChIJdemo_kuromon", title: "구로몬 시장",
-      memo: "9시 전에 가야 참치 꼬치가 남아 있어요. 현금 챙기세요.",
-      sectionId: "s1", position: 0, tags: ["현금만"], videoUrl: null,
-      lat: 34.6655, lng: 135.5065,
-    },
-    {
-      id: "i2", placeId: "ChIJdemo_mizuno", title: "미즈노 오코노미야키",
-      memo: "야마이모야키가 진짜예요. 줄은 30분 정도, 회전이 빠릅니다.",
-      sectionId: "s2", position: 1, tags: ["줄 있음"], videoUrl: null,
-      lat: 34.6687, lng: 135.5023,
-    },
-    {
-      id: "i3", placeId: "ChIJdemo_kamukura", title: "카무쿠라 라멘 도톤보리점",
-      memo: "새벽까지 열어요. 배추 듬뿍 국물이라 늦은 밤에도 부담 없습니다.",
-      sectionId: "s2", position: 2, tags: ["심야"], videoUrl: null,
-      lat: 34.6688, lng: 135.5013,
-    },
-    {
-      id: "i4", placeId: "ChIJdemo_daruma", title: "쿠시카츠 다루마 신세카이",
-      memo: "소스 두 번 찍기 금지. 양배추는 무한 리필이에요.",
-      sectionId: "s2", position: 3, tags: [], videoUrl: null,
-      lat: 34.6523, lng: 135.5063,
-    },
-    {
-      id: "i5", placeId: "ChIJdemo_rikuro", title: "리쿠로 오지상 치즈케이크",
-      memo: "갓 구운 종이 울리면 그때 사세요. 따뜻할 때가 제일 맛있습니다.",
-      sectionId: "s3", position: 4, tags: ["포장"], videoUrl: null,
-      lat: 34.6649, lng: 135.5009,
-    },
-    {
-      id: "i6", placeId: "ChIJdemo_brooklyn", title: "브루클린 로스팅 기타하마",
-      memo: "강가 창가 자리가 명당. 오후 4시쯤 햇빛이 예뻐요.",
-      sectionId: "s3", position: 5, tags: [], videoUrl: null,
-      lat: 34.6919, lng: 135.5078,
-    },
+    { id: "s2", name: "점심", position: 1 },
+    { id: "s3", name: "오후", position: 2 },
+    { id: "s4", name: "저녁", position: 3 },
   ],
 };
+
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://pinwith-xiea.vercel.app";
+
+function meters(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
+  const r = (d: number) => (d * Math.PI) / 180;
+  const h =
+    Math.sin(r(b.lat - a.lat) / 2) ** 2 +
+    Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(r(b.lng - a.lng) / 2) ** 2;
+  return 2 * 6371000 * Math.asin(Math.sqrt(h));
+}
+
+async function resolve(seed: Seed): Promise<{ placeId: string; lat: number; lng: number } | null> {
+  const key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+  if (!key) return null;
+  try {
+    const res = await fetch("https://places.googleapis.com/v1/places:searchText", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": key,
+        "X-Goog-FieldMask": "places.id,places.location",
+        Referer: `${SITE}/`,
+      },
+      body: JSON.stringify({
+        textQuery: seed.query,
+        languageCode: "ko",
+        regionCode: "KR",
+        pageSize: 1,
+        locationBias: { circle: { center: { latitude: 37.5445, longitude: 127.0510 }, radius: 3000 } },
+      }),
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as { places?: { id: string; location: { latitude: number; longitude: number } }[] };
+    const p = data.places?.[0];
+    if (!p) return null;
+    const found = { lat: p.location.latitude, lng: p.location.longitude };
+    // 엉뚱한 곳이 잡히면 쓰지 않는다
+    if (meters(found, { lat: seed.lat!, lng: seed.lng! }) > 1500) return null;
+    return { placeId: p.id, ...found };
+  } catch {
+    return null;
+  }
+}
+
+export async function getSampleList(): Promise<CuratedList> {
+  "use cache";
+  cacheLife("weeks");
+  const resolved = await Promise.all(seeds.map(resolve));
+  return {
+    ...base,
+    items: seeds.map((s, n) => {
+      const r = resolved[n];
+      return {
+        id: s.id, title: s.title, memo: s.memo, sectionId: s.sectionId, tags: s.tags, videoUrl: s.videoUrl,
+        position: n, placeId: r?.placeId ?? "", lat: r?.lat ?? s.lat, lng: r?.lng ?? s.lng,
+      };
+    }),
+  };
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { SignOutButton } from "./SignOutButton";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -99,7 +100,10 @@ export function ExploreView() {
         <Link href="/" className="font-display text-[16px] font-semibold text-pin">PinWith</Link>
         <span className="ml-auto" />
         {myHandle ? (
-          <Link href={`/@${myHandle}`} className="btn-quiet">내 지도</Link>
+          <>
+            <SignOutButton />
+            <Link href={`/@${myHandle}`} className="btn-quiet">내 지도</Link>
+          </>
         ) : (
           me === null && <Link href="/login?next=/explore" className="btn-quiet">로그인</Link>
         )}

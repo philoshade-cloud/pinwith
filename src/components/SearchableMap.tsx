@@ -21,6 +21,7 @@ type Props = {
   selectedId: string | null;
   onSelect: (id: string) => void;
   showRoute: boolean;
+  numbering?: Map<string, number>;
   target: AddTarget;
   onAdded: (listId: string, item: AddedItem) => void;
   // 지도 위쪽에 다른 요소(모바일 제목 줄 등)가 있으면 검색창을 그만큼 내린다
@@ -33,7 +34,7 @@ const NEW_LIST = "__new__";
 
 // 지도 위 검색 → 후보 핀 → 장소 카드와 함께 이름·메모를 적어 리스트에 추가
 export function SearchableMap({
-  items, selectedId, onSelect, showRoute, target, onAdded, topOffsetClass = "top-3", sheetBottomPadClass = "",
+  items, selectedId, onSelect, showRoute, numbering, target, onAdded, topOffsetClass = "top-3", sheetBottomPadClass = "",
 }: Props) {
   const [placeId, setPlaceId] = useState<string | null>(null);
   const [loaded, setLoaded] = useState<LoadedPlace | null>(null);
@@ -105,6 +106,7 @@ export function SearchableMap({
         selectedId={selectedId}
         onSelect={onSelect}
         showRoute={showRoute}
+        numbering={numbering}
         candidate={loaded ? { lat: loaded.lat, lng: loaded.lng } : null}
       />
 

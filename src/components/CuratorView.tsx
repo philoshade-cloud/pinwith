@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import { createEmptyList } from "@/lib/lists";
 import type { Curator, ListItem, ListSummary } from "@/lib/types";
 import { FollowButton } from "./FollowButton";
+import { SignOutButton } from "./SignOutButton";
 
 const PlaceMap = dynamic(() => import("./PlaceMap").then((m) => m.PlaceMap), {
   ssr: false,
@@ -84,6 +85,7 @@ export function CuratorView({ curator, lists, isOwner }: { curator: Curator; lis
             <Link href="/" className="font-display text-[16px] font-semibold text-pin">PinWith</Link>
             <Link href="/explore" className="ml-auto text-muted hover:text-ink">찾기</Link>
             {isOwner && <Link href="/me" className="text-muted hover:text-ink">프로필 편집</Link>}
+            {isOwner && <SignOutButton />}
           </nav>
           <h1 className="font-display mt-6 text-[32px] font-semibold leading-tight tracking-[-0.02em] text-ink">
             {curator.displayName}
