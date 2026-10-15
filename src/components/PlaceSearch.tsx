@@ -38,6 +38,7 @@ export function PlaceSearchBox({
   near?: () => { lat: number; lng: number } | null;
 }) {
   const lib = useRef<PlacesLib | null>(null);
+  const input = useRef<HTMLInputElement>(null);
   const token = useRef<unknown>(null);
   const timer = useRef<number | undefined>(undefined);
   const seq = useRef(0);
@@ -102,6 +103,8 @@ export function PlaceSearchBox({
   }
 
   function pick(s: Suggestion) {
+    // 휴대폰 키보드를 내려 지도가 보이게 한다
+    input.current?.blur();
     token.current = null;
     setOpen(false);
     setText(s.main);
@@ -113,6 +116,7 @@ export function PlaceSearchBox({
     if (!q || !lib.current || busy) return;
     window.clearTimeout(timer.current);
     seq.current++;
+    input.current?.blur();
     setOpen(false);
     setBusy(true);
     try {
@@ -165,6 +169,7 @@ export function PlaceSearchBox({
     <div className="relative">
       <div className="flex items-center">
         <input
+          ref={input}
           type="search"
           value={text}
           onChange={(e) => {
