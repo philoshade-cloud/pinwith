@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { PlaceCard, type LoadedPlace } from "../PlaceSearch";
 import { ExternalLinks } from "./ExternalLinks";
+import { ReserveButton } from "../Reservation";
 
 // 검색으로 고른 장소의 미리보기: 구글 장소 카드 + 다른 지도 앱 버튼 + 리스트에 저장.
 // 저장을 눌러야 이름·메모를 적는 저장 화면으로 넘어간다.
@@ -37,6 +38,7 @@ export function PlacePreview({
         />
       </div>
       <div className="mt-3 flex flex-wrap gap-2">
+        <ReserveButton placeId={placeId} />
         {place && <ExternalLinks item={{ title: place.name, placeId, lat: place.lat, lng: place.lng }} />}
       </div>
       <button

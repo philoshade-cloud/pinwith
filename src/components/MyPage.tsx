@@ -156,6 +156,7 @@ export function MyPage() {
               내 리스트 보기
             </Link>
           )}
+          <Link href="/me/reservations" className="btn-quiet justify-center">내 예약 문의</Link>
           <Link href="/biz" className="btn-quiet justify-center">상업 이용자용 콘솔</Link>
           <Link href="/support" className="btn-quiet justify-center">문의·신고하기</Link>
           {money?.is_admin && <Link href="/admin" className="btn-quiet justify-center">운영자 콘솔</Link>}

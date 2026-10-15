@@ -11,9 +11,14 @@ export function SignOutButton({ className = "text-muted hover:text-ink" }: { cla
   async function signOut() {
     if (busy) return;
     setBusy(true);
-    await createClient().auth.signOut();
-    router.replace("/");
-    router.refresh();
+    try {
+      await createClient().auth.signOut();
+      router.replace("/");
+      router.refresh();
+    } finally {
+      // 화면을 떠나도 이 화면의 상태가 남아 있다가 다시 보일 수 있으므로(Next.js가 지난 화면을 보관) 원래대로 돌려 둔다
+      setBusy(false);
+    }
   }
   return (
     <button type="button" onClick={signOut} disabled={busy} className={className}>

@@ -11,7 +11,7 @@ import { useShell } from "./shell/context";
 
 type N = {
   id: string;
-  kind: "follow" | "like" | "comment" | "reply" | "invite" | "invite_accepted" | "share_changed" | "notice" | "resolved" | "reservation" | "reservation_new";
+  kind: "follow" | "like" | "comment" | "reply" | "invite" | "invite_accepted" | "share_changed" | "notice" | "resolved" | "reservation" | "reservation_new" | "reservation_msg" | "biz_block" | "biz_alert";
   body: string | null;
   read_at: string | null;
   created_at: string;
@@ -32,6 +32,9 @@ const TEXT: Record<N["kind"], string> = {
   notice: "님의 새 공지",
   reservation: "님이 예약 문의에 답했어요",
   reservation_new: "님의 예약 문의(가게 콘솔에서 확인)",
+  reservation_msg: "님이 예약 문의에 메시지를 보냈어요",
+  biz_block: "",
+  biz_alert: "",
 };
 
 // 알림: 팔로우, 좋아요, 댓글, 공동 편집 초대, 공지. 열면 모두 읽음으로 바뀐다.
@@ -118,8 +121,14 @@ export function Notifications() {
               return (
                 <li key={n.id} className={`py-3 text-[14px] ${n.read_at ? "" : "bg-pin/5 -mx-5 px-5"}`}>
                   <p className="leading-snug text-ink">
-                    <Link href={`/@${n.actor?.handle}`} className="font-semibold">{who}</Link>
-                    {TEXT[n.kind]}
+                    {n.actor ? (
+                      <>
+                        <Link href={`/@${n.actor.handle}`} className="font-semibold">{who}</Link>
+                        {TEXT[n.kind]}
+                      </>
+                    ) : (
+                      <span className="font-semibold">{n.kind === "biz_alert" ? "📊 연결된 가게 확인 필요" : n.kind === "biz_block" ? "🚫 가게 요청으로 리스트에서 빠짐" : "PinWith 알림"}</span>
+                    )}
                     {n.list && listHref && (
                       <>
                         {" · "}
@@ -130,7 +139,9 @@ export function Notifications() {
                   {n.body && <p className="mt-1 line-clamp-3 whitespace-pre-wrap text-[13px] text-ink/75">{n.body}</p>}
                   <p className="mt-1 flex items-center gap-2 text-[11px] text-muted">
                     {ago(n.created_at)}
-                    {n.kind === "reservation_new" && <Link href="/biz/place" className="btn-primary !px-2.5 !py-1 !text-[12px]">가게 콘솔에서 보기</Link>}
+                    {n.kind === "reservation_new" && <Link href="/biz/place?tab=reservations" className="btn-primary !px-2.5 !py-1 !text-[12px]">가게 콘솔에서 보기</Link>}
+                    {(n.kind === "reservation" || n.kind === "reservation_msg") && <Link href="/me/reservations" className="btn-primary !px-2.5 !py-1 !text-[12px]">예약 문의 보기</Link>}
+                    {n.kind === "biz_alert" && <Link href="/biz/curator?tab=stores" className="btn-primary !px-2.5 !py-1 !text-[12px]">연결된 가게 보기</Link>}
                     {n.kind === "follow" && n.actor && !followingBack.has(n.actor.id) && (
                       <button type="button" onClick={() => followBack(n.actor!.id)} className="btn-primary !px-2.5 !py-1 !text-[12px]">맞팔로우</button>
                     )}

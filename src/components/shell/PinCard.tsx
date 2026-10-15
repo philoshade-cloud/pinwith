@@ -41,7 +41,7 @@ export function PinCard({
       {item.memo && <p className="mt-1.5 text-[14px] leading-relaxed text-ink/80">{item.memo}</p>}
       <Tags tags={item.tags} />
       <div className="mt-3 flex flex-wrap gap-2">
-        {listId && !listId.startsWith("demo") && <ReserveButton itemId={item.id} placeId={item.placeId} />}
+        <ReserveButton placeId={item.placeId} itemId={listId && !listId.startsWith("demo") ? item.id : undefined} />
         <ExternalLinks item={item} onEvent={log} />
         <button type="button" onClick={() => onSave(item)} className="btn-quiet">
           내 리스트에 담기
