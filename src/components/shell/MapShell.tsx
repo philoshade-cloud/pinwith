@@ -3,12 +3,12 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Suspense, useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/env";
 import type { ListItem } from "@/lib/types";
 import { track } from "@/lib/track";
-import { PlaceSearchBox, type LoadedPlace } from "../PlaceSearch";
+import { PlaceSearchBox, type FoundPlace, type LoadedPlace } from "../PlaceSearch";
 import { SaveToListSheet } from "../SaveToListSheet";
 import { AddPlaceSheet } from "./AddPlaceSheet";
 import { PinCard } from "./PinCard";
@@ -49,6 +49,18 @@ export function MapShell({ children }: { children: ReactNode }) {
   const [picked, setPicked] = useState<string | null>(null);
   const [candidate, setCandidate] = useState<LoadedPlace | null>(null);
   const [searchKey, setSearchKey] = useState(0);
+  // Enter로 찾은 여러 장소: 지도에 다른 색 핀으로, 버튼을 누르면 목록으로
+  const [results, setResults] = useState<{ query: string; places: FoundPlace[] } | null>(null);
+  const [resultsList, setResultsList] = useState(false);
+  const centerOf = useRef<(() => { lat: number; lng: number }) | null>(null);
+  const resultItems: ListItem[] = useMemo(
+    () =>
+      (results?.places ?? []).map((p, n) => ({
+        id: p.id, placeId: p.id, title: p.name, memo: p.address, sectionId: null,
+        position: n, tags: [], videoUrl: null, lat: p.lat, lng: p.lng,
+      })),
+    [results],
+  );
 
   // ── 로그인 상태와 내 리스트 ─────────────────
   const refreshMine = useCallback(async () => {
@@ -120,6 +132,25 @@ export function MapShell({ children }: { children: ReactNode }) {
   function closeAdd() {
     setPicked(null);
     setCandidate(null);
+    // 검색 결과를 보던 중이면 결과는 그대로 둔다(다른 곳도 이어서 담을 수 있게)
+    if (!results) setSearchKey((k) => k + 1);
+  }
+
+  function showResults(query: string, places: FoundPlace[]) {
+    setSelectedId(null);
+    if (places.length === 0) {
+      setResults(null);
+      toast(`‘${query}’로 찾은 장소가 없습니다.`);
+      return;
+    }
+    setResults({ query, places });
+    setResultsList(false);
+    if (window.innerWidth < 1024) setPanelOpen(false);
+  }
+
+  function closeResults() {
+    setResults(null);
+    setResultsList(false);
     setSearchKey((k) => k + 1);
   }
 
@@ -131,10 +162,10 @@ export function MapShell({ children }: { children: ReactNode }) {
   // ── 지도 여백: 패널·버튼에 가리지 않게 ─────────
   // 핀은 좌표 위쪽으로 30px쯤 솟으므로 위 여백을 그만큼 더 둔다.
   const padding = desktop
-    ? { top: scene.toolbar ? 160 : 128, bottom: 56, left: panelOpen ? 448 : 40, right: 64 }
+    ? { top: scene.toolbar && !results ? 160 : 128, bottom: 56, left: panelOpen || resultsList ? 448 : 40, right: 64 }
     : {
-        top: scene.toolbar ? 146 : 106,
-        bottom: panelOpen ? Math.round(h * 0.62) + 16 : 64 + 52 + 32,
+        top: scene.toolbar && !results ? 146 : 106,
+        bottom: panelOpen || resultsList ? Math.round(h * 0.62) + 16 : 64 + 52 + 32 + (results ? 56 : 0),
         left: 28,
         right: 28,
       };
@@ -156,13 +187,15 @@ export function MapShell({ children }: { children: ReactNode }) {
       {/* 바탕 지도 */}
       <div className="fixed inset-0">
         <PlaceMap
-          items={scene.items}
-          selectedId={selectedId}
-          onSelect={select}
-          showRoute={!!scene.showRoute}
-          numbering={scene.numbering}
+          items={results ? resultItems : scene.items}
+          selectedId={results ? null : selectedId}
+          onSelect={results ? (id) => setPicked(id) : select}
+          showRoute={!results && !!scene.showRoute}
+          numbering={results ? undefined : scene.numbering}
+          tone={results ? "result" : "pin"}
           candidate={candidate}
           padding={padding}
+          onReady={(get) => (centerOf.current = get)}
         />
       </div>
 
@@ -177,17 +210,26 @@ export function MapShell({ children }: { children: ReactNode }) {
             }
           }}
           aria-label="PinWith 지도"
-          className="font-display grid h-11 shrink-0 place-items-center rounded-xl bg-white px-3 text-[15px] font-semibold text-pin shadow-[0_2px_10px_rgba(24,34,47,0.15)]"
+          className="font-display hidden h-11 shrink-0 place-items-center rounded-xl bg-white px-3 text-[15px] font-semibold text-pin shadow-[0_2px_10px_rgba(24,34,47,0.15)] lg:grid"
         >
-          <span className="lg:hidden">P</span>
-          <span className="hidden lg:inline">PinWith</span>
+          PinWith
         </Link>
         <div className="min-h-11 min-w-0 flex-1 rounded-xl bg-white p-1 shadow-[0_2px_10px_rgba(24,34,47,0.15)]">
           {me ? (
-            <PlaceSearchBox key={searchKey} onPick={(id) => { setPicked(id); setCandidate(null); setSelectedId(null); }} />
+            <PlaceSearchBox
+              key={searchKey}
+              near={() => centerOf.current?.() ?? null}
+              onResults={showResults}
+              onPick={(id) => {
+                setResults(null);
+                setPicked(id);
+                setCandidate(null);
+                setSelectedId(null);
+              }}
+            />
           ) : (
             <Link href="/explore" className="flex h-9 items-center px-2 text-[15px] text-muted">
-              {me === undefined ? "" : "큐레이터·리스트 찾기"}
+              {me === undefined ? "" : "타인의 리스트 둘러보기"}
             </Link>
           )}
         </div>
@@ -198,8 +240,8 @@ export function MapShell({ children }: { children: ReactNode }) {
         <Nav variant="top" {...navProps} />
       </Suspense>
 
-      {/* 지도 도구(섹션 칩 등) */}
-      {scene.toolbar && (
+      {/* 지도 도구(섹션 칩 등). 검색 결과를 볼 때는 숨긴다 */}
+      {scene.toolbar && !results && (
         <div className="fixed inset-x-0 top-[60px] z-20 px-2 pr-12 lg:left-[432px] lg:right-auto lg:top-[76px] lg:max-w-[calc(100vw-460px)] lg:pr-0">
           {scene.toolbar}
         </div>
@@ -219,6 +261,41 @@ export function MapShell({ children }: { children: ReactNode }) {
             extra={scene.cardExtra?.(selected)}
           />
         </div>
+      )}
+
+      {/* 검색 결과: 요약 줄 + 목록 */}
+      {results && !picked && (
+        <>
+          {resultsList && (
+            <section
+              aria-label="검색 결과"
+              className="fixed inset-x-0 bottom-16 top-[38dvh] z-[25] overflow-y-auto rounded-t-2xl bg-white pb-28 shadow-[0_-6px_24px_rgba(24,34,47,0.16)] lg:inset-x-auto lg:bottom-4 lg:left-4 lg:top-[76px] lg:w-[400px] lg:rounded-2xl lg:pb-16"
+            >
+              <ul className="divide-y divide-rule">
+                {results.places.map((p) => (
+                  <li key={p.id}>
+                    <button type="button" onClick={() => setPicked(p.id)} className="block w-full px-5 py-3 text-left hover:bg-surface/60">
+                      <span className="block text-[16px] font-semibold text-ink">{p.name}</span>
+                      <span className="mt-0.5 block text-[13px] text-muted">{p.address}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <p className="px-5 py-3 text-right text-[12px] text-muted">Google 검색 결과</p>
+            </section>
+          )}
+          <div className="fixed inset-x-2 bottom-[124px] z-30 flex items-center gap-2 rounded-2xl bg-ink px-4 py-2.5 text-white shadow-lg lg:bottom-6 lg:left-4 lg:right-auto lg:w-[400px]">
+            <span className="min-w-0 flex-1 truncate text-[14px]">
+              ‘{results.query}’ {results.places.length}곳 · 핀을 눌러 담기
+            </span>
+            <button type="button" onClick={() => setResultsList(!resultsList)} className="shrink-0 rounded-full bg-white px-3 py-1 text-[13px] font-semibold text-ink">
+              {resultsList ? "지도" : "목록"}
+            </button>
+            <button type="button" onClick={closeResults} className="shrink-0 px-1 text-white/80 hover:text-white" aria-label="검색 결과 닫기">
+              ✕
+            </button>
+          </div>
+        </>
       )}
 
       {/* 모바일 아래 메뉴 */}
@@ -271,22 +348,27 @@ function NavView({ variant, me, reopen, path }: NavProps & { path: string }) {
   const nav = me
     ? [
         { href: "/", label: "지도", icon: "◎" },
-        { href: "/explore", label: "찾기", icon: "⌕" },
+        { href: "/explore", label: "타인의 리스트", icon: "⌕" },
         { href: `/@${me.handle}`, label: "내 리스트", icon: "☰" },
         { href: "/me", label: "프로필", icon: "◐" },
       ]
     : [
         { href: "/", label: "지도", icon: "◎" },
-        { href: "/explore", label: "찾기", icon: "⌕" },
+        { href: "/explore", label: "타인의 리스트", icon: "⌕" },
         { href: "/demo", label: "예시", icon: "★" },
         { href: path && path !== "/login" ? `/login?next=${encodeURIComponent(path)}` : "/login", label: "로그인", icon: "→" },
       ];
+  const base = (href: string) => href.split("?")[0];
+  // 강조: 그 아래 화면에 있어도(예: 내 리스트 > 리스트 하나) 켠다
   const isActive = (href: string) => {
-    const base = href.split("?")[0];
-    return base === "/" ? path === "/" : path === base || path.startsWith(base + "/");
+    const b = base(href);
+    if (b === "/" || b === "/me") return path === b;
+    if (me && b === `/@${me.handle}` && path.startsWith("/me/lists/")) return true;
+    return path === b || path.startsWith(b + "/");
   };
+  // 정확히 그 화면일 때만 다시 누르면 패널 펼치기. 아래 화면에서 누르면 그 화면(목록)으로 간다.
   const onNav = (href: string) => (e: React.MouseEvent) => {
-    if (!isActive(href)) return;
+    if (path !== base(href)) return;
     e.preventDefault();
     reopen(href);
   };

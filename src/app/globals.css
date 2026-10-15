@@ -130,6 +130,10 @@ body {
   background: var(--color-ink);
 }
 
+.pin-result {
+  background: var(--color-teal);
+}
+
 .pin-candidate {
   width: 34px;
   height: 34px;

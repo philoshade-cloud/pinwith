@@ -7,55 +7,61 @@ export function normalizeHandle(raw: string) {
   return decodeURIComponent(raw).replace(/^@/, "").toLowerCase();
 }
 
-async function getCurator(handle: string): Promise<Curator | null> {
-  const supabase = await createClient();
-  const { data: p } = await supabase
-    .from("profiles")
-    .select("id, handle, display_name, avatar_url, bio")
-    .eq("handle", handle)
-    .maybeSingle();
-  if (!p) return null;
-  const { count } = await supabase
-    .from("follows")
-    .select("*", { count: "exact", head: true })
-    .eq("followee_id", p.id);
+// 로그인한 사람의 id. 토큰을 이 서버에서 검증하므로 인증 서버 왕복이 없다.
+async function myId(supabase: Awaited<ReturnType<typeof createClient>>) {
+  const { data } = await supabase.auth.getClaims();
+  return (data?.claims?.sub as string | undefined) ?? null;
+}
+
+const CURATOR_FIELDS =
+  "id, handle, display_name, avatar_url, bio, followers:follows!follows_followee_id_fkey(count)";
+
+type CuratorRow = {
+  id: string; handle: string; display_name: string; avatar_url: string | null; bio: string;
+  followers: { count: number }[];
+};
+
+function toCurator(p: CuratorRow): Curator {
   return {
     id: p.id,
     handle: p.handle,
     displayName: p.display_name || p.handle,
     avatarUrl: p.avatar_url,
     bio: p.bio,
-    followerCount: count ?? 0,
+    followerCount: p.followers?.[0]?.count ?? 0,
   };
 }
 
+type SummaryRow = {
+  id: string; slug: string; title: string; visibility: ListSummary["visibility"];
+  themes: string[]; like_count: number;
+  list_items: { id: string; place_id: string; custom_title: string; places: { lat: number | null; lng: number | null } | null }[];
+};
+
+// 데이터베이스 왕복을 줄이려고 프로필과 리스트를 동시에 읽는다(서버와 DB가 같은 지역에 있어야 빠르다).
 export async function getCuratorPage(
   rawHandle: string,
 ): Promise<{ curator: Curator; lists: ListSummary[]; isOwner: boolean } | null> {
-  const curator = await getCurator(normalizeHandle(rawHandle));
-  if (!curator) return null;
+  const handle = normalizeHandle(rawHandle);
   const supabase = await createClient();
-  const { data: auth } = await supabase.auth.getUser();
-  const isOwner = auth.user?.id === curator.id;
-
-  // 다른 사람에게는 공개 리스트만, 주인에게는 비공개·링크 공개까지 모두 보인다.
-  let query = supabase
-    .from("lists")
-    .select(
-      "id, slug, title, visibility, themes, like_count," +
-        " list_items(id, place_id, custom_title, places(lat, lng))",
-    )
-    .eq("owner_id", curator.id)
-    .order("updated_at", { ascending: false });
-  if (!isOwner) query = query.eq("visibility", "public");
-  const { data } = await query;
-
-  type Row = {
-    id: string; slug: string; title: string; visibility: ListSummary["visibility"];
-    themes: string[]; like_count: number;
-    list_items: { id: string; place_id: string; custom_title: string; places: { lat: number | null; lng: number | null } | null }[];
-  };
-  const lists: ListSummary[] = ((data ?? []) as unknown as Row[]).map((l) => ({
+  const [uid, { data: p }, { data }] = await Promise.all([
+    myId(supabase),
+    supabase.from("profiles").select(CURATOR_FIELDS).eq("handle", handle).maybeSingle(),
+    // 공개 범위는 RLS가 판단: 남에게는 공개·링크 공개만, 주인에게는 전부
+    supabase
+      .from("lists")
+      .select(
+        "id, slug, title, visibility, themes, like_count, owner:profiles!lists_owner_id_fkey!inner(handle)," +
+          " list_items(id, place_id, custom_title, places(lat, lng))",
+      )
+      .eq("owner.handle", handle)
+      .order("updated_at", { ascending: false }),
+  ]);
+  if (!p) return null;
+  const curator = toCurator(p as unknown as CuratorRow);
+  const isOwner = uid === curator.id;
+  const rows = ((data ?? []) as unknown as SummaryRow[]).filter((l) => isOwner || l.visibility === "public");
+  const lists: ListSummary[] = rows.map((l) => ({
     id: l.id,
     slug: l.slug,
     title: l.title,
@@ -78,26 +84,35 @@ export async function getCuratedList(
   rawHandle: string,
   slug: string,
 ): Promise<CuratedList | null> {
-  const curator = await getCurator(normalizeHandle(rawHandle));
-  if (!curator) return null;
+  const handle = normalizeHandle(rawHandle);
   const supabase = await createClient();
-  // RLS가 공개 범위를 판단한다: 공개·링크 공개는 누구나, 비공개는 주인·편집자만.
-  const { data: list } = await supabase
-    .from("lists")
-    .select(
-      "id, slug, title, description, visibility, kind, themes, like_count, updated_at," +
-        " sections(id, name, position)," +
-        " list_items(id, place_id, custom_title, memo, section_id, position, tags, video_ts_url, places(lat, lng))",
-    )
-    .eq("owner_id", curator.id)
-    .eq("slug", decodeURIComponent(slug))
-    .maybeSingle();
+  // 리스트(큐레이터 포함)와 같은 큐레이터의 다른 리스트를 동시에 읽는다. 공개 범위는 RLS가 판단한다.
+  const [{ data: list }, { data: others }, uid] = await Promise.all([
+    supabase
+      .from("lists")
+      .select(
+        "id, slug, title, description, visibility, kind, themes, like_count, updated_at," +
+          ` owner:profiles!lists_owner_id_fkey!inner(${CURATOR_FIELDS}),` +
+          " sections(id, name, position)," +
+          " list_items(id, place_id, custom_title, memo, section_id, position, tags, video_ts_url, places(lat, lng))",
+      )
+      .eq("owner.handle", handle)
+      .eq("slug", decodeURIComponent(slug))
+      .maybeSingle(),
+    supabase
+      .from("lists")
+      .select("slug, title, visibility, owner:profiles!lists_owner_id_fkey!inner(handle)")
+      .eq("owner.handle", handle)
+      .order("updated_at", { ascending: false }),
+    myId(supabase),
+  ]);
   if (!list) return null;
 
   type Row = {
     id: string; slug: string; title: string; description: string;
     visibility: CuratedList["visibility"]; kind: CuratedList["kind"];
     themes: string[]; like_count: number; updated_at: string;
+    owner: CuratorRow;
     sections: { id: string; name: string; position: number }[];
     list_items: {
       id: string; place_id: string; custom_title: string; memo: string;
@@ -106,6 +121,11 @@ export async function getCuratedList(
     }[];
   };
   const row = list as unknown as Row;
+  const curator = toCurator(row.owner);
+  const isOwner = uid === curator.id;
+  const siblings = ((others ?? []) as unknown as { slug: string; title: string; visibility: string }[])
+    .filter((l) => isOwner || l.visibility === "public" || l.slug === row.slug)
+    .map((l) => ({ slug: l.slug, title: l.title }));
 
   return {
     id: row.id,
@@ -118,6 +138,7 @@ export async function getCuratedList(
     likeCount: row.like_count,
     updatedAt: row.updated_at,
     curator,
+    siblings,
     sections: [...row.sections].sort((a, b) => a.position - b.position),
     items: [...row.list_items]
       .sort((a, b) => a.position - b.position)
@@ -139,9 +160,9 @@ export async function getCuratedList(
 // 로그인한 사람의 지도(홈 화면용). 로그인하지 않았으면 null.
 export async function getMyCuratorPage() {
   const supabase = await createClient();
-  const { data: auth } = await supabase.auth.getUser();
-  if (!auth.user) return null;
-  const { data: p } = await supabase.from("profiles").select("handle").eq("id", auth.user.id).maybeSingle();
+  const uid = await myId(supabase);
+  if (!uid) return null;
+  const { data: p } = await supabase.from("profiles").select("handle").eq("id", uid).maybeSingle();
   if (!p) return null;
   return getCuratorPage(p.handle);
 }

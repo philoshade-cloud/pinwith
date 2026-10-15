@@ -36,6 +36,8 @@ export type CuratedList = {
   likeCount: number;
   updatedAt: string;
   curator: Curator;
+  // 같은 큐레이터의 다른 리스트(바꿔 보기용)
+  siblings?: { slug: string; title: string }[];
   sections: Section[];
   items: ListItem[];
 };

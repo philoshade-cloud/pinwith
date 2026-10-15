@@ -12,12 +12,15 @@ type ListHit = {
   title: string;
   themes: string[];
   like_count: number;
+  owner_id: string;
+  // 내 리스트와 겹치는 장소 수(추천용)
+  overlap?: number;
   owner: { handle: string; display_name: string } | null;
   list_items: { count: number }[];
 };
 
 const LIST_SELECT =
-  "id, slug, title, themes, like_count, owner:profiles!lists_owner_id_fkey(handle, display_name), list_items(count)";
+  "id, slug, title, themes, like_count, owner_id, owner:profiles!lists_owner_id_fkey(handle, display_name), list_items(count)";
 
 // 검색어를 PostgREST 필터에 안전하게 넣기 위해 특수문자를 뺀다.
 const clean = (q: string) => q.replace(/[,()%*\\#]/g, " ").trim();
@@ -31,6 +34,8 @@ export function ExploreView() {
   const [lists, setLists] = useState<ListHit[]>([]);
   const [following, setFollowing] = useState<CuratorHit[]>([]);
   const [recent, setRecent] = useState<ListHit[]>([]);
+  const [popular, setPopular] = useState<ListHit[]>([]);
+  const [similar, setSimilar] = useState<ListHit[]>([]);
   const [me, setMe] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -39,22 +44,53 @@ export function ExploreView() {
       const { data: auth } = await supabase.auth.getUser();
       const uid = auth.user?.id ?? null;
       setMe(uid);
-      const recentReq = supabase
-        .from("lists")
-        .select(LIST_SELECT)
-        .eq("visibility", "public")
-        .order("updated_at", { ascending: false })
-        .limit(30);
-      if (uid) {
-        const { data: f } = await supabase
+      const notMine = (l: ListHit) => l.owner_id !== uid && (l.list_items[0]?.count ?? 0) > 0;
+
+      // 새로 올라온 리스트, 인기 리스트(좋아요 순)는 함께 읽는다
+      const [{ data: r }, { data: pop }] = await Promise.all([
+        supabase.from("lists").select(LIST_SELECT).eq("visibility", "public").order("updated_at", { ascending: false }).limit(30),
+        supabase.from("lists").select(LIST_SELECT).eq("visibility", "public").gt("like_count", 0).order("like_count", { ascending: false }).limit(20),
+      ]);
+      setRecent(((r ?? []) as unknown as ListHit[]).filter(notMine));
+      setPopular(((pop ?? []) as unknown as ListHit[]).filter(notMine).slice(0, 10));
+
+      if (!uid) return;
+      const [{ data: f }, { data: mine }] = await Promise.all([
+        supabase
           .from("follows")
           .select("followee:profiles!follows_followee_id_fkey(id, handle, display_name, bio)")
           .eq("follower_id", uid)
-          .order("created_at", { ascending: false });
-        setFollowing(((f ?? []) as unknown as { followee: CuratorHit }[]).map((r) => r.followee).filter(Boolean));
+          .order("created_at", { ascending: false }),
+        // 내 리스트에 담긴 장소들
+        supabase.from("list_items").select("place_id, lists!inner(owner_id)").eq("lists.owner_id", uid).limit(300),
+      ]);
+      setFollowing(((f ?? []) as unknown as { followee: CuratorHit }[]).map((x) => x.followee).filter(Boolean));
+
+      // 내 장소가 많이 겹치는 다른 사람의 공개 리스트
+      const placeIds = [...new Set((mine ?? []).map((x) => x.place_id as string))];
+      if (placeIds.length === 0) return;
+      const { data: hits } = await supabase
+        .from("list_items")
+        .select("list_id, place_id, lists!inner(owner_id, visibility)")
+        .in("place_id", placeIds.slice(0, 150))
+        .eq("lists.visibility", "public")
+        .neq("lists.owner_id", uid)
+        .limit(1000);
+      const overlap = new Map<string, Set<string>>();
+      for (const h of (hits ?? []) as { list_id: string; place_id: string }[]) {
+        if (!overlap.has(h.list_id)) overlap.set(h.list_id, new Set());
+        overlap.get(h.list_id)!.add(h.place_id);
       }
-      const { data: r } = await recentReq;
-      setRecent(((r ?? []) as unknown as ListHit[]).filter((l) => (l.list_items[0]?.count ?? 0) > 0));
+      const top = [...overlap.entries()].sort((a, b) => b[1].size - a[1].size).slice(0, 10);
+      if (top.length === 0) return;
+      const { data: sim } = await supabase.from("lists").select(LIST_SELECT).in("id", top.map(([id]) => id));
+      const byId = new Map(((sim ?? []) as unknown as ListHit[]).map((l) => [l.id, l]));
+      setSimilar(
+        top.flatMap(([id, set]): ListHit[] => {
+          const l = byId.get(id);
+          return l ? [{ ...l, overlap: set.size }] : [];
+        }),
+      );
     })();
   }, [supabase]);
 
@@ -90,7 +126,7 @@ export function ExploreView() {
   );
 
   return (
-    <Panel title="찾기 · 큐레이터와 리스트">
+    <Panel title="타인의 리스트">
       <div className="px-5 pb-10 pt-4">
       <form
         onSubmit={(e) => {
@@ -133,6 +169,16 @@ export function ExploreView() {
           {following.length > 0 && (
             <Section title="팔로우 중">
               <CuratorRows rows={following} />
+            </Section>
+          )}
+          {similar.length > 0 && (
+            <Section title="내 리스트와 겹치는 리스트">
+              <ListRows rows={similar} />
+            </Section>
+          )}
+          {popular.length > 0 && (
+            <Section title="인기 리스트">
+              <ListRows rows={popular} />
             </Section>
           )}
           <Section title="새로 올라온 리스트">
@@ -193,6 +239,7 @@ function ListRows({ rows }: { rows: ListHit[] }) {
             <span className="block text-[17px] font-semibold text-ink">{l.title}</span>
             <span className="mt-1 block text-[13px] text-muted">
               {l.owner?.display_name || `@${l.owner?.handle}`} · 장소 {l.list_items[0]?.count ?? 0}곳
+              {l.overlap ? ` · 내 장소와 ${l.overlap}곳 겹침` : ""}
               {l.like_count > 0 && ` · 좋아요 ${l.like_count.toLocaleString("ko-KR")}`}
               {l.themes.length > 0 && ` · ${l.themes.map((t) => `#${t}`).join(" ")}`}
             </span>

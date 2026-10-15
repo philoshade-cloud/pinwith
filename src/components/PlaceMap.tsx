@@ -17,6 +17,10 @@ type Props = {
   candidate?: { lat: number; lng: number } | null;
   // 지도를 가리는 패널·버튼 영역. 핀을 맞출 때 이만큼 비켜서 보여준다.
   padding?: { top: number; bottom: number; left: number; right: number };
+  // "result": 검색 결과처럼 아직 리스트에 없는 장소(다른 색)
+  tone?: "pin" | "result";
+  // 지도 가운데 좌표를 읽는 함수를 넘겨준다(검색을 이 근처로)
+  onReady?: (getCenter: () => { lat: number; lng: number }) => void;
 };
 
 const DEFAULT_PADDING = { top: 64, bottom: 64, left: 64, right: 64 };
@@ -29,7 +33,7 @@ function centerOffset(p: { top: number; bottom: number; left: number; right: num
 
 // 큐레이터의 핀만 보여주는 가벼운 지도. 자세한 정보와 길찾기는 구글·네이버 지도로 넘긴다.
 export function PlaceMap({
-  items, selectedId, onSelect, showRoute, candidate = null, numbering, padding = DEFAULT_PADDING,
+  items, selectedId, onSelect, showRoute, candidate = null, numbering, padding = DEFAULT_PADDING, tone = "pin", onReady,
 }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
@@ -60,12 +64,18 @@ export function PlaceMap({
     m.addControl(new maplibregl.AttributionControl({ compact: true }), narrow ? "top-right" : "bottom-right");
     if (!narrow) m.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
     map.current = m;
+    onReady?.(() => {
+      const c = m.getCenter();
+      return { lat: c.lat, lng: c.lng };
+    });
     const pins = markers.current;
     return () => {
       m.remove();
       map.current = null;
       pins.clear();
     };
+    // 지도는 한 번만 만든다
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 핀 갱신 + 화면 맞추기
@@ -82,7 +92,7 @@ export function PlaceMap({
       el.className = "pin-wrap";
       el.setAttribute("aria-label", item.title);
       const shape = document.createElement("span");
-      shape.className = "pin";
+      shape.className = tone === "result" ? "pin pin-result" : "pin";
       if (showRoute) {
         const n = document.createElement("span");
         n.className = "pin-num";
@@ -123,7 +133,7 @@ export function PlaceMap({
     if (m.isStyleLoaded()) drawRoute();
     else m.once("load", drawRoute);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items, showRoute, numbering]);
+  }, [items, showRoute, numbering, tone]);
 
   // 화면 맞추기: 핀이 바뀌거나 패널이 열리고 닫힐 때
   const padKey = `${padding.top},${padding.bottom},${padding.left},${padding.right}`;

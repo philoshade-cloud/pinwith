@@ -21,7 +21,8 @@ export async function proxy(request: NextRequest) {
       },
     },
   });
-  await supabase.auth.getUser();
+  // getClaims는 토큰을 이 서버에서 검증한다(만료됐으면 갱신). 인증 서버까지 왕복하지 않아 빠르다.
+  await supabase.auth.getClaims();
   return response;
 }
 

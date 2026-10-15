@@ -156,6 +156,15 @@ export function ListEditor({ listId }: { listId: string }) {
     setMetaMsg("저장했습니다.");
   }
 
+  async function setKind(kind: ListKind) {
+    if (!meta || !savedMeta) return;
+    setMeta({ ...meta, kind });
+    setSavedMeta({ ...savedMeta, kind });
+    const { error } = await supabase.from("lists").update({ kind }).eq("id", listId);
+    if (error) flash("저장하지 못했습니다. 다시 시도하세요.");
+    else flash(kind === "course" ? "번호를 붙였습니다." : "번호를 뗐습니다.");
+  }
+
   // ── 섹션 ─────────────────────────────────
   async function addSection(e: React.FormEvent) {
     e.preventDefault();
@@ -328,7 +337,7 @@ export function ListEditor({ listId }: { listId: string }) {
               placeholder="#라멘 #혼자여행"
             />
           </label>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4">
             <label className="grid gap-1 text-[13px] font-semibold text-ink">
               공개 범위
               <select
@@ -339,17 +348,6 @@ export function ListEditor({ listId }: { listId: string }) {
                 {(Object.keys(VISIBILITY_LABEL) as Visibility[]).map((v) => (
                   <option key={v} value={v}>{VISIBILITY_LABEL[v]}</option>
                 ))}
-              </select>
-            </label>
-            <label className="grid gap-1 text-[13px] font-semibold text-ink">
-              방문 순서
-              <select
-                value={meta.kind}
-                onChange={(e) => setMeta({ ...meta, kind: e.target.value as ListKind })}
-                className="field"
-              >
-                <option value="collection">순서 없음 (모음)</option>
-                <option value="course">순서대로 (코스)</option>
               </select>
             </label>
           </div>
@@ -417,6 +415,21 @@ export function ListEditor({ listId }: { listId: string }) {
         {/* 장소 목록 */}
         <section className="mt-10" aria-labelledby="items-h">
           <h2 id="items-h" className="text-[15px] font-semibold text-ink">장소 {items.length}곳</h2>
+          {/* 코스 번호: 켜면 1, 2, 3 번호와 지도 위 경로선이 생긴다. 바로 저장된다. */}
+          <label className="mt-3 flex cursor-pointer items-start gap-3 rounded-xl border border-rule p-3">
+            <input
+              type="checkbox"
+              checked={meta.kind === "course"}
+              onChange={(e) => setKind(e.target.checked ? "course" : "collection")}
+              className="mt-0.5 h-5 w-5 shrink-0 accent-[var(--color-pin)]"
+            />
+            <span>
+              <span className="block text-[14px] font-semibold text-ink">방문 순서대로 번호 붙이기 (코스)</span>
+              <span className="mt-0.5 block text-[13px] text-muted">
+                켜면 장소에 1, 2, 3 번호가 붙고 지도에 순서대로 선이 이어집니다. 순서는 아래 ↑↓ 버튼으로 바꿉니다.
+              </span>
+            </span>
+          </label>
           {items.length === 0 && (
             <p className="mt-2 text-[14px] text-muted">지도에서 장소를 검색해 첫 장소를 추가하세요.</p>
           )}
