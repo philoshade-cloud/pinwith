@@ -317,6 +317,7 @@ export function ListEditor({ listId }: { listId: string }) {
       <div className="px-5 pb-10 pt-4">
         <nav className="flex items-center gap-2">
           <Link href={viewHref} className="btn-quiet">리스트 보기</Link>
+          <Link href="/me/stats" className="btn-quiet">통계</Link>
           <button type="button" onClick={copyLink} className="btn-quiet">링크 복사</button>
         </nav>
 

@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { CuratedList, ListItem } from "@/lib/types";
 import { isWithinMeters } from "@/lib/links";
 import { shortLink } from "@/lib/share";
+import { track } from "@/lib/track";
 import { AdSlot } from "./AdSlot";
 import { FollowButton } from "./FollowButton";
 import { LikeButton } from "./LikeButton";
@@ -108,6 +109,20 @@ export function ListExplorer({ list }: { list: CuratedList }) {
     );
   }
 
+  // 열림 기록(큐레이터 통계용): 주인이 아닌 사람이 열었을 때, 같은 탭에서는 한 번만
+  useEffect(() => {
+    if (isDemo || me === undefined || isOwner) return;
+    const key = `pw_open_${list.id}`;
+    try {
+      if (sessionStorage.getItem(key)) return;
+      sessionStorage.setItem(key, "1");
+    } catch {
+      /* 저장이 막혀도 기록은 남긴다 */
+    }
+    const code = new URLSearchParams(window.location.search).get("s");
+    track("open", { listId: list.id, code: code && /^[A-Za-z0-9]{4,12}$/.test(code) ? code : null });
+  }, [isDemo, me, isOwner, list.id]);
+
   // 내 리스트면 공유용 짧은 링크를 미리 만들어 둔다(공유 창은 누른 즉시 떠야 해서)
   const [shareUrl, setShareUrl] = useState<string | null>(null);
   useEffect(() => {
@@ -160,6 +175,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
               </span>
             </span>
           </Link>
+          {isOwner && <Link href="/me/stats" className="btn-quiet shrink-0">통계</Link>}
           {isOwner && <Link href={`/me/lists/${list.id}`} className="btn-quiet shrink-0">편집</Link>}
         </div>
         <h1 className="font-display mt-5 text-[28px] font-semibold leading-[1.15] tracking-[-0.02em] text-ink text-balance">

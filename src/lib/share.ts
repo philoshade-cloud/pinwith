@@ -33,3 +33,19 @@ export async function shortLink(target: { listId: string } | { profileId: string
     return fallback;
   }
 }
+
+// 채널별 링크(예: 인스타 프로필, 유튜브 설명란). 같은 리스트라도 채널마다 다른 코드를 만들어 유입을 나눠 센다.
+export async function createChannelLink(listId: string, label: string): Promise<string | null> {
+  const supabase = createClient();
+  const { data } = await supabase.auth.getClaims();
+  const me = data?.claims?.sub as string | undefined;
+  if (!me) return null;
+  for (let tries = 0; tries < 3; tries++) {
+    const c = randomCode();
+    const { error } = await supabase
+      .from("short_links")
+      .insert({ code: c, owner_id: me, target_list_id: listId, channel_label: label.trim().slice(0, 40) });
+    if (!error) return c;
+  }
+  return null;
+}

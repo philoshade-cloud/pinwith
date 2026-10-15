@@ -115,6 +115,7 @@ export function CuratorView({
             <FollowButton curatorId={curator.id} handle={curator.handle} />
           )}
           <button type="button" onClick={share} className="btn-quiet">공유</button>
+          {isOwner && <Link href="/me/stats" className="btn-quiet">통계</Link>}
           {isOwner && <Link href="/me" className="btn-quiet">프로필 편집</Link>}
         </div>
         {isOwner && (

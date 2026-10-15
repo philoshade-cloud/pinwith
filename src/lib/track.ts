@@ -43,7 +43,7 @@ async function inRadius(target: { lat: number | null; lng: number | null }) {
 
 export async function track(
   event: EventName,
-  ctx: { listId: string; itemId?: string; lat?: number | null; lng?: number | null },
+  ctx: { listId: string; itemId?: string; lat?: number | null; lng?: number | null; code?: string | null },
 ) {
   if (!isSupabaseConfigured() || ctx.listId.startsWith("demo")) return;
   try {
@@ -51,15 +51,19 @@ export async function track(
     const { data } = await supabase.auth.getUser();
     const radius =
       event === "directions" ? await inRadius({ lat: ctx.lat ?? null, lng: ctx.lng ?? null }) : null;
-    await supabase.from("link_events").insert({
+    const row = {
       list_id: ctx.listId,
+      code: ctx.code ?? null,
       item_id: ctx.itemId ?? null,
       user_id: data.user?.id ?? null,
       device_id: deviceId(),
       event,
       in_radius: radius,
       referrer: document.referrer || null,
-    });
+    };
+    const { error } = await supabase.from("link_events").insert(row);
+    // 없는 링크 코드가 붙어 왔으면 코드 없이 다시 기록
+    if (error && row.code) await supabase.from("link_events").insert({ ...row, code: null });
   } catch {
     // 기록 실패는 무시
   }

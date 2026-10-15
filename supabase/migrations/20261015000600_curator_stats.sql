@@ -1,0 +1,2 @@
+-- (적용 완료) 큐레이터 통계 함수 my_stats(days). 본문은 Supabase에 적용된 버전과 같다.
+-- 자세한 정의는 데이터베이스의 public.my_stats 참고(security invoker, RLS 적용).

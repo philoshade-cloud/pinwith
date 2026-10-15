@@ -27,7 +27,13 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   else if (row?.profile) path = `/@${row.profile.handle}`;
   if (!path) return NextResponse.redirect(home);
 
-  // 기록 실패는 무시하고 이동한다
-  await db.from("link_events").insert({ code, list_id: row?.target_list_id ?? null, event: "open", referrer: request.headers.get("referer") });
+  // 리스트 링크: 열림 기록은 리스트 화면이 남긴다(?s=코드로 어느 링크인지 전달).
+  // 큐레이터 지도 링크: 여기서 기록한다.
+  if (row?.list) {
+    const url = new URL(path, request.url);
+    url.searchParams.set("s", code);
+    return NextResponse.redirect(url, 307);
+  }
+  await db.from("link_events").insert({ code, event: "open", referrer: request.headers.get("referer") });
   return NextResponse.redirect(new URL(path, request.url), 307);
 }

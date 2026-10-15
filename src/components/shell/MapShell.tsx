@@ -392,7 +392,7 @@ function NavView({ variant, me, reopen, path }: NavProps & { path: string }) {
   const isActive = (href: string) => {
     const b = base(href);
     if (b === "/" || b === "/me") return path === b;
-    if (me && b === `/@${me.handle}` && path.startsWith("/me/lists/")) return true;
+    if (me && b === `/@${me.handle}` && (path.startsWith("/me/lists/") || path === "/me/stats")) return true;
     return path === b || path.startsWith(b + "/");
   };
   // 정확히 그 화면일 때만 다시 누르면 패널 펼치기. 아래 화면에서 누르면 그 화면(목록)으로 간다.
