@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { useMonetization } from "@/lib/monetization";
-import { count, DetailHeader, money, Msg, MODEL, Period, Stat, Tabs, useAuthed, useConsoleNav } from "./ui";
+import { ConfirmButton, count, DetailHeader, money, Msg, MODEL, Period, Stat, Tabs, useAuthed, useConsoleNav } from "./ui";
 
 type Tab = "display" | "market" | "mine" | "stores" | "payout";
 const TABS: { id: Tab; label: string }[] = [
@@ -497,7 +497,7 @@ function Mine({ currency }: { currency: string }) {
 // ── 연결된 가게: 가게별 통계(예약 확정·방문·노쇼·취소, 주변 평균 비교), 연결 끊기 ─────────────────────────
 type Store = {
   business_id: string; place_name: string; business: string;
-  attachments: { attachment_id: string; model: string; list_title: string; active: boolean }[];
+  attachments: { attachment_id: string; model: string; list_title: string; active: boolean; item_id: string }[];
   inquiries: number; confirmed: number; visited: number; no_show: number; cancel_business: number; cancel_guest: number;
   store_rate: number | null; store_confirmed: number; peer_rate: number; clicks: number; earned: number; alerted_at: string | null;
 };
@@ -515,11 +515,11 @@ function Stores({ currency }: { currency: string }) {
     load();
   }, [load]);
 
+  // 연결 끊기: 제휴를 해제하고 그 가게를 내 리스트에서도 뺀다(이미 쌓인 수익은 그대로)
   async function disconnect(s: Store) {
-    if (!confirm(`${s.place_name}과(와)의 제휴 연결을 모두 끊을까요? 리스트에는 그대로 남고, 이후 보상만 멈춰요.`)) return;
-    const ids = s.attachments.filter((a) => a.active).map((a) => a.attachment_id);
-    const { error } = await supabase.from("offer_attachments").update({ active: false }).in("id", ids);
-    setMsg(error ? "끊지 못했어요." : `${s.place_name} 연결을 끊었어요.`);
+    const items = [...new Set(s.attachments.map((a) => a.item_id).filter(Boolean))];
+    const { error } = items.length ? await supabase.from("list_items").delete().in("id", items) : { error: null };
+    setMsg(error ? "끊지 못했어요." : `${s.place_name} 연결을 끊고 내 리스트에서 뺐어요.`);
     load();
   }
 
@@ -529,7 +529,7 @@ function Stores({ currency }: { currency: string }) {
     <section className="grid gap-4">
       <p className="text-[13px] text-muted">
         최근 90일 동안 내 리스트를 통해 연결된 가게들이에요. 노쇼·취소는 가게가 알려 준 대로 반영하되, 그 비율이 반경 3km 안 다른 가게들보다 눈에 띄게 높으면 알림으로 알려 드려요.
-        이상하다고 생각되면 연결을 끊을 수 있어요.
+        이상하다고 생각되면 연결을 끊을 수 있고, 끊으면 그 가게가 내 리스트에서도 빠져요.
       </p>
       <Msg text={msg} />
       {rows.length === 0 && <p className="text-[14px] text-muted">아직 연결된 가게가 없어요.</p>}
@@ -563,9 +563,15 @@ function Stores({ currency }: { currency: string }) {
               </p>
               <p className="text-[13px] text-muted">길찾기·방문 과금 {count(s.clicks)}회 · 90일 내 몫 {money(s.earned, currency)}</p>
               {s.alerted_at && <p className="text-[12px] text-pin">{new Date(s.alerted_at).toLocaleDateString("ko-KR")}에 이상 패턴 알림을 보냈어요.</p>}
-              {active && (
-                <button type="button" onClick={() => disconnect(s)} className="btn-quiet mt-3 !px-3 !py-1 !text-[13px]">이 가게 연결 끊기</button>
-              )}
+              <div className="mt-3">
+                <ConfirmButton
+                  label="이 가게 연결 끊기"
+                  className="btn-quiet !px-3 !py-1 !text-[13px]"
+                  question={`${s.place_name}과(와)의 제휴를 끊고, 이 가게를 내 리스트(${[...new Set(s.attachments.map((a) => a.list_title))].join(", ")})에서도 뺄까요? 이미 쌓인 수익은 그대로예요.`}
+                  confirmLabel="끊고 빼기"
+                  onConfirm={() => disconnect(s)}
+                />
+              </div>
             </li>
           );
         })}

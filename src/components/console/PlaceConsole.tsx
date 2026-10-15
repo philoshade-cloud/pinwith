@@ -6,7 +6,7 @@ import { loadPlacesLibrary } from "@/lib/google";
 import { PAY_COUNTRIES } from "@/lib/payments";
 import { DAYS, ReservationThread } from "../Reservation";
 import { PlaceSearchBox, type FoundPlace } from "../PlaceSearch";
-import { count, DetailHeader, money, Msg, MODEL, Period, Stat, Tabs, useAuthed, useConsoleNav } from "./ui";
+import { ConfirmButton, count, DetailHeader, money, Msg, MODEL, Period, Stat, Tabs, useAuthed, useConsoleNav } from "./ui";
 
 type Business = {
   id: string; place_id: string; place_name: string; place_address: string | null; business_name: string; reg_number: string | null;
@@ -396,9 +396,8 @@ function BizDetail({ b, dash, kind, onBack, reload }: { b: Business; dash: Dash;
   }, [load]);
 
   async function block(l: BizList) {
-    if (!confirm(`@${l.handle}님을 차단할까요?\n\n그 큐레이터의 리스트에서 우리 가게가 빠지고, 차단을 풀기 전까지 다시 담을 수 없어요. 큐레이터에게 알림이 가요.`)) return;
     const { error } = await supabase.rpc("block_curator", { p_business: b.id, p_curator: l.curator_id });
-    setMsg(error ? "차단하지 못했어요." : `@${l.handle}님을 차단했어요.`);
+    setMsg(error ? `차단하지 못했어요. (${error.message})` : `@${l.handle}님을 차단했어요. 그 큐레이터의 리스트에서 우리 가게가 빠졌고, 큐레이터에게 알림이 갔어요.`);
     load();
     reload();
   }
@@ -487,7 +486,14 @@ function BizDetail({ b, dash, kind, onBack, reload }: { b: Business; dash: Dash;
                         {l.paid_only && " · 광고비 있을 때만 공개"}
                       </span>
                     </span>
-                    {kind === "lists" && <button type="button" onClick={() => block(l)} className="btn-quiet !px-3 !py-1 !text-[12px]">이 큐레이터 차단</button>}
+                    {kind === "lists" && (
+                      <ConfirmButton
+                        label="이 큐레이터 차단"
+                        question={`@${l.handle}님을 차단할까요?\n그 큐레이터의 리스트에서 우리 가게가 빠지고, 차단을 풀기 전까지 다시 담을 수 없어요. 큐레이터에게 알림이 가요.`}
+                        confirmLabel="차단"
+                        onConfirm={() => block(l)}
+                      />
+                    )}
                   </li>
                 ))}
             </ul>
@@ -940,10 +946,7 @@ function Reservations({ b, onChanged }: { b: Business; onChanged: () => void }) 
     load();
   }, [load]);
 
-  async function act(r: Resv, status: Resv["status"]) {
-    const ask = status === "confirmed" ? "손님에게 보낼 말(선택). 예: 창가 자리로 준비할게요" : status === "declined" ? "거절 사유(손님에게 보여요)" : status === "no_show" || status === "cancelled" ? "사유(선택, 손님에게 보여요)" : null;
-    const reply = ask ? prompt(ask, "") : "";
-    if (reply === null) return;
+  async function act(r: Resv, status: Resv["status"], reply: string) {
     const { error } = await supabase.rpc("set_reservation_status", { p_id: r.id, p_status: status, p_reply: reply });
     if (error) {
       setMsg(error.message.includes("insufficient")
@@ -997,15 +1000,15 @@ function Reservations({ b, onChanged }: { b: Business; onChanged: () => void }) 
                 </button>
                 {r.status === "new" && (
                   <>
-                    <button type="button" onClick={() => act(r, "confirmed")} className="btn-primary !px-3 !py-1 !text-[13px]">확정</button>
-                    <button type="button" onClick={() => act(r, "declined")} className="btn-quiet !px-3 !py-1 !text-[13px]">거절</button>
+                    <ConfirmButton label="확정" className="btn-primary !px-3 !py-1 !text-[13px]" question={`${r.name}님 ${r.visit_date.slice(5).replace("-", "/")} ${r.visit_time ?? ""} ${r.party_size}명 예약을 확정할까요?`} withNote="손님에게 보낼 말(선택). 예: 창가 자리로 준비할게요" confirmLabel="확정" onConfirm={(t) => act(r, "confirmed", t)} />
+                    <ConfirmButton label="거절" className="btn-quiet !px-3 !py-1 !text-[13px]" question="이 문의를 거절할까요?" withNote="거절 사유(손님에게 보여요)" confirmLabel="거절" onConfirm={(t) => act(r, "declined", t)} />
                   </>
                 )}
                 {r.status === "confirmed" && (
                   <>
-                    <button type="button" onClick={() => act(r, "visited")} className="btn-quiet !px-3 !py-1 !text-[13px]">방문함</button>
-                    <button type="button" onClick={() => act(r, "no_show")} className="btn-quiet !px-3 !py-1 !text-[13px]">노쇼</button>
-                    <button type="button" onClick={() => act(r, "cancelled")} className="btn-quiet !px-3 !py-1 !text-[13px]">취소</button>
+                    <ConfirmButton label="방문함" className="btn-quiet !px-3 !py-1 !text-[13px]" question="손님이 방문했나요?" confirmLabel="방문함" onConfirm={(t) => act(r, "visited", t)} />
+                    <ConfirmButton label="노쇼" className="btn-quiet !px-3 !py-1 !text-[13px]" question="노쇼로 기록할까요? 큐레이터 보상은 되돌려져요." withNote="사유(선택, 손님에게 보여요)" confirmLabel="노쇼로 기록" onConfirm={(t) => act(r, "no_show", t)} />
+                    <ConfirmButton label="취소" className="btn-quiet !px-3 !py-1 !text-[13px]" question="가게 사정으로 취소할까요? 큐레이터 보상은 되돌려져요." withNote="사유(손님에게 보여요)" confirmLabel="취소하기" onConfirm={(t) => act(r, "cancelled", t)} />
                   </>
                 )}
               </div>

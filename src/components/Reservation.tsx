@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { useShell } from "./shell/context";
+import { ConfirmButton } from "./console/ui";
 
 // 예약 가능 시간: {"0":[["11:00","21:00"]], ...} 0=일요일. 비어 있으면 아무 때나.
 export type Hours = Record<string, [string, string][]>;
@@ -270,7 +271,6 @@ export function MyReservations() {
   }, [me, router, load]);
 
   async function cancel(id: string) {
-    if (!confirm("이 예약 문의를 취소할까요?")) return;
     await supabase.rpc("cancel_reservation", { p_id: id });
     load();
   }
@@ -298,14 +298,14 @@ export function MyReservations() {
                   </span>
                 </p>
                 {r.reply && <p className="mt-1 text-[13px] text-ink/75">가게: {r.reply}</p>}
-                <p className="mt-1 flex gap-3 text-[12px]">
+                <div className="mt-1 flex flex-wrap gap-3 text-[12px]">
                   <button type="button" onClick={() => setOpen(open === r.id ? null : r.id)} className="text-teal underline">
                     {open === r.id ? "대화 닫기" : "가게와 대화"}
                   </button>
                   {(r.status === "new" || r.status === "confirmed") && (
-                    <button type="button" onClick={() => cancel(r.id)} className="text-muted underline">취소</button>
+                    <ConfirmButton label="취소" className="text-muted underline" question="이 예약 문의를 취소할까요?" confirmLabel="취소하기" onConfirm={() => cancel(r.id)} />
                   )}
-                </p>
+                </div>
                 {open === r.id && <ReservationThread reservationId={r.id} meId={me.id} otherLabel={r.business?.place_name ?? "가게"} />}
               </li>
             ))}
