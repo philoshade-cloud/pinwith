@@ -8,8 +8,16 @@ import { useConsent } from "./Consent";
 import { useShell } from "./shell/context";
 
 // 광고 자리. 광고 계정(AdSense)을 연결하기 전에는 PinWith 자체 홍보를 보여준다.
-// 연결하려면 환경 변수 NEXT_PUBLIC_ADSENSE_CLIENT(ca-pub-…)와 각 자리의 slot id를 넣는다.
+// 연결하려면 환경 변수 NEXT_PUBLIC_ADSENSE_CLIENT(ca-pub-…)와 광고 단위 id(숫자)를 넣는다:
+//   NEXT_PUBLIC_ADSENSE_SLOT_LIST(리스트 안·끝), NEXT_PUBLIC_ADSENSE_SLOT_EXPLORE(타인의 핀)
+//   (선택) NEXT_PUBLIC_ADSENSE_LAYOUT_KEY: 인피드(fluid) 광고 단위를 만들었으면 그 레이아웃 키. 없으면 반응형 디스플레이 광고.
+// 광고 단위 id가 없는 자리는 계속 자체 홍보를 보여준다. /ads.txt는 NEXT_PUBLIC_ADSENSE_CLIENT로 자동으로 만들어진다.
 const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? "";
+const LAYOUT_KEY = process.env.NEXT_PUBLIC_ADSENSE_LAYOUT_KEY ?? "";
+const UNIT_LIST = process.env.NEXT_PUBLIC_ADSENSE_SLOT_LIST ?? "";
+const UNIT_EXPLORE = process.env.NEXT_PUBLIC_ADSENSE_SLOT_EXPLORE ?? "";
+// 화면 속 자리 이름 → AdSense 광고 단위 id
+const unitFor = (slot: string) => (slot.startsWith("list") ? UNIT_LIST : slot.startsWith("explore") ? UNIT_EXPLORE : "");
 
 const HOUSE = [
   { title: "아는 곳을 핀으로 꽂아 보세요", body: "내 단골집, 여행 코스를 지도에 모아 링크 하나로 건네요.", cta: "내 지도 만들기", href: "/login?next=/" },
@@ -66,12 +74,13 @@ function useAdView(listId: string | undefined, slot: string) {
 export function AdSlot({ slot, variant = 0, listId }: { slot: string; variant?: number; listId?: string }) {
   const consent = useConsent();
   const { me } = useShell();
-  const paid = !!(ADSENSE_CLIENT && consent);
+  const unit = unitFor(slot);
+  const paid = !!(ADSENSE_CLIENT && unit && consent);
   const viewRef = useAdView(listId, paid ? slot : `house:${slot}`);
   if (paid)
     return (
       <div ref={viewRef}>
-        <AdSenseUnit slot={slot} personalized={consent === "all"} />
+        <AdSenseUnit unit={unit} personalized={consent === "all"} />
       </div>
     );
   const base = HOUSE[variant % HOUSE.length];
@@ -97,9 +106,11 @@ declare global {
   }
 }
 
-function AdSenseUnit({ slot, personalized }: { slot: string; personalized: boolean }) {
+function AdSenseUnit({ unit, personalized }: { unit: string; personalized: boolean }) {
   const ref = useRef<HTMLModElement>(null);
   useEffect(() => {
+    // 같은 광고 칸에 두 번 채우지 않는다(동의 변경으로 다시 그릴 때)
+    if (ref.current?.dataset.adsbygoogleStatus) return;
     if (!document.querySelector("script[data-adsense]")) {
       const s = document.createElement("script");
       s.async = true;
@@ -124,9 +135,10 @@ function AdSenseUnit({ slot, personalized }: { slot: string; personalized: boole
         ref={ref}
         className="adsbygoogle block"
         data-ad-client={ADSENSE_CLIENT}
-        data-ad-slot={slot}
-        data-ad-format="fluid"
-        data-ad-layout-key="-fb+5w+4e-db+86"
+        data-ad-slot={unit}
+        {...(LAYOUT_KEY
+          ? { "data-ad-format": "fluid", "data-ad-layout-key": LAYOUT_KEY }
+          : { "data-ad-format": "auto", "data-full-width-responsive": "true" })}
       />
     </div>
   );
