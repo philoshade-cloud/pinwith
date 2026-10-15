@@ -7,6 +7,8 @@ import { createClient } from "@/lib/supabase/client";
 import { shortLink } from "@/lib/share";
 import type { ListItem, ListKind, Section, Visibility } from "@/lib/types";
 import { Panel, PanelLoading } from "./shell/Panel";
+import { EditorsManager } from "./CoEdit";
+import { NoticeComposer } from "./NoticeComposer";
 import { useMapScene, useShell, type Scene } from "./shell/context";
 
 type Meta = {
@@ -26,6 +28,8 @@ type ItemRow = {
   section_id: string | null;
   position: number;
   places: { lat: number | null; lng: number | null } | null;
+  added_by?: string;
+  adder?: { handle: string; display_name: string } | null;
 };
 
 const VISIBILITY_LABEL: Record<Visibility, string> = {
@@ -54,6 +58,7 @@ export function ListEditor({ listId }: { listId: string }) {
   const [state, setState] = useState<"loading" | "ready" | "forbidden" | "missing">("loading");
   const [handle, setHandle] = useState("");
   const [isOwner, setIsOwner] = useState(false);
+  const [ownerId, setOwnerId] = useState("");
   const [meta, setMeta] = useState<Meta | null>(null);
   const [savedMeta, setSavedMeta] = useState<Meta | null>(null);
   const [metaMsg, setMetaMsg] = useState<string | null>(null);
@@ -76,7 +81,8 @@ export function ListEditor({ listId }: { listId: string }) {
           "id, owner_id, slug, title, description, visibility, kind, themes," +
             " owner:profiles!lists_owner_id_fkey(handle)," +
             " sections(id, name, position)," +
-            " list_items(id, place_id, custom_title, memo, section_id, position, places(lat, lng))",
+            " list_items(id, place_id, custom_title, memo, section_id, position, added_by, places(lat, lng)," +
+            " adder:profiles!list_items_added_by_fkey(handle, display_name))",
         )
         .eq("id", listId)
         .maybeSingle();
@@ -111,6 +117,7 @@ export function ListEditor({ listId }: { listId: string }) {
         themes: row.themes.map((t) => `#${t}`).join(" "),
       };
       setIsOwner(owner);
+      setOwnerId(row.owner_id);
       setHandle(row.owner?.handle ?? "");
       setMeta(m);
       setSavedMeta(m);
@@ -153,8 +160,8 @@ export function ListEditor({ listId }: { listId: string }) {
       .update({
         title: meta.title.trim(),
         description: meta.description.trim(),
-        slug,
-        visibility: meta.visibility,
+        // 공개 범위와 주소는 주인만 바꾼다(공동 편집자는 DB에서도 막힘)
+        ...(isOwner ? { slug, visibility: meta.visibility } : {}),
         kind: meta.kind,
         themes,
       })
@@ -351,7 +358,7 @@ export function ListEditor({ listId }: { listId: string }) {
               placeholder="#라멘 #혼자여행"
             />
           </label>
-          <div className="grid gap-4">
+          {isOwner && <div className="grid gap-4">
             <label className="grid gap-1 text-[13px] font-semibold text-ink">
               공개 범위
               <select
@@ -364,8 +371,8 @@ export function ListEditor({ listId }: { listId: string }) {
                 ))}
               </select>
             </label>
-          </div>
-          <label className="grid gap-1 text-[13px] font-semibold text-ink">
+          </div>}
+          {isOwner && <label className="grid gap-1 text-[13px] font-semibold text-ink">
             주소
             <span className="flex items-center rounded-lg border border-rule bg-surface pl-3 text-[14px] font-normal text-muted focus-within:outline-2 focus-within:outline-teal">
               /@{handle}/
@@ -375,7 +382,7 @@ export function ListEditor({ listId }: { listId: string }) {
                 className="min-w-0 flex-1 rounded-r-lg bg-white px-2 py-2.5 text-[15px] text-ink outline-none"
               />
             </span>
-          </label>
+          </label>}
           <div className="flex items-center gap-3">
             <button type="submit" disabled={!metaDirty} className="btn-primary disabled:opacity-40">
               변경 저장
@@ -459,6 +466,9 @@ export function ListEditor({ listId }: { listId: string }) {
                     <span className="mt-2.5 w-5 text-right text-[13px] font-semibold tabular-nums text-pin">{index + 1}</span>
                   )}
                   <div className="grid min-w-0 flex-1 gap-2">
+                    {item.adder && item.added_by !== ownerId && (
+                      <span className="text-[12px] text-muted">추가: {item.adder.display_name || item.adder.handle}</span>
+                    )}
                     <input
                       defaultValue={item.custom_title}
                       aria-label="장소 이름"
@@ -503,6 +513,9 @@ export function ListEditor({ listId }: { listId: string }) {
             ))}
           </ol>
         </section>
+
+        <NoticeComposer listId={listId} />
+        {isOwner && <EditorsManager listId={listId} />}
 
         {isOwner && (
           <section className="mt-16 border-t border-rule pt-6">

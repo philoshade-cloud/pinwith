@@ -7,6 +7,8 @@ import { createEmptyList } from "@/lib/lists";
 import { shortLink } from "@/lib/share";
 import type { Curator, ListItem, ListSummary } from "@/lib/types";
 import { FollowButton } from "./FollowButton";
+import { CoEditedLists } from "./CoEdit";
+import { DmButton, NotifyToggle } from "./SocialBits";
 import { Avatar } from "./ListExplorer";
 import { Panel } from "./shell/Panel";
 import { useMapScene, useShell, type Scene } from "./shell/context";
@@ -115,15 +117,22 @@ export function CuratorView({
             <FollowButton curatorId={curator.id} handle={curator.handle} />
           )}
           <button type="button" onClick={share} className="btn-quiet">공유</button>
+          {!isOwner && <DmButton userId={curator.id} />}
           {isOwner && <Link href="/me/stats" className="btn-quiet">통계</Link>}
           {isOwner && <Link href="/me" className="btn-quiet">프로필 편집</Link>}
         </div>
+        {!isOwner && (
+          <div className="mt-2">
+            <NotifyToggle curatorId={curator.id} />
+          </div>
+        )}
         {isOwner && (
           <p className="mt-4 rounded-lg bg-surface px-3 py-2 text-[13px] text-ink/80">
             위쪽 검색창에서 장소를 찾아 리스트에 담을 수 있어요.
           </p>
         )}
       </header>
+      {isOwner && <CoEditedLists />}
 
       <div className="border-t border-rule">
         {lists.length === 0 ? (

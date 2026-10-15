@@ -10,6 +10,7 @@ import { track } from "@/lib/track";
 import { AdSlot } from "./AdSlot";
 import { FollowButton } from "./FollowButton";
 import { LikeButton } from "./LikeButton";
+import { DmButton, ItemExtras, ListNotice, NotifyToggle, useCommentCounts } from "./SocialBits";
 import { Panel } from "./shell/Panel";
 import { Tags } from "./shell/PinCard";
 import { useMapScene, useShell, type Scene } from "./shell/context";
@@ -38,6 +39,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
     return list.items.filter((i) => i.sectionId === section);
   }, [list, section]);
   const numbering = useMemo(() => new Map(list.items.map((i, n) => [i.id, n + 1])), [list]);
+  const commentCounts = useCommentCounts(isDemo ? [] : list.items.map((i) => i.id));
 
   const groups = useMemo(() => {
     if (sort === "nearest" && here) {
@@ -91,8 +93,11 @@ export function ListExplorer({ list }: { list: CuratedList }) {
       addTarget: isOwner
         ? { listId: list.id, sections: list.sections, onAdded: () => router.refresh() }
         : null,
+      cardExtra: isDemo
+        ? undefined
+        : (i: ListItem) => <ItemExtras itemId={i.id} listId={list.id} ownerId={list.curator.id} isOwner={isOwner} />,
     }),
-    [visibleItems, isCourse, numbering, chips, list.id, list.sections, isOwner, router],
+    [visibleItems, isCourse, numbering, chips, list.id, list.sections, isOwner, router, isDemo, list.curator.id],
   );
   useMapScene(scene);
 
@@ -197,7 +202,14 @@ export function ListExplorer({ list }: { list: CuratedList }) {
             !isOwner && <FollowButton curatorId={list.curator.id} handle={list.curator.handle} />
           )}
           <button type="button" onClick={share} className="btn-quiet">공유</button>
+          {!isDemo && !isOwner && <DmButton userId={list.curator.id} listId={list.id} />}
         </div>
+        {!isDemo && !isOwner && (
+          <div className="mt-2">
+            <NotifyToggle curatorId={list.curator.id} />
+          </div>
+        )}
+        {!isDemo && <ListNotice listId={list.id} />}
         {isOwner && (
           <p className="mt-4 rounded-lg bg-surface px-3 py-2 text-[13px] text-ink/80">
             위쪽 검색창에서 장소를 찾으면 이 리스트에 바로 추가할 수 있어요.
@@ -254,6 +266,9 @@ export function ListExplorer({ list }: { list: CuratedList }) {
                       <span className="text-[16px] font-semibold text-ink">{item.title}</span>
                       {here && item.lat != null && isWithinMeters(here, { lat: item.lat, lng: item.lng! }) && (
                         <span className="text-[12px] text-teal">근처</span>
+                      )}
+                      {(commentCounts.get(item.id) ?? 0) > 0 && (
+                        <span className="text-[12px] text-muted">💬 {commentCounts.get(item.id)}</span>
                       )}
                     </span>
                     {item.memo && <span className="mt-1 block text-[14px] leading-relaxed text-ink/75">{item.memo}</span>}

@@ -36,6 +36,8 @@ export type Shell = {
   refreshMine: () => Promise<void>;
   toast: (msg: string) => void;
   startSave: (item: ListItem) => void;
+  // 위쪽 메시지·알림 아이콘의 숫자를 다시 센다
+  refreshBadges: () => void;
 };
 
 export const ShellContext = createContext<Shell | null>(null);

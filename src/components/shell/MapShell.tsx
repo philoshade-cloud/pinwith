@@ -97,6 +97,30 @@ export function MapShell({ children }: { children: ReactNode }) {
     };
   }, [supabase, refreshMine]);
 
+  // ── 메시지·알림 숫자 ─────────────────────
+  const [badges, setBadges] = useState({ messages: 0, notifications: 0 });
+  const refreshBadges = useCallback(async () => {
+    if (!supabase || !me) return;
+    const [{ data: inbox }, { count }] = await Promise.all([
+      supabase.rpc("my_inbox"),
+      supabase.from("notifications").select("id", { count: "exact", head: true }).is("read_at", null),
+    ]);
+    const unread = ((inbox as { status: string; unread: number }[] | null) ?? []).reduce(
+      (n, r) => n + (r.status === "blocked" ? 0 : Number(r.unread) || 0),
+      0,
+    );
+    setBadges({ messages: unread, notifications: count ?? 0 });
+  }, [supabase, me]);
+  useEffect(() => {
+    if (!me) return;
+    const t0 = window.setTimeout(refreshBadges, 0);
+    const t = window.setInterval(refreshBadges, 60000);
+    return () => {
+      window.clearTimeout(t0);
+      window.clearInterval(t);
+    };
+  }, [me, refreshBadges]);
+
   // ── 공용 동작 ───────────────────────────
   const toast = useCallback((msg: string) => {
     setToastMsg(msg);
@@ -170,7 +194,7 @@ export function MapShell({ children }: { children: ReactNode }) {
 
   const shell: Shell = {
     setScene, releaseScene, selectedId, select, panelOpen, setPanelOpen,
-    me, myLists, refreshMine, toast, startSave,
+    me, myLists, refreshMine, toast, startSave, refreshBadges,
   };
 
   // ── 지도 여백: 패널·버튼에 가리지 않게 ─────────
@@ -247,6 +271,12 @@ export function MapShell({ children }: { children: ReactNode }) {
             </Link>
           )}
         </div>
+        {me && (
+          <>
+            <IconLink href="/messages" label="메시지" count={badges.messages}>✉</IconLink>
+            <IconLink href="/notifications" label="알림" count={badges.notifications}>🔔</IconLink>
+          </>
+        )}
       </div>
 
       {/* 데스크톱 메뉴 */}
@@ -434,5 +464,22 @@ function NavView({ variant, me, reopen, path }: NavProps & { path: string }) {
         </Link>
       ))}
     </nav>
+  );
+}
+
+function IconLink({ href, label, count, children }: { href: string; label: string; count: number; children: ReactNode }) {
+  return (
+    <Link
+      href={href}
+      aria-label={count ? `${label} ${count}개 안 읽음` : label}
+      className="relative grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white text-[18px] shadow-[0_2px_10px_rgba(24,34,47,0.15)]"
+    >
+      <span aria-hidden>{children}</span>
+      {count > 0 && (
+        <span className="absolute -right-1 -top-1 min-w-5 rounded-full bg-pin px-1 text-center text-[11px] font-semibold leading-5 text-white">
+          {count > 99 ? "99+" : count}
+        </span>
+      )}
+    </Link>
   );
 }
