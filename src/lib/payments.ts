@@ -1,9 +1,7 @@
-// 카드 결제 서비스 고르기: 가게가 있는 나라에 맞춰 고른다.
-// 지금: 대한민국 → 토스페이먼츠(원화), 그 밖 → Stripe(기본 통화).
-// 진출국이 늘면 그 시장에서 많이 쓰는 결제를 여기에 더한다(예: 일본 KOMOJU·PayPay, 인도 Razorpay,
-// 동남아 Xendit, 중남미 Mercado Pago). 화면과 API는 이 표만 보고 움직인다.
-export type PayProvider = "toss" | "stripe";
-
+// 광고비 카드 결제는 Stripe 하나로 받는다(2026-10-15 결정).
+// 대한민국 가게: 원화로 결제창을 열어 국내 카드·네이버페이·삼성페이·페이코를 쓸 수 있게 한다
+// (싱가포르 법인 Stripe 계정에서 가능, 카카오페이는 싱가포르 계정에서 지원되지 않음).
+// 그 밖의 나라: 기본 통화로 결제. 나중에 특정 시장에 더 맞는 결제가 필요하면 여기서 나라별로 나눈다.
 export const PAY_COUNTRIES: { code: string; name: string }[] = [
   { code: "KR", name: "대한민국" },
   { code: "JP", name: "일본" },
@@ -26,8 +24,7 @@ export const PAY_COUNTRIES: { code: string; name: string }[] = [
   { code: "XX", name: "그 밖의 나라" },
 ];
 
-export const PROVIDER_LABEL: Record<PayProvider, string> = { toss: "토스페이먼츠", stripe: "Stripe" };
-
-export function providerFor(country: string): PayProvider {
-  return country === "KR" ? "toss" : "stripe";
+// 결제창에 보여 줄 통화: 나라별로 그 나라 결제 수단을 쓰려면 현지 통화가 필요하다
+export function presentmentCurrency(country: string): string | null {
+  return country === "KR" ? "KRW" : null;
 }

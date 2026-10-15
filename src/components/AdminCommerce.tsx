@@ -112,7 +112,7 @@ export function Topups() {
   return (
     <section className="grid gap-3">
       <p className="text-[13px] text-muted">
-        계좌 입금 요청은 입금 방법을 안내하고, 입금이 확인되면 ‘입금 확인’을 누르세요. 카드 결제(토스·Stripe)는 결제가 끝나면 자동으로 잔액에 들어가요(미완료 건은 취소해도 돼요).
+        계좌 입금 요청은 입금 방법을 안내하고, 입금이 확인되면 ‘입금 확인’을 누르세요. 카드 결제(Stripe)는 결제가 끝나면 자동으로 잔액에 들어가요(미완료 건은 취소해도 돼요).
       </p>
       {rows.length === 0 && <p className="text-[14px] text-muted">없어요.</p>}
       <ul className="divide-y divide-rule text-[14px]">
@@ -123,7 +123,7 @@ export function Topups() {
             <span className="text-[12px] text-muted">{t.biz?.business_name} · {t.biz?.contact_phone}</span>
             <b className="tabular-nums">{money(t.amount, t.currency)}</b>
             <span className="text-[12px] text-muted">
-              {t.provider === "bank" ? "계좌 입금" : t.provider === "toss" ? "토스 카드" : "Stripe 카드"}
+              {t.provider === "bank" ? "계좌 입금" : "Stripe 카드"}
               {t.pay_currency && t.pay_currency !== t.currency && t.pay_amount ? ` · ${money(t.pay_amount, t.pay_currency)}` : ""}
             </span>
             <span className={t.status === "paid" ? "text-teal" : t.status === "cancelled" ? "text-muted" : "text-pin"}>

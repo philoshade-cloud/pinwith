@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     const id = s.metadata?.topup;
     if (id) {
       const { data: t } = await db.from("biz_topups").select("id, pay_amount, pay_currency, status").eq("id", id).maybeSingle();
-      const zeroDecimal = ["KRW", "JPY"].includes(String(t?.pay_currency));
+      const zeroDecimal = ["KRW", "JPY", "VND", "IDR"].includes(String(t?.pay_currency));
       const expected = t ? Math.round(Number(t.pay_amount) * (zeroDecimal ? 1 : 100)) : -1;
       if (t && t.status === "requested" && s.amount_total === expected) {
         await db
