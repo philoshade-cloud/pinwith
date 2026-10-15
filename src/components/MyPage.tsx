@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SignOutButton } from "./SignOutButton";
 import { APP_VERSION } from "@/lib/version";
+import { useMonetization } from "@/lib/monetization";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { useShell } from "./shell/context";
 
@@ -19,6 +20,7 @@ export function MyPage() {
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const { refreshMine } = useShell();
+  const money = useMonetization();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [draft, setDraft] = useState<Profile | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
@@ -151,6 +153,7 @@ export function MyPage() {
             </Link>
           )}
           <Link href="/support" className="btn-quiet justify-center">문의·신고하기</Link>
+          {money?.is_admin && <Link href="/admin" className="btn-quiet justify-center">운영자 콘솔</Link>}
           <SignOutButton className="btn-quiet justify-center" />
         </div>
 
