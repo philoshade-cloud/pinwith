@@ -11,6 +11,10 @@ const PlaceMap = dynamic(() => import("./PlaceMap").then((m) => m.PlaceMap), {
   ssr: false,
   loading: () => <div className="h-full w-full bg-surface" />,
 });
+const SearchableMap = dynamic(() => import("./SearchableMap").then((m) => m.SearchableMap), {
+  ssr: false,
+  loading: () => <div className="h-full w-full bg-surface" />,
+});
 
 const VIS = { public: "공개", unlisted: "링크 공개", private: "나만 보기" } as const;
 
@@ -21,6 +25,7 @@ export function CuratorView({ curator, lists, isOwner }: { curator: Curator; lis
   const [selectedPin, setSelectedPin] = useState<string | null>(null);
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
 
   const shown = activeList ? lists.filter((l) => l.id === activeList) : lists;
   const pins: ListItem[] = useMemo(
@@ -129,16 +134,42 @@ export function CuratorView({ curator, lists, isOwner }: { curator: Curator; lis
         </div>
       </aside>
 
-      <main className="relative order-1 h-[45dvh] lg:order-2 lg:h-auto lg:flex-1">
-        <PlaceMap items={pins} selectedId={selectedPin} onSelect={setSelectedPin} showRoute={false} />
+      <main className={`relative order-1 lg:order-2 lg:h-auto lg:flex-1 ${isOwner ? "h-[62dvh]" : "h-[45dvh]"}`}>
+        {isOwner ? (
+          <SearchableMap
+            items={pins}
+            selectedId={selectedPin}
+            onSelect={setSelectedPin}
+            showRoute={false}
+            target={{
+              mode: "pick",
+              lists: lists.map((l) => ({ id: l.id, title: l.title })),
+              onCreateList: () => createEmptyList(),
+            }}
+            onAdded={(listId, item) => {
+              const name = lists.find((l) => l.id === listId)?.title ?? "새 리스트";
+              setToast(`${item.custom_title}을(를) ‘${name}’에 추가했습니다.`);
+              window.setTimeout(() => setToast(null), 3000);
+              router.refresh();
+            }}
+          />
+        ) : (
+          <PlaceMap items={pins} selectedId={selectedPin} onSelect={setSelectedPin} showRoute={false} />
+        )}
         {pinList && (
-          <div className="absolute inset-x-3 bottom-3 z-10 rounded-xl bg-white p-4 shadow-[0_8px_30px_rgba(24,34,47,0.18)] lg:left-6 lg:right-auto lg:w-[340px]">
+          <div className="absolute inset-x-3 bottom-3 z-[5] rounded-xl bg-white p-4 shadow-[0_8px_30px_rgba(24,34,47,0.18)] lg:left-6 lg:right-auto lg:w-[340px]">
             <p className="text-[16px] font-semibold text-ink">{pinTitle}</p>
             <p className="mt-0.5 text-[13px] text-muted">{pinList.title}</p>
             <Link href={`/@${curator.handle}/${pinList.slug}`} className="btn-primary mt-3">이 리스트 열기</Link>
           </div>
         )}
       </main>
+
+      {toast && (
+        <div role="status" className="fixed inset-x-0 bottom-6 z-30 mx-auto w-fit max-w-[90vw] rounded-full bg-ink px-4 py-2 text-[14px] text-white">
+          {toast}
+        </div>
+      )}
     </div>
   );
 }

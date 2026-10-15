@@ -11,13 +11,16 @@ type Props = {
   selectedId: string | null;
   onSelect: (id: string) => void;
   showRoute: boolean;
+  // 검색으로 고른, 아직 리스트에 넣지 않은 장소
+  candidate?: { lat: number; lng: number } | null;
 };
 
 // 큐레이터의 핀만 보여주는 가벼운 지도. 자세한 정보와 길찾기는 구글·네이버 지도로 넘긴다.
-export function PlaceMap({ items, selectedId, onSelect, showRoute }: Props) {
+export function PlaceMap({ items, selectedId, onSelect, showRoute, candidate = null }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
   const markers = useRef(new Map<string, { marker: maplibregl.Marker; el: HTMLButtonElement }>());
+  const candidateMarker = useRef<maplibregl.Marker | null>(null);
   const onSelectRef = useRef(onSelect);
   useEffect(() => {
     onSelectRef.current = onSelect;
@@ -34,8 +37,8 @@ export function PlaceMap({ items, selectedId, onSelect, showRoute }: Props) {
     const m = new maplibregl.Map({
       container: container.current,
       style: MAP_STYLE_URL,
-      center: [135.5, 34.67],
-      zoom: 12,
+      center: [127, 30],
+      zoom: 2.5,
       attributionControl: { compact: true },
     });
     m.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
@@ -56,16 +59,20 @@ export function PlaceMap({ items, selectedId, onSelect, showRoute }: Props) {
     markers.current.clear();
 
     located.forEach((item, index) => {
+      // 지도 라이브러리가 바깥 요소의 transform으로 위치를 잡으므로, 모양은 안쪽 요소에 그린다.
       const el = document.createElement("button");
       el.type = "button";
-      el.className = "pin";
+      el.className = "pin-wrap";
       el.setAttribute("aria-label", item.title);
+      const shape = document.createElement("span");
+      shape.className = "pin";
       if (showRoute) {
         const n = document.createElement("span");
-        n.style.transform = "rotate(45deg)";
+        n.className = "pin-num";
         n.textContent = String(index + 1);
-        el.appendChild(n);
+        shape.appendChild(n);
       }
+      el.appendChild(shape);
       el.addEventListener("click", (e) => {
         e.stopPropagation();
         onSelectRef.current(item.id);
@@ -124,6 +131,24 @@ export function PlaceMap({ items, selectedId, onSelect, showRoute }: Props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedId]);
+
+  // 후보 장소: 다른 색 핀을 꽂고 그쪽으로 이동
+  useEffect(() => {
+    const m = map.current;
+    candidateMarker.current?.remove();
+    candidateMarker.current = null;
+    if (!m || !candidate) return;
+    const el = document.createElement("div");
+    el.className = "pin-wrap";
+    el.setAttribute("aria-hidden", "true");
+    const shape = document.createElement("span");
+    shape.className = "pin pin-candidate";
+    el.appendChild(shape);
+    candidateMarker.current = new maplibregl.Marker({ element: el, anchor: "bottom" })
+      .setLngLat([candidate.lng, candidate.lat])
+      .addTo(m);
+    m.flyTo({ center: [candidate.lng, candidate.lat], zoom: Math.max(m.getZoom(), 15), duration: 600 });
+  }, [candidate?.lat, candidate?.lng]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <div ref={container} className="h-full w-full" role="region" aria-label="장소 지도" />;
 }

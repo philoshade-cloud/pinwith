@@ -89,33 +89,63 @@ body {
   border-color: transparent;
 }
 
-/* 지도 핀: 물방울 모양, 선택되면 커지고 테두리가 진해진다 */
+/* 지도 핀: 바깥(.pin-wrap)은 지도 라이브러리가 위치를 잡고, 안쪽(.pin)에 물방울 모양을 그린다 */
+.pin-wrap {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
 .pin {
+  display: grid;
+  place-items: center;
   width: 26px;
   height: 26px;
+  margin-bottom: 4px;
   border-radius: 50% 50% 50% 0;
   transform: rotate(-45deg);
   background: var(--color-pin);
   border: 2.5px solid #ffffff;
   box-shadow: 0 2px 6px rgba(24, 34, 47, 0.35);
+  transition: width 120ms ease, height 120ms ease, background-color 120ms ease;
+}
+
+.pin-num {
+  transform: rotate(45deg);
   color: #ffffff;
   font-size: 12px;
   font-weight: 700;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  transition: width 120ms ease, height 120ms ease;
-}
-
-.pin:not(:empty) {
   line-height: 1;
 }
 
-.pin[data-selected="true"] {
+.pin-wrap[data-selected="true"] {
+  z-index: 2;
+}
+
+.pin-wrap[data-selected="true"] .pin {
   width: 34px;
   height: 34px;
   background: var(--color-ink);
-  z-index: 2;
+}
+
+.pin-candidate {
+  width: 34px;
+  height: 34px;
+  background: var(--color-teal);
+  animation: pin-drop 300ms ease-out;
+}
+
+@keyframes pin-drop {
+  from {
+    transform: translateY(-14px) rotate(-45deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(-45deg);
+    opacity: 1;
+  }
 }
 
 @keyframes fade-out {

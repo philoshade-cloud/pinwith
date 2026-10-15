@@ -6,9 +6,8 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { ListItem, ListKind, Section, Visibility } from "@/lib/types";
-import { PlacePicker, type PickedPlace } from "./PlacePicker";
 
-const PlaceMap = dynamic(() => import("./PlaceMap").then((m) => m.PlaceMap), {
+const SearchableMap = dynamic(() => import("./SearchableMap").then((m) => m.SearchableMap), {
   ssr: false,
   loading: () => <div className="h-full w-full bg-surface" />,
 });
@@ -56,7 +55,6 @@ export function ListEditor({ listId }: { listId: string }) {
   const supabase = useMemo(() => createClient(), []);
 
   const [state, setState] = useState<"loading" | "ready" | "forbidden" | "missing">("loading");
-  const [userId, setUserId] = useState<string | null>(null);
   const [handle, setHandle] = useState("");
   const [isOwner, setIsOwner] = useState(false);
   const [meta, setMeta] = useState<Meta | null>(null);
@@ -66,6 +64,8 @@ export function ListEditor({ listId }: { listId: string }) {
   const [items, setItems] = useState<ItemRow[]>([]);
   const [newSection, setNewSection] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  // 모바일: 편집 / 지도(장소 추가) 전환. 데스크톱은 둘 다 보인다.
+  const [view, setView] = useState<"edit" | "map">("edit");
   const [toast, setToast] = useState<string | null>(null);
 
   const flash = useCallback((msg: string) => {
@@ -80,7 +80,6 @@ export function ListEditor({ listId }: { listId: string }) {
         router.replace(`/login?next=${encodeURIComponent(`/me/lists/${listId}`)}`);
         return;
       }
-      setUserId(auth.user.id);
 
       const { data } = await supabase
         .from("lists")
@@ -199,39 +198,11 @@ export function ListEditor({ listId }: { listId: string }) {
   }
 
   // ── 장소 ─────────────────────────────────
-  async function addPlace(p: PickedPlace) {
-    if (!userId) return;
-    const now = new Date().toISOString();
-    const expired = new Date(Date.now() - 30 * 864e5).toISOString();
-    // place_id는 영구, 좌표는 30일 캐시. 이미 있으면 만료된 경우에만 갱신된다(RLS).
-    const ins = await supabase
-      .from("places")
-      .upsert({ google_place_id: p.placeId, lat: p.lat, lng: p.lng, coords_fetched_at: now }, { onConflict: "google_place_id", ignoreDuplicates: true });
-    if (ins.error) throw ins.error;
-    await supabase
-      .from("places")
-      .update({ lat: p.lat, lng: p.lng, coords_fetched_at: now })
-      .eq("google_place_id", p.placeId)
-      .or(`coords_fetched_at.is.null,coords_fetched_at.lt.${expired}`);
-
-    const position = items.length ? Math.max(...items.map((i) => i.position)) + 1 : 0;
-    const { data, error } = await supabase
-      .from("list_items")
-      .insert({
-        list_id: listId,
-        place_id: p.placeId,
-        added_by: userId,
-        custom_title: p.title,
-        memo: p.memo,
-        section_id: p.sectionId,
-        position,
-      })
-      .select("id, place_id, custom_title, memo, section_id, position, places(lat, lng)")
-      .single();
-    if (error || !data) throw error ?? new Error("insert failed");
-    setItems((list) => [...list, data as unknown as ItemRow]);
-    setSelectedId(data.id);
-    flash(`${p.title}을(를) 추가했습니다.`);
+  // 장소 추가는 지도 위 검색(SearchableMap)에서 한다.
+  function onPlaceAdded(item: ItemRow) {
+    setItems((list) => [...list, item]);
+    setSelectedId(item.id);
+    flash(`${item.custom_title}을(를) 추가했습니다.`);
   }
 
   async function updateItem(id: string, patch: Partial<Pick<ItemRow, "custom_title" | "memo" | "section_id">>) {
@@ -311,8 +282,8 @@ export function ListEditor({ listId }: { listId: string }) {
   const viewHref = `/@${handle}/${savedMeta.slug}`;
 
   return (
-    <div className="lg:grid lg:h-dvh lg:grid-cols-[minmax(0,560px)_1fr]">
-      <div className="overflow-y-auto px-5 pb-24 pt-5 lg:border-r lg:border-rule">
+    <div className="lg:grid lg:h-dvh lg:grid-cols-[minmax(0,520px)_1fr]">
+      <div className={`${view === "edit" ? "block" : "hidden"} overflow-y-auto px-5 pb-28 pt-5 lg:block lg:border-r lg:border-rule`}>
         <nav className="flex items-center gap-2">
           <Link href={handle ? `/@${handle}` : "/me"} className="text-[14px] text-muted hover:text-ink">← 내 지도</Link>
           <span className="ml-auto" />
@@ -427,20 +398,23 @@ export function ListEditor({ listId }: { listId: string }) {
           </form>
         </section>
 
-        {/* 장소 추가 */}
-        <div className="mt-10">
-          <PlacePicker
-            sections={sections}
-            existingPlaceIds={new Set(items.map((i) => i.place_id))}
-            onAdd={addPlace}
-          />
+        {/* 장소 추가: 지도에서 */}
+        <div className="mt-10 rounded-xl bg-surface p-4">
+          <p className="text-[15px] font-semibold text-ink">장소 추가</p>
+          <p className="mt-1 text-[14px] text-ink/75">
+            <span className="hidden lg:inline">오른쪽 지도 위 검색창에서 장소를 찾아 리스트에 추가하세요.</span>
+            <span className="lg:hidden">지도에서 장소를 검색해 리스트에 추가합니다.</span>
+          </p>
+          <button type="button" onClick={() => setView("map")} className="btn-primary mt-3 lg:hidden">
+            지도에서 장소 추가
+          </button>
         </div>
 
         {/* 장소 목록 */}
         <section className="mt-10" aria-labelledby="items-h">
           <h2 id="items-h" className="text-[15px] font-semibold text-ink">장소 {items.length}곳</h2>
           {items.length === 0 && (
-            <p className="mt-2 text-[14px] text-muted">위에서 장소를 검색해 첫 장소를 추가하세요.</p>
+            <p className="mt-2 text-[14px] text-muted">지도에서 장소를 검색해 첫 장소를 추가하세요.</p>
           )}
           <ol className="mt-3 grid gap-3">
             {items.map((item, index) => (
@@ -508,20 +482,43 @@ export function ListEditor({ listId }: { listId: string }) {
         )}
       </div>
 
-      <div className="hidden lg:block">
-        <PlaceMap
+      <div className={`${view === "map" ? "fixed inset-0 z-20" : "hidden"} lg:static lg:z-auto lg:block`}>
+        <SearchableMap
           items={mapItems}
           selectedId={selectedId}
           showRoute={meta.kind === "course"}
+          target={{ mode: "fixed", listId, sections }}
+          sheetBottomPadClass="pb-24 lg:pb-4"
+          onAdded={(_, item) => onPlaceAdded(item as ItemRow)}
           onSelect={(id) => {
             setSelectedId(id);
-            document.getElementById(`item-${id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+            if (window.innerWidth >= 1024) {
+              document.getElementById(`item-${id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
           }}
         />
       </div>
 
+      {/* 모바일 전환 버튼 */}
+      <div className="fixed inset-x-0 bottom-5 z-30 flex justify-center lg:hidden">
+        <div role="tablist" aria-label="보기 방식" className="flex rounded-full bg-ink p-1 shadow-lg">
+          {(["edit", "map"] as const).map((v) => (
+            <button
+              key={v}
+              role="tab"
+              type="button"
+              aria-selected={view === v}
+              onClick={() => setView(v)}
+              className={`rounded-full px-5 py-2 text-[14px] font-semibold transition-colors ${view === v ? "bg-white text-ink" : "text-white/80"}`}
+            >
+              {v === "edit" ? "편집" : "지도"}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {toast && (
-        <div role="status" className="fixed inset-x-0 bottom-6 z-30 mx-auto w-fit max-w-[90vw] rounded-full bg-ink px-4 py-2 text-[14px] text-white">
+        <div role="status" className="fixed inset-x-0 bottom-20 z-40 lg:bottom-6 mx-auto w-fit max-w-[90vw] rounded-full bg-ink px-4 py-2 text-[14px] text-white">
           {toast}
         </div>
       )}
