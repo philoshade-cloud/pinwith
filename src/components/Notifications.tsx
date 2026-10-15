@@ -11,7 +11,7 @@ import { useShell } from "./shell/context";
 
 type N = {
   id: string;
-  kind: "follow" | "like" | "comment" | "reply" | "invite" | "invite_accepted" | "share_changed" | "notice" | "resolved";
+  kind: "follow" | "like" | "comment" | "reply" | "invite" | "invite_accepted" | "share_changed" | "notice" | "resolved" | "reservation" | "reservation_new";
   body: string | null;
   read_at: string | null;
   created_at: string;
@@ -30,6 +30,8 @@ const TEXT: Record<N["kind"], string> = {
   invite: "님이 리스트 공동 편집에 초대했어요",
   invite_accepted: "님이 공동 편집 초대를 수락했어요",
   notice: "님의 새 공지",
+  reservation: "님이 예약 문의에 답했어요",
+  reservation_new: "님의 예약 문의(가게 콘솔에서 확인)",
 };
 
 // 알림: 팔로우, 좋아요, 댓글, 공동 편집 초대, 공지. 열면 모두 읽음으로 바뀐다.
@@ -128,6 +130,7 @@ export function Notifications() {
                   {n.body && <p className="mt-1 line-clamp-3 whitespace-pre-wrap text-[13px] text-ink/75">{n.body}</p>}
                   <p className="mt-1 flex items-center gap-2 text-[11px] text-muted">
                     {ago(n.created_at)}
+                    {n.kind === "reservation_new" && <Link href="/biz/place" className="btn-primary !px-2.5 !py-1 !text-[12px]">가게 콘솔에서 보기</Link>}
                     {n.kind === "follow" && n.actor && !followingBack.has(n.actor.id) && (
                       <button type="button" onClick={() => followBack(n.actor!.id)} className="btn-primary !px-2.5 !py-1 !text-[12px]">맞팔로우</button>
                     )}
