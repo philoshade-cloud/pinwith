@@ -1,28 +1,37 @@
 "use client";
 
+import { useState } from "react";
 import type { ListItem } from "@/lib/types";
 import { googleDirectionsUrl, googleMapsUrl, isInKorea, kakaoMapUrl, naverAppUrl, naverMapUrl } from "@/lib/links";
 
 type Item = Pick<ListItem, "title" | "placeId" | "lat" | "lng">;
 type Ev = "directions" | "google_open" | "naver_open" | "kakao_open";
 
-// 휴대폰에서는 네이버 지도 앱을 좌표로 열고, 앱이 없으면(1.5초 뒤에도 이 화면이면) 웹 검색으로 연다.
-function openNaver(item: Item) {
-  const mobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  if (!mobile || item.lat == null || item.lng == null) {
-    window.open(naverMapUrl(item), "_blank", "noopener");
-    return;
-  }
-  const fallback = window.setTimeout(() => {
-    if (document.visibilityState === "visible") window.location.href = naverMapUrl(item);
-  }, 1500);
-  document.addEventListener("visibilitychange", () => window.clearTimeout(fallback), { once: true });
-  window.location.href = naverAppUrl(item, window.location.origin);
-}
+const isMobile = () => /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-// 다른 지도 앱으로 보내는 버튼들(상세 정보·길찾기는 그쪽에서 본다)
+// 다른 지도 앱으로 보내는 버튼들(상세 정보·길찾기는 그쪽에서 본다).
+// 어느 버튼도 PinWith 화면을 바꾸지 않는다: 웹 지도는 새 탭, 앱은 앱으로 열린다.
 export function ExternalLinks({ item, onEvent }: { item: Item; onEvent?: (e: Ev) => void }) {
   const korea = isInKorea(item.lat, item.lng);
+  // 휴대폰에서 네이버 앱이 열리지 않았을 때 보여줄 '웹에서 열기'
+  const [naverWeb, setNaverWeb] = useState(false);
+
+  function openNaver(e: React.MouseEvent<HTMLAnchorElement>) {
+    onEvent?.("naver_open");
+    if (!isMobile() || item.lat == null || item.lng == null) return; // 컴퓨터: 링크 그대로 새 탭
+    e.preventDefault();
+    // 앱이 있으면 앱으로 넘어가 이 화면은 그대로 남는다.
+    // 1.5초 뒤에도 이 화면이 보이면 앱이 없는 것: 같은 탭을 바꾸지 않고 새 탭 링크를 띄운다.
+    let left = false;
+    const onHide = () => (left = true);
+    document.addEventListener("visibilitychange", onHide, { once: true });
+    window.location.href = naverAppUrl(item, window.location.origin);
+    window.setTimeout(() => {
+      document.removeEventListener("visibilitychange", onHide);
+      if (!left && document.visibilityState === "visible") setNaverWeb(true);
+    }, 1500);
+  }
+
   return (
     <>
       <a href={googleDirectionsUrl(item)} target="_blank" rel="noopener" onClick={() => onEvent?.("directions")} className="btn-primary">
@@ -33,20 +42,27 @@ export function ExternalLinks({ item, onEvent }: { item: Item; onEvent?: (e: Ev)
       </a>
       {korea && (
         <>
-          <button
-            type="button"
-            onClick={() => {
-              onEvent?.("naver_open");
-              openNaver(item);
-            }}
-            className="btn-quiet"
-          >
+          <a href={naverMapUrl(item)} target="_blank" rel="noopener" onClick={openNaver} className="btn-quiet">
             네이버
-          </button>
+          </a>
           <a href={kakaoMapUrl(item)} target="_blank" rel="noopener" onClick={() => onEvent?.("kakao_open")} className="btn-quiet">
             카카오
           </a>
         </>
+      )}
+      {naverWeb && (
+        <span className="flex w-full items-center gap-2 rounded-lg bg-surface px-3 py-2 text-[13px] text-ink/80">
+          네이버 지도 앱이 열리지 않았나요?
+          <a
+            href={naverMapUrl(item)}
+            target="_blank"
+            rel="noopener"
+            onClick={() => setNaverWeb(false)}
+            className="ml-auto shrink-0 font-semibold text-teal underline"
+          >
+            웹에서 열기
+          </a>
+        </span>
       )}
     </>
   );
