@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { useMonetization } from "@/lib/monetization";
 import { shortLink } from "@/lib/share";
 import type { ListItem, ListKind, Section, Visibility } from "@/lib/types";
 import { Panel, PanelLoading } from "./shell/Panel";
@@ -59,6 +60,7 @@ export function ListEditor({ listId }: { listId: string }) {
   const [isOwner, setIsOwner] = useState(false);
   const [ownerId, setOwnerId] = useState("");
   const [monetize, setMonetize] = useState(false);
+  const money = useMonetization();
   const [meta, setMeta] = useState<Meta | null>(null);
   const [savedMeta, setSavedMeta] = useState<Meta | null>(null);
   const [metaMsg, setMetaMsg] = useState<string | null>(null);
@@ -178,12 +180,13 @@ export function ListEditor({ listId }: { listId: string }) {
   }
 
   // '이 리스트로 수익화할 것이다': 켜야 공동 편집자별 수익 배분을 정하고 보여준다
+  // 수익화 기준(팔로워 또는 최근 30일 광고 노출)을 넘은 주인에게만 보인다
   async function toggleMonetize(on: boolean) {
     setMonetize(on);
     const { error } = await supabase.from("lists").update({ monetize: on }).eq("id", listId);
     if (error) {
       setMonetize(!on);
-      flash("저장하지 못했습니다.");
+      flash(error.message.includes("eligible") ? "아직 수익화 기준에 이르지 않았어요." : "저장하지 못했습니다.");
     }
   }
 
@@ -526,7 +529,7 @@ export function ListEditor({ listId }: { listId: string }) {
           </ol>
         </section>
 
-        {isOwner && (
+        {isOwner && (monetize || money?.eligible) && (
           <label className="mt-10 flex cursor-pointer items-start gap-3 rounded-xl border border-rule p-3">
             <input
               type="checkbox"

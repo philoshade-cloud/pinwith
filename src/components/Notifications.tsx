@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { ago } from "@/lib/social";
+import { useMonetization, won } from "@/lib/monetization";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { useShell } from "./shell/context";
 
@@ -97,11 +98,14 @@ export function Notifications() {
     toast(on ? "이 리스트의 알림을 껐어요." : "이 리스트의 알림을 다시 받아요.");
   }
 
+  const money = useMonetization(!!me);
+
   if (!rows) return <PanelLoading />;
 
   return (
     <Panel title="알림">
       <div className="px-5 pb-8 pt-2">
+        {money?.eligible && !money.monetizing && <MonetizeReady m={money} />}
         {rows.length === 0 ? (
           <p className="py-8 text-[14px] text-muted">아직 알림이 없어요.</p>
         ) : (
@@ -146,5 +150,27 @@ export function Notifications() {
         )}
       </div>
     </Panel>
+  );
+}
+
+// 알림 맨 위 고정: 수익화 기준을 넘었는데 아직 수익화한 리스트가 없을 때만 보인다.
+// 리스트 하나라도 수익화를 켜면 사라진다.
+function MonetizeReady({ m }: { m: NonNullable<ReturnType<typeof useMonetization>> }) {
+  const why =
+    m.followers >= m.min_followers
+      ? `팔로워 ${won(m.followers)}명`
+      : m.views_30d >= m.min_ad_views_30d
+        ? `최근 30일 광고 노출 ${won(m.views_30d)}회`
+        : "운영자 승인";
+  return (
+    <section aria-label="고정된 알림" className="-mx-5 mb-2 border-b border-rule bg-[#fff7fb] px-5 py-4">
+      <p className="text-[12px] font-semibold text-pin">📌 고정</p>
+      <p className="mt-1 text-[15px] font-semibold text-ink">이제 리스트로 수익을 낼 수 있어요</p>
+      <p className="mt-1 text-[13px] leading-relaxed text-ink/80">
+        {why}로 수익화 기준을 넘었어요. 리스트 편집 화면에서 ‘이 리스트로 수익화할 것이다’를 켜면, 그 리스트 화면에 실제로 보인 광고 수만큼
+        광고 수익의 {m.rate_pct}%를 나눠 드려요.
+      </p>
+      <Link href="/" className="btn-primary mt-3 inline-flex !py-2 !text-[13px]">내 리스트에서 켜기</Link>
+    </section>
   );
 }
