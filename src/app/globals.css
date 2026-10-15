@@ -198,3 +198,12 @@ body {
 .doc ul { margin-top: 4px; padding-left: 1.2em; list-style: disc; }
 .doc .note { color: var(--color-muted); font-size: 13px; }
 .doc hr { margin: 36px 0 8px; border-color: var(--color-rule); }
+
+/* 아이폰은 글자가 16px보다 작은 입력칸을 누르면 화면을 확대한다. 휴대폰에서는 입력칸 글자를 16px로 */
+@media (max-width: 1023px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}

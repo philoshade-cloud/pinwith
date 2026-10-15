@@ -1,6 +1,7 @@
 import "server-only";
 import { createClient } from "@/lib/supabase/server";
 import type { CuratedList, Curator, ListSummary } from "./types";
+import { fillMissingCoords } from "./placeCoords";
 
 // URL의 핸들("%40hana.eats" 또는 "@hana.eats")을 정규화한다.
 export function normalizeHandle(raw: string) {
@@ -61,6 +62,12 @@ export async function getCuratorPage(
   const curator = toCurator(p as unknown as CuratorRow);
   const isOwner = uid === curator.id;
   const rows = ((data ?? []) as unknown as SummaryRow[]).filter((l) => isOwner || l.visibility === "public");
+  // 열람 기록(좌표 갱신 대상 판단용)과, 좌표가 지워진 장소 다시 받기
+  const missing = rows.flatMap((l) => l.list_items.filter((i) => i.places?.lat == null).map((i) => i.place_id));
+  const [, filled] = await Promise.all([
+    rows.length ? supabase.rpc("touch_lists", { ids: rows.map((l) => l.id) }) : null,
+    fillMissingCoords(missing),
+  ]);
   const lists: ListSummary[] = rows.map((l) => ({
     id: l.id,
     slug: l.slug,
@@ -73,8 +80,8 @@ export async function getCuratorPage(
       id: i.id,
       title: i.custom_title,
       placeId: i.place_id,
-      lat: i.places?.lat ?? null,
-      lng: i.places?.lng ?? null,
+      lat: i.places?.lat ?? filled.get(i.place_id)?.lat ?? null,
+      lng: i.places?.lng ?? filled.get(i.place_id)?.lng ?? null,
     })),
   }));
   return { curator, lists, isOwner };
@@ -123,6 +130,10 @@ export async function getCuratedList(
   const row = list as unknown as Row;
   const curator = toCurator(row.owner);
   const isOwner = uid === curator.id;
+  const [, filled] = await Promise.all([
+    supabase.rpc("touch_lists", { ids: [row.id] }),
+    fillMissingCoords(row.list_items.filter((i) => i.places?.lat == null).map((i) => i.place_id)),
+  ]);
   const siblings = ((others ?? []) as unknown as { slug: string; title: string; visibility: string }[])
     .filter((l) => isOwner || l.visibility === "public" || l.slug === row.slug)
     .map((l) => ({ slug: l.slug, title: l.title }));
@@ -151,8 +162,8 @@ export async function getCuratedList(
         position: i.position,
         tags: i.tags,
         videoUrl: i.video_ts_url,
-        lat: i.places?.lat ?? null,
-        lng: i.places?.lng ?? null,
+        lat: i.places?.lat ?? filled.get(i.place_id)?.lat ?? null,
+        lng: i.places?.lng ?? filled.get(i.place_id)?.lng ?? null,
       })),
   };
 }

@@ -117,6 +117,7 @@ export function ListEditor({ listId }: { listId: string }) {
       setSections([...row.sections].sort((a, b) => a.position - b.position));
       setItems([...row.list_items].sort((a, b) => a.position - b.position));
       setState("ready");
+      supabase.rpc("touch_lists", { ids: [listId] }).then(() => {});
     })();
   }, [listId, router, supabase]);
 

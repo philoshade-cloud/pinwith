@@ -51,7 +51,10 @@ export function FollowingView() {
         .eq("visibility", "public")
         .order("updated_at", { ascending: false })
         .limit(60);
-      setRows(((data ?? []) as unknown as Row[]).filter((l) => l.list_items.length > 0));
+      const found = ((data ?? []) as unknown as Row[]).filter((l) => l.list_items.length > 0);
+      setRows(found);
+      // 열람 기록(좌표 갱신 대상 판단용)
+      if (found.length) supabase.rpc("touch_lists", { ids: found.map((l) => l.id) }).then(() => {});
     })();
   }, [supabase, router]);
 
