@@ -6,12 +6,13 @@ import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { ago } from "@/lib/social";
 import { useMonetization, won } from "@/lib/monetization";
+import { PushToggle } from "./PushToggle";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { useShell } from "./shell/context";
 
 type N = {
   id: string;
-  kind: "follow" | "like" | "comment" | "reply" | "invite" | "invite_accepted" | "share_changed" | "notice" | "resolved" | "reservation" | "reservation_new" | "reservation_msg" | "biz_block" | "biz_alert";
+  kind: "follow" | "like" | "comment" | "reply" | "invite" | "invite_accepted" | "share_changed" | "notice" | "resolved" | "reservation" | "reservation_new" | "reservation_msg" | "biz_block" | "biz_alert" | "biz_review" | "topup_paid" | "payout";
   body: string | null;
   read_at: string | null;
   created_at: string;
@@ -35,6 +36,9 @@ const TEXT: Record<N["kind"], string> = {
   reservation_msg: "님이 예약 문의에 메시지를 보냈어요",
   biz_block: "",
   biz_alert: "",
+  biz_review: "",
+  topup_paid: "",
+  payout: "",
 };
 
 // 알림: 팔로우, 좋아요, 댓글, 공동 편집 초대, 공지. 열면 모두 읽음으로 바뀐다.
@@ -110,6 +114,9 @@ export function Notifications() {
   return (
     <Panel title="알림">
       <div className="px-5 pb-8 pt-2">
+        <div className="mb-3 mt-2">
+          <PushToggle compact />
+        </div>
         {money?.eligible && !money.monetizing && <MonetizeReady m={money} />}
         {rows.length === 0 ? (
           <p className="py-8 text-[14px] text-muted">아직 알림이 없어요.</p>
@@ -127,7 +134,7 @@ export function Notifications() {
                         {TEXT[n.kind]}
                       </>
                     ) : (
-                      <span className="font-semibold">{n.kind === "biz_alert" ? "📊 연결된 가게 확인 필요" : n.kind === "biz_block" ? "🚫 가게 요청으로 리스트에서 빠짐" : "PinWith 알림"}</span>
+                      <span className="font-semibold">{n.kind === "biz_alert" ? "📊 연결된 가게 확인 필요" : n.kind === "biz_block" ? "🚫 가게 요청으로 리스트에서 빠짐" : n.kind === "biz_review" ? "🏪 가게 인증" : n.kind === "topup_paid" ? "💳 광고비 충전" : n.kind === "payout" ? "💸 지급" : "PinWith 알림"}</span>
                     )}
                     {n.list && listHref && (
                       <>
@@ -142,6 +149,8 @@ export function Notifications() {
                     {n.kind === "reservation_new" && <Link href="/biz/place?tab=reservations" className="btn-primary !px-2.5 !py-1 !text-[12px]">가게 콘솔에서 보기</Link>}
                     {(n.kind === "reservation" || n.kind === "reservation_msg") && <Link href="/me/reservations" className="btn-primary !px-2.5 !py-1 !text-[12px]">예약 문의 보기</Link>}
                     {n.kind === "biz_alert" && <Link href="/biz/curator?tab=stores" className="btn-primary !px-2.5 !py-1 !text-[12px]">연결된 가게 보기</Link>}
+                    {(n.kind === "biz_review" || n.kind === "topup_paid") && <Link href="/biz/place" className="btn-primary !px-2.5 !py-1 !text-[12px]">가게 콘솔</Link>}
+                    {n.kind === "payout" && <Link href="/biz/curator?tab=payout" className="btn-primary !px-2.5 !py-1 !text-[12px]">지급 보기</Link>}
                     {n.kind === "follow" && n.actor && !followingBack.has(n.actor.id) && (
                       <button type="button" onClick={() => followBack(n.actor!.id)} className="btn-primary !px-2.5 !py-1 !text-[12px]">맞팔로우</button>
                     )}

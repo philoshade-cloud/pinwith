@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SignOutButton } from "./SignOutButton";
 import { AvatarPicker } from "./AvatarPicker";
+import { PushToggle } from "./PushToggle";
 import { APP_VERSION } from "@/lib/version";
 import { useMonetization } from "@/lib/monetization";
 import { Panel, PanelLoading } from "./shell/Panel";
@@ -150,7 +151,10 @@ export function MyPage() {
           </div>
         </form>
 
-        <div className="mt-10 grid gap-2 border-t border-rule pt-6">
+        <div className="mt-8">
+          <PushToggle />
+        </div>
+        <div className="mt-6 grid gap-2 border-t border-rule pt-6">
           {!needsHandle && (
             <Link href={`/@${profile.handle}`} className="btn-quiet justify-center">
               내 리스트 보기

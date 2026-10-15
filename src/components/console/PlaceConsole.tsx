@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { loadPlacesLibrary } from "@/lib/google";
 import { PAY_COUNTRIES } from "@/lib/payments";
 import { DAYS, ReservationThread } from "../Reservation";
+import { PushToggle } from "../PushToggle";
 import { PlaceSearchBox, type FoundPlace } from "../PlaceSearch";
 import { ConfirmButton, count, DetailHeader, money, Msg, MODEL, Period, Stat, Tabs, useAuthed, useConsoleNav } from "./ui";
 
@@ -351,6 +352,9 @@ function Approved({ b, reloadBiz }: { b: Business; reloadBiz: () => void }) {
           <button type="button" onClick={() => nav.setTab("billing")} className="font-semibold underline">충전하기</button>
         </p>
       )}
+      <div className="mt-4">
+        <PushToggle compact />
+      </div>
       <div className="mt-6">
         <Tabs tabs={TABS} value={nav.tab} onChange={nav.setTab} />
       </div>
