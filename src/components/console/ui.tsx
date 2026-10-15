@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
@@ -41,14 +41,60 @@ export function Tabs<T extends string>({ tabs, value, onChange }: { tabs: { id: 
   );
 }
 
-export function Stat({ label, value, hint }: { label: string; value: string; hint?: string }) {
-  return (
-    <div className="rounded-xl border border-rule p-4">
-      <p className="text-[12px] text-muted">{label}</p>
+// 대시보드 숫자 상자. onClick을 주면 눌러서 자세히 보기(상세 화면)로 간다.
+export function Stat({ label, value, hint, onClick }: { label: string; value: string; hint?: string; onClick?: () => void }) {
+  const body = (
+    <>
+      <p className="flex items-center text-[12px] text-muted">
+        {label}
+        {onClick && <span className="ml-auto text-[12px] text-teal">자세히 ›</span>}
+      </p>
       <p className="mt-1 text-[22px] font-semibold tabular-nums text-ink">{value}</p>
       {hint && <p className="mt-1 text-[12px] text-muted">{hint}</p>}
+    </>
+  );
+  return onClick ? (
+    <button type="button" onClick={onClick} className="rounded-xl border border-rule p-4 text-left transition hover:border-teal hover:bg-surface/50">
+      {body}
+    </button>
+  ) : (
+    <div className="rounded-xl border border-rule p-4">{body}</div>
+  );
+}
+
+// 상세 화면 위쪽: 뒤로(대시보드로) + 제목. 브라우저 뒤로 가기로도 돌아간다.
+export function DetailHeader({ title, onBack }: { title: string; onBack: () => void }) {
+  return (
+    <div className="flex items-center gap-3">
+      <button type="button" onClick={onBack} className="btn-quiet !px-3 !py-1.5">← 대시보드</button>
+      <h2 className="text-[20px] font-semibold text-ink">{title}</h2>
     </div>
   );
+}
+
+// 콘솔 화면 상태를 주소(?tab=…&detail=…)에 담는다: 상세 화면은 기록을 남겨(push) 뒤로 가기가 되게 한다.
+export function useConsoleNav<T extends string>(defaultTab: T) {
+  const router = useRouter();
+  const q = useSearchParams();
+  const tab = (q.get("tab") as T | null) ?? defaultTab;
+  const detail = q.get("detail");
+  const go = (next: { tab?: string; detail?: string | null }, push: boolean) => {
+    const p = new URLSearchParams(q.toString());
+    if (next.tab !== undefined) p.set("tab", next.tab);
+    if (next.detail === null) p.delete("detail");
+    else if (next.detail !== undefined) p.set("detail", next.detail);
+    p.delete("paid");
+    const url = `${window.location.pathname}?${p.toString()}`;
+    if (push) router.push(url, { scroll: true });
+    else router.replace(url, { scroll: false });
+  };
+  return {
+    tab,
+    detail,
+    setTab: (t: T) => go({ tab: t, detail: null }, false),
+    open: (d: string) => go({ detail: d }, true),
+    back: () => (window.history.length > 1 ? router.back() : go({ detail: null }, false)),
+  };
 }
 
 export function Period({ value, onChange }: { value: number; onChange: (d: number) => void }) {

@@ -3,14 +3,17 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { loadPlacesLibrary } from "@/lib/google";
-import { PAY_COUNTRIES, PROVIDER_LABEL, providerFor } from "@/lib/payments";
+import { PAY_COUNTRIES } from "@/lib/payments";
+import { DAYS, ReservationThread } from "../Reservation";
 import { PlaceSearchBox, type FoundPlace } from "../PlaceSearch";
-import { count, money, Msg, MODEL, Period, Stat, Tabs, useAuthed } from "./ui";
+import { count, DetailHeader, money, Msg, MODEL, Period, Stat, Tabs, useAuthed, useConsoleNav } from "./ui";
 
 type Business = {
   id: string; place_id: string; place_name: string; place_address: string | null; business_name: string; reg_number: string | null;
   contact_name: string; contact_phone: string; role: "owner" | "manager"; doc_path: string | null;
   status: "pending" | "approved" | "rejected" | "suspended"; review_note: string | null; created_at: string;
+  reservations_enabled: boolean; reservation_hours: Record<string, [string, string][]>; reservation_slot_minutes: number;
+  reservation_max_party: number; reservation_note: string | null;
 };
 const STATUS: Record<Business["status"], string> = { pending: "확인 중", approved: "인증됨", rejected: "반려", suspended: "정지" };
 
@@ -64,7 +67,7 @@ export function PlaceConsole() {
         {b.place_name} · {b.business_name} · <b className={b.status === "approved" ? "text-teal" : "text-pin"}>{STATUS[b.status]}</b>
       </p>
       {b.status === "approved" ? (
-        <Approved b={b} />
+        <Approved b={b} reloadBiz={load} />
       ) : (
         <div className="mt-6 max-w-[560px] rounded-xl bg-surface p-4 text-[14px]">
           {b.status === "pending" && (
@@ -299,24 +302,26 @@ function Field({ label, value, onChange, ...rest }: { label: string; value: stri
 }
 
 // ── 승인된 가게 ─────────────────────────
-type Tab = "offers" | "reservations" | "stats" | "billing";
+type Tab = "offers" | "reservations" | "booking" | "stats" | "billing";
 const TABS: { id: Tab; label: string }[] = [
-  { id: "offers", label: "과금 모델" },
   { id: "reservations", label: "예약 문의" },
+  { id: "booking", label: "예약 설정" },
+  { id: "offers", label: "과금 모델" },
   { id: "stats", label: "성과" },
   { id: "billing", label: "광고비" },
 ];
 type Dash = {
-  currency: string; balance: number; spent_month: number; lists_with_place: number; attached_lists: number;
+  currency: string; balance: number; min_rate: number | null; spent_month: number; lists_with_place: number; paid_only_lists: number; attached_lists: number;
   organic: { taps: number; opens: number; nearby: number };
   by_model: { model: string; count: number; cost: number }[];
+  reservations: { total: number; new: number; confirmed: number; visited: number; no_show: number; cancelled: number; declined: number; via_curator: number };
   by_list: { list: string; handle: string; slug: string; count: number; cost: number }[];
   daily: { d: string; count: number; cost: number }[];
 };
 
-function Approved({ b }: { b: Business }) {
+function Approved({ b, reloadBiz }: { b: Business; reloadBiz: () => void }) {
   const { supabase } = useAuthed("/biz/place");
-  const [tab, setTab] = useState<Tab>("offers");
+  const nav = useConsoleNav<Tab>("reservations");
   const [days, setDays] = useState(30);
   const [dash, setDash] = useState<Dash | null>(null);
   const reload = useCallback(async () => {
@@ -328,24 +333,286 @@ function Approved({ b }: { b: Business }) {
     reload();
   }, [reload]);
   if (!dash) return <p className="mt-6 text-muted">불러오는 중…</p>;
+
+  if (nav.detail) return <BizDetail b={b} dash={dash} kind={nav.detail} onBack={nav.back} reload={reload} />;
+
+  const low = dash.min_rate != null && dash.balance < dash.min_rate;
   return (
     <div className="mt-4">
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Stat label="광고비 잔액" value={money(dash.balance, dash.currency)} hint={dash.balance <= 0 ? "잔액이 없으면 과금이 멈춰요" : undefined} />
-        <Stat label="이번 달 쓴 광고비" value={money(dash.spent_month, dash.currency)} />
-        <Stat label="우리 가게를 담은 공개 리스트" value={`${count(dash.lists_with_place)}개`} />
-        <Stat label="제휴를 붙인 리스트" value={`${count(dash.attached_lists)}건`} />
+        <Stat label="광고비 잔액" value={money(dash.balance, dash.currency)} hint={low ? "잔액이 모자라 과금·노출이 멈췄어요" : undefined} onClick={() => nav.open("balance")} />
+        <Stat label="이번 달 쓴 광고비" value={money(dash.spent_month, dash.currency)} onClick={() => nav.open("spent")} />
+        <Stat label="우리 가게를 담은 리스트" value={`${count(dash.lists_with_place)}개`} hint={dash.paid_only_lists ? `그중 ${dash.paid_only_lists}개는 광고비가 있을 때만 공개` : undefined} onClick={() => nav.open("lists")} />
+        <Stat label="제휴를 붙인 리스트" value={`${count(dash.attached_lists)}건`} onClick={() => nav.open("attached")} />
       </div>
+      {low && (
+        <p className="mt-3 rounded-lg bg-[#fff7fb] px-3 py-2 text-[13px] text-pin">
+          광고비 잔액이 과금 금액보다 적어요. 새 과금이 멈췄고, 큐레이터가 ‘광고비 지급될 때만 공개’로 담은 리스트({dash.paid_only_lists}개)에서는 우리 가게가 보이지 않아요.{" "}
+          <button type="button" onClick={() => nav.setTab("billing")} className="font-semibold underline">충전하기</button>
+        </p>
+      )}
       <div className="mt-6">
-        <Tabs tabs={TABS} value={tab} onChange={setTab} />
+        <Tabs tabs={TABS} value={nav.tab} onChange={nav.setTab} />
       </div>
       <div className="mt-5">
-        {tab === "offers" && <Offers b={b} currency={dash.currency} />}
-        {tab === "reservations" && <Reservations b={b} />}
-        {tab === "stats" && <Stats dash={dash} days={days} setDays={setDays} />}
-        {tab === "billing" && <Billing b={b} dash={dash} reload={reload} />}
+        {nav.tab === "reservations" && <Reservations b={b} onChanged={reload} />}
+        {nav.tab === "booking" && <BookingSettings b={b} onSaved={reloadBiz} />}
+        {nav.tab === "offers" && <Offers b={b} currency={dash.currency} paidOnly={dash.paid_only_lists} />}
+        {nav.tab === "stats" && <Stats dash={dash} days={days} setDays={setDays} />}
+        {nav.tab === "billing" && <Billing b={b} dash={dash} reload={reload} />}
       </div>
     </div>
+  );
+}
+
+// ── 대시보드 상자 상세 ─────────────────────────
+type Charge = { at: string; model: string; amount: number; list_title: string | null; handle: string | null };
+type BizList = { list_id: string; title: string; slug: string; visibility: string; curator_id: string; handle: string; name: string; paid_only: boolean; models: string[]; events_30d: number };
+
+function BizDetail({ b, dash, kind, onBack, reload }: { b: Business; dash: Dash; kind: string; onBack: () => void; reload: () => void }) {
+  const { supabase } = useAuthed("/biz/place");
+  const [charges, setCharges] = useState<Charge[] | null>(null);
+  const [topups, setTopups] = useState<Topup[]>([]);
+  const [lists, setLists] = useState<{ lists: BizList[]; blocked: { curator_id: string; handle: string; name: string; at: string }[] } | null>(null);
+  const [msg, setMsg] = useState("");
+  const load = useCallback(async () => {
+    if (kind === "balance" || kind === "spent") {
+      const [{ data: c }, { data: t }] = await Promise.all([
+        supabase.rpc("biz_charges", { p_business: b.id, p_days: kind === "spent" ? 31 : 365 }),
+        supabase.from("biz_topups").select("*").eq("business_id", b.id).order("created_at", { ascending: false }),
+      ]);
+      const month = new Date();
+      const m0 = new Date(month.getFullYear(), month.getMonth(), 1).getTime();
+      setCharges(((c as Charge[]) ?? []).filter((x) => kind !== "spent" || new Date(x.at).getTime() >= m0));
+      setTopups((t as Topup[]) ?? []);
+    } else {
+      const { data } = await supabase.rpc("biz_lists", { p_business: b.id });
+      setLists(data as NonNullable<typeof lists>);
+    }
+  }, [supabase, b.id, kind]);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    load();
+  }, [load]);
+
+  async function block(l: BizList) {
+    if (!confirm(`@${l.handle}님을 차단할까요?\n\n그 큐레이터의 리스트에서 우리 가게가 빠지고, 차단을 풀기 전까지 다시 담을 수 없어요. 큐레이터에게 알림이 가요.`)) return;
+    const { error } = await supabase.rpc("block_curator", { p_business: b.id, p_curator: l.curator_id });
+    setMsg(error ? "차단하지 못했어요." : `@${l.handle}님을 차단했어요.`);
+    load();
+    reload();
+  }
+  async function unblock(id: string, handle: string) {
+    const { error } = await supabase.rpc("unblock_curator", { p_business: b.id, p_curator: id });
+    setMsg(error ? "풀지 못했어요." : `@${handle}님 차단을 풀었어요. 숨겨졌던 리스트에 다시 보여요.`);
+    load();
+    reload();
+  }
+
+  const titles: Record<string, string> = { balance: "광고비 잔액 내역", spent: "이번 달 쓴 광고비", lists: "우리 가게를 담은 리스트", attached: "제휴를 붙인 리스트" };
+  return (
+    <div className="mt-4 grid gap-4">
+      <DetailHeader title={titles[kind] ?? "자세히"} onBack={onBack} />
+      <Msg text={msg} />
+      {(kind === "balance" || kind === "spent") && (
+        <>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            <Stat label="지금 잔액" value={money(dash.balance, dash.currency)} />
+            <Stat label="이번 달 쓴 광고비" value={money(dash.spent_month, dash.currency)} />
+            {kind === "balance" && <Stat label="충전 합계" value={money(topups.filter((t) => t.status === "paid").reduce((s, t) => s + Number(t.amount), 0), dash.currency)} />}
+          </div>
+          {kind === "balance" && (
+            <section>
+              <h3 className="text-[15px] font-semibold">충전</h3>
+              <ul className="mt-2 divide-y divide-rule text-[14px]">
+                {topups.length === 0 && <li className="py-2 text-muted">없어요.</li>}
+                {topups.map((t) => (
+                  <li key={t.id} className="flex flex-wrap gap-2 py-2">
+                    <span className="tabular-nums text-muted">{new Date(t.created_at).toLocaleDateString("ko-KR")}</span>
+                    <b className="tabular-nums text-teal">+{money(t.amount, t.currency)}</b>
+                    <span className="text-[12px] text-muted">{t.status === "paid" ? "반영됨" : t.status === "cancelled" ? "취소" : "대기"} · {t.provider === "bank" ? "계좌 입금" : "카드"}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+          <section>
+            <h3 className="text-[15px] font-semibold">과금 기록</h3>
+            {!charges ? (
+              <p className="text-muted">불러오는 중…</p>
+            ) : charges.length === 0 ? (
+              <p className="mt-2 text-[14px] text-muted">없어요.</p>
+            ) : (
+              <table className="mt-2 w-full text-left text-[14px]">
+                <thead className="border-b border-rule text-[12px] text-muted">
+                  <tr><th className="py-2">때</th><th>종류</th><th>리스트 · 큐레이터</th><th className="text-right">금액</th></tr>
+                </thead>
+                <tbody>
+                  {charges.map((c, i) => (
+                    <tr key={i} className="border-b border-rule">
+                      <td className="py-1.5 tabular-nums text-[13px]">{new Date(c.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "numeric", minute: "2-digit" })}</td>
+                      <td className="text-[13px]">{MODEL[c.model]?.label.replace(/ 1(회|건)당/, "") ?? c.model}{Number(c.amount) < 0 && " (되돌림)"}</td>
+                      <td className="text-[13px]">{c.list_title ?? "-"}{c.handle && <span className="text-muted"> · @{c.handle}</span>}</td>
+                      <td className={`text-right tabular-nums ${Number(c.amount) < 0 ? "text-teal" : ""}`}>{Number(c.amount) < 0 ? "+" : "−"}{money(Math.abs(Number(c.amount)), dash.currency)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </section>
+        </>
+      )}
+      {(kind === "lists" || kind === "attached") && (
+        <>
+          {kind === "lists" && (
+            <p className="text-[13px] text-muted">
+              우리 가게를 담은 공개·링크 공개 리스트예요. 원치 않는 큐레이터는 차단할 수 있어요. 차단하면 그 큐레이터의 리스트에서 우리 가게가 빠지고, 풀기 전까지 다시 담을 수
+              없으며, 큐레이터에게 알림이 가요.
+            </p>
+          )}
+          {!lists ? (
+            <p className="text-muted">불러오는 중…</p>
+          ) : (
+            <ul className="divide-y divide-rule text-[14px]">
+              {lists.lists.filter((l) => kind === "lists" || l.models.length > 0).length === 0 && <li className="py-3 text-muted">없어요.</li>}
+              {lists.lists
+                .filter((l) => kind === "lists" || l.models.length > 0)
+                .map((l) => (
+                  <li key={l.list_id} className="flex flex-wrap items-center gap-2 py-3">
+                    <span className="min-w-0 flex-1">
+                      <Link href={`/@${l.handle}/${l.slug}`} className="font-semibold">{l.title}</Link>
+                      <span className="block text-[12px] text-muted">
+                        @{l.handle} · 최근 30일 반응 {count(l.events_30d)}
+                        {l.models.length > 0 && ` · 제휴: ${l.models.map((m) => MODEL[m]?.label.replace(/ 1(회|건)당/, "")).join(", ")}`}
+                        {l.paid_only && " · 광고비 있을 때만 공개"}
+                      </span>
+                    </span>
+                    {kind === "lists" && <button type="button" onClick={() => block(l)} className="btn-quiet !px-3 !py-1 !text-[12px]">이 큐레이터 차단</button>}
+                  </li>
+                ))}
+            </ul>
+          )}
+          {kind === "lists" && lists && lists.blocked.length > 0 && (
+            <section>
+              <h3 className="text-[15px] font-semibold">차단한 큐레이터</h3>
+              <ul className="mt-2 divide-y divide-rule text-[14px]">
+                {lists.blocked.map((k) => (
+                  <li key={k.curator_id} className="flex items-center gap-2 py-2">
+                    <span className="flex-1">@{k.handle} <span className="text-[12px] text-muted">{new Date(k.at).toLocaleDateString("ko-KR")}부터</span></span>
+                    <button type="button" onClick={() => unblock(k.curator_id, k.handle)} className="btn-quiet !px-3 !py-1 !text-[12px]">차단 풀기</button>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+// ── 예약 설정: 수익화와 관계없이 켜고 끄기, 요일·시간대 ─────────────────────────
+type Ranges = [string, string][];
+function BookingSettings({ b, onSaved }: { b: Business; onSaved: () => void }) {
+  const { supabase } = useAuthed("/biz/place");
+  const [on, setOn] = useState(b.reservations_enabled);
+  const [hours, setHours] = useState<Record<string, Ranges>>(b.reservation_hours ?? {});
+  const [slot, setSlot] = useState(b.reservation_slot_minutes ?? 30);
+  const [maxParty, setMaxParty] = useState(String(b.reservation_max_party ?? 20));
+  const [note, setNote] = useState(b.reservation_note ?? "");
+  const [msg, setMsg] = useState("");
+  const anytime = Object.keys(hours).length === 0;
+
+  function setDay(d: number, r: Ranges) {
+    setHours({ ...hours, [String(d)]: r });
+  }
+  function toggleHours(v: boolean) {
+    setHours(v ? Object.fromEntries([1, 2, 3, 4, 5, 6].map((d) => [String(d), [["11:00", "21:00"]] as Ranges])) : {});
+  }
+
+  async function save(enable = on) {
+    // 시간이 거꾸로 된 구간은 저장하지 않는다
+    for (const [d, rs] of Object.entries(hours))
+      for (const [a, z] of rs) if (!a || !z || a >= z) return setMsg(`${DAYS[Number(d)]}요일 시간대를 확인하세요(시작이 끝보다 빨라야 해요).`);
+    const mp = Math.max(1, Math.min(100, Number(maxParty) || 20));
+    const { error } = await supabase
+      .from("businesses")
+      .update({ reservations_enabled: enable, reservation_hours: hours, reservation_slot_minutes: slot, reservation_max_party: mp, reservation_note: note.trim() || null })
+      .eq("id", b.id);
+    setMsg(error ? "저장하지 못했어요." : enable ? "저장했어요. 손님 화면의 예약 문의에 바로 반영돼요." : "예약 문의를 껐어요. 장소 카드에서 버튼이 사라져요.");
+    setOn(enable);
+    onSaved();
+  }
+
+  return (
+    <section className="grid max-w-[640px] gap-4">
+      <div className="flex items-center gap-3 rounded-xl border border-rule p-4">
+        <span className="flex-1">
+          <b className="block text-[16px]">PinWith로 예약 문의 받기</b>
+          <span className="text-[13px] text-muted">
+            켜면 우리 가게의 장소 카드(어떤 리스트에서 보든, 검색해서 보든)에 ‘예약 문의’ 버튼이 생겨요. 수익화(과금 모델)와 관계없이 무료예요.
+          </span>
+        </span>
+        <button type="button" onClick={() => save(!on)} className={on ? "btn-quiet" : "btn-primary"}>{on ? "끄기" : "켜기"}</button>
+      </div>
+      <div className="rounded-xl border border-rule p-4">
+        <p className="text-[15px] font-semibold">예약 받는 요일·시간</p>
+        <label className="mt-2 flex items-center gap-2 text-[14px]">
+          <input type="checkbox" checked={!anytime} onChange={(e) => toggleHours(e.target.checked)} /> 요일·시간을 정해서 받기(끄면 아무 때나 문의 가능)
+        </label>
+        {!anytime && (
+          <ul className="mt-3 grid gap-2">
+            {DAYS.map((d, i) => {
+              const rs = hours[String(i)] ?? [];
+              return (
+                <li key={d} className="flex flex-wrap items-center gap-2 text-[14px]">
+                  <span className="w-6 font-semibold">{d}</span>
+                  {rs.length === 0 ? (
+                    <span className="text-muted">휴무</span>
+                  ) : (
+                    rs.map((r, k) => (
+                      <span key={k} className="flex items-center gap-1">
+                        <input type="time" value={r[0]} onChange={(e) => setDay(i, rs.map((x, j) => (j === k ? [e.target.value, x[1]] : x)) as Ranges)} className="field !w-auto !py-1" />
+                        ~
+                        <input type="time" value={r[1]} onChange={(e) => setDay(i, rs.map((x, j) => (j === k ? [x[0], e.target.value] : x)) as Ranges)} className="field !w-auto !py-1" />
+                        <button type="button" onClick={() => setDay(i, rs.filter((_, j) => j !== k))} className="text-muted" aria-label="이 시간대 빼기">✕</button>
+                      </span>
+                    ))
+                  )}
+                  {rs.length < 3 && (
+                    <button type="button" onClick={() => setDay(i, [...rs, rs.length ? ["17:00", "21:00"] : ["11:00", "21:00"]])} className="text-[12px] text-teal underline">
+                      {rs.length ? "+ 시간대" : "받기"}
+                    </button>
+                  )}
+                  {rs.length > 0 && <button type="button" onClick={() => setDay(i, [])} className="text-[12px] text-muted underline">휴무로</button>}
+                </li>
+              );
+            })}
+          </ul>
+        )}
+        <div className="mt-3 grid grid-cols-2 gap-3 sm:max-w-[360px]">
+          <label className="grid gap-1 text-[13px] font-semibold">
+            시간 간격
+            <select value={slot} onChange={(e) => setSlot(Number(e.target.value))} className="field">
+              <option value={15}>15분</option>
+              <option value={30}>30분</option>
+              <option value={60}>1시간</option>
+            </select>
+          </label>
+          <Field label="최대 인원" value={maxParty} onChange={setMaxParty} inputMode="numeric" />
+        </div>
+        <label className="mt-3 grid gap-1 text-[13px] font-semibold">
+          손님에게 보일 안내(선택)
+          <textarea value={note} onChange={(e) => setNote(e.target.value)} maxLength={300} rows={2} className="field" placeholder="예: 6인 이상은 하루 전까지 문의해 주세요." />
+        </label>
+        <button type="button" onClick={() => save()} className="btn-primary mt-3">저장</button>
+      </div>
+      <p className="text-[13px] text-muted">
+        큐레이터에게 예약 보상을 주고 싶다면 ‘과금 모델’ 탭에서 ‘예약 확정 1건당’을 등록하세요. 그 조건을 붙인 큐레이터의 리스트에서 들어온 문의를 확정할 때만 광고비가
+        나가요(잔액이 모자라면 확정할 수 없어요).
+      </p>
+      <Msg text={msg} />
+    </section>
   );
 }
 
@@ -353,7 +620,7 @@ const MODELS = ["click", "visit", "reservation"] as const;
 
 type Offer = { id?: string; model: "click" | "visit" | "reservation"; rate: string; monthly_budget: string; message: string; active: boolean };
 
-function Offers({ b, currency }: { b: Business; currency: string }) {
+function Offers({ b, currency, paidOnly }: { b: Business; currency: string; paidOnly: number }) {
   const { supabase } = useAuthed("/biz/place");
   const [rows, setRows] = useState<Record<string, Offer>>({});
   const [fee, setFee] = useState(20);
@@ -399,6 +666,10 @@ function Offers({ b, currency }: { b: Business; currency: string }) {
         큐레이터가 우리 가게가 담긴 리스트에 이 조건을 붙이면, 손님 행동마다 광고비 잔액에서 빠져나가요. 같은 사람은 조건별로 하루 1회만 과금되고, 큐레이터·가게 주인
         본인은 빠져요. 금액의 {fee}%는 PinWith 수수료, 나머지는 큐레이터에게 가요.
       </p>
+      <div className="rounded-lg bg-surface px-3 py-2 text-[13px] text-ink/85">
+        <b>잔액과 노출</b> — 큐레이터는 우리 가게를 담을 때 ‘광고비 지급될 때만 공개’를 고를 수 있어요. 그렇게 담은 리스트에서는 잔액이 조건 금액보다 적어지면 우리 가게가
+        보이지 않고, 충전하면 다시 보여요. 지금 {paidOnly}개 리스트가 이렇게 담았어요. 이 설정을 고르지 않은 큐레이터의 리스트에서는 잔액과 관계없이 계속 보여요(과금만 멈춤).
+      </div>
       <Msg text={msg} />
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {MODELS.map((m) => {
@@ -420,12 +691,12 @@ function Offers({ b, currency }: { b: Business; currency: string }) {
               </div>
               {m === "reservation" && (
                 <p className="mt-2 rounded-lg bg-surface px-3 py-2 text-[12px] text-ink/80">
-                  등록하면 우리 가게가 담긴 모든 리스트의 장소 카드에 ‘예약 문의’ 버튼이 생겨요. 문의는 ‘예약 문의’ 탭에서 확정·거절하고, 확정할 때 그 리스트에
-                  이 조건을 붙인 큐레이터에게만 금액이 나가요.
+                  예약 문의 버튼 자체는 ‘예약 설정’에서 무료로 켜요. 이 조건은 큐레이터 보상용이에요: 이 조건을 붙인 큐레이터의 리스트에서 들어온 문의를 확정할 때 금액이
+                  나가요. 잔액이 모자라면 그런 문의는 확정할 수 없고, 확정 뒤 노쇼·취소로 바꾸면 되돌려 받아요.
                 </p>
               )}
               <label className="mt-3 grid gap-1 text-[13px] font-semibold">
-                {m === "reservation" ? "손님·큐레이터에게 안내(선택)" : "큐레이터에게 한마디(선택)"}
+                큐레이터에게 한마디(선택)
                 <textarea value={o.message} onChange={(e) => set({ message: e.target.value })} maxLength={300} rows={2} className="field" placeholder="예: 대표 메뉴는 들기름 막국수예요. 사진 촬영 환영!" />
               </label>
               <div className="mt-3 flex gap-2">
@@ -443,16 +714,39 @@ function Offers({ b, currency }: { b: Business; currency: string }) {
 function Stats({ dash, days, setDays }: { dash: Dash; days: number; setDays: (d: number) => void }) {
   const total = dash.by_model.reduce((s, x) => s + Number(x.cost), 0);
   const max = Math.max(1, ...dash.daily.map((d) => Number(d.count)));
+  const r = dash.reservations;
   return (
-    <section className="grid gap-5">
+    <section className="grid gap-6">
       <Period value={days} onChange={setDays} />
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Stat label={`${days}일 광고비`} value={money(total, dash.currency)} />
-        {MODELS.map((m) => {
-          const x = dash.by_model.find((y) => y.model === m);
-          return <Stat key={m} label={MODEL[m].label.replace(" 1회당", "")} value={`${count(x?.count)}회`} hint={money(x?.cost, dash.currency)} />;
-        })}
-        <Stat label="전체 리스트에서 우리 가게 탭" value={`${count(dash.organic.taps)}회`} hint={`지도 열기 ${count(dash.organic.opens)} · 근처에서 ${count(dash.organic.nearby)}`} />
+      <div>
+        <h2 className="text-[15px] font-semibold">과금된 성과 <span className="text-[12px] font-normal text-muted">제휴 큐레이터 리스트에서 생겨 광고비가 나간 것</span></h2>
+        <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <Stat label={`${days}일 광고비`} value={money(total, dash.currency)} />
+          {MODELS.map((m) => {
+            const x = dash.by_model.find((y) => y.model === m);
+            return <Stat key={m} label={MODEL[m].label.replace(/ 1(회|건)당/, "")} value={`${count(x?.count)}회`} hint={money(x?.cost, dash.currency)} />;
+          })}
+        </div>
+      </div>
+      <div>
+        <h2 className="text-[15px] font-semibold">과금 없는 성과 <span className="text-[12px] font-normal text-muted">광고비 없이 생긴 반응</span></h2>
+        <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <Stat label="리스트에서 우리 가게 탭" value={`${count(dash.organic.taps)}회`} />
+          <Stat label="길찾기·지도 열기" value={`${count(dash.organic.opens)}회`} />
+          <Stat label="가게 근처에서 누름" value={`${count(dash.organic.nearby)}회`} />
+          <Stat label="예약 문의(제휴 외)" value={`${count(r.total - r.via_curator)}건`} />
+        </div>
+      </div>
+      <div>
+        <h2 className="text-[15px] font-semibold">예약 문의</h2>
+        <div className="mt-2 grid grid-cols-3 gap-3 sm:grid-cols-6">
+          <Stat label="전체" value={count(r.total)} hint={`제휴 ${count(r.via_curator)}`} />
+          <Stat label="확정" value={count(r.confirmed)} />
+          <Stat label="방문" value={count(r.visited)} />
+          <Stat label="노쇼" value={count(r.no_show)} />
+          <Stat label="취소" value={count(r.cancelled)} />
+          <Stat label="거절" value={count(r.declined)} />
+        </div>
       </div>
       <div>
         <h2 className="text-[15px] font-semibold">날짜별 과금 횟수</h2>
@@ -470,7 +764,7 @@ function Stats({ dash, days, setDays }: { dash: Dash; days: number; setDays: (d:
         )}
       </div>
       <div>
-        <h2 className="text-[15px] font-semibold">리스트별</h2>
+        <h2 className="text-[15px] font-semibold">리스트별 과금</h2>
         {dash.by_list.length === 0 ? (
           <p className="mt-2 text-[14px] text-muted">아직 없어요.</p>
         ) : (
@@ -496,16 +790,6 @@ function Stats({ dash, days, setDays }: { dash: Dash; days: number; setDays: (d:
 
 type Topup = { id: string; amount: number; currency: string; method: string; provider: string; pay_amount: number | null; pay_currency: string | null; status: string; created_at: string; paid_at: string | null };
 
-function loadScript(src: string) {
-  return new Promise<void>((ok, fail) => {
-    if (document.querySelector(`script[src="${src}"]`)) return ok();
-    const el = Object.assign(document.createElement("script"), { src, async: true });
-    el.onload = () => ok();
-    el.onerror = () => fail(new Error("script"));
-    document.head.append(el);
-  });
-}
-
 function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => void }) {
   const { supabase } = useAuthed("/biz/place");
   const [amount, setAmount] = useState("");
@@ -516,8 +800,7 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
       return "";
     }
   });
-  const [ready, setReady] = useState<{ stripe: boolean; toss: boolean } | null>(null);
-  const [krw, setKrw] = useState(1400);
+  const [ready, setReady] = useState<boolean | null>(null);
   const [rows, setRows] = useState<Topup[]>([]);
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
@@ -528,17 +811,12 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
-    fetch("/api/pay/config").then((r) => r.json()).then(setReady).catch(() => setReady({ stripe: false, toss: false }));
-    supabase.from("monetization_settings").select("krw_per_unit").maybeSingle().then(({ data }) => data && setKrw(Number(data.krw_per_unit)));
-    // 카드 결제에서 돌아왔을 때 결과 안내
+    fetch("/api/pay/config").then((r) => r.json()).then((c) => setReady(!!c.stripe)).catch(() => setReady(false));
     const paid = new URLSearchParams(window.location.search).get("paid");
-    if (paid) setMsg(paid === "ok" || paid === "stripe" ? "결제됐어요. 잔액에 반영되기까지 몇 초 걸릴 수 있어요." : paid === "cancel" ? "결제를 취소했어요." : "결제가 완료되지 않았어요. 카드사 안내를 확인하거나 다시 시도하세요.");
-  }, [load, supabase]);
+    if (paid) setMsg(paid === "stripe" ? "결제됐어요. 잔액에 반영되기까지 몇 초 걸릴 수 있어요." : paid === "cancel" ? "결제를 취소했어요." : "결제가 완료되지 않았어요. 다시 시도하세요.");
+  }, [load]);
 
-  const provider = country ? providerFor(country) : null;
-  const providerReady = provider ? !!ready?.[provider] : false;
   const v = Number(amount);
-
   function pickCountry(c: string) {
     setCountry(c);
     try {
@@ -569,41 +847,20 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
       body: JSON.stringify({ businessId: b.id, amount: v, country }),
     }).catch(() => null);
     const data = res ? await res.json().catch(() => null) : null;
-    if (!res?.ok || !data) {
+    if (!res?.ok || !data?.url) {
       setBusy(false);
-      return setMsg(data?.error === "provider_not_ready" ? `${PROVIDER_LABEL[provider!]} 결제가 아직 준비되지 않았어요. 계좌 입금으로 충전해 주세요.` : "결제를 시작하지 못했어요.");
+      return setMsg(data?.error === "provider_not_ready" ? "카드 결제가 아직 준비되지 않았어요. 계좌 입금으로 충전해 주세요." : "결제를 시작하지 못했어요.");
     }
-    if (data.provider === "stripe") {
-      window.location.href = data.url;
-      return;
-    }
-    // 토스페이먼츠 결제창
-    try {
-      await loadScript("https://js.tosspayments.com/v2/standard");
-      const tp = (window as unknown as { TossPayments: (k: string) => { payment: (o: { customerKey: string }) => { requestPayment: (o: Record<string, unknown>) => Promise<void> } } }).TossPayments(
-        process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY ?? "",
-      );
-      await tp.payment({ customerKey: data.customerKey }).requestPayment({
-        method: "CARD",
-        amount: { currency: "KRW", value: data.amount },
-        orderId: data.orderId,
-        orderName: data.orderName,
-        successUrl: `${window.location.origin}/api/pay/toss/confirm`,
-        failUrl: `${window.location.origin}/biz/place?paid=fail`,
-      });
-    } catch {
-      setMsg("결제창을 닫았거나 열지 못했어요.");
-    } finally {
-      setBusy(false);
-      load();
-    }
+    window.location.href = data.url;
   }
 
   return (
     <section className="grid gap-5">
       <form onSubmit={bank} className="grid max-w-[520px] gap-3 rounded-xl border border-rule p-4">
         <h2 className="text-[16px] font-semibold">광고비 충전</h2>
-        <p className="text-[13px] text-muted">미리 충전한 금액에서 과금돼요. 가게가 있는 나라에 맞는 카드 결제를 연결해 드려요.</p>
+        <p className="text-[13px] text-muted">
+          미리 충전한 금액에서 과금돼요. 잔액이 조건 금액보다 적어지면 과금이 멈추고, 큐레이터가 ‘광고비 지급될 때만 공개’로 담은 리스트에서는 우리 가게가 숨겨져요.
+        </p>
         <label className="grid gap-1 text-[13px] font-semibold">
           가게가 있는 나라
           <select value={country} onChange={(e) => pickCountry(e.target.value)} className="field">
@@ -612,30 +869,19 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
               <option key={c.code} value={c.code}>{c.name}</option>
             ))}
           </select>
-          {provider && (
-            <span className="font-normal text-muted">
-              카드 결제: {PROVIDER_LABEL[provider]}
-              {provider === "toss" ? ` · 원화로 결제(1 ${dash.currency} = ${krw.toLocaleString("ko-KR")}원)` : ` · ${dash.currency}로 결제`}
-              {ready && !providerReady && " · 준비 중"}
-            </span>
-          )}
+          {country && <span className="font-normal text-muted">{payNote(country, dash.currency)}</span>}
         </label>
         <label className="grid gap-1 text-[13px] font-semibold">
           충전 금액({dash.currency})
           <input value={amount} onChange={(e) => setAmount(e.target.value)} inputMode="decimal" className="field" placeholder="예: 100" />
-          {provider === "toss" && v > 0 && dash.currency !== "KRW" && (
-            <span className="font-normal text-muted">결제 금액 약 {Math.round(v * krw).toLocaleString("ko-KR")}원</span>
-          )}
         </label>
         <div className="flex flex-wrap gap-2">
-          <button type="button" onClick={card} disabled={busy || !providerReady} className="btn-primary disabled:opacity-40">
-            {busy ? "결제 여는 중" : provider ? `${PROVIDER_LABEL[provider]}로 카드 결제` : "카드 결제"}
+          <button type="button" onClick={card} disabled={busy || !ready} className="btn-primary disabled:opacity-40">
+            {busy ? "결제 여는 중" : "카드로 결제(Stripe)"}
           </button>
           <button className="btn-quiet">계좌 입금으로 충전 요청</button>
         </div>
-        {provider && ready && !providerReady && (
-          <p className="text-[12px] text-muted">{PROVIDER_LABEL[provider]} 카드 결제는 연결 준비 중이에요. 지금은 계좌 입금으로 충전해 주세요.</p>
-        )}
+        {ready === false && <p className="text-[12px] text-muted">카드 결제는 연결 준비 중이에요. 지금은 계좌 입금으로 충전해 주세요.</p>}
         <Msg text={msg} />
       </form>
       <div>
@@ -652,7 +898,7 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
                   {r.status === "paid" ? (r.provider === "bank" ? "입금 확인" : "결제 완료") : r.status === "cancelled" ? "취소" : r.provider === "bank" ? "입금 대기" : "결제 미완료"}
                 </span>
                 <span className="text-[12px] text-muted">
-                  {r.provider === "bank" ? "계좌 입금" : r.provider === "toss" ? "토스페이먼츠" : "Stripe"}
+                  {r.provider === "bank" ? "계좌 입금" : "카드"}
                   {r.pay_currency && r.pay_currency !== r.currency && r.pay_amount ? ` · ${money(r.pay_amount, r.pay_currency)}` : ""}
                 </span>
               </li>
@@ -664,23 +910,24 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
   );
 }
 
-// ── 예약 문의 관리 ─────────────────────────
+// ── 예약 문의 관리(대화 포함) ─────────────────────────
 type Resv = {
-  id: string; name: string; phone: string; visit_date: string; visit_time: string | null; party_size: number; note: string | null;
-  status: "new" | "confirmed" | "declined" | "visited" | "no_show" | "cancelled"; reply: string | null; created_at: string;
-  curator_id: string | null; list: { title: string } | null;
+  id: string; user_id: string | null; name: string; phone: string; visit_date: string; visit_time: string | null; party_size: number; note: string | null;
+  status: "new" | "confirmed" | "declined" | "visited" | "no_show" | "cancelled"; reply: string | null; created_at: string; cancelled_by: string | null;
+  curator_id: string | null; attachment_id: string | null; list: { title: string } | null;
 };
 const RS: Record<Resv["status"], string> = { new: "새 문의", confirmed: "확정", declined: "거절", visited: "방문 완료", no_show: "노쇼", cancelled: "취소" };
 
-function Reservations({ b }: { b: Business }) {
-  const { supabase } = useAuthed("/biz/place");
+function Reservations({ b, onChanged }: { b: Business; onChanged: () => void }) {
+  const { user, supabase } = useAuthed("/biz/place");
   const [rows, setRows] = useState<Resv[] | null>(null);
   const [filter, setFilter] = useState<"open" | "all">("open");
+  const [open, setOpen] = useState<string | null>(null);
   const [msg, setMsg] = useState("");
   const load = useCallback(async () => {
     let q = supabase
       .from("reservations")
-      .select("id, name, phone, visit_date, visit_time, party_size, note, status, reply, created_at, curator_id, list:lists(title)")
+      .select("id, user_id, name, phone, visit_date, visit_time, party_size, note, status, reply, created_at, cancelled_by, curator_id, attachment_id, list:lists(title)")
       .eq("business_id", b.id)
       .order("visit_date", { ascending: true })
       .limit(200);
@@ -694,20 +941,28 @@ function Reservations({ b }: { b: Business }) {
   }, [load]);
 
   async function act(r: Resv, status: Resv["status"]) {
-    const ask = status === "confirmed" ? "손님에게 보낼 말(선택). 예: 창가 자리로 준비할게요" : status === "declined" ? "거절 사유(손님에게 보여요)" : null;
+    const ask = status === "confirmed" ? "손님에게 보낼 말(선택). 예: 창가 자리로 준비할게요" : status === "declined" ? "거절 사유(손님에게 보여요)" : status === "no_show" || status === "cancelled" ? "사유(선택, 손님에게 보여요)" : null;
     const reply = ask ? prompt(ask, "") : "";
     if (reply === null) return;
     const { error } = await supabase.rpc("set_reservation_status", { p_id: r.id, p_status: status, p_reply: reply });
-    setMsg(error ? "바꾸지 못했어요." : `${r.name}님 문의: ${RS[status]}`);
+    if (error) {
+      setMsg(error.message.includes("insufficient")
+        ? "광고비 잔액이 예약 보상 금액보다 적어 확정할 수 없어요(큐레이터 제휴로 들어온 문의). ‘광고비’ 탭에서 충전한 뒤 확정해 주세요."
+        : "바꾸지 못했어요.");
+    } else setMsg(`${r.name}님 문의: ${RS[status]}`);
     load();
+    onChanged();
   }
 
-  if (!rows) return <p className="text-muted">불러오는 중…</p>;
+  if (!rows || !user) return <p className="text-muted">불러오는 중…</p>;
   return (
     <section className="grid gap-4">
+      {!b.reservations_enabled && (
+        <p className="rounded-lg bg-surface px-3 py-2 text-[13px]">예약 문의가 꺼져 있어요. ‘예약 설정’ 탭에서 켜면 장소 카드에 ‘예약 문의’ 버튼이 생겨요.</p>
+      )}
       <p className="text-[13px] text-muted">
-        PinWith 장소 카드의 ‘예약 문의’로 들어온 요청이에요. 손님에게 연락해 확인한 뒤 확정하거나 거절하세요. 확정하면 손님에게 알림이 가고, 그 리스트에 예약 제휴를 붙인
-        큐레이터에게 보상이 기록돼요.
+        장소 카드의 ‘예약 문의’로 들어온 요청이에요. 확정·거절 전에도 ‘대화’로 손님과 메시지를 주고받을 수 있어요. 큐레이터 제휴로 들어온 문의는 확정할 때 보상이
+        나가고(잔액 필요), 확정 뒤 노쇼·취소로 바꾸면 되돌려 받아요.
       </p>
       <div className="flex gap-2">
         <button type="button" onClick={() => setFilter("open")} className={`${filter === "open" ? "btn-primary" : "btn-quiet"} !py-1 !text-[13px]`}>처리할 것</button>
@@ -723,7 +978,9 @@ function Reservations({ b }: { b: Business }) {
               <p className="flex items-center gap-2">
                 <b className="text-[16px]">{r.visit_date.slice(5).replace("-", "/")} {r.visit_time ?? ""}</b>
                 <span className="text-[14px]">· {r.party_size}명</span>
-                <span className={`ml-auto rounded-full px-2 py-0.5 text-[12px] ${r.status === "new" ? "bg-pin text-white" : "bg-surface text-muted"}`}>{RS[r.status]}</span>
+                <span className={`ml-auto rounded-full px-2 py-0.5 text-[12px] ${r.status === "new" ? "bg-pin text-white" : "bg-surface text-muted"}`}>
+                  {RS[r.status]}{r.status === "cancelled" && r.cancelled_by === "guest" ? "(손님)" : ""}
+                </span>
               </p>
               <p className="mt-1 text-[14px]">
                 {r.name} · <a href={`tel:${r.phone}`} className="text-teal underline">{r.phone}</a>
@@ -731,10 +988,13 @@ function Reservations({ b }: { b: Business }) {
               {r.note && <p className="mt-1 text-[13px] text-ink/80">요청: {r.note}</p>}
               {r.reply && <p className="mt-1 text-[13px] text-muted">내 답: {r.reply}</p>}
               <p className="mt-1 text-[12px] text-muted">
-                {r.list ? `‘${r.list.title}’에서` : "리스트에서"} · {new Date(r.created_at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "numeric", minute: "2-digit" })}
-                {r.curator_id ? " · 큐레이터 제휴" : ""}
+                {r.list ? `‘${r.list.title}’에서` : "장소 카드에서"} · {new Date(r.created_at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "numeric", minute: "2-digit" })}
+                {r.attachment_id ? " · 큐레이터 제휴(확정 시 보상)" : ""}
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
+                <button type="button" onClick={() => setOpen(open === r.id ? null : r.id)} className="btn-quiet !px-3 !py-1 !text-[13px]">
+                  {open === r.id ? "대화 닫기" : "대화"}
+                </button>
                 {r.status === "new" && (
                   <>
                     <button type="button" onClick={() => act(r, "confirmed")} className="btn-primary !px-3 !py-1 !text-[13px]">확정</button>
@@ -749,10 +1009,16 @@ function Reservations({ b }: { b: Business }) {
                   </>
                 )}
               </div>
+              {open === r.id && <ReservationThread reservationId={r.id} meId={user.id} otherLabel={`${r.name}님`} />}
             </li>
           ))}
         </ul>
       )}
     </section>
   );
+}
+
+function payNote(country: string, currency: string) {
+  if (country === "KR") return `Stripe로 원화 결제: 국내 카드·네이버페이·삼성페이·페이코 사용 가능(충전액 ${currency} 기준, 결제일 환율로 원화 표시)`;
+  return `Stripe 카드 결제(${currency})`;
 }
