@@ -15,6 +15,7 @@ type Business = {
   status: "pending" | "approved" | "rejected" | "suspended"; review_note: string | null; created_at: string;
   reservations_enabled: boolean; reservation_hours: Record<string, [string, string][]>; reservation_slot_minutes: number;
   reservation_max_party: number; reservation_note: string | null;
+  lock_reservation_offer?: boolean; lock_reservations?: boolean;
 };
 const STATUS: Record<Business["status"], string> = { pending: "확인 중", approved: "인증됨", rejected: "반려", suspended: "정지" };
 
@@ -526,6 +527,24 @@ function BizDetail({ b, dash, kind, onBack, reload }: { b: Business; dash: Dash;
 
 // ── 예약 설정: 수익화와 관계없이 켜고 끄기, 요일·시간대 ─────────────────────────
 type Ranges = [string, string][];
+// 운영자 조치로 잠긴 기능: 풀어 주기 전까지 켤 수 없고, 이의 제기는 열어 둔다
+function AdminLock({ b, what }: { b: Business; what: string }) {
+  const [msg, setMsg] = useState("");
+  return (
+    <div className="rounded-xl border border-pin bg-pin/5 p-4 text-[14px]">
+      <b className="block">🔒 운영자 조치로 {what}이(가) 꺼져 있어요</b>
+      <span className="text-[13px] text-ink/80">
+        예약 품질(노쇼·가게 취소 비율) 등 운영 기준을 확인한 결과예요. 운영자가 잠금을 풀기 전까지는 다시 켤 수 없어요. 사정이 있다면 이의를 제기해 주세요. 운영자가 확인하고
+        알림으로 결과를 알려 드려요.
+      </span>
+      <div className="mt-2 flex flex-wrap items-center gap-3">
+        <DisputeButton businessId={b.id} label="이의 제기" onDone={setMsg} />
+        {msg && <span className="text-[13px] text-teal">{msg}</span>}
+      </div>
+    </div>
+  );
+}
+
 function BookingSettings({ b, onSaved }: { b: Business; onSaved: () => void }) {
   const { supabase } = useAuthed("/biz/place");
   const [on, setOn] = useState(b.reservations_enabled);
@@ -552,13 +571,15 @@ function BookingSettings({ b, onSaved }: { b: Business; onSaved: () => void }) {
       .from("businesses")
       .update({ reservations_enabled: enable, reservation_hours: hours, reservation_slot_minutes: slot, reservation_max_party: mp, reservation_note: note.trim() || null })
       .eq("id", b.id);
-    setMsg(error ? "저장하지 못했어요." : enable ? "저장했어요. 손님 화면의 예약 문의에 바로 반영돼요." : "예약 문의를 껐어요. 장소 카드에서 버튼이 사라져요.");
+    if (error) return setMsg(error.message.includes("locked by admin") ? "운영자 조치로 잠겨 있어 켤 수 없어요." : "저장하지 못했어요.");
+    setMsg(enable ? "저장했어요. 손님 화면의 예약 문의에 바로 반영돼요." : "예약 문의를 껐어요. 장소 카드에서 버튼이 사라져요.");
     setOn(enable);
     onSaved();
   }
 
   return (
     <section className="grid max-w-[640px] gap-4">
+      {b.lock_reservations && <AdminLock b={b} what="예약 기능" />}
       <div className="flex items-center gap-3 rounded-xl border border-rule p-4">
         <span className="flex-1">
           <b className="block text-[16px]">PinWith로 예약 문의 받기</b>
@@ -566,7 +587,9 @@ function BookingSettings({ b, onSaved }: { b: Business; onSaved: () => void }) {
             켜면 우리 가게의 장소 카드(어떤 리스트에서 보든, 검색해서 보든)에 ‘예약 문의’ 버튼이 생겨요. 수익화(과금 모델)와 관계없이 무료예요.
           </span>
         </span>
-        <button type="button" onClick={() => save(!on)} className={on ? "btn-quiet" : "btn-primary"}>{on ? "끄기" : "켜기"}</button>
+        <button type="button" onClick={() => save(!on)} disabled={!on && b.lock_reservations} className={on ? "btn-quiet" : "btn-primary disabled:opacity-40"}>
+          {on ? "끄기" : b.lock_reservations ? "잠김" : "켜기"}
+        </button>
       </div>
       <div className="rounded-xl border border-rule p-4">
         <p className="text-[15px] font-semibold">예약 받는 요일·시간</p>
@@ -669,7 +692,11 @@ function Offers({ b, currency, paidOnly }: { b: Business; currency: string; paid
     const { error } = o.id
       ? await supabase.from("biz_offers").update(row).eq("id", o.id)
       : await supabase.from("biz_offers").insert(row);
-    setMsg(error ? "저장하지 못했어요." : active ? "등록했어요. 큐레이터들이 제휴 목록에서 볼 수 있어요." : "해제했어요. 새 과금이 멈춰요.");
+    setMsg(
+      error
+        ? error.message.includes("locked by admin") ? "운영자 조치로 잠겨 있어 켤 수 없어요. 이의 제기를 이용해 주세요." : "저장하지 못했어요."
+        : active ? "등록했어요. 큐레이터들이 제휴 목록에서 볼 수 있어요." : "해제했어요. 새 과금이 멈춰요.",
+    );
     load();
   }
 
@@ -702,6 +729,7 @@ function Offers({ b, currency, paidOnly }: { b: Business; currency: string; paid
                 <Field label={`1회 금액(${currency})`} value={o.rate} onChange={(v) => set({ rate: v })} inputMode="decimal" />
                 <Field label="한 달 예산(선택)" value={o.monthly_budget} onChange={(v) => set({ monthly_budget: v })} inputMode="decimal" placeholder="제한 없음" />
               </div>
+              {m === "reservation" && b.lock_reservation_offer && <div className="mt-2"><AdminLock b={b} what="예약 제휴" /></div>}
               {m === "reservation" && (
                 <p className="mt-2 rounded-lg bg-surface px-3 py-2 text-[12px] text-ink/80">
                   예약 문의 버튼 자체는 ‘예약 설정’에서 무료로 켜요. 이 조건은 큐레이터 보상용이에요: 이 조건을 붙인 큐레이터의 리스트에서 들어온 문의를 확정할 때 금액이
@@ -713,7 +741,9 @@ function Offers({ b, currency, paidOnly }: { b: Business; currency: string; paid
                 <textarea value={o.message} onChange={(e) => set({ message: e.target.value })} maxLength={300} rows={2} className="field" placeholder="예: 대표 메뉴는 들기름 막국수예요. 사진 촬영 환영!" />
               </label>
               <div className="mt-3 flex gap-2">
-                <button type="button" onClick={() => save(o, true)} className="btn-primary !py-1.5">{o.active ? "저장" : "등록"}</button>
+                <button type="button" onClick={() => save(o, true)} disabled={m === "reservation" && b.lock_reservation_offer} className="btn-primary !py-1.5 disabled:opacity-40">
+                  {o.active ? "저장" : "등록"}
+                </button>
                 {o.active && <button type="button" onClick={() => save(o, false)} className="btn-quiet !py-1.5">해제</button>}
               </div>
             </div>
@@ -862,7 +892,7 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
     const data = res ? await res.json().catch(() => null) : null;
     if (!res?.ok || !data?.url) {
       setBusy(false);
-      return setMsg(data?.error === "provider_not_ready" ? "카드 결제가 아직 준비되지 않았어요. 계좌 입금으로 충전해 주세요." : "결제를 시작하지 못했어요.");
+      return setMsg(data?.error === "provider_not_ready" ? "카드 결제가 아직 준비되지 않았어요. 계좌 입금으로 충전해 주세요." : data?.error === "too_many" ? "잠시 뒤에 다시 시도해 주세요." : "결제를 시작하지 못했어요.");
     }
     window.location.href = data.url;
   }

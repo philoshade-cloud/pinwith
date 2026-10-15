@@ -232,6 +232,7 @@ type Quality = {
   business_id: string; place_name: string; business: string; status: string; owner: string; reservations_enabled: boolean; admin_note: string | null;
   confirmed: number; bad: number; no_show: number; cancel_business: number; rate: number | null; peer: number; flagged: boolean; alerts: number;
   reservation_offer_active: boolean; curators: number; open_disputes: number;
+  lock_reservation_offer: boolean; lock_reservations: boolean;
 };
 
 export function StoreQuality() {
@@ -261,7 +262,7 @@ export function StoreQuality() {
     <section className="grid gap-3">
       <p className="text-[13px] text-muted">
         최근 90일 확정 예약 중 노쇼·가게 취소 비율이에요. 확정 5건 이상이면서 반경 3km 평균의 2배 또는 평균 +20%p를 넘으면 ‘이상’으로 표시하고, 연결된 큐레이터에게는 이미 알림이
-        가요. 필요하면 예약 제휴를 끄거나(큐레이터 보상 중단), 예약 기능을 끄거나, 가게를 정지하세요. 정지하면 가게에 알림이 가요.
+        가요. 필요하면 예약 제휴를 끄거나(큐레이터 보상 중단), 예약 기능을 끄거나, 가게를 정지하세요. 제휴·예약 기능을 끄면 잠기기 때문에 여기서 풀어 주기 전까지 가게가 다시 켤 수 없고(이의 제기는 가능), 가게와 예약 제휴로 연결된 큐레이터에게도 알림이 가요. 정지하면 가게에 알림이 가요.
       </p>
       <label className="flex items-center gap-2 text-[14px]">
         <input type="checkbox" checked={onlyFlagged} onChange={(e) => setOnlyFlagged(e.target.checked)} /> 이상 표시된 가게만
@@ -283,7 +284,8 @@ export function StoreQuality() {
               <span className="text-muted"> ({r.bad}/{r.confirmed}건 · 노쇼 {r.no_show} · 가게 취소 {r.cancel_business}) · 주변 평균 {pct(r.peer)}</span>
             </p>
             <p className="text-[12px] text-muted">
-              큐레이터 알림 {r.alerts}번 · 연결 큐레이터 {r.curators}명 · 예약 기능 {r.reservations_enabled ? "켬" : "끔"} · 예약 제휴 {r.reservation_offer_active ? "켬" : "끔"}
+              큐레이터 알림 {r.alerts}번 · 연결 큐레이터 {r.curators}명 · 예약 기능 {r.lock_reservations ? "🔒 운영자 잠금" : r.reservations_enabled ? "켬" : "끔"} · 예약 제휴{" "}
+              {r.lock_reservation_offer ? "🔒 운영자 잠금" : r.reservation_offer_active ? "켬" : "끔"}
             </p>
             <label className="mt-2 grid gap-1 text-[12px] font-semibold">
               운영 메모
@@ -295,13 +297,21 @@ export function StoreQuality() {
               />
             </label>
             <div className="mt-2 flex flex-wrap gap-2">
-              {r.reservation_offer_active && (
-                <ConfirmButton label="예약 제휴 끄기" question="이 가게의 ‘예약 확정’ 과금 모델을 끌까요? 큐레이터 보상이 멈춰요(예약 문의 자체는 계속)." confirmLabel="끄기"
-                  onConfirm={() => run("예약 제휴 끄기", supabase.from("biz_offers").update({ active: false }).eq("business_id", r.business_id).eq("model", "reservation"))} />
+              {r.lock_reservation_offer ? (
+                <ConfirmButton label="예약 제휴 잠금 풀기" question="잠금을 풀까요? 가게가 다시 ‘예약 확정’ 모델을 켤 수 있어요(자동으로 켜지지는 않아요)." confirmLabel="풀기"
+                  onConfirm={() => run("예약 제휴 잠금 풀기", supabase.rpc("admin_set_lock", { p_business: r.business_id, p_what: "offer", p_on: false, p_note: null }))} />
+              ) : (
+                <ConfirmButton label="예약 제휴 끄기" question="‘예약 확정’ 과금 모델을 끄고 잠글까요? 큐레이터 보상이 멈추고, 풀어 주기 전까지 가게가 다시 켤 수 없어요. 가게와 연결된 큐레이터에게 알림이 가요."
+                  withNote="사유(가게·큐레이터에게 보여요)" confirmLabel="끄고 잠그기"
+                  onConfirm={(note) => run("예약 제휴 끄기", supabase.rpc("admin_set_lock", { p_business: r.business_id, p_what: "offer", p_on: true, p_note: note || null }))} />
               )}
-              {r.reservations_enabled && (
-                <ConfirmButton label="예약 기능 끄기" question="이 가게의 예약 문의 버튼을 끌까요?" confirmLabel="끄기"
-                  onConfirm={() => run("예약 기능 끄기", supabase.from("businesses").update({ reservations_enabled: false }).eq("id", r.business_id))} />
+              {r.lock_reservations ? (
+                <ConfirmButton label="예약 기능 잠금 풀기" question="잠금을 풀까요? 가게가 다시 예약 문의를 켤 수 있어요(자동으로 켜지지는 않아요)." confirmLabel="풀기"
+                  onConfirm={() => run("예약 기능 잠금 풀기", supabase.rpc("admin_set_lock", { p_business: r.business_id, p_what: "reservations", p_on: false, p_note: null }))} />
+              ) : (
+                <ConfirmButton label="예약 기능 끄기" question="예약 문의를 끄고 잠글까요? 풀어 주기 전까지 가게가 다시 켤 수 없어요. 가게와 예약 제휴로 연결된 큐레이터에게 알림이 가요."
+                  withNote="사유(가게·큐레이터에게 보여요)" confirmLabel="끄고 잠그기"
+                  onConfirm={(note) => run("예약 기능 끄기", supabase.rpc("admin_set_lock", { p_business: r.business_id, p_what: "reservations", p_on: true, p_note: note || null }))} />
               )}
               {r.status === "approved" ? (
                 <ConfirmButton label="가게 정지" question="가게 계정을 정지할까요? 과금·예약·콘솔 사용이 멈추고 가게에 알림이 가요." withNote="정지 사유(가게에 보여요)" confirmLabel="정지"
