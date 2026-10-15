@@ -27,8 +27,11 @@ const ago = (iso: string) => {
 export function FollowingView() {
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
-  const [rows, setRows] = useState<Row[] | null>(null);
+  const [following, setFollowing] = useState<Row[] | null>(null);
+  const [liked, setLiked] = useState<Row[]>([]);
+  const [tab, setTab] = useState<"following" | "liked">("following");
   const [people, setPeople] = useState(0);
+  const rows = tab === "following" ? following : liked;
 
   useEffect(() => {
     (async () => {
@@ -37,10 +40,23 @@ export function FollowingView() {
         router.replace("/login?next=/following");
         return;
       }
-      const { data: f } = await supabase.from("follows").select("followee_id").eq("follower_id", auth.user.id);
+      const [{ data: f }, { data: likes }] = await Promise.all([
+        supabase.from("follows").select("followee_id").eq("follower_id", auth.user.id),
+        // 좋아요한 리스트(3.7)
+        supabase
+          .from("list_likes")
+          .select(
+            "created_at, list:lists(id, slug, title, updated_at, like_count, owner:profiles!lists_owner_id_fkey(handle, display_name)," +
+              " list_items(id, place_id, custom_title, places(lat, lng)))",
+          )
+          .eq("user_id", auth.user.id)
+          .order("created_at", { ascending: false })
+          .limit(60),
+      ]);
+      setLiked(((likes ?? []) as unknown as { list: Row | null }[]).map((x) => x.list).filter((l): l is Row => !!l));
       const ids = (f ?? []).map((x) => x.followee_id as string);
       setPeople(ids.length);
-      if (ids.length === 0) return setRows([]);
+      if (ids.length === 0) return setFollowing([]);
       const { data } = await supabase
         .from("lists")
         .select(
@@ -52,7 +68,7 @@ export function FollowingView() {
         .order("updated_at", { ascending: false })
         .limit(60);
       const found = ((data ?? []) as unknown as Row[]).filter((l) => l.list_items.length > 0);
-      setRows(found);
+      setFollowing(found);
       // 열람 기록(좌표 갱신 대상 판단용)
       if (found.length) supabase.rpc("touch_lists", { ids: found.map((l) => l.id) }).then(() => {});
     })();
@@ -88,16 +104,38 @@ export function FollowingView() {
   if (!rows) return <PanelLoading />;
 
   return (
-    <Panel title={`팔로잉 리스트 · ${rows.length}개`}>
+    <Panel title={tab === "following" ? `팔로잉 리스트 · ${rows.length}개` : `좋아요한 리스트 · ${rows.length}개`}>
       <div className="px-5 pb-8 pt-4">
+        <div className="mb-3 flex gap-1.5" role="tablist">
+          {(["following", "liked"] as const).map((t) => (
+            <button
+              key={t}
+              type="button"
+              role="tab"
+              aria-selected={tab === t}
+              onClick={() => setTab(t)}
+              className={`rounded-full px-3 py-1.5 text-[13px] font-semibold ${tab === t ? "bg-ink text-white" : "bg-surface text-ink"}`}
+            >
+              {t === "following" ? "팔로잉" : `좋아요${liked.length ? ` ${liked.length}` : ""}`}
+            </button>
+          ))}
+        </div>
         {rows.length === 0 ? (
           <div className="py-6 text-[15px] text-muted">
-            {people === 0 ? "아직 팔로우한 사람이 없어요." : "팔로우한 사람들이 아직 공개 리스트를 만들지 않았어요."}
+            {tab === "liked"
+              ? "아직 좋아요한 리스트가 없어요."
+              : people === 0
+                ? "아직 팔로우한 사람이 없어요."
+                : "팔로우한 사람들이 아직 공개 리스트를 만들지 않았어요."}
             <Link href="/explore" className="btn-primary mt-4">타인의 핀 둘러보기</Link>
           </div>
         ) : (
           <>
-            <p className="text-[13px] text-muted">팔로우하는 {people}명의 리스트를 최근에 바뀐 순서로 보여줘요. 지도에는 모든 핀이 함께 보입니다.</p>
+            <p className="text-[13px] text-muted">
+              {tab === "following"
+                ? `팔로우하는 ${people}명의 리스트를 최근에 바뀐 순서로 보여줘요. 지도에는 모든 핀이 함께 보입니다.`
+                : "좋아요를 누른 리스트예요. 지도에는 모든 핀이 함께 보입니다."}
+            </p>
             <ul className="mt-3 divide-y divide-rule border-y border-rule">
               {rows.map((l) => (
                 <li key={l.id}>

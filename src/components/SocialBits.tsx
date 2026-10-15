@@ -95,7 +95,7 @@ export function ListNotice({ listId }: { listId: string }) {
   );
 }
 
-// 핀 카드 아래: 댓글 보기 + 큐레이터에게 묻기
+// 핀 카드 아래: 댓글(내가 볼 수 있는 수 표시) + 큐레이터에게 묻기
 export function ItemExtras({
   itemId, listId, ownerId, isOwner,
 }: {
@@ -104,18 +104,29 @@ export function ItemExtras({
   ownerId: string;
   isOwner: boolean;
 }) {
+  const supabase = useMemo(() => createClient(), []);
+  const { me } = useShell();
   const [open, setOpen] = useState(false);
+  const [count, setCount] = useState<number | null>(null);
+  useEffect(() => {
+    if (!me) return;
+    supabase
+      .from("item_comments")
+      .select("id", { count: "exact", head: true })
+      .eq("item_id", itemId)
+      .then(({ count: n }) => setCount(n ?? 0));
+  }, [supabase, me, itemId]);
   return (
     <div>
       <div className="flex flex-wrap gap-2">
         <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} className="btn-quiet !py-1.5 !text-[13px]">
-          💬 {open ? "댓글 닫기" : "댓글"}
+          💬 {open ? "댓글 닫기" : `댓글${count ? ` (${count})` : ""}`}
         </button>
         {!isOwner && <DmButton userId={ownerId} listId={listId} itemId={itemId} label="큐레이터에게 묻기" className="btn-quiet !py-1.5 !text-[13px]" />}
       </div>
       {open && (
         <div className="mt-3">
-          <Comments itemId={itemId} ownerId={ownerId} />
+          <Comments itemId={itemId} ownerId={ownerId} onCount={setCount} />
         </div>
       )}
     </div>

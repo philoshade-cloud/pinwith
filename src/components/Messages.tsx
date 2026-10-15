@@ -98,6 +98,7 @@ type Msg = {
   sender_id: string;
   body: string;
   tag: string | null;
+  resolved_at: string | null;
   created_at: string;
   list: { id: string; title: string; slug: string; owner: { handle: string } | null } | null;
   item: { id: string; custom_title: string } | null;
@@ -148,7 +149,7 @@ export function Conversation({ id }: { id: string }) {
       supabase
         .from("messages")
         .select(
-          "id, sender_id, body, tag, created_at, list:lists!messages_attached_list_id_fkey(id, title, slug, owner:profiles!lists_owner_id_fkey(handle))," +
+          "id, sender_id, body, tag, resolved_at, created_at, list:lists!messages_attached_list_id_fkey(id, title, slug, owner:profiles!lists_owner_id_fkey(handle))," +
             " item:list_items!messages_attached_item_id_fkey(id, custom_title)",
         )
         .eq("conversation_id", id)
@@ -206,6 +207,14 @@ export function Conversation({ id }: { id: string }) {
     load();
   }
 
+  // 받은 사람(보통 큐레이터)이 '반영함'을 누르면 보낸 사람에게 "리스트가 업데이트됐어요" 알림
+  async function resolve(messageId: string) {
+    const { error } = await supabase.rpc("resolve_message", { p_message: messageId });
+    if (error) return toast("처리하지 못했습니다.");
+    toast("반영했다고 알렸어요.");
+    load();
+  }
+
   async function setStatus(status: "active" | "blocked") {
     if (!me) return;
     await supabase.from("conversation_members").update({ status }).eq("conversation_id", id).eq("user_id", me.id);
@@ -253,6 +262,13 @@ export function Conversation({ id }: { id: string }) {
                     </Link>
                   )}
                   {m.body && <p className="whitespace-pre-wrap break-words">{m.body}</p>}
+                  {m.tag && (m.resolved_at ? (
+                    <p className={`mt-1 text-[11px] font-semibold ${mine ? "text-white/80" : "text-teal"}`}>✓ 리스트에 반영함</p>
+                  ) : !mine ? (
+                    <button type="button" onClick={() => resolve(m.id)} className="mt-1.5 rounded-full bg-white px-2.5 py-1 text-[12px] font-semibold text-teal shadow-[inset_0_0_0_1px_var(--color-rule)]">
+                      반영함
+                    </button>
+                  ) : null)}
                   <p className={`mt-0.5 text-right text-[10px] ${mine ? "text-white/60" : "text-muted"}`}>{ago(m.created_at)}</p>
                 </div>
               </li>

@@ -10,7 +10,7 @@ import { useShell } from "./shell/context";
 
 type N = {
   id: string;
-  kind: "follow" | "like" | "comment" | "invite" | "invite_accepted" | "notice";
+  kind: "follow" | "like" | "comment" | "reply" | "invite" | "invite_accepted" | "share_changed" | "notice" | "resolved";
   body: string | null;
   read_at: string | null;
   created_at: string;
@@ -23,6 +23,9 @@ const TEXT: Record<N["kind"], string> = {
   follow: "님이 나를 팔로우했어요",
   like: "님이 리스트를 좋아해요",
   comment: "님이 댓글을 남겼어요",
+  reply: "님이 내 댓글에 답글을 남겼어요",
+  share_changed: "님이 공동 편집 수익 배분을 바꿨어요",
+  resolved: "님이 내 메시지를 리스트에 반영했어요",
   invite: "님이 리스트 공동 편집에 초대했어요",
   invite_accepted: "님이 공동 편집 초대를 수락했어요",
   notice: "님의 새 공지",
@@ -35,12 +38,13 @@ export function Notifications() {
   const { me, toast, refreshBadges } = useShell();
   const [rows, setRows] = useState<N[] | null>(null);
   const [followingBack, setFollowingBack] = useState<Set<string>>(new Set());
+  const [muted, setMuted] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     (async () => {
       const { data: auth } = await supabase.auth.getUser();
       if (!auth.user) return router.replace("/login?next=/notifications");
-      const [{ data }, { data: f }] = await Promise.all([
+      const [{ data }, { data: f }, { data: mutes }] = await Promise.all([
         supabase
           .from("notifications")
           .select(
@@ -50,7 +54,9 @@ export function Notifications() {
           .order("created_at", { ascending: false })
           .limit(100),
         supabase.from("follows").select("followee_id").eq("follower_id", auth.user.id),
+        supabase.from("list_mutes").select("list_id").eq("user_id", auth.user.id),
       ]);
+      setMuted(new Set((mutes ?? []).map((m) => m.list_id as string)));
       setRows((data as unknown as N[]) ?? []);
       setFollowingBack(new Set((f ?? []).map((x) => x.followee_id as string)));
       await supabase.from("notifications").update({ read_at: new Date().toISOString() }).is("read_at", null).eq("user_id", auth.user.id);
@@ -75,6 +81,20 @@ export function Notifications() {
     if (error) return toast("이미 처리했거나 초대가 취소됐습니다.");
     toast(accept ? "공동 편집자가 됐습니다." : "초대를 거절했습니다.");
     if (accept) router.push(`/me/lists/${listId}`);
+  }
+
+  // 알림 끄기: 이 리스트에서 오는 알림(공지·댓글·좋아요 등)을 더 받지 않는다
+  async function mute(listId: string, on: boolean) {
+    if (!me) return;
+    const { error } = on
+      ? await supabase.from("list_mutes").insert({ user_id: me.id, list_id: listId })
+      : await supabase.from("list_mutes").delete().eq("user_id", me.id).eq("list_id", listId);
+    if (error) return toast("바꾸지 못했습니다.");
+    const next = new Set(muted);
+    if (on) next.add(listId);
+    else next.delete(listId);
+    setMuted(next);
+    toast(on ? "이 리스트의 알림을 껐어요." : "이 리스트의 알림을 다시 받아요.");
   }
 
   if (!rows) return <PanelLoading />;
@@ -106,6 +126,11 @@ export function Notifications() {
                     {ago(n.created_at)}
                     {n.kind === "follow" && n.actor && !followingBack.has(n.actor.id) && (
                       <button type="button" onClick={() => followBack(n.actor!.id)} className="btn-primary !px-2.5 !py-1 !text-[12px]">맞팔로우</button>
+                    )}
+                    {n.list_id && n.kind !== "invite" && n.kind !== "share_changed" && (
+                      <button type="button" onClick={() => mute(n.list_id!, !muted.has(n.list_id!))} className="ml-auto underline">
+                        {muted.has(n.list_id) ? "알림 다시 받기" : "이 리스트 알림 끄기"}
+                      </button>
                     )}
                     {n.kind === "invite" && n.list_id && (
                       <>

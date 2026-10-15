@@ -182,6 +182,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
           </Link>
           {isOwner && <Link href="/me/stats" className="btn-quiet shrink-0">통계</Link>}
           {isOwner && <Link href={`/me/lists/${list.id}`} className="btn-quiet shrink-0">편집</Link>}
+          {isOwner && <Link href={`/me/lists/${list.id}/notice`} className="btn-quiet shrink-0">공지</Link>}
         </div>
         <h1 className="font-display mt-5 text-[28px] font-semibold leading-[1.15] tracking-[-0.02em] text-ink text-balance">
           {list.title}
@@ -251,7 +252,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
                   {/* 광고 자리: 장소 6곳마다 */}
                   {(() => {
                     const n = groups.slice(0, gi).reduce((c, x) => c + x.items.length, 0) + ii;
-                    return n > 0 && n % 6 === 0 ? <AdSlot slot="list-inline" variant={n / 6} /> : null;
+                    return n > 0 && n % 6 === 0 ? <AdSlot slot="list-inline" variant={n / 6} listId={isDemo ? undefined : list.id} /> : null;
                   })()}
                   <button
                     type="button"
@@ -280,7 +281,14 @@ export function ListExplorer({ list }: { list: CuratedList }) {
           </section>
         ))}
         {/* 광고 자리: 목록 끝 */}
-        <AdSlot slot="list-end" variant={isDemo ? 0 : 1} />
+        <AdSlot slot="list-end" variant={isDemo ? 0 : 1} listId={isDemo ? undefined : list.id} />
+        {!isDemo && !isOwner && (
+          <p className="px-5 pb-2 text-right">
+            <Link href={`/support?type=report&from=${encodeURIComponent(`/@${list.curator.handle}/${list.slug}`)}`} className="text-[12px] text-muted underline">
+              이 리스트 신고
+            </Link>
+          </p>
+        )}
       </div>
     </Panel>
   );

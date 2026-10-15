@@ -8,7 +8,8 @@ import { useShell } from "./shell/context";
 type Invite = {
   list_id: string;
   accepted_at: string | null;
-  list: { title: string; slug: string; owner: { handle: string; display_name: string } | null } | null;
+  revenue_share_pct: number;
+  list: { title: string; slug: string; monetize: boolean; owner: { handle: string; display_name: string } | null } | null;
 };
 
 // 내가 공동 편집자인 리스트와 받은 초대(3.10). 내 지도 화면에 보인다.
@@ -21,7 +22,7 @@ export function CoEditedLists() {
     if (!me) return;
     const { data } = await supabase
       .from("list_editors")
-      .select("list_id, accepted_at, list:lists(title, slug, owner:profiles!lists_owner_id_fkey(handle, display_name))")
+      .select("list_id, accepted_at, revenue_share_pct, list:lists(title, slug, monetize, owner:profiles!lists_owner_id_fkey(handle, display_name))")
       .eq("user_id", me.id)
       .order("created_at", { ascending: false });
     setRows((data as unknown as Invite[]) ?? []);
@@ -54,6 +55,7 @@ export function CoEditedLists() {
               <span className="block truncate font-semibold text-ink">{r.list?.title}</span>
               <span className="block truncate text-[12px] text-muted">
                 {r.list?.owner?.display_name || r.list?.owner?.handle}의 리스트{!r.accepted_at && " · 초대받음"}
+                {r.list?.monetize && ` · 내 수익 배분 ${r.revenue_share_pct}%`}
               </span>
             </span>
             {r.accepted_at ? (
@@ -83,7 +85,7 @@ type Editor = {
 type Person = { id: string; handle: string; display_name: string };
 
 // 리스트 편집 화면: 공동 편집자 관리(주인만). 서로 팔로우하는 사람만 초대할 수 있다.
-export function EditorsManager({ listId }: { listId: string }) {
+export function EditorsManager({ listId, monetize }: { listId: string; monetize: boolean }) {
   const supabase = useMemo(() => createClient(), []);
   const { me, toast } = useShell();
   const [editors, setEditors] = useState<Editor[]>([]);
@@ -148,7 +150,7 @@ export function EditorsManager({ listId }: { listId: string }) {
                 <span className="block truncate font-semibold text-ink">{e.user?.display_name || e.user?.handle}</span>
                 <span className="block text-[12px] text-muted">{e.accepted_at ? "편집 중" : "초대 보냄"}</span>
               </span>
-              <label className="flex shrink-0 items-center gap-1 text-[12px] text-muted" title="이 리스트에서 생기는 수익 중 이 사람 몫">
+              {monetize && <label className="flex shrink-0 items-center gap-1 text-[12px] text-muted" title="이 리스트에서 생기는 수익 중 이 사람 몫">
                 수익
                 <input
                   type="number"
@@ -160,7 +162,7 @@ export function EditorsManager({ listId }: { listId: string }) {
                   aria-label="수익 배분(%)"
                 />
                 %
-              </label>
+              </label>}
               <button type="button" onClick={() => remove(e.user_id)} className="btn-quiet shrink-0 !px-2.5">빼기</button>
             </li>
           ))}
@@ -179,7 +181,82 @@ export function EditorsManager({ listId }: { listId: string }) {
       ) : (
         <p className="mt-3 text-[13px] text-muted">초대할 수 있는 사람이 없습니다. 서로 팔로우하는 사이여야 해요.</p>
       )}
-      <p className="mt-2 text-[12px] text-muted">수익 배분 기본값은 주인 100%입니다(나중에 수익화 기능에 쓰입니다).</p>
+      {monetize && (
+        <p className="mt-2 text-[12px] text-muted">
+          수익 배분은 초대한 사람(주인)이 정하고, 편집자는 자기 몫을 볼 수 있어요. 기본값은 주인 100%이며, 바꾸면 편집자에게 알림이 가요.
+        </p>
+      )}
+    </section>
+  );
+}
+
+// 공동 편집자에게: 수익화가 켜진 리스트면 내 몫(주인이 바꾸면 바로 반영)
+export function MyShare({ listId }: { listId: string }) {
+  const supabase = useMemo(() => createClient(), []);
+  const { me } = useShell();
+  const [share, setShare] = useState<number | null>(null);
+  useEffect(() => {
+    if (!me) return;
+    supabase
+      .from("list_editors")
+      .select("revenue_share_pct, list:lists(monetize)")
+      .eq("list_id", listId)
+      .eq("user_id", me.id)
+      .maybeSingle()
+      .then(({ data }) => {
+        const d = data as unknown as { revenue_share_pct: number; list: { monetize: boolean } | null } | null;
+        setShare(d?.list?.monetize ? d.revenue_share_pct : null);
+      });
+  }, [supabase, me, listId]);
+  if (share === null) return null;
+  return (
+    <p className="mt-10 rounded-xl bg-surface px-4 py-3 text-[14px] text-ink">
+      이 리스트에서 내 수익 배분: <b>{share}%</b>
+      <span className="mt-0.5 block text-[12px] text-muted">리스트 주인이 정하며, 바뀌면 알림으로 알려드려요.</span>
+    </p>
+  );
+}
+
+type Change = { id: number; action: "add" | "edit" | "remove" | "move"; item_title: string | null; created_at: string; actor: { display_name: string; handle: string } | null };
+const ACTION = { add: "추가", edit: "수정", remove: "삭제", move: "순서 변경" } as const;
+
+// 변경 기록(3.10): 누가 언제 무엇을
+export function ChangeLog({ listId }: { listId: string }) {
+  const supabase = useMemo(() => createClient(), []);
+  const [rows, setRows] = useState<Change[]>([]);
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (!open) return;
+    supabase
+      .from("list_changes")
+      .select("id, action, item_title, created_at, actor:profiles!list_changes_actor_id_fkey(display_name, handle)")
+      .eq("list_id", listId)
+      .order("created_at", { ascending: false })
+      .limit(50)
+      .then(({ data }) => setRows((data as unknown as Change[]) ?? []));
+  }, [supabase, listId, open]);
+  return (
+    <section className="mt-10">
+      <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} className="text-[15px] font-semibold text-ink">
+        변경 기록 {open ? "▴" : "▾"}
+      </button>
+      {open && (
+        rows.length === 0 ? (
+          <p className="mt-2 text-[13px] text-muted">아직 기록이 없어요.</p>
+        ) : (
+          <ul className="mt-2 grid gap-1.5 text-[13px]">
+            {rows.map((c) => (
+              <li key={c.id} className="flex gap-2">
+                <span className="shrink-0 text-muted">{new Date(c.created_at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
+                <span className="min-w-0 text-ink/85">
+                  <b>{c.actor?.display_name || c.actor?.handle || "알 수 없음"}</b> {ACTION[c.action]}
+                  {c.item_title && ` · ${c.item_title}`}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )
+      )}
     </section>
   );
 }

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { createClient } from "@/lib/supabase/client";
 import { LogoMark } from "./Logo";
 import { useConsent } from "./Consent";
 import { useShell } from "./shell/context";
@@ -16,15 +17,52 @@ const HOUSE = [
   { title: "받은 사람은 로그인 없이", body: "링크를 열면 바로 지도. 길찾기는 구글·네이버·카카오로.", cta: "예시 보기", href: "/demo" },
 ];
 
-export function AdSlot({ slot, variant = 0 }: { slot: string; variant?: number }) {
+// 리스트 화면의 광고 자리가 화면에 절반 이상 1초 넘게 보이면 '노출'로 센다(리스트별·하루 단위).
+// 나중에 광고 수익을 큐레이터와 나눌 때 근거가 된다. 주인 본인의 열람은 DB에서 뺀다.
+function useAdView(listId: string | undefined, slot: string) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !listId || !("IntersectionObserver" in window)) return;
+    let timer: number | undefined;
+    let done = false;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (done) return;
+        if (e.isIntersecting && e.intersectionRatio >= 0.5) {
+          timer = window.setTimeout(() => {
+            done = true;
+            io.disconnect();
+            createClient().rpc("record_ad_view", { p_list: listId, p_slot: slot }).then(() => {});
+          }, 1000);
+        } else window.clearTimeout(timer);
+      },
+      { threshold: [0, 0.5, 1] },
+    );
+    io.observe(el);
+    return () => {
+      window.clearTimeout(timer);
+      io.disconnect();
+    };
+  }, [listId, slot]);
+  return ref;
+}
+
+export function AdSlot({ slot, variant = 0, listId }: { slot: string; variant?: number; listId?: string }) {
   const consent = useConsent();
   const { me } = useShell();
-  if (ADSENSE_CLIENT && consent) return <AdSenseUnit slot={slot} personalized={consent === "all"} />;
+  const viewRef = useAdView(listId, slot);
+  if (ADSENSE_CLIENT && consent)
+    return (
+      <div ref={viewRef}>
+        <AdSenseUnit slot={slot} personalized={consent === "all"} />
+      </div>
+    );
   const base = HOUSE[variant % HOUSE.length];
   // 로그인한 사람에게 '내 지도 만들기'는 내 리스트로
   const h = base.href.startsWith("/login") && me ? { ...base, cta: "내 리스트로", href: `/@${me.handle}` } : base;
   return (
-    <aside aria-label="PinWith 소개" className="mx-5 my-3 flex items-center gap-3 rounded-xl border border-rule bg-[#fff7fb] p-3.5">
+    <aside ref={viewRef} aria-label="PinWith 소개" className="mx-5 my-3 flex items-center gap-3 rounded-xl border border-rule bg-[#fff7fb] p-3.5">
       <LogoMark size={36} />
       <div className="min-w-0 flex-1">
         <p className="text-[14px] font-semibold text-ink">{h.title}</p>

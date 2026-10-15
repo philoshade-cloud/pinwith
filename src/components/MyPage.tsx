@@ -149,6 +149,7 @@ export function MyPage() {
               내 리스트 보기
             </Link>
           )}
+          <Link href="/support" className="btn-quiet justify-center">문의·신고하기</Link>
           <SignOutButton className="btn-quiet justify-center" />
         </div>
 

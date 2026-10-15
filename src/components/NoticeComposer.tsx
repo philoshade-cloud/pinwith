@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { ago } from "@/lib/social";
+import { Panel, PanelLoading } from "./shell/Panel";
 import { useShell } from "./shell/context";
 
 type Post = { id: string; body: string; created_at: string; author_id: string };
@@ -48,8 +50,8 @@ export function NoticeComposer({ listId }: { listId: string }) {
   }
 
   return (
-    <section className="mt-10" aria-labelledby="notice-h">
-      <h2 id="notice-h" className="text-[15px] font-semibold text-ink">공지</h2>
+    <section aria-labelledby="notice-h">
+      <h2 id="notice-h" className="text-[15px] font-semibold text-ink">새 공지</h2>
       <p className="mt-1 text-[13px] text-muted">리스트 맨 위에 보이고, 소식 알림을 켠 팔로워에게 알림이 갑니다. 예: “○○집 폐업해서 뺐어요”</p>
       <form onSubmit={post} className="mt-3 grid gap-2">
         <textarea value={text} onChange={(e) => setText(e.target.value)} rows={2} maxLength={4000} className="field" placeholder="새 공지" aria-label="새 공지" />
@@ -69,5 +71,39 @@ export function NoticeComposer({ listId }: { listId: string }) {
         </ul>
       )}
     </section>
+  );
+}
+
+// /me/lists/[id]/notice — 내 리스트에서 '공지'를 눌렀을 때
+export function NoticePanel({ listId }: { listId: string }) {
+  const supabase = useMemo(() => createClient(), []);
+  const { me } = useShell();
+  const [list, setList] = useState<{ title: string; slug: string; owner: { handle: string } | null } | null | undefined>(undefined);
+  useEffect(() => {
+    supabase
+      .from("lists")
+      .select("title, slug, owner:profiles!lists_owner_id_fkey(handle)")
+      .eq("id", listId)
+      .maybeSingle()
+      .then(({ data }) => setList((data as unknown as typeof list) ?? null));
+  }, [supabase, listId]);
+  if (list === undefined || me === undefined) return <PanelLoading />;
+  if (!list || !me) {
+    return (
+      <Panel title="공지">
+        <p className="p-5 text-[15px] text-muted">리스트를 찾을 수 없습니다.</p>
+      </Panel>
+    );
+  }
+  return (
+    <Panel title={`공지 · ${list.title}`}>
+      <div className="px-5 pb-10 pt-4">
+        <nav className="mb-5 flex gap-2">
+          <Link href={`/@${list.owner?.handle}/${list.slug}`} className="btn-quiet">리스트 보기</Link>
+          <Link href={`/me/lists/${listId}`} className="btn-quiet">편집</Link>
+        </nav>
+        <NoticeComposer listId={listId} />
+      </div>
+    </Panel>
   );
 }

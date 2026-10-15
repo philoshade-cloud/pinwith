@@ -7,8 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { shortLink } from "@/lib/share";
 import type { ListItem, ListKind, Section, Visibility } from "@/lib/types";
 import { Panel, PanelLoading } from "./shell/Panel";
-import { EditorsManager } from "./CoEdit";
-import { NoticeComposer } from "./NoticeComposer";
+import { ChangeLog, EditorsManager, MyShare } from "./CoEdit";
 import { useMapScene, useShell, type Scene } from "./shell/context";
 
 type Meta = {
@@ -59,6 +58,7 @@ export function ListEditor({ listId }: { listId: string }) {
   const [handle, setHandle] = useState("");
   const [isOwner, setIsOwner] = useState(false);
   const [ownerId, setOwnerId] = useState("");
+  const [monetize, setMonetize] = useState(false);
   const [meta, setMeta] = useState<Meta | null>(null);
   const [savedMeta, setSavedMeta] = useState<Meta | null>(null);
   const [metaMsg, setMetaMsg] = useState<string | null>(null);
@@ -78,7 +78,7 @@ export function ListEditor({ listId }: { listId: string }) {
       const { data } = await supabase
         .from("lists")
         .select(
-          "id, owner_id, slug, title, description, visibility, kind, themes," +
+          "id, owner_id, slug, title, description, visibility, kind, themes, monetize," +
             " owner:profiles!lists_owner_id_fkey(handle)," +
             " sections(id, name, position)," +
             " list_items(id, place_id, custom_title, memo, section_id, position, added_by, places(lat, lng)," +
@@ -90,7 +90,7 @@ export function ListEditor({ listId }: { listId: string }) {
 
       const row = data as unknown as {
         owner_id: string; slug: string; title: string; description: string;
-        visibility: Visibility; kind: ListKind; themes: string[];
+        visibility: Visibility; kind: ListKind; themes: string[]; monetize: boolean;
         owner: { handle: string } | null;
         sections: Section[]; list_items: ItemRow[];
       };
@@ -118,6 +118,7 @@ export function ListEditor({ listId }: { listId: string }) {
       };
       setIsOwner(owner);
       setOwnerId(row.owner_id);
+      setMonetize(row.monetize);
       setHandle(row.owner?.handle ?? "");
       setMeta(m);
       setSavedMeta(m);
@@ -174,6 +175,16 @@ export function ListEditor({ listId }: { listId: string }) {
     setMeta(next);
     setSavedMeta(next);
     setMetaMsg("저장했습니다.");
+  }
+
+  // '이 리스트로 수익화할 것이다': 켜야 공동 편집자별 수익 배분을 정하고 보여준다
+  async function toggleMonetize(on: boolean) {
+    setMonetize(on);
+    const { error } = await supabase.from("lists").update({ monetize: on }).eq("id", listId);
+    if (error) {
+      setMonetize(!on);
+      flash("저장하지 못했습니다.");
+    }
   }
 
   async function setKind(kind: ListKind) {
@@ -324,6 +335,7 @@ export function ListEditor({ listId }: { listId: string }) {
       <div className="px-5 pb-10 pt-4">
         <nav className="flex items-center gap-2">
           <Link href={viewHref} className="btn-quiet">리스트 보기</Link>
+          <Link href={`/me/lists/${listId}/notice`} className="btn-quiet">공지</Link>
           <Link href="/me/stats" className="btn-quiet">통계</Link>
           <button type="button" onClick={copyLink} className="btn-quiet">링크 복사</button>
         </nav>
@@ -514,8 +526,25 @@ export function ListEditor({ listId }: { listId: string }) {
           </ol>
         </section>
 
-        <NoticeComposer listId={listId} />
-        {isOwner && <EditorsManager listId={listId} />}
+        {isOwner && (
+          <label className="mt-10 flex cursor-pointer items-start gap-3 rounded-xl border border-rule p-3">
+            <input
+              type="checkbox"
+              checked={monetize}
+              onChange={(e) => toggleMonetize(e.target.checked)}
+              className="mt-0.5 h-5 w-5 shrink-0 accent-[var(--color-pin)]"
+            />
+            <span>
+              <span className="block text-[14px] font-semibold text-ink">이 리스트로 수익화할 것이다</span>
+              <span className="mt-0.5 block text-[13px] text-muted">
+                켜면 공동 편집자별 수익 배분을 정할 수 있고, 편집자도 자기 몫을 볼 수 있어요. 끄면 배분은 보이지 않아요.
+              </span>
+            </span>
+          </label>
+        )}
+        {isOwner && <EditorsManager listId={listId} monetize={monetize} />}
+        {!isOwner && <MyShare listId={listId} />}
+        <ChangeLog listId={listId} />
 
         {isOwner && (
           <section className="mt-16 border-t border-rule pt-6">

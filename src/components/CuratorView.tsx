@@ -9,6 +9,7 @@ import type { Curator, ListItem, ListSummary } from "@/lib/types";
 import { FollowButton } from "./FollowButton";
 import { CoEditedLists } from "./CoEdit";
 import { DmButton, NotifyToggle } from "./SocialBits";
+import { ProfileQr } from "./ProfileQr";
 import { Avatar } from "./ListExplorer";
 import { Panel } from "./shell/Panel";
 import { useMapScene, useShell, type Scene } from "./shell/context";
@@ -117,6 +118,7 @@ export function CuratorView({
             <FollowButton curatorId={curator.id} handle={curator.handle} />
           )}
           <button type="button" onClick={share} className="btn-quiet">공유</button>
+          <ProfileQr url={shareUrl ?? `${typeof window === "undefined" ? "" : window.location.origin}/@${curator.handle}`} name={curator.displayName} />
           {!isOwner && <DmButton userId={curator.id} />}
           {isOwner && <Link href="/me/stats" className="btn-quiet">통계</Link>}
           {isOwner && <Link href="/me" className="btn-quiet">프로필 편집</Link>}
@@ -155,6 +157,7 @@ export function CuratorView({
                     </span>
                   </Link>
                   {isOwner && <Link href={`/me/lists/${l.id}`} className="btn-quiet shrink-0 !px-3">편집</Link>}
+                  {isOwner && <Link href={`/me/lists/${l.id}/notice`} className="btn-quiet shrink-0 !px-3">공지</Link>}
                   <Link href={`/@${curator.handle}/${l.slug}`} aria-hidden tabIndex={-1} className="shrink-0 text-[20px] text-muted">›</Link>
                 </div>
               </li>
