@@ -44,6 +44,7 @@ function today() {
 export function ReserveButton({ placeId, itemId, onOpen, className = "btn-primary" }: { placeId: string; itemId?: string; onOpen?: () => void; className?: string }) {
   const [offer, setOffer] = useState<OfferInfo | null>(null);
   useEffect(() => {
+    if (!placeId) return;
     let alive = true;
     createClient()
       .rpc("reservation_offer", { p_place: placeId })
@@ -52,7 +53,7 @@ export function ReserveButton({ placeId, itemId, onOpen, className = "btn-primar
       alive = false;
     };
   }, [placeId]);
-  if (!offer) return null;
+  if (!offer || !placeId) return null;
   return (
     // 누르면 장소 카드·미리보기를 닫아 예약 화면을 가리지 않게 한다
     <Link href={`/reserve/${encodeURIComponent(placeId)}${itemId ? `?item=${itemId}` : ""}`} onClick={onOpen} className={className}>
