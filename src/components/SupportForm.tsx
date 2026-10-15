@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Panel, PanelLoading } from "./shell/Panel";
 
@@ -12,32 +13,32 @@ const CATEGORIES = [
   { id: "other", label: "기타" },
 ] as const;
 
-const noop = () => () => {};
-
 // 고객센터: 문의와 신고를 운영자에게 보낸다
 export function SupportForm() {
-  // 주소창 값(?type=…)을 쓰므로 브라우저에서만 그린다
-  const ready = useSyncExternalStore(noop, () => true, () => false);
-  return ready ? <SupportFormInner /> : <PanelLoading />;
+  // 주소의 ?type=…&list=… 를 읽으므로 Suspense 안에서 그린다.
+  // (화면 안에서 이동해 오면 window.location은 아직 이전 주소라서 useSearchParams로 읽어야 한다)
+  return (
+    <Suspense fallback={<PanelLoading />}>
+      <SupportFormFromUrl />
+    </Suspense>
+  );
 }
 
-function SupportFormInner() {
+function SupportFormFromUrl() {
+  const q = useSearchParams();
+  // 주소가 바뀌면(다른 리스트 신고) 처음부터 다시 그린다
+  return <SupportFormInner key={q.toString()} type={q.get("type")} listId={q.get("list") ?? ""} from={q.get("from")} />;
+}
+
+function SupportFormInner({ type, listId, from: fromParam }: { type: string | null; listId: string; from: string | null }) {
   const supabase = useMemo(() => createClient(), []);
-  // 주소의 ?type=report&from=… 로 신고 대상과 종류를 미리 채운다(처음 한 번만 읽음)
-  const [category, setCategory] = useState<string>(() =>
-    typeof window === "undefined" ? "question" : new URLSearchParams(window.location.search).get("type") ?? "question",
-  );
+  const [category, setCategory] = useState<string>(type && CATEGORIES.some((c) => c.id === type) ? type : "question");
   const [email, setEmail] = useState("");
   const [body, setBody] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [from] = useState(() =>
-    typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("from") ?? document.referrer,
-  );
+  const from = fromParam ?? "";
 
   // 리스트 화면의 '이 리스트 신고'로 들어오면 어떤 리스트인지 함께 보낸다
-  const [listId] = useState(() =>
-    typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("list") ?? "",
-  );
   const [listTitle, setListTitle] = useState("");
   useEffect(() => {
     if (!listId) return;
