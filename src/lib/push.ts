@@ -26,7 +26,7 @@ const TITLE: Record<string, string> = {
   follow: "새 팔로워", like: "좋아요", comment: "새 댓글", reply: "내 댓글에 답글", invite: "공동 편집 초대", invite_accepted: "초대 수락",
   share_changed: "수익 배분 변경", notice: "새 공지", resolved: "메시지 반영", reservation: "예약 문의 답변", reservation_new: "새 예약 문의",
   reservation_msg: "예약 문의 메시지", biz_block: "리스트에서 빠짐", biz_alert: "연결된 가게 확인 필요", biz_review: "가게 인증", topup_paid: "광고비 충전",
-  payout: "지급",
+  payout: "지급", dispute: "이의 제기",
 };
 
 // 알림 한 건을 휴대폰 알림 문구와 눌렀을 때 열 주소로 바꾼다
@@ -38,6 +38,7 @@ export function pushPayload(n: N) {
         : n.kind === "biz_alert" ? "/biz/curator?tab=stores"
           : n.kind === "biz_review" || n.kind === "topup_paid" ? "/biz/place"
             : n.kind === "payout" ? "/biz/curator?tab=payout"
+              : n.kind === "dispute" ? (n.actor ? "/admin?tab=disputes" : "/notifications")
               : n.kind === "follow" && n.actor ? `/@${n.actor.handle}`
                 : n.list?.owner ? `/@${n.list.owner.handle}/${n.list.slug}` : "/notifications";
   return {

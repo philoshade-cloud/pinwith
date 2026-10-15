@@ -7,7 +7,7 @@ import { PAY_COUNTRIES } from "@/lib/payments";
 import { DAYS, ReservationThread } from "../Reservation";
 import { PushToggle } from "../PushToggle";
 import { PlaceSearchBox, type FoundPlace } from "../PlaceSearch";
-import { ConfirmButton, count, DetailHeader, money, Msg, MODEL, Period, Stat, Tabs, useAuthed, useConsoleNav } from "./ui";
+import { ConfirmButton, count, DetailHeader, DisputeButton, money, Msg, MODEL, Period, Stat, Tabs, useAuthed, useConsoleNav } from "./ui";
 
 type Business = {
   id: string; place_id: string; place_name: string; place_address: string | null; business_name: string; reg_number: string | null;
@@ -370,7 +370,7 @@ function Approved({ b, reloadBiz }: { b: Business; reloadBiz: () => void }) {
 }
 
 // ── 대시보드 상자 상세 ─────────────────────────
-type Charge = { at: string; model: string; amount: number; list_title: string | null; handle: string | null };
+type Charge = { id: number; at: string; model: string; amount: number; list_title: string | null; handle: string | null; disputed: boolean };
 type BizList = { list_id: string; title: string; slug: string; visibility: string; curator_id: string; handle: string; name: string; paid_only: boolean; models: string[]; events_30d: number };
 
 function BizDetail({ b, dash, kind, onBack, reload }: { b: Business; dash: Dash; kind: string; onBack: () => void; reload: () => void }) {
@@ -448,15 +448,18 @@ function BizDetail({ b, dash, kind, onBack, reload }: { b: Business; dash: Dash;
             ) : (
               <table className="mt-2 w-full text-left text-[14px]">
                 <thead className="border-b border-rule text-[12px] text-muted">
-                  <tr><th className="py-2">때</th><th>종류</th><th>리스트 · 큐레이터</th><th className="text-right">금액</th></tr>
+                  <tr><th className="py-2">때</th><th>종류</th><th>리스트 · 큐레이터</th><th className="text-right">금액</th><th></th></tr>
                 </thead>
                 <tbody>
                   {charges.map((c, i) => (
                     <tr key={i} className="border-b border-rule">
                       <td className="py-1.5 tabular-nums text-[13px]">{new Date(c.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "numeric", minute: "2-digit" })}</td>
-                      <td className="text-[13px]">{MODEL[c.model]?.label.replace(/ 1(회|건)당/, "") ?? c.model}{Number(c.amount) < 0 && " (되돌림)"}</td>
+                      <td className="text-[13px]">{c.model === "adjustment" ? "운영자 조정(이의 제기)" : (MODEL[c.model]?.label.replace(/ 1(회|건)당/, "") ?? c.model)}{c.model !== "adjustment" && Number(c.amount) < 0 && " (되돌림)"}</td>
                       <td className="text-[13px]">{c.list_title ?? "-"}{c.handle && <span className="text-muted"> · @{c.handle}</span>}</td>
                       <td className={`text-right tabular-nums ${Number(c.amount) < 0 ? "text-teal" : ""}`}>{Number(c.amount) < 0 ? "+" : "−"}{money(Math.abs(Number(c.amount)), dash.currency)}</td>
+                      <td className="pl-2 text-right">
+                        {c.disputed ? <span className="text-[12px] text-muted">이의 처리 중</span> : Number(c.amount) > 0 && <DisputeButton businessId={b.id} chargeId={c.id} onDone={setMsg} />}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

@@ -168,3 +168,23 @@ export function ConfirmButton({
     </span>
   );
 }
+
+// 이의 제기: 과금·되돌림·노쇼 기록이 이상할 때 운영자에게 판단을 맡긴다
+export function DisputeButton({ businessId, chargeId, reservationId, label = "이의 제기", onDone }: {
+  businessId: string; chargeId?: number; reservationId?: string; label?: string; onDone?: (msg: string) => void;
+}) {
+  const supabase = useMemo(() => createClient(), []);
+  return (
+    <ConfirmButton
+      label={label}
+      className="text-[12px] text-muted underline"
+      question="운영자에게 이의를 낼까요? 어떤 점이 이상한지 적어 주세요(5자 이상). 운영자가 양쪽 기록을 보고 판단해 결과를 알려 드려요."
+      withNote="예: 손님이 실제로 방문했다고 해요 / 같은 손님이 하루에 여러 번 눌렀어요"
+      confirmLabel="이의 보내기"
+      onConfirm={async (note) => {
+        const { error } = await supabase.rpc("file_dispute", { p_business: businessId, p_charge: chargeId ?? null, p_reservation: reservationId ?? null, p_reason: note });
+        onDone?.(error ? (error.message.includes("short") ? "이유를 5자 이상 적어 주세요." : error.message.includes("too many") ? "처리 중인 이의가 너무 많아요." : "보내지 못했어요.") : "이의를 보냈어요. 운영자가 확인하고 알려 드려요.");
+      }}
+    />
+  );
+}

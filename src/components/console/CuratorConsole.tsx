@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { useMonetization } from "@/lib/monetization";
-import { ConfirmButton, count, DetailHeader, money, Msg, MODEL, Period, Stat, Tabs, useAuthed, useConsoleNav } from "./ui";
+import { ConfirmButton, count, DetailHeader, DisputeButton, money, Msg, MODEL, Period, Stat, Tabs, useAuthed, useConsoleNav } from "./ui";
 
 type Tab = "display" | "market" | "mine" | "stores" | "payout";
 const TABS: { id: Tab; label: string }[] = [
@@ -96,7 +96,7 @@ export function CuratorConsole() {
 }
 
 // ── 대시보드 상자 상세 ─────────────────────────
-type MyCharge = { at: string; place_name: string; list_title: string | null; model: string; amount: number };
+type MyCharge = { id: number; business_id: string; at: string; place_name: string; list_title: string | null; model: string; amount: number; disputed: boolean };
 type PayoutRow = { month: string; amount: number; currency: string; views: number };
 
 function CuratorDetail({ dash, kind, onBack }: { dash: Dash; kind: string; onBack: () => void }) {
@@ -122,6 +122,7 @@ function CuratorDetail({ dash, kind, onBack }: { dash: Dash; kind: string; onBac
     load();
   }, [load]);
 
+  const [note, setNote] = useState("");
   const titles: Record<string, string> = {
     available: "받을 수 있는 금액", display: "이번 달 광고 예상", traffic: "이번 달 길찾기·방문 제휴", reservation: "이번 달 예약 제휴", paid: "지급 받은 금액",
   };
@@ -131,15 +132,18 @@ function CuratorDetail({ dash, kind, onBack }: { dash: Dash; kind: string; onBac
     ) : (
       <table className="mt-2 w-full text-left text-[14px]">
         <thead className="border-b border-rule text-[12px] text-muted">
-          <tr><th className="py-2">때</th><th>가게 · 리스트</th><th>종류</th><th className="text-right">내 몫</th></tr>
+          <tr><th className="py-2">때</th><th>가게 · 리스트</th><th>종류</th><th className="text-right">내 몫</th><th></th></tr>
         </thead>
         <tbody>
           {rows.map((c, i) => (
             <tr key={i} className="border-b border-rule">
               <td className="py-1.5 text-[13px] tabular-nums">{new Date(c.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "numeric", minute: "2-digit" })}</td>
               <td className="text-[13px]"><b>{c.place_name}</b>{c.list_title && <span className="text-muted"> · {c.list_title}</span>}</td>
-              <td className="text-[13px]">{MODEL[c.model]?.label.replace(/ 1(회|건)당/, "")}{Number(c.amount) < 0 && " (노쇼·취소로 되돌림)"}</td>
+              <td className="text-[13px]">{c.model === "adjustment" ? "운영자 조정(이의 제기)" : MODEL[c.model]?.label.replace(/ 1(회|건)당/, "")}{c.model !== "adjustment" && Number(c.amount) < 0 && " (노쇼·취소로 되돌림)"}</td>
               <td className={`text-right tabular-nums ${Number(c.amount) < 0 ? "text-pin" : ""}`}>{money(c.amount, dash.currency)}</td>
+              <td className="pl-2 text-right">
+                {c.disputed ? <span className="text-[12px] text-muted">이의 처리 중</span> : <DisputeButton businessId={c.business_id} chargeId={c.id} onDone={setNote} />}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -149,6 +153,7 @@ function CuratorDetail({ dash, kind, onBack }: { dash: Dash; kind: string; onBac
   return (
     <div className="grid gap-4">
       <DetailHeader title={titles[kind] ?? "자세히"} onBack={onBack} />
+      <Msg text={note} />
       {kind === "display" && <Display dash={dash} reload={() => {}} />}
       {(kind === "traffic" || kind === "reservation") && (
         <section>
@@ -563,6 +568,9 @@ function Stores({ currency }: { currency: string }) {
               </p>
               <p className="text-[13px] text-muted">길찾기·방문 과금 {count(s.clicks)}회 · 90일 내 몫 {money(s.earned, currency)}</p>
               {s.alerted_at && <p className="text-[12px] text-pin">{new Date(s.alerted_at).toLocaleDateString("ko-KR")}에 이상 패턴 알림을 보냈어요.</p>}
+              <div className="mt-2">
+                <DisputeButton businessId={s.business_id} label="이 가게 기록에 이의 제기" onDone={setMsg} />
+              </div>
               <div className="mt-3">
                 <ConfirmButton
                   label="이 가게 연결 끊기"

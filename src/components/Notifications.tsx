@@ -12,7 +12,7 @@ import { useShell } from "./shell/context";
 
 type N = {
   id: string;
-  kind: "follow" | "like" | "comment" | "reply" | "invite" | "invite_accepted" | "share_changed" | "notice" | "resolved" | "reservation" | "reservation_new" | "reservation_msg" | "biz_block" | "biz_alert" | "biz_review" | "topup_paid" | "payout";
+  kind: "follow" | "like" | "comment" | "reply" | "invite" | "invite_accepted" | "share_changed" | "notice" | "resolved" | "reservation" | "reservation_new" | "reservation_msg" | "biz_block" | "biz_alert" | "biz_review" | "topup_paid" | "payout" | "dispute";
   body: string | null;
   read_at: string | null;
   created_at: string;
@@ -39,6 +39,7 @@ const TEXT: Record<N["kind"], string> = {
   biz_review: "",
   topup_paid: "",
   payout: "",
+  dispute: "님이 이의를 제기했어요",
 };
 
 // 알림: 팔로우, 좋아요, 댓글, 공동 편집 초대, 공지. 열면 모두 읽음으로 바뀐다.
@@ -134,7 +135,7 @@ export function Notifications() {
                         {TEXT[n.kind]}
                       </>
                     ) : (
-                      <span className="font-semibold">{n.kind === "biz_alert" ? "📊 연결된 가게 확인 필요" : n.kind === "biz_block" ? "🚫 가게 요청으로 리스트에서 빠짐" : n.kind === "biz_review" ? "🏪 가게 인증" : n.kind === "topup_paid" ? "💳 광고비 충전" : n.kind === "payout" ? "💸 지급" : "PinWith 알림"}</span>
+                      <span className="font-semibold">{n.kind === "biz_alert" ? "📊 연결된 가게 확인 필요" : n.kind === "biz_block" ? "🚫 가게 요청으로 리스트에서 빠짐" : n.kind === "biz_review" ? "🏪 가게 인증" : n.kind === "topup_paid" ? "💳 광고비 충전" : n.kind === "payout" ? "💸 지급" : n.kind === "dispute" ? "⚖️ 이의 제기 결과" : "PinWith 알림"}</span>
                     )}
                     {n.list && listHref && (
                       <>
@@ -151,6 +152,7 @@ export function Notifications() {
                     {n.kind === "biz_alert" && <Link href="/biz/curator?tab=stores" className="btn-primary !px-2.5 !py-1 !text-[12px]">연결된 가게 보기</Link>}
                     {(n.kind === "biz_review" || n.kind === "topup_paid") && <Link href="/biz/place" className="btn-primary !px-2.5 !py-1 !text-[12px]">가게 콘솔</Link>}
                     {n.kind === "payout" && <Link href="/biz/curator?tab=payout" className="btn-primary !px-2.5 !py-1 !text-[12px]">지급 보기</Link>}
+                    {n.kind === "dispute" && n.actor && <Link href="/admin?tab=disputes" className="btn-primary !px-2.5 !py-1 !text-[12px]">운영자 콘솔</Link>}
                     {n.kind === "follow" && n.actor && !followingBack.has(n.actor.id) && (
                       <button type="button" onClick={() => followBack(n.actor!.id)} className="btn-primary !px-2.5 !py-1 !text-[12px]">맞팔로우</button>
                     )}

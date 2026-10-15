@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { money } from "./console/ui";
+import { ConfirmButton, money } from "./console/ui";
 
 // ── 가게 인증: 신청 확인 → 승인·반려·정지 ─────────────────────────
 type Biz = {
@@ -217,6 +217,235 @@ export function PayoutRequests() {
                 <p className="flex gap-2">
                   <button type="button" onClick={() => decide(r, "paid")} className="btn-primary !px-3 !py-1 !text-[13px]">지급함</button>
                   <button type="button" onClick={() => decide(r, "rejected")} className="btn-quiet !px-3 !py-1 !text-[13px]">반려</button>
+                </p>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
+
+// ── 예약 품질: 노쇼·가게 취소 비율이 주변보다 높은 가게, 조치 ─────────────────────────
+type Quality = {
+  business_id: string; place_name: string; business: string; status: string; owner: string; reservations_enabled: boolean; admin_note: string | null;
+  confirmed: number; bad: number; no_show: number; cancel_business: number; rate: number | null; peer: number; flagged: boolean; alerts: number;
+  reservation_offer_active: boolean; curators: number; open_disputes: number;
+};
+
+export function StoreQuality() {
+  const supabase = useMemo(() => createClient(), []);
+  const [rows, setRows] = useState<Quality[] | null>(null);
+  const [onlyFlagged, setOnlyFlagged] = useState(false);
+  const [msg, setMsg] = useState("");
+  const load = useCallback(async () => {
+    const { data } = await supabase.rpc("admin_store_quality");
+    setRows((data as Quality[]) ?? []);
+  }, [supabase]);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    load();
+  }, [load]);
+
+  async function run(label: string, p: PromiseLike<{ error: unknown }>) {
+    const { error } = await p;
+    setMsg(error ? `${label}: 실패했어요.` : `${label}: 처리했어요.`);
+    load();
+  }
+
+  if (!rows) return <p className="text-muted">불러오는 중…</p>;
+  const pct = (v: number | null) => (v == null ? "–" : `${Math.round(v * 100)}%`);
+  const shown = onlyFlagged ? rows.filter((r) => r.flagged) : rows;
+  return (
+    <section className="grid gap-3">
+      <p className="text-[13px] text-muted">
+        최근 90일 확정 예약 중 노쇼·가게 취소 비율이에요. 확정 5건 이상이면서 반경 3km 평균의 2배 또는 평균 +20%p를 넘으면 ‘이상’으로 표시하고, 연결된 큐레이터에게는 이미 알림이
+        가요. 필요하면 예약 제휴를 끄거나(큐레이터 보상 중단), 예약 기능을 끄거나, 가게를 정지하세요. 정지하면 가게에 알림이 가요.
+      </p>
+      <label className="flex items-center gap-2 text-[14px]">
+        <input type="checkbox" checked={onlyFlagged} onChange={(e) => setOnlyFlagged(e.target.checked)} /> 이상 표시된 가게만
+      </label>
+      {msg && <p role="status" className="text-[14px] text-teal">{msg}</p>}
+      {shown.length === 0 && <p className="text-[14px] text-muted">없어요.</p>}
+      <ul className="grid gap-3 lg:grid-cols-2">
+        {shown.map((r) => (
+          <li key={r.business_id} className={`rounded-xl border p-4 text-[14px] ${r.flagged ? "border-pin" : "border-rule"}`}>
+            <p className="flex flex-wrap items-center gap-2">
+              <b className="text-[16px]">{r.place_name}</b>
+              <span className="text-[12px] text-muted">@{r.owner}</span>
+              {r.flagged && <span className="rounded-full bg-pin px-2 py-0.5 text-[11px] text-white">이상</span>}
+              {r.status === "suspended" && <span className="rounded-full bg-ink px-2 py-0.5 text-[11px] text-white">정지됨</span>}
+              {r.open_disputes > 0 && <span className="rounded-full bg-surface px-2 py-0.5 text-[11px]">이의 제기 {r.open_disputes}</span>}
+            </p>
+            <p className="mt-1">
+              노쇼·가게 취소 <b className={r.flagged ? "text-pin" : ""}>{pct(r.rate)}</b>
+              <span className="text-muted"> ({r.bad}/{r.confirmed}건 · 노쇼 {r.no_show} · 가게 취소 {r.cancel_business}) · 주변 평균 {pct(r.peer)}</span>
+            </p>
+            <p className="text-[12px] text-muted">
+              큐레이터 알림 {r.alerts}번 · 연결 큐레이터 {r.curators}명 · 예약 기능 {r.reservations_enabled ? "켬" : "끔"} · 예약 제휴 {r.reservation_offer_active ? "켬" : "끔"}
+            </p>
+            <label className="mt-2 grid gap-1 text-[12px] font-semibold">
+              운영 메모
+              <input
+                defaultValue={r.admin_note ?? ""}
+                onBlur={(e) => e.target.value !== (r.admin_note ?? "") && run("메모", supabase.from("businesses").update({ admin_note: e.target.value || null }).eq("id", r.business_id))}
+                className="field !py-1 !text-[13px]"
+                placeholder="예: 10/20 사장님과 통화, 노쇼 기록 기준 안내함"
+              />
+            </label>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {r.reservation_offer_active && (
+                <ConfirmButton label="예약 제휴 끄기" question="이 가게의 ‘예약 확정’ 과금 모델을 끌까요? 큐레이터 보상이 멈춰요(예약 문의 자체는 계속)." confirmLabel="끄기"
+                  onConfirm={() => run("예약 제휴 끄기", supabase.from("biz_offers").update({ active: false }).eq("business_id", r.business_id).eq("model", "reservation"))} />
+              )}
+              {r.reservations_enabled && (
+                <ConfirmButton label="예약 기능 끄기" question="이 가게의 예약 문의 버튼을 끌까요?" confirmLabel="끄기"
+                  onConfirm={() => run("예약 기능 끄기", supabase.from("businesses").update({ reservations_enabled: false }).eq("id", r.business_id))} />
+              )}
+              {r.status === "approved" ? (
+                <ConfirmButton label="가게 정지" question="가게 계정을 정지할까요? 과금·예약·콘솔 사용이 멈추고 가게에 알림이 가요." withNote="정지 사유(가게에 보여요)" confirmLabel="정지"
+                  onConfirm={(note) => run("정지", supabase.from("businesses").update({ status: "suspended", review_note: note || "운영 정책 위반 확인" }).eq("id", r.business_id))} />
+              ) : (
+                <ConfirmButton label="정지 풀기" question="정지를 풀까요?" confirmLabel="풀기"
+                  onConfirm={() => run("정지 풀기", supabase.from("businesses").update({ status: "approved" }).eq("id", r.business_id))} />
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+// ── 차단 현황: 가게가 큐레이터를 차단한 기록(남용 확인, 풀기) ─────────────────────────
+type Block = { business_id: string; place_name: string; curator_id: string; handle: string; name: string; active: boolean; at: string; blocks_by_this_business: number; blocked_curator_total: number };
+
+export function Blocks() {
+  const supabase = useMemo(() => createClient(), []);
+  const [rows, setRows] = useState<Block[] | null>(null);
+  const [msg, setMsg] = useState("");
+  const load = useCallback(async () => {
+    const { data } = await supabase.rpc("admin_blocks");
+    setRows((data as Block[]) ?? []);
+  }, [supabase]);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    load();
+  }, [load]);
+  if (!rows) return <p className="text-muted">불러오는 중…</p>;
+  return (
+    <section className="grid gap-3">
+      <p className="text-[13px] text-muted">
+        가게가 큐레이터를 차단한 기록이에요. 한 가게가 여러 큐레이터를 차단하거나(나쁜 리뷰 막기 의심), 한 큐레이터가 여러 가게에서 차단되면(문제 큐레이터 의심) 확인해 보세요.
+      </p>
+      {msg && <p role="status" className="text-[14px] text-teal">{msg}</p>}
+      {rows.length === 0 && <p className="text-[14px] text-muted">없어요.</p>}
+      <ul className="divide-y divide-rule text-[14px]">
+        {rows.map((k) => (
+          <li key={`${k.business_id}-${k.curator_id}`} className="flex flex-wrap items-center gap-2 py-2">
+            <b>{k.place_name}</b> → <Link href={`/@${k.handle}`} className="text-teal">@{k.handle}</Link>
+            <span className="text-[12px] text-muted">
+              {new Date(k.at).toLocaleDateString("ko-KR")} · {k.active ? "차단 중" : "풀림"} · 이 가게의 차단 {k.blocks_by_this_business}건 · 이 큐레이터가 받은 차단 {k.blocked_curator_total}건
+            </span>
+            {(k.blocks_by_this_business >= 3 || k.blocked_curator_total >= 3) && <span className="rounded-full bg-pin px-2 py-0.5 text-[11px] text-white">확인 필요</span>}
+            {k.active && (
+              <span className="ml-auto">
+                <ConfirmButton label="운영자가 풀기" question="이 차단을 풀까요? 큐레이터 리스트에 가게가 다시 보이고 다시 담을 수 있어요." confirmLabel="풀기"
+                  onConfirm={async () => {
+                    const { error } = await supabase.from("biz_blocks").update({ active: false }).eq("business_id", k.business_id).eq("curator_id", k.curator_id);
+                    setMsg(error ? "풀지 못했어요." : `${k.place_name} → @${k.handle} 차단을 풀었어요.`);
+                    load();
+                  }} />
+              </span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+// ── 이의 제기(분쟁) 처리 ─────────────────────────
+type Dispute = {
+  id: string; filer_role: "curator" | "business"; filer: string | null; place_name: string; curator: string | null; reason: string;
+  status: string; resolution: string | null; adjustment: number | null; created_at: string; resolved_at: string | null;
+  charge: { model: string; amount: number; at: string } | null;
+  reservation: { status: string; visit_date: string; visit_time: string | null; party_size: number; cancelled_by: string | null; reply: string | null } | null;
+  store_rate: number | null; peer_rate: number;
+};
+
+export function Disputes() {
+  const supabase = useMemo(() => createClient(), []);
+  const [rows, setRows] = useState<Dispute[] | null>(null);
+  const [open, setOpen] = useState(true);
+  const [form, setForm] = useState<Record<string, { action: string; amount: string; note: string }>>({});
+  const [msg, setMsg] = useState("");
+  const load = useCallback(async () => {
+    const { data } = await supabase.rpc("admin_disputes", { p_open_only: open });
+    setRows((data as Dispute[]) ?? []);
+  }, [supabase, open]);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    load();
+  }, [load]);
+
+  async function resolve(d: Dispute) {
+    const f = form[d.id] ?? { action: "reject", amount: "", note: "" };
+    const { error } = await supabase.rpc("admin_resolve_dispute", { p_id: d.id, p_action: f.action, p_amount: Number(f.amount) || 0, p_note: f.note });
+    setMsg(error ? (error.message.includes("amount") ? "금액을 넣으세요." : "처리하지 못했어요.") : "처리했어요. 양쪽에 알림이 갔어요.");
+    load();
+  }
+
+  if (!rows) return <p className="text-muted">불러오는 중…</p>;
+  const pct = (v: number | null) => (v == null ? "–" : `${Math.round(v * 100)}%`);
+  return (
+    <section className="grid gap-3">
+      <p className="text-[13px] text-muted">
+        큐레이터나 가게가 과금·되돌림·노쇼 기록에 낸 이의예요. 가게 기록을 먼저 믿되, 예약 대화·가게의 노쇼 비율·양쪽 설명을 보고 판단하세요. ‘큐레이터에게 지급’은 가게
+        잔액에서 금액을 빼 수수료를 뗀 몫을 큐레이터에게, ‘가게에 환불’은 가게 잔액을 돌려주고 큐레이터 몫을 줄여요.
+      </p>
+      <label className="flex items-center gap-2 text-[14px]">
+        <input type="checkbox" checked={open} onChange={(e) => setOpen(e.target.checked)} /> 처리 안 한 것만
+      </label>
+      {msg && <p role="status" className="text-[14px] text-teal">{msg}</p>}
+      {rows.length === 0 && <p className="text-[14px] text-muted">없어요.</p>}
+      <ul className="grid gap-3">
+        {rows.map((d) => {
+          const f = form[d.id] ?? { action: "reject", amount: "", note: "" };
+          const set = (patch: Partial<typeof f>) => setForm({ ...form, [d.id]: { ...f, ...patch } });
+          return (
+            <li key={d.id} className="rounded-xl border border-rule p-4 text-[14px]">
+              <p className="flex flex-wrap items-center gap-2">
+                <b>{d.place_name}</b>
+                <span className="rounded-full bg-surface px-2 py-0.5 text-[12px]">{d.filer_role === "curator" ? "큐레이터" : "가게"}가 제기 · @{d.filer}</span>
+                {d.curator && <span className="text-[12px] text-muted">관련 큐레이터 @{d.curator}</span>}
+                <span className="ml-auto text-[12px] text-muted">{new Date(d.created_at).toLocaleString("ko-KR")}</span>
+              </p>
+              <p className="mt-2 whitespace-pre-wrap">{d.reason}</p>
+              <p className="mt-2 text-[12px] text-muted">
+                {d.charge && `과금: ${d.charge.model} ${d.charge.amount} (${new Date(d.charge.at).toLocaleDateString("ko-KR")}) · `}
+                {d.reservation && `예약: ${d.reservation.visit_date} ${d.reservation.visit_time ?? ""} ${d.reservation.party_size}명 · ${d.reservation.status}${d.reservation.cancelled_by ? `(${d.reservation.cancelled_by})` : ""} · `}
+                가게 노쇼·취소 비율 {pct(d.store_rate)} / 주변 {pct(d.peer_rate)}
+              </p>
+              {d.status === "open" ? (
+                <div className="mt-3 flex flex-wrap items-end gap-2">
+                  <select value={f.action} onChange={(e) => set({ action: e.target.value })} className="field !w-auto !py-1">
+                    <option value="reject">받아들이지 않음</option>
+                    <option value="pay_curator">큐레이터에게 지급</option>
+                    <option value="refund_business">가게에 환불</option>
+                  </select>
+                  {f.action !== "reject" && (
+                    <input value={f.amount} onChange={(e) => set({ amount: e.target.value })} inputMode="decimal" placeholder="금액" className="field !w-24 !py-1" />
+                  )}
+                  <input value={f.note} onChange={(e) => set({ note: e.target.value })} placeholder="결정 이유(양쪽에 보여요)" className="field min-w-[200px] flex-1 !py-1" />
+                  <button type="button" onClick={() => resolve(d)} className="btn-primary !px-3 !py-1 !text-[13px]">처리</button>
+                </div>
+              ) : (
+                <p className="mt-2 text-[13px]">
+                  <b>{d.status === "resolved" ? "처리함" : "받아들이지 않음"}</b>
+                  {d.adjustment != null && ` · 조정 ${d.adjustment}`}
+                  {d.resolution && ` · ${d.resolution}`}
                 </p>
               )}
             </li>

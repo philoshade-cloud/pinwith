@@ -3,14 +3,17 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { BizReview, PayoutRequests, Topups } from "./AdminCommerce";
+import { Blocks, BizReview, Disputes, PayoutRequests, StoreQuality, Topups } from "./AdminCommerce";
 
-type Tab = "payout" | "curators" | "settings" | "support" | "biz" | "topups" | "requests";
+type Tab = "payout" | "curators" | "settings" | "support" | "biz" | "topups" | "requests" | "disputes" | "quality" | "blocks";
 const TABS: { id: Tab; label: string }[] = [
   { id: "payout", label: "정산" },
   { id: "requests", label: "지급 요청" },
   { id: "biz", label: "가게 인증" },
   { id: "topups", label: "광고비 충전" },
+  { id: "disputes", label: "이의 제기" },
+  { id: "quality", label: "예약 품질" },
+  { id: "blocks", label: "차단 현황" },
   { id: "curators", label: "큐레이터·분배율" },
   { id: "settings", label: "수익화 기준" },
   { id: "support", label: "문의·신고" },
@@ -23,7 +26,10 @@ const num = (v: number | string | null | undefined) => Number(v ?? 0).toLocaleSt
 export function AdminConsole() {
   const supabase = useMemo(() => createClient(), []);
   const [allowed, setAllowed] = useState<boolean | null>(null);
-  const [tab, setTab] = useState<Tab>("payout");
+  // 알림에서 ?tab=disputes 처럼 바로 들어올 수 있게
+  const [tab, setTab] = useState<Tab>(() =>
+    typeof window === "undefined" ? "payout" : ((new URLSearchParams(window.location.search).get("tab") as Tab | null) ?? "payout"),
+  );
 
   useEffect(() => {
     supabase.rpc("my_monetization").then(({ data }) => setAllowed(!!(data as { is_admin?: boolean } | null)?.is_admin));
@@ -60,6 +66,9 @@ export function AdminConsole() {
         {tab === "biz" && <BizReview />}
         {tab === "topups" && <Topups />}
         {tab === "requests" && <PayoutRequests />}
+        {tab === "disputes" && <Disputes />}
+        {tab === "quality" && <StoreQuality />}
+        {tab === "blocks" && <Blocks />}
       </div>
     </div>
   );
