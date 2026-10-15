@@ -10,7 +10,7 @@ import { track } from "@/lib/track";
 import { AdSlot } from "./AdSlot";
 import { FollowButton } from "./FollowButton";
 import { LikeButton } from "./LikeButton";
-import { DmButton, ItemExtras, ListNotice, NotifyToggle, useCommentCounts } from "./SocialBits";
+import { CopiedFrom, CopyListButton, DmButton, ItemExtras, ListNotice, NotifyToggle, useCommentCounts } from "./SocialBits";
 import { Panel } from "./shell/Panel";
 import { Tags } from "./shell/PinCard";
 import { useMapScene, useShell, type Scene } from "./shell/context";
@@ -188,6 +188,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
           {list.title}
         </h1>
         {list.description && <p className="mt-2 text-[15px] leading-relaxed text-ink/80">{list.description}</p>}
+        {isOwner && <CopiedFrom listId={list.id} />}
         {list.themes.length > 0 && (
           <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="테마">
             {list.themes.map((t) => (
@@ -204,6 +205,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
           )}
           <button type="button" onClick={share} className="btn-quiet">공유</button>
           {!isDemo && !isOwner && <DmButton userId={list.curator.id} listId={list.id} />}
+          {!isDemo && !isOwner && <CopyListButton listId={list.id} title={list.title} />}
         </div>
         {!isDemo && !isOwner && (
           <div className="mt-2">

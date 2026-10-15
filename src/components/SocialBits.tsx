@@ -154,3 +154,53 @@ export function useCommentCounts(itemIds: string[]) {
   }, [supabase, me, key]);
   return counts;
 }
+
+// 리스트 통째로 담기: 남의 리스트를 '나만 보기' 새 리스트로 복사한다(원본 표시, 이후 자유롭게 고침)
+export function CopyListButton({ listId, title }: { listId: string; title: string }) {
+  const router = useRouter();
+  const { me, toast, refreshMine } = useShell();
+  const [busy, setBusy] = useState(false);
+  async function go() {
+    if (!me) {
+      router.push(`/login?next=${encodeURIComponent(window.location.pathname)}`);
+      return;
+    }
+    if (!window.confirm(`‘${title}’ 리스트를 통째로 내 리스트에 담을까요? 나만 보기로 만들어지고, 원본이 표시돼요.`)) return;
+    setBusy(true);
+    const { data, error } = await createClient().rpc("copy_list", { p_list: listId });
+    setBusy(false);
+    if (error || !data) return toast(error?.message.includes("too many") ? "리스트가 너무 많아요(최대 200개)." : "담지 못했습니다.");
+    await refreshMine();
+    toast("내 리스트에 담았어요(나만 보기).");
+    router.push(`/me/lists/${data as string}`);
+  }
+  return (
+    <button type="button" onClick={go} disabled={busy} className="btn-quiet disabled:opacity-50">
+      {busy ? "담는 중" : "통째로 담기"}
+    </button>
+  );
+}
+
+// 복사해 온 리스트: 원본 리스트와 만든 사람을 보여준다
+export function CopiedFrom({ listId }: { listId: string }) {
+  const supabase = useMemo(() => createClient(), []);
+  const [src, setSrc] = useState<{ title: string; slug: string; owner: { handle: string; display_name: string } | null } | null>(null);
+  useEffect(() => {
+    let alive = true;
+    supabase
+      .from("lists")
+      .select("src:copied_from_list_id(title, slug, owner:profiles!lists_owner_id_fkey(handle, display_name))")
+      .eq("id", listId)
+      .maybeSingle()
+      .then(({ data }) => alive && data?.src && setSrc(data.src as unknown as NonNullable<typeof src>));
+    return () => {
+      alive = false;
+    };
+  }, [supabase, listId]);
+  if (!src?.owner) return null;
+  return (
+    <p className="mt-2 text-[13px] text-muted">
+      원본: <a href={`/@${src.owner.handle}/${src.slug}`} className="font-semibold text-teal">{src.title}</a> · {src.owner.display_name || `@${src.owner.handle}`}
+    </p>
+  );
+}
