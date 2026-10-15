@@ -19,6 +19,21 @@ const HOUSE = [
 
 // 리스트 화면의 광고 자리가 화면에 절반 이상 1초 넘게 보이면 '노출'로 센다(리스트별·하루 단위).
 // 나중에 광고 수익을 큐레이터와 나눌 때 근거가 된다. 주인 본인의 열람은 DB에서 뺀다.
+// 로그인하지 않은 사람은 브라우저마다 무작위 번호로 구분해 30분 안의 반복 노출을 한 번으로 센다
+function viewerId() {
+  try {
+    let v = localStorage.getItem("pw-viewer");
+    if (!v) {
+      v = crypto.randomUUID();
+      localStorage.setItem("pw-viewer", v);
+    }
+    return v;
+  } catch {
+    return "";
+  }
+}
+
+// 자체 홍보 자리는 'house:'를 붙여 기록한다(수익화 자격에는 들어가고, 광고 수익 정산에서는 빠진다)
 function useAdView(listId: string | undefined, slot: string) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -33,7 +48,7 @@ function useAdView(listId: string | undefined, slot: string) {
           timer = window.setTimeout(() => {
             done = true;
             io.disconnect();
-            createClient().rpc("record_ad_view", { p_list: listId, p_slot: slot }).then(() => {});
+            createClient().rpc("record_ad_view", { p_list: listId, p_slot: slot, p_viewer: viewerId() }).then(() => {});
           }, 1000);
         } else window.clearTimeout(timer);
       },
@@ -51,8 +66,9 @@ function useAdView(listId: string | undefined, slot: string) {
 export function AdSlot({ slot, variant = 0, listId }: { slot: string; variant?: number; listId?: string }) {
   const consent = useConsent();
   const { me } = useShell();
-  const viewRef = useAdView(listId, slot);
-  if (ADSENSE_CLIENT && consent)
+  const paid = !!(ADSENSE_CLIENT && consent);
+  const viewRef = useAdView(listId, paid ? slot : `house:${slot}`);
+  if (paid)
     return (
       <div ref={viewRef}>
         <AdSenseUnit slot={slot} personalized={consent === "all"} />
