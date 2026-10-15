@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SignOutButton } from "./SignOutButton";
+import { APP_VERSION } from "@/lib/version";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { useShell } from "./shell/context";
 
@@ -155,6 +156,8 @@ export function MyPage() {
 
         <div className="mt-10 border-t border-rule pt-6 text-[13px] text-muted">
           <p>
+            PinWith v{APP_VERSION}
+            {" · "}
             <Link href="/privacy" className="underline">개인정보처리방침</Link>
             {" · "}
             <Link href="/terms" className="underline">이용약관</Link>
