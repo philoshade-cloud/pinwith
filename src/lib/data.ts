@@ -98,7 +98,7 @@ export async function getCuratedList(
     supabase
       .from("lists")
       .select(
-        "id, slug, title, description, visibility, kind, themes, like_count, updated_at," +
+        "id, slug, title, description, visibility, kind, themes, like_count, updated_at, public_comments," +
           ` owner:profiles!lists_owner_id_fkey!inner(${CURATOR_FIELDS}),` +
           " sections(id, name, position)," +
           " list_items(id, place_id, custom_title, memo, section_id, position, tags, video_ts_url, places(lat, lng))",
@@ -118,7 +118,7 @@ export async function getCuratedList(
   type Row = {
     id: string; slug: string; title: string; description: string;
     visibility: CuratedList["visibility"]; kind: CuratedList["kind"];
-    themes: string[]; like_count: number; updated_at: string;
+    themes: string[]; like_count: number; updated_at: string; public_comments: boolean;
     owner: CuratorRow;
     sections: { id: string; name: string; position: number }[];
     list_items: {
@@ -148,6 +148,7 @@ export async function getCuratedList(
     themes: row.themes,
     likeCount: row.like_count,
     updatedAt: row.updated_at,
+    publicComments: row.public_comments,
     curator,
     siblings,
     sections: [...row.sections].sort((a, b) => a.position - b.position),

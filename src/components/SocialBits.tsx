@@ -97,25 +97,26 @@ export function ListNotice({ listId }: { listId: string }) {
 
 // 핀 카드 아래: 댓글(내가 볼 수 있는 수 표시) + 큐레이터에게 묻기
 export function ItemExtras({
-  itemId, listId, ownerId, isOwner,
+  itemId, listId, ownerId, isOwner, publicComments,
 }: {
   itemId: string;
   listId: string;
   ownerId: string;
   isOwner: boolean;
+  publicComments?: boolean;
 }) {
   const supabase = useMemo(() => createClient(), []);
   const { me } = useShell();
   const [open, setOpen] = useState(false);
   const [count, setCount] = useState<number | null>(null);
   useEffect(() => {
-    if (!me) return;
+    if (!me && !publicComments) return;
     supabase
       .from("item_comments")
       .select("id", { count: "exact", head: true })
       .eq("item_id", itemId)
       .then(({ count: n }) => setCount(n ?? 0));
-  }, [supabase, me, itemId]);
+  }, [supabase, me, itemId, publicComments]);
   return (
     <div>
       <div className="flex flex-wrap gap-2">
@@ -126,7 +127,7 @@ export function ItemExtras({
       </div>
       {open && (
         <div className="mt-3">
-          <Comments itemId={itemId} ownerId={ownerId} onCount={setCount} />
+          <Comments itemId={itemId} ownerId={ownerId} onCount={setCount} publicComments={publicComments} />
         </div>
       )}
     </div>
@@ -134,13 +135,13 @@ export function ItemExtras({
 }
 
 // 리스트 안 장소별 댓글 수(내가 볼 수 있는 것만)
-export function useCommentCounts(itemIds: string[]) {
+export function useCommentCounts(itemIds: string[], publicComments = false) {
   const supabase = useMemo(() => createClient(), []);
   const { me } = useShell();
   const [counts, setCounts] = useState<Map<string, number>>(new Map());
   const key = itemIds.join(",");
   useEffect(() => {
-    if (!me || !key) return;
+    if ((!me && !publicComments) || !key) return;
     supabase
       .from("item_comments")
       .select("item_id")
@@ -151,6 +152,6 @@ export function useCommentCounts(itemIds: string[]) {
         for (const r of data ?? []) m.set(r.item_id as string, (m.get(r.item_id as string) ?? 0) + 1);
         setCounts(m);
       });
-  }, [supabase, me, key]);
+  }, [supabase, me, key, publicComments]);
   return counts;
 }

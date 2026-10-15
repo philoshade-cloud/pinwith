@@ -22,7 +22,7 @@ export const VISIBILITY_NOTE = "댓글은 댓글을 단 사람의 팔로워와 �
 // 댓글: 작성자 본인, 리스트 주인, 작성자의 팔로워에게 보인다.
 // 대댓글: 위에 더해 원래 댓글을 쓴 사람에게도 보인다. 원래 댓글을 지우면 대댓글도 지워진다.
 // 누가 볼 수 있는지는 DB(RLS)가 정하고, 여기서는 받은 것만 그린다.
-export function Comments({ itemId, ownerId, onCount }: { itemId: string; ownerId: string; onCount?: (n: number) => void }) {
+export function Comments({ itemId, ownerId, onCount, publicComments }: { itemId: string; ownerId: string; onCount?: (n: number) => void; publicComments?: boolean }) {
   const supabase = useMemo(() => createClient(), []);
   const { me } = useShell();
   const [rows, setRows] = useState<C[] | null>(null);
@@ -108,8 +108,8 @@ export function Comments({ itemId, ownerId, onCount }: { itemId: string; ownerId
 
   return (
     <div className="text-[13px]">
-      <p className="text-[12px] text-muted">{VISIBILITY_NOTE}</p>
-      {!me && <p className="mt-1 text-muted">로그인하면 내가 팔로우하는 사람들의 댓글이 보여요.</p>}
+      <p className="text-[12px] text-muted">{publicComments ? "이 리스트는 댓글 논의를 함께 보여 주는 예시라서, 댓글이 누구에게나 보여요." : VISIBILITY_NOTE}</p>
+      {!me && !publicComments && <p className="mt-1 text-muted">로그인하면 내가 팔로우하는 사람들의 댓글이 보여요.</p>}
       {me && rows?.length === 0 && <p className="mt-1 text-muted">아직 내게 보이는 댓글이 없어요.</p>}
       <ul className="mt-2 grid max-h-60 gap-2.5 overflow-y-auto">
         {tops.map((c) => (
@@ -134,7 +134,7 @@ export function Comments({ itemId, ownerId, onCount }: { itemId: string; ownerId
                   onChange={(e) => setReplyText(e.target.value)}
                   maxLength={1000}
                   autoFocus
-                  placeholder="답글 (내 팔로워와 원래 댓글 쓴 사람에게 보여요)"
+                  placeholder={publicComments ? "답글 (누구에게나 보여요)" : "답글 (내 팔로워와 원래 댓글 쓴 사람에게 보여요)"}
                   aria-label="답글"
                   className="field !py-1.5 !text-[13px]"
                 />

@@ -39,7 +39,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
     return list.items.filter((i) => i.sectionId === section);
   }, [list, section]);
   const numbering = useMemo(() => new Map(list.items.map((i, n) => [i.id, n + 1])), [list]);
-  const commentCounts = useCommentCounts(isDemo ? [] : list.items.map((i) => i.id));
+  const commentCounts = useCommentCounts(isDemo ? [] : list.items.map((i) => i.id), !!list.publicComments);
 
   const groups = useMemo(() => {
     if (sort === "nearest" && here) {
@@ -95,7 +95,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
         : null,
       cardExtra: isDemo
         ? undefined
-        : (i: ListItem) => <ItemExtras itemId={i.id} listId={list.id} ownerId={list.curator.id} isOwner={isOwner} />,
+        : (i: ListItem) => <ItemExtras itemId={i.id} listId={list.id} ownerId={list.curator.id} isOwner={isOwner} publicComments={list.publicComments} />,
     }),
     [visibleItems, isCourse, numbering, chips, list.id, list.sections, isOwner, router, isDemo, list.curator.id],
   );

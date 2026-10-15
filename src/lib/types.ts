@@ -40,6 +40,8 @@ export type CuratedList = {
   siblings?: { slug: string; title: string }[];
   sections: Section[];
   items: ListItem[];
+  // 운영자가 지정한 리스트(예시 등): 댓글을 누구나 볼 수 있다
+  publicComments?: boolean;
 };
 
 export type ListSummary = {
