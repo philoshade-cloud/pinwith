@@ -84,7 +84,7 @@ export function BizReview() {
 }
 
 // ── 광고비 충전: 입금 확인 ─────────────────────────
-type Topup = { id: string; amount: number; currency: string; method: string; status: string; reference: string | null; created_at: string; biz: { place_name: string; business_name: string; contact_phone: string } | null };
+type Topup = { id: string; amount: number; currency: string; method: string; provider: string; pay_amount: number | null; pay_currency: string | null; status: string; reference: string | null; created_at: string; biz: { place_name: string; business_name: string; contact_phone: string } | null };
 
 export function Topups() {
   const supabase = useMemo(() => createClient(), []);
@@ -111,7 +111,9 @@ export function Topups() {
 
   return (
     <section className="grid gap-3">
-      <p className="text-[13px] text-muted">가게가 충전을 요청하면 입금 방법을 안내하고, 입금이 확인되면 ‘입금 확인’을 누르세요. 그때부터 잔액으로 과금돼요.</p>
+      <p className="text-[13px] text-muted">
+        계좌 입금 요청은 입금 방법을 안내하고, 입금이 확인되면 ‘입금 확인’을 누르세요. 카드 결제(토스·Stripe)는 결제가 끝나면 자동으로 잔액에 들어가요(미완료 건은 취소해도 돼요).
+      </p>
       {rows.length === 0 && <p className="text-[14px] text-muted">없어요.</p>}
       <ul className="divide-y divide-rule text-[14px]">
         {rows.map((t) => (
@@ -120,12 +122,16 @@ export function Topups() {
             <b>{t.biz?.place_name}</b>
             <span className="text-[12px] text-muted">{t.biz?.business_name} · {t.biz?.contact_phone}</span>
             <b className="tabular-nums">{money(t.amount, t.currency)}</b>
+            <span className="text-[12px] text-muted">
+              {t.provider === "bank" ? "계좌 입금" : t.provider === "toss" ? "토스 카드" : "Stripe 카드"}
+              {t.pay_currency && t.pay_currency !== t.currency && t.pay_amount ? ` · ${money(t.pay_amount, t.pay_currency)}` : ""}
+            </span>
             <span className={t.status === "paid" ? "text-teal" : t.status === "cancelled" ? "text-muted" : "text-pin"}>
               {t.status === "paid" ? `입금 확인${t.reference ? ` (${t.reference})` : ""}` : t.status === "cancelled" ? "취소" : "입금 대기"}
             </span>
             {t.status === "requested" && (
               <span className="ml-auto flex gap-2">
-                <button type="button" onClick={() => mark(t, "paid")} className="btn-primary !px-3 !py-1 !text-[13px]">입금 확인</button>
+                {t.provider === "bank" && <button type="button" onClick={() => mark(t, "paid")} className="btn-primary !px-3 !py-1 !text-[13px]">입금 확인</button>}
                 <button type="button" onClick={() => mark(t, "cancelled")} className="btn-quiet !px-3 !py-1 !text-[13px]">취소</button>
               </span>
             )}

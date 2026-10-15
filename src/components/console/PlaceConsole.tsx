@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { loadPlacesLibrary } from "@/lib/google";
+import { PAY_COUNTRIES, PROVIDER_LABEL, providerFor } from "@/lib/payments";
 import { PlaceSearchBox, type FoundPlace } from "../PlaceSearch";
 import { count, money, Msg, MODEL, Period, Stat, Tabs, useAuthed } from "./ui";
 
@@ -423,13 +424,33 @@ function Stats({ dash, days, setDays }: { dash: Dash; days: number; setDays: (d:
   );
 }
 
-type Topup = { id: string; amount: number; currency: string; method: string; status: string; created_at: string; paid_at: string | null };
+type Topup = { id: string; amount: number; currency: string; method: string; provider: string; pay_amount: number | null; pay_currency: string | null; status: string; created_at: string; paid_at: string | null };
+
+function loadScript(src: string) {
+  return new Promise<void>((ok, fail) => {
+    if (document.querySelector(`script[src="${src}"]`)) return ok();
+    const el = Object.assign(document.createElement("script"), { src, async: true });
+    el.onload = () => ok();
+    el.onerror = () => fail(new Error("script"));
+    document.head.append(el);
+  });
+}
 
 function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => void }) {
   const { supabase } = useAuthed("/biz/place");
   const [amount, setAmount] = useState("");
+  const [country, setCountry] = useState(() => {
+    try {
+      return localStorage.getItem("pw-pay-country") ?? "";
+    } catch {
+      return "";
+    }
+  });
+  const [ready, setReady] = useState<{ stripe: boolean; toss: boolean } | null>(null);
+  const [krw, setKrw] = useState(1400);
   const [rows, setRows] = useState<Topup[]>([]);
   const [msg, setMsg] = useState("");
+  const [busy, setBusy] = useState(false);
   const load = useCallback(async () => {
     const { data } = await supabase.from("biz_topups").select("*").eq("business_id", b.id).order("created_at", { ascending: false });
     setRows((data as Topup[]) ?? []);
@@ -437,32 +458,114 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
-  }, [load]);
+    fetch("/api/pay/config").then((r) => r.json()).then(setReady).catch(() => setReady({ stripe: false, toss: false }));
+    supabase.from("monetization_settings").select("krw_per_unit").maybeSingle().then(({ data }) => data && setKrw(Number(data.krw_per_unit)));
+    // 카드 결제에서 돌아왔을 때 결과 안내
+    const paid = new URLSearchParams(window.location.search).get("paid");
+    if (paid) setMsg(paid === "ok" || paid === "stripe" ? "결제됐어요. 잔액에 반영되기까지 몇 초 걸릴 수 있어요." : paid === "cancel" ? "결제를 취소했어요." : "결제가 완료되지 않았어요. 카드사 안내를 확인하거나 다시 시도하세요.");
+  }, [load, supabase]);
 
-  async function request(e: React.FormEvent) {
+  const provider = country ? providerFor(country) : null;
+  const providerReady = provider ? !!ready?.[provider] : false;
+  const v = Number(amount);
+
+  function pickCountry(c: string) {
+    setCountry(c);
+    try {
+      localStorage.setItem("pw-pay-country", c);
+    } catch {
+      /* 저장 못 해도 괜찮다 */
+    }
+  }
+
+  async function bank(e: React.FormEvent) {
     e.preventDefault();
-    const v = Number(amount);
     if (!(v > 0)) return setMsg("금액을 넣으세요.");
-    const { error } = await supabase.from("biz_topups").insert({ business_id: b.id, amount: v, currency: dash.currency, method: "bank" });
+    const { error } = await supabase.from("biz_topups").insert({ business_id: b.id, amount: v, currency: dash.currency, method: "bank", provider: "bank", country: country || null });
     setMsg(error ? "요청하지 못했어요." : "충전을 요청했어요. 운영자가 입금 방법을 안내하고, 입금이 확인되면 잔액에 들어가요.");
     setAmount("");
     load();
     reload();
   }
 
+  async function card() {
+    if (!(v > 0)) return setMsg("금액을 넣으세요.");
+    if (!country) return setMsg("가게가 있는 나라를 먼저 고르세요.");
+    setBusy(true);
+    setMsg("");
+    const res = await fetch("/api/pay/start", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ businessId: b.id, amount: v, country }),
+    }).catch(() => null);
+    const data = res ? await res.json().catch(() => null) : null;
+    if (!res?.ok || !data) {
+      setBusy(false);
+      return setMsg(data?.error === "provider_not_ready" ? `${PROVIDER_LABEL[provider!]} 결제가 아직 준비되지 않았어요. 계좌 입금으로 충전해 주세요.` : "결제를 시작하지 못했어요.");
+    }
+    if (data.provider === "stripe") {
+      window.location.href = data.url;
+      return;
+    }
+    // 토스페이먼츠 결제창
+    try {
+      await loadScript("https://js.tosspayments.com/v2/standard");
+      const tp = (window as unknown as { TossPayments: (k: string) => { payment: (o: { customerKey: string }) => { requestPayment: (o: Record<string, unknown>) => Promise<void> } } }).TossPayments(
+        process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY ?? "",
+      );
+      await tp.payment({ customerKey: data.customerKey }).requestPayment({
+        method: "CARD",
+        amount: { currency: "KRW", value: data.amount },
+        orderId: data.orderId,
+        orderName: data.orderName,
+        successUrl: `${window.location.origin}/api/pay/toss/confirm`,
+        failUrl: `${window.location.origin}/biz/place?paid=fail`,
+      });
+    } catch {
+      setMsg("결제창을 닫았거나 열지 못했어요.");
+    } finally {
+      setBusy(false);
+      load();
+    }
+  }
+
   return (
     <section className="grid gap-5">
-      <form onSubmit={request} className="grid max-w-[480px] gap-3 rounded-xl border border-rule p-4">
+      <form onSubmit={bank} className="grid max-w-[520px] gap-3 rounded-xl border border-rule p-4">
         <h2 className="text-[16px] font-semibold">광고비 충전</h2>
-        <p className="text-[13px] text-muted">미리 충전한 금액에서 과금돼요. 지금은 계좌 입금으로 받고, 카드 결제는 곧 열려요.</p>
+        <p className="text-[13px] text-muted">미리 충전한 금액에서 과금돼요. 가게가 있는 나라에 맞는 카드 결제를 연결해 드려요.</p>
         <label className="grid gap-1 text-[13px] font-semibold">
-          금액({dash.currency})
-          <input value={amount} onChange={(e) => setAmount(e.target.value)} inputMode="decimal" className="field" placeholder="예: 100" />
+          가게가 있는 나라
+          <select value={country} onChange={(e) => pickCountry(e.target.value)} className="field">
+            <option value="">고르세요</option>
+            {PAY_COUNTRIES.map((c) => (
+              <option key={c.code} value={c.code}>{c.name}</option>
+            ))}
+          </select>
+          {provider && (
+            <span className="font-normal text-muted">
+              카드 결제: {PROVIDER_LABEL[provider]}
+              {provider === "toss" ? ` · 원화로 결제(1 ${dash.currency} = ${krw.toLocaleString("ko-KR")}원)` : ` · ${dash.currency}로 결제`}
+              {ready && !providerReady && " · 준비 중"}
+            </span>
+          )}
         </label>
-        <div className="flex gap-2">
-          <button className="btn-primary">계좌 입금으로 충전 요청</button>
-          <button type="button" disabled className="btn-quiet opacity-40" title="결제 서비스 연결 후 열려요">카드 결제(준비 중)</button>
+        <label className="grid gap-1 text-[13px] font-semibold">
+          충전 금액({dash.currency})
+          <input value={amount} onChange={(e) => setAmount(e.target.value)} inputMode="decimal" className="field" placeholder="예: 100" />
+          {provider === "toss" && v > 0 && dash.currency !== "KRW" && (
+            <span className="font-normal text-muted">결제 금액 약 {Math.round(v * krw).toLocaleString("ko-KR")}원</span>
+          )}
+        </label>
+        <div className="flex flex-wrap gap-2">
+          <button type="button" onClick={card} disabled={busy || !providerReady} className="btn-primary disabled:opacity-40">
+            {busy ? "결제 여는 중" : provider ? `${PROVIDER_LABEL[provider]}로 카드 결제` : "카드 결제"}
+          </button>
+          <button className="btn-quiet">계좌 입금으로 충전 요청</button>
         </div>
+        {provider && ready && !providerReady && (
+          <p className="text-[12px] text-muted">{PROVIDER_LABEL[provider]} 카드 결제는 연결 준비 중이에요. 지금은 계좌 입금으로 충전해 주세요.</p>
+        )}
         <Msg text={msg} />
       </form>
       <div>
@@ -476,7 +579,11 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
                 <span className="tabular-nums">{new Date(r.created_at).toLocaleDateString("ko-KR")}</span>
                 <b className="tabular-nums">{money(r.amount, r.currency)}</b>
                 <span className={r.status === "paid" ? "text-teal" : r.status === "cancelled" ? "text-muted line-through" : "text-pin"}>
-                  {r.status === "paid" ? "입금 확인" : r.status === "cancelled" ? "취소" : "입금 대기"}
+                  {r.status === "paid" ? (r.provider === "bank" ? "입금 확인" : "결제 완료") : r.status === "cancelled" ? "취소" : r.provider === "bank" ? "입금 대기" : "결제 미완료"}
+                </span>
+                <span className="text-[12px] text-muted">
+                  {r.provider === "bank" ? "계좌 입금" : r.provider === "toss" ? "토스페이먼츠" : "Stripe"}
+                  {r.pay_currency && r.pay_currency !== r.currency && r.pay_amount ? ` · ${money(r.pay_amount, r.pay_currency)}` : ""}
                 </span>
               </li>
             ))}
