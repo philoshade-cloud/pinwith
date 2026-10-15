@@ -13,8 +13,14 @@ export function googleDirectionsUrl(item: Pick<ListItem, "title" | "placeId">) {
   return `https://www.google.com/maps/dir/?api=1&destination=${enc(item.title)}${id}`;
 }
 
+// 네이버 지도 웹: 좌표로 핀을 꽂는 공개 주소가 없어 이름으로 검색한다(컴퓨터용).
 export function naverMapUrl(item: Pick<ListItem, "title">) {
   return `https://map.naver.com/p/search/${enc(item.title)}`;
+}
+
+// 네이버 지도 앱: 좌표에 핀을 꽂아 연다(휴대폰용). appname은 네이버가 요구하는 호출 출처 표시.
+export function naverAppUrl(item: Pick<ListItem, "title" | "lat" | "lng">, origin: string) {
+  return `nmap://place?lat=${item.lat}&lng=${item.lng}&name=${enc(item.title)}&appname=${enc(origin)}`;
 }
 
 export function kakaoMapUrl(item: Pick<ListItem, "title" | "lat" | "lng">) {

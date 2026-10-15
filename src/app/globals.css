@@ -91,6 +91,7 @@ body {
 
 /* 지도 핀: 바깥(.pin-wrap)은 지도 라이브러리가 위치를 잡고, 안쪽(.pin)에 물방울 모양을 그린다 */
 .pin-wrap {
+  position: relative;
   display: block;
   padding: 0;
   border: 0;
@@ -110,6 +111,27 @@ body {
   border: 2.5px solid #ffffff;
   box-shadow: 0 2px 6px rgba(24, 34, 47, 0.35);
   transition: width 120ms ease, height 120ms ease, background-color 120ms ease;
+}
+
+/* 핀 옆 이름: 흰 테두리 글자로 지도 위에서도 읽히게 */
+.pin-label {
+  position: absolute;
+  left: calc(100% + 2px);
+  bottom: 10px;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-ink);
+  text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 4px #fff;
+  pointer-events: none;
+}
+
+.pin-wrap[data-selected="true"] .pin-label {
+  font-size: 13px;
 }
 
 .pin-num {

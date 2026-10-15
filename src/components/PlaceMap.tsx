@@ -14,7 +14,7 @@ type Props = {
   // 코스 번호(전체 리스트 기준). 섹션으로 일부만 보여도 번호가 유지된다.
   numbering?: Map<string, number>;
   // 검색으로 고른, 아직 리스트에 넣지 않은 장소
-  candidate?: { lat: number; lng: number } | null;
+  candidate?: { lat: number; lng: number; name?: string } | null;
   // 지도를 가리는 패널·버튼 영역. 핀을 맞출 때 이만큼 비켜서 보여준다.
   padding?: { top: number; bottom: number; left: number; right: number };
   // "result": 검색 결과처럼 아직 리스트에 없는 장소(다른 색)
@@ -29,6 +29,21 @@ const DEFAULT_PADDING = { top: 64, bottom: 64, left: 64, right: 64 };
 // (easeTo에 padding을 주면 지도에 계속 남아 다음 맞추기 때 여백이 겹치므로 offset을 쓴다)
 function centerOffset(p: { top: number; bottom: number; left: number; right: number }): [number, number] {
   return [(p.left - p.right) / 2, (p.top - p.bottom) / 2];
+}
+
+// 핀 이름이 서로 겹치면 뒤의 것을 숨긴다(선택된 핀의 이름은 항상 보인다).
+function declutter() {
+  const labels = [...document.querySelectorAll<HTMLElement>(".pin-wrap .pin-label")];
+  labels.sort((a, b) => Number(b.parentElement?.dataset.selected === "true") - Number(a.parentElement?.dataset.selected === "true"));
+  const shown: DOMRect[] = [];
+  for (const el of labels) {
+    el.style.visibility = "visible";
+    const r = el.getBoundingClientRect();
+    const pin = el.parentElement!.getBoundingClientRect();
+    const hit = (x: DOMRect) => r.left < x.right && r.right > x.left && r.top < x.bottom && r.bottom > x.top;
+    if (shown.some(hit)) el.style.visibility = "hidden";
+    else shown.push(r, pin);
+  }
 }
 
 // 큐레이터의 핀만 보여주는 가벼운 지도. 자세한 정보와 길찾기는 구글·네이버 지도로 넘긴다.
@@ -64,6 +79,8 @@ export function PlaceMap({
     m.addControl(new maplibregl.AttributionControl({ compact: true }), narrow ? "top-right" : "bottom-right");
     if (!narrow) m.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
     map.current = m;
+    // 지도를 움직이면 겹치는 이름을 다시 정리한다
+    m.on("moveend", () => declutter());
     onReady?.(() => {
       const c = m.getCenter();
       return { lat: c.lat, lng: c.lng };
@@ -100,6 +117,11 @@ export function PlaceMap({
         shape.appendChild(n);
       }
       el.appendChild(shape);
+      // 핀 옆 이름(저장된 장소는 큐레이터가 붙인 이름, 검색 결과는 구글 이름)
+      const label = document.createElement("span");
+      label.className = "pin-label";
+      label.textContent = item.title;
+      el.appendChild(label);
       el.addEventListener("click", (e) => {
         e.stopPropagation();
         onSelectRef.current(item.id);
@@ -158,6 +180,7 @@ export function PlaceMap({
     }
     m.fitBounds(bounds, { padding: pad, maxZoom: 15, duration: fitted.current ? 500 : 0 });
     fitted.current = true;
+    requestAnimationFrame(declutter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, padKey]);
 
@@ -166,6 +189,7 @@ export function PlaceMap({
     markers.current.forEach(({ el }, id) => {
       el.dataset.selected = id === selectedId ? "true" : "false";
     });
+    requestAnimationFrame(declutter);
     const sel = selectedId ? located.find((i) => i.id === selectedId) : null;
     if (sel && map.current) {
       map.current.easeTo({ center: [sel.lng!, sel.lat!], offset: centerOffset(padding), duration: 400 });
@@ -185,11 +209,17 @@ export function PlaceMap({
     const shape = document.createElement("span");
     shape.className = "pin pin-candidate";
     el.appendChild(shape);
+    if (candidate.name) {
+      const label = document.createElement("span");
+      label.className = "pin-label";
+      label.textContent = candidate.name;
+      el.appendChild(label);
+    }
     candidateMarker.current = new maplibregl.Marker({ element: el, anchor: "bottom" })
       .setLngLat([candidate.lng, candidate.lat])
       .addTo(m);
     m.flyTo({ center: [candidate.lng, candidate.lat], zoom: Math.max(m.getZoom(), 15), offset: centerOffset(padding), duration: 600 });
-  }, [candidate?.lat, candidate?.lng]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [candidate?.lat, candidate?.lng, candidate?.name]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <div ref={container} className="h-full w-full" role="region" aria-label="장소 지도" />;
 }

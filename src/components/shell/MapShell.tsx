@@ -12,6 +12,7 @@ import { PlaceSearchBox, type FoundPlace, type LoadedPlace } from "../PlaceSearc
 import { SaveToListSheet } from "../SaveToListSheet";
 import { AddPlaceSheet } from "./AddPlaceSheet";
 import { PinCard } from "./PinCard";
+import { PlacePreview } from "./PlacePreview";
 import { ShellContext, type Me, type MyList, type Scene, type Shell } from "./context";
 
 const PlaceMap = dynamic(() => import("../PlaceMap").then((m) => m.PlaceMap), {
@@ -46,7 +47,9 @@ export function MapShell({ children }: { children: ReactNode }) {
   const [myLists, setMyLists] = useState<MyList[]>([]);
   const [toastMsg, setToastMsg] = useState<string | null>(null);
   const [saving, setSaving] = useState<ListItem | null>(null);
-  const [picked, setPicked] = useState<string | null>(null);
+  // 검색으로 고른 장소: 먼저 미리보기(다른 지도 앱 버튼 + 저장), 저장을 누르면 저장 화면
+  const [picked, setPicked] = useState<{ id: string; known?: LoadedPlace } | null>(null);
+  const [saveAs, setSaveAs] = useState<LoadedPlace | null>(null);
   const [candidate, setCandidate] = useState<LoadedPlace | null>(null);
   const [searchKey, setSearchKey] = useState(0);
   // Enter로 찾은 여러 장소: 지도에 다른 색 핀으로, 버튼을 누르면 목록으로
@@ -131,6 +134,7 @@ export function MapShell({ children }: { children: ReactNode }) {
 
   function closeAdd() {
     setPicked(null);
+    setSaveAs(null);
     setCandidate(null);
     // 검색 결과를 보던 중이면 결과는 그대로 둔다(다른 곳도 이어서 담을 수 있게)
     if (!results) setSearchKey((k) => k + 1);
@@ -146,6 +150,12 @@ export function MapShell({ children }: { children: ReactNode }) {
     setResults({ query, places });
     setResultsList(false);
     if (window.innerWidth < 1024) setPanelOpen(false);
+  }
+
+  function pickResult(id: string) {
+    const p = results?.places.find((x) => x.id === id);
+    setSaveAs(null);
+    setPicked({ id, known: p ? { name: p.name, lat: p.lat, lng: p.lng } : undefined });
   }
 
   function closeResults() {
@@ -189,7 +199,7 @@ export function MapShell({ children }: { children: ReactNode }) {
         <PlaceMap
           items={results ? resultItems : scene.items}
           selectedId={results ? null : selectedId}
-          onSelect={results ? (id) => setPicked(id) : select}
+          onSelect={results ? pickResult : select}
           showRoute={!results && !!scene.showRoute}
           numbering={results ? undefined : scene.numbering}
           tone={results ? "result" : "pin"}
@@ -222,7 +232,7 @@ export function MapShell({ children }: { children: ReactNode }) {
               onResults={showResults}
               onPick={(id) => {
                 setResults(null);
-                setPicked(id);
+                setPicked({ id });
                 setCandidate(null);
                 setSelectedId(null);
               }}
@@ -274,7 +284,7 @@ export function MapShell({ children }: { children: ReactNode }) {
               <ul className="divide-y divide-rule">
                 {results.places.map((p) => (
                   <li key={p.id}>
-                    <button type="button" onClick={() => setPicked(p.id)} className="block w-full px-5 py-3 text-left hover:bg-surface/60">
+                    <button type="button" onClick={() => pickResult(p.id)} className="block w-full px-5 py-3 text-left hover:bg-surface/60">
                       <span className="block text-[16px] font-semibold text-ink">{p.name}</span>
                       <span className="mt-0.5 block text-[13px] text-muted">{p.address}</span>
                     </button>
@@ -303,21 +313,33 @@ export function MapShell({ children }: { children: ReactNode }) {
         <Nav variant="dock" {...navProps} />
       </Suspense>
 
-      {picked && me && (
-        <AddPlaceSheet
-          key={picked}
-          placeId={picked}
-          target={addTarget}
+      {picked && me && !saveAs && (
+        <PlacePreview
+          key={picked.id}
+          placeId={picked.id}
+          known={picked.known}
           onLoaded={setCandidate}
+          onClose={closeAdd}
+          onSave={setSaveAs}
+        />
+      )}
+
+      {picked && me && saveAs && (
+        <AddPlaceSheet
+          key={picked.id}
+          placeId={picked.id}
+          place={saveAs}
+          target={addTarget}
+          onBack={() => setSaveAs(null)}
           onClose={closeAdd}
           onAdded={(listId, item, created) => {
             closeAdd();
             if (scene.addTarget && scene.addTarget.listId === listId) {
               scene.addTarget.onAdded(item);
-              toast(`${item.custom_title}을(를) 추가했습니다.`);
+              toast(`${item.custom_title}을(를) 저장했습니다.`);
             } else {
               const name = myLists.find((l) => l.id === listId)?.title ?? "새 리스트";
-              toast(`${item.custom_title}을(를) ‘${name}’에 추가했습니다.`);
+              toast(`${item.custom_title}을(를) ‘${name}’에 저장했습니다.`);
               if (created) router.push(`/me/lists/${listId}`);
               else router.refresh();
             }

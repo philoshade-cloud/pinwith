@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { addPlaceToList, createEmptyList, DuplicatePlaceError, type AddedItem } from "@/lib/lists";
 import type { Section } from "@/lib/types";
-import { PlaceCard, type LoadedPlace } from "../PlaceSearch";
+import type { LoadedPlace } from "../PlaceSearch";
 
 const NEW_LIST = "__new__";
 
@@ -11,30 +11,25 @@ export type AddTarget =
   | { mode: "fixed"; listId: string; sections: Section[] }
   | { mode: "pick"; lists: { id: string; title: string }[] };
 
-// 검색으로 고른 장소: 구글 장소 카드 + 이름·메모를 적어 리스트에 추가
+// 저장 화면: 이름·메모·넣을 리스트를 정해 추가
 export function AddPlaceSheet({
-  placeId, target, onLoaded, onClose, onAdded,
+  placeId, place, target, onBack, onClose, onAdded,
 }: {
   placeId: string;
+  place: LoadedPlace;
   target: AddTarget;
-  onLoaded: (p: LoadedPlace) => void;
+  onBack: () => void;
   onClose: () => void;
   onAdded: (listId: string, item: AddedItem, createdList: boolean) => void;
 }) {
-  const [loaded, setLoaded] = useState<LoadedPlace | null>(null);
-  const [title, setTitle] = useState("");
+  const loaded = place;
+  // 구글 이름은 기본값으로만 쓰고, 큐레이터가 확인한 이름을 저장한다.
+  const [title, setTitle] = useState(place.name);
   const [memo, setMemo] = useState("");
   const [listId, setListId] = useState(target.mode === "fixed" ? target.listId : target.lists[0]?.id ?? NEW_LIST);
   const [sectionId, setSectionId] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  function cardLoaded(p: LoadedPlace) {
-    setLoaded(p);
-    // 구글 이름은 기본값으로만 쓰고, 큐레이터가 확인한 이름을 저장한다.
-    setTitle((prev) => prev || p.name);
-    onLoaded(p);
-  }
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
@@ -67,14 +62,14 @@ export function AddPlaceSheet({
       onSubmit={add}
       className="fixed inset-x-0 bottom-0 z-40 max-h-[78dvh] overflow-y-auto rounded-t-2xl bg-white p-4 pb-6 shadow-[0_-8px_30px_rgba(24,34,47,0.2)] lg:bottom-auto lg:left-4 lg:right-auto lg:top-[76px] lg:max-h-[calc(100dvh-92px)] lg:w-[400px] lg:rounded-2xl"
     >
-      <div className="flex items-center">
-        <h2 className="text-[15px] font-semibold text-ink">리스트에 추가</h2>
+      <div className="flex items-center gap-2">
+        <button type="button" onClick={onBack} className="-ml-1 rounded p-1 text-[18px] leading-none text-muted hover:text-ink" aria-label="장소 정보로 돌아가기">
+          ‹
+        </button>
+        <h2 className="text-[15px] font-semibold text-ink">리스트에 저장</h2>
         <button type="button" onClick={onClose} className="ml-auto rounded p-1 text-muted hover:text-ink" aria-label="닫기">
           ✕
         </button>
-      </div>
-      <div className="mt-2">
-        <PlaceCard placeId={placeId} onLoaded={cardLoaded} />
       </div>
       <div className="mt-3 grid gap-3">
         <label className="grid gap-1 text-[13px] font-semibold text-ink">
@@ -85,7 +80,6 @@ export function AddPlaceSheet({
             maxLength={120}
             required
             className="field"
-            placeholder={loaded ? "" : "장소 정보를 불러오는 중"}
           />
         </label>
         <label className="grid gap-1 text-[13px] font-semibold text-ink">
@@ -122,7 +116,7 @@ export function AddPlaceSheet({
         )}
         {error && <p role="alert" className="text-[14px] text-pin">{error}</p>}
         <button type="submit" disabled={!loaded || !title.trim() || saving} className="btn-primary justify-center !py-2.5 disabled:opacity-40">
-          {saving ? "추가하는 중" : "리스트에 추가"}
+          {saving ? "저장하는 중" : "저장"}
         </button>
       </div>
     </form>

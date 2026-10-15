@@ -2,8 +2,8 @@
 
 import type { ReactNode } from "react";
 import type { ListItem } from "@/lib/types";
-import { googleDirectionsUrl, googleMapsUrl, isInKorea, kakaoMapUrl, naverMapUrl } from "@/lib/links";
 import { track } from "@/lib/track";
+import { ExternalLinks } from "./ExternalLinks";
 
 export function Tags({ tags }: { tags: string[] }) {
   if (tags.length === 0) return null;
@@ -26,9 +26,9 @@ export function PinCard({
   onSave: (item: ListItem) => void;
   extra?: ReactNode;
 }) {
-  const korea = isInKorea(item.lat, item.lng);
-  const log = (e: Parameters<typeof track>[0]) =>
-    listId && track(e, { listId, itemId: item.id, lat: item.lat, lng: item.lng });
+  const log = (e: Parameters<typeof track>[0]) => {
+    if (listId) track(e, { listId, itemId: item.id, lat: item.lat, lng: item.lng });
+  };
   return (
     <div className="rounded-2xl bg-white p-4 shadow-[0_8px_30px_rgba(24,34,47,0.2)]">
       <div className="flex items-start justify-between gap-3">
@@ -40,22 +40,7 @@ export function PinCard({
       {item.memo && <p className="mt-1.5 text-[14px] leading-relaxed text-ink/80">{item.memo}</p>}
       <Tags tags={item.tags} />
       <div className="mt-3 flex flex-wrap gap-2">
-        <a href={googleDirectionsUrl(item)} target="_blank" rel="noopener" onClick={() => log("directions")} className="btn-primary">
-          길찾기
-        </a>
-        <a href={googleMapsUrl(item)} target="_blank" rel="noopener" onClick={() => log("google_open")} className="btn-quiet">
-          구글 지도
-        </a>
-        {korea && (
-          <>
-            <a href={naverMapUrl(item)} target="_blank" rel="noopener" onClick={() => log("naver_open")} className="btn-quiet">
-              네이버
-            </a>
-            <a href={kakaoMapUrl(item)} target="_blank" rel="noopener" onClick={() => log("kakao_open")} className="btn-quiet">
-              카카오
-            </a>
-          </>
-        )}
+        <ExternalLinks item={item} onEvent={log} />
         <button type="button" onClick={() => onSave(item)} className="btn-quiet">
           내 리스트에 담기
         </button>
