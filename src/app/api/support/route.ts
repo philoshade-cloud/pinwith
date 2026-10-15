@@ -1,9 +1,8 @@
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { serviceDb } from "@/lib/placeCoords";
 
-// 문의·신고 접수: DB에 저장하고, 메일 설정이 있으면 운영자에게 메일로 보낸다.
-// 메일 설정(Vercel 환경 변수): RESEND_API_KEY, SUPPORT_INBOX(받을 주소), SUPPORT_FROM(보내는 주소, 도메인 인증 후)
-const CATEGORIES = { question: "이용 문의", bug: "오류·불편 신고", report: "부적절한 내용 신고", partnership: "제휴·광고 문의", other: "기타" } as const;
+// 문의·신고 접수: DB(support_requests)에 저장하고 운영자 콘솔(/admin → 문의·신고)에서 확인한다.
+const CATEGORIES = ["question", "bug", "report", "partnership", "other"] as const;
 
 export async function POST(req: Request) {
   let body: { category?: string; email?: string; body?: string; pageUrl?: string; listId?: string };
@@ -12,7 +11,7 @@ export async function POST(req: Request) {
   } catch {
     return Response.json({ ok: false }, { status: 400 });
   }
-  const category = (body.category ?? "") in CATEGORIES ? (body.category as keyof typeof CATEGORIES) : "other";
+  const category = (CATEGORIES as readonly string[]).includes(body.category ?? "") ? body.category! : "other";
   const text = (body.body ?? "").trim().slice(0, 4000);
   const email = (body.email ?? "").trim().slice(0, 200) || null;
   const pageUrl = (body.pageUrl ?? "").slice(0, 500) || null;
@@ -24,51 +23,16 @@ export async function POST(req: Request) {
   // 로그인 여부와 관계없이 저장: 서버 키가 있으면 그걸로, 없으면 사용자 권한으로
   const db = serviceDb() ?? supabase;
 
-  // 신고 대상 리스트: 제목·주인·주소·공개 범위를 메일에 자동으로 붙인다
-  const origin = new URL(req.url).origin;
+  // '이 리스트 신고'로 왔으면 신고 대상 리스트를 함께 저장(콘솔에서 제목·주인·링크로 보임)
   let listId: string | null = null;
-  let target = "";
   if (body.listId && /^[0-9a-f-]{36}$/i.test(body.listId)) {
-    const { data: l } = await db
-      .from("lists")
-      .select("id, title, slug, visibility, owner:profiles!lists_owner_id_fkey(handle, display_name)")
-      .eq("id", body.listId)
-      .maybeSingle();
-    if (l) {
-      const o = l.owner as unknown as { handle: string; display_name: string } | null;
-      listId = l.id as string;
-      target =
-        `신고 대상 리스트: ${l.title}\n` +
-        `만든 사람: ${o ? `${o.display_name} (@${o.handle})` : "-"}\n` +
-        `주소: ${o ? `${origin}/@${o.handle}/${l.slug}` : "-"}\n` +
-        `공개 범위: ${l.visibility}\n리스트 ID: ${l.id}\n`;
-    }
+    const { data: l } = await db.from("lists").select("id").eq("id", body.listId).maybeSingle();
+    listId = (l?.id as string | undefined) ?? null;
   }
-  const row = { user_id: userId, category, email, body: text, page_url: pageUrl, list_id: listId };
-  const { error } = await db.from("support_requests").insert(row);
-  if (error) return Response.json({ ok: false }, { status: 500 });
 
-  const key = process.env.RESEND_API_KEY;
-  const to = process.env.SUPPORT_INBOX;
-  if (key && to) {
-    let who = "로그인 안 함";
-    if (userId) {
-      const { data: p } = await supabase.from("profiles").select("handle, display_name").eq("id", userId).maybeSingle();
-      if (p) who = `${p.display_name} (@${p.handle})`;
-    }
-    await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        from: process.env.SUPPORT_FROM || "PinWith <onboarding@resend.dev>",
-        to: [to],
-        reply_to: email ?? undefined,
-        subject: `[PinWith ${CATEGORIES[category]}] ${target ? `리스트 신고 · ` : ""}${text.slice(0, 40)}`,
-        text:
-          `분류: ${CATEGORIES[category]}\n보낸 사람: ${who}\n답장 받을 메일: ${email ?? "(없음)"}\n` +
-          `화면: ${pageUrl ? (pageUrl.startsWith("/") ? origin + pageUrl : pageUrl) : "-"}\n${target}\n${text}`,
-      }),
-    }).catch(() => {});
-  }
+  const { error } = await db
+    .from("support_requests")
+    .insert({ user_id: userId, category, email, body: text, page_url: pageUrl, list_id: listId });
+  if (error) return Response.json({ ok: false }, { status: 500 });
   return Response.json({ ok: true });
 }
