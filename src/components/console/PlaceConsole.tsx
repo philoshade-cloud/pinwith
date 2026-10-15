@@ -228,9 +228,10 @@ function Field({ label, value, onChange, ...rest }: { label: string; value: stri
 }
 
 // ── 승인된 가게 ─────────────────────────
-type Tab = "offers" | "stats" | "billing";
+type Tab = "offers" | "reservations" | "stats" | "billing";
 const TABS: { id: Tab; label: string }[] = [
   { id: "offers", label: "과금 모델" },
+  { id: "reservations", label: "예약 문의" },
   { id: "stats", label: "성과" },
   { id: "billing", label: "광고비" },
 ];
@@ -269,6 +270,7 @@ function Approved({ b }: { b: Business }) {
       </div>
       <div className="mt-5">
         {tab === "offers" && <Offers b={b} currency={dash.currency} />}
+        {tab === "reservations" && <Reservations b={b} />}
         {tab === "stats" && <Stats dash={dash} days={days} setDays={setDays} />}
         {tab === "billing" && <Billing b={b} dash={dash} reload={reload} />}
       </div>
@@ -276,7 +278,9 @@ function Approved({ b }: { b: Business }) {
   );
 }
 
-type Offer = { id?: string; model: "click" | "visit"; rate: string; monthly_budget: string; message: string; active: boolean };
+const MODELS = ["click", "visit", "reservation"] as const;
+
+type Offer = { id?: string; model: "click" | "visit" | "reservation"; rate: string; monthly_budget: string; message: string; active: boolean };
 
 function Offers({ b, currency }: { b: Business; currency: string }) {
   const { supabase } = useAuthed("/biz/place");
@@ -290,7 +294,7 @@ function Offers({ b, currency }: { b: Business; currency: string }) {
     ]);
     if (s) setFee(Number(s.platform_fee_pct));
     const out: Record<string, Offer> = {};
-    for (const m of ["click", "visit"] as const) {
+    for (const m of MODELS) {
       const o = (data ?? []).find((x) => x.model === m);
       out[m] = o
         ? { id: o.id, model: m, rate: String(o.rate), monthly_budget: o.monthly_budget ? String(o.monthly_budget) : "", message: o.message ?? "", active: o.active }
@@ -325,8 +329,8 @@ function Offers({ b, currency }: { b: Business; currency: string }) {
         본인은 빠져요. 금액의 {fee}%는 PinWith 수수료, 나머지는 큐레이터에게 가요.
       </p>
       <Msg text={msg} />
-      <div className="grid gap-4 md:grid-cols-2">
-        {(["click", "visit"] as const).map((m) => {
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {MODELS.map((m) => {
           const o = rows[m];
           if (!o) return null;
           const set = (patch: Partial<Offer>) => setRows({ ...rows, [m]: { ...o, ...patch } });
@@ -343,8 +347,14 @@ function Offers({ b, currency }: { b: Business; currency: string }) {
                 <Field label={`1회 금액(${currency})`} value={o.rate} onChange={(v) => set({ rate: v })} inputMode="decimal" />
                 <Field label="한 달 예산(선택)" value={o.monthly_budget} onChange={(v) => set({ monthly_budget: v })} inputMode="decimal" placeholder="제한 없음" />
               </div>
+              {m === "reservation" && (
+                <p className="mt-2 rounded-lg bg-surface px-3 py-2 text-[12px] text-ink/80">
+                  등록하면 우리 가게가 담긴 모든 리스트의 장소 카드에 ‘예약 문의’ 버튼이 생겨요. 문의는 ‘예약 문의’ 탭에서 확정·거절하고, 확정할 때 그 리스트에
+                  이 조건을 붙인 큐레이터에게만 금액이 나가요.
+                </p>
+              )}
               <label className="mt-3 grid gap-1 text-[13px] font-semibold">
-                큐레이터에게 한마디(선택)
+                {m === "reservation" ? "손님·큐레이터에게 안내(선택)" : "큐레이터에게 한마디(선택)"}
                 <textarea value={o.message} onChange={(e) => set({ message: e.target.value })} maxLength={300} rows={2} className="field" placeholder="예: 대표 메뉴는 들기름 막국수예요. 사진 촬영 환영!" />
               </label>
               <div className="mt-3 flex gap-2">
@@ -367,7 +377,7 @@ function Stats({ dash, days, setDays }: { dash: Dash; days: number; setDays: (d:
       <Period value={days} onChange={setDays} />
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <Stat label={`${days}일 광고비`} value={money(total, dash.currency)} />
-        {(["click", "visit"] as const).map((m) => {
+        {MODELS.map((m) => {
           const x = dash.by_model.find((y) => y.model === m);
           return <Stat key={m} label={MODEL[m].label.replace(" 1회당", "")} value={`${count(x?.count)}회`} hint={money(x?.cost, dash.currency)} />;
         })}
@@ -473,6 +483,99 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
           </ul>
         )}
       </div>
+    </section>
+  );
+}
+
+// ── 예약 문의 관리 ─────────────────────────
+type Resv = {
+  id: string; name: string; phone: string; visit_date: string; visit_time: string | null; party_size: number; note: string | null;
+  status: "new" | "confirmed" | "declined" | "visited" | "no_show" | "cancelled"; reply: string | null; created_at: string;
+  curator_id: string | null; list: { title: string } | null;
+};
+const RS: Record<Resv["status"], string> = { new: "새 문의", confirmed: "확정", declined: "거절", visited: "방문 완료", no_show: "노쇼", cancelled: "취소" };
+
+function Reservations({ b }: { b: Business }) {
+  const { supabase } = useAuthed("/biz/place");
+  const [rows, setRows] = useState<Resv[] | null>(null);
+  const [filter, setFilter] = useState<"open" | "all">("open");
+  const [msg, setMsg] = useState("");
+  const load = useCallback(async () => {
+    let q = supabase
+      .from("reservations")
+      .select("id, name, phone, visit_date, visit_time, party_size, note, status, reply, created_at, curator_id, list:lists(title)")
+      .eq("business_id", b.id)
+      .order("visit_date", { ascending: true })
+      .limit(200);
+    if (filter === "open") q = q.in("status", ["new", "confirmed"]);
+    const { data } = await q;
+    setRows((data as unknown as Resv[]) ?? []);
+  }, [supabase, b.id, filter]);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    load();
+  }, [load]);
+
+  async function act(r: Resv, status: Resv["status"]) {
+    const ask = status === "confirmed" ? "손님에게 보낼 말(선택). 예: 창가 자리로 준비할게요" : status === "declined" ? "거절 사유(손님에게 보여요)" : null;
+    const reply = ask ? prompt(ask, "") : "";
+    if (reply === null) return;
+    const { error } = await supabase.rpc("set_reservation_status", { p_id: r.id, p_status: status, p_reply: reply });
+    setMsg(error ? "바꾸지 못했어요." : `${r.name}님 문의: ${RS[status]}`);
+    load();
+  }
+
+  if (!rows) return <p className="text-muted">불러오는 중…</p>;
+  return (
+    <section className="grid gap-4">
+      <p className="text-[13px] text-muted">
+        PinWith 장소 카드의 ‘예약 문의’로 들어온 요청이에요. 손님에게 연락해 확인한 뒤 확정하거나 거절하세요. 확정하면 손님에게 알림이 가고, 그 리스트에 예약 제휴를 붙인
+        큐레이터에게 보상이 기록돼요.
+      </p>
+      <div className="flex gap-2">
+        <button type="button" onClick={() => setFilter("open")} className={`${filter === "open" ? "btn-primary" : "btn-quiet"} !py-1 !text-[13px]`}>처리할 것</button>
+        <button type="button" onClick={() => setFilter("all")} className={`${filter === "all" ? "btn-primary" : "btn-quiet"} !py-1 !text-[13px]`}>전체</button>
+      </div>
+      <Msg text={msg} />
+      {rows.length === 0 ? (
+        <p className="text-[14px] text-muted">{filter === "open" ? "처리할 문의가 없어요." : "아직 문의가 없어요."}</p>
+      ) : (
+        <ul className="grid gap-3 md:grid-cols-2">
+          {rows.map((r) => (
+            <li key={r.id} className={`rounded-xl border p-4 ${r.status === "new" ? "border-pin" : "border-rule"}`}>
+              <p className="flex items-center gap-2">
+                <b className="text-[16px]">{r.visit_date.slice(5).replace("-", "/")} {r.visit_time ?? ""}</b>
+                <span className="text-[14px]">· {r.party_size}명</span>
+                <span className={`ml-auto rounded-full px-2 py-0.5 text-[12px] ${r.status === "new" ? "bg-pin text-white" : "bg-surface text-muted"}`}>{RS[r.status]}</span>
+              </p>
+              <p className="mt-1 text-[14px]">
+                {r.name} · <a href={`tel:${r.phone}`} className="text-teal underline">{r.phone}</a>
+              </p>
+              {r.note && <p className="mt-1 text-[13px] text-ink/80">요청: {r.note}</p>}
+              {r.reply && <p className="mt-1 text-[13px] text-muted">내 답: {r.reply}</p>}
+              <p className="mt-1 text-[12px] text-muted">
+                {r.list ? `‘${r.list.title}’에서` : "리스트에서"} · {new Date(r.created_at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "numeric", minute: "2-digit" })}
+                {r.curator_id ? " · 큐레이터 제휴" : ""}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {r.status === "new" && (
+                  <>
+                    <button type="button" onClick={() => act(r, "confirmed")} className="btn-primary !px-3 !py-1 !text-[13px]">확정</button>
+                    <button type="button" onClick={() => act(r, "declined")} className="btn-quiet !px-3 !py-1 !text-[13px]">거절</button>
+                  </>
+                )}
+                {r.status === "confirmed" && (
+                  <>
+                    <button type="button" onClick={() => act(r, "visited")} className="btn-quiet !px-3 !py-1 !text-[13px]">방문함</button>
+                    <button type="button" onClick={() => act(r, "no_show")} className="btn-quiet !px-3 !py-1 !text-[13px]">노쇼</button>
+                    <button type="button" onClick={() => act(r, "cancelled")} className="btn-quiet !px-3 !py-1 !text-[13px]">취소</button>
+                  </>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   );
 }

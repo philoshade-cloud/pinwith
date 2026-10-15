@@ -66,6 +66,7 @@ export function Period({ value, onChange }: { value: number; onChange: (d: numbe
 export const MODEL: Record<string, { label: string; desc: string }> = {
   click: { label: "길찾기·지도 열기 1회당", desc: "리스트에서 이 가게의 길찾기나 구글·네이버·카카오 지도 열기를 누를 때" },
   visit: { label: "가게 근처에서 누를 때 1회당", desc: "가게 500m 안에서 길찾기·지도 열기를 누를 때(방문 가능성이 높은 손님)" },
+  reservation: { label: "예약 확정 1건당", desc: "리스트의 장소 카드에서 ‘예약 문의’로 들어온 문의를 가게가 확정할 때" },
 };
 
 export function Msg({ text }: { text: string }) {
