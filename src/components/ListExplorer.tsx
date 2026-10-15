@@ -16,6 +16,8 @@ import { track } from "@/lib/track";
 import { isSupabaseConfigured } from "@/lib/env";
 import { createClient } from "@/lib/supabase/client";
 import { FollowButton } from "./FollowButton";
+import { SaveToListSheet } from "./SaveToListSheet";
+import { useRouter } from "next/navigation";
 
 const PlaceMap = dynamic(() => import("./PlaceMap").then((m) => m.PlaceMap), {
   ssr: false,
@@ -31,6 +33,10 @@ const formatCount = (n: number) =>
 export function ListExplorer({ list }: { list: CuratedList }) {
   const [view, setView] = useState<View>("map");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  // 섹션 필터: "all" 또는 섹션 id. 지도 핀과 목록이 함께 바뀐다.
+  const [section, setSection] = useState<string>("all");
+  const [saving, setSaving] = useState<ListItem | null>(null);
+  const router = useRouter();
   const [sort, setSort] = useState<Sort>("curator");
   const [here, setHere] = useState<{ lat: number; lng: number } | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -46,7 +52,14 @@ export function ListExplorer({ list }: { list: CuratedList }) {
       .then(({ data }) => setIsOwner(data.user?.id === list.curator.id));
   }, [isDemo, list.curator.id]);
 
-  const selected = list.items.find((i) => i.id === selectedId) ?? null;
+  const hasLoose = list.items.some((i) => !i.sectionId || !list.sections.some((sec) => sec.id === i.sectionId));
+  const visibleItems = useMemo(() => {
+    if (section === "all") return list.items;
+    if (section === "none")
+      return list.items.filter((i) => !i.sectionId || !list.sections.some((sec) => sec.id === i.sectionId));
+    return list.items.filter((i) => i.sectionId === section);
+  }, [list, section]);
+  const selected = visibleItems.find((i) => i.id === selectedId) ?? null;
   const isCourse = list.kind === "course";
 
   const groups = useMemo(() => {
@@ -55,18 +68,18 @@ export function ListExplorer({ list }: { list: CuratedList }) {
         i.lat == null || i.lng == null
           ? Infinity
           : Math.hypot(i.lat - here.lat, (i.lng - here.lng) * Math.cos((here.lat * Math.PI) / 180));
-      return [{ id: "near", name: "가까운 순", items: [...list.items].sort((a, b) => dist(a) - dist(b)) }];
+      return [{ id: "near", name: "가까운 순", items: [...visibleItems].sort((a, b) => dist(a) - dist(b)) }];
     }
     const bySection = list.sections.map((s) => ({
       id: s.id,
       name: s.name,
-      items: list.items.filter((i) => i.sectionId === s.id),
+      items: visibleItems.filter((i) => i.sectionId === s.id),
     }));
-    const loose = list.items.filter((i) => !i.sectionId || !list.sections.some((s) => s.id === i.sectionId));
+    const loose = visibleItems.filter((i) => !i.sectionId || !list.sections.some((s) => s.id === i.sectionId));
     return [...(loose.length ? [{ id: "none", name: "", items: loose }] : []), ...bySection].filter(
       (g) => g.items.length > 0,
     );
-  }, [list, sort, here]);
+  }, [list, visibleItems, sort, here]);
 
   function chooseSort(next: Sort) {
     if (next === "curator") return setSort("curator");
@@ -86,6 +99,43 @@ export function ListExplorer({ list }: { list: CuratedList }) {
     const item = list.items.find((i) => i.id === id);
     track("tap", { listId: list.id, itemId: id, lat: item?.lat, lng: item?.lng });
   }
+
+  async function startSave(item: ListItem) {
+    if (isDemo) {
+      setNotice("예시 리스트의 장소는 담을 수 없습니다. 실제 리스트에서 담아보세요.");
+      return;
+    }
+    const { data } = await createClient().auth.getUser();
+    if (!data.user) {
+      router.push(`/login?next=${encodeURIComponent(window.location.pathname)}`);
+      return;
+    }
+    setSaving(item);
+  }
+
+  function chooseSection(id: string) {
+    setSection(id);
+    setSelectedId(null);
+  }
+
+  const sectionChips =
+    list.sections.length > 0 ? (
+      <div className="flex gap-1.5 overflow-x-auto" role="group" aria-label="섹션">
+        {[{ id: "all", name: "전체" }, ...list.sections, ...(hasLoose ? [{ id: "none", name: "기타" }] : [])].map((sec) => (
+          <button
+            key={sec.id}
+            type="button"
+            aria-pressed={section === sec.id}
+            onClick={() => chooseSection(sec.id)}
+            className={`shrink-0 rounded-full px-3 py-1.5 text-[13px] font-semibold transition-colors ${
+              section === sec.id ? "bg-ink text-white" : "bg-white text-ink shadow-[inset_0_0_0_1px_var(--color-rule)]"
+            }`}
+          >
+            {sec.name}
+          </button>
+        ))}
+      </div>
+    ) : null;
 
   async function share() {
     const url = window.location.href;
@@ -152,7 +202,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
         </header>
 
         <div className="flex items-center justify-between border-y border-rule px-5 py-2.5">
-          <span className="text-[13px] text-muted">장소 {list.items.length}곳</span>
+          <span className="text-[13px] text-muted">장소 {visibleItems.length}곳</span>
           <label className="flex items-center gap-2 text-[13px] text-muted">
             정렬
             <select
@@ -165,6 +215,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
             </select>
           </label>
         </div>
+        {sectionChips && <div className="border-b border-rule px-5 py-2.5">{sectionChips}</div>}
 
         <div className="pb-28 lg:pb-8">
           {groups.map((g) => (
@@ -196,7 +247,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
                     </button>
                     {item.id === selectedId && (
                       <div className="bg-surface px-5 pb-4">
-                        <PlaceActions item={item} listId={list.id} />
+                        <PlaceActions item={item} listId={list.id} onSave={startSave} />
                       </div>
                     )}
                   </li>
@@ -208,7 +259,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
       </aside>
 
       {/* 지도: 모바일에서는 '지도' 보기일 때, 데스크톱에서는 항상 */}
-      <main className={`${view === "map" ? "block" : "hidden"} map-under-header relative min-h-0 flex-1 lg:block`}>
+      <main className={`${view === "map" ? "block" : "hidden"} map-ctrl-low relative min-h-0 flex-1 lg:block`}>
         <div className="absolute inset-x-0 top-0 z-10 flex items-center gap-2 bg-white/95 px-3 py-3 shadow-[0_1px_0_var(--color-rule)] lg:hidden">
           <Link href={homeHref} aria-label="뒤로" className="-my-1 grid h-8 w-8 shrink-0 place-items-center rounded-full text-[20px] text-ink hover:bg-surface">
             ‹
@@ -219,7 +270,9 @@ export function ListExplorer({ list }: { list: CuratedList }) {
             <Link href={`/me/lists/${list.id}`} className="btn-quiet shrink-0 !px-3 !py-1">편집</Link>
           )}
         </div>
-        <PlaceMap items={list.items} selectedId={selectedId} onSelect={select} showRoute={isCourse} />
+        {sectionChips && <div className="absolute inset-x-0 top-[52px] z-10 px-3 py-2 lg:hidden">{sectionChips}</div>}
+        {sectionChips && <div className="absolute left-4 top-4 z-10 hidden max-w-[70%] lg:block">{sectionChips}</div>}
+        <PlaceMap items={visibleItems} selectedId={selectedId} onSelect={select} showRoute={isCourse} />
         {selected && (
           <div className="absolute inset-x-3 bottom-20 z-10 rounded-xl bg-white p-4 shadow-[0_8px_30px_rgba(24,34,47,0.18)] lg:bottom-6 lg:left-6 lg:right-auto lg:w-[360px]">
             <div className="flex items-start justify-between gap-3">
@@ -235,7 +288,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
             </div>
             {selected.memo && <p className="mt-1.5 text-[14px] leading-relaxed text-ink/80">{selected.memo}</p>}
             <div className="mt-3">
-              <PlaceActions item={selected} listId={list.id} />
+              <PlaceActions item={selected} listId={list.id} onSave={startSave} />
             </div>
           </div>
         )}
@@ -259,6 +312,8 @@ export function ListExplorer({ list }: { list: CuratedList }) {
         </div>
       </div>
 
+      {saving && <SaveToListSheet item={saving} onClose={() => setSaving(null)} />}
+
       {notice && (
         <div
           role="status"
@@ -273,7 +328,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
   );
 }
 
-function PlaceActions({ item, listId }: { item: ListItem; listId: string }) {
+function PlaceActions({ item, listId, onSave }: { item: ListItem; listId: string; onSave: (item: ListItem) => void }) {
   const korea = isInKorea(item.lat, item.lng);
   const ctx = { listId, itemId: item.id, lat: item.lat, lng: item.lng };
   return (
@@ -306,9 +361,9 @@ function PlaceActions({ item, listId }: { item: ListItem; listId: string }) {
           </a>
         </>
       )}
-      <Link href="/login" className="btn-quiet">
+      <button type="button" onClick={() => onSave(item)} className="btn-quiet">
         내 리스트에 담기
-      </Link>
+      </button>
     </div>
   );
 }

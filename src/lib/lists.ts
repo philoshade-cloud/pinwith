@@ -24,6 +24,8 @@ export type NewItem = {
   title: string;
   memo: string;
   sectionId: string | null;
+  // 남의 리스트에서 담은 경우 원래 항목(출처 표시용)
+  copiedFromItemId?: string | null;
 };
 
 export type AddedItem = {
@@ -77,6 +79,7 @@ export async function addPlaceToList(item: NewItem): Promise<AddedItem> {
       custom_title: item.title,
       memo: item.memo,
       section_id: item.sectionId,
+      copied_from_item_id: item.copiedFromItemId ?? null,
       position: (last?.position ?? -1) + 1,
     })
     .select("id, place_id, custom_title, memo, section_id, position, places(lat, lng)")

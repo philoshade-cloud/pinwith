@@ -75,12 +75,6 @@ export function CuratorView({ curator, lists, isOwner }: { curator: Curator; lis
     window.setTimeout(() => setToast(null), 3000);
   }
 
-  function showListOnMap(id: string) {
-    setActiveList(id);
-    setSelectedPin(null);
-    setView("map");
-  }
-
   return (
     <div className="lg:flex lg:h-dvh">
       {/* 목록: 프로필 + 리스트 */}
@@ -122,19 +116,18 @@ export function CuratorView({ curator, lists, isOwner }: { curator: Curator; lis
             <ul>
               {lists.map((l) => (
                 <li key={l.id} className={`border-b border-rule ${activeList === l.id ? "bg-surface" : ""}`}>
-                  <div className="flex items-start gap-3 px-5 py-4">
-                    <button type="button" onClick={() => showListOnMap(l.id)} className="min-w-0 flex-1 text-left">
+                  <div className="flex items-center gap-3 px-5 py-4">
+                    {/* 리스트 이름을 누르면 리스트 화면으로 */}
+                    <Link href={`/@${curator.handle}/${l.slug}`} className="min-w-0 flex-1">
                       <span className="block text-[17px] font-semibold text-ink">{l.title}</span>
                       <span className="mt-1 block text-[13px] text-muted">
                         장소 {l.itemCount}곳
                         {isOwner && ` · ${VIS[l.visibility]}`}
                         {l.themes.length > 0 && ` · ${l.themes.map((t) => `#${t}`).join(" ")}`}
                       </span>
-                    </button>
-                    <span className="flex shrink-0 gap-1.5">
-                      {isOwner && <Link href={`/me/lists/${l.id}`} className="btn-quiet !px-3">편집</Link>}
-                      <Link href={`/@${curator.handle}/${l.slug}`} className="btn-quiet !px-3">열기</Link>
-                    </span>
+                    </Link>
+                    {isOwner && <Link href={`/me/lists/${l.id}`} className="btn-quiet shrink-0 !px-3">편집</Link>}
+                    <Link href={`/@${curator.handle}/${l.slug}`} aria-hidden tabIndex={-1} className="shrink-0 text-[20px] text-muted">›</Link>
                   </div>
                 </li>
               ))}

@@ -89,7 +89,7 @@ export function PlaceMap({ items, selectedId, onSelect, showRoute, candidate = n
       const narrow = window.innerWidth < 1024;
       // 모바일에서는 위쪽 제목 줄과 아래쪽 지도/목록 전환 버튼을 피해서 맞춘다.
       m.fitBounds(bounds, {
-        padding: narrow ? { top: 90, bottom: 110, left: 40, right: 40 } : 64,
+        padding: narrow ? { top: 120, bottom: 110, left: 40, right: 40 } : 64,
         maxZoom: 15,
         duration: 0,
       });

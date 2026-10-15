@@ -5,7 +5,9 @@ import { createClient } from "@/lib/supabase/client";
 
 // 구글 클라이언트 ID(공개 값). Google Identity Services로 로그인 창을 우리 사이트에서 띄운다.
 // 이렇게 하면 구글 화면에 Supabase 주소 대신 우리 사이트 주소가 보인다.
-export const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? "";
+export const GOOGLE_CLIENT_ID =
+  process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ||
+  "647613550393-d7lrh369jmb3laac8re391l91t2b10m2.apps.googleusercontent.com";
 
 type GoogleId = {
   accounts: {
