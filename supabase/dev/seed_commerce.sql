@@ -114,3 +114,6 @@ begin
       ((select id from auth.users where email = 'test6@pinwith.test'), 'other', null, '[테스트] 다크 모드도 지원되면 좋겠어요.', '/me', null, now() - interval '30 minutes');
   end if;
 end $$;
+
+-- v0.20 추가(2026-10-15): 우래옥·명동교자 예약 기능 켜기(요일·시간대), 우래옥 노쇼 많은 패턴(이상 알림 시험용), 예약 대화 샘플
+-- (실행한 SQL은 대화 기록 참고: businesses.reservations_enabled/hours 설정, 지난 확정 예약 6건(방문 2·노쇼 4), private.check_reservation_anomaly 호출)
