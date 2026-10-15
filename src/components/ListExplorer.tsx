@@ -6,7 +6,9 @@ import { useEffect, useMemo, useState } from "react";
 import type { CuratedList, ListItem } from "@/lib/types";
 import { isWithinMeters } from "@/lib/links";
 import { shortLink } from "@/lib/share";
+import { AdSlot } from "./AdSlot";
 import { FollowButton } from "./FollowButton";
+import { LikeButton } from "./LikeButton";
 import { Panel } from "./shell/Panel";
 import { Tags } from "./shell/PinCard";
 import { useMapScene, useShell, type Scene } from "./shell/context";
@@ -178,7 +180,9 @@ export function ListExplorer({ list }: { list: CuratedList }) {
             !isOwner && <FollowButton curatorId={list.curator.id} handle={list.curator.handle} />
           )}
           <button type="button" onClick={share} className="btn-quiet">공유</button>
-          <span className="ml-auto self-center text-[13px] text-muted">좋아요 {formatCount(list.likeCount)}</span>
+          <span className="ml-auto self-center">
+            <LikeButton listId={list.id} initialCount={list.likeCount} demo={isDemo} />
+          </span>
         </div>
         {isOwner && (
           <p className="mt-4 rounded-lg bg-surface px-3 py-2 text-[13px] text-ink/80">
@@ -212,12 +216,17 @@ export function ListExplorer({ list }: { list: CuratedList }) {
       </div>
 
       <div className="pb-6">
-        {groups.map((g) => (
+        {groups.map((g, gi) => (
           <section key={g.id} aria-label={g.name || "장소"}>
             {g.name && <h2 className="px-5 pb-1 pt-5 text-[13px] font-semibold text-teal">{g.name}</h2>}
             <ul>
-              {g.items.map((item) => (
+              {g.items.map((item, ii) => (
                 <li key={item.id}>
+                  {/* 광고 자리: 장소 6곳마다 */}
+                  {(() => {
+                    const n = groups.slice(0, gi).reduce((c, x) => c + x.items.length, 0) + ii;
+                    return n > 0 && n % 6 === 0 ? <AdSlot slot="list-inline" variant={n / 6} /> : null;
+                  })()}
                   <button
                     type="button"
                     onClick={() => select(item.id)}
@@ -241,6 +250,8 @@ export function ListExplorer({ list }: { list: CuratedList }) {
             </ul>
           </section>
         ))}
+        {/* 광고 자리: 목록 끝 */}
+        <AdSlot slot="list-end" variant={isDemo ? 0 : 1} />
       </div>
     </Panel>
   );

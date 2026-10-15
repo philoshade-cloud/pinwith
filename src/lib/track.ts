@@ -6,8 +6,10 @@ import { isWithinMeters } from "@/lib/links";
 
 type EventName = "open" | "tap" | "directions" | "google_open" | "naver_open" | "kakao_open";
 
+// 기기 식별값은 '모두 허용'에 동의한 경우에만 만든다
 function deviceId() {
   try {
+    if (localStorage.getItem("pw_consent") !== "all") return null;
     let id = localStorage.getItem("pw_device");
     if (!id) {
       id = crypto.randomUUID();

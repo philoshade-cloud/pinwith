@@ -75,6 +75,18 @@ export function MyPage() {
     router.push("/");
   }
 
+  async function deleteAccount() {
+    if (!window.confirm("계정을 삭제할까요? 내 리스트와 장소, 팔로우, 좋아요가 모두 지워지며 되돌릴 수 없습니다.")) return;
+    const { error } = await supabase.rpc("delete_my_account");
+    if (error) {
+      setMsg("계정을 삭제하지 못했습니다. 잠시 후 다시 시도하세요.");
+      return;
+    }
+    await supabase.auth.signOut();
+    await refreshMine();
+    router.replace("/");
+  }
+
   if (!profile || !draft) return <PanelLoading />;
 
   return (
@@ -138,6 +150,18 @@ export function MyPage() {
             </Link>
           )}
           <SignOutButton className="btn-quiet justify-center" />
+        </div>
+
+        <div className="mt-10 border-t border-rule pt-6 text-[13px] text-muted">
+          <p>
+            <Link href="/privacy" className="underline">개인정보처리방침</Link>
+            {" · "}
+            <Link href="/terms" className="underline">이용약관</Link>
+          </p>
+          <button type="button" onClick={deleteAccount} className="mt-4 font-semibold text-pin hover:underline">
+            계정 삭제
+          </button>
+          <p className="mt-1">내 프로필, 리스트, 팔로우, 좋아요가 모두 지워지며 되돌릴 수 없습니다.</p>
         </div>
       </div>
     </Panel>

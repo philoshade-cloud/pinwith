@@ -190,3 +190,11 @@ body {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* 긴 글(개인정보처리방침·약관) */
+.doc h1 { font-family: var(--font-display); font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
+.doc h2 { margin-top: 28px; font-size: 17px; font-weight: 700; }
+.doc p, .doc li { margin-top: 8px; font-size: 15px; line-height: 1.7; color: rgb(24 34 47 / 0.85); }
+.doc ul { margin-top: 4px; padding-left: 1.2em; list-style: disc; }
+.doc .note { color: var(--color-muted); font-size: 13px; }
+.doc hr { margin: 36px 0 8px; border-color: var(--color-rule); }

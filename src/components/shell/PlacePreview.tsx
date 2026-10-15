@@ -18,6 +18,8 @@ export function PlacePreview({
 }) {
   const [loaded, setLoaded] = useState<LoadedPlace | null>(known ?? null);
   const place = loaded ?? known ?? null;
+  // 이름·좌표를 이미 알면 구글 장소 카드(유료)는 눌렀을 때만 불러온다
+  const [showCard, setShowCard] = useState(!known);
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 max-h-[78dvh] overflow-y-auto rounded-t-2xl bg-white p-4 pb-6 shadow-[0_-8px_30px_rgba(24,34,47,0.2)] lg:bottom-auto lg:left-4 lg:right-auto lg:top-[76px] lg:max-h-[calc(100dvh-92px)] lg:w-[400px] lg:rounded-2xl">
@@ -27,14 +29,19 @@ export function PlacePreview({
           ✕
         </button>
       </div>
-      <div className="mt-2">
-        <PlaceCard
+      {!showCard && (
+        <button type="button" onClick={() => setShowCard(true)} className="mt-2 w-full rounded-lg bg-surface px-3 py-2.5 text-left text-[14px] font-semibold text-teal">
+          사진·평점·영업 정보 보기 ›
+        </button>
+      )}
+      <div className={showCard ? "mt-2" : "hidden"}>
+        {showCard && <PlaceCard
           placeId={placeId}
           onLoaded={(p) => {
             setLoaded(p);
             onLoaded(p);
           }}
-        />
+        />}
       </div>
       <div className="mt-3 flex flex-wrap gap-2">
         {place && <ExternalLinks item={{ title: place.name, placeId, lat: place.lat, lng: place.lng }} />}

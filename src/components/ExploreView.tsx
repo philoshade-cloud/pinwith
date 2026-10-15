@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Panel } from "./shell/Panel";
+import { AdSlot } from "./AdSlot";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -178,11 +179,14 @@ export function ExploreView() {
           )}
           {popular.length > 0 && (
             <Section title="인기 리스트">
-              <ListRows rows={popular} />
+              <ListRows rows={popular} adSlot="explore-popular" />
             </Section>
           )}
+          <div className="-mx-5 mt-6">
+            <AdSlot slot="explore-mid" variant={2} />
+          </div>
           <Section title="새로 올라온 리스트">
-            {recent.length === 0 ? <Empty>아직 공개된 리스트가 없습니다.</Empty> : <ListRows rows={recent} />}
+            {recent.length === 0 ? <Empty>아직 공개된 리스트가 없습니다.</Empty> : <ListRows rows={recent} adSlot="explore-recent" />}
           </Section>
           <Section title="예시">
             <Link href="/demo" className="block border-y border-rule py-3.5 hover:bg-surface/60">
@@ -230,11 +234,17 @@ function CuratorRows({ rows }: { rows: CuratorHit[] }) {
   );
 }
 
-function ListRows({ rows }: { rows: ListHit[] }) {
+// 광고 자리: 리스트 5개마다
+function ListRows({ rows, adSlot }: { rows: ListHit[]; adSlot?: string }) {
   return (
     <ul className="divide-y divide-rule border-y border-rule">
-      {rows.map((l) => (
+      {rows.map((l, i) => (
         <li key={l.id}>
+          {adSlot && i > 0 && i % 5 === 0 && (
+            <div className="-mx-5 py-1">
+              <AdSlot slot={adSlot} variant={i / 5} />
+            </div>
+          )}
           <Link href={`/@${l.owner?.handle}/${l.slug}`} className="block py-3.5 hover:bg-surface/60">
             <span className="block text-[17px] font-semibold text-ink">{l.title}</span>
             <span className="mt-1 block text-[13px] text-muted">

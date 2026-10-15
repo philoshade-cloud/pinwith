@@ -44,6 +44,11 @@ export function Welcome({ sample }: { sample: CuratedList }) {
             다른 사람 리스트 둘러보기
           </Link>
         </div>
+        <p className="mt-8 text-[12px] text-muted">
+          <Link href="/privacy" className="underline">개인정보처리방침</Link>
+          {" · "}
+          <Link href="/terms" className="underline">이용약관</Link>
+        </p>
       </div>
     </Panel>
   );

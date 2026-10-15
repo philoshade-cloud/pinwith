@@ -13,6 +13,8 @@ import { SaveToListSheet } from "../SaveToListSheet";
 import { AddPlaceSheet } from "./AddPlaceSheet";
 import { PinCard } from "./PinCard";
 import { PlacePreview } from "./PlacePreview";
+import { ConsentBanner } from "../Consent";
+import { Logo } from "../Logo";
 import { ShellContext, type Me, type MyList, type Scene, type Shell } from "./context";
 
 const PlaceMap = dynamic(() => import("../PlaceMap").then((m) => m.PlaceMap), {
@@ -53,7 +55,7 @@ export function MapShell({ children }: { children: ReactNode }) {
   const [candidate, setCandidate] = useState<LoadedPlace | null>(null);
   const [searchKey, setSearchKey] = useState(0);
   // Enter로 찾은 여러 장소: 지도에 다른 색 핀으로, 버튼을 누르면 목록으로
-  const [results, setResults] = useState<{ query: string; places: FoundPlace[] } | null>(null);
+  const [results, setResults] = useState<{ query: string; places: FoundPlace[]; more?: () => void } | null>(null);
   const [resultsList, setResultsList] = useState(false);
   const centerOf = useRef<(() => { lat: number; lng: number }) | null>(null);
   const resultItems: ListItem[] = useMemo(
@@ -140,14 +142,14 @@ export function MapShell({ children }: { children: ReactNode }) {
     if (!results) setSearchKey((k) => k + 1);
   }
 
-  function showResults(query: string, places: FoundPlace[]) {
+  function showResults(query: string, places: FoundPlace[], more?: () => void) {
     setSelectedId(null);
     if (places.length === 0) {
       setResults(null);
       toast(`‘${query}’로 찾은 장소가 없습니다.`);
       return;
     }
-    setResults({ query, places });
+    setResults({ query, places, more });
     setResultsList(false);
     if (window.innerWidth < 1024) setPanelOpen(false);
   }
@@ -155,7 +157,9 @@ export function MapShell({ children }: { children: ReactNode }) {
   function pickResult(id: string) {
     const p = results?.places.find((x) => x.id === id);
     setSaveAs(null);
-    setPicked({ id, known: p ? { name: p.name, lat: p.lat, lng: p.lng } : undefined });
+    const known = p ? { name: p.name, lat: p.lat, lng: p.lng } : undefined;
+    setPicked({ id, known });
+    setCandidate(known ?? null);
   }
 
   function closeResults() {
@@ -222,7 +226,7 @@ export function MapShell({ children }: { children: ReactNode }) {
           aria-label="PinWith 지도"
           className="font-display hidden h-11 shrink-0 place-items-center rounded-xl bg-white px-3 text-[15px] font-semibold text-pin shadow-[0_2px_10px_rgba(24,34,47,0.15)] lg:grid"
         >
-          PinWith
+          <Logo size={24} />
         </Link>
         <div className="min-h-11 min-w-0 flex-1 rounded-xl bg-white p-1 shadow-[0_2px_10px_rgba(24,34,47,0.15)]">
           {me ? (
@@ -230,10 +234,10 @@ export function MapShell({ children }: { children: ReactNode }) {
               key={searchKey}
               near={() => centerOf.current?.() ?? null}
               onResults={showResults}
-              onPick={(id) => {
+              onPick={(id, known) => {
                 setResults(null);
-                setPicked({ id });
-                setCandidate(null);
+                setPicked({ id, known });
+                setCandidate(known ?? null);
                 setSelectedId(null);
               }}
             />
@@ -298,6 +302,11 @@ export function MapShell({ children }: { children: ReactNode }) {
             <span className="min-w-0 flex-1 truncate text-[14px]">
               ‘{results.query}’ {results.places.length}곳 · 핀을 눌러 담기
             </span>
+            {results.more && (
+              <button type="button" onClick={results.more} className="shrink-0 rounded-full bg-white/15 px-3 py-1 text-[13px] font-semibold text-white">
+                구글에서 더
+              </button>
+            )}
             <button type="button" onClick={() => setResultsList(!resultsList)} className="shrink-0 rounded-full bg-white px-3 py-1 text-[13px] font-semibold text-ink">
               {resultsList ? "지도" : "목록"}
             </button>
@@ -349,6 +358,8 @@ export function MapShell({ children }: { children: ReactNode }) {
       )}
 
       {saving && <SaveToListSheet item={saving} onClose={() => setSaving(null)} />}
+
+      <ConsentBanner />
 
       {toastMsg && (
         <div role="status" className="fixed inset-x-0 top-[64px] z-50 mx-auto w-fit max-w-[90vw] rounded-full bg-ink px-4 py-2 text-[14px] text-white lg:top-5">
