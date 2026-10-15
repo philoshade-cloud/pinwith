@@ -10,6 +10,7 @@ drop function if exists public.unblock_curator(uuid, uuid);
 drop function if exists public.biz_lists(uuid);
 drop function if exists public.add_place_and_attach(uuid, uuid, boolean);
 drop function if exists public.my_connected_stores(integer);
+drop function if exists public.anonymize_old_reservations();
 drop function if exists public.my_charges(integer, text);
 drop function if exists public.biz_charges(uuid, integer);
 drop function if exists public.send_reservation_message(uuid, text);

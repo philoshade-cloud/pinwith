@@ -537,3 +537,19 @@ language sql stable security definer set search_path = '' as $$
 $$;
 revoke execute on function public.my_offer_stats(integer) from public, anon;
 grant execute on function public.my_offer_stats(integer) to authenticated;
+
+-- ── 0.20-16 예약 문의 보관 기간(방문일 + 1년)이 지나면 이름·연락처·요청·메시지를 지운다(매일 자동 작업에서 호출) ──
+create or replace function public.anonymize_old_reservations() returns integer
+language plpgsql security definer set search_path = '' as $$
+declare n integer;
+begin
+  update public.reservation_messages m set body = '(보관 기간이 지나 지웠어요)'
+  from public.reservations r
+  where r.id = m.reservation_id and r.visit_date < (now() at time zone 'Asia/Seoul')::date - 365 and m.body <> '(보관 기간이 지나 지웠어요)';
+  update public.reservations set name = '(지움)', phone = '(지움)', note = null, reply = null
+  where visit_date < (now() at time zone 'Asia/Seoul')::date - 365 and name <> '(지움)';
+  get diagnostics n = row_count;
+  return n;
+end; $$;
+revoke all on function public.anonymize_old_reservations() from public, anon, authenticated;
+grant execute on function public.anonymize_old_reservations() to service_role;
