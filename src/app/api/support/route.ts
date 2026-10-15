@@ -1,10 +1,13 @@
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { serviceDb } from "@/lib/placeCoords";
+import { allow, clientIp, tooMany } from "@/lib/rateLimit";
 
 // 문의·신고 접수: DB(support_requests)에 저장하고 운영자 콘솔(/admin → 문의·신고)에서 확인한다.
 const CATEGORIES = ["question", "bug", "report", "partnership", "other"] as const;
 
 export async function POST(req: Request) {
+  // 같은 곳에서 10분에 5건까지
+  if (!(await allow(`support:${clientIp(req)}`, 5, 600))) return tooMany();
   let body: { category?: string; email?: string; body?: string; pageUrl?: string; listId?: string };
   try {
     body = await req.json();

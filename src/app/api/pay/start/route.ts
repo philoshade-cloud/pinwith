@@ -1,6 +1,7 @@
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
 import { serviceDb } from "@/lib/placeCoords";
 import { presentmentCurrency } from "@/lib/payments";
+import { allow, clientIp, tooMany } from "@/lib/rateLimit";
 
 const ZERO_DECIMAL = new Set(["KRW", "JPY", "VND", "IDR"]);
 
@@ -18,6 +19,7 @@ async function rate(from: string, to: string): Promise<number | null> {
 
 // 광고비 카드 결제 시작(Stripe Checkout): 충전 기록을 만들고 결제 페이지 주소를 돌려준다.
 export async function POST(req: Request) {
+  if (!(await allow(`pay:${clientIp(req)}`, 10, 60))) return tooMany();
   let body: { businessId?: string; amount?: number; country?: string };
   try {
     body = await req.json();

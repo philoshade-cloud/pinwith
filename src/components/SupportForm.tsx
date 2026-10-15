@@ -35,7 +35,7 @@ function SupportFormInner({ type, listId, from: fromParam }: { type: string | nu
   const [category, setCategory] = useState<string>(type && CATEGORIES.some((c) => c.id === type) ? type : "question");
   const [email, setEmail] = useState("");
   const [body, setBody] = useState("");
-  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [state, setState] = useState<"idle" | "sending" | "sent" | "error" | "busy">("idle");
   const from = fromParam ?? "";
 
   // 리스트 화면의 '이 리스트 신고'로 들어오면 어떤 리스트인지 함께 보낸다
@@ -58,7 +58,7 @@ function SupportFormInner({ type, listId, from: fromParam }: { type: string | nu
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ category, email, body, pageUrl: from, listId: listId || undefined }),
     }).catch(() => null);
-    setState(res?.ok ? "sent" : "error");
+    setState(res?.ok ? "sent" : res?.status === 429 ? "busy" : "error");
   }
 
   return (
@@ -104,6 +104,7 @@ function SupportFormInner({ type, listId, from: fromParam }: { type: string | nu
               />
             </label>
             {state === "error" && <p role="alert" className="text-[14px] text-pin">보내지 못했습니다. 잠시 후 다시 시도하세요.</p>}
+            {state === "busy" && <p role="alert" className="text-[14px] text-pin">짧은 시간에 너무 많이 보냈어요. 10분쯤 뒤에 다시 보내 주세요.</p>}
             <button type="submit" disabled={state === "sending" || !body.trim()} className="btn-primary justify-center !py-3 disabled:opacity-40">
               {state === "sending" ? "보내는 중" : "보내기"}
             </button>

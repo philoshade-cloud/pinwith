@@ -1,7 +1,9 @@
 import { createClient as createServerSupabase } from "@/lib/supabase/server";
+import { allow, clientIp, tooMany } from "@/lib/rateLimit";
 
 // 이 기기를 알림 받을 곳으로 등록/해제(로그인한 사람 본인 것만)
 export async function POST(req: Request) {
+  if (!(await allow(`push:${clientIp(req)}`, 20, 60))) return tooMany();
   const supabase = await createServerSupabase();
   const { data: claims } = await supabase.auth.getClaims();
   const userId = claims?.claims?.sub as string | undefined;
