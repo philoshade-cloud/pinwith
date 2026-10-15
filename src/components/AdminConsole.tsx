@@ -3,10 +3,14 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { BizReview, PayoutRequests, Topups } from "./AdminCommerce";
 
-type Tab = "payout" | "curators" | "settings" | "support";
+type Tab = "payout" | "curators" | "settings" | "support" | "biz" | "topups" | "requests";
 const TABS: { id: Tab; label: string }[] = [
   { id: "payout", label: "정산" },
+  { id: "requests", label: "지급 요청" },
+  { id: "biz", label: "가게 인증" },
+  { id: "topups", label: "광고비 충전" },
   { id: "curators", label: "큐레이터·분배율" },
   { id: "settings", label: "수익화 기준" },
   { id: "support", label: "문의·신고" },
@@ -53,6 +57,9 @@ export function AdminConsole() {
         {tab === "curators" && <Curators />}
         {tab === "settings" && <Settings />}
         {tab === "support" && <Support />}
+        {tab === "biz" && <BizReview />}
+        {tab === "topups" && <Topups />}
+        {tab === "requests" && <PayoutRequests />}
       </div>
     </div>
   );
@@ -133,14 +140,6 @@ function Payouts() {
     load();
   }
 
-  async function updatePayout(p: Payout, patch: Partial<Payout>) {
-    const next = { ...patch };
-    if (patch.status === "paid" && !p.paid_at) next.paid_at = new Date().toISOString();
-    const { error } = await supabase.from("payouts").update(next).eq("id", p.id);
-    if (error) return setMsg("바꾸지 못했습니다.");
-    setPayouts((xs) => xs.map((x) => (x.id === p.id ? { ...x, ...next } : x)));
-  }
-
   function downloadCsv() {
     const head = ["handle", "amount", "currency", "status", "method", "reference", "paid_at", "views"];
     const lines = payouts.map((p) => [p.handle, p.amount, p.currency, p.status, p.method ?? "", p.reference ?? "", p.paid_at ?? "", p.views]);
@@ -187,6 +186,7 @@ function Payouts() {
         넣으세요.
       </p>
       {msg && <p role="status" className="text-[14px] text-teal">{msg}</p>}
+      <p className="text-[13px] text-muted">확정한 금액은 각 큐레이터의 ‘받을 수 있는 금액’에 더해지고, 실제 지급은 ‘지급 요청’ 탭에서 처리해요.</p>
 
       <div className="flex items-center gap-3">
         <h2 className="text-[17px] font-semibold">{finalized ? "지급 목록(확정됨)" : "미리보기"}</h2>
@@ -209,8 +209,6 @@ function Payouts() {
                 <th>노출</th>
                 <th>금액</th>
                 <th>리스트별</th>
-                {finalized && <th>상태</th>}
-                {finalized && <th>지급 방법 · 참조</th>}
               </tr>
             </thead>
             <tbody>
@@ -228,21 +226,6 @@ function Payouts() {
                       </span>
                     ))}
                   </td>
-                  {finalized && "status" in p && (
-                    <td>
-                      <select value={p.status} onChange={(e) => updatePayout(p, { status: e.target.value as Payout["status"] })} className="field !py-1">
-                        <option value="pending">지급 전</option>
-                        <option value="paid">지급함</option>
-                        <option value="held">보류</option>
-                      </select>
-                    </td>
-                  )}
-                  {finalized && "status" in p && (
-                    <td className="grid gap-1 py-2">
-                      <input defaultValue={p.method ?? ""} onBlur={(e) => e.target.value !== (p.method ?? "") && updatePayout(p, { method: e.target.value || null })} className="field !py-1" placeholder="Wise, PayPal, 계좌이체…" />
-                      <input defaultValue={p.reference ?? ""} onBlur={(e) => e.target.value !== (p.reference ?? "") && updatePayout(p, { reference: e.target.value || null })} className="field !py-1" placeholder="거래 번호" />
-                    </td>
-                  )}
                 </tr>
               ))}
             </tbody>
@@ -343,11 +326,11 @@ function Curators() {
 // ── 수익화 기준 ─────────────────────────
 function Settings() {
   const supabase = useMemo(() => createClient(), []);
-  const [s, setS] = useState<{ min_followers: number; min_ad_views_30d: number; default_rate_pct: number; currency: string } | null>(null);
+  const [s, setS] = useState<{ min_followers: number; min_ad_views_30d: number; default_rate_pct: number; currency: string; platform_fee_pct: number; min_payout: number; est_rpm: number } | null>(null);
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    supabase.from("monetization_settings").select("min_followers, min_ad_views_30d, default_rate_pct, currency").maybeSingle().then(({ data }) => data && setS(data as NonNullable<typeof s>));
+    supabase.from("monetization_settings").select("min_followers, min_ad_views_30d, default_rate_pct, currency, platform_fee_pct, min_payout, est_rpm").maybeSingle().then(({ data }) => data && setS(data as NonNullable<typeof s>));
   }, [supabase]);
 
   async function save(e: React.FormEvent) {
@@ -379,7 +362,10 @@ function Settings() {
       {field("min_followers", "팔로워 수 기준", "이 수 이상이면 자격")}
       {field("min_ad_views_30d", "최근 30일 광고 노출 기준", "리스트 화면 광고 자리가 절반 이상 1초 넘게 보인 횟수(같은 사람 30분 안 반복·본인 열람 제외)")}
       {field("default_rate_pct", "기본 분배율 %", "큐레이터별로 따로 정하지 않았을 때")}
-      {field("currency", "기본 통화", "예: USD, SGD, KRW")}
+      {field("currency", "기본 통화", "예: USD, SGD, KRW. 광고 정산·가게 광고비·지급 모두 이 통화")}
+      {field("est_rpm", "예상 광고 단가(1,000회 노출당)", "큐레이터 콘솔의 '이번 달 예상'에 씀. 지난달 실제 값으로 맞춰 주세요")}
+      {field("platform_fee_pct", "가게 제휴 수수료 %", "가게가 내는 금액 중 PinWith 몫. 나머지는 큐레이터")}
+      {field("min_payout", "최소 지급 요청 금액", "이보다 적으면 지급 요청 버튼이 꺼져요")}
       {msg && <p role="status" className="text-[14px] text-teal">{msg}</p>}
       <button className="btn-primary justify-self-start">저장</button>
     </form>
