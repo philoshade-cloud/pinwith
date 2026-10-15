@@ -326,11 +326,11 @@ function Curators() {
 // ── 수익화 기준 ─────────────────────────
 function Settings() {
   const supabase = useMemo(() => createClient(), []);
-  const [s, setS] = useState<{ min_followers: number; min_ad_views_30d: number; default_rate_pct: number; currency: string; platform_fee_pct: number; min_payout: number; est_rpm: number } | null>(null);
+  const [s, setS] = useState<{ min_followers: number; min_ad_views_30d: number; default_rate_pct: number; currency: string; platform_fee_pct: number; min_payout: number; est_rpm: number; krw_per_unit: number } | null>(null);
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    supabase.from("monetization_settings").select("min_followers, min_ad_views_30d, default_rate_pct, currency, platform_fee_pct, min_payout, est_rpm").maybeSingle().then(({ data }) => data && setS(data as NonNullable<typeof s>));
+    supabase.from("monetization_settings").select("min_followers, min_ad_views_30d, default_rate_pct, currency, platform_fee_pct, min_payout, est_rpm, krw_per_unit").maybeSingle().then(({ data }) => data && setS(data as NonNullable<typeof s>));
   }, [supabase]);
 
   async function save(e: React.FormEvent) {
@@ -366,6 +366,7 @@ function Settings() {
       {field("est_rpm", "예상 광고 단가(1,000회 노출당)", "큐레이터 콘솔의 '이번 달 예상'에 씀. 지난달 실제 값으로 맞춰 주세요")}
       {field("platform_fee_pct", "가게 제휴 수수료 %", "가게가 내는 금액 중 PinWith 몫. 나머지는 큐레이터")}
       {field("min_payout", "최소 지급 요청 금액", "이보다 적으면 지급 요청 버튼이 꺼져요")}
+      {field("krw_per_unit", "원화 환율(기본 통화 1 = 몇 원)", "한국 가게가 토스페이먼츠로 원화 결제할 때 씀")}
       {msg && <p role="status" className="text-[14px] text-teal">{msg}</p>}
       <button className="btn-primary justify-self-start">저장</button>
     </form>
