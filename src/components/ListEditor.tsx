@@ -482,8 +482,16 @@ export function ListEditor({ listId }: { listId: string }) {
         )}
       </div>
 
-      <div className={`${view === "map" ? "fixed inset-0 z-20" : "hidden"} lg:static lg:z-auto lg:block`}>
+      <div className={`${view === "map" ? "fixed inset-0 z-20" : "hidden"} map-ctrl-low lg:relative lg:static lg:z-auto lg:block`}>
+        {/* 모바일 상단 줄 */}
+        <div className="absolute inset-x-0 top-0 z-20 flex items-center gap-2 bg-white/95 px-3 py-2.5 shadow-[0_1px_0_var(--color-rule)] lg:hidden">
+          <button type="button" onClick={() => setView("edit")} className="btn-quiet shrink-0 !px-3 !py-1">
+            ← 편집
+          </button>
+          <span className="min-w-0 flex-1 truncate text-[15px] font-semibold text-ink">{savedMeta.title}</span>
+        </div>
         <SearchableMap
+          topOffsetClass="top-[60px] lg:top-3"
           items={mapItems}
           selectedId={selectedId}
           showRoute={meta.kind === "course"}

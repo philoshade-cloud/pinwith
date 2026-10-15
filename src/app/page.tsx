@@ -16,6 +16,9 @@ export default function Home() {
         <Link href="/me?welcome=1" className="btn-primary !px-5 !py-3 !text-[15px]">
           내 지도 만들기
         </Link>
+        <Link href="/explore" className="btn-quiet !px-5 !py-3 !text-[15px]">
+          다른 사람 리스트 둘러보기
+        </Link>
         <Link href="/demo" className="btn-quiet !px-5 !py-3 !text-[15px]">
           예시 리스트 보기
         </Link>

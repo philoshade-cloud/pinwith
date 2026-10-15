@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/env";
+import { GOOGLE_CLIENT_ID, GoogleSignIn } from "@/components/GoogleSignIn";
 
 // 구글 로그인 버튼. 끄려면 환경 변수에 false를 넣는다.
 const GOOGLE_LOGIN_ENABLED = process.env.NEXT_PUBLIC_GOOGLE_LOGIN_ENABLED !== "false";
@@ -12,6 +13,14 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error" | "rate">("idle");
   const [sentTo, setSentTo] = useState("");
+  // 돌아갈 화면. 화면에 글자로 그리지 않으므로 서버/브라우저 값이 달라도 문제없다.
+  const [nextPath] = useState(() =>
+    typeof window === "undefined"
+      ? "/me?welcome=1"
+      : new URLSearchParams(window.location.search).get("next") ?? "/me?welcome=1",
+  );
+  const [googleError, setGoogleError] = useState<string | null>(null);
+  const onGoogleError = useCallback((msg: string) => setGoogleError(msg), []);
 
   const next = () => new URLSearchParams(window.location.search).get("next") ?? "/me?welcome=1";
   const redirectTo = () => `${window.location.origin}/auth/callback?next=${encodeURIComponent(next())}`;
@@ -54,11 +63,17 @@ export default function LoginPage() {
     <main className="mx-auto max-w-[420px] px-6 py-20">
       <h1 className="font-display text-[28px] font-semibold text-ink">PinWith에 로그인</h1>
       <p className="mt-2 text-[15px] text-muted">팔로우, 내 리스트 만들기, DM에 필요합니다.</p>
-      {GOOGLE_LOGIN_ENABLED && (
-        <button type="button" onClick={withGoogle} className="btn-quiet mt-8 w-full justify-center !py-3">
-          구글로 계속하기
-        </button>
-      )}
+      {GOOGLE_LOGIN_ENABLED &&
+        (GOOGLE_CLIENT_ID ? (
+          <div className="mt-8">
+            <GoogleSignIn next={nextPath} onError={onGoogleError} />
+            {googleError && <p role="alert" className="mt-2 text-[14px] text-pin">{googleError}</p>}
+          </div>
+        ) : (
+          <button type="button" onClick={withGoogle} className="btn-quiet mt-8 w-full justify-center !py-3">
+            구글로 계속하기
+          </button>
+        ))}
       <form onSubmit={withEmail} className={GOOGLE_LOGIN_ENABLED ? "mt-6" : "mt-8"}>
         <label htmlFor="email" className="text-[14px] font-semibold text-ink">
           이메일로 로그인 링크 받기

@@ -15,6 +15,7 @@ import {
 import { track } from "@/lib/track";
 import { isSupabaseConfigured } from "@/lib/env";
 import { createClient } from "@/lib/supabase/client";
+import { FollowButton } from "./FollowButton";
 
 const PlaceMap = dynamic(() => import("./PlaceMap").then((m) => m.PlaceMap), {
   ssr: false,
@@ -138,9 +139,11 @@ export function ListExplorer({ list }: { list: CuratedList }) {
             </ul>
           )}
           <div className="mt-5 flex gap-2">
-            <Link href={`/login?next=/@${list.curator.handle}`} className="btn-primary">
-              팔로우
-            </Link>
+            {isDemo ? (
+              <Link href="/login" className="btn-primary">팔로우</Link>
+            ) : (
+              <FollowButton curatorId={list.curator.id} handle={list.curator.handle} />
+            )}
             <button type="button" onClick={share} className="btn-quiet">
               공유
             </button>
