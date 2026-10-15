@@ -121,11 +121,49 @@ function Apply({ userId, initial, onDone, onCancel }: { userId: string; initial:
     }
   }
 
+  // 이 가게가 이미 인증됐는지, 내가 이미 신청했는지
+  const [claim, setClaim] = useState<"free" | "taken" | "mine_pending" | "mine_approved" | null>(null);
+  useEffect(() => {
+    if (!place) return;
+    let alive = true;
+    supabase.rpc("place_claim_status", { p_place: place.id }).then(({ data }) => alive && setClaim((data as typeof claim) ?? "free"));
+    return () => {
+      alive = false;
+    };
+  }, [supabase, place]);
+  const claimBlock =
+    place && claim && claim !== "free" && !(initial && claim === "mine_pending")
+      ? claim === "taken"
+        ? "이 가게는 이미 다른 계정이 인증했어요. 실제 주인인데 모르는 일이라면 ‘문의·신고하기’로 알려 주세요. 확인 후 정리해 드려요."
+        : claim === "mine_pending"
+          ? "이 가게로 이미 신청해 두셨어요. 운영자 확인을 기다려 주세요(보통 1~2 영업일)."
+          : "이미 인증된 내 가게예요. 가게 콘솔에서 바로 쓰시면 돼요."
+      : null;
+
+  const FILE_TYPES = ["image/jpeg", "image/png", "image/webp", "application/pdf"];
+  const fileProblem = file
+    ? file.size > 5 * 1024 * 1024
+      ? `파일이 너무 커요(${(file.size / 1024 / 1024).toFixed(1)}MB). 5MB 이하로 줄이거나 사진으로 찍어 올려 주세요.`
+      : !FILE_TYPES.includes(file.type)
+        ? "JPG·PNG·WEBP 사진이나 PDF만 올릴 수 있어요(아이폰 HEIC 사진은 ‘가장 호환성 높은 형식’으로 바꿔 주세요)."
+        : null
+    : null;
+  const checks: { ok: boolean; text: string }[] = [
+    { ok: !!place, text: "가게 고르기(위 검색창에서 이름으로 찾기)" },
+    { ok: !!f.business_name.trim(), text: "상호" },
+    { ok: !!f.contact_name.trim(), text: "담당자 이름" },
+    { ok: f.contact_phone.replace(/[^0-9+]/g, "").length >= 8, text: "연락처(숫자 8자리 이상)" },
+    { ok: (!!file && !fileProblem) || (!file && !!initial?.doc_path), text: "사업자등록증 또는 운영 증명 자료" },
+    { ok: agree, text: "맨 아래 확인 항목 동의" },
+  ];
+  const missing = checks.filter((c) => !c.ok);
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!place) return setMsg("어느 가게인지 먼저 고르세요.");
-    if (!file && !initial?.doc_path) return setMsg("사업자등록증(또는 가게 운영을 증명하는 자료)을 올려 주세요.");
-    if (!agree) return setMsg("확인 항목에 동의해 주세요.");
+    if (claimBlock) return setMsg(claimBlock);
+    if (fileProblem) return setMsg(fileProblem);
+    if (missing.length) return setMsg(`아직 빠진 것이 있어요: ${missing.map((m) => m.text.replace(/\(.*\)/, "")).join(", ")}`);
+    if (!place) return;
     setBusy(true);
     setMsg("");
     let doc = initial?.doc_path ?? null;
@@ -135,7 +173,13 @@ function Apply({ userId, initial, onDone, onCancel }: { userId: string; initial:
       const { error } = await supabase.storage.from("biz-docs").upload(path, file, { contentType: file.type });
       if (error) {
         setBusy(false);
-        return setMsg("파일을 올리지 못했어요. 5MB 이하의 사진이나 PDF로 올려 주세요.");
+        const m = error.message.toLowerCase();
+        return setMsg(
+          m.includes("size") || m.includes("large") ? "파일이 5MB를 넘어요. 줄여서 다시 올려 주세요."
+            : m.includes("mime") || m.includes("type") ? "이 파일 형식은 올릴 수 없어요. JPG·PNG·WEBP 사진이나 PDF로 올려 주세요."
+              : m.includes("jwt") || m.includes("auth") || m.includes("policy") ? "로그인이 풀렸어요. 새로고침 후 다시 로그인해 주세요."
+                : "파일을 올리지 못했어요. 인터넷 연결을 확인하고 다시 시도하세요.",
+        );
       }
       doc = path;
     }
@@ -148,7 +192,15 @@ function Apply({ userId, initial, onDone, onCancel }: { userId: string; initial:
       ? await supabase.from("businesses").update({ ...row, status: "pending" }).eq("id", initial.id)
       : await supabase.from("businesses").insert({ ...row, owner_id: userId });
     setBusy(false);
-    if (error) return setMsg("신청하지 못했어요. 칸을 확인하고 다시 시도하세요.");
+    if (error) {
+      return setMsg(
+        error.code === "23514" ? "입력한 내용 중 길이가 맞지 않는 칸이 있어요(상호 120자, 이름 60자, 연락처 5~30자, 사업자번호 40자 이내)."
+          : error.code === "42501" ? "로그인이 풀렸거나 권한이 없어요. 새로고침 후 다시 로그인해 주세요."
+            : error.code === "23505" ? "이 가게는 이미 인증된 계정이 있어요."
+              : error.message.includes("not allowed") ? "지금 상태에서는 고칠 수 없어요(이미 승인됐거나 확인 중이에요)."
+                : "신청하지 못했어요. 인터넷 연결을 확인하고 다시 시도하세요.",
+      );
+    }
     onDone();
   }
 
@@ -170,9 +222,15 @@ function Apply({ userId, initial, onDone, onCancel }: { userId: string; initial:
               <button type="button" onClick={() => setPlace(null)} className="btn-quiet !py-1 !text-[13px]">바꾸기</button>
             </div>
           ) : (
-            <div className="rounded-lg border border-rule p-1 font-normal">
-              <PlaceSearchBox onPick={pickId} onResults={(_, ps) => setResults(ps)} />
-            </div>
+            <>
+              <div className="rounded-lg border border-rule p-1 font-normal">
+                <PlaceSearchBox onPick={pickId} onResults={(_, ps) => setResults(ps)} />
+              </div>
+              <span className="font-normal text-muted">
+                구글 지도에 나오는 가게 이름으로 찾아 주세요. 검색이 안 되거나 가게가 나오지 않으면 구글 지도에 먼저 등록돼 있어야 해요. 그래도 안 되면 ‘문의·신고하기’로 가게
+                이름과 주소를 보내 주세요.
+              </span>
+            </>
           )}
           {!place && results.length > 0 && (
             <ul className="mt-1 divide-y divide-rule rounded-lg border border-rule font-normal">
@@ -209,6 +267,18 @@ function Apply({ userId, initial, onDone, onCancel }: { userId: string; initial:
           <input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} className="mt-0.5" />
           이 가게를 운영하거나 운영자에게 권한을 받았고, 확인을 위해 운영자가 가게 전화번호로 연락할 수 있음에 동의해요.
         </label>
+        {claimBlock && <p role="alert" className="rounded-lg bg-surface px-3 py-2 text-[14px] text-pin">{claimBlock}</p>}
+        {fileProblem && <p role="alert" className="text-[14px] text-pin">{fileProblem}</p>}
+        {missing.length > 0 && (
+          <div className="rounded-lg bg-surface px-3 py-2 text-[13px]">
+            <p className="font-semibold text-ink">신청하려면 아래가 더 필요해요</p>
+            <ul className="mt-1 grid gap-0.5">
+              {checks.map((c) => (
+                <li key={c.text} className={c.ok ? "text-teal" : "text-ink/80"}>{c.ok ? "✓" : "○"} {c.text}</li>
+              ))}
+            </ul>
+          </div>
+        )}
         {msg && <p role="alert" className="text-[14px] text-pin">{msg}</p>}
         <div className="flex gap-2">
           <button disabled={busy} className="btn-primary disabled:opacity-50">{busy ? "보내는 중" : initial ? "다시 신청" : "인증 신청"}</button>
