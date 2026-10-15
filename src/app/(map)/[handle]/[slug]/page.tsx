@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { PanelLoading } from "@/components/shell/Panel";
 import { notFound } from "next/navigation";
 import { ListExplorer } from "@/components/ListExplorer";
 import { getCuratedList } from "@/lib/data";
@@ -7,7 +8,7 @@ import { isSupabaseConfigured } from "@/lib/env";
 // /@handle/slug — 큐레이터의 리스트 화면. 로그인 없이도 공개·링크 공개 리스트를 그대로 본다.
 export default function ListPage({ params }: PageProps<"/[handle]/[slug]">) {
   return (
-    <Suspense fallback={<div className="h-dvh bg-surface" aria-busy="true" />}>
+    <Suspense fallback={<PanelLoading />}>
       <ListContent params={params} />
     </Suspense>
   );

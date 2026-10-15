@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/env";
 import { GOOGLE_CLIENT_ID, GoogleSignIn } from "@/components/GoogleSignIn";
+import { Panel } from "@/components/shell/Panel";
 
 // 구글 로그인 버튼. 끄려면 환경 변수에 false를 넣는다.
 const GOOGLE_LOGIN_ENABLED = process.env.NEXT_PUBLIC_GOOGLE_LOGIN_ENABLED !== "false";
@@ -52,20 +53,20 @@ export default function LoginPage() {
 
   if (!isSupabaseConfigured()) {
     return (
-      <main className="mx-auto max-w-[420px] px-6 py-20">
-        <h1 className="font-display text-[28px] font-semibold">로그인</h1>
-        <p className="mt-4 text-[15px] text-muted">서버 연결 설정이 아직 없습니다. 환경 변수를 확인하세요.</p>
-      </main>
+      <Panel title="로그인">
+        <p className="p-5 text-[15px] text-muted">서버 연결 설정이 아직 없습니다. 환경 변수를 확인하세요.</p>
+      </Panel>
     );
   }
 
   return (
-    <main className="mx-auto max-w-[420px] px-6 py-20">
-      <h1 className="font-display text-[28px] font-semibold text-ink">PinWith에 로그인</h1>
+    <Panel title="로그인">
+      <div className="px-5 pb-8 pt-5">
+      <h1 className="font-display text-[26px] font-semibold text-ink">PinWith에 로그인</h1>
       <p className="mt-2 text-[15px] text-muted">팔로우, 내 리스트 만들기, DM에 필요합니다.</p>
       {GOOGLE_LOGIN_ENABLED &&
         (GOOGLE_CLIENT_ID ? (
-          <div className="mt-8">
+          <div className="mt-6">
             <GoogleSignIn next={nextPath} onError={onGoogleError} />
             {googleError && <p role="alert" className="mt-2 text-[14px] text-pin">{googleError}</p>}
           </div>
@@ -74,7 +75,7 @@ export default function LoginPage() {
             구글로 계속하기
           </button>
         ))}
-      <form onSubmit={withEmail} className={GOOGLE_LOGIN_ENABLED ? "mt-6" : "mt-8"}>
+      <form onSubmit={withEmail} className={GOOGLE_LOGIN_ENABLED ? "mt-6" : "mt-6"}>
         <label htmlFor="email" className="text-[14px] font-semibold text-ink">
           이메일로 로그인 링크 받기
         </label>
@@ -114,6 +115,7 @@ export default function LoginPage() {
           )}
         </p>
       </form>
-    </main>
+      </div>
+    </Panel>
   );
 }

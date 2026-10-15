@@ -15,10 +15,22 @@ type Props = {
   numbering?: Map<string, number>;
   // 검색으로 고른, 아직 리스트에 넣지 않은 장소
   candidate?: { lat: number; lng: number } | null;
+  // 지도를 가리는 패널·버튼 영역. 핀을 맞출 때 이만큼 비켜서 보여준다.
+  padding?: { top: number; bottom: number; left: number; right: number };
 };
 
+const DEFAULT_PADDING = { top: 64, bottom: 64, left: 64, right: 64 };
+
+// 가려진 영역을 뺀 나머지의 가운데로 옮기는 화면 이동량.
+// (easeTo에 padding을 주면 지도에 계속 남아 다음 맞추기 때 여백이 겹치므로 offset을 쓴다)
+function centerOffset(p: { top: number; bottom: number; left: number; right: number }): [number, number] {
+  return [(p.left - p.right) / 2, (p.top - p.bottom) / 2];
+}
+
 // 큐레이터의 핀만 보여주는 가벼운 지도. 자세한 정보와 길찾기는 구글·네이버 지도로 넘긴다.
-export function PlaceMap({ items, selectedId, onSelect, showRoute, candidate = null, numbering }: Props) {
+export function PlaceMap({
+  items, selectedId, onSelect, showRoute, candidate = null, numbering, padding = DEFAULT_PADDING,
+}: Props) {
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
   const markers = useRef(new Map<string, { marker: maplibregl.Marker; el: HTMLButtonElement }>());
@@ -41,9 +53,12 @@ export function PlaceMap({ items, selectedId, onSelect, showRoute, candidate = n
       style: MAP_STYLE_URL,
       center: [127, 30],
       zoom: 2.5,
-      attributionControl: { compact: true },
+      attributionControl: false,
     });
-    m.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+    // 모바일에서는 손가락으로 확대하므로 버튼을 두지 않고, 출처 표시는 위쪽(아래는 패널이 덮음)에 둔다.
+    const narrow = window.innerWidth < 1024;
+    m.addControl(new maplibregl.AttributionControl({ compact: true }), narrow ? "top-right" : "bottom-right");
+    if (!narrow) m.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
     map.current = m;
     const pins = markers.current;
     return () => {
@@ -85,18 +100,6 @@ export function PlaceMap({ items, selectedId, onSelect, showRoute, candidate = n
       markers.current.set(item.id, { marker, el });
     });
 
-    if (located.length > 0) {
-      const bounds = new maplibregl.LngLatBounds();
-      located.forEach((i) => bounds.extend([i.lng!, i.lat!]));
-      const narrow = window.innerWidth < 1024;
-      // 모바일에서는 위쪽 제목 줄과 아래쪽 지도/목록 전환 버튼을 피해서 맞춘다.
-      m.fitBounds(bounds, {
-        padding: narrow ? { top: 120, bottom: 110, left: 40, right: 40 } : 64,
-        maxZoom: 15,
-        duration: 0,
-      });
-    }
-
     const drawRoute = () => {
       const id = "course-line";
       if (m.getLayer(id)) m.removeLayer(id);
@@ -122,6 +125,32 @@ export function PlaceMap({ items, selectedId, onSelect, showRoute, candidate = n
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, showRoute, numbering]);
 
+  // 화면 맞추기: 핀이 바뀌거나 패널이 열리고 닫힐 때
+  const padKey = `${padding.top},${padding.bottom},${padding.left},${padding.right}`;
+  const fitted = useRef(false);
+  useEffect(() => {
+    const m = map.current;
+    if (!m || located.length === 0) return;
+    const bounds = new maplibregl.LngLatBounds();
+    located.forEach((i) => bounds.extend([i.lng!, i.lat!]));
+    // 화면이 작아 여백이 지도보다 크면 맞추기가 실패하므로 줄인다
+    const c = m.getContainer();
+    const pad = { ...padding };
+    if (pad.top + pad.bottom > c.clientHeight - 80) {
+      const k = Math.max(0, c.clientHeight - 80) / (pad.top + pad.bottom);
+      pad.top *= k;
+      pad.bottom *= k;
+    }
+    if (pad.left + pad.right > c.clientWidth - 80) {
+      const k = Math.max(0, c.clientWidth - 80) / (pad.left + pad.right);
+      pad.left *= k;
+      pad.right *= k;
+    }
+    m.fitBounds(bounds, { padding: pad, maxZoom: 15, duration: fitted.current ? 500 : 0 });
+    fitted.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items, padKey]);
+
   // 선택 강조
   useEffect(() => {
     markers.current.forEach(({ el }, id) => {
@@ -129,7 +158,7 @@ export function PlaceMap({ items, selectedId, onSelect, showRoute, candidate = n
     });
     const sel = selectedId ? located.find((i) => i.id === selectedId) : null;
     if (sel && map.current) {
-      map.current.easeTo({ center: [sel.lng!, sel.lat!], duration: 400 });
+      map.current.easeTo({ center: [sel.lng!, sel.lat!], offset: centerOffset(padding), duration: 400 });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedId]);
@@ -149,7 +178,7 @@ export function PlaceMap({ items, selectedId, onSelect, showRoute, candidate = n
     candidateMarker.current = new maplibregl.Marker({ element: el, anchor: "bottom" })
       .setLngLat([candidate.lng, candidate.lat])
       .addTo(m);
-    m.flyTo({ center: [candidate.lng, candidate.lat], zoom: Math.max(m.getZoom(), 15), duration: 600 });
+    m.flyTo({ center: [candidate.lng, candidate.lat], zoom: Math.max(m.getZoom(), 15), offset: centerOffset(padding), duration: 600 });
   }, [candidate?.lat, candidate?.lng]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <div ref={container} className="h-full w-full" role="region" aria-label="장소 지도" />;

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { SignOutButton } from "./SignOutButton";
+import { Panel } from "./shell/Panel";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -32,7 +32,6 @@ export function ExploreView() {
   const [following, setFollowing] = useState<CuratorHit[]>([]);
   const [recent, setRecent] = useState<ListHit[]>([]);
   const [me, setMe] = useState<string | null>(null);
-  const [myHandle, setMyHandle] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -47,16 +46,12 @@ export function ExploreView() {
         .order("updated_at", { ascending: false })
         .limit(30);
       if (uid) {
-        const [{ data: f }, { data: p }] = await Promise.all([
-          supabase
-            .from("follows")
-            .select("followee:profiles!follows_followee_id_fkey(id, handle, display_name, bio)")
-            .eq("follower_id", uid)
-            .order("created_at", { ascending: false }),
-          supabase.from("profiles").select("handle").eq("id", uid).single(),
-        ]);
+        const { data: f } = await supabase
+          .from("follows")
+          .select("followee:profiles!follows_followee_id_fkey(id, handle, display_name, bio)")
+          .eq("follower_id", uid)
+          .order("created_at", { ascending: false });
         setFollowing(((f ?? []) as unknown as { followee: CuratorHit }[]).map((r) => r.followee).filter(Boolean));
-        setMyHandle(p?.handle ?? null);
       }
       const { data: r } = await recentReq;
       setRecent(((r ?? []) as unknown as ListHit[]).filter((l) => (l.list_items[0]?.count ?? 0) > 0));
@@ -95,27 +90,14 @@ export function ExploreView() {
   );
 
   return (
-    <main className="mx-auto max-w-[640px] px-5 pb-16 pt-5">
-      <nav className="flex items-center gap-4 text-[14px]">
-        <Link href="/" className="font-display text-[16px] font-semibold text-pin">PinWith</Link>
-        <span className="ml-auto" />
-        {myHandle ? (
-          <>
-            <SignOutButton />
-            <Link href={`/@${myHandle}`} className="btn-quiet">내 지도</Link>
-          </>
-        ) : (
-          me === null && <Link href="/login?next=/explore" className="btn-quiet">로그인</Link>
-        )}
-      </nav>
-
-      <h1 className="font-display mt-8 text-[32px] font-semibold tracking-[-0.02em] text-ink">찾기</h1>
+    <Panel title="찾기 · 큐레이터와 리스트">
+      <div className="px-5 pb-10 pt-4">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           search(query);
         }}
-        className="mt-4 flex gap-2"
+        className="flex gap-2"
         role="search"
       >
         <input
@@ -156,15 +138,22 @@ export function ExploreView() {
           <Section title="새로 올라온 리스트">
             {recent.length === 0 ? <Empty>아직 공개된 리스트가 없습니다.</Empty> : <ListRows rows={recent} />}
           </Section>
+          <Section title="예시">
+            <Link href="/demo" className="block border-y border-rule py-3.5 hover:bg-surface/60">
+              <span className="block text-[17px] font-semibold text-ink">성수동 하루, 걸어서 도는 일곱 군데</span>
+              <span className="mt-1 block text-[13px] text-muted">민지의 걷는 서울 · 장소 7곳 · #서울 #성수 #하루코스</span>
+            </Link>
+          </Section>
         </>
       )}
-    </main>
+      </div>
+    </Panel>
   );
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="mt-10">
+    <section className="mt-8">
       <h2 className="text-[15px] font-semibold text-teal">{title}</h2>
       <div className="mt-2">{children}</div>
     </section>

@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { PanelLoading } from "@/components/shell/Panel";
 import { notFound } from "next/navigation";
 import { CuratorView } from "@/components/CuratorView";
 import { getCuratorPage } from "@/lib/data";
@@ -7,7 +8,7 @@ import { isSupabaseConfigured } from "@/lib/env";
 // /@handle — 큐레이터의 지도: 리스트들의 장소를 한 지도에. 주인이면 새 리스트를 만들 수 있다.
 export default function CuratorPage({ params }: PageProps<"/[handle]">) {
   return (
-    <Suspense fallback={<div className="h-dvh bg-surface" aria-busy="true" />}>
+    <Suspense fallback={<PanelLoading />}>
       <CuratorContent params={params} />
     </Suspense>
   );

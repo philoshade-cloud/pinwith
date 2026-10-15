@@ -25,15 +25,10 @@ body {
   overflow-wrap: anywhere;
 }
 
-/* 모바일 리스트 화면: 위쪽 제목 줄 아래로 지도 컨트롤을 내린다 */
+/* 모바일: 지도 출처 표시를 위쪽 검색줄 아래로 */
 @media (max-width: 1023px) {
-  .map-under-header .maplibregl-ctrl-top-right {
-    top: 56px;
-  }
-  /* 위쪽에 검색창이 있는 지도: 확대 버튼을 오른쪽 아래(전환 버튼 위)로 */
-  .map-ctrl-low .maplibregl-ctrl-top-right {
-    top: auto;
-    bottom: 96px;
+  .maplibregl-ctrl-top-right {
+    top: 58px;
   }
 }
 

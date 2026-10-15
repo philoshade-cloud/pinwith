@@ -1,16 +1,12 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { ListItem, ListKind, Section, Visibility } from "@/lib/types";
-
-const SearchableMap = dynamic(() => import("./SearchableMap").then((m) => m.SearchableMap), {
-  ssr: false,
-  loading: () => <div className="h-full w-full bg-surface" />,
-});
+import { Panel, PanelLoading } from "./shell/Panel";
+import { useMapScene, useShell, type Scene } from "./shell/context";
 
 type Meta = {
   title: string;
@@ -63,15 +59,7 @@ export function ListEditor({ listId }: { listId: string }) {
   const [sections, setSections] = useState<Section[]>([]);
   const [items, setItems] = useState<ItemRow[]>([]);
   const [newSection, setNewSection] = useState("");
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  // 모바일: 편집 / 지도(장소 추가) 전환. 데스크톱은 둘 다 보인다.
-  const [view, setView] = useState<"edit" | "map">("edit");
-  const [toast, setToast] = useState<string | null>(null);
-
-  const flash = useCallback((msg: string) => {
-    setToast(msg);
-    window.setTimeout(() => setToast(null), 2500);
-  }, []);
+  const { selectedId, toast: flash, refreshMine, setPanelOpen } = useShell();
 
   useEffect(() => {
     (async () => {
@@ -198,12 +186,47 @@ export function ListEditor({ listId }: { listId: string }) {
   }
 
   // ── 장소 ─────────────────────────────────
-  // 장소 추가는 지도 위 검색(SearchableMap)에서 한다.
-  function onPlaceAdded(item: ItemRow) {
-    setItems((list) => [...list, item]);
-    setSelectedId(item.id);
-    flash(`${item.custom_title}을(를) 추가했습니다.`);
-  }
+  // 장소 추가는 지도 위 검색창에서 한다(지도 화면이 이 리스트로 넣어준다).
+  const mapItems: ListItem[] = useMemo(
+    () =>
+      items.map((i) => ({
+        id: i.id,
+        placeId: i.place_id,
+        title: i.custom_title,
+        memo: i.memo,
+        sectionId: i.section_id,
+        position: i.position,
+        tags: [],
+        videoUrl: null,
+        lat: i.places?.lat ?? null,
+        lng: i.places?.lng ?? null,
+      })),
+    [items],
+  );
+  const numbering = useMemo(() => new Map(items.map((i, n) => [i.id, n + 1])), [items]);
+  const scene: Scene | null = useMemo(
+    () =>
+      state !== "ready"
+        ? null
+        : {
+            items: mapItems,
+            showRoute: savedMeta?.kind === "course",
+            numbering,
+            listIdOf: () => listId,
+            addTarget: {
+              listId,
+              sections,
+              onAdded: (item) => setItems((list) => [...list, item as ItemRow]),
+            },
+          },
+    [state, mapItems, savedMeta?.kind, numbering, listId, sections],
+  );
+  useMapScene(scene);
+
+  // 지도에서 핀을 고르면 편집 목록에서 그 장소로
+  useEffect(() => {
+    if (selectedId) document.getElementById(`item-${selectedId}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [selectedId]);
 
   async function updateItem(id: string, patch: Partial<Pick<ItemRow, "custom_title" | "memo" | "section_id">>) {
     setItems((list) => list.map((i) => (i.id === id ? { ...i, ...patch } : i)));
@@ -235,7 +258,8 @@ export function ListEditor({ listId }: { listId: string }) {
     if (!window.confirm("이 리스트를 지울까요? 담긴 장소와 메모도 함께 지워집니다.")) return;
     const { error } = await supabase.from("lists").delete().eq("id", listId);
     if (error) return flash("리스트를 지우지 못했습니다.");
-    router.push(handle ? `/@${handle}` : "/me");
+    await refreshMine();
+    router.push("/");
   }
 
   async function copyLink() {
@@ -250,45 +274,28 @@ export function ListEditor({ listId }: { listId: string }) {
   }
 
   // ── 화면 ─────────────────────────────────
-  if (state === "loading") return <p className="p-8 text-muted">불러오는 중</p>;
-  if (state === "missing")
+  if (state === "loading") return <PanelLoading />;
+  if (state === "missing" || state === "forbidden")
     return (
-      <main className="mx-auto max-w-[560px] px-6 py-16">
-        <p className="text-[16px] text-ink">리스트를 찾을 수 없습니다.</p>
-        <Link href="/me" className="btn-quiet mt-4">내 리스트로 돌아가기</Link>
-      </main>
-    );
-  if (state === "forbidden")
-    return (
-      <main className="mx-auto max-w-[560px] px-6 py-16">
-        <p className="text-[16px] text-ink">이 리스트를 편집할 권한이 없습니다.</p>
-        <Link href="/me" className="btn-quiet mt-4">내 리스트로 돌아가기</Link>
-      </main>
+      <Panel title="리스트 편집">
+        <div className="p-5">
+          <p className="text-[16px] text-ink">
+            {state === "missing" ? "리스트를 찾을 수 없습니다." : "이 리스트를 편집할 권한이 없습니다."}
+          </p>
+          <Link href="/" className="btn-quiet mt-4">지도로 돌아가기</Link>
+        </div>
+      </Panel>
     );
   if (!meta || !savedMeta) return null;
 
-  const mapItems: ListItem[] = items.map((i) => ({
-    id: i.id,
-    placeId: i.place_id,
-    title: i.custom_title,
-    memo: i.memo,
-    sectionId: i.section_id,
-    position: i.position,
-    tags: [],
-    videoUrl: null,
-    lat: i.places?.lat ?? null,
-    lng: i.places?.lng ?? null,
-  }));
   const viewHref = `/@${handle}/${savedMeta.slug}`;
 
   return (
-    <div className="lg:grid lg:h-dvh lg:grid-cols-[minmax(0,520px)_1fr]">
-      <div className={`${view === "edit" ? "block" : "hidden"} overflow-y-auto px-5 pb-28 pt-5 lg:block lg:border-r lg:border-rule`}>
+    <Panel title={`편집 · ${savedMeta.title}`}>
+      <div className="px-5 pb-10 pt-4">
         <nav className="flex items-center gap-2">
-          <Link href={handle ? `/@${handle}` : "/me"} className="text-[14px] text-muted hover:text-ink">← 내 지도</Link>
-          <span className="ml-auto" />
+          <Link href={viewHref} className="btn-quiet">리스트 보기</Link>
           <button type="button" onClick={copyLink} className="btn-quiet">링크 복사</button>
-          <Link href={viewHref} target="_blank" className="btn-quiet">보기</Link>
         </nav>
 
         {/* 리스트 정보 */}
@@ -401,12 +408,9 @@ export function ListEditor({ listId }: { listId: string }) {
         {/* 장소 추가: 지도에서 */}
         <div className="mt-10 rounded-xl bg-surface p-4">
           <p className="text-[15px] font-semibold text-ink">장소 추가</p>
-          <p className="mt-1 text-[14px] text-ink/75">
-            <span className="hidden lg:inline">오른쪽 지도 위 검색창에서 장소를 찾아 리스트에 추가하세요.</span>
-            <span className="lg:hidden">지도에서 장소를 검색해 리스트에 추가합니다.</span>
-          </p>
-          <button type="button" onClick={() => setView("map")} className="btn-primary mt-3 lg:hidden">
-            지도에서 장소 추가
+          <p className="mt-1 text-[14px] text-ink/75">맨 위 검색창에서 장소를 찾으면 이 리스트에 바로 들어갑니다.</p>
+          <button type="button" onClick={() => setPanelOpen(false)} className="btn-quiet mt-3 lg:hidden">
+            지도 보기
           </button>
         </div>
 
@@ -481,55 +485,6 @@ export function ListEditor({ listId }: { listId: string }) {
           </section>
         )}
       </div>
-
-      <div className={`${view === "map" ? "fixed inset-0 z-20" : "hidden"} map-ctrl-low lg:relative lg:static lg:z-auto lg:block`}>
-        {/* 모바일 상단 줄 */}
-        <div className="absolute inset-x-0 top-0 z-20 flex items-center gap-2 bg-white/95 px-3 py-2.5 shadow-[0_1px_0_var(--color-rule)] lg:hidden">
-          <button type="button" onClick={() => setView("edit")} className="btn-quiet shrink-0 !px-3 !py-1">
-            ← 편집
-          </button>
-          <span className="min-w-0 flex-1 truncate text-[15px] font-semibold text-ink">{savedMeta.title}</span>
-        </div>
-        <SearchableMap
-          topOffsetClass="top-[60px] lg:top-3"
-          items={mapItems}
-          selectedId={selectedId}
-          showRoute={meta.kind === "course"}
-          target={{ mode: "fixed", listId, sections }}
-          sheetBottomPadClass="pb-24 lg:pb-4"
-          onAdded={(_, item) => onPlaceAdded(item as ItemRow)}
-          onSelect={(id) => {
-            setSelectedId(id);
-            if (window.innerWidth >= 1024) {
-              document.getElementById(`item-${id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
-            }
-          }}
-        />
-      </div>
-
-      {/* 모바일 전환 버튼 */}
-      <div className="fixed inset-x-0 bottom-5 z-30 flex justify-center lg:hidden">
-        <div role="tablist" aria-label="보기 방식" className="flex rounded-full bg-ink p-1 shadow-lg">
-          {(["edit", "map"] as const).map((v) => (
-            <button
-              key={v}
-              role="tab"
-              type="button"
-              aria-selected={view === v}
-              onClick={() => setView(v)}
-              className={`rounded-full px-5 py-2 text-[14px] font-semibold transition-colors ${view === v ? "bg-white text-ink" : "text-white/80"}`}
-            >
-              {v === "edit" ? "편집" : "지도"}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {toast && (
-        <div role="status" className="fixed inset-x-0 bottom-20 z-40 lg:bottom-6 mx-auto w-fit max-w-[90vw] rounded-full bg-ink px-4 py-2 text-[14px] text-white">
-          {toast}
-        </div>
-      )}
-    </div>
+    </Panel>
   );
 }

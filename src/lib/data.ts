@@ -135,3 +135,13 @@ export async function getCuratedList(
       })),
   };
 }
+
+// 로그인한 사람의 지도(홈 화면용). 로그인하지 않았으면 null.
+export async function getMyCuratorPage() {
+  const supabase = await createClient();
+  const { data: auth } = await supabase.auth.getUser();
+  if (!auth.user) return null;
+  const { data: p } = await supabase.from("profiles").select("handle").eq("id", auth.user.id).maybeSingle();
+  if (!p) return null;
+  return getCuratorPage(p.handle);
+}
