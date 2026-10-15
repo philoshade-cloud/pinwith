@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://pinwith-xiea.vercel.app"),
   title: { default: "PinWith", template: "%s · PinWith" },
   description: "좋아하는 장소를 지도에 모아 링크 하나로 건네세요.",
 };

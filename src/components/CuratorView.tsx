@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createEmptyList } from "@/lib/lists";
+import { shortLink } from "@/lib/share";
 import type { Curator, ListItem, ListSummary } from "@/lib/types";
 import { FollowButton } from "./FollowButton";
 import { Avatar } from "./ListExplorer";
@@ -65,8 +66,18 @@ export function CuratorView({
     }
   }
 
+  const [shareUrl, setShareUrl] = useState<string | null>(null);
+  useEffect(() => {
+    if (!isOwner) return;
+    let alive = true;
+    shortLink({ profileId: curator.id }, "").then((u) => alive && u && setShareUrl(u));
+    return () => {
+      alive = false;
+    };
+  }, [isOwner, curator.id]);
+
   async function share() {
-    const url = `${window.location.origin}/@${curator.handle}`;
+    const url = shareUrl ?? `${window.location.origin}/@${curator.handle}`;
     try {
       if (navigator.share) await navigator.share({ title: curator.displayName, url });
       else {

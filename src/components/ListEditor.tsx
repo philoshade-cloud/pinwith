@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { shortLink } from "@/lib/share";
 import type { ListItem, ListKind, Section, Visibility } from "@/lib/types";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { useMapScene, useShell, type Scene } from "./shell/context";
@@ -118,6 +119,17 @@ export function ListEditor({ listId }: { listId: string }) {
       setState("ready");
     })();
   }, [listId, router, supabase]);
+
+  // 공유용 짧은 링크는 미리 만들어 둔다(복사는 누른 즉시 해야 해서)
+  const [shareUrl, setShareUrl] = useState<string | null>(null);
+  useEffect(() => {
+    if (state !== "ready") return;
+    let alive = true;
+    shortLink({ listId }, "").then((u) => alive && u && setShareUrl(u));
+    return () => {
+      alive = false;
+    };
+  }, [state, listId]);
 
   // ── 리스트 정보 ─────────────────────────────
   const metaDirty = meta && savedMeta && JSON.stringify(meta) !== JSON.stringify(savedMeta);
@@ -273,7 +285,7 @@ export function ListEditor({ listId }: { listId: string }) {
 
   async function copyLink() {
     if (!savedMeta) return;
-    const url = `${window.location.origin}/@${handle}/${savedMeta.slug}`;
+    const url = shareUrl ?? `${window.location.origin}/@${handle}/${savedMeta.slug}`;
     try {
       await navigator.clipboard.writeText(url);
       flash("링크를 복사했습니다.");

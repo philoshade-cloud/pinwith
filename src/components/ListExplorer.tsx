@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import type { CuratedList, ListItem } from "@/lib/types";
 import { isWithinMeters } from "@/lib/links";
+import { shortLink } from "@/lib/share";
 import { FollowButton } from "./FollowButton";
 import { Panel } from "./shell/Panel";
 import { Tags } from "./shell/PinCard";
@@ -105,8 +106,19 @@ export function ListExplorer({ list }: { list: CuratedList }) {
     );
   }
 
+  // 내 리스트면 공유용 짧은 링크를 미리 만들어 둔다(공유 창은 누른 즉시 떠야 해서)
+  const [shareUrl, setShareUrl] = useState<string | null>(null);
+  useEffect(() => {
+    if (!isOwner) return;
+    let alive = true;
+    shortLink({ listId: list.id }, "").then((u) => alive && u && setShareUrl(u));
+    return () => {
+      alive = false;
+    };
+  }, [isOwner, list.id]);
+
   async function share() {
-    const url = window.location.href;
+    const url = shareUrl ?? window.location.href;
     try {
       if (navigator.share) await navigator.share({ title: list.title, url });
       else {
