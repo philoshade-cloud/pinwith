@@ -45,12 +45,10 @@ export function Tabs<T extends string>({ tabs, value, onChange }: { tabs: { id: 
 export function Stat({ label, value, hint, onClick }: { label: string; value: string; hint?: string; onClick?: () => void }) {
   const body = (
     <>
-      <p className="flex items-center text-[12px] text-muted">
-        {label}
-        {onClick && <span className="ml-auto text-[12px] text-teal">자세히 ›</span>}
-      </p>
+      <p className="text-[12px] text-muted">{label}</p>
       <p className="mt-1 text-[22px] font-semibold tabular-nums text-ink">{value}</p>
       {hint && <p className="mt-1 text-[12px] text-muted">{hint}</p>}
+      {onClick && <p className="mt-2 text-[12px] font-semibold text-teal">자세히 보기 ›</p>}
     </>
   );
   return onClick ? (
