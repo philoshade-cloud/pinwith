@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "개인정보처리방침" };
 
-// 초안: 법인 설립·도메인 확정 후 운영 주체와 연락처를 채우고 법률 검토를 받는다.
+// 초안: 도메인 확정 후 문의 이메일을 채우고 법률 검토를 받는다.
 export default function Privacy() {
   return (
     <>
@@ -10,7 +10,12 @@ export default function Privacy() {
       <p className="note">시행일: 2026년 10월 15일 (초안)</p>
 
       <h2>1. 누가 운영하나요</h2>
-      <p>PinWith(이하 “서비스”)는 PinWith 운영사(싱가포르 법인 설립 예정)가 운영합니다. 문의: [연락처 이메일 확정 예정]</p>
+      <p>PinWith(이하 “서비스”)는 다음 회사가 운영합니다.</p>
+      <ul>
+        <li>STRATO TRADINGS PTE. LTD. (싱가포르, 회사등록번호 UEN 202402989G)</li>
+        <li>주소: 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874</li>
+        <li>문의 이메일: [도메인 확정 후 기재]</li>
+      </ul>
 
       <h2>2. 어떤 정보를 모으나요</h2>
       <ul>
@@ -70,7 +75,7 @@ export default function Privacy() {
         follows, likes) and link-usage events. Whether a tap happened within 500 m of a place is computed on your device; we
         store only yes/no, never your coordinates. A random device ID and personalized ads are used only if you choose “Allow
         all”. Processors: Supabase (Tokyo), Vercel, Google (Sign-in, Maps Platform, AdSense when enabled), OpenFreeMap. You can
-        delete your account at any time from your profile. Contact: [to be confirmed].
+        delete your account at any time from your profile. Operator: STRATO TRADINGS PTE. LTD. (UEN 202402989G), 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874. Contact email: [to be added].
       </p>
     </>
   );

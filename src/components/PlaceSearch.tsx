@@ -2,22 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { loadPlacesLibrary, type UiKitPlace } from "@/lib/google";
-import { searchSavedPlaces } from "@/lib/savedPlaces";
 
 export type FoundPlace = { id: string; name: string; address: string; lat: number; lng: number };
 
-// source "pinwith": 우리 DB에 이미 있는 장소(좌표를 알고 있어 구글 요금이 들지 않는다)
-type Suggestion = {
-  placeId: string; main: string; secondary: string;
-  source: "pinwith" | "google";
-  known?: { name: string; lat: number; lng: number };
-};
+type Suggestion = { placeId: string; main: string; secondary: string };
 
 // 구글 제안 요청은 글자마다 요금이 붙으므로: 2글자부터, 입력이 멈춘 뒤에만, 같은 검색어는 다시 묻지 않는다.
 const MIN_GOOGLE_CHARS = 2;
 const DEBOUNCE_MS = 350;
-// Enter: 우리 DB에서 이만큼 찾으면 구글 검색(유료)은 '더 찾기'를 눌렀을 때만 한다
-const ENOUGH_SAVED = 5;
+
 
 type PlacesLib = {
   AutocompleteSessionToken: new () => unknown;
@@ -41,13 +34,11 @@ type PlacesLib = {
 // 장소 검색창.
 // 글자를 치면 제안 목록이 뜨고(고르면 그 장소 하나), 제안을 고르지 않고 Enter를 누르면
 // 같은 검색어로 찾은 장소 여러 곳을 지도와 목록으로 보여준다.
-// 비용을 줄이려고 PinWith에 이미 담긴 장소를 먼저 보여주고, 구글은 필요할 때만 부른다.
 export function PlaceSearchBox({
   onPick, onResults, near,
 }: {
-  onPick: (placeId: string, known?: { name: string; lat: number; lng: number }) => void;
-  // more: 우리 DB 결과만 보여줬을 때 구글에서 더 찾는 함수
-  onResults: (query: string, places: FoundPlace[], more?: () => void) => void;
+  onPick: (placeId: string) => void;
+  onResults: (query: string, places: FoundPlace[]) => void;
   // 지금 보고 있는 지도 가운데. 이 근처 결과를 먼저 보여준다.
   near?: () => { lat: number; lng: number } | null;
 }) {
@@ -87,25 +78,15 @@ export function PlaceSearchBox({
   function suggest(q: string) {
     window.clearTimeout(timer.current);
     const term = q.trim();
-    if (!term) {
+    if (term.length < MIN_GOOGLE_CHARS) {
       setSuggestions([]);
       return;
     }
     timer.current = window.setTimeout(async () => {
       const my = ++seq.current;
-      const [saved, google] = await Promise.all([
-        searchSavedPlaces(term, 4),
-        term.length >= MIN_GOOGLE_CHARS ? googleSuggest(term) : Promise.resolve([] as Suggestion[]),
-      ]);
+      const list = await googleSuggest(term);
       if (my !== seq.current) return;
-      const savedIds = new Set(saved.map((p) => p.id));
-      setSuggestions([
-        ...saved.map((p): Suggestion => ({
-          placeId: p.id, main: p.name, secondary: `PinWith 리스트 ${p.lists}곳에 담김`,
-          source: "pinwith", known: { name: p.name, lat: p.lat, lng: p.lng },
-        })),
-        ...google.filter((g) => !savedIds.has(g.placeId)),
-      ]);
+      setSuggestions(list);
       setActive(-1);
       setOpen(true);
     }, DEBOUNCE_MS);
@@ -128,7 +109,7 @@ export function PlaceSearchBox({
         .map((x) => x.placePrediction)
         .filter((x): x is NonNullable<typeof x> => !!x)
         .map((x): Suggestion => ({
-          placeId: x.placeId, main: x.mainText?.text ?? "", secondary: x.secondaryText?.text ?? "", source: "google",
+          placeId: x.placeId, main: x.mainText?.text ?? "", secondary: x.secondaryText?.text ?? "",
         }));
       cache.current.set(q, out);
       return out;
@@ -143,7 +124,7 @@ export function PlaceSearchBox({
     token.current = null;
     setOpen(false);
     setText(s.main);
-    onPick(s.placeId, s.known);
+    onPick(s.placeId);
   }
 
   async function googleSearch(q: string): Promise<FoundPlace[]> {
@@ -179,17 +160,7 @@ export function PlaceSearchBox({
     setOpen(false);
     setBusy(true);
     try {
-      const saved = (await searchSavedPlaces(q, 15)).map((p) => ({ ...p, address: `PinWith 리스트 ${p.lists}곳에 담김` }));
-      const merge = (google: FoundPlace[]) => {
-        const ids = new Set(saved.map((p) => p.id));
-        return [...saved, ...google.filter((g) => !ids.has(g.id))];
-      };
-      if (saved.length >= ENOUGH_SAVED) {
-        // 우리 DB 결과로 충분: 구글 검색은 사용자가 원할 때만
-        onResults(q, saved, async () => onResults(q, merge(await googleSearch(q))));
-      } else {
-        onResults(q, merge(await googleSearch(q)));
-      }
+      onResults(q, await googleSearch(q));
     } finally {
       token.current = null;
       setBusy(false);
@@ -264,12 +235,7 @@ export function PlaceSearchBox({
                 onClick={() => pick(s)}
                 className={`block w-full px-3 py-2 text-left ${i === active ? "bg-surface" : "hover:bg-surface/60"}`}
               >
-                <span className="flex items-center gap-1.5">
-                  {s.source === "pinwith" && (
-                    <span className="shrink-0 rounded bg-pin/10 px-1 text-[11px] font-semibold text-pin">PinWith</span>
-                  )}
-                  <span className="truncate text-[15px] text-ink">{s.main}</span>
-                </span>
+                <span className="block truncate text-[15px] text-ink">{s.main}</span>
                 {s.secondary && <span className="block truncate text-[12px] text-muted">{s.secondary}</span>}
               </button>
             </li>
@@ -278,7 +244,7 @@ export function PlaceSearchBox({
             <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={searchAll} className="font-semibold text-teal">
               ‘{text.trim()}’ 결과 모두 지도에 보기
             </button>
-            {suggestions.some((x) => x.source === "google") && <span>Google</span>}
+            <span>Google</span>
           </li>
         </ul>
       )}

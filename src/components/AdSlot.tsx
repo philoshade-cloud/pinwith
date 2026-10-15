@@ -12,7 +12,7 @@ const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? "";
 
 const HOUSE = [
   { title: "아는 곳을 핀으로 꽂아 보세요", body: "내 단골집, 여행 코스를 지도에 모아 링크 하나로 건네요.", cta: "내 지도 만들기", href: "/login?next=/" },
-  { title: "다른 사람의 지도 구경하기", body: "여행 가기 전, 그 동네를 잘 아는 사람의 리스트부터.", cta: "타인의 리스트", href: "/explore" },
+  { title: "다른 사람의 지도 구경하기", body: "여행 가기 전, 그 동네를 잘 아는 사람의 리스트부터.", cta: "타인의 핀", href: "/explore" },
   { title: "받은 사람은 로그인 없이", body: "링크를 열면 바로 지도. 길찾기는 구글·네이버·카카오로.", cta: "예시 보기", href: "/demo" },
 ];
 

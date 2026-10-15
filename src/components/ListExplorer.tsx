@@ -173,16 +173,14 @@ export function ListExplorer({ list }: { list: CuratedList }) {
             ))}
           </ul>
         )}
-        <div className="mt-4 flex gap-2">
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <LikeButton listId={list.id} initialCount={list.likeCount} demo={isDemo} />
           {isDemo ? (
             <Link href="/login?next=/demo" className="btn-primary">팔로우</Link>
           ) : (
             !isOwner && <FollowButton curatorId={list.curator.id} handle={list.curator.handle} />
           )}
           <button type="button" onClick={share} className="btn-quiet">공유</button>
-          <span className="ml-auto self-center">
-            <LikeButton listId={list.id} initialCount={list.likeCount} demo={isDemo} />
-          </span>
         </div>
         {isOwner && (
           <p className="mt-4 rounded-lg bg-surface px-3 py-2 text-[13px] text-ink/80">

@@ -127,7 +127,7 @@ export function ExploreView() {
   );
 
   return (
-    <Panel title="타인의 리스트">
+    <Panel title="타인의 핀">
       <div className="px-5 pb-10 pt-4">
       <form
         onSubmit={(e) => {

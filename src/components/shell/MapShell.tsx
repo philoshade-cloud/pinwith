@@ -55,7 +55,7 @@ export function MapShell({ children }: { children: ReactNode }) {
   const [candidate, setCandidate] = useState<LoadedPlace | null>(null);
   const [searchKey, setSearchKey] = useState(0);
   // Enter로 찾은 여러 장소: 지도에 다른 색 핀으로, 버튼을 누르면 목록으로
-  const [results, setResults] = useState<{ query: string; places: FoundPlace[]; more?: () => void } | null>(null);
+  const [results, setResults] = useState<{ query: string; places: FoundPlace[] } | null>(null);
   const [resultsList, setResultsList] = useState(false);
   const centerOf = useRef<(() => { lat: number; lng: number }) | null>(null);
   const resultItems: ListItem[] = useMemo(
@@ -142,14 +142,14 @@ export function MapShell({ children }: { children: ReactNode }) {
     if (!results) setSearchKey((k) => k + 1);
   }
 
-  function showResults(query: string, places: FoundPlace[], more?: () => void) {
+  function showResults(query: string, places: FoundPlace[]) {
     setSelectedId(null);
     if (places.length === 0) {
       setResults(null);
       toast(`‘${query}’로 찾은 장소가 없습니다.`);
       return;
     }
-    setResults({ query, places, more });
+    setResults({ query, places });
     setResultsList(false);
     if (window.innerWidth < 1024) setPanelOpen(false);
   }
@@ -234,16 +234,16 @@ export function MapShell({ children }: { children: ReactNode }) {
               key={searchKey}
               near={() => centerOf.current?.() ?? null}
               onResults={showResults}
-              onPick={(id, known) => {
+              onPick={(id) => {
                 setResults(null);
-                setPicked({ id, known });
-                setCandidate(known ?? null);
+                setPicked({ id });
+                setCandidate(null);
                 setSelectedId(null);
               }}
             />
           ) : (
             <Link href="/explore" className="flex h-9 items-center px-2 text-[15px] text-muted">
-              {me === undefined ? "" : "타인의 리스트 둘러보기"}
+              {me === undefined ? "" : "타인의 핀 둘러보기"}
             </Link>
           )}
         </div>
@@ -302,11 +302,6 @@ export function MapShell({ children }: { children: ReactNode }) {
             <span className="min-w-0 flex-1 truncate text-[14px]">
               ‘{results.query}’ {results.places.length}곳 · 핀을 눌러 담기
             </span>
-            {results.more && (
-              <button type="button" onClick={results.more} className="shrink-0 rounded-full bg-white/15 px-3 py-1 text-[13px] font-semibold text-white">
-                구글에서 더
-              </button>
-            )}
             <button type="button" onClick={() => setResultsList(!resultsList)} className="shrink-0 rounded-full bg-white px-3 py-1 text-[13px] font-semibold text-ink">
               {resultsList ? "지도" : "목록"}
             </button>
@@ -381,13 +376,14 @@ function NavView({ variant, me, reopen, path }: NavProps & { path: string }) {
   const nav = me
     ? [
         { href: "/", label: "지도", icon: "◎" },
-        { href: "/explore", label: "타인의 리스트", icon: "⌕" },
+        { href: "/explore", label: "타인의 핀", icon: "⌕" },
+        { href: "/following", label: "팔로잉 리스트", icon: "♥" },
         { href: `/@${me.handle}`, label: "내 리스트", icon: "☰" },
         { href: "/me", label: "프로필", icon: "◐" },
       ]
     : [
         { href: "/", label: "지도", icon: "◎" },
-        { href: "/explore", label: "타인의 리스트", icon: "⌕" },
+        { href: "/explore", label: "타인의 핀", icon: "⌕" },
         { href: "/demo", label: "예시", icon: "★" },
         { href: path && path !== "/login" ? `/login?next=${encodeURIComponent(path)}` : "/login", label: "로그인", icon: "→" },
       ];
@@ -424,14 +420,14 @@ function NavView({ variant, me, reopen, path }: NavProps & { path: string }) {
     );
   }
   return (
-    <nav aria-label="메뉴" className="fixed inset-x-0 bottom-0 z-30 grid h-16 grid-cols-4 border-t border-rule bg-white pb-[env(safe-area-inset-bottom)] lg:hidden">
+    <nav aria-label="메뉴" className={`fixed inset-x-0 bottom-0 z-30 grid h-16 border-t ${nav.length === 5 ? "grid-cols-5" : "grid-cols-4"} border-rule bg-white pb-[env(safe-area-inset-bottom)] lg:hidden`}>
       {nav.map((n) => (
         <Link
           key={n.label}
           href={n.href}
           onClick={onNav(n.href)}
           aria-current={isActive(n.href) ? "page" : undefined}
-          className={`flex flex-col items-center justify-center gap-0.5 text-[12px] font-semibold ${isActive(n.href) ? "text-pin" : "text-muted"}`}
+          className={`flex flex-col items-center justify-center gap-0.5 whitespace-nowrap font-semibold tracking-[-0.02em] ${nav.length === 5 ? "text-[11px]" : "text-[12px]"} ${isActive(n.href) ? "text-pin" : "text-muted"}`}
         >
           <span aria-hidden className="text-[18px] leading-none">{n.icon}</span>
           {n.label}

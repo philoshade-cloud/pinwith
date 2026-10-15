@@ -54,12 +54,13 @@ export function LikeButton({ listId, initialCount, demo = false }: { listId: str
       onClick={toggle}
       aria-pressed={liked}
       aria-label={liked ? "좋아요 취소" : "좋아요"}
-      className={`inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[13px] font-semibold transition-colors ${
-        liked ? "bg-pin/10 text-pin" : "text-muted hover:bg-surface"
+      className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[15px] font-semibold transition-colors ${
+        liked ? "bg-pin text-white" : "bg-white text-pin shadow-[inset_0_0_0_1.5px_var(--color-pin)] hover:bg-pin/5"
       }`}
     >
-      <span aria-hidden className="text-[15px] leading-none">{liked ? "♥" : "♡"}</span>
-      {fmt(count)}
+      <span aria-hidden className="text-[19px] leading-none">{liked ? "♥" : "♡"}</span>
+      좋아요
+      <span className="tabular-nums">{fmt(count)}</span>
     </button>
   );
 }

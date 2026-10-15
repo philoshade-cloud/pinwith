@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "이용약관" };
 
-// 초안: 법인 설립 후 운영 주체·준거법을 확정하고 법률 검토를 받는다.
+// 초안: 도메인 확정 후 문의 이메일을 채우고 법률 검토를 받는다.
 export default function Terms() {
   return (
     <>
       <h1>이용약관</h1>
       <p className="note">시행일: 2026년 10월 15일 (초안)</p>
+
+      <p>이 약관은 STRATO TRADINGS PTE. LTD.(싱가포르, UEN 202402989G, 이하 “회사”)가 운영하는 PinWith 이용에 적용됩니다.</p>
 
       <h2>1. 서비스</h2>
       <p>PinWith는 장소를 지도에 모아 리스트로 만들고 링크로 공유하는 서비스입니다. 링크를 받은 사람은 로그인 없이 볼 수 있습니다.</p>
@@ -43,6 +45,10 @@ export default function Terms() {
 
       <h2>8. 변경</h2>
       <p>약관이 바뀌면 시행 7일 전(불리한 변경은 30일 전)에 서비스 안에서 알립니다.</p>
+
+      <h2>9. 준거법과 문의</h2>
+      <p>이 약관은 싱가포르 법을 따릅니다. 다만 이용자가 사는 나라의 소비자 보호 법이 더 유리하게 정한 부분은 그 법을 따릅니다.</p>
+      <p>회사 주소: 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874 · 문의 이메일: [도메인 확정 후 기재]</p>
     </>
   );
 }
