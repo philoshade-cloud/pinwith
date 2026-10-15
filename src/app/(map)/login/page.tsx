@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
@@ -136,6 +137,10 @@ export default function LoginPage() {
           )}
         </p>
       </form>
+      <div className="mt-8 border-t border-rule pt-5">
+        <p className="text-[13px] text-muted">리스트로 수익을 내려는 큐레이터, 손님을 모으려는 가게라면</p>
+        <Link href="/biz" className="btn-quiet mt-2 w-full justify-center !py-3">상업 이용자용 콘솔</Link>
+      </div>
       </div>
     </Panel>
   );
