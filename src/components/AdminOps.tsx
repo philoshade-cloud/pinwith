@@ -277,8 +277,8 @@ function GoogleSwitch() {
 
 // ── 로그인 방식: Supabase → Authentication → Providers에 설정을 마친 회사만 켠다 ──────────
 const LOGINS = [
-  { key: "kakao", label: "카카오" },
-  { key: "apple", label: "Apple" },
+  // Apple은 Apple Developer Program(연 $99, iOS 앱 낼 때 가입) 뒤에 켠다
+  { key: "apple", label: "Apple(개발자 가입 뒤)" },
   { key: "facebook", label: "Facebook(Meta)" },
 ] as const;
 function LoginSwitch() {

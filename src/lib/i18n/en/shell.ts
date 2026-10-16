@@ -100,7 +100,6 @@ export const shell: Record<string, string> = {
   "PinWith에 로그인": "Log in to PinWith",
   "팔로우, 내 리스트 만들기, DM에 필요합니다.": "Needed to follow people, make lists, and send DMs.",
   "구글로 계속하기": "Continue with Google",
-  "카카오로 계속하기": "Continue with Kakao",
   "Apple로 계속하기": "Continue with Apple",
   "Facebook으로 계속하기": "Continue with Facebook",
   "이동하는 중…": "Redirecting…",

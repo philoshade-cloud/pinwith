@@ -18,7 +18,7 @@ const noSubscribe = () => () => {};
 // 구글 로그인 버튼. 끄려면 환경 변수에 false를 넣는다.
 const GOOGLE_LOGIN_ENABLED = process.env.NEXT_PUBLIC_GOOGLE_LOGIN_ENABLED !== "false";
 
-// 로그인: 구글, (켜 둔 경우) 카카오·Apple·Facebook, 또는 이메일 링크. 로그인 후 원래 보던 화면(next)으로 돌아간다.
+// 로그인: 구글, (켜 둔 경우) Apple·Facebook, 또는 이메일 링크. 로그인 후 원래 보던 화면(next)으로 돌아간다.
 export default function LoginPage() {
   const router = useRouter();
   const t = useT();
