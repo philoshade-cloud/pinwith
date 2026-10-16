@@ -23,7 +23,13 @@ export function loadPlacesLibrary(): Promise<Record<string, unknown>> {
   if (loading) return loading;
   if (!GOOGLE_MAPS_API_KEY) return Promise.reject(new Error("missing-key"));
 
-  loading = new Promise<void>((resolve, reject) => {
+  // 운영자가 구글 장소 기능을 껐으면(예산 초과 등) 스크립트도 불러오지 않는다
+  loading = import("./supabase/client")
+    .then(({ createClient }) => import("./googleFlag").then((g) => g.googleFlagInBrowser(createClient())))
+    .then((flag) => {
+      if (!flag.enabled) throw new Error("disabled");
+    })
+    .then(() => new Promise<void>((resolve, reject) => {
     if (window.google?.maps?.importLibrary) return resolve();
     window.__pinwithMapsReady = () => resolve();
     const params = new URLSearchParams({
@@ -38,7 +44,7 @@ export function loadPlacesLibrary(): Promise<Record<string, unknown>> {
     script.onerror = () => reject(new Error("load-failed"));
     script.onload = () => import("./usage").then((u) => u.logUsage("maps_js")).catch(() => {});
     document.head.append(script);
-  })
+  }))
     .then(() => window.google!.maps.importLibrary("places"))
     .catch((e) => {
       loading = null;

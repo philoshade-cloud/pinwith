@@ -51,7 +51,7 @@ export function PlaceSearchBox({
   const timer = useRef<number | undefined>(undefined);
   const seq = useRef(0);
   const cache = useRef(new Map<string, Suggestion[]>());
-  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  const [status, setStatus] = useState<"loading" | "ready" | "error" | "off">("loading");
   const [text, setText] = useState("");
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [open, setOpen] = useState(false);
@@ -66,7 +66,7 @@ export function PlaceSearchBox({
         lib.current = l as unknown as PlacesLib;
         setStatus("ready");
       })
-      .catch(() => !cancelled && setStatus("error"));
+      .catch((e: Error) => !cancelled && setStatus(e?.message === "disabled" ? "off" : "error"));
     return () => {
       cancelled = true;
       window.clearTimeout(timer.current);
@@ -206,8 +206,8 @@ export function PlaceSearchBox({
           onKeyDown={onKey}
           onFocus={() => suggestions.length && setOpen(true)}
           onBlur={() => window.setTimeout(() => setOpen(false), 150)}
-          placeholder={status === "error" ? t("장소 검색을 불러오지 못했습니다") : t("장소 이름이나 주소로 검색")}
-          disabled={status === "error"}
+          placeholder={status === "off" ? t("장소 검색을 잠시 쉬고 있어요") : status === "error" ? t("장소 검색을 불러오지 못했습니다") : t("장소 이름이나 주소로 검색")}
+          disabled={status === "error" || status === "off"}
           enterKeyHint="search"
           role="combobox"
           aria-controls="place-suggestions"
@@ -271,6 +271,7 @@ export function PlaceCard({ placeId, onLoaded }: { placeId: string; onLoaded: (p
     onLoadedRef.current = onLoaded;
   }, [onLoaded]);
 
+  const [unavailable, setUnavailable] = useState(false);
   useEffect(() => {
     let cancelled = false;
     loadPlacesLibrary().then(() => {
@@ -302,6 +303,9 @@ export function PlaceCard({ placeId, onLoaded }: { placeId: string; onLoaded: (p
       slot.current.replaceChildren(card);
       request.current = req;
       req.place = placeId;
+    }).catch(() => {
+      // 구글 장소 기능이 꺼졌거나 불러오지 못하면 카드 자리를 비운다(장소 이름·메모는 그대로 보임)
+      if (!cancelled) setUnavailable(true);
     });
     return () => {
       cancelled = true;
@@ -314,5 +318,6 @@ export function PlaceCard({ placeId, onLoaded }: { placeId: string; onLoaded: (p
     if (request.current) request.current.place = placeId;
   }, [placeId]);
 
+  if (unavailable) return null;
   return <div ref={slot} className="min-h-[72px]" />;
 }

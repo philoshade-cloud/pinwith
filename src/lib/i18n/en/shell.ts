@@ -117,6 +117,8 @@ export const shell: Record<string, string> = {
 
   // 장소 검색·지도
   "장소 검색을 불러오지 못했습니다": "Couldn't load place search",
+  "장소 검색을 잠시 쉬고 있어요": "Place search is paused for now",
+  "장소 검색을 잠시 쉬고 있어요. 나중에 다시 시도해 주세요.": "Place search is paused for now. Please try again later.",
   "장소 이름이나 주소로 검색": "Search by place name or address",
   "장소 검색": "Place search",
   "지우기": "Delete",

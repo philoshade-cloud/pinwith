@@ -55,6 +55,8 @@ export function UsagePanel() {
       </p>
       {msg && <p role="status" className="text-[14px] text-teal">{msg}</p>}
 
+      <GoogleSwitch />
+
       <div className="grid gap-3 sm:grid-cols-3">
         <Box title="구글 지도 이번 달" value={`$${num(gNow, 2)}`} hint={`월말 예상 $${num(gProj, 2)}`} warn={!!gb && gb.monthly_budget_usd > 0 && gProj >= (gb.monthly_budget_usd * gb.alert_pct) / 100} />
         <Box title="데이터베이스 용량" value={`${num(u.db_mb, 1)} MB`} hint={db ? `한도 ${num(db.monthly_budget_usd)} MB` : ""} warn={!!db && db.monthly_budget_usd > 0 && u.db_mb >= (db.monthly_budget_usd * db.alert_pct) / 100} />
@@ -209,5 +211,64 @@ export function ErrorsPanel() {
         ))}
       </ul>
     </section>
+  );
+}
+
+
+// ── 구글 장소 기능 스위치: 끄면 사이트가 구글 장소 검색·카드·좌표 찾기를 부르지 않는다 ──────────
+// "예산 넘으면 자동으로 끄기"가 켜져 있으면, 이번 달 추정 요금이 구글 예산에 닿을 때 DB가 스스로 끄고 운영자에게 알린다.
+type Flag = { enabled?: boolean; auto_off?: boolean; reason?: string | null; changed_at?: string; cost?: number; budget?: number };
+function GoogleSwitch() {
+  const supabase = useMemo(() => createClient(), []);
+  const [flag, setFlag] = useState<Flag | null>(null);
+  const [msg, setMsg] = useState("");
+  const load = useCallback(async () => {
+    const { data } = await supabase.from("app_flags").select("value").eq("key", "google_places").maybeSingle();
+    setFlag((data?.value as Flag) ?? { enabled: true, auto_off: true });
+  }, [supabase]);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    load();
+  }, [load]);
+
+  async function save(patch: Flag) {
+    const value = { ...flag, ...patch, changed_at: new Date().toISOString() };
+    // 손으로 켜고 끄면 자동으로 꺼진 사유는 지운다
+    if ("enabled" in patch) value.reason = patch.enabled ? null : "manual";
+    const { error } = await supabase.from("app_flags").update({ value, updated_at: new Date().toISOString() }).eq("key", "google_places");
+    setMsg(error ? "저장하지 못했어요." : "저장했어요. 이미 열려 있는 화면은 새로 고치면 반영돼요.");
+    load();
+  }
+
+  if (!flag) return null;
+  const on = flag.enabled !== false;
+  return (
+    <div className={`rounded-xl border p-4 ${on ? "border-rule" : "border-pin bg-pin/5"}`}>
+      <div className="flex flex-wrap items-center gap-3">
+        <b className="flex-1 text-[15px]">구글 장소 기능 {on ? "켜짐" : "꺼짐"}</b>
+        <ConfirmButton
+          label={on ? "끄기" : "다시 켜기"}
+          question={on ? "구글 장소 기능을 끌까요? 장소 검색·장소 카드·가게 찾기가 멈추고, 이미 담긴 장소와 지도는 그대로 보여요." : "구글 장소 기능을 다시 켤까요? 요금이 다시 나가기 시작해요."}
+          confirmLabel={on ? "끄기" : "켜기"}
+          onConfirm={() => save({ enabled: !on })}
+          className={on ? "btn-quiet !text-pin" : "btn-primary"}
+        />
+      </div>
+      {!on && (
+        <p className="mt-2 text-[13px] text-pin">
+          {flag.reason === "budget"
+            ? `예산 때문에 자동으로 꺼졌어요${flag.changed_at ? ` (${when(flag.changed_at)})` : ""}: 이번 달 추정 $${num(flag.cost, 2)} / 예산 $${num(flag.budget, 2)}. 예산을 올리거나 다음 달이 된 뒤 다시 켜세요(켠 뒤에도 예산을 넘은 상태면 곧 다시 꺼져요).`
+            : `손으로 껐어요${flag.changed_at ? ` (${when(flag.changed_at)})` : ""}.`}
+        </p>
+      )}
+      <label className="mt-3 flex items-center gap-2 text-[14px]">
+        <input type="checkbox" checked={flag.auto_off !== false} onChange={(e) => save({ auto_off: e.target.checked })} />
+        예산 넘으면 자동으로 끄기 <span className="text-[12px] text-muted">(아래 &lsquo;구글 지도&rsquo; 한 달 예산 기준, 예산이 0이면 꺼지지 않음)</span>
+      </label>
+      <p className="mt-2 text-[12px] text-muted">
+        이 스위치는 PinWith가 센 사용량으로 판단해요. 구글이 실제 청구액으로 직접 멈추게 하려면 저장소의 scripts/gcp/stop-places-on-budget.sh를 구글 클라우드 셸에서 한 번 실행해 두세요.
+      </p>
+      {msg && <p role="status" className="mt-1 text-[13px] text-teal">{msg}</p>}
+    </div>
   );
 }

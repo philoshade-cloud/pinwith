@@ -1,4 +1,5 @@
 import "server-only";
+import { googleFlagOnServer } from "./googleFlag";
 import { createClient } from "@supabase/supabase-js";
 import { SUPABASE_URL } from "./env";
 
@@ -14,6 +15,9 @@ export function serviceDb() {
 export async function fetchLocation(placeId: string): Promise<{ lat: number; lng: number } | "gone" | null> {
   const key = process.env.GOOGLE_MAPS_SERVER_KEY || process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   if (!key) return null;
+  // 운영자가 구글 장소 기능을 껐으면 부르지 않는다(좌표는 다음에 켜졌을 때 받는다)
+  const db = serviceDb();
+  if (db && !(await googleFlagOnServer(db)).enabled) return null;
   try {
     // 사용량 기록(운영자 콘솔 → 서비스 사용량)
     serviceDb()?.rpc("log_usage", { p_kind: "place_details", p_n: 1, p_key: "server" }).then(() => {});

@@ -126,8 +126,8 @@ function Apply({ userId, initial, onDone, onCancel }: { userId: string; initial:
       await p.fetchFields({ fields: ["displayName", "formattedAddress", "location"] });
       setPlace({ id, name: p.displayName ?? "", address: p.formattedAddress ?? "", lat: p.location?.lat() ?? null, lng: p.location?.lng() ?? null });
       setResults([]);
-    } catch {
-      setMsg(t("가게 정보를 불러오지 못했어요. 다시 골라 주세요."));
+    } catch (e) {
+      setMsg((e as Error)?.message === "disabled" ? t("장소 검색을 잠시 쉬고 있어요. 나중에 다시 시도해 주세요.") : t("가게 정보를 불러오지 못했어요. 다시 골라 주세요."));
     }
   }
 
