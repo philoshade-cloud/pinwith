@@ -8,6 +8,7 @@ import { useMonetization } from "@/lib/monetization";
 import { shortLink } from "@/lib/share";
 import type { ListItem, ListKind, Section, Visibility } from "@/lib/types";
 import { Panel, PanelLoading } from "./shell/Panel";
+import { ConfirmButton } from "./ConfirmButton";
 import { ChangeLog, EditorsManager, MyShare } from "./CoEdit";
 import { useMapScene, useShell, type Scene } from "./shell/context";
 
@@ -298,7 +299,6 @@ export function ListEditor({ listId }: { listId: string }) {
   }
 
   async function deleteList() {
-    if (!window.confirm("이 리스트를 지울까요? 담긴 장소와 메모도 함께 지워집니다.")) return;
     const { error } = await supabase.from("lists").delete().eq("id", listId);
     if (error) return flash("리스트를 지우지 못했습니다.");
     await refreshMine();
@@ -551,9 +551,13 @@ export function ListEditor({ listId }: { listId: string }) {
 
         {isOwner && (
           <section className="mt-16 border-t border-rule pt-6">
-            <button type="button" onClick={deleteList} className="text-[14px] font-semibold text-pin hover:underline">
-              리스트 삭제
-            </button>
+            <ConfirmButton
+              label="리스트 삭제"
+              question="이 리스트를 지울까요? 담긴 장소와 메모, 댓글도 함께 지워지고 되돌릴 수 없어요. 공유한 링크도 더 이상 열리지 않아요."
+              confirmLabel="지우기"
+              onConfirm={deleteList}
+              className="text-[14px] font-semibold text-pin hover:underline"
+            />
           </section>
         )}
       </div>

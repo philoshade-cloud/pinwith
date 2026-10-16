@@ -4,6 +4,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
+import { ConfirmButton } from "../ConfirmButton";
+
+export { ConfirmButton };
 
 // 로그인한 사람만: 아니면 로그인 화면으로 보내고 돌아오게 한다
 export function useAuthed(next: string) {
@@ -115,58 +118,6 @@ export const MODEL: Record<string, { label: string; desc: string }> = {
 
 export function Msg({ text }: { text: string }) {
   return text ? <p role="status" className="text-[14px] text-teal">{text}</p> : null;
-}
-
-// 브라우저 확인 창(confirm) 대신 화면 안에서 한 번 더 묻는 버튼.
-// (일부 휴대폰 브라우저·홈 화면 앱에서는 확인 창이 뜨지 않고 바로 '취소'로 처리된다)
-export function ConfirmButton({
-  label, question, confirmLabel = "확인", onConfirm, className = "btn-quiet !px-3 !py-1 !text-[12px]", withNote,
-}: {
-  label: string;
-  question: string;
-  confirmLabel?: string;
-  onConfirm: (note: string) => void | Promise<void>;
-  className?: string;
-  // 메모 칸(예: 손님에게 보낼 말)을 함께 받을 때 그 안내 문구
-  withNote?: string;
-}) {
-  const [open, setOpen] = useState(false);
-  const [note, setNote] = useState("");
-  const [busy, setBusy] = useState(false);
-  if (!open)
-    return (
-      <button type="button" onClick={() => setOpen(true)} className={className}>
-        {label}
-      </button>
-    );
-  return (
-    <span className="flex w-full flex-col gap-2 rounded-lg border border-pin/40 bg-[#fff7fb] p-3 text-[13px] text-ink">
-      <span className="whitespace-pre-wrap">{question}</span>
-      {withNote && (
-        <input value={note} onChange={(e) => setNote(e.target.value)} maxLength={300} placeholder={withNote} className="field !py-1.5 !text-[14px]" />
-      )}
-      <span className="flex gap-2">
-        <button
-          type="button"
-          disabled={busy}
-          onClick={async () => {
-            setBusy(true);
-            try {
-              await onConfirm(note);
-            } finally {
-              setBusy(false);
-              setOpen(false);
-              setNote("");
-            }
-          }}
-          className="btn-primary !px-3 !py-1 !text-[13px] disabled:opacity-50"
-        >
-          {busy ? "처리 중" : confirmLabel}
-        </button>
-        <button type="button" onClick={() => setOpen(false)} className="btn-quiet !px-3 !py-1 !text-[13px]">취소</button>
-      </span>
-    </span>
-  );
 }
 
 // 이의 제기: 과금·되돌림·노쇼 기록이 이상할 때 운영자에게 판단을 맡긴다

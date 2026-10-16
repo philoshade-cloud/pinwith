@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { ago } from "@/lib/social";
 import { useShell } from "./shell/context";
+import { ConfirmButton } from "./ConfirmButton";
 
 type C = {
   id: string;
@@ -67,8 +68,6 @@ export function Comments({ itemId, ownerId, onCount, publicComments }: { itemId:
   }
 
   async function remove(c: C) {
-    const replies = (rows ?? []).filter((r) => r.parent_id === c.id).length;
-    if (replies && !window.confirm(`이 댓글을 지우면 대댓글 ${replies}개도 함께 지워집니다. 지울까요?`)) return;
     await supabase.from("item_comments").delete().eq("id", c.id);
     load();
   }
@@ -100,7 +99,15 @@ export function Comments({ itemId, ownerId, onCount, publicComments }: { itemId:
               {c.hidden_by_owner ? "다시 보이기" : "숨기기"}
             </button>
           )}
-          {c.author_id === me?.id && <button type="button" onClick={() => remove(c)} className="underline">지우기</button>}
+          {c.author_id === me?.id && (
+            <ConfirmButton
+              label="지우기"
+              question={repliesOf(c.id).length ? `이 댓글을 지우면 대댓글 ${repliesOf(c.id).length}개도 함께 지워져요. 지울까요?` : "이 댓글을 지울까요?"}
+              confirmLabel="지우기"
+              onConfirm={() => remove(c)}
+              className="underline"
+            />
+          )}
         </p>
       </div>
     );

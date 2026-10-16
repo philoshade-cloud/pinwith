@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { ago, TAGS } from "@/lib/social";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { useShell } from "./shell/context";
+import { ConfirmButton } from "./ConfirmButton";
 
 type InboxRow = {
   id: string;
@@ -231,10 +232,18 @@ export function Conversation({ id }: { id: string }) {
         <div className="flex items-center gap-2 border-b border-rule px-5 py-2.5 text-[13px]">
           <Link href="/messages" className="text-muted hover:text-ink">← 메시지함</Link>
           {other && <Link href={`/@${other.handle}`} className="ml-auto font-semibold text-teal">@{other.handle}</Link>}
-          {myStatus !== "blocked" && (
-            <button type="button" onClick={() => window.confirm("이 사람을 차단할까요?") && setStatus("blocked")} className="text-muted underline">차단</button>
-          )}
         </div>
+        {myStatus !== "blocked" && (
+          <div className="flex justify-end px-5 pt-2 text-[13px]">
+            <ConfirmButton
+              label="이 사람 차단"
+              question="이 사람을 차단할까요? 차단하면 이 사람의 메시지를 더 받지 않아요."
+              confirmLabel="차단"
+              onConfirm={() => setStatus("blocked")}
+              className="text-muted underline"
+            />
+          </div>
+        )}
         {myStatus === "request" && (
           <div className="mx-5 mt-3 rounded-xl bg-surface p-3 text-[13px]">
             <p className="text-ink">내가 팔로우하지 않는 사람이 보낸 메시지 요청이에요.</p>

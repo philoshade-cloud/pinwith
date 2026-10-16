@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Blocks, BizReview, Disputes, PayoutRequests, StoreQuality, Topups } from "./AdminCommerce";
 import { ErrorsPanel, UsagePanel } from "./AdminOps";
+import { ConfirmButton } from "./ConfirmButton";
 
 type Tab = "payout" | "curators" | "settings" | "support" | "biz" | "topups" | "requests" | "disputes" | "quality" | "blocks" | "usage" | "errors";
 const TABS: { id: Tab; label: string }[] = [
@@ -147,7 +148,6 @@ function Payouts() {
   }
 
   async function finalize() {
-    if (!confirm(`${month.slice(0, 7)} 정산을 확정할까요? 확정하면 금액이 지급 목록으로 굳어지고 바꿀 수 없어요.`)) return;
     const { data, error } = await supabase.rpc("admin_finalize_month", { p_month: month });
     if (error) return setMsg("확정하지 못했습니다. 수익 금액을 먼저 저장했는지 확인하세요.");
     setMsg(`확정했습니다. 지급 ${data}건.`);
@@ -192,7 +192,15 @@ function Payouts() {
           <input value={note} onChange={(e) => setNote(e.target.value)} disabled={finalized} className="field" placeholder="애드센스 확정 금액, 환율 등" />
         </label>
         {!finalized && <button type="button" onClick={saveRevenue} className="btn-quiet">저장</button>}
-        {!finalized && row && <button type="button" onClick={finalize} className="btn-primary">정산 확정</button>}
+        {!finalized && row && (
+          <ConfirmButton
+            label="정산 확정"
+            question={`${month.slice(0, 7)} 정산을 확정할까요? 확정하면 금액이 지급 목록으로 굳어지고 바꿀 수 없어요.`}
+            confirmLabel="확정"
+            onConfirm={finalize}
+            className="btn-primary"
+          />
+        )}
       </div>
       <p className="text-[13px] text-muted">
         계산: (그 달 리스트 화면 광고 수익) × (수익화한 리스트의 실제 광고 노출 ÷ 모든 리스트의 실제 광고 노출) × 큐레이터 분배율. 공동 편집자 배분(%)은 그

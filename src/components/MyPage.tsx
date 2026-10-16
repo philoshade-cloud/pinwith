@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { SignOutButton } from "./SignOutButton";
 import { AvatarPicker } from "./AvatarPicker";
 import { PushToggle } from "./PushToggle";
+import { ConfirmButton } from "./ConfirmButton";
 import { APP_VERSION } from "@/lib/version";
 import { useMonetization } from "@/lib/monetization";
 import { Panel, PanelLoading } from "./shell/Panel";
@@ -81,7 +82,6 @@ export function MyPage() {
   }
 
   async function deleteAccount() {
-    if (!window.confirm("계정을 삭제할까요? 내 리스트와 장소, 팔로우, 좋아요가 모두 지워지며 되돌릴 수 없습니다.")) return;
     const { error } = await supabase.rpc("delete_my_account");
     if (error) {
       setMsg("계정을 삭제하지 못했습니다. 잠시 후 다시 시도하세요.");
@@ -175,9 +175,15 @@ export function MyPage() {
             {" · "}
             <Link href="/terms" className="underline">이용약관</Link>
           </p>
-          <button type="button" onClick={deleteAccount} className="mt-4 font-semibold text-pin hover:underline">
-            계정 삭제
-          </button>
+          <div className="mt-4">
+            <ConfirmButton
+              label="계정 삭제"
+              question="계정을 삭제할까요? 내 리스트와 장소, 팔로우, 좋아요가 모두 지워지며 되돌릴 수 없어요."
+              confirmLabel="삭제"
+              onConfirm={deleteAccount}
+              className="font-semibold text-pin hover:underline"
+            />
+          </div>
           <p className="mt-1">내 프로필, 리스트, 팔로우, 좋아요가 모두 지워지며 되돌릴 수 없습니다.</p>
         </div>
       </div>

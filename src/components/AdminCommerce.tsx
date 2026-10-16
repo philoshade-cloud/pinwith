@@ -34,9 +34,8 @@ export function BizReview() {
     if (data?.signedUrl) window.open(data.signedUrl, "_blank", "noopener");
   }
 
-  async function decide(b: Biz, status: string) {
-    const note = status === "approved" ? null : prompt(status === "rejected" ? "반려 사유(가게에 보여요)" : "정지 사유", b.review_note ?? "") ?? undefined;
-    if (note === undefined) return;
+  async function decide(b: Biz, status: string, reason?: string) {
+    const note = status === "approved" ? null : reason?.trim() || null;
     const { error } = await supabase.from("businesses").update({ status, review_note: note }).eq("id", b.id);
     setMsg(error ? (error.code === "23505" ? "이 가게는 이미 다른 계정이 인증돼 있어요." : "바꾸지 못했어요.") : `${b.place_name}: ${BS[status]}`);
     load();
@@ -73,8 +72,14 @@ export function BizReview() {
             </p>
             <p className="flex gap-2">
               {b.status !== "approved" && <button type="button" onClick={() => decide(b, "approved")} className="btn-primary !px-3 !py-1 !text-[13px]">승인</button>}
-              {b.status === "pending" && <button type="button" onClick={() => decide(b, "rejected")} className="btn-quiet !px-3 !py-1 !text-[13px]">반려</button>}
-              {b.status === "approved" && <button type="button" onClick={() => decide(b, "suspended")} className="btn-quiet !px-3 !py-1 !text-[13px]">정지</button>}
+              {b.status === "pending" && (
+                <ConfirmButton label="반려" question="이 신청을 반려할까요? 사유가 가게에 보여요." withNote="반려 사유(가게에 보여요)" noteDefault={b.review_note ?? ""} noteRequired
+                  confirmLabel="반려" onConfirm={(note) => decide(b, "rejected", note)} className="btn-quiet !px-3 !py-1 !text-[13px]" />
+              )}
+              {b.status === "approved" && (
+                <ConfirmButton label="정지" question="이 가게를 정지할까요? 과금·예약·콘솔 사용이 멈추고 가게에 알림이 가요." withNote="정지 사유(가게에 보여요)" noteDefault={b.review_note ?? ""} noteRequired
+                  confirmLabel="정지" onConfirm={(note) => decide(b, "suspended", note)} className="btn-quiet !px-3 !py-1 !text-[13px]" />
+              )}
             </p>
           </li>
         ))}
@@ -102,9 +107,8 @@ export function Topups() {
     load();
   }, [load]);
 
-  async function mark(t: Topup, status: "paid" | "cancelled") {
-    const reference = status === "paid" ? prompt("입금 확인 메모(입금자명·거래 번호)", t.reference ?? "") : null;
-    if (status === "paid" && reference === null) return;
+  async function mark(t: Topup, status: "paid" | "cancelled", memo?: string) {
+    const reference = status === "paid" ? memo?.trim() || null : null;
     await supabase.from("biz_topups").update({ status, reference, paid_at: status === "paid" ? new Date().toISOString() : null }).eq("id", t.id);
     load();
   }
@@ -131,8 +135,11 @@ export function Topups() {
             </span>
             {t.status === "requested" && (
               <span className="ml-auto flex gap-2">
-                {t.provider === "bank" && <button type="button" onClick={() => mark(t, "paid")} className="btn-primary !px-3 !py-1 !text-[13px]">입금 확인</button>}
-                <button type="button" onClick={() => mark(t, "cancelled")} className="btn-quiet !px-3 !py-1 !text-[13px]">취소</button>
+                {t.provider === "bank" && (
+                  <ConfirmButton label="입금 확인" question="입금을 확인했나요? 확인하면 가게 광고비 잔액에 바로 들어가요." withNote="입금 확인 메모(입금자명·거래 번호)" noteDefault={t.reference ?? ""}
+                    confirmLabel="입금 확인" onConfirm={(note) => mark(t, "paid", note)} className="btn-primary !px-3 !py-1 !text-[13px]" />
+                )}
+                <ConfirmButton label="취소" question="이 충전 요청을 취소할까요?" confirmLabel="충전 취소" onConfirm={() => mark(t, "cancelled")} className="btn-quiet !px-3 !py-1 !text-[13px]" />
               </span>
             )}
           </li>
@@ -168,9 +175,8 @@ export function PayoutRequests() {
     load();
   }, [load]);
 
-  async function decide(r: Req, status: "paid" | "rejected") {
-    const text = prompt(status === "paid" ? "송금 거래 번호(Wise·PayPal·은행)" : "반려 사유(큐레이터에게 보여요)", "");
-    if (text === null) return;
+  async function decide(r: Req, status: "paid" | "rejected", note: string) {
+    const text = note.trim();
     await supabase
       .from("payout_requests")
       .update(status === "paid" ? { status, reference: text, paid_at: new Date().toISOString() } : { status, note: text })
@@ -215,8 +221,10 @@ export function PayoutRequests() {
               )}
               {r.status === "requested" && (
                 <p className="flex gap-2">
-                  <button type="button" onClick={() => decide(r, "paid")} className="btn-primary !px-3 !py-1 !text-[13px]">지급함</button>
-                  <button type="button" onClick={() => decide(r, "rejected")} className="btn-quiet !px-3 !py-1 !text-[13px]">반려</button>
+                  <ConfirmButton label="지급함" question="송금을 마쳤나요? 큐레이터에게 지급 완료 알림이 가요." withNote="송금 거래 번호(Wise·PayPal·은행)" noteRequired
+                    confirmLabel="지급 완료" onConfirm={(note) => decide(r, "paid", note)} className="btn-primary !px-3 !py-1 !text-[13px]" />
+                  <ConfirmButton label="반려" question="이 지급 요청을 반려할까요? 금액은 큐레이터의 받을 수 있는 금액으로 돌아가요." withNote="반려 사유(큐레이터에게 보여요)" noteRequired
+                    confirmLabel="반려" onConfirm={(note) => decide(r, "rejected", note)} className="btn-quiet !px-3 !py-1 !text-[13px]" />
                 </p>
               )}
             </li>

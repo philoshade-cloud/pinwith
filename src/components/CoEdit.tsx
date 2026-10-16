@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useShell } from "./shell/context";
+import { ConfirmButton } from "./ConfirmButton";
 
 type Invite = {
   list_id: string;
@@ -124,7 +125,6 @@ export function EditorsManager({ listId, monetize }: { listId: string; monetize:
   }
 
   async function remove(userId: string) {
-    if (!window.confirm("이 사람을 공동 편집자에서 뺄까요?")) return;
     await supabase.from("list_editors").delete().eq("list_id", listId).eq("user_id", userId);
     load();
   }
@@ -163,7 +163,7 @@ export function EditorsManager({ listId, monetize }: { listId: string; monetize:
                 />
                 %
               </label>}
-              <button type="button" onClick={() => remove(e.user_id)} className="btn-quiet shrink-0 !px-2.5">빼기</button>
+              <ConfirmButton label="빼기" question="이 사람을 공동 편집자에서 뺄까요? 이미 담은 장소와 메모는 리스트에 남아요." confirmLabel="빼기" onConfirm={() => remove(e.user_id)} className="btn-quiet shrink-0 !px-2.5" />
             </li>
           ))}
         </ul>
