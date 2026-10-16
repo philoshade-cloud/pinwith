@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   // 아이폰 '홈 화면에 추가' 아이콘(홈 화면 앱이어야 아이폰에서 알림을 받을 수 있다)
   icons: { apple: "/apple-touch-icon.png" },
   appleWebApp: { capable: true, title: "PinWith", statusBarStyle: "default" },
+  // AdSense 사이트 확인용(<meta name="google-adsense-account">). 광고 계정 번호(ca-pub-…)를 넣으면 생긴다.
+  ...(process.env.NEXT_PUBLIC_ADSENSE_CLIENT ? { other: { "google-adsense-account": process.env.NEXT_PUBLIC_ADSENSE_CLIENT } } : {}),
 };
 
 export const viewport: Viewport = {
