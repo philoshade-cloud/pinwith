@@ -204,4 +204,7 @@ export const social: Record<string, string> = {
   "카메라로 찍으면 바로 열려요": "Scan with a camera to open it",
   "{name} 프로필 QR": "{name} profile QR",
   "이미지 저장": "Save image",
+  "프로필 사진 바꾸기": "Change profile photo",
+  "프로필 사진 올리기": "Add profile photo",
+  "사진 지우기": "Remove photo",
 };

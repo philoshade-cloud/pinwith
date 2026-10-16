@@ -25,13 +25,14 @@ function ownPath(url: string | null) {
   return m ? decodeURIComponent(m[1]) : null;
 }
 
-// 프로필 사진 바꾸기·지우기
+// 프로필 사진: 사진을 누르면 올리기(없을 때) 또는 바꾸기·지우기 메뉴. 펜 표시로 고칠 수 있음을 알린다.
 export function AvatarPicker({ userId, name, onChange }: { userId: string; name: string; onChange?: () => void }) {
   const supabase = useMemo(() => createClient(), []);
   const input = useRef<HTMLInputElement>(null);
   const [url, setUrl] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
+  const [menu, setMenu] = useState(false);
   const t = useT();
 
   useEffect(() => {
@@ -79,19 +80,31 @@ export function AvatarPicker({ userId, name, onChange }: { userId: string; name:
   }
 
   return (
-    <div className="flex items-center gap-4">
-      <Avatar name={name || "?"} url={url} size={64} />
-      <div className="grid gap-1">
-        <div className="flex gap-2">
-          <button type="button" onClick={() => input.current?.click()} disabled={busy} className="btn-quiet !py-1.5 disabled:opacity-50">
-            {busy ? t("올리는 중") : url ? t("사진 바꾸기") : t("사진 올리기")}
-          </button>
-          {url && (
-            <button type="button" onClick={clear} disabled={busy} className="btn-quiet !py-1.5 disabled:opacity-50">{t("지우기@@사진")}</button>
-          )}
-        </div>
-        {msg && <span role="status" className="text-[12px] text-muted">{msg}</span>}
-      </div>
+    <div className="relative shrink-0">
+      {/* 사진을 누르면 올리기·바꾸기·지우기 */}
+      <button
+        type="button"
+        onClick={() => (url ? setMenu(!menu) : input.current?.click())}
+        disabled={busy}
+        aria-label={url ? t("프로필 사진 바꾸기") : t("프로필 사진 올리기")}
+        aria-expanded={url ? menu : undefined}
+        className="relative block rounded-full disabled:opacity-50"
+      >
+        <Avatar name={name || "?"} url={url} size={64} />
+        <span aria-hidden className="absolute -bottom-0.5 -right-0.5 grid h-6 w-6 place-items-center rounded-full border-2 border-white bg-ink text-white">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M3 17.25V21h3.75L17.8 9.95l-3.75-3.75L3 17.25zm17.7-10.2a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" /></svg>
+        </span>
+      </button>
+      {menu && (
+        <span className="absolute left-0 top-[72px] z-10 grid w-40 overflow-hidden rounded-xl border border-rule bg-white text-[14px] shadow-lg">
+          <button type="button" onClick={() => { setMenu(false); input.current?.click(); }} className="px-3 py-2.5 text-left hover:bg-surface">{t("사진 바꾸기")}</button>
+          <button type="button" onClick={() => { setMenu(false); clear(); }} className="px-3 py-2.5 text-left text-pin hover:bg-surface">{t("사진 지우기")}</button>
+          <button type="button" onClick={() => setMenu(false)} className="px-3 py-2.5 text-left text-muted hover:bg-surface">{t("취소")}</button>
+        </span>
+      )}
+      {(busy || msg) && (
+        <span role="status" className="absolute left-0 top-[70px] w-max max-w-[200px] text-[11px] text-muted">{busy ? t("올리는 중") : msg}</span>
+      )}
       <input ref={input} type="file" accept="image/*" hidden onChange={(e) => pick(e.target.files?.[0])} />
     </div>
   );

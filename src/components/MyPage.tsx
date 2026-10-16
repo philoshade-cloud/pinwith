@@ -123,28 +123,33 @@ export function MyPage() {
   if (!profile || !draft) return <PanelLoading />;
 
   return (
-    <Panel title={t("내 프로필")}>
+    <Panel
+      title={t("내 프로필")}
+      titleSlot={
+        <span className="flex min-w-0 items-center gap-2">
+          <span className="truncate text-[15px] font-semibold text-ink">{t("내 프로필")}</span>
+          <LangSwitch className="ml-auto" />
+        </span>
+      }
+    >
       <div className="px-5 pb-8 pt-4">
-        <div className="mt-1 mb-4 flex justify-end">
-          <LangSwitch />
-        </div>
         {needsHandle && (
           <p className="rounded-lg bg-surface px-3 py-2 text-[14px] text-teal">
             {t("핸들을 정하면 내 지도의 주소가 됩니다: /@핸들. 나중에 언제든 바꿀 수 있습니다.")}
           </p>
         )}
-        <div className="mt-4">
-          <AvatarPicker userId={profile.id} name={draft.display_name || profile.handle} onChange={refreshMine} />
-        </div>
         <form onSubmit={saveProfile} className="mt-4 grid gap-4">
-          <label className="grid gap-1 text-[13px] font-semibold text-ink">
+          {/* 프로필 사진 옆에 핸들(화면을 짧게) */}
+          <div className="flex items-start gap-4">
+          <AvatarPicker userId={profile.id} name={draft.display_name || profile.handle} onChange={refreshMine} />
+          <label className="grid min-w-0 flex-1 gap-1 text-[13px] font-semibold text-ink">
             {t("핸들")}
-            <span className="flex items-center rounded-lg border border-rule bg-surface pl-3 text-[15px] font-normal text-muted focus-within:outline-2 focus-within:outline-teal">
+            <span className="flex min-w-0 items-center rounded-lg border border-rule bg-surface pl-3 text-[15px] font-normal text-muted focus-within:outline-2 focus-within:outline-teal">
               @
               <input
                 value={draft.handle}
                 onChange={(e) => setDraft({ ...draft, handle: e.target.value })}
-                className="min-w-0 flex-1 rounded-r-lg bg-white px-2 py-2.5 text-ink outline-none"
+                className="w-0 min-w-0 flex-1 rounded-r-lg bg-white px-2 py-2.5 text-ink outline-none"
                 autoComplete="username"
               />
             </span>
@@ -154,6 +159,7 @@ export function MyPage() {
               </span>
             )}
           </label>
+          </div>
           <label className="grid gap-1 text-[13px] font-semibold text-ink">
             {t("이름")}
             <input

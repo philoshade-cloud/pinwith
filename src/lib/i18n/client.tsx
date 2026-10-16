@@ -5,7 +5,7 @@
 // - 언어를 바꾸면 쿠키에 저장하고 새로 불러온다(모든 화면·날짜 형식이 한 번에 바뀌게).
 import { useCallback, useEffect, useSyncExternalStore, type ReactNode } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { LANG_COOKIE, detect, localeOf, translate, translateTitle, type Lang, type Vars } from "./core";
+import { LANG_COOKIE, LANGS, detect, localeOf, translate, translateTitle, type Lang, type Vars } from "./core";
 
 let active: Lang = "ko";
 const listeners = new Set<() => void>();
@@ -119,24 +119,26 @@ export function LangBoot() {
   return null;
 }
 
-// 언어 바꾸기 버튼(로그인 화면, My 화면 맨 위)
+// 언어 바꾸기: 눌러서 고르는 방식(언어가 늘어나도 그대로). 글자 위에 기기 기본 선택 창을 투명하게 덮는다.
 export function LangSwitch({ className = "" }: { className?: string }) {
   const lang = useLang();
+  const current = LANGS.find((l) => l.id === lang)?.label ?? lang;
   return (
-    <div role="group" aria-label="Language / 언어" className={`inline-flex items-center gap-1 rounded-full bg-surface p-1 text-[13px] font-semibold ${className}`}>
-      <span aria-hidden className="pl-2 pr-1 text-muted">🌐</span>
-      {(["ko", "en"] as const).map((l) => (
-        <button
-          key={l}
-          type="button"
-          onClick={() => l !== lang && setLang(l)}
-          aria-pressed={l === lang}
-          className={`rounded-full px-3 py-1 ${l === lang ? "bg-white text-ink shadow-sm" : "text-muted hover:text-ink"}`}
-        >
-          {l === "ko" ? "한국어" : "English"}
-        </button>
-      ))}
-    </div>
+    <label className={`relative inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-full bg-surface px-2.5 py-1 text-[12px] font-semibold text-ink ${className}`}>
+      <span aria-hidden>🌐</span>
+      <span>{current}</span>
+      <span aria-hidden className="text-muted">▾</span>
+      <select
+        value={lang}
+        onChange={(e) => setLang(e.target.value as Lang)}
+        aria-label="Language / 언어"
+        className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+      >
+        {LANGS.map((l) => (
+          <option key={l.id} value={l.id}>{l.label}</option>
+        ))}
+      </select>
+    </label>
   );
 }
 
