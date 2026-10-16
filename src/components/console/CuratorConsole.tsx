@@ -622,7 +622,7 @@ function Payout({ dash, reload }: { dash: Dash; reload: () => void }) {
     const latin = p.holder_name_latin.trim().replace(/\s+/g, " ");
     const phone = p.phone.trim();
     // 원화(KRW)로 받으면 송금 회사(Wise 등)가 영문 이름·생년월일·한국 휴대폰 번호를 요구한다
-    if (krw && (!latin || !p.birth_date || !phone)) return setMsg("원화로 받으려면 영문 이름, 생년월일, 휴대폰 번호가 필요해요.");
+    if (krw && (!latin || !p.birth_date || !phone)) return setMsg("원화를 은행 계좌로 받으려면 영문 이름, 생년월일, 휴대폰 번호가 필요해요.");
     if (latin && !/^[A-Za-z][A-Za-z .,'-]*$/.test(latin)) return setMsg("영문 이름은 알파벳으로만 적어 주세요(통장·여권의 영문 철자와 같게).");
     if (phone && !/^\+?[0-9 -]{6,20}$/.test(phone)) return setMsg("휴대폰 번호는 숫자로 적어 주세요(예: 010-1234-5678 또는 +82 10 1234 5678).");
     if (p.method === "bank" && krw && !/^[0-9-]{10,20}$/.test(p.account_number.trim())) return setMsg("한국 계좌 번호를 숫자로 확인해 주세요.");
@@ -649,7 +649,9 @@ function Payout({ dash, reload }: { dash: Dash; reload: () => void }) {
   }
 
   const pending = reqs.some((r) => r.status === "requested");
-  const krw = p.currency.trim().toUpperCase() === "KRW" || (!p.currency.trim() && p.country.trim().toUpperCase() === "KR");
+  // 원화(KRW)를 은행 계좌로 직접 받을 때만 송금 회사가 영문 이름·생년월일·휴대폰 번호를 요구한다.
+  // Wise 계정(이메일)으로 받으면 Wise가 받는 사람 본인 확인을 직접 하므로 필요 없다.
+  const krw = p.method === "bank" && (p.currency.trim().toUpperCase() === "KRW" || (!p.currency.trim() && p.country.trim().toUpperCase() === "KR"));
   const can = dash.has_profile && !pending && dash.available >= dash.min_payout && dash.available > 0;
   const field = (k: keyof Profile, label: string, props: React.InputHTMLAttributes<HTMLInputElement> = {}) => (
     <label className="grid gap-1 text-[13px] font-semibold">
@@ -684,23 +686,32 @@ function Payout({ dash, reload }: { dash: Dash; reload: () => void }) {
         <label className="grid gap-1 text-[13px] font-semibold">
           받는 방법
           <select value={p.method} onChange={(e) => setP({ ...p, method: e.target.value as Profile["method"] })} className="field">
-            <option value="wise">Wise</option>
+            <option value="wise">Wise 계정(추천)</option>
             <option value="paypal">PayPal</option>
-            <option value="bank">은행 계좌</option>
+            <option value="bank">은행 계좌로 직접</option>
           </select>
         </label>
-        {field("holder_name", "받는 사람 이름(실명)", { required: true, autoComplete: "name" })}
-        {field("holder_name_latin", `영문 이름(통장·여권 영문 철자)${krw ? "" : " — 선택"}`, { autoComplete: "name", placeholder: "예: HONG GILDONG", required: krw })}
-        <div className="grid grid-cols-2 gap-3">
-          {field("birth_date", `생년월일${krw ? "" : " — 선택"}`, { type: "date", required: krw, max: new Date().toISOString().slice(0, 10) })}
-          {field("phone", `휴대폰 번호${krw ? "" : " — 선택"}`, { type: "tel", inputMode: "tel", autoComplete: "tel", placeholder: "010-1234-5678", required: krw })}
-        </div>
-        {krw && (
-          <p className="text-[12px] text-muted">
-            원화로 받으면 송금 회사가 영문 이름·생년월일을 확인하고, 한 번에 95만 원이 넘으면 휴대폰으로 본인 확인을 요청할 수 있어요.
+        {p.method === "wise" && (
+          <p className="rounded-lg bg-surface px-3 py-2 text-[12px] text-ink/80">
+            지급하면 Wise가 아래 이메일로 받는 방법을 보내요. Wise 계정이 없으면 그 메일에서 같은 이메일로 가입하고(Wise가 본인 확인을 해요) 내 은행 계좌로 받으면 돼요.
+            메일을 받고 10일 안에 받지 않으면 송금이 취소되니, 자주 보는 이메일을 적어 주세요.
           </p>
         )}
-        {(p.method === "wise" || p.method === "paypal") && field("email", `${p.method === "wise" ? "Wise" : "PayPal"} 계정 이메일`, { inputMode: "email", required: true })}
+        {field("holder_name", "받는 사람 이름(실명)", { required: true, autoComplete: "name" })}
+        {p.method !== "wise" && field("holder_name_latin", `영문 이름(통장·여권 영문 철자)${krw ? "" : " — 선택"}`, { autoComplete: "name", placeholder: "예: HONG GILDONG", required: krw })}
+        {p.method !== "wise" && (
+          <div className="grid grid-cols-2 gap-3">
+            {field("birth_date", `생년월일${krw ? "" : " — 선택"}`, { type: "date", required: krw, max: new Date().toISOString().slice(0, 10) })}
+            {field("phone", `휴대폰 번호${krw ? "" : " — 선택"}`, { type: "tel", inputMode: "tel", autoComplete: "tel", placeholder: "010-1234-5678", required: krw })}
+          </div>
+        )}
+        {krw && (
+          <p className="text-[12px] text-muted">
+            원화를 은행 계좌로 받으면 송금 회사가 영문 이름·생년월일을 확인하고, 한 번에 95만 원이 넘으면 휴대폰으로 본인 확인을 요청할 수 있어요. Wise 계정으로 받으면 이
+            정보 없이 받을 수 있어요.
+          </p>
+        )}
+        {(p.method === "wise" || p.method === "paypal") && field("email", p.method === "wise" ? "Wise에서 받을 이메일(Wise 계정이 있으면 그 이메일)" : "PayPal 계정 이메일", { inputMode: "email", required: true })}
         {p.method === "bank" && (
           <>
             {field("bank_name", "은행 이름", { required: true })}
