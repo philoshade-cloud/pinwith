@@ -31,7 +31,25 @@ const LIST_SELECT =
 // 검색어를 PostgREST 필터에 안전하게 넣기 위해 특수문자를 뺀다.
 const clean = (q: string) => q.replace(/[,()%*\\#]/g, " ").trim();
 
-// /explore — 다른 사람의 리스트와 큐레이터 찾기
+type Category = "following" | "popular" | "similar";
+const CATEGORIES: { id: Category; label: string; login?: boolean }[] = [
+  { id: "following", label: "팔로우 중@@칩", login: true },
+  { id: "popular", label: "인기 리스트@@칩" },
+  { id: "similar", label: "내 리스트와 겹치는 리스트@@칩", login: true },
+];
+const PREF = "pw_explore";
+
+function readPref(): { cat?: Category; local?: boolean } {
+  try {
+    return JSON.parse(localStorage.getItem(PREF) ?? "{}");
+  } catch {
+    return {};
+  }
+}
+
+// /explore — 다른 사람의 리스트와 큐레이터 찾기.
+// 위에서 묶음(팔로우 중 · 인기 · 내 리스트와 겹치는)을 골라 그 리스트만 보여 주고,
+// '현재 지도 지역 먼저'를 켜면 그 묶음 안에서 지금 지도에 핀이 있는 리스트를 위로 올린다.
 export function ExploreView() {
   const t = useT();
   const supabase = useMemo(() => createClient(), []);
@@ -40,18 +58,40 @@ export function ExploreView() {
   const [curators, setCurators] = useState<CuratorHit[]>([]);
   const [lists, setLists] = useState<ListHit[]>([]);
   const [following, setFollowing] = useState<CuratorHit[]>([]);
-  const [recent, setRecent] = useState<ListHit[]>([]);
+  const [followingLists, setFollowingLists] = useState<ListHit[]>([]);
   const [popular, setPopular] = useState<ListHit[]>([]);
   const [similar, setSimilar] = useState<ListHit[]>([]);
-  const [me, setMe] = useState<string | null>(null);
+  // undefined: 아직 확인 중
+  const [me, setMe] = useState<string | null | undefined>(undefined);
   const [loading, setLoading] = useState(false);
+  const [cat, setCat] = useState<Category | null>(null);
+  const [local, setLocal] = useState(true);
   // 지금 지도에 보이는 지역에 핀이 있는 리스트(핀 수)
   const { view } = useShell();
   const [nearby, setNearby] = useState<ListHit[]>([]);
   const [pinsHere, setPinsHere] = useState<Map<string, number>>(new Map());
 
+  // 고른 묶음·켜기 상태는 이 기기에 기억한다
   useEffect(() => {
-    if (!view || view.zoom < LOCAL_ZOOM) {
+    const p = readPref();
+    const timer = window.setTimeout(() => {
+      if (p.cat) setCat(p.cat);
+      if (typeof p.local === "boolean") setLocal(p.local);
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
+  const choose = (next: { cat?: Category; local?: boolean }) => {
+    if (next.cat) setCat(next.cat);
+    if (typeof next.local === "boolean") setLocal(next.local);
+    try {
+      localStorage.setItem(PREF, JSON.stringify({ ...readPref(), ...next }));
+    } catch {
+      /* 저장이 막힌 브라우저 */
+    }
+  };
+
+  useEffect(() => {
+    if (!local || !view || view.zoom < LOCAL_ZOOM) {
       const t0 = window.setTimeout(() => {
         setNearby([]);
         setPinsHere(new Map());
@@ -59,29 +99,25 @@ export function ExploreView() {
       return () => window.clearTimeout(t0);
     }
     // 지도를 움직이는 동안은 기다렸다가 멈추면 한 번만 찾는다
-    const t = window.setTimeout(async () => {
-      const { data } = await supabase.rpc("lists_in_view", { p_s: view.s, p_w: view.w, p_n: view.n, p_e: view.e, p_limit: 30 });
+    const timer = window.setTimeout(async () => {
+      const { data } = await supabase.rpc("lists_in_view", { p_s: view.s, p_w: view.w, p_n: view.n, p_e: view.e, p_limit: 60 });
       const rows = (data ?? []) as { list_id: string; pins: number }[];
       const pins = new Map(rows.map((r) => [r.list_id, r.pins]));
       setPinsHere(pins);
       if (rows.length === 0) return setNearby([]);
       const { data: ls } = await supabase.from("lists").select(LIST_SELECT).in("id", rows.map((r) => r.list_id));
-      const { data: auth } = await supabase.auth.getSession();
-      const uid = auth.session?.user.id;
-      setNearby(
-        ((ls ?? []) as unknown as ListHit[])
-          .filter((l) => l.owner_id !== uid)
-          .sort((a, b) => (pins.get(b.id) ?? 0) - (pins.get(a.id) ?? 0) || b.like_count - a.like_count),
-      );
+      setNearby((ls ?? []) as unknown as ListHit[]);
     }, 500);
-    return () => window.clearTimeout(t);
-  }, [supabase, view]);
+    return () => window.clearTimeout(timer);
+  }, [supabase, view, local]);
 
-  // 다른 묶음에서도 이 지역에 핀이 있는 리스트를 앞으로(그 안에서는 원래 순서)
+  // 켜져 있으면 이 지역에 핀이 있는 리스트를 위로(핀 많은 순), 나머지는 원래 순서
   const localFirst = useCallback(
     (rows: ListHit[]) =>
-      pinsHere.size === 0 ? rows : [...rows].sort((a, b) => Number(pinsHere.has(b.id)) - Number(pinsHere.has(a.id))),
-    [pinsHere],
+      !local || pinsHere.size === 0
+        ? rows
+        : [...rows].sort((a, b) => (pinsHere.get(b.id) ?? 0) - (pinsHere.get(a.id) ?? 0)),
+    [pinsHere, local],
   );
 
   useEffect(() => {
@@ -91,13 +127,10 @@ export function ExploreView() {
       setMe(uid);
       const notMine = (l: ListHit) => l.owner_id !== uid && (l.list_items?.[0]?.count ?? 0) > 0;
 
-      // 새로 올라온 리스트, 인기 리스트(좋아요 순)는 함께 읽는다
-      const [{ data: r }, { data: pop }] = await Promise.all([
-        supabase.from("lists").select(LIST_SELECT).eq("visibility", "public").order("updated_at", { ascending: false }).limit(30),
-        supabase.from("lists").select(LIST_SELECT).eq("visibility", "public").gt("like_count", 0).order("like_count", { ascending: false }).limit(20),
-      ]);
-      setRecent(((r ?? []) as unknown as ListHit[]).filter(notMine));
-      setPopular(((pop ?? []) as unknown as ListHit[]).filter(notMine).slice(0, 10));
+      const { data: pop } = await supabase
+        .from("lists").select(LIST_SELECT).eq("visibility", "public").gt("like_count", 0)
+        .order("like_count", { ascending: false }).limit(40);
+      setPopular(((pop ?? []) as unknown as ListHit[]).filter(notMine).slice(0, 30));
 
       if (!uid) return;
       const [{ data: f }, { data: mine }] = await Promise.all([
@@ -109,7 +142,14 @@ export function ExploreView() {
         // 내 리스트에 담긴 장소들
         supabase.from("list_items").select("place_id, lists!inner(owner_id)").eq("lists.owner_id", uid).limit(300),
       ]);
-      setFollowing(((f ?? []) as unknown as { followee: CuratorHit }[]).map((x) => x.followee).filter(Boolean));
+      const people = ((f ?? []) as unknown as { followee: CuratorHit }[]).map((x) => x.followee).filter(Boolean);
+      setFollowing(people);
+      if (people.length) {
+        const { data: fl } = await supabase
+          .from("lists").select(LIST_SELECT).eq("visibility", "public").in("owner_id", people.map((p) => p.id))
+          .order("updated_at", { ascending: false }).limit(60);
+        setFollowingLists(((fl ?? []) as unknown as ListHit[]).filter(notMine));
+      }
 
       // 내 장소가 많이 겹치는 다른 사람의 공개 리스트
       const placeIds = [...new Set((mine ?? []).map((x) => x.place_id as string))];
@@ -126,7 +166,7 @@ export function ExploreView() {
         if (!overlap.has(h.list_id)) overlap.set(h.list_id, new Set());
         overlap.get(h.list_id)!.add(h.place_id);
       }
-      const top = [...overlap.entries()].sort((a, b) => b[1].size - a[1].size).slice(0, 10);
+      const top = [...overlap.entries()].sort((a, b) => b[1].size - a[1].size).slice(0, 20);
       if (top.length === 0) return;
       const { data: sim } = await supabase.from("lists").select(LIST_SELECT).in("id", top.map(([id]) => id));
       const byId = new Map(((sim ?? []) as unknown as ListHit[]).map((l) => [l.id, l]));
@@ -170,6 +210,22 @@ export function ExploreView() {
     [supabase, me],
   );
 
+  // 로그인하지 않았으면 '인기'만. 고른 적이 없으면 팔로우한 사람이 있을 때 '팔로우 중', 아니면 '인기'.
+  const active: Category = !me ? "popular" : cat ?? (following.length ? "following" : "popular");
+  // 지금 지역에 핀이 있는데 처음 목록 밖에 있던 리스트도 그 묶음 조건에 맞으면 넣는다
+  const base: ListHit[] = useMemo(() => {
+    const merge = (rows: ListHit[], extra: ListHit[]) => {
+      const seen = new Set(rows.map((r) => r.id));
+      return [...rows, ...extra.filter((x) => !seen.has(x.id))];
+    };
+    const followIds = new Set(following.map((p) => p.id));
+    if (active === "following") return merge(followingLists, local ? nearby.filter((l) => followIds.has(l.owner_id) && l.owner_id !== me) : []);
+    if (active === "popular") return merge(popular, local ? nearby.filter((l) => l.like_count > 0 && l.owner_id !== me) : []);
+    return similar;
+  }, [active, followingLists, popular, similar, nearby, following, local, me]);
+  const shown = localFirst(base);
+  const hereCount = shown.filter((l) => pinsHere.has(l.id)).length;
+
   return (
     <Panel title={t("타인의 핀")}>
       <div className="px-5 pb-10 pt-4">
@@ -196,6 +252,52 @@ export function ExploreView() {
         <button type="submit" className="btn-primary shrink-0">{t("검색")}</button>
       </form>
 
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <div role="tablist" aria-label={t("리스트 묶음")} className="flex min-w-0 gap-1.5 overflow-x-auto">
+          {CATEGORIES.map((c) => {
+            const locked = c.login && !me;
+            return (
+              <button
+                key={c.id}
+                type="button"
+                role="tab"
+                aria-selected={active === c.id && searched === null}
+                disabled={!!locked}
+                title={locked ? t("로그인하면 볼 수 있어요") : undefined}
+                onClick={() => {
+                  choose({ cat: c.id });
+                  setSearched(null);
+                  setQuery("");
+                }}
+                className={`shrink-0 rounded-full px-3 py-1.5 text-[13px] font-semibold ${
+                  active === c.id && searched === null ? "bg-ink text-white" : "bg-surface text-ink"
+                } disabled:opacity-40`}
+              >
+                {t(c.label)}
+              </button>
+            );
+          })}
+        </div>
+        <label className="ml-auto flex shrink-0 cursor-pointer items-center gap-2 text-[13px] font-semibold text-ink">
+          <span>{t("현재 지도 지역 먼저")}</span>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={local}
+            onClick={() => choose({ local: !local })}
+            className={`relative h-6 w-10 rounded-full transition-colors ${local ? "bg-teal" : "bg-rule"}`}
+          >
+            <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-all ${local ? "left-[18px]" : "left-0.5"}`} />
+          </button>
+        </label>
+      </div>
+      {local && view && view.zoom < LOCAL_ZOOM && searched === null && (
+        <p className="mt-2 text-[12px] text-muted">{t("지도를 도시 정도로 확대하면 그 지역에 핀을 꽂은 리스트를 먼저 보여 드려요.")}</p>
+      )}
+      {local && hereCount > 0 && searched === null && (
+        <p className="mt-2 text-[12px] text-teal">{t("지금 지도에 보이는 지역의 리스트 {n}개를 위에 보여 드려요.", { n: hereCount })}</p>
+      )}
+
       {loading && <p className="mt-6 text-[14px] text-muted">{t("찾는 중")}</p>}
 
       {searched !== null && !loading && (
@@ -204,48 +306,42 @@ export function ExploreView() {
             {curators.length === 0 ? <Empty>{t("‘{q}’와 맞는 사람이 없습니다.", { q: searched })}</Empty> : <CuratorRows rows={curators} />}
           </Section>
           <Section title={t("리스트 {n}", { n: lists.length })}>
-            {lists.length === 0 ? <Empty>{t("‘{q}’와 맞는 공개 리스트가 없습니다.", { q: searched })}</Empty> : <ListRows rows={localFirst(lists)} pinsHere={pinsHere} />}
+            {lists.length === 0 ? <Empty>{t("‘{q}’와 맞는 공개 리스트가 없습니다.", { q: searched })}</Empty> : <ListRows rows={localFirst(lists)} pinsHere={local ? pinsHere : undefined} />}
           </Section>
         </>
       )}
 
-      {searched === null && (
+      {searched === null && me !== undefined && (
         <>
-          {nearby.length > 0 && (
-            <Section title={t("지금 지도에 보이는 지역의 리스트")}>
-              <ListRows rows={nearby} pinsHere={pinsHere} />
-            </Section>
-          )}
-          {view && view.zoom < LOCAL_ZOOM && (
-            <p className="mt-6 rounded-xl bg-surface px-3 py-2 text-[13px] text-muted">{t("지도를 도시 정도로 확대하면 그 지역에 핀을 꽂은 리스트를 먼저 보여 드려요.")}</p>
-          )}
-          {following.length > 0 && (
-            <Section title={t("팔로우 중")}>
-              <CuratorRows rows={following} />
-            </Section>
-          )}
-          {similar.length > 0 && (
-            <Section title={t("내 리스트와 겹치는 리스트")}>
-              <ListRows rows={localFirst(similar)} pinsHere={pinsHere} />
-            </Section>
-          )}
-          {popular.length > 0 && (
-            <Section title={t("인기 리스트")}>
-              <ListRows rows={localFirst(popular)} adSlot="explore-popular" pinsHere={pinsHere} />
-            </Section>
-          )}
+          <div className="mt-4">
+            {shown.length > 0 ? (
+              <ListRows rows={shown} adSlot={active === "popular" ? "explore-popular" : undefined} pinsHere={local ? pinsHere : undefined} />
+            ) : active === "following" ? (
+              following.length === 0 ? (
+                <Empty>{t("아직 팔로우한 사람이 없어요. 인기 리스트에서 마음에 드는 큐레이터를 찾아보세요.")}</Empty>
+              ) : (
+                <>
+                  <Empty>{t("팔로우한 사람들이 아직 공개 리스트를 만들지 않았어요.")}</Empty>
+                  <CuratorRows rows={following} />
+                </>
+              )
+            ) : active === "similar" ? (
+              <Empty>{t("내 리스트에 장소를 담으면, 같은 장소를 담은 다른 사람의 리스트를 보여 드려요.")}</Empty>
+            ) : (
+              <Empty>{t("아직 공개된 리스트가 없습니다.")}</Empty>
+            )}
+          </div>
           <div className="-mx-5 mt-6">
             <AdSlot slot="explore-mid" variant={2} />
           </div>
-          <Section title={t("새로 올라온 리스트")}>
-            {recent.length === 0 ? <Empty>{t("아직 공개된 리스트가 없습니다.")}</Empty> : <ListRows rows={localFirst(recent)} adSlot="explore-recent" pinsHere={pinsHere} />}
-          </Section>
-          <Section title={t("예시")}>
-            <Link href="/demo" className="block border-y border-rule py-3.5 hover:bg-surface/60">
-              <span className="block text-[17px] font-semibold text-ink">{t("성수동 하루, 걸어서 도는 일곱 군데")}</span>
-              <span className="mt-1 block text-[13px] text-muted">{t("민지의 걷는 서울")} · {t("장소 {n}곳", { n: 7 })} · {t("#서울 #성수 #하루코스")}</span>
-            </Link>
-          </Section>
+          {!me && (
+            <Section title={t("예시")}>
+              <Link href="/demo" className="block border-y border-rule py-3.5 hover:bg-surface/60">
+                <span className="block text-[17px] font-semibold text-ink">{t("성수동 하루, 걸어서 도는 일곱 군데")}</span>
+                <span className="mt-1 block text-[13px] text-muted">{t("민지의 걷는 서울")} · {t("장소 {n}곳", { n: 7 })} · {t("#서울 #성수 #하루코스")}</span>
+              </Link>
+            </Section>
+          )}
         </>
       )}
       </div>

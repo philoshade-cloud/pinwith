@@ -152,4 +152,13 @@ export const shell: Record<string, string> = {
   "정보가 바뀜": "Info changed",
   "추천 요청": "Recommendation request",
   "기타": "Other",
+  "리스트 묶음": "List groups",
+  "로그인하면 볼 수 있어요": "Log in to see this",
+  "현재 지도 지역 먼저": "This map area first",
+  "지금 지도에 보이는 지역의 리스트 {n}개를 위에 보여 드려요.": "Showing {n} list from the area on the map first.|Showing {n} lists from the area on the map first.",
+  "아직 팔로우한 사람이 없어요. 인기 리스트에서 마음에 드는 큐레이터를 찾아보세요.": "You don't follow anyone yet. Find curators you like in Popular lists.",
+  "내 리스트에 장소를 담으면, 같은 장소를 담은 다른 사람의 리스트를 보여 드려요.": "Save places to your lists and we'll show other people's lists with the same places.",
+  "팔로우 중@@칩": "Following",
+  "인기 리스트@@칩": "Popular",
+  "내 리스트와 겹치는 리스트@@칩": "Like mine",
 };
