@@ -21,7 +21,11 @@ type Props = {
   tone?: "pin" | "result";
   // 지도 가운데 좌표를 읽는 함수를 넘겨준다(검색을 이 근처로)
   onReady?: (getCenter: () => { lat: number; lng: number }) => void;
+  // 지도를 움직일 때마다 지금 보이는 영역(패널 등에 가려진 부분은 뺌)과 확대 단계
+  onView?: (view: MapView) => void;
 };
+
+export type MapView = { s: number; w: number; n: number; e: number; zoom: number };
 
 const DEFAULT_PADDING = { top: 64, bottom: 64, left: 64, right: 64 };
 
@@ -48,8 +52,14 @@ function declutter() {
 
 // 큐레이터의 핀만 보여주는 가벼운 지도. 자세한 정보와 길찾기는 구글·네이버 지도로 넘긴다.
 export function PlaceMap({
-  items, selectedId, onSelect, showRoute, candidate = null, numbering, padding = DEFAULT_PADDING, tone = "pin", onReady,
+  items, selectedId, onSelect, showRoute, candidate = null, numbering, padding = DEFAULT_PADDING, tone = "pin", onReady, onView,
 }: Props) {
+  const paddingRef = useRef(padding);
+  const onViewRef = useRef(onView);
+  useEffect(() => {
+    paddingRef.current = padding;
+    onViewRef.current = onView;
+  });
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
   const markers = useRef(new Map<string, { marker: maplibregl.Marker; el: HTMLButtonElement }>());
@@ -81,6 +91,16 @@ export function PlaceMap({
     map.current = m;
     // 지도를 움직이면 겹치는 이름을 다시 정리한다
     m.on("moveend", () => declutter());
+    // 가려지지 않은 부분의 네 모서리로 '지금 보이는 지역'을 알린다
+    const report = () => {
+      const p = paddingRef.current;
+      const { clientWidth: W, clientHeight: H } = m.getContainer();
+      const a = m.unproject([p.left, p.top]);
+      const b = m.unproject([Math.max(p.left + 1, W - p.right), Math.max(p.top + 1, H - p.bottom)]);
+      onViewRef.current?.({ s: Math.min(a.lat, b.lat), n: Math.max(a.lat, b.lat), w: a.lng, e: b.lng, zoom: m.getZoom() });
+    };
+    m.on("moveend", report);
+    m.once("load", report);
     onReady?.(() => {
       const c = m.getCenter();
       return { lat: c.lat, lng: c.lng };

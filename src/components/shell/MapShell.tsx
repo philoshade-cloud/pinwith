@@ -16,6 +16,7 @@ import { PlacePreview } from "./PlacePreview";
 import { ConsentBanner } from "../Consent";
 import { Logo } from "../Logo";
 import { ShellContext, type Me, type MyList, type Scene, type Shell } from "./context";
+import type { MapView } from "../PlaceMap";
 
 const PlaceMap = dynamic(() => import("../PlaceMap").then((m) => m.PlaceMap), {
   ssr: false,
@@ -58,6 +59,7 @@ export function MapShell({ children }: { children: ReactNode }) {
   const [results, setResults] = useState<{ query: string; places: FoundPlace[] } | null>(null);
   const [resultsList, setResultsList] = useState(false);
   const centerOf = useRef<(() => { lat: number; lng: number }) | null>(null);
+  const [view, setView] = useState<MapView | null>(null);
   const resultItems: ListItem[] = useMemo(
     () =>
       (results?.places ?? []).map((p, n) => ({
@@ -194,7 +196,7 @@ export function MapShell({ children }: { children: ReactNode }) {
 
   const shell: Shell = {
     setScene, releaseScene, selectedId, select, panelOpen, setPanelOpen,
-    me, myLists, refreshMine, toast, startSave, refreshBadges,
+    me, myLists, refreshMine, toast, startSave, refreshBadges, view,
   };
 
   // ── 지도 여백: 패널·버튼에 가리지 않게 ─────────
@@ -234,6 +236,7 @@ export function MapShell({ children }: { children: ReactNode }) {
           candidate={candidate}
           padding={padding}
           onReady={(get) => (centerOf.current = get)}
+          onView={setView}
         />
       </div>
 

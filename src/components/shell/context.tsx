@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, type ReactNode } from "react";
+import type { MapView } from "../PlaceMap";
 import type { AddedItem } from "@/lib/lists";
 import type { ListItem, Section } from "@/lib/types";
 
@@ -38,6 +39,8 @@ export type Shell = {
   startSave: (item: ListItem) => void;
   // 위쪽 메시지·알림 아이콘의 숫자를 다시 센다
   refreshBadges: () => void;
+  // 지금 지도에 보이는 지역(지도를 움직이면 바뀜). 아직 모르면 null
+  view: MapView | null;
 };
 
 export const ShellContext = createContext<Shell | null>(null);

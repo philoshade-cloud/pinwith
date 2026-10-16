@@ -5,6 +5,10 @@ import { Panel } from "./shell/Panel";
 import { AdSlot } from "./AdSlot";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { useShell } from "./shell/context";
+
+// 이 확대 단계(도시 정도)보다 넓게 보고 있으면 '이 지역'으로 치지 않는다
+const LOCAL_ZOOM = 8;
 
 type CuratorHit = { id: string; handle: string; display_name: string; bio: string };
 type ListHit = {
@@ -39,6 +43,44 @@ export function ExploreView() {
   const [similar, setSimilar] = useState<ListHit[]>([]);
   const [me, setMe] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  // 지금 지도에 보이는 지역에 핀이 있는 리스트(핀 수)
+  const { view } = useShell();
+  const [nearby, setNearby] = useState<ListHit[]>([]);
+  const [pinsHere, setPinsHere] = useState<Map<string, number>>(new Map());
+
+  useEffect(() => {
+    if (!view || view.zoom < LOCAL_ZOOM) {
+      const t0 = window.setTimeout(() => {
+        setNearby([]);
+        setPinsHere(new Map());
+      }, 0);
+      return () => window.clearTimeout(t0);
+    }
+    // 지도를 움직이는 동안은 기다렸다가 멈추면 한 번만 찾는다
+    const t = window.setTimeout(async () => {
+      const { data } = await supabase.rpc("lists_in_view", { p_s: view.s, p_w: view.w, p_n: view.n, p_e: view.e, p_limit: 30 });
+      const rows = (data ?? []) as { list_id: string; pins: number }[];
+      const pins = new Map(rows.map((r) => [r.list_id, r.pins]));
+      setPinsHere(pins);
+      if (rows.length === 0) return setNearby([]);
+      const { data: ls } = await supabase.from("lists").select(LIST_SELECT).in("id", rows.map((r) => r.list_id));
+      const { data: auth } = await supabase.auth.getSession();
+      const uid = auth.session?.user.id;
+      setNearby(
+        ((ls ?? []) as unknown as ListHit[])
+          .filter((l) => l.owner_id !== uid)
+          .sort((a, b) => (pins.get(b.id) ?? 0) - (pins.get(a.id) ?? 0) || b.like_count - a.like_count),
+      );
+    }, 500);
+    return () => window.clearTimeout(t);
+  }, [supabase, view]);
+
+  // 다른 묶음에서도 이 지역에 핀이 있는 리스트를 앞으로(그 안에서는 원래 순서)
+  const localFirst = useCallback(
+    (rows: ListHit[]) =>
+      pinsHere.size === 0 ? rows : [...rows].sort((a, b) => Number(pinsHere.has(b.id)) - Number(pinsHere.has(a.id))),
+    [pinsHere],
+  );
 
   useEffect(() => {
     (async () => {
@@ -160,13 +202,21 @@ export function ExploreView() {
             {curators.length === 0 ? <Empty>‘{searched}’와 맞는 사람이 없습니다.</Empty> : <CuratorRows rows={curators} />}
           </Section>
           <Section title={`리스트 ${lists.length}`}>
-            {lists.length === 0 ? <Empty>‘{searched}’와 맞는 공개 리스트가 없습니다.</Empty> : <ListRows rows={lists} />}
+            {lists.length === 0 ? <Empty>‘{searched}’와 맞는 공개 리스트가 없습니다.</Empty> : <ListRows rows={localFirst(lists)} pinsHere={pinsHere} />}
           </Section>
         </>
       )}
 
       {searched === null && (
         <>
+          {nearby.length > 0 && (
+            <Section title="지금 지도에 보이는 지역의 리스트">
+              <ListRows rows={nearby} pinsHere={pinsHere} />
+            </Section>
+          )}
+          {view && view.zoom < LOCAL_ZOOM && (
+            <p className="mt-6 rounded-xl bg-surface px-3 py-2 text-[13px] text-muted">지도를 도시 정도로 확대하면 그 지역에 핀을 꽂은 리스트를 먼저 보여 드려요.</p>
+          )}
           {following.length > 0 && (
             <Section title="팔로우 중">
               <CuratorRows rows={following} />
@@ -174,19 +224,19 @@ export function ExploreView() {
           )}
           {similar.length > 0 && (
             <Section title="내 리스트와 겹치는 리스트">
-              <ListRows rows={similar} />
+              <ListRows rows={localFirst(similar)} pinsHere={pinsHere} />
             </Section>
           )}
           {popular.length > 0 && (
             <Section title="인기 리스트">
-              <ListRows rows={popular} adSlot="explore-popular" />
+              <ListRows rows={localFirst(popular)} adSlot="explore-popular" pinsHere={pinsHere} />
             </Section>
           )}
           <div className="-mx-5 mt-6">
             <AdSlot slot="explore-mid" variant={2} />
           </div>
           <Section title="새로 올라온 리스트">
-            {recent.length === 0 ? <Empty>아직 공개된 리스트가 없습니다.</Empty> : <ListRows rows={recent} adSlot="explore-recent" />}
+            {recent.length === 0 ? <Empty>아직 공개된 리스트가 없습니다.</Empty> : <ListRows rows={localFirst(recent)} adSlot="explore-recent" pinsHere={pinsHere} />}
           </Section>
           <Section title="예시">
             <Link href="/demo" className="block border-y border-rule py-3.5 hover:bg-surface/60">
@@ -235,7 +285,7 @@ function CuratorRows({ rows }: { rows: CuratorHit[] }) {
 }
 
 // 광고 자리: 리스트 5개마다
-function ListRows({ rows, adSlot }: { rows: ListHit[]; adSlot?: string }) {
+function ListRows({ rows, adSlot, pinsHere }: { rows: ListHit[]; adSlot?: string; pinsHere?: Map<string, number> }) {
   return (
     <ul className="divide-y divide-rule border-y border-rule">
       {rows.map((l, i) => (
@@ -250,6 +300,7 @@ function ListRows({ rows, adSlot }: { rows: ListHit[]; adSlot?: string }) {
             <span className="mt-1 block text-[13px] text-muted">
               {l.owner?.display_name || `@${l.owner?.handle}`} · 장소 {l.list_items[0]?.count ?? 0}곳
               {l.overlap ? ` · 내 장소와 ${l.overlap}곳 겹침` : ""}
+              {pinsHere?.get(l.id) ? ` · 이 지역 ${pinsHere.get(l.id)}곳` : ""}
               {l.like_count > 0 && ` · 좋아요 ${l.like_count.toLocaleString("ko-KR")}`}
               {l.themes.length > 0 && ` · ${l.themes.map((t) => `#${t}`).join(" ")}`}
             </span>
