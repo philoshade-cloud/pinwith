@@ -64,7 +64,7 @@ export function MapShell({ children }: { children: ReactNode }) {
   const [view, setView] = useState<MapView | null>(null);
   // 핀 카드에서 리스트를 열 때 지도 위치를 지킬 장소(google place id)
   const pendingFocus = useRef<string | null>(null);
-  const holdView = useRef<string | null>(null);
+  const holdView = useRef<{ placeId: string; lat?: number; lng?: number } | null>(null);
   const resultItems: ListItem[] = useMemo(
     () =>
       (results?.places ?? []).map((p, n) => ({
@@ -202,9 +202,9 @@ export function MapShell({ children }: { children: ReactNode }) {
   const shell: Shell = {
     setScene, releaseScene, selectedId, select, panelOpen, setPanelOpen,
     me, myLists, refreshMine, toast, startSave, refreshBadges, view,
-    focusNext: (placeId) => {
+    focusNext: (placeId, at) => {
       pendingFocus.current = placeId;
-      holdView.current = placeId;
+      holdView.current = { placeId, ...at };
     },
     takeFocus: () => {
       const p = pendingFocus.current;
@@ -234,7 +234,16 @@ export function MapShell({ children }: { children: ReactNode }) {
     setPanelOpen(href !== "/");
     setSelectedId(null);
   }, []);
-  const navProps = { me, reopen };
+  // 리스트 등에서 핀을 고른 채 '지도'로 나가면 지도는 그 핀에 머문다
+  const leave = useCallback(
+    (href: string) => {
+      if (href !== "/" || !selected || selected.lat == null || selected.lng == null) return;
+      pendingFocus.current = selected.placeId;
+      holdView.current = { placeId: selected.placeId, lat: selected.lat, lng: selected.lng };
+    },
+    [selected],
+  );
+  const navProps = { me, reopen, leave };
 
   return (
     <ShellContext.Provider value={shell}>
@@ -413,7 +422,11 @@ export function MapShell({ children }: { children: ReactNode }) {
   );
 }
 
-type NavProps = { variant: "top" | "dock"; me: Me | null | undefined; reopen: (href: string) => void };
+type NavProps = {
+  variant: "top" | "dock"; me: Me | null | undefined; reopen: (href: string) => void;
+  // 다른 메뉴로 나갈 때(지금 고른 핀이 있으면 '지도'에서 그 위치를 지키려고)
+  leave?: (href: string) => void;
+};
 
 // 주소를 읽는 부분은 Suspense 안에 둔다(정적 뼈대는 주소 없이 그린다).
 function Nav(props: NavProps) {
@@ -430,7 +443,7 @@ function PersonIcon() {
   );
 }
 
-function NavView({ variant, me, reopen, path }: NavProps & { path: string }) {
+function NavView({ variant, me, reopen, leave, path }: NavProps & { path: string }) {
   const t = useT();
   const nav: { href: string; label: string; icon: React.ReactNode }[] = me
     ? [
@@ -456,7 +469,10 @@ function NavView({ variant, me, reopen, path }: NavProps & { path: string }) {
   };
   // 정확히 그 화면일 때만 다시 누르면 패널 펼치기. 아래 화면에서 누르면 그 화면(목록)으로 간다.
   const onNav = (href: string) => (e: React.MouseEvent) => {
-    if (path !== base(href)) return;
+    if (path !== base(href)) {
+      leave?.(base(href));
+      return;
+    }
     e.preventDefault();
     reopen(href);
   };

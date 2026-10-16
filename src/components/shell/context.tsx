@@ -41,8 +41,9 @@ export type Shell = {
   refreshBadges: () => void;
   // 지금 지도에 보이는 지역(지도를 움직이면 바뀜). 아직 모르면 null
   view: MapView | null;
-  // 지도 핀 카드에서 '리스트 열기'를 누를 때: 다음 화면이 이 장소를 고르고, 지도는 그 장소를 가운데 둔 채(확대 그대로) 유지
-  focusNext: (placeId: string) => void;
+  // 다음 화면으로 갈 때 지도를 이 장소에 머물게 한다(확대 그대로). 다음 화면에 그 장소가 있으면 골라 준다.
+  // 예: 핀 카드의 '리스트 열기', 리스트에서 핀을 고른 채 '지도'로 나가기. at은 다음 화면에 그 장소가 없을 때 쓸 좌표.
+  focusNext: (placeId: string, at?: { lat: number; lng: number }) => void;
   // 다음 화면이 꺼내 쓰는 값(한 번 쓰면 비움)
   takeFocus: () => string | null;
 };

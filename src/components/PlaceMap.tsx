@@ -25,7 +25,7 @@ type Props = {
   // 지도를 움직일 때마다 지금 보이는 영역(패널 등에 가려진 부분은 뺌)과 확대 단계
   onView?: (view: MapView) => void;
   // 이 장소(google place id)가 든 핀 묶음이 들어오면 화면 맞추기 대신 그 장소를 가운데 두고 확대는 그대로(한 번)
-  holdViewRef?: { current: string | null };
+  holdViewRef?: { current: { placeId: string; lat?: number; lng?: number } | null };
 };
 
 export type MapView = { s: number; w: number; n: number; e: number; zoom: number };
@@ -195,7 +195,10 @@ export function PlaceMap({
   useEffect(() => {
     const m = map.current;
     if (!m || located.length === 0) return;
-    const keep = holdViewRef?.current ? located.find((i) => i.placeId === holdViewRef.current) : null;
+    const hold = holdViewRef?.current;
+    const keep = hold
+      ? (located.find((i) => i.placeId === hold.placeId) ?? (hold.lat != null && hold.lng != null ? { lat: hold.lat, lng: hold.lng } : null))
+      : null;
     if (keep) {
       holdViewRef!.current = null;
       heldItems.current = items;
