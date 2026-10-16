@@ -1,0 +1,23 @@
+// 영어 사전(브라우저 탭 제목): 서버가 정한 한국어 페이지 제목 → 영어
+export const titles: Record<string, string> = {
+  "가게 콘솔": "Store console",
+  "상업 이용자용 콘솔": "Business console",
+  "큐레이터 콘솔": "Curator console",
+  "아는 곳을 핀으로 꽂아, 링크 하나로": "Pin the places you know, share them in one link",
+  "내 예약 문의": "My reservation inquiries",
+  "내 통계": "My stats",
+  "내 프로필": "My profile",
+  "리스트 편집": "Edit list",
+  "공지": "Notice",
+  "팔로잉 리스트": "Following",
+  "알림": "Notifications",
+  "문의·신고하기": "Help & report",
+  "메시지": "Messages",
+  "예시 리스트": "Example list",
+  "타인의 핀": "Explore",
+  "예약 문의": "Reservation inquiry",
+  "이용약관": "Terms of use",
+  "개인정보처리방침": "Privacy policy",
+  "로그인": "Log in",
+  "{name}의 지도": "{name}'s map",
+};

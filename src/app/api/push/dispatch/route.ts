@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     .eq("id", id)
     .is("pushed_at", null)
     .gt("created_at", since)
-    .select("user_id, kind, body, list_id, actor:profiles!notifications_actor_id_fkey(display_name, handle), list:lists(slug, owner:profiles!lists_owner_id_fkey(handle))")
+    .select("user_id, kind, body, body_en, list_id, actor:profiles!notifications_actor_id_fkey(display_name, handle), list:lists(slug, owner:profiles!lists_owner_id_fkey(handle))")
     .maybeSingle();
   if (!claimed) return Response.json({ skipped: "already sent or too old" });
 

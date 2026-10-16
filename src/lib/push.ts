@@ -20,7 +20,7 @@ export async function vapidKeys(db: SupabaseClient): Promise<{ publicKey: string
   return m2.vapid_public && m2.vapid_private ? { publicKey: m2.vapid_public, privateKey: m2.vapid_private } : null;
 }
 
-type N = { kind: string; body: string | null; list_id: string | null; actor: { display_name: string | null; handle: string } | null; list: { slug: string; owner: { handle: string } | null } | null };
+type N = { kind: string; body: string | null; body_en?: string | null; list_id: string | null; actor: { display_name: string | null; handle: string } | null; list: { slug: string; owner: { handle: string } | null } | null };
 
 const TITLE: Record<string, string> = {
   follow: "새 팔로워", like: "좋아요", comment: "새 댓글", reply: "내 댓글에 답글", invite: "공동 편집 초대", invite_accepted: "초대 수락",
@@ -52,7 +52,7 @@ export function pushPayload(n: N, lang: "ko" | "en" = "ko") {
                 : n.list?.owner ? `/@${n.list.owner.handle}/${n.list.slug}` : "/notifications";
   return {
     title: `${(lang === "en" ? TITLE_EN[n.kind] : TITLE[n.kind]) ?? (lang === "en" ? "Notification" : "알림")}${n.actor ? ` · ${who}` : ""}`,
-    body: n.body ?? "",
+    body: (lang === "en" && n.body_en) || n.body || "",
     url,
     tag: n.kind === "reservation_msg" ? `rmsg` : undefined,
   };

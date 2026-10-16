@@ -9,12 +9,14 @@ import { useMonetization } from "@/lib/monetization";
 import { PushToggle } from "./PushToggle";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { useShell } from "./shell/context";
-import { useFormat, useT, useTRich } from "@/lib/i18n/client";
+import { useFormat, useLang, useT, useTRich } from "@/lib/i18n/client";
 
 type N = {
   id: string;
   kind: "follow" | "like" | "comment" | "reply" | "invite" | "invite_accepted" | "share_changed" | "notice" | "resolved" | "reservation" | "reservation_new" | "reservation_msg" | "biz_block" | "biz_alert" | "biz_review" | "topup_paid" | "payout" | "dispute" | "biz_admin" | "ops";
   body: string | null;
+  // DB가 만든 안내 문장의 영어판(사람이 쓴 글은 없음)
+  body_en?: string | null;
   read_at: string | null;
   created_at: string;
   list_id: string | null;
@@ -61,6 +63,7 @@ const TITLE: Partial<Record<N["kind"], string>> = {
 // 알림: 팔로우, 좋아요, 댓글, 공동 편집 초대, 공지. 열면 모두 읽음으로 바뀐다.
 export function Notifications() {
   const t = useT();
+  const lang = useLang();
   const tRich = useTRich();
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
@@ -77,7 +80,7 @@ export function Notifications() {
         supabase
           .from("notifications")
           .select(
-            "id, kind, body, read_at, created_at, list_id, actor:profiles!notifications_actor_id_fkey(id, handle, display_name)," +
+            "id, kind, body, body_en, read_at, created_at, list_id, actor:profiles!notifications_actor_id_fkey(id, handle, display_name)," +
               " list:lists(title, slug, owner:profiles!lists_owner_id_fkey(handle))",
           )
           .order("created_at", { ascending: false })
@@ -163,7 +166,7 @@ export function Notifications() {
                       </>
                     )}
                   </p>
-                  {n.body && <p className="mt-1 line-clamp-3 whitespace-pre-wrap text-[13px] text-ink/75">{n.body}</p>}
+                  {n.body && <p className="mt-1 line-clamp-3 whitespace-pre-wrap text-[13px] text-ink/75">{(lang === "en" && n.body_en) || n.body}</p>}
                   <p className="mt-1 flex items-center gap-2 text-[11px] text-muted">
                     {ago(n.created_at)}
                     {n.kind === "reservation_new" && <Link href="/biz/place?tab=reservations" className="btn-primary !px-2.5 !py-1 !text-[12px]">{t("가게 콘솔에서 보기")}</Link>}

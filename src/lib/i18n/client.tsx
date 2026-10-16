@@ -5,7 +5,7 @@
 // - 언어를 바꾸면 쿠키에 저장하고 새로 불러온다(모든 화면·날짜 형식이 한 번에 바뀌게).
 import { useCallback, useEffect, useSyncExternalStore, type ReactNode } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { LANG_COOKIE, detect, localeOf, translate, type Lang, type Vars } from "./core";
+import { LANG_COOKIE, detect, localeOf, translate, translateTitle, type Lang, type Vars } from "./core";
 
 let active: Lang = "ko";
 const listeners = new Set<() => void>();
@@ -63,7 +63,10 @@ export async function setLang(lang: Lang) {
   try {
     const supabase = createClient();
     const { data } = await supabase.auth.getSession();
-    if (data.session) await supabase.from("profiles").update({ lang }).eq("id", data.session.user.id);
+    if (data.session) {
+      const { error } = await supabase.from("profiles").update({ lang }).eq("id", data.session.user.id);
+      if (!error) localStorage.setItem("pw_lang_synced", lang);
+    }
   } catch {
     /* 저장 실패는 무시 */
   }
@@ -83,8 +86,35 @@ export function LangBoot() {
       active = lang;
       listeners.forEach((l) => l());
     }
+    // 브라우저 탭 제목: 서버는 한국어로 정하므로, 영어면 바뀔 때마다 옮긴다(화면 이동 포함)
+    let stopTitle = () => {};
+    if (lang === "en") {
+      const fix = () => {
+        const next = translateTitle(document.title);
+        if (next !== document.title) document.title = next;
+      };
+      fix();
+      const obs = new MutationObserver(fix);
+      obs.observe(document.head, { childList: true, subtree: true, characterData: true });
+      stopTitle = () => obs.disconnect();
+    }
     // 다시 그린 다음 화면을 보여 준다
     requestAnimationFrame(() => document.documentElement.classList.remove("i18n-wait"));
+    // 로그인한 사람의 계정 언어를 화면 언어와 맞춘다(휴대폰 알림 언어). 기기마다 한 번만.
+    try {
+      if (localStorage.getItem("pw_lang_synced") !== lang) {
+        const l = lang;
+        const supabase = createClient();
+        supabase.auth.getSession().then(async ({ data }) => {
+          if (!data.session) return;
+          const { error } = await supabase.from("profiles").update({ lang: l }).eq("id", data.session.user.id);
+          if (!error) localStorage.setItem("pw_lang_synced", l);
+        });
+      }
+    } catch {
+      /* 저장이 막힌 브라우저 */
+    }
+    return () => stopTitle();
   }, []);
   return null;
 }

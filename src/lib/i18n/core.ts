@@ -3,7 +3,7 @@
 //
 // 변수: t("{n}곳", { n: 3 }) → 사전 값 "{n} places". 단수·복수: "{n} place|{n} places"(n이 1이면 앞쪽).
 // 같은 한국어가 자리에 따라 영어가 다를 때: t("좋아요@@탭") — 한국어로는 "@@" 앞만 보이고, 사전은 "좋아요@@탭"을 따로 찾는다.
-import { EN } from "./en";
+import { EN, TITLES } from "./en";
 
 export type Lang = "ko" | "en";
 export const LANGS: { id: Lang; label: string }[] = [
@@ -39,4 +39,16 @@ export const localeOf = (lang: Lang) => (lang === "en" ? "en-US" : "ko-KR");
 export function detect(languages: readonly string[] | undefined): Lang {
   const first = (languages ?? []).find(Boolean)?.toLowerCase() ?? "ko";
   return first.startsWith("ko") ? "ko" : "en";
+}
+
+// 브라우저 탭 제목(“내 프로필 · PinWith”, “지수의 지도 · PinWith”)을 영어로. 모르는 제목(리스트 이름 등)은 그대로.
+export function translateTitle(title: string): string {
+  const suffix = " · PinWith";
+  const head = title.endsWith(suffix) ? title.slice(0, -suffix.length) : title;
+  let out = TITLES[head];
+  if (out === undefined) {
+    const m = head.match(/^(.+)의 지도$/);
+    out = m ? TITLES["{name}의 지도"].replace("{name}", m[1]) : head;
+  }
+  return title.endsWith(suffix) ? out + suffix : out;
 }
