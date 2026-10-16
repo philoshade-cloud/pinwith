@@ -19,6 +19,23 @@ const HANDLE_RE = /^[a-z0-9_]{3,24}$/;
 const TEMP_HANDLE = /^u[0-9a-f]{12}$/;
 
 
+const fmt = (v: number, c: string) => {
+  try {
+    return new Intl.NumberFormat("ko-KR", { style: "currency", currency: c, maximumFractionDigits: 2 }).format(v);
+  } catch {
+    return `${v} ${c}`;
+  }
+};
+
+function deleteQuestion(l: { currency: string; available: number; pending_payout: number; stores: { place_name: string; balance: number }[] } | null) {
+  const warn: string[] = [];
+  if (l && Number(l.pending_payout) > 0) warn.push(`· 처리 중인 지급 요청 ${fmt(Number(l.pending_payout), l.currency)}: 탈퇴하면 지급 정보가 지워져 보내 드릴 수 없어요. 지급을 받은 뒤 탈퇴하세요.`);
+  if (l && Number(l.available) > 0) warn.push(`· 아직 받지 않은 수익 ${fmt(Number(l.available), l.currency)}: 탈퇴하면 받을 수 없어요. 상업 이용자용 콘솔에서 먼저 지급을 요청하세요.`);
+  for (const b of l?.stores ?? []) warn.push(`· ${b.place_name} 광고비 잔액 ${fmt(Number(b.balance), l!.currency)}: 탈퇴 전에 문의·신고하기로 환불을 요청하세요.`);
+  const base = "계정을 삭제할까요? 내 리스트와 장소, 팔로우, 좋아요, 가게·수익 기록이 모두 지워지며 되돌릴 수 없어요.";
+  return warn.length ? `${base}\n\n남은 돈이 있어요:\n${warn.join("\n")}` : base;
+}
+
 export function MyPage() {
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
@@ -27,6 +44,8 @@ export function MyPage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [draft, setDraft] = useState<Profile | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
+  // 탈퇴 전에 남은 돈 확인(받을 수익, 처리 중인 지급, 가게 광고비 잔액)
+  const [leftover, setLeftover] = useState<{ currency: string; available: number; pending_payout: number; stores: { place_name: string; balance: number }[] } | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -50,6 +69,8 @@ export function MyPage() {
         }
         setProfile(p);
         setDraft(p);
+        const { data: chk } = await supabase.rpc("my_deletion_check");
+        if (chk) setLeftover(chk as NonNullable<typeof leftover>);
       }
     })();
   }, [router, supabase]);
@@ -178,7 +199,7 @@ export function MyPage() {
           <div className="mt-4">
             <ConfirmButton
               label="계정 삭제"
-              question="계정을 삭제할까요? 내 리스트와 장소, 팔로우, 좋아요가 모두 지워지며 되돌릴 수 없어요."
+              question={deleteQuestion(leftover)}
               confirmLabel="삭제"
               onConfirm={deleteAccount}
               className="font-semibold text-pin hover:underline"
