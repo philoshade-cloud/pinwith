@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import type { CuratedList, ListItem } from "@/lib/types";
 import { isWithinMeters } from "@/lib/links";
 import { shortLink } from "@/lib/share";
@@ -153,23 +154,17 @@ export function ListExplorer({ list }: { list: CuratedList }) {
   }
 
   return (
-    <Panel title={`${list.title} · ${list.items.length}곳`}>
+    <Panel
+      title={`${list.title} · ${list.items.length}곳`}
+      titleSlot={
+        isDemo ? undefined : (
+          <Suspense fallback={<PlainTitle list={list} />}>
+            <ListSwitcher list={list} isOwner={isOwner} />
+          </Suspense>
+        )
+      }
+    >
       <header className="px-5 pb-5 pt-4">
-        {list.siblings && list.siblings.length > 1 && (
-          <label className="mb-4 flex items-center gap-2 rounded-xl bg-surface px-3 py-2 text-[13px] font-semibold text-muted">
-            <span className="shrink-0">{isOwner ? "내 리스트" : `${list.curator.displayName}의 리스트`}</span>
-            <select
-              value={list.slug}
-              onChange={(e) => router.push(`/@${list.curator.handle}/${e.target.value}`)}
-              className="min-w-0 flex-1 truncate rounded-lg border border-rule bg-white px-2 py-1.5 text-[14px] font-semibold text-ink"
-              aria-label="다른 리스트로 바꾸기"
-            >
-              {list.siblings.map((l) => (
-                <option key={l.slug} value={l.slug}>{l.title}</option>
-              ))}
-            </select>
-          </label>
-        )}
         <div className="flex items-center gap-3">
           <Link href={isDemo ? "/demo" : `/@${list.curator.handle}`} className="flex min-w-0 flex-1 items-center gap-3">
             <Avatar name={list.curator.displayName} url={list.curator.avatarUrl} />
@@ -342,5 +337,75 @@ function DemoGuide() {
         ))}
       </ul>
     </div>
+  );
+}
+
+function PlainTitle({ list }: { list: CuratedList }) {
+  return <span className="block truncate text-[15px] font-semibold text-ink">{`${list.title} · ${list.items.length}곳`}</span>;
+}
+
+type Option = { href: string; title: string; by?: string };
+
+// 패널 제목 줄에서 바로 다른 리스트로 바꾸기(접힌 상태에서도).
+// 좋아요한 리스트에서 왔으면(?from=liked) 내가 좋아요한 다른 리스트, 아니면 같은 큐레이터의 다른 리스트.
+function ListSwitcher({ list, isOwner }: { list: CuratedList; isOwner: boolean }) {
+  const router = useRouter();
+  const { me } = useShell();
+  const fromLiked = useSearchParams().get("from") === "liked";
+  const [liked, setLiked] = useState<Option[] | null>(null);
+  const here = `/@${list.curator.handle}/${list.slug}`;
+
+  useEffect(() => {
+    if (!fromLiked || !me) return;
+    createClient()
+      .from("list_likes")
+      .select("created_at, list:lists(slug, title, owner:profiles!lists_owner_id_fkey(handle, display_name))")
+      .eq("user_id", me.id)
+      .order("created_at", { ascending: false })
+      .limit(60)
+      .then(({ data }) => {
+        type Row = { list: { slug: string; title: string; owner: { handle: string; display_name: string } | null } | null };
+        setLiked(
+          ((data ?? []) as unknown as Row[])
+            .map((r) => r.list)
+            .filter((l): l is NonNullable<Row["list"]> => !!l?.owner)
+            .map((l) => ({ href: `/@${l.owner!.handle}/${l.slug}?from=liked`, title: l.title, by: l.owner!.display_name || `@${l.owner!.handle}` })),
+        );
+      });
+  }, [fromLiked, me]);
+
+  const options: Option[] | null = fromLiked
+    ? liked
+    : (list.siblings ?? []).map((l) => ({ href: `/@${list.curator.handle}/${l.slug}`, title: l.title }));
+  const current = fromLiked ? `${here}?from=liked` : here;
+  // 지금 리스트가 목록에 없으면(예: 좋아요를 취소함) 맨 앞에 넣어 둔다
+  const all = options && !options.some((o) => o.href === current) ? [{ href: current, title: list.title }, ...options] : options;
+  if (!all || all.length < 2) return <PlainTitle list={list} />;
+
+  const label = fromLiked ? "좋아요한 리스트" : isOwner ? "내 리스트" : `${list.curator.displayName}의 리스트`;
+  return (
+    <label className="relative flex min-w-0 cursor-pointer items-center gap-1">
+      <span className="min-w-0 truncate text-[15px] font-semibold text-ink">
+        {list.title} <span className="font-normal text-muted">· {list.items.length}곳</span>
+      </span>
+      <span aria-hidden className="shrink-0 rounded-full border border-rule px-1.5 text-[11px] leading-[18px] text-muted">
+        {all.length}개 ▾
+      </span>
+      {/* 실제 고르기는 기기 기본 선택 창(휴대폰에서 편함). 글자 위에 투명하게 덮는다. */}
+      <select
+        value={current}
+        onChange={(e) => router.push(e.target.value)}
+        aria-label={`${label} 중에서 바꾸기`}
+        className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+      >
+        <optgroup label={label}>
+          {all.map((o) => (
+            <option key={o.href} value={o.href}>
+              {o.by && fromLiked ? `${o.title} — ${o.by}` : o.title}
+            </option>
+          ))}
+        </optgroup>
+      </select>
+    </label>
   );
 }

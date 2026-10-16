@@ -139,7 +139,7 @@ export function FollowingView() {
             <ul className="mt-3 divide-y divide-rule border-y border-rule">
               {rows.map((l) => (
                 <li key={l.id}>
-                  <Link href={`/@${l.owner?.handle}/${l.slug}`} className="block py-3.5 hover:bg-surface/60">
+                  <Link href={`/@${l.owner?.handle}/${l.slug}${tab === "liked" ? "?from=liked" : ""}`} className="block py-3.5 hover:bg-surface/60">
                     <span className="block text-[17px] font-semibold text-ink">{l.title}</span>
                     <span className="mt-1 block text-[13px] text-muted">
                       {l.owner?.display_name || `@${l.owner?.handle}`} · 장소 {l.list_items.length}곳 · {ago(l.updated_at)}
