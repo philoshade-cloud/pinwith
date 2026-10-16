@@ -20,6 +20,7 @@
 #   - 예산의 범위(프로젝트·서비스)가 넓으면 다른 서비스 요금 때문에 꺼질 수도 있다. 예산 범위를 이 프로젝트로 두세요.
 #   - 달이 바뀌면 자동으로 켜지지 않는다. 아래 '다시 켜기' 명령을 실행하세요.
 set -euo pipefail
+echo "스크립트 판: 3 (환경 변수 파일)"
 
 PROJECT="${PROJECT:-$(gcloud config get-value project 2>/dev/null)}"
 REGION="${REGION:-asia-northeast3}"   # 서울
@@ -83,11 +84,12 @@ def stop(event):
         print(f"disable {name}: {r.status_code} {r.text[:200]}")
 PY
 
-# SERVICES 값에 쉼표가 있어서 구분자를 @로 바꿔 넘긴다(gcloud의 ^@^ 문법)
+# 환경 변수는 파일로 넘긴다(SERVICES 값의 쉼표를 gcloud가 구분 기호로 읽지 않게)
+printf 'PROJECT: "%s"\nSERVICES: "%s"\n' "$PROJECT" "$SERVICES" > "$SRC/.env.yaml"
 gcloud functions deploy "$FN" --project "$PROJECT" --gen2 --region "$REGION" --runtime python312 \
   --source "$SRC" --entry-point stop --trigger-topic "$TOPIC" \
   --service-account "$SA" --trigger-service-account "$SA" \
-  --set-env-vars "^@^PROJECT=$PROJECT@SERVICES=$SERVICES" --max-instances 1 --memory 256Mi --quiet
+  --env-vars-file "$SRC/.env.yaml" --max-instances 1 --memory 256Mi --quiet
 
 TEST_DATA="$(printf '{"budgetDisplayName":"test","costAmount":2,"budgetAmount":1,"currencyCode":"USD"}')"
 cat <<MSG
