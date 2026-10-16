@@ -10,6 +10,11 @@
 
 ---
 
+## v0.36 — 카카오 로그인 빼기·메일 템플릿 영어 (2026-10-16)
+- 0.36-1 카카오 로그인은 하지 않기로 함: 로그인 버튼·운영자 콘솔 스위치·개인정보처리방침(한·영)에서 뺌. Apple 로그인은 Apple Developer Program 가입 전까지 꺼 둔 채 유지(콘솔 표시 'Apple(개발자 가입 뒤)') `[DB]` · `d4e7063`
+- DB: `supabase/migrations/20261016000200_login_flags_no_kakao.sql` · 되돌리기 `supabase/rollback/20261016000200_login_flags_no_kakao.down.sql`
+- 0.36-2 `supabase/templates/magic_link.html`, `confirm_signup.html`을 영어로만 · `c7a4750`
+
 ## v0.35 — 카카오·Apple·Facebook 로그인 준비·이메일 로그인 정비 (2026-10-16)
 - 0.35-1 `scripts/gcp/stop-places-on-budget.sh` 5판: 함수 소스 버킷에 읽기 권한을 직접 주고, 권한이 퍼질 때까지 배포를 1분 간격으로 최대 5번 다시 시도 · `9bf434f`
 - 0.35-2 로그인 화면에 카카오·Apple·Facebook 버튼(운영자 콘솔 → 서비스 사용량 → '로그인 방식'에서 켠 것만 보임, 처음엔 모두 꺼짐). 이메일 링크·외부 로그인 실패로 돌아오면 안내 문구. 개인정보처리방침(한·영)에 Apple·Meta·Kakao와 Apple 이메일 가리기 추가, '내 권리' 절에 링크용 id(`#delete`) `[DB]` · `8e718d0`
