@@ -7,7 +7,8 @@ import { fetchLocation, serviceDb } from "@/lib/placeCoords";
 // 3) 보관 기간이 지난 예약 문의 개인정보를 지운다.
 // 4) 서비스 예산을 확인해 넘을 것 같으면 운영자에게 알린다. 하루 지난 요청 제한 기록, 2년 지난 링크 기록, 1년 지난 해결된 오류를 지운다.
 // 실행 결과는 job_runs에 남는다(운영자 콘솔 → 서비스 사용량).
-// 필요한 환경 변수: SUPABASE_SERVICE_ROLE_KEY(DB 쓰기), CRON_SECRET(호출 확인)
+// 5) 메일 발송(Resend) 사용량을 받아 기록하고, 하루·한 달 한도의 80%를 넘으면 운영자에게 알린다.
+// 필요한 환경 변수: SUPABASE_SERVICE_ROLE_KEY(DB 쓰기), CRON_SECRET(호출 확인), RESEND_API_KEY(전체 권한 키, 사용량 조회용 — 없으면 건너뜀)
 const BATCH = 300;
 
 export async function GET(req: Request) {
@@ -47,11 +48,46 @@ export async function GET(req: Request) {
     const ago = (days: number) => new Date(Date.now() - days * 86400_000).toISOString();
     await db.from("link_events").delete().lt("created_at", ago(730));
     await db.from("error_logs").delete().eq("resolved", true).lt("last_at", ago(365));
-    const detail = { checked: rows?.length ?? 0, updated, gone, expired, anonymized, budget };
+    const resend = await checkResend(db);
+    const detail = { checked: rows?.length ?? 0, updated, gone, expired, anonymized, budget, resend };
     await db.from("job_runs").insert({ job: "daily", ok: true, detail });
     return Response.json(detail);
   } catch (e) {
     await db.from("job_runs").insert({ job: "daily", ok: false, detail: { error: String(e) } });
     return Response.json({ error: String(e) }, { status: 500 });
+  }
+}
+
+type Win = { used: number; limit: number | null };
+const ALERT_PCT = 80;
+
+// Resend 사용량(GET https://api.resend.com/usage). 무료: 하루 100통, 한 달 3,000통(하루는 UTC 자정에 초기화).
+async function checkResend(db: NonNullable<ReturnType<typeof serviceDb>>) {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return { skipped: "RESEND_API_KEY 없음" };
+  try {
+    const r = await fetch("https://api.resend.com/usage", { headers: { authorization: `Bearer ${key}` }, cache: "no-store" });
+    if (!r.ok) return { error: `HTTP ${r.status}` };
+    // 응답: { emails: { daily: { used, limit, sent, received, resets_at }, monthly: {…} } } — 유료 요금제는 daily.limit이 null
+    const j = (await r.json()) as { emails?: { daily?: Win; monthly?: Win } };
+    const pick = (w?: Win) => (w ? { used: Number(w.used ?? 0), limit: w.limit == null ? null : Number(w.limit) } : null);
+    const daily = pick(j.emails?.daily);
+    const monthly = pick(j.emails?.monthly);
+    const pct = (w: Win | null) => (w && w.limit ? Math.round((w.used / w.limit) * 100) : null);
+    const out = { daily, monthly, daily_pct: pct(daily), monthly_pct: pct(monthly) };
+    const over = [
+      out.daily_pct != null && out.daily_pct >= ALERT_PCT ? `오늘 ${daily!.used}/${daily!.limit}통(${out.daily_pct}%)` : null,
+      out.monthly_pct != null && out.monthly_pct >= ALERT_PCT ? `이번 달 ${monthly!.used}/${monthly!.limit}통(${out.monthly_pct}%)` : null,
+    ].filter(Boolean);
+    // 하루 한 번만 알린다
+    if (over.length && (await db.rpc("rate_hit", { p_key: "alert:resend", p_limit: 1, p_seconds: 86400 })).data) {
+      const { data: admins } = await db.from("admins").select("user_id");
+      const body = `📧 메일 발송 한도에 가까워요: ${over.join(", ")}. 한도를 넘으면 로그인 메일이 가지 않아요. Resend 요금제를 올리거나 사용량을 확인하세요.`;
+      if (admins?.length) await db.from("notifications").insert(admins.map((a) => ({ user_id: a.user_id, kind: "ops", body })));
+      return { ...out, alerted: true };
+    }
+    return out;
+  } catch (e) {
+    return { error: String(e) };
   }
 }

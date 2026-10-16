@@ -46,6 +46,11 @@ export function UsagePanel() {
   const db = u.budgets.find((b) => b.service === "supabase_db");
   const last = u.jobs.find((j) => j.job === "daily");
   const lastAgeH = last ? (now - new Date(last.ran_at).getTime()) / 3600_000 : null;
+  // 메일 발송(Resend) 사용량: 매일 자동 작업이 받아 둔 값
+  type RW = { used: number; limit: number | null } | null;
+  const rs = (u.jobs.find((j) => j.job === "daily" && j.ok && j.detail && "resend" in j.detail)?.detail?.resend ?? null) as
+    | { daily?: RW; monthly?: RW; daily_pct?: number | null; monthly_pct?: number | null; skipped?: string; error?: string }
+    | null;
 
   return (
     <section className="grid gap-5">
@@ -58,7 +63,7 @@ export function UsagePanel() {
       <GoogleSwitch />
       <LoginSwitch />
 
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-4">
         <Box title="구글 지도 이번 달" value={`$${num(gNow, 2)}`} hint={`월말 예상 $${num(gProj, 2)}`} warn={!!gb && gb.monthly_budget_usd > 0 && gProj >= (gb.monthly_budget_usd * gb.alert_pct) / 100} />
         <Box title="데이터베이스 용량" value={`${num(u.db_mb, 1)} MB`} hint={db ? `한도 ${num(db.monthly_budget_usd)} MB` : ""} warn={!!db && db.monthly_budget_usd > 0 && u.db_mb >= (db.monthly_budget_usd * db.alert_pct) / 100} />
         <Box
@@ -66,6 +71,12 @@ export function UsagePanel() {
           value={last ? (last.ok ? "정상" : "실패") : "기록 없음"}
           hint={last ? `${when(last.ran_at)}${lastAgeH && lastAgeH > 30 ? " · 하루 넘게 안 돎" : ""}` : "아직 한 번도 기록되지 않았어요"}
           warn={!last || !last.ok || (lastAgeH ?? 0) > 30}
+        />
+        <Box
+          title="메일 발송(Resend)"
+          value={rs?.monthly ? `${num(rs.monthly.used)}${rs.monthly.limit ? ` / ${num(rs.monthly.limit)}` : ""}통` : rs?.skipped ? "설정 전" : rs?.error ? "확인 실패" : "기록 없음"}
+          hint={rs?.daily ? `이번 달 · 오늘 ${num(rs.daily.used)}${rs.daily.limit ? ` / ${num(rs.daily.limit)}` : ""}통` : rs?.skipped ? "Vercel에 RESEND_API_KEY(전체 권한)를 넣으면 매일 확인해요" : (rs?.error ?? "")}
+          warn={(rs?.monthly_pct ?? 0) >= 80 || (rs?.daily_pct ?? 0) >= 80 || !!rs?.error}
         />
       </div>
 
@@ -279,7 +290,8 @@ function GoogleSwitch() {
 const LOGINS = [
   // Apple은 Apple Developer Program(연 $99, iOS 앱 낼 때 가입) 뒤에 켠다
   { key: "apple", label: "Apple(개발자 가입 뒤)" },
-  { key: "facebook", label: "Facebook(Meta)" },
+  // Facebook은 Meta 비즈니스 인증 뒤에 켠다(사용자 결정 2026-10-17)
+  { key: "facebook", label: "Facebook(회사 인증 뒤)" },
 ] as const;
 function LoginSwitch() {
   const supabase = useMemo(() => createClient(), []);
