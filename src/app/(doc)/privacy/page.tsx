@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = { title: "개인정보처리방침" };
 
-// 출시 전 법률 검토를 받는다. 도메인이 정해지면 문의 이메일을 더하고, 개인정보 보호책임자 이름을 채운다.
+// 출시 전 법률 검토를 받는다. 도메인이 정해지면 문의 이메일을 더한다.
 export default function Privacy() {
   return (
     <>
@@ -22,7 +22,7 @@ export default function Privacy() {
         <li>
           개인정보 문의·요청: <Link href="/support?type=question">문의·신고하기</Link>(로그인 없이도 보낼 수 있어요). 답을 받을 이메일을 함께 적어 주세요.
         </li>
-        <li>개인정보 보호책임자: 회사 대표 (위 문의 창구로 연락)</li>
+        <li>개인정보 보호책임자: Adrian Kim (대표, 위 문의 창구로 연락)</li>
       </ul>
 
       <h2>2. 모으는 정보</h2>
@@ -68,8 +68,8 @@ export default function Privacy() {
           <b>가게 계정</b>: 가게(구글 장소), 상호, 사업자등록번호, 담당자 이름·연락처, 사업자등록증 등 증빙 자료, 예약 설정, 과금 조건, 광고비 충전·결제 기록, 이의 제기 내용
         </li>
         <li>
-          <b>큐레이터 지급 정보</b>: 받는 사람 실명, 받는 방법(Wise·PayPal·은행), 계좌 또는 계정 이메일, SWIFT, 나라·통화, 지급 요청·지급 기록, 이의 제기 내용. 송금 회사가 요구하면
-          생년월일·연락처를 더 받을 수 있습니다.
+          <b>큐레이터 지급 정보</b>: 받는 사람 실명과 영문 이름, 받는 방법(Wise·PayPal·은행), 계좌 또는 계정 이메일, SWIFT, 나라·통화, 생년월일·휴대폰 번호(원화로 받는 경우 등
+          송금 회사가 요구할 때), 지급 요청·지급 기록, 이의 제기 내용
         </li>
       </ul>
       <p>카드 번호는 결제 회사(Stripe)가 직접 받으며 PinWith는 보지도 저장하지도 않습니다.</p>
@@ -166,7 +166,7 @@ export default function Privacy() {
       <h2>Privacy Policy (English summary)</h2>
       <p>
         PinWith is operated by STRATO TRADINGS PTE. LTD. (Singapore, UEN 202402989G), 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874.
-        Contact us through the in-app <Link href="/support?type=question">support form</Link>.
+        Data protection officer: Adrian Kim. Contact us through the in-app <Link href="/support?type=question">support form</Link>.
       </p>
       <p>
         We collect: account data (email; name and photo from Google sign-in), profile and content you create (lists, places, notes, comments, messages, follows,
