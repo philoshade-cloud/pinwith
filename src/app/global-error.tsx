@@ -2,6 +2,7 @@
 import { useEffect, useSyncExternalStore } from "react";
 import { LANG_COOKIE, translate, type Lang } from "@/lib/i18n/core";
 import { reportError } from "@/lib/reportError";
+import { checkStale, reloadOnceIfStale } from "@/lib/buildCheck";
 
 // 앱의 언어 도구 밖에서 그려지므로 언어 쿠키를 직접 읽는다
 const noSubscribe = () => () => {};
@@ -12,7 +13,11 @@ export default function GlobalError({ error, retry }: { error: Error & { digest?
   const lang = useSyncExternalStore(noSubscribe, cookieLang, () => "ko" as Lang);
   const t = (ko: string) => translate(lang, ko);
   useEffect(() => {
-    reportError(error, `global${error.digest ? ` ${error.digest}` : ""}`);
+    // 예전 배포의 탭이라 난 오류면 기록하지 않고 한 번 새로 불러온다
+    checkStale(true).then((stale) => {
+      if (stale && reloadOnceIfStale()) return;
+      reportError(error, `global${stale ? " stale" : ""}${error.digest ? ` ${error.digest}` : ""}`);
+    });
   }, [error]);
   return (
     <html lang={lang}>
