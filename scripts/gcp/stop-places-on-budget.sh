@@ -83,10 +83,11 @@ def stop(event):
         print(f"disable {name}: {r.status_code} {r.text[:200]}")
 PY
 
+# SERVICES 값에 쉼표가 있어서 구분자를 @로 바꿔 넘긴다(gcloud의 ^@^ 문법)
 gcloud functions deploy "$FN" --project "$PROJECT" --gen2 --region "$REGION" --runtime python312 \
   --source "$SRC" --entry-point stop --trigger-topic "$TOPIC" \
   --service-account "$SA" --trigger-service-account "$SA" \
-  --set-env-vars "PROJECT=$PROJECT,SERVICES=$SERVICES" --max-instances 1 --memory 256Mi --quiet
+  --set-env-vars "^@^PROJECT=$PROJECT@SERVICES=$SERVICES" --max-instances 1 --memory 256Mi --quiet
 
 TEST_DATA="$(printf '{"budgetDisplayName":"test","costAmount":2,"budgetAmount":1,"currencyCode":"USD"}')"
 cat <<MSG
