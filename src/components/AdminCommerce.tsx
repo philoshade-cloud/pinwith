@@ -151,7 +151,7 @@ export function Topups() {
 
 // ── 지급 요청: 지급 정보 보고 송금 후 '지급함' ─────────────────────────
 type Req = { id: string; user_id: string; amount: number; currency: string; status: string; reference: string | null; note: string | null; created_at: string; user: { handle: string } | null };
-type Prof = { user_id: string; method: string; holder_name: string; email: string | null; bank_name: string | null; account_number: string | null; swift: string | null; country: string | null; currency: string | null };
+type Prof = { user_id: string; method: string; holder_name: string; holder_name_latin: string | null; birth_date: string | null; phone: string | null; email: string | null; bank_name: string | null; account_number: string | null; swift: string | null; country: string | null; currency: string | null };
 
 export function PayoutRequests() {
   const supabase = useMemo(() => createClient(), []);
@@ -209,6 +209,9 @@ export function PayoutRequests() {
               {p ? (
                 <p className="text-[13px] text-ink/80">
                   {p.method === "bank" ? "은행" : p.method === "wise" ? "Wise" : "PayPal"} · {p.holder_name}
+                  {p.holder_name_latin && ` (${p.holder_name_latin})`}
+                  {p.birth_date && ` · 생년월일 ${p.birth_date}`}
+                  {p.phone && ` · ${p.phone}`}
                   {p.email && ` · ${p.email}`}
                   {p.bank_name && ` · ${p.bank_name}`}
                   {p.account_number && ` ${p.account_number}`}

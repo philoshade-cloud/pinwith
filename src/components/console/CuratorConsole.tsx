@@ -589,8 +589,11 @@ function Stores({ currency }: { currency: string }) {
 }
 
 // ── 지급 ─────────────────────────
-type Profile = { method: "wise" | "paypal" | "bank"; holder_name: string; email: string; bank_name: string; account_number: string; swift: string; country: string; currency: string };
-const EMPTY: Profile = { method: "wise", holder_name: "", email: "", bank_name: "", account_number: "", swift: "", country: "KR", currency: "" };
+type Profile = {
+  method: "wise" | "paypal" | "bank"; holder_name: string; holder_name_latin: string; birth_date: string; phone: string;
+  email: string; bank_name: string; account_number: string; swift: string; country: string; currency: string;
+};
+const EMPTY: Profile = { method: "wise", holder_name: "", holder_name_latin: "", birth_date: "", phone: "", email: "", bank_name: "", account_number: "", swift: "", country: "KR", currency: "" };
 type Req = { id: string; amount: number; currency: string; status: string; created_at: string; paid_at: string | null; reference: string | null; note: string | null };
 
 function Payout({ dash, reload }: { dash: Dash; reload: () => void }) {
@@ -616,8 +619,16 @@ function Payout({ dash, reload }: { dash: Dash; reload: () => void }) {
   async function save(e: React.FormEvent) {
     e.preventDefault();
     if (!user) return;
+    const latin = p.holder_name_latin.trim().replace(/\s+/g, " ");
+    const phone = p.phone.trim();
+    // 원화(KRW)로 받으면 송금 회사(Wise 등)가 영문 이름·생년월일·한국 휴대폰 번호를 요구한다
+    if (krw && (!latin || !p.birth_date || !phone)) return setMsg("원화로 받으려면 영문 이름, 생년월일, 휴대폰 번호가 필요해요.");
+    if (latin && !/^[A-Za-z][A-Za-z .,'-]*$/.test(latin)) return setMsg("영문 이름은 알파벳으로만 적어 주세요(통장·여권의 영문 철자와 같게).");
+    if (phone && !/^\+?[0-9 -]{6,20}$/.test(phone)) return setMsg("휴대폰 번호는 숫자로 적어 주세요(예: 010-1234-5678 또는 +82 10 1234 5678).");
+    if (p.method === "bank" && krw && !/^[0-9-]{10,20}$/.test(p.account_number.trim())) return setMsg("한국 계좌 번호를 숫자로 확인해 주세요.");
     const row = {
       user_id: user.id, method: p.method, holder_name: p.holder_name.trim(),
+      holder_name_latin: latin || null, birth_date: p.birth_date || null, phone: phone || null,
       email: p.email.trim() || null, bank_name: p.bank_name.trim() || null, account_number: p.account_number.trim() || null,
       swift: p.swift.trim().toUpperCase() || null, country: p.country.trim().toUpperCase().slice(0, 2) || null,
       currency: p.currency.trim().toUpperCase().slice(0, 3) || null, updated_at: new Date().toISOString(),
@@ -638,6 +649,7 @@ function Payout({ dash, reload }: { dash: Dash; reload: () => void }) {
   }
 
   const pending = reqs.some((r) => r.status === "requested");
+  const krw = p.currency.trim().toUpperCase() === "KRW" || (!p.currency.trim() && p.country.trim().toUpperCase() === "KR");
   const can = dash.has_profile && !pending && dash.available >= dash.min_payout && dash.available > 0;
   const field = (k: keyof Profile, label: string, props: React.InputHTMLAttributes<HTMLInputElement> = {}) => (
     <label className="grid gap-1 text-[13px] font-semibold">
@@ -666,7 +678,9 @@ function Payout({ dash, reload }: { dash: Dash; reload: () => void }) {
 
       <form onSubmit={save} className="grid max-w-[560px] gap-3">
         <h2 className="text-[17px] font-semibold">지급 받을 정보</h2>
-        <p className="text-[12px] text-muted">운영자만 볼 수 있어요. 지급할 때만 써요.</p>
+        <p className="text-[12px] text-muted">
+          운영자만 볼 수 있어요. 지급할 때만 쓰고, 송금 회사(Wise·PayPal·은행)에 받는 사람 정보로 전달돼요. 이름은 통장(계정) 주인 이름과 같아야 송금이 실패하지 않아요.
+        </p>
         <label className="grid gap-1 text-[13px] font-semibold">
           받는 방법
           <select value={p.method} onChange={(e) => setP({ ...p, method: e.target.value as Profile["method"] })} className="field">
@@ -676,6 +690,16 @@ function Payout({ dash, reload }: { dash: Dash; reload: () => void }) {
           </select>
         </label>
         {field("holder_name", "받는 사람 이름(실명)", { required: true, autoComplete: "name" })}
+        {field("holder_name_latin", `영문 이름(통장·여권 영문 철자)${krw ? "" : " — 선택"}`, { autoComplete: "name", placeholder: "예: HONG GILDONG", required: krw })}
+        <div className="grid grid-cols-2 gap-3">
+          {field("birth_date", `생년월일${krw ? "" : " — 선택"}`, { type: "date", required: krw, max: new Date().toISOString().slice(0, 10) })}
+          {field("phone", `휴대폰 번호${krw ? "" : " — 선택"}`, { type: "tel", inputMode: "tel", autoComplete: "tel", placeholder: "010-1234-5678", required: krw })}
+        </div>
+        {krw && (
+          <p className="text-[12px] text-muted">
+            원화로 받으면 송금 회사가 영문 이름·생년월일을 확인하고, 한 번에 95만 원이 넘으면 휴대폰으로 본인 확인을 요청할 수 있어요.
+          </p>
+        )}
         {(p.method === "wise" || p.method === "paypal") && field("email", `${p.method === "wise" ? "Wise" : "PayPal"} 계정 이메일`, { inputMode: "email", required: true })}
         {p.method === "bank" && (
           <>
