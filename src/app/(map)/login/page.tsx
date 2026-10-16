@@ -2,21 +2,23 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useSyncExternalStore } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/env";
 import { GOOGLE_CLIENT_ID, GoogleSignIn } from "@/components/GoogleSignIn";
+import { SocialLogins } from "@/components/SocialLogins";
 import { Panel } from "@/components/shell/Panel";
 import { LangSwitch, useT } from "@/lib/i18n/client";
 
 // 임시 테스트 계정(test1~test6@pinwith.test). 끄려면 환경 변수에 false를 넣는다.
 const TEST_LOGIN = process.env.NEXT_PUBLIC_TEST_LOGIN !== "false";
 const TEST_PASSWORD = "pinwith-test-2026";
+const noSubscribe = () => () => {};
 
 // 구글 로그인 버튼. 끄려면 환경 변수에 false를 넣는다.
 const GOOGLE_LOGIN_ENABLED = process.env.NEXT_PUBLIC_GOOGLE_LOGIN_ENABLED !== "false";
 
-// 로그인: 구글 또는 이메일 링크. 로그인 후 원래 보던 화면(next)으로 돌아간다.
+// 로그인: 구글, (켜 둔 경우) 카카오·Apple·Facebook, 또는 이메일 링크. 로그인 후 원래 보던 화면(next)으로 돌아간다.
 export default function LoginPage() {
   const router = useRouter();
   const t = useT();
@@ -30,6 +32,8 @@ export default function LoginPage() {
       : new URLSearchParams(window.location.search).get("next") ?? "/me?welcome=1",
   );
   const [googleError, setGoogleError] = useState<string | null>(null);
+  // 이메일 링크·외부 로그인에서 실패하고 돌아왔을 때
+  const linkError = useSyncExternalStore(noSubscribe, () => new URLSearchParams(window.location.search).has("error"), () => false);
   const onGoogleError = useCallback((msg: string) => setGoogleError(msg), []);
 
   const next = () => new URLSearchParams(window.location.search).get("next") ?? "/me?welcome=1";
@@ -89,6 +93,11 @@ export default function LoginPage() {
       <LangSwitch className="mb-4" />
       <h1 className="font-display text-[26px] font-semibold text-ink">{t("PinWith에 로그인")}</h1>
       <p className="mt-2 text-[15px] text-muted">{t("팔로우, 내 리스트 만들기, DM에 필요합니다.")}</p>
+      {linkError && (
+        <p role="alert" className="mt-3 rounded-lg bg-surface px-3 py-2 text-[14px] text-pin">
+          {t("로그인하지 못했어요. 링크가 만료됐거나 이미 쓴 링크일 수 있어요. 다시 시도해 주세요.")}
+        </p>
+      )}
       {GOOGLE_LOGIN_ENABLED &&
         (GOOGLE_CLIENT_ID ? (
           <div className="mt-6">
@@ -100,6 +109,7 @@ export default function LoginPage() {
             {t("구글로 계속하기")}
           </button>
         ))}
+      <SocialLogins redirectTo={redirectTo} />
       <form onSubmit={withEmail} className={GOOGLE_LOGIN_ENABLED ? "mt-6" : "mt-6"}>
         <label htmlFor="email" className="text-[14px] font-semibold text-ink">
           {t("이메일로 로그인 링크 받기")}

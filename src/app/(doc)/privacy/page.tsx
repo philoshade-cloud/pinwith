@@ -57,7 +57,7 @@ function PrivacyKo() {
         <b>가입한 이용자</b>
       </p>
       <ul>
-        <li><b>계정</b>: 이메일 주소, 구글로 로그인하면 구글이 알려 주는 이름과 프로필 사진</li>
+        <li><b>계정</b>: 이메일 주소, 구글·Apple·Facebook·카카오로 로그인하면 그 회사가 알려 주는 이름과 프로필 사진(Apple에서 이메일 가리기를 고르면 Apple이 만든 전달용 주소)</li>
         <li><b>프로필</b>: 핸들, 이름, 소개, 프로필 사진(직접 올린 경우)</li>
         <li><b>내가 만든 내용</b>: 리스트, 장소, 메모, 섹션, 태그, 공지, 팔로우, 좋아요, 댓글, 공동 편집 기록(누가 언제 무엇을 바꿨는지)</li>
         <li><b>메시지</b>: 다른 이용자와 주고받은 메시지와 차단 여부</li>
@@ -115,6 +115,7 @@ function PrivacyKo() {
         <li><b>Supabase</b>(미국 회사, 데이터 보관: 일본 도쿄) — 데이터베이스, 로그인, 파일 보관: 위 2번의 모든 정보</li>
         <li><b>Vercel</b>(미국 회사, 서버: 일본 도쿄 등) — 웹사이트 운영: 접속 정보</li>
         <li><b>Google</b>(미국) — 구글 로그인, 장소 검색·장소 정보(Google Maps Platform), 광고(Google AdSense, 도입 시): 로그인 정보, 접속 정보, 광고 동의 여부</li>
+        <li><b>Apple</b>(미국), <b>Meta</b>(미국, Facebook 로그인), <b>Kakao</b>(한국) — 그 회사 계정으로 로그인할 때: 로그인 정보</li>
         <li><b>Stripe</b>(미국·싱가포르) — 가게 광고비 카드 결제: 결제 정보, 가게 이름·이메일</li>
         <li><b>Wise, PayPal 또는 은행</b> — 큐레이터에게 송금: 지급 정보</li>
         <li>
@@ -142,7 +143,7 @@ function PrivacyKo() {
         <li>짧은 시간에 몰리는 요청은 자동으로 막고, 오류는 기록해 빠르게 고칩니다.</li>
       </ul>
 
-      <h2>8. 내 권리</h2>
+      <h2 id="delete">8. 내 권리</h2>
       <ul>
         <li>내 정보를 보고, 고치고, 지우고, 처리를 멈추게 하거나, 받아 갈(이동) 수 있습니다.</li>
         <li>프로필 화면의 <b>계정 삭제</b>로 언제든 바로 지울 수 있고, 그 밖의 요청은 위 문의 창구로 보내 주세요. 법이 정한 기간 안에 답합니다.</li>
@@ -226,7 +227,7 @@ function PrivacyEn() {
         <b>Registered users</b>
       </p>
       <ul>
-        <li><b>Account</b>: email address, and if you sign in with Google, the name and profile photo Google provides</li>
+        <li><b>Account</b>: email address, and if you sign in with Google, Apple, Facebook or Kakao, the name and profile photo that company provides (if you choose Hide My Email with Apple, the relay address Apple creates)</li>
         <li><b>Profile</b>: handle, name, bio, profile photo (if you uploaded one)</li>
         <li><b>Content you create</b>: lists, places, notes, sections, tags, announcements, follows, likes, comments, and co-editing history (who changed what and when)</li>
         <li><b>Messages</b>: messages exchanged with other users and whether you have blocked someone</li>
@@ -289,6 +290,7 @@ function PrivacyEn() {
         <li><b>Supabase</b> (US company, data stored in Tokyo, Japan) — database, sign-in and file storage: all information in section 2 above</li>
         <li><b>Vercel</b> (US company, servers in Tokyo, Japan and elsewhere) — website hosting: connection information</li>
         <li><b>Google</b> (US) — Google sign-in, place search and place information (Google Maps Platform), ads (Google AdSense, once introduced): sign-in information, connection information, ad consent status</li>
+        <li><b>Apple</b> (US), <b>Meta</b> (US, Facebook Login), <b>Kakao</b> (Korea) — when you sign in with an account from that company: sign-in information</li>
         <li><b>Stripe</b> (US and Singapore) — card payments for stores’ ad credit: payment information, store name and email</li>
         <li><b>Wise, PayPal or banks</b> — transfers to curators: payout information</li>
         <li>
@@ -317,7 +319,7 @@ function PrivacyEn() {
         <li>Bursts of requests in a short period are blocked automatically, and errors are logged so we can fix them quickly.</li>
       </ul>
 
-      <h2>8. Your rights</h2>
+      <h2 id="delete-en">8. Your rights</h2>
       <ul>
         <li>You can access, correct and delete your information, ask us to stop processing it, or take a copy with you (portability).</li>
         <li>You can delete your account immediately at any time with <b>Delete account</b> on your profile screen; please send any other requests through the support form above. We will respond within the period required by law.</li>

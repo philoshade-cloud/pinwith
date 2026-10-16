@@ -56,6 +56,7 @@ export function UsagePanel() {
       {msg && <p role="status" className="text-[14px] text-teal">{msg}</p>}
 
       <GoogleSwitch />
+      <LoginSwitch />
 
       <div className="grid gap-3 sm:grid-cols-3">
         <Box title="구글 지도 이번 달" value={`$${num(gNow, 2)}`} hint={`월말 예상 $${num(gProj, 2)}`} warn={!!gb && gb.monthly_budget_usd > 0 && gProj >= (gb.monthly_budget_usd * gb.alert_pct) / 100} />
@@ -268,6 +269,48 @@ function GoogleSwitch() {
       <p className="mt-2 text-[12px] text-muted">
         이 스위치는 PinWith가 센 사용량으로 판단해요. 구글이 실제 청구액으로 직접 멈추게 하려면 저장소의 scripts/gcp/stop-places-on-budget.sh를 구글 클라우드 셸에서 한 번 실행해 두세요.
       </p>
+      {msg && <p role="status" className="mt-1 text-[13px] text-teal">{msg}</p>}
+    </div>
+  );
+}
+
+
+// ── 로그인 방식: Supabase → Authentication → Providers에 설정을 마친 회사만 켠다 ──────────
+const LOGINS = [
+  { key: "kakao", label: "카카오" },
+  { key: "apple", label: "Apple" },
+  { key: "facebook", label: "Facebook(Meta)" },
+] as const;
+function LoginSwitch() {
+  const supabase = useMemo(() => createClient(), []);
+  const [v, setV] = useState<Record<string, boolean> | null>(null);
+  const [msg, setMsg] = useState("");
+  const load = useCallback(async () => {
+    const { data } = await supabase.from("app_flags").select("value").eq("key", "login").maybeSingle();
+    setV((data?.value as Record<string, boolean>) ?? {});
+  }, [supabase]);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    load();
+  }, [load]);
+  async function toggle(key: string, on: boolean) {
+    const { error } = await supabase.from("app_flags").update({ value: { ...v, [key]: on }, updated_at: new Date().toISOString() }).eq("key", "login");
+    setMsg(error ? "저장하지 못했어요." : "저장했어요. 로그인 화면을 새로 열면 반영돼요.");
+    load();
+  }
+  if (!v) return null;
+  return (
+    <div className="rounded-xl border border-rule p-4">
+      <b className="text-[15px]">로그인 방식</b>
+      <span className="ml-2 text-[12px] text-muted">구글·이메일은 늘 켜져 있어요. Supabase에 설정을 마친 뒤 켜고, 시험 로그인을 꼭 해 보세요.</span>
+      <div className="mt-2 flex flex-wrap gap-4 text-[14px]">
+        {LOGINS.map((l) => (
+          <label key={l.key} className="flex items-center gap-2">
+            <input type="checkbox" checked={!!v[l.key]} onChange={(e) => toggle(l.key, e.target.checked)} />
+            {l.label}
+          </label>
+        ))}
+      </div>
       {msg && <p role="status" className="mt-1 text-[13px] text-teal">{msg}</p>}
     </div>
   );
