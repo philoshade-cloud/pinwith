@@ -10,6 +10,12 @@
 
 ---
 
+## v0.35 — 카카오·Apple·Facebook 로그인 준비·이메일 로그인 정비 (2026-10-16)
+- 0.35-1 `scripts/gcp/stop-places-on-budget.sh` 5판: 함수 소스 버킷에 읽기 권한을 직접 주고, 권한이 퍼질 때까지 배포를 1분 간격으로 최대 5번 다시 시도 · `9bf434f`
+- 0.35-2 로그인 화면에 카카오·Apple·Facebook 버튼(운영자 콘솔 → 서비스 사용량 → '로그인 방식'에서 켠 것만 보임, 처음엔 모두 꺼짐). 이메일 링크·외부 로그인 실패로 돌아오면 안내 문구. 개인정보처리방침(한·영)에 Apple·Meta·Kakao와 Apple 이메일 가리기 추가, '내 권리' 절에 링크용 id(`#delete`) `[DB]` · `8e718d0`
+- DB: `supabase/migrations/20261016000100_login_flags.sql` · 되돌리기 `supabase/rollback/20261016000100_login_flags.down.sql`
+- 0.35-3 이메일 로그인 링크를 token_hash 방식으로 받음(`/auth/callback`): 요청한 브라우저가 아닌 메일 앱 안 브라우저·다른 기기에서 열어도 로그인됨. 한·영 메일 템플릿 `supabase/templates/magic_link.html`, `confirm_signup.html`(Supabase에 붙여 넣어야 적용) · `3b6f48e`
+
 ## v0.34 — 문의 이메일·구글 예산 스크립트 빌드 권한 (2026-10-16)
 - 0.34-1 `scripts/gcp/stop-places-on-budget.sh` 4판: 새 프로젝트에서 기본 빌드 계정에 권한이 없어 함수 빌드가 실패하던 것 — 스크립트가 만든 계정을 빌드 계정으로 지정하고 빌드 권한(cloudbuild.builds.builder 등)을 줌 · `23eba8c`
 - 0.34-2 개인정보처리방침·이용약관(한·영)에 문의 이메일 support@pinwith.me(문의·신고하기 창구와 함께), 개인정보 보호책임자 연락처도 이 이메일 · `4bc835d`
