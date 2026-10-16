@@ -188,6 +188,12 @@ export function ListExplorer({ list }: { list: CuratedList }) {
           {list.title}
         </h1>
         {list.description && <p className="mt-2 text-[15px] leading-relaxed text-ink/80">{list.description}</p>}
+        {list.items.some((i) => i.sponsored) && (
+          <p className="mt-2 text-[12px] text-muted">
+            <span className="mr-1 rounded border border-rule px-1 py-px text-[11px] font-semibold text-ink/70">제휴</span>
+            표시된 장소는 큐레이터가 PinWith 가게 제휴로 보상을 받을 수 있는 곳이에요.
+          </p>
+        )}
         {list.themes.length > 0 && (
           <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="테마">
             {list.themes.map((t) => (
@@ -265,6 +271,11 @@ export function ListExplorer({ list }: { list: CuratedList }) {
                         <span className="text-[13px] font-semibold tabular-nums text-pin">{numbering.get(item.id)}</span>
                       )}
                       <span className="text-[16px] font-semibold text-ink">{item.title}</span>
+                      {item.sponsored && (
+                        <span title="큐레이터가 이 가게와의 제휴로 보상을 받을 수 있어요" className="rounded border border-rule px-1 py-px text-[11px] font-semibold text-ink/70">
+                          제휴
+                        </span>
+                      )}
                       {here && item.lat != null && isWithinMeters(here, { lat: item.lat, lng: item.lng! }) && (
                         <span className="text-[12px] text-teal">근처</span>
                       )}

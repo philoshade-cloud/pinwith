@@ -130,10 +130,12 @@ export async function getCuratedList(
   const row = list as unknown as Row;
   const curator = toCurator(row.owner);
   const isOwner = uid === curator.id;
-  const [, filled] = await Promise.all([
+  const [, filled, { data: sponsoredRows }] = await Promise.all([
     supabase.rpc("touch_lists", { ids: [row.id] }),
     fillMissingCoords(row.list_items.filter((i) => i.places?.lat == null).map((i) => i.place_id)),
+    supabase.rpc("list_sponsored_items", { p_list: row.id }),
   ]);
+  const sponsored = new Set(((sponsoredRows ?? []) as unknown[]).map((r) => (typeof r === "string" ? r : Object.values(r as object)[0]) as string));
   const siblings = ((others ?? []) as unknown as { slug: string; title: string; visibility: string }[])
     .filter((l) => isOwner || l.visibility === "public" || l.slug === row.slug)
     .map((l) => ({ slug: l.slug, title: l.title }));
@@ -165,6 +167,7 @@ export async function getCuratedList(
         videoUrl: i.video_ts_url,
         lat: i.places?.lat ?? filled.get(i.place_id)?.lat ?? null,
         lng: i.places?.lng ?? filled.get(i.place_id)?.lng ?? null,
+        sponsored: sponsored.has(i.id),
       })),
   };
 }

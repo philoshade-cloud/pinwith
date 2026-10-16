@@ -23,6 +23,8 @@ export type ListItem = {
   videoUrl: string | null;
   lat: number | null;
   lng: number | null;
+  // 가게 제휴가 붙어 큐레이터가 보상을 받을 수 있는 장소(화면에 '제휴' 표시)
+  sponsored?: boolean;
 };
 
 export type CuratedList = {
