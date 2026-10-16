@@ -15,6 +15,7 @@
 - DB: `supabase/migrations/20261016000200_login_flags_no_kakao.sql` · 되돌리기 `supabase/rollback/20261016000200_login_flags_no_kakao.down.sql`
 - 0.36-2 `supabase/templates/magic_link.html`, `confirm_signup.html`을 영어로만 · `c7a4750`
 - 0.36-3 앱 등록용 아이콘 `public/brand/pinwith-icon-1024.png`(1024×1024, 흰 바탕). 구글 예산 스크립트 6판: 예산 알림 계정(billing-budget-alert@system.gserviceaccount.com)에 주제 발행 권한 · `68c507b`
+- 0.36-4 앱 등록용 아이콘을 투명 배경으로(Meta가 흰 배경을 거부) · `efc1244`
 
 ## v0.35 — 카카오·Apple·Facebook 로그인 준비·이메일 로그인 정비 (2026-10-16)
 - 0.35-1 `scripts/gcp/stop-places-on-budget.sh` 5판: 함수 소스 버킷에 읽기 권한을 직접 주고, 권한이 퍼질 때까지 배포를 1분 간격으로 최대 5번 다시 시도 · `9bf434f`
