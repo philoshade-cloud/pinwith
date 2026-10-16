@@ -121,7 +121,6 @@ export function CuratorView({
           <ProfileQr url={shareUrl ?? `${typeof window === "undefined" ? "" : window.location.origin}/@${curator.handle}`} name={curator.displayName} />
           {!isOwner && <DmButton userId={curator.id} />}
           {isOwner && <Link href="/me/stats" className="btn-quiet">통계</Link>}
-          {isOwner && <Link href="/me" className="btn-quiet">프로필 편집</Link>}
         </div>
         {!isOwner && (
           <div className="mt-2">
