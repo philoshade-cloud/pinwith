@@ -4,7 +4,7 @@ import { ByLang } from "@/components/ByLang";
 
 export const metadata: Metadata = { title: "이용약관" };
 
-// 출시 전 법률 검토를 받는다. 도메인이 정해지면 문의 이메일을 더한다.
+// 출시 전 법률 검토를 받는다.
 export default function Terms() {
   return <ByLang ko={<TermsKo />} en={<TermsEn />} />;
 }
@@ -169,7 +169,7 @@ function TermsKo() {
       <h2>13. 약관 변경과 연락</h2>
       <p>
         약관이 바뀌면 시행 7일 전(이용자에게 불리한 변경은 30일 전)에 서비스 안에서 알립니다. 바뀐 약관에 동의하지 않으면 시행 전에 탈퇴할 수 있습니다. 문의는{" "}
-        <Link href="/support?type=question">문의·신고하기</Link>로 보내 주세요. 회사 주소: 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874.
+        <Link href="/support?type=question">문의·신고하기</Link> 또는 이메일 <a href="mailto:support@pinwith.me">support@pinwith.me</a>로 보내 주세요. 회사 주소: 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874.
       </p>
 
     </>
@@ -356,7 +356,7 @@ function TermsEn() {
       <p>
         If these terms change, we will notify you within the Service 7 days before the change takes effect (30 days before for changes unfavorable to users).
         If you do not agree to the revised terms, you may delete your account before they take effect. Please send questions through the{" "}
-        <Link href="/support?type=question">support form</Link>. Company address: 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874.
+        <Link href="/support?type=question">support form</Link> or by email to <a href="mailto:support@pinwith.me">support@pinwith.me</a>. Company address: 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874.
       </p>
     </>
   );

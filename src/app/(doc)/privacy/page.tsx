@@ -4,7 +4,7 @@ import { ByLang } from "@/components/ByLang";
 
 export const metadata: Metadata = { title: "개인정보처리방침" };
 
-// 출시 전 법률 검토를 받는다. 도메인이 정해지면 문의 이메일을 더한다.
+// 출시 전 법률 검토를 받는다.
 export default function Privacy() {
   return <ByLang ko={<PrivacyKo />} en={<PrivacyEn />} />;
 }
@@ -25,9 +25,9 @@ function PrivacyKo() {
         <li>운영 회사: STRATO TRADINGS PTE. LTD. (싱가포르, 회사등록번호 UEN 202402989G)</li>
         <li>주소: 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874</li>
         <li>
-          개인정보 문의·요청: <Link href="/support?type=question">문의·신고하기</Link>(로그인 없이도 보낼 수 있어요). 답을 받을 이메일을 함께 적어 주세요.
+          개인정보 문의·요청: 이메일 <a href="mailto:support@pinwith.me">support@pinwith.me</a> 또는 <Link href="/support?type=question">문의·신고하기</Link>(로그인 없이도 보낼 수 있어요. 답을 받을 이메일을 함께 적어 주세요).
         </li>
-        <li>개인정보 보호책임자: Adrian Kim (대표, 위 문의 창구로 연락)</li>
+        <li>개인정보 보호책임자: Adrian Kim (대표, <a href="mailto:support@pinwith.me">support@pinwith.me</a>)</li>
       </ul>
 
       <h2>2. 모으는 정보</h2>
@@ -188,10 +188,10 @@ function PrivacyEn() {
         <li>Operating company: STRATO TRADINGS PTE. LTD. (Singapore, company registration number UEN 202402989G)</li>
         <li>Address: 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874</li>
         <li>
-          Privacy questions and requests: <Link href="/support?type=question">support form</Link> (you can send it without signing in). Please include an
-          email address where we can reply.
+          Privacy questions and requests: email <a href="mailto:support@pinwith.me">support@pinwith.me</a> or use the <Link href="/support?type=question">support form</Link> (you can send it without signing in;
+          please include an email address where we can reply).
         </li>
-        <li>Data Protection Officer: Adrian Kim (CEO; contact via the support form above)</li>
+        <li>Data Protection Officer: Adrian Kim (CEO; <a href="mailto:support@pinwith.me">support@pinwith.me</a>)</li>
       </ul>
 
       <h2>2. Information we collect</h2>
