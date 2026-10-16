@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { useT } from "@/lib/i18n/client";
 
 // 팔로우/팔로우 취소. 로그인 전이면 로그인 화면으로 보낸 뒤 이 화면으로 돌아온다.
 export function FollowButton({ curatorId, handle, className = "" }: { curatorId: string; handle: string; className?: string }) {
+  const t = useT();
   const [me, setMe] = useState<string | null | undefined>(undefined);
   const [following, setFollowing] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -29,7 +31,7 @@ export function FollowButton({ curatorId, handle, className = "" }: { curatorId:
   if (me === null) {
     return (
       <Link href={`/login?next=/@${handle}`} className={`btn-primary ${className}`}>
-        팔로우
+        {t("팔로우")}
       </Link>
     );
   }
@@ -54,7 +56,7 @@ export function FollowButton({ curatorId, handle, className = "" }: { curatorId:
       aria-pressed={following}
       className={`${following ? "btn-quiet" : "btn-primary"} disabled:opacity-60 ${className}`}
     >
-      {following ? "팔로잉" : "팔로우"}
+      {following ? t("팔로잉") : t("팔로우")}
     </button>
   );
 }

@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { useShell } from "./shell/context";
 import { ConfirmButton } from "./console/ui";
+import { currentLocale, tr, useFormat, useT, useTRich } from "@/lib/i18n/client";
 
 // 예약 가능 시간: {"0":[["11:00","21:00"]], ...} 0=일요일. 비어 있으면 아무 때나.
 export type Hours = Record<string, [string, string][]>;
@@ -30,9 +31,11 @@ export function slotsFor(hours: Hours, slot: number, date: string): string[] | n
   for (const [a, b] of ranges) for (let m = toMin(a); m < toMin(b); m += slot) out.push(toTime(m));
   return out;
 }
+// 요일 이름(화면 언어대로). 2023-01-01이 일요일이다.
+const weekdayOf = (i: number) => new Date(2023, 0, 1 + i);
 export function openDaysText(hours: Hours) {
-  if (!hours || Object.keys(hours).length === 0) return "언제든 문의 가능";
-  return DAYS.map((d, i) => ((hours[String(i)] ?? []).length ? d : null)).filter(Boolean).join("·");
+  if (!hours || Object.keys(hours).length === 0) return tr("언제든 문의 가능");
+  return DAYS.map((_, i) => ((hours[String(i)] ?? []).length ? weekdayOf(i).toLocaleDateString(currentLocale(), { weekday: "short" }) : null)).filter(Boolean).join("·");
 }
 
 function today() {
@@ -43,6 +46,7 @@ function today() {
 // 장소 카드의 '예약 문의' 버튼: 가게가 예약 기능을 켜 두었으면 어디서 보든(리스트·검색) 보인다.
 export function ReserveButton({ placeId, itemId, onOpen, className = "btn-primary" }: { placeId: string; itemId?: string; onOpen?: () => void; className?: string }) {
   const [offer, setOffer] = useState<OfferInfo | null>(null);
+  const t = useT();
   useEffect(() => {
     if (!placeId) return;
     let alive = true;
@@ -57,7 +61,7 @@ export function ReserveButton({ placeId, itemId, onOpen, className = "btn-primar
   return (
     // 누르면 장소 카드·미리보기를 닫아 예약 화면을 가리지 않게 한다
     <Link href={`/reserve/${encodeURIComponent(placeId)}${itemId ? `?item=${itemId}` : ""}`} onClick={onOpen} className={className}>
-      예약 문의
+      {t("예약 문의")}
     </Link>
   );
 }
@@ -71,6 +75,9 @@ export function ReserveForm({ placeId, itemId }: { placeId: string; itemId: stri
   const [f, setF] = useState({ name: "", phone: "", date: today(), time: "", party: "2", note: "" });
   const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
   const [err, setErr] = useState("");
+  const t = useT();
+  const tRich = useTRich();
+  const fmt = useFormat();
 
   useEffect(() => {
     if (me === null) router.replace(`/login?next=${encodeURIComponent(`/reserve/${placeId}${itemId ? `?item=${itemId}` : ""}`)}`);
@@ -87,9 +94,9 @@ export function ReserveForm({ placeId, itemId }: { placeId: string; itemId: stri
   async function send(e: React.FormEvent) {
     e.preventDefault();
     setErr("");
-    if (!f.name.trim() || f.phone.replace(/[^0-9]/g, "").length < 8) return setErr("이름과 연락처(숫자 8자리 이상)를 적어 주세요.");
-    if (closed) return setErr("이 날은 예약을 받지 않아요. 다른 날을 골라 주세요.");
-    if (slots && !f.time) return setErr("시간을 골라 주세요.");
+    if (!f.name.trim() || f.phone.replace(/[^0-9]/g, "").length < 8) return setErr(t("이름과 연락처(숫자 8자리 이상)를 적어 주세요."));
+    if (closed) return setErr(t("이 날은 예약을 받지 않아요. 다른 날을 골라 주세요."));
+    if (slots && !f.time) return setErr(t("시간을 골라 주세요."));
     setState("sending");
     const { error } = await supabase.rpc("request_reservation", {
       p_place: placeId, p_item: itemId, p_name: f.name, p_phone: f.phone, p_date: f.date, p_time: f.time,
@@ -99,15 +106,15 @@ export function ReserveForm({ placeId, itemId }: { placeId: string; itemId: stri
       setState("idle");
       const m = error.message;
       return setErr(
-        m.includes("too many") ? "하루에 5건까지 문의할 수 있어요."
-          : m.includes("past date") ? "오늘 이후 날짜를 고르세요."
-            : m.includes("too far") ? "90일 안의 날짜만 문의할 수 있어요."
-              : m.includes("closed day") ? "이 날은 예약을 받지 않아요."
-                : m.includes("closed time") || m.includes("time required") ? "예약 가능한 시간을 골라 주세요."
-                  : m.includes("party size") ? `인원은 ${offer?.max_party ?? 20}명까지 문의할 수 있어요.`
-                    : m.includes("own business") ? "내 가게에는 문의할 수 없어요."
-                      : m.includes("no reservation") ? "이 가게는 지금 예약 문의를 받지 않아요."
-                        : "보내지 못했어요. 잠시 후 다시 시도하세요.",
+        m.includes("too many") ? t("하루에 5건까지 문의할 수 있어요.")
+          : m.includes("past date") ? t("오늘 이후 날짜를 고르세요.")
+            : m.includes("too far") ? t("90일 안의 날짜만 문의할 수 있어요.")
+              : m.includes("closed day") ? t("이 날은 예약을 받지 않아요.")
+                : m.includes("closed time") || m.includes("time required") ? t("예약 가능한 시간을 골라 주세요.")
+                  : m.includes("party size") ? t("인원은 {n}명까지 문의할 수 있어요.", { n: offer?.max_party ?? 20 })
+                    : m.includes("own business") ? t("내 가게에는 문의할 수 없어요.")
+                      : m.includes("no reservation") ? t("이 가게는 지금 예약 문의를 받지 않아요.")
+                        : t("보내지 못했어요. 잠시 후 다시 시도하세요."),
       );
     }
     setState("sent");
@@ -116,41 +123,41 @@ export function ReserveForm({ placeId, itemId }: { placeId: string; itemId: stri
   if (offer === undefined) return <PanelLoading />;
   if (offer === null)
     return (
-      <Panel title="예약 문의">
-        <p className="px-5 py-6 text-[15px] text-muted">이 가게는 지금 PinWith로 예약 문의를 받지 않아요.</p>
+      <Panel title={t("예약 문의")}>
+        <p className="px-5 py-6 text-[15px] text-muted">{t("이 가게는 지금 PinWith로 예약 문의를 받지 않아요.")}</p>
       </Panel>
     );
 
   const set = (k: keyof typeof f) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setF({ ...f, [k]: e.target.value, ...(k === "date" ? { time: "" } : {}) });
   return (
-    <Panel title={`예약 문의 · ${offer.place_name}`}>
+    <Panel title={t("예약 문의 · {place}", { place: offer.place_name })}>
       <div className="px-5 pb-10 pt-4">
         {state === "sent" ? (
           <div className="py-4">
-            <p className="text-[17px] font-semibold text-ink">문의를 보냈어요.</p>
-            <p className="mt-1 text-[14px] text-muted">{offer.place_name}에서 확인하고 답하면 알림으로 알려 드려요. 확정 전까지는 예약이 아니에요.</p>
+            <p className="text-[17px] font-semibold text-ink">{t("문의를 보냈어요.")}</p>
+            <p className="mt-1 text-[14px] text-muted">{t("{place}에서 확인하고 답하면 알림으로 알려 드려요. 확정 전까지는 예약이 아니에요.", { place: offer.place_name })}</p>
             <div className="mt-4 flex gap-2">
-              <Link href="/me/reservations" className="btn-primary">내 예약 문의 보기</Link>
-              <button type="button" onClick={() => router.back()} className="btn-quiet">돌아가기</button>
+              <Link href="/me/reservations" className="btn-primary">{t("내 예약 문의 보기")}</Link>
+              <button type="button" onClick={() => router.back()} className="btn-quiet">{t("돌아가기")}</button>
             </div>
           </div>
         ) : (
           <form onSubmit={send} className="grid gap-3">
-            <p className="text-[14px] text-ink/80"><b>{offer.place_name}</b>에 방문 예약을 문의해요. 가게가 확인하고 확정해 줘요.</p>
-            <p className="text-[13px] text-muted">예약 받는 요일: {openDaysText(offer.hours)}</p>
-            {offer.message && <p className="rounded-lg bg-surface px-3 py-2 text-[13px] text-ink/80">가게 안내: {offer.message}</p>}
+            <p className="text-[14px] text-ink/80">{tRich("<b>{place}</b>에 방문 예약을 문의해요. 가게가 확인하고 확정해 줘요.", { b: (s) => <b>{s}</b> }, { place: offer.place_name })}</p>
+            <p className="text-[13px] text-muted">{t("예약 받는 요일: {days}", { days: openDaysText(offer.hours) })}</p>
+            {offer.message && <p className="rounded-lg bg-surface px-3 py-2 text-[13px] text-ink/80">{t("가게 안내: {message}", { message: offer.message })}</p>}
             <div className="grid grid-cols-2 gap-3">
-              <label className="grid gap-1 text-[13px] font-semibold">이름<input value={f.name} onChange={set("name")} className="field" autoComplete="name" required /></label>
-              <label className="grid gap-1 text-[13px] font-semibold">연락처<input value={f.phone} onChange={set("phone")} className="field" inputMode="tel" autoComplete="tel" required /></label>
+              <label className="grid gap-1 text-[13px] font-semibold">{t("이름")}<input value={f.name} onChange={set("name")} className="field" autoComplete="name" required /></label>
+              <label className="grid gap-1 text-[13px] font-semibold">{t("연락처")}<input value={f.phone} onChange={set("phone")} className="field" inputMode="tel" autoComplete="tel" required /></label>
             </div>
             <div className="grid grid-cols-[1.4fr_1fr_0.7fr] gap-2">
-              <label className="grid gap-1 text-[13px] font-semibold">날짜<input type="date" min={today()} value={f.date} onChange={set("date")} className="field" required /></label>
+              <label className="grid gap-1 text-[13px] font-semibold">{t("날짜")}<input type="date" min={today()} value={f.date} onChange={set("date")} className="field" required /></label>
               <label className="grid gap-1 text-[13px] font-semibold">
-                시간
+                {t("시간")}
                 {slots ? (
                   <select value={f.time} onChange={set("time")} disabled={closed} className="field">
-                    <option value="">{closed ? "휴무" : "고르기"}</option>
+                    <option value="">{closed ? t("휴무") : t("고르기")}</option>
                     {slots.map((t) => (
                       <option key={t} value={t}>{t}</option>
                     ))}
@@ -160,7 +167,7 @@ export function ReserveForm({ placeId, itemId }: { placeId: string; itemId: stri
                 )}
               </label>
               <label className="grid gap-1 text-[13px] font-semibold">
-                인원
+                {t("인원")}
                 <select value={f.party} onChange={set("party")} className="field">
                   {Array.from({ length: offer.max_party }, (_, i) => i + 1).map((n) => (
                     <option key={n} value={n}>{n}</option>
@@ -168,14 +175,14 @@ export function ReserveForm({ placeId, itemId }: { placeId: string; itemId: stri
                 </select>
               </label>
             </div>
-            {closed && <p className="text-[13px] text-pin">{DAYS[new Date(`${f.date}T00:00:00`).getDay()]}요일은 예약을 받지 않아요.</p>}
-            <label className="grid gap-1 text-[13px] font-semibold">요청 사항(선택)<textarea value={f.note} onChange={set("note")} rows={2} maxLength={500} className="field" /></label>
-            <p className="text-[12px] text-muted">이름과 연락처는 이 가게에만 전달돼요(개인정보처리방침 참고). 확정 전에도 가게와 메시지를 주고받을 수 있어요.</p>
+            {closed && <p className="text-[13px] text-pin">{t("{day}은 예약을 받지 않아요.", { day: fmt.date(weekdayOf(new Date(`${f.date}T00:00:00`).getDay()), { weekday: "long" }) })}</p>}
+            <label className="grid gap-1 text-[13px] font-semibold">{t("요청 사항(선택)")}<textarea value={f.note} onChange={set("note")} rows={2} maxLength={500} className="field" /></label>
+            <p className="text-[12px] text-muted">{t("이름과 연락처는 이 가게에만 전달돼요(개인정보처리방침 참고). 확정 전에도 가게와 메시지를 주고받을 수 있어요.")}</p>
             {err && <p role="alert" className="text-[14px] text-pin">{err}</p>}
             <button disabled={state === "sending"} className="btn-primary justify-center !py-3 disabled:opacity-50">
-              {state === "sending" ? "보내는 중" : "예약 문의 보내기"}
+              {state === "sending" ? t("보내는 중") : t("예약 문의 보내기")}
             </button>
-            <Link href="/me/reservations" className="text-center text-[13px] text-muted underline">내 예약 문의 전체 보기</Link>
+            <Link href="/me/reservations" className="text-center text-[13px] text-muted underline">{t("내 예약 문의 전체 보기")}</Link>
           </form>
         )}
       </div>
@@ -190,6 +197,8 @@ export function ReservationThread({ reservationId, meId, otherLabel }: { reserva
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
+  const t = useT();
+  const fmt = useFormat();
   const load = useCallback(async () => {
     const { data } = await supabase.from("reservation_messages").select("id, sender_id, body, created_at").eq("reservation_id", reservationId).order("created_at");
     setMsgs((data as Msg[]) ?? []);
@@ -214,7 +223,7 @@ export function ReservationThread({ reservationId, meId, otherLabel }: { reserva
   }
   return (
     <div className="mt-2 rounded-lg bg-surface p-2">
-      {msgs.length === 0 && <p className="px-1 text-[12px] text-muted">아직 주고받은 메시지가 없어요.</p>}
+      {msgs.length === 0 && <p className="px-1 text-[12px] text-muted">{t("아직 주고받은 메시지가 없어요.")}</p>}
       <ul className="grid gap-1.5">
         {msgs.map((m) => {
           const mine = m.sender_id === meId;
@@ -223,15 +232,15 @@ export function ReservationThread({ reservationId, meId, otherLabel }: { reserva
               {!mine && <span className="block text-[11px] text-muted">{otherLabel}</span>}
               <span className="whitespace-pre-wrap">{m.body}</span>
               <span className={`block text-right text-[10px] ${mine ? "text-white/70" : "text-muted"}`}>
-                {new Date(m.created_at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "numeric", minute: "2-digit" })}
+                {fmt.dateTime(m.created_at, { month: "numeric", day: "numeric", hour: "numeric", minute: "2-digit" })}
               </span>
             </li>
           );
         })}
       </ul>
       <form onSubmit={send} className="mt-2 flex gap-2">
-        <input value={text} onChange={(e) => setText(e.target.value)} maxLength={1000} placeholder="메시지 보내기" className="field min-w-0 flex-1 !py-1.5" />
-        <button disabled={busy || !text.trim()} className="btn-primary !px-3 !py-1.5 !text-[13px] disabled:opacity-40">보내기</button>
+        <input value={text} onChange={(e) => setText(e.target.value)} maxLength={1000} placeholder={t("메시지 보내기")} className="field min-w-0 flex-1 !py-1.5" />
+        <button disabled={busy || !text.trim()} className="btn-primary !px-3 !py-1.5 !text-[13px] disabled:opacity-40">{t("보내기")}</button>
       </form>
     </div>
   );
@@ -242,7 +251,7 @@ type Mine = {
   id: string; visit_date: string; visit_time: string | null; party_size: number; status: string; reply: string | null; created_at: string;
   business: { place_name: string; place_id: string } | null;
 };
-const ST: Record<string, string> = { new: "답 기다리는 중", confirmed: "확정", declined: "어렵다고 답함", visited: "방문 완료", no_show: "노쇼", cancelled: "취소" };
+const ST: Record<string, string> = { new: "답 기다리는 중", confirmed: "확정", declined: "어렵다고 답함", visited: "방문 완료", no_show: "노쇼", cancelled: "취소됨" };
 
 export function MyReservations() {
   const router = useRouter();
@@ -251,6 +260,8 @@ export function MyReservations() {
   const [rows, setRows] = useState<Mine[] | null>(null);
   const [open, setOpen] = useState<string | null>(null);
   const [ownsBiz, setOwnsBiz] = useState(false);
+  const t = useT();
+  const tRich = useTRich();
   const load = useCallback(async () => {
     if (!me) return;
     const [{ data }, { count }] = await Promise.all([
@@ -278,36 +289,36 @@ export function MyReservations() {
 
   if (!rows || !me) return <PanelLoading />;
   return (
-    <Panel title="내 예약 문의">
+    <Panel title={t("내 예약 문의")}>
       <div className="px-5 pb-10 pt-3">
         {ownsBiz && (
           <p className="mb-3 rounded-lg bg-surface px-3 py-2 text-[13px]">
-            내 가게로 들어온 예약 문의는 <Link href="/biz/place" className="font-semibold text-teal underline">가게 콘솔</Link>에서 봐요.
+            {tRich("내 가게로 들어온 예약 문의는 <a>가게 콘솔</a>에서 봐요.", { a: (s) => <Link href="/biz/place" className="font-semibold text-teal underline">{s}</Link> })}
           </p>
         )}
         {rows.length === 0 ? (
-          <p className="py-6 text-[14px] text-muted">아직 보낸 예약 문의가 없어요. 장소 카드의 ‘예약 문의’로 보낼 수 있어요.</p>
+          <p className="py-6 text-[14px] text-muted">{t("아직 보낸 예약 문의가 없어요. 장소 카드의 ‘예약 문의’로 보낼 수 있어요.")}</p>
         ) : (
           <ul className="divide-y divide-rule">
             {rows.map((r) => (
               <li key={r.id} className="py-3 text-[14px]">
                 <p className="flex flex-wrap items-center gap-x-2">
                   <b>{r.business?.place_name}</b>
-                  <span>{r.visit_date.slice(5).replace("-", "/")} {r.visit_time ?? ""} · {r.party_size}명</span>
+                  <span>{t("{date} {time} · {n}명", { date: r.visit_date.slice(5).replace("-", "/"), time: r.visit_time ?? "", n: r.party_size })}</span>
                   <span className={`ml-auto text-[13px] ${r.status === "confirmed" || r.status === "visited" ? "text-teal" : r.status === "declined" ? "text-pin" : "text-muted"}`}>
-                    {ST[r.status]}
+                    {ST[r.status] && t(ST[r.status])}
                   </span>
                 </p>
-                {r.reply && <p className="mt-1 text-[13px] text-ink/75">가게: {r.reply}</p>}
+                {r.reply && <p className="mt-1 text-[13px] text-ink/75">{t("가게: {reply}", { reply: r.reply })}</p>}
                 <div className="mt-1 flex flex-wrap gap-3 text-[12px]">
                   <button type="button" onClick={() => setOpen(open === r.id ? null : r.id)} className="text-teal underline">
-                    {open === r.id ? "대화 닫기" : "가게와 대화"}
+                    {open === r.id ? t("대화 닫기") : t("가게와 대화")}
                   </button>
                   {(r.status === "new" || r.status === "confirmed") && (
-                    <ConfirmButton label="취소" className="text-muted underline" question="이 예약 문의를 취소할까요?" confirmLabel="취소하기" onConfirm={() => cancel(r.id)} />
+                    <ConfirmButton label={t("취소")} className="text-muted underline" question={t("이 예약 문의를 취소할까요?")} confirmLabel={t("취소하기")} onConfirm={() => cancel(r.id)} />
                   )}
                 </div>
-                {open === r.id && <ReservationThread reservationId={r.id} meId={me.id} otherLabel={r.business?.place_name ?? "가게"} />}
+                {open === r.id && <ReservationThread reservationId={r.id} meId={me.id} otherLabel={r.business?.place_name ?? t("가게")} />}
               </li>
             ))}
           </ul>

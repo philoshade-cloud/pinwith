@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { ListItem } from "@/lib/types";
+import { useT } from "@/lib/i18n/client";
 import { googleDirectionsUrl, googleMapsUrl, isInKorea, kakaoMapUrl, naverAppUrl, naverMapUrl } from "@/lib/links";
 
 type Item = Pick<ListItem, "title" | "placeId" | "lat" | "lng">;
@@ -12,6 +13,7 @@ const isMobile = () => /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 // 다른 지도 앱으로 보내는 버튼들(상세 정보·길찾기는 그쪽에서 본다).
 // 어느 버튼도 PinWith 화면을 바꾸지 않는다: 웹 지도는 새 탭, 앱은 앱으로 열린다.
 export function ExternalLinks({ item, onEvent, compact = false }: { item: Item; onEvent?: (e: Ev) => void; compact?: boolean }) {
+  const t = useT();
   // compact: 장소 카드처럼 한 줄에 버튼을 많이 둘 때(작게, 줄바꿈 없이)
   const sm = compact ? " shrink-0 whitespace-nowrap !px-3 !py-1.5 !text-[13px]" : "";
   const korea = isInKorea(item.lat, item.lng);
@@ -37,24 +39,24 @@ export function ExternalLinks({ item, onEvent, compact = false }: { item: Item; 
   return (
     <>
       <a href={googleDirectionsUrl(item)} target="_blank" rel="noopener" onClick={() => onEvent?.("directions")} className={`btn-primary${sm}`}>
-        길찾기
+        {t("길찾기")}
       </a>
       <a href={googleMapsUrl(item)} target="_blank" rel="noopener" onClick={() => onEvent?.("google_open")} className={`btn-quiet${sm}`}>
-        구글 지도
+        {t("구글 지도")}
       </a>
       {korea && (
         <>
           <a href={naverMapUrl(item)} target="_blank" rel="noopener" onClick={openNaver} className={`btn-quiet${sm}`}>
-            네이버
+            {t("네이버")}
           </a>
           <a href={kakaoMapUrl(item)} target="_blank" rel="noopener" onClick={() => onEvent?.("kakao_open")} className={`btn-quiet${sm}`}>
-            카카오
+            {t("카카오")}
           </a>
         </>
       )}
       {naverWeb && (
         <span className="flex w-full shrink-0 items-center gap-2 whitespace-nowrap rounded-lg bg-surface px-3 py-2 text-[13px] text-ink/80">
-          네이버 지도 앱이 열리지 않았나요?
+          {t("네이버 지도 앱이 열리지 않았나요?")}
           <a
             href={naverMapUrl(item)}
             target="_blank"
@@ -62,7 +64,7 @@ export function ExternalLinks({ item, onEvent, compact = false }: { item: Item; 
             onClick={() => setNaverWeb(false)}
             className="ml-auto shrink-0 font-semibold text-teal underline"
           >
-            웹에서 열기
+            {t("웹에서 열기")}
           </a>
         </span>
       )}

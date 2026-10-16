@@ -8,6 +8,7 @@ import { ago, TAGS } from "@/lib/social";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { useShell } from "./shell/context";
 import { ConfirmButton } from "./ConfirmButton";
+import { useT } from "@/lib/i18n/client";
 
 type InboxRow = {
   id: string;
@@ -22,6 +23,7 @@ type InboxRow = {
 
 // 받은 메시지함(3.8): 대화 / 메시지 요청(내가 팔로우하지 않는 사람)으로 나눈다
 export function Inbox() {
+  const t = useT();
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const [rows, setRows] = useState<InboxRow[] | null>(null);
@@ -41,28 +43,28 @@ export function Inbox() {
   const shown = rows.filter((r) => (tab === "request" ? r.status === "request" : r.status === "active"));
 
   return (
-    <Panel title="메시지">
+    <Panel title={t("메시지")}>
       <div className="px-5 pb-8 pt-4">
         <div className="flex gap-1.5" role="tablist">
-          {(["active", "request"] as const).map((t) => (
+          {(["active", "request"] as const).map((k) => (
             <button
-              key={t}
+              key={k}
               type="button"
               role="tab"
-              aria-selected={tab === t}
-              onClick={() => setTab(t)}
-              className={`rounded-full px-3 py-1.5 text-[13px] font-semibold ${tab === t ? "bg-ink text-white" : "bg-surface text-ink"}`}
+              aria-selected={tab === k}
+              onClick={() => setTab(k)}
+              className={`rounded-full px-3 py-1.5 text-[13px] font-semibold ${tab === k ? "bg-ink text-white" : "bg-surface text-ink"}`}
             >
-              {t === "active" ? "대화" : `메시지 요청${requests.length ? ` ${requests.length}` : ""}`}
+              {k === "active" ? t("대화") : `${t("메시지 요청")}${requests.length ? ` ${requests.length}` : ""}`}
             </button>
           ))}
         </div>
         {tab === "request" && (
-          <p className="mt-3 text-[12px] text-muted">내가 팔로우하지 않는 사람이 보낸 메시지예요. 수락하기 전에는 읽음 표시가 가지 않아요.</p>
+          <p className="mt-3 text-[12px] text-muted">{t("내가 팔로우하지 않는 사람이 보낸 메시지예요. 수락하기 전에는 읽음 표시가 가지 않아요.")}</p>
         )}
         {shown.length === 0 ? (
           <p className="py-8 text-[14px] text-muted">
-            {tab === "active" ? "아직 대화가 없어요. 리스트나 장소에서 ‘메시지’를 눌러 시작하세요." : "메시지 요청이 없어요."}
+            {tab === "active" ? t("아직 대화가 없어요. 리스트나 장소에서 ‘메시지’를 눌러 시작하세요.") : t("메시지 요청이 없어요.")}
           </p>
         ) : (
           <ul className="mt-3 divide-y divide-rule border-y border-rule">
@@ -78,7 +80,7 @@ export function Inbox() {
                       {r.last_at && <span className="shrink-0 text-[11px] text-muted">{ago(r.last_at)}</span>}
                     </span>
                     <span className={`block truncate text-[13px] ${r.unread ? "font-semibold text-ink" : "text-muted"}`}>
-                      {r.last_body || "첨부한 카드"}
+                      {r.last_body || t("첨부한 카드")}
                     </span>
                   </span>
                   {r.unread > 0 && (
@@ -109,6 +111,7 @@ type Attach = { listId?: string; itemId?: string; label: string };
 
 // 대화 화면. 4초마다 새 메시지를 확인한다. 리스트·장소 카드를 붙여 보낼 수 있다.
 export function Conversation({ id }: { id: string }) {
+  const t = useT();
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const { me, toast, refreshBadges } = useShell();
@@ -131,10 +134,10 @@ export function Conversation({ id }: { id: string }) {
       let label = "";
       if (itemId) {
         const { data } = await supabase.from("list_items").select("custom_title").eq("id", itemId).maybeSingle();
-        label = data?.custom_title ?? "장소";
+        label = data?.custom_title ?? "";
       } else if (listId) {
         const { data } = await supabase.from("lists").select("title").eq("id", listId).maybeSingle();
-        label = data?.title ?? "리스트";
+        label = data?.title ?? "";
       }
       setAttach({ listId, itemId, label });
     })();
@@ -176,10 +179,10 @@ export function Conversation({ id }: { id: string }) {
   useEffect(() => {
     if (me === null) router.replace(`/login?next=/messages/${id}`);
     const t0 = window.setTimeout(load, 0);
-    const t = window.setInterval(load, 4000);
+    const t1 = window.setInterval(load, 4000);
     return () => {
       window.clearTimeout(t0);
-      window.clearInterval(t);
+      window.clearInterval(t1);
     };
   }, [load, me, router, id]);
 
@@ -201,7 +204,7 @@ export function Conversation({ id }: { id: string }) {
       attached_item_id: attach?.itemId ?? null,
     });
     setBusy(false);
-    if (error) return toast(error.message.includes("blocked") ? "이 대화에는 보낼 수 없습니다." : "보내지 못했습니다.");
+    if (error) return toast(error.message.includes("blocked") ? t("이 대화에는 보낼 수 없습니다.") : t("보내지 못했습니다."));
     setText("");
     setTag("");
     setAttach(null);
@@ -211,34 +214,34 @@ export function Conversation({ id }: { id: string }) {
   // 받은 사람(보통 큐레이터)이 '반영함'을 누르면 보낸 사람에게 "리스트가 업데이트됐어요" 알림
   async function resolve(messageId: string) {
     const { error } = await supabase.rpc("resolve_message", { p_message: messageId });
-    if (error) return toast("처리하지 못했습니다.");
-    toast("반영했다고 알렸어요.");
+    if (error) return toast(t("처리하지 못했습니다."));
+    toast(t("반영했다고 알렸어요."));
     load();
   }
 
   async function setStatus(status: "active" | "blocked") {
     if (!me) return;
     await supabase.from("conversation_members").update({ status }).eq("conversation_id", id).eq("user_id", me.id);
-    toast(status === "active" ? "메시지 요청을 수락했습니다." : "차단했습니다. 더는 메시지를 주고받을 수 없어요.");
+    toast(status === "active" ? t("메시지 요청을 수락했습니다.") : t("차단했습니다. 더는 메시지를 주고받을 수 없어요."));
     load();
   }
 
   if (!msgs) return <PanelLoading />;
-  const name = other?.display_name || other?.handle || "대화";
+  const name = other?.display_name || other?.handle || t("대화");
 
   return (
-    <Panel title={`메시지 · ${name}`}>
+    <Panel title={t("메시지 · {name}", { name })}>
       <div className="flex min-h-full flex-col">
         <div className="flex items-center gap-2 border-b border-rule px-5 py-2.5 text-[13px]">
-          <Link href="/messages" className="text-muted hover:text-ink">← 메시지함</Link>
+          <Link href="/messages" className="text-muted hover:text-ink">{t("← 메시지함")}</Link>
           {other && <Link href={`/@${other.handle}`} className="ml-auto font-semibold text-teal">@{other.handle}</Link>}
         </div>
         {myStatus !== "blocked" && (
           <div className="flex justify-end px-5 pt-2 text-[13px]">
             <ConfirmButton
-              label="이 사람 차단"
-              question="이 사람을 차단할까요? 차단하면 이 사람의 메시지를 더 받지 않아요."
-              confirmLabel="차단"
+              label={t("이 사람 차단")}
+              question={t("이 사람을 차단할까요? 차단하면 이 사람의 메시지를 더 받지 않아요.")}
+              confirmLabel={t("차단")}
               onConfirm={() => setStatus("blocked")}
               className="text-muted underline"
             />
@@ -246,18 +249,19 @@ export function Conversation({ id }: { id: string }) {
         )}
         {myStatus === "request" && (
           <div className="mx-5 mt-3 rounded-xl bg-surface p-3 text-[13px]">
-            <p className="text-ink">내가 팔로우하지 않는 사람이 보낸 메시지 요청이에요.</p>
+            <p className="text-ink">{t("내가 팔로우하지 않는 사람이 보낸 메시지 요청이에요.")}</p>
             <div className="mt-2 flex gap-2">
-              <button type="button" onClick={() => setStatus("active")} className="btn-primary !py-1.5">수락</button>
-              <button type="button" onClick={() => setStatus("blocked")} className="btn-quiet !py-1.5">차단</button>
+              <button type="button" onClick={() => setStatus("active")} className="btn-primary !py-1.5">{t("수락")}</button>
+              <button type="button" onClick={() => setStatus("blocked")} className="btn-quiet !py-1.5">{t("차단")}</button>
             </div>
           </div>
         )}
         <ul className="flex-1 space-y-2 px-5 py-4">
-          {msgs.length === 0 && <li className="text-[13px] text-muted">첫 메시지를 보내 보세요.</li>}
+          {msgs.length === 0 && <li className="text-[13px] text-muted">{t("첫 메시지를 보내 보세요.")}</li>}
           {msgs.map((m) => {
             const mine = m.sender_id === me?.id;
-            const tagLabel = TAGS.find((t) => t.id === m.tag)?.label;
+            const tagKo = TAGS.find((x) => x.id === m.tag)?.label;
+            const tagLabel = tagKo ? t(tagKo) : undefined;
             return (
               <li key={m.id} className={`flex ${mine ? "justify-end" : "justify-start"}`}>
                 <div className={`max-w-[85%] rounded-2xl px-3 py-2 text-[14px] ${mine ? "bg-ink text-white" : "bg-surface text-ink"}`}>
@@ -272,10 +276,10 @@ export function Conversation({ id }: { id: string }) {
                   )}
                   {m.body && <p className="whitespace-pre-wrap break-words">{m.body}</p>}
                   {m.tag && (m.resolved_at ? (
-                    <p className={`mt-1 text-[11px] font-semibold ${mine ? "text-white/80" : "text-teal"}`}>✓ 리스트에 반영함</p>
+                    <p className={`mt-1 text-[11px] font-semibold ${mine ? "text-white/80" : "text-teal"}`}>{t("✓ 리스트에 반영함")}</p>
                   ) : !mine ? (
                     <button type="button" onClick={() => resolve(m.id)} className="mt-1.5 rounded-full bg-white px-2.5 py-1 text-[12px] font-semibold text-teal shadow-[inset_0_0_0_1px_var(--color-rule)]">
-                      반영함
+                      {t("반영함")}
                     </button>
                   ) : null)}
                   <p className={`mt-0.5 text-right text-[10px] ${mine ? "text-white/60" : "text-muted"}`}>{ago(m.created_at)}</p>
@@ -289,30 +293,30 @@ export function Conversation({ id }: { id: string }) {
           <form onSubmit={send} className="sticky bottom-0 grid gap-2 border-t border-rule bg-white px-5 py-3">
             {attach && (
               <span className="flex items-center gap-2 rounded-lg bg-surface px-2.5 py-1.5 text-[13px]">
-                📍 {attach.label}
-                <button type="button" onClick={() => setAttach(null)} className="ml-auto text-muted" aria-label="첨부 빼기">✕</button>
+                📍 {attach.label || (attach.itemId ? t("장소") : t("리스트"))}
+                <button type="button" onClick={() => setAttach(null)} className="ml-auto text-muted" aria-label={t("첨부 빼기")}>✕</button>
               </span>
             )}
-            <div className="flex gap-1.5 overflow-x-auto" role="group" aria-label="메시지 유형">
-              {TAGS.map((t) => (
+            <div className="flex gap-1.5 overflow-x-auto" role="group" aria-label={t("메시지 유형")}>
+              {TAGS.map((x) => (
                 <button
-                  key={t.id}
+                  key={x.id}
                   type="button"
-                  aria-pressed={tag === t.id}
-                  onClick={() => setTag(tag === t.id ? "" : t.id)}
-                  className={`shrink-0 rounded-full px-2.5 py-1 text-[12px] font-semibold ${tag === t.id ? "bg-teal text-white" : "bg-surface text-ink"}`}
+                  aria-pressed={tag === x.id}
+                  onClick={() => setTag(tag === x.id ? "" : x.id)}
+                  className={`shrink-0 rounded-full px-2.5 py-1 text-[12px] font-semibold ${tag === x.id ? "bg-teal text-white" : "bg-surface text-ink"}`}
                 >
-                  {t.label}
+                  {t(x.label)}
                 </button>
               ))}
             </div>
             <div className="flex gap-2">
-              <input value={text} onChange={(e) => setText(e.target.value)} maxLength={4000} placeholder="메시지" aria-label="메시지" className="field" />
-              <button type="submit" disabled={busy || (!text.trim() && !attach)} className="btn-primary shrink-0 disabled:opacity-40">보내기</button>
+              <input value={text} onChange={(e) => setText(e.target.value)} maxLength={4000} placeholder={t("메시지@@입력")} aria-label={t("메시지@@입력")} className="field" />
+              <button type="submit" disabled={busy || (!text.trim() && !attach)} className="btn-primary shrink-0 disabled:opacity-40">{t("보내기")}</button>
             </div>
           </form>
         ) : (
-          <p className="border-t border-rule px-5 py-3 text-[13px] text-muted">차단된 대화입니다.</p>
+          <p className="border-t border-rule px-5 py-3 text-[13px] text-muted">{t("차단된 대화입니다.")}</p>
         )}
       </div>
     </Panel>

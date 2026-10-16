@@ -29,8 +29,15 @@ const TITLE: Record<string, string> = {
   payout: "지급", dispute: "이의 제기", biz_admin: "운영자 조치", ops: "운영 알림",
 };
 
+const TITLE_EN: Record<string, string> = {
+  follow: "New follower", like: "Like", comment: "New comment", reply: "Reply to your comment", invite: "Co-editing invite", invite_accepted: "Invite accepted",
+  share_changed: "Revenue share changed", notice: "New notice", resolved: "Message applied", reservation: "Reservation reply", reservation_new: "New reservation inquiry",
+  reservation_msg: "Reservation message", biz_block: "Removed from list", biz_alert: "Check a connected store", biz_review: "Store verification", topup_paid: "Ad credit top-up",
+  payout: "Payout", dispute: "Dispute", biz_admin: "Admin action", ops: "Operations",
+};
+
 // 알림 한 건을 휴대폰 알림 문구와 눌렀을 때 열 주소로 바꾼다
-export function pushPayload(n: N) {
+export function pushPayload(n: N, lang: "ko" | "en" = "ko") {
   const who = n.actor ? n.actor.display_name || `@${n.actor.handle}` : "PinWith";
   const url =
     n.kind === "reservation_new" ? "/biz/place?tab=reservations"
@@ -44,7 +51,7 @@ export function pushPayload(n: N) {
               : n.kind === "follow" && n.actor ? `/@${n.actor.handle}`
                 : n.list?.owner ? `/@${n.list.owner.handle}/${n.list.slug}` : "/notifications";
   return {
-    title: `${TITLE[n.kind] ?? "알림"}${n.actor ? ` · ${who}` : ""}`,
+    title: `${(lang === "en" ? TITLE_EN[n.kind] : TITLE[n.kind]) ?? (lang === "en" ? "Notification" : "알림")}${n.actor ? ` · ${who}` : ""}`,
     body: n.body ?? "",
     url,
     tag: n.kind === "reservation_msg" ? `rmsg` : undefined,

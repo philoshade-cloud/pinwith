@@ -15,16 +15,26 @@ import { DmButton, ItemExtras, ListNotice, NotifyToggle, useCommentCounts } from
 import { Panel } from "./shell/Panel";
 import { Tags } from "./shell/PinCard";
 import { useMapScene, useShell, type Scene } from "./shell/context";
+import { useFormat, useT, useTRich } from "@/lib/i18n/client";
 
 type Sort = "curator" | "nearest";
 
-const formatCount = (n: number) =>
-  n >= 10000 ? `${(n / 10000).toFixed(1).replace(/\.0$/, "")}만` : n.toLocaleString("ko-KR");
+// 1만 이상은 짧게(한국어 1.2만, 영어 12K)
+const formatCount = (n: number, locale: string) =>
+  n.toLocaleString(locale, n >= 10000 ? { notation: "compact", maximumFractionDigits: 1 } : undefined);
 
 // 리스트 화면: 지도에는 이 리스트의 핀, 패널에는 큐레이터·설명·장소 목록.
 export function ListExplorer({ list }: { list: CuratedList }) {
   const router = useRouter();
+  const t = useT();
+  const tRich = useTRich();
+  const { locale } = useFormat();
   const { me, selectedId, select, toast } = useShell();
+  // useMemo 안에서 쓰는 문구는 미리 번역해 둔다(문자열이라 의존성이 안정적)
+  const nearLabel = t("가까운 순");
+  const sectionsLabel = t("섹션");
+  const allLabel = t("전체");
+  const otherLabel = t("기타");
   // 섹션 필터: "all", 섹션 id, "none"(섹션 없음). 지도 핀과 목록이 함께 바뀐다.
   const [section, setSection] = useState<string>("all");
   const [sort, setSort] = useState<Sort>("curator");
@@ -48,14 +58,14 @@ export function ListExplorer({ list }: { list: CuratedList }) {
         i.lat == null || i.lng == null
           ? Infinity
           : Math.hypot(i.lat - here.lat, (i.lng - here.lng) * Math.cos((here.lat * Math.PI) / 180));
-      return [{ id: "near", name: "가까운 순", items: [...visibleItems].sort((a, b) => dist(a) - dist(b)) }];
+      return [{ id: "near", name: nearLabel, items: [...visibleItems].sort((a, b) => dist(a) - dist(b)) }];
     }
     const loose = visibleItems.filter((i) => !i.sectionId || !list.sections.some((s) => s.id === i.sectionId));
     return [
       ...(loose.length ? [{ id: "none", name: "", items: loose }] : []),
       ...list.sections.map((s) => ({ id: s.id, name: s.name, items: visibleItems.filter((i) => i.sectionId === s.id) })),
     ].filter((g) => g.items.length > 0);
-  }, [list, visibleItems, sort, here]);
+  }, [list, visibleItems, sort, here, nearLabel]);
 
   // 섹션을 바꿀 때 선택된 장소가 사라지면 선택을 푼다
   useEffect(() => {
@@ -65,8 +75,8 @@ export function ListExplorer({ list }: { list: CuratedList }) {
   const chips = useMemo(
     () =>
       list.sections.length === 0 ? null : (
-        <div className="flex gap-1.5 overflow-x-auto pb-1" role="group" aria-label="섹션">
-          {[{ id: "all", name: "전체" }, ...list.sections, ...(hasLoose ? [{ id: "none", name: "기타" }] : [])].map((sec) => (
+        <div className="flex gap-1.5 overflow-x-auto pb-1" role="group" aria-label={sectionsLabel}>
+          {[{ id: "all", name: allLabel }, ...list.sections, ...(hasLoose ? [{ id: "none", name: otherLabel }] : [])].map((sec) => (
             <button
               key={sec.id}
               type="button"
@@ -81,7 +91,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
           ))}
         </div>
       ),
-    [list.sections, hasLoose, section],
+    [list.sections, hasLoose, section, sectionsLabel, allLabel, otherLabel],
   );
 
   const scene: Scene = useMemo(
@@ -104,13 +114,13 @@ export function ListExplorer({ list }: { list: CuratedList }) {
 
   function chooseSort(next: Sort) {
     if (next === "curator") return setSort("curator");
-    if (!("geolocation" in navigator)) return toast("이 기기에서는 위치를 확인할 수 없습니다.");
+    if (!("geolocation" in navigator)) return toast(t("이 기기에서는 위치를 확인할 수 없습니다."));
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         setHere({ lat: pos.coords.latitude, lng: pos.coords.longitude });
         setSort("nearest");
       },
-      () => toast("위치 권한이 없어 큐레이터 순서로 보여줍니다."),
+      () => toast(t("위치 권한이 없어 큐레이터 순서로 보여줍니다.")),
       { timeout: 5000 },
     );
   }
@@ -146,7 +156,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
       if (navigator.share) await navigator.share({ title: list.title, url });
       else {
         await navigator.clipboard.writeText(url);
-        toast("링크를 복사했습니다.");
+        toast(t("링크를 복사했습니다."));
       }
     } catch {
       /* 사용자가 공유를 취소함 */
@@ -155,7 +165,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
 
   return (
     <Panel
-      title={`${list.title} · ${list.items.length}곳`}
+      title={t("{title} · {n}곳", { title: list.title, n: list.items.length })}
       titleSlot={
         isDemo ? undefined : (
           <Suspense fallback={<PlainTitle list={list} />}>
@@ -167,12 +177,12 @@ export function ListExplorer({ list }: { list: CuratedList }) {
       <header className="px-5 pb-5 pt-4">
         {list.siblings && list.siblings.length > 1 && (
           <label className="mb-4 flex items-center gap-2 rounded-xl bg-surface px-3 py-2 text-[13px] font-semibold text-muted">
-            <span className="shrink-0">{isOwner ? "내 리스트" : `${list.curator.displayName}의 리스트`}</span>
+            <span className="shrink-0">{isOwner ? t("내 리스트") : t("{name}의 리스트", { name: list.curator.displayName })}</span>
             <select
               value={list.slug}
               onChange={(e) => router.push(`/@${list.curator.handle}/${e.target.value}`)}
               className="min-w-0 flex-1 truncate rounded-lg border border-rule bg-white px-2 py-1.5 text-[14px] font-semibold text-ink"
-              aria-label="다른 리스트로 바꾸기"
+              aria-label={t("다른 리스트로 바꾸기")}
             >
               {list.siblings.map((l) => (
                 <option key={l.slug} value={l.slug}>{l.title}</option>
@@ -186,13 +196,13 @@ export function ListExplorer({ list }: { list: CuratedList }) {
             <span className="min-w-0 leading-tight">
               <span className="block truncate text-[15px] font-semibold text-ink">{list.curator.displayName}</span>
               <span className="block truncate text-[13px] text-muted">
-                @{list.curator.handle} · 팔로워 {formatCount(list.curator.followerCount)}
+                @{list.curator.handle} · {t("팔로워 {count}", { n: list.curator.followerCount, count: formatCount(list.curator.followerCount, locale) })}
               </span>
             </span>
           </Link>
-          {isOwner && <Link href="/me/stats" className="btn-quiet shrink-0">통계</Link>}
-          {isOwner && <Link href={`/me/lists/${list.id}`} className="btn-quiet shrink-0">편집</Link>}
-          {isOwner && <Link href={`/me/lists/${list.id}/notice`} className="btn-quiet shrink-0">공지</Link>}
+          {isOwner && <Link href="/me/stats" className="btn-quiet shrink-0">{t("통계")}</Link>}
+          {isOwner && <Link href={`/me/lists/${list.id}`} className="btn-quiet shrink-0">{t("편집")}</Link>}
+          {isOwner && <Link href={`/me/lists/${list.id}/notice`} className="btn-quiet shrink-0">{t("공지")}</Link>}
         </div>
         <h1 className="font-display mt-5 text-[28px] font-semibold leading-[1.15] tracking-[-0.02em] text-ink text-balance">
           {list.title}
@@ -200,25 +210,25 @@ export function ListExplorer({ list }: { list: CuratedList }) {
         {list.description && <p className="mt-2 text-[15px] leading-relaxed text-ink/80">{list.description}</p>}
         {list.items.some((i) => i.sponsored) && (
           <p className="mt-2 text-[12px] text-muted">
-            <span className="mr-1 rounded border border-rule px-1 py-px text-[11px] font-semibold text-ink/70">제휴</span>
-            표시된 장소는 큐레이터가 PinWith 가게 제휴로 보상을 받을 수 있는 곳이에요.
+            <span className="mr-1 rounded border border-rule px-1 py-px text-[11px] font-semibold text-ink/70">{t("제휴")}</span>
+            {t("표시된 장소는 큐레이터가 PinWith 가게 제휴로 보상을 받을 수 있는 곳이에요.")}
           </p>
         )}
         {list.themes.length > 0 && (
-          <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="테마">
-            {list.themes.map((t) => (
-              <li key={t} className="rounded-full bg-surface px-2.5 py-1 text-[13px] text-teal">#{t}</li>
+          <ul className="mt-3 flex flex-wrap gap-1.5" aria-label={t("테마")}>
+            {list.themes.map((theme) => (
+              <li key={theme} className="rounded-full bg-surface px-2.5 py-1 text-[13px] text-teal">#{theme}</li>
             ))}
           </ul>
         )}
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <LikeButton listId={list.id} initialCount={list.likeCount} demo={isDemo} />
           {isDemo ? (
-            <Link href="/login?next=/demo" className="btn-primary">팔로우</Link>
+            <Link href="/login?next=/demo" className="btn-primary">{t("팔로우")}</Link>
           ) : (
             !isOwner && <FollowButton curatorId={list.curator.id} handle={list.curator.handle} />
           )}
-          <button type="button" onClick={share} className="btn-quiet">공유</button>
+          <button type="button" onClick={share} className="btn-quiet">{t("공유")}</button>
           {!isDemo && !isOwner && <DmButton userId={list.curator.id} listId={list.id} />}
         </div>
         {!isDemo && !isOwner && (
@@ -229,12 +239,13 @@ export function ListExplorer({ list }: { list: CuratedList }) {
         {!isDemo && <ListNotice listId={list.id} />}
         {isOwner && (
           <p className="mt-4 rounded-lg bg-surface px-3 py-2 text-[13px] text-ink/80">
-            위쪽 검색창에서 장소를 찾으면 이 리스트에 바로 추가할 수 있어요.
+            {t("위쪽 검색창에서 장소를 찾으면 이 리스트에 바로 추가할 수 있어요.")}
             {!isCourse && (
               <>
-                {" "}장소에 1, 2, 3 번호를 붙이려면{" "}
-                <Link href={`/me/lists/${list.id}`} className="font-semibold text-teal underline">편집</Link>에서
-                ‘방문 순서대로 번호 붙이기’를 켜세요.
+                {" "}
+                {tRich("장소에 1, 2, 3 번호를 붙이려면 <a>편집</a>에서 ‘방문 순서대로 번호 붙이기’를 켜세요.", {
+                  a: (s) => <Link href={`/me/lists/${list.id}`} className="font-semibold text-teal underline">{s}</Link>,
+                })}
               </>
             )}
           </p>
@@ -244,23 +255,23 @@ export function ListExplorer({ list }: { list: CuratedList }) {
       {isDemo && <DemoGuide />}
 
       <div className="mt-2 flex items-center justify-between border-y border-rule px-5 py-2.5">
-        <span className="text-[13px] text-muted">장소 {visibleItems.length}곳</span>
+        <span className="text-[13px] text-muted">{t("장소 {n}곳", { n: visibleItems.length })}</span>
         <label className="flex items-center gap-2 text-[13px] text-muted">
-          정렬
+          {t("정렬")}
           <select
             value={sort}
             onChange={(e) => chooseSort(e.target.value as Sort)}
             className="rounded-md border border-rule bg-white px-2 py-1 text-ink"
           >
-            <option value="curator">{isCourse ? "코스 순서" : "큐레이터 순서"}</option>
-            <option value="nearest">가까운 순</option>
+            <option value="curator">{isCourse ? t("코스 순서") : t("큐레이터 순서")}</option>
+            <option value="nearest">{t("가까운 순")}</option>
           </select>
         </label>
       </div>
 
       <div className="pb-6">
         {groups.map((g, gi) => (
-          <section key={g.id} aria-label={g.name || "장소"}>
+          <section key={g.id} aria-label={g.name || t("장소")}>
             {g.name && <h2 className="px-5 pb-1 pt-5 text-[13px] font-semibold text-teal">{g.name}</h2>}
             <ul>
               {g.items.map((item, ii) => (
@@ -282,12 +293,12 @@ export function ListExplorer({ list }: { list: CuratedList }) {
                       )}
                       <span className="text-[16px] font-semibold text-ink">{item.title}</span>
                       {item.sponsored && (
-                        <span title="큐레이터가 이 가게와의 제휴로 보상을 받을 수 있어요" className="rounded border border-rule px-1 py-px text-[11px] font-semibold text-ink/70">
-                          제휴
+                        <span title={t("큐레이터가 이 가게와의 제휴로 보상을 받을 수 있어요")} className="rounded border border-rule px-1 py-px text-[11px] font-semibold text-ink/70">
+                          {t("제휴")}
                         </span>
                       )}
                       {here && item.lat != null && isWithinMeters(here, { lat: item.lat, lng: item.lng! }) && (
-                        <span className="text-[12px] text-teal">근처</span>
+                        <span className="text-[12px] text-teal">{t("근처")}</span>
                       )}
                       {(commentCounts.get(item.id) ?? 0) > 0 && (
                         <span className="text-[12px] text-muted">💬 {commentCounts.get(item.id)}</span>
@@ -306,7 +317,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
         {!isDemo && !isOwner && (
           <p className="px-5 pb-2 text-right">
             <Link href={`/support?type=report&list=${list.id}&from=${encodeURIComponent(`/@${list.curator.handle}/${list.slug}`)}`} className="text-[12px] text-muted underline">
-              이 리스트 신고
+              {t("이 리스트 신고")}
             </Link>
           </p>
         )}
@@ -333,20 +344,21 @@ export function Avatar({ name, url, size = 40 }: { name: string; url: string | n
 
 // 예시 리스트에서 해볼 수 있는 기능 안내
 function DemoGuide() {
+  const t = useT();
   const tips = [
-    ["섹션", "지도 위 아침·점심·오후·저녁을 누르면 그 시간대 핀만 남아요."],
-    ["코스", "번호 순서대로 경로가 이어집니다. 정렬을 ‘가까운 순’으로 바꿀 수도 있어요."],
-    ["길찾기", "장소나 핀을 누르면 구글 길찾기, 네이버, 카카오로 바로 열려요."],
-    ["담기", "마음에 드는 곳은 ‘내 리스트에 담기’로 내 지도에 옮겨요."],
-    ["공유", "링크 하나로 보내면 받는 사람은 로그인 없이 봅니다."],
+    [t("섹션"), t("지도 위 아침·점심·오후·저녁을 누르면 그 시간대 핀만 남아요.")],
+    [t("코스"), t("번호 순서대로 경로가 이어집니다. 정렬을 ‘가까운 순’으로 바꿀 수도 있어요.")],
+    [t("길찾기"), t("장소나 핀을 누르면 구글 길찾기, 네이버, 카카오로 바로 열려요.")],
+    [t("담기"), t("마음에 드는 곳은 ‘내 리스트에 담기’로 내 지도에 옮겨요.")],
+    [t("공유"), t("링크 하나로 보내면 받는 사람은 로그인 없이 봅니다.")],
   ];
   return (
     <div className="mx-5 rounded-xl bg-surface p-4">
-      <p className="text-[13px] font-semibold text-ink">예시 리스트예요. 이렇게 써보세요</p>
+      <p className="text-[13px] font-semibold text-ink">{t("예시 리스트예요. 이렇게 써보세요")}</p>
       <ul className="mt-2 grid gap-1.5">
         {tips.map(([k, v]) => (
           <li key={k} className="flex gap-2 text-[13px] leading-snug text-ink/80">
-            <span className="w-11 shrink-0 font-semibold text-teal">{k}</span>
+            <span className="min-w-11 shrink-0 font-semibold text-teal">{k}</span>
             <span>{v}</span>
           </li>
         ))}
@@ -356,7 +368,8 @@ function DemoGuide() {
 }
 
 function PlainTitle({ list }: { list: CuratedList }) {
-  return <span className="block truncate text-[15px] font-semibold text-ink">{`${list.title} · ${list.items.length}곳`}</span>;
+  const t = useT();
+  return <span className="block truncate text-[15px] font-semibold text-ink">{t("{title} · {n}곳", { title: list.title, n: list.items.length })}</span>;
 }
 
 type Option = { href: string; title: string; by?: string };
@@ -365,6 +378,7 @@ type Option = { href: string; title: string; by?: string };
 // 좋아요한 리스트에서 왔으면(?from=liked) 내가 좋아요한 다른 리스트, 아니면 같은 큐레이터의 다른 리스트.
 function ListSwitcher({ list, isOwner }: { list: CuratedList; isOwner: boolean }) {
   const router = useRouter();
+  const t = useT();
   const { me } = useShell();
   const fromLiked = useSearchParams().get("from") === "liked";
   const [liked, setLiked] = useState<Option[] | null>(null);
@@ -397,20 +411,20 @@ function ListSwitcher({ list, isOwner }: { list: CuratedList; isOwner: boolean }
   const all = options && !options.some((o) => o.href === current) ? [{ href: current, title: list.title }, ...options] : options;
   if (!all || all.length < 2) return <PlainTitle list={list} />;
 
-  const label = fromLiked ? "좋아요한 리스트" : isOwner ? "내 리스트" : `${list.curator.displayName}의 리스트`;
+  const label = fromLiked ? t("좋아요한 리스트") : isOwner ? t("내 리스트") : t("{name}의 리스트", { name: list.curator.displayName });
   return (
     <label className="relative flex min-w-0 cursor-pointer items-center gap-1">
       <span className="min-w-0 truncate text-[15px] font-semibold text-ink">
-        {list.title} <span className="font-normal text-muted">· {list.items.length}곳</span>
+        {list.title} <span className="font-normal text-muted">· {t("{n}곳", { n: list.items.length })}</span>
       </span>
       <span aria-hidden className="shrink-0 rounded-full border border-rule px-1.5 text-[11px] leading-[18px] text-muted">
-        {all.length}개 ▾
+        {t("{n}개", { n: all.length })} ▾
       </span>
       {/* 실제 고르기는 기기 기본 선택 창(휴대폰에서 편함). 글자 위에 투명하게 덮는다. */}
       <select
         value={current}
         onChange={(e) => router.push(e.target.value)}
-        aria-label={`${label} 중에서 바꾸기`}
+        aria-label={t("{label} 중에서 바꾸기", { label })}
         className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
       >
         <optgroup label={label}>

@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ByLang } from "@/components/ByLang";
 
 export const metadata: Metadata = { title: "이용약관" };
 
 // 출시 전 법률 검토를 받는다. 도메인이 정해지면 문의 이메일을 더한다.
 export default function Terms() {
+  return <ByLang ko={<TermsKo />} en={<TermsEn />} />;
+}
+
+function TermsKo() {
   return (
     <>
       <h1>이용약관</h1>
@@ -167,26 +172,191 @@ export default function Terms() {
         <Link href="/support?type=question">문의·신고하기</Link>로 보내 주세요. 회사 주소: 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874.
       </p>
 
-      <hr />
-      <h2>Terms of Use (English summary)</h2>
+    </>
+  );
+}
+
+function TermsEn() {
+  return (
+    <>
+      <h1>Terms of Use</h1>
+      <p className="note">Effective date: October 16, 2026</p>
+
       <p>
-        These terms apply to PinWith, operated by STRATO TRADINGS PTE. LTD. (Singapore, UEN 202402989G). You must meet the minimum age (14, or your country’s age
-        of digital consent). You keep the rights to your content and license us to display and share it within the service; content added by co-editors stays
-        with the list. Do not post infringing, false, hateful or unlabeled sponsored content, spam, or inflate views, clicks, visits or reservations; we may hide
-        content, restrict accounts and withhold or claw back earnings.
+        These terms apply to everyone who uses PinWith (the “Service”), operated by STRATO TRADINGS PTE. LTD. (Singapore, UEN 202402989G, the “Company”). By
+        registering or using the Service, you are deemed to agree to these terms and the <Link href="/privacy">Privacy Policy</Link>. Sections 6 to 9 on store
+        accounts and monetization apply only to those who use those features.
       </p>
+
+      <h2>1. The Service</h2>
       <p>
-        Reservation inquiries are not bookings until the business confirms; fulfilment is between guest and business. Verified businesses prepay advertising
-        credit for PinWith’s advertising service (unused balance refundable on request, minus payment fees) and are charged per qualifying action; we may disable
-        and lock a business’s reservation features for abnormal no-show/cancellation patterns or violations. Eligible curators earn a share of list-page ad
-        revenue and partner rewards; these are fees paid by PinWith from its own revenue for the curator’s promotional activity, not funds transmitted on behalf
-        of businesses. Payouts are sent on request above the minimum via Wise, PayPal or bank; recipients are responsible for their own taxes. Disputes can be
-        filed in the console.
+        PinWith is a service for collecting places on a map into lists and sharing them by link. Anyone who receives a link can view it without signing in.
+        The Company may change or discontinue features to improve the Service, and will give advance notice of changes that are important to users.
       </p>
+
+      <h2>2. Accounts</h2>
+      <ul>
+        <li>You must be at least 14 years old (13 to 16, depending on the country) to register.</li>
+        <li>Your account is for your use only, and you must keep your sign-in method secure. You are responsible for activity on your account.</li>
+        <li>You may not use a handle or name that impersonates another person, company or brand.</li>
+        <li>You can leave at any time with “Delete account” on your profile screen. Deleting your account erases your lists, comments and other content, and this cannot be undone. If you still have earnings to receive, check section 9 first.</li>
+      </ul>
+
+      <h2>3. Content you post</h2>
+      <ul>
+        <li>You keep the rights to the content you post, such as lists, notes, comments and photos.</li>
+        <li>
+          You grant the Company a free permission to use it to the extent needed to operate the Service (displaying it on screen, creating share links and
+          preview images, and featuring public lists in places such as “Explore”). This permission ends when you delete the content or make it private.
+        </li>
+        <li>
+          <b>Co-editing</b>: places and notes that co-editors add to a list become part of that list, and the list owner may continue to use and edit them.
+          Removing a co-editor does not remove content they have already added.
+        </li>
+        <li>When you “save” a place from someone else’s list, only the place is copied; the original curator’s notes are not.</li>
+        <li>You decide the visibility (public, link-only or private). Link-only means anyone who has the link can view it.</li>
+      </ul>
+
+      <h2>4. Prohibited conduct</h2>
+      <ul>
+        <li>Infringing others’ rights (copyright, portrait rights, trademarks, etc.), or posting false, illegal, hateful, harassing or obscene content</li>
+        <li>Damaging the reputation of a store or person with untrue content</li>
+        <li>Posting paid promotion without disclosure (places with a PinWith store partnership are automatically labeled “Partnership” on the list screen; if you received any other compensation, you must disclose it yourself in your notes)</li>
+        <li>Spam messages or comments, or repeatedly contacting people who do not want to be contacted</li>
+        <li>Inflating impressions, clicks, visits or reservations (self-clicking, automation, paying others to tap, fake reservations, etc.)</li>
+        <li>Mass collection by automated means, or disrupting or circumventing the Service</li>
+      </ul>
       <p>
-        The service is provided as is; to the extent permitted by law our liability is limited to the amount you paid us in the prior 12 months (US$100 for
-        free users), except for intent, gross negligence or where limits are not allowed. Singapore law applies, without removing mandatory consumer protections
-        of your country. Material changes are notified 7 days in advance (30 days if unfavourable). Contact us via the in-app support form.
+        Please report such content or conduct through the <Link href="/support?type=report">support form</Link>. After review, the Company may hide or
+        remove content, restrict features or suspend accounts, and will withhold or reclaim inflated earnings. List owners can hide comments on their own
+        lists, and you can block other users in messages.
+      </p>
+
+      <h2>5. Place information and maps</h2>
+      <p>
+        Place names, photos, ratings and business information are received from external sources such as Google and displayed as-is; the Company does not
+        guarantee their accuracy. Please check with the relevant map app or the store before visiting. Directions are provided in the external map app you
+        choose (Google, Naver, Kakao, etc.). Base map data © OpenStreetMap contributors.
+      </p>
+
+      <h2>6. Advertising</h2>
+      <p>
+        Ads may appear in the Service. Advertisers are responsible for their ads, and any purchase of products or services through an ad is a transaction
+        between the advertiser and the user.
+      </p>
+
+      <h2>7. Reservation inquiries</h2>
+      <ul>
+        <li>A reservation inquiry is not a reservation until the store confirms it. The store decides whether to confirm, decline or change it.</li>
+        <li>Guests’ names and contact details are delivered only to that store, and the store may not use them for any purpose other than handling the reservation.</li>
+        <li>
+          Fulfilling the reservation (seating, prices, payment, cancellation and no-show policies, etc.) is a matter between the guest and the store; the
+          Company only helps connect them. However, if a problem arises, the Company will accept and review reports and, if necessary, restrict the store’s
+          reservation features.
+        </li>
+      </ul>
+
+      <h2>8. Store accounts and ad credit</h2>
+      <ul>
+        <li>
+          <b>Verification</b>: only the actual operator of a store (or a person authorized by the operator) may create a store account. The Company verifies
+          this using supporting documents and the store’s phone number, and only one verified account is allowed per store. If the information is untrue, the
+          Company will not approve the account or will suspend it.
+        </li>
+        <li>
+          <b>Billing conditions</b>: verified stores can set billing conditions (directions or map opens, taps near the store, confirmed reservations), the
+          amount for each, and a monthly budget. When a curator attaches these to their list, the amount is deducted from the ad credit balance for each guest
+          action that meets a condition. The same person is counted only once per day per condition, and actions by the curator or the store itself are not
+          counted.
+        </li>
+        <li>
+          <b>Confirmed-reservation condition</b>: the charge is made when the store confirms (a reservation cannot be confirmed if the balance is
+          insufficient), and is reversed if the reservation is later changed to a no-show or cancellation. The store’s records are accepted in the first
+          instance, but if its no-show or cancellation rate is significantly higher than that of nearby stores, the linked curators are notified and the
+          Company reviews it.
+        </li>
+        <li>
+          <b>Ad credit</b>: ad credit is a prepaid fee for the Company’s advertising service (exposure and connections through PinWith lists). It is topped up
+          by card (Stripe) or bank transfer. You may request a refund of any unused balance through the support form, and we will refund the amount minus
+          payment and transfer fees. The balance does not earn interest.
+        </li>
+        <li>
+          <b>Store rights</b>: a store can block a specific curator; the store is then hidden from that curator’s lists and cannot be added again until the
+          block is lifted. The Company may lift blocks that are abused.
+        </li>
+        <li>
+          <b>Operator actions</b>: if a store’s no-show or cancellation rate is abnormal or it violates these terms, the Company may turn off and lock the
+          store’s reservation partnership or reservation features. Locked features cannot be turned back on until the Company unlocks them, and the curators
+          linked to the store are notified. If a store is suspended, charging, reservations and console use stop.
+        </li>
+      </ul>
+
+      <h2>9. Curator earnings</h2>
+      <ul>
+        <li>
+          <b>Eligibility</b>: curators who exceed the criteria set by the Company in the operator console (number of followers or actual ad impressions) can
+          turn on monetization for each list. The criteria and rates may change, and we will give 30 days’ notice of unfavorable changes.
+        </li>
+        <li>
+          <b>Ad revenue sharing</b>: a percentage of ad revenue from list screens, set by the Company, is divided according to each monetized list’s share of
+          actual ad impressions. Settlement is monthly, after ad revenue is finalized.
+        </li>
+        <li>
+          <b>Store partnership rewards</b>: when a store partnership condition that a curator attached to a list is met, the amount minus the Company’s fee is
+          credited to the curator as a reward. Curators can add a store as “Show only while paid”; in that case, the store is hidden from that
+          list when the store’s balance is insufficient.
+        </li>
+        <li>
+          <b>Nature of rewards</b>: money a curator receives is compensation paid by the Company from its own revenue for the curator’s referral and
+          promotional activities. The Company does not hold or pass on money on behalf of stores or advertisers, and no direct contract arises between the
+          curator and the store.
+        </li>
+        <li>
+          <b>Sharing with co-editors</b>: the list owner can give a portion (%) of that list’s share to co-editors.
+        </li>
+        <li>
+          <b>Payouts</b>: once you register payout information and your balance reaches the minimum amount, you can request a payout. After review, the Company
+          sends it via the registered method (Wise, PayPal or bank) and may request additional identity information required by the money transfer provider.
+          Fees and exchange-rate differences charged on the receiving side may be borne by the recipient.
+        </li>
+        <li>
+          <b>When we do not pay</b>: if inflation as described in section 4 is confirmed, if payout information is incorrect, or if the country or person cannot
+          receive transfers due to laws or sanctions, the Company may withhold payment, reclaim amounts already paid, or deduct them from the next payout. Deleting
+          your account also deletes your payout information, so if you have earnings to receive, collect your payout before deleting your account.
+        </li>
+        <li><b>Taxes</b>: recipients are responsible for reporting and paying taxes on money received, in accordance with the laws of the country where they live. Where required by law, the Company may withhold taxes or request necessary documents.</li>
+      </ul>
+
+      <h2>10. Disputes</h2>
+      <p>
+        If you disagree with a charge, reversal, no-show record or operator action, let us know using “Dispute” in the store console or curator console. The
+        Company will review both sides’ records and decide to reject the dispute, pay the curator, or refund the store, and will notify you of the result. If
+        the matter is still not resolved, section 12 applies.
+      </p>
+
+      <h2>11. Limitation of liability</h2>
+      <ul>
+        <li>The Service is provided as is. The Company does not guarantee uninterrupted service, the accuracy of place information, or the conduct of other users or stores.</li>
+        <li>
+          To the extent permitted by law, the Company is not liable for indirect damages (loss of profits, loss of data, etc.), and the Company’s liability
+          will not exceed the amount the user paid the Company in the 12 months before the incident (US$100 for free users).
+        </li>
+        <li>The above limits do not apply to damage caused by the Company’s intentional misconduct or gross negligence, or to damage for which the law does not allow liability to be limited.</li>
+        <li>Stores and curators must protect the Company from claims by others arising from the content they post, their billing conditions or their handling of reservations.</li>
+      </ul>
+
+      <h2>12. Governing law and disputes</h2>
+      <p>
+        These terms are governed by the laws of Singapore, and disputes will first be discussed through our support channel. If no agreement is reached, they
+        will be resolved in the courts of Singapore. However, users who are consumers retain any more favorable rights under the consumer protection laws of
+        the country where they live, and the right to bring proceedings in the courts of that country.
+      </p>
+
+      <h2>13. Changes to these terms and contact</h2>
+      <p>
+        If these terms change, we will notify you within the Service 7 days before the change takes effect (30 days before for changes unfavorable to users).
+        If you do not agree to the revised terms, you may delete your account before they take effect. Please send questions through the{" "}
+        <Link href="/support?type=question">support form</Link>. Company address: 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874.
       </p>
     </>
   );

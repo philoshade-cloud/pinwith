@@ -3,12 +3,16 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { useFormat, useT } from "@/lib/i18n/client";
 
-const fmt = (n: number) => (n >= 10000 ? `${(n / 10000).toFixed(1).replace(/\.0$/, "")}만` : n.toLocaleString("ko-KR"));
+// 1만 이상은 짧게(한국어 1.2만, 영어 12K)
+const fmt = (n: number, locale: string) => n.toLocaleString(locale, n >= 10000 ? { notation: "compact", maximumFractionDigits: 1 } : undefined);
 
 // 리스트 좋아요. 로그인 전이면 로그인 후 이 화면으로 돌아온다.
 export function LikeButton({ listId, initialCount, demo = false }: { listId: string; initialCount: number; demo?: boolean }) {
   const router = useRouter();
+  const t = useT();
+  const { locale } = useFormat();
   const [liked, setLiked] = useState(false);
   const [count, setCount] = useState(initialCount);
   const [me, setMe] = useState<string | null>(null);
@@ -53,14 +57,14 @@ export function LikeButton({ listId, initialCount, demo = false }: { listId: str
       type="button"
       onClick={toggle}
       aria-pressed={liked}
-      aria-label={liked ? "좋아요 취소" : "좋아요"}
+      aria-label={liked ? t("좋아요 취소") : t("좋아요")}
       className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[15px] font-semibold transition-colors ${
         liked ? "bg-pin text-white" : "bg-white text-pin shadow-[inset_0_0_0_1.5px_var(--color-pin)] hover:bg-pin/5"
       }`}
     >
       <span aria-hidden className="text-[19px] leading-none">{liked ? "♥" : "♡"}</span>
-      좋아요
-      <span className="tabular-nums">{fmt(count)}</span>
+      {t("좋아요")}
+      <span className="tabular-nums">{fmt(count, locale)}</span>
     </button>
   );
 }

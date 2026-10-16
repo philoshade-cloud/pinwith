@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/env";
 import { GOOGLE_CLIENT_ID, GoogleSignIn } from "@/components/GoogleSignIn";
 import { Panel } from "@/components/shell/Panel";
+import { LangSwitch, useT } from "@/lib/i18n/client";
 
 // 임시 테스트 계정(test1~test6@pinwith.test). 끄려면 환경 변수에 false를 넣는다.
 const TEST_LOGIN = process.env.NEXT_PUBLIC_TEST_LOGIN !== "false";
@@ -18,6 +19,7 @@ const GOOGLE_LOGIN_ENABLED = process.env.NEXT_PUBLIC_GOOGLE_LOGIN_ENABLED !== "f
 // 로그인: 구글 또는 이메일 링크. 로그인 후 원래 보던 화면(next)으로 돌아간다.
 export default function LoginPage() {
   const router = useRouter();
+  const t = useT();
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error" | "rate">("idle");
   const [sentTo, setSentTo] = useState("");
@@ -75,17 +77,18 @@ export default function LoginPage() {
 
   if (!isSupabaseConfigured()) {
     return (
-      <Panel title="로그인">
-        <p className="p-5 text-[15px] text-muted">서버 연결 설정이 아직 없습니다. 환경 변수를 확인하세요.</p>
+      <Panel title={t("로그인")}>
+        <p className="p-5 text-[15px] text-muted">{t("서버 연결 설정이 아직 없습니다. 환경 변수를 확인하세요.")}</p>
       </Panel>
     );
   }
 
   return (
-    <Panel title="로그인">
+    <Panel title={t("로그인")}>
       <div className="px-5 pb-8 pt-5">
-      <h1 className="font-display text-[26px] font-semibold text-ink">PinWith에 로그인</h1>
-      <p className="mt-2 text-[15px] text-muted">팔로우, 내 리스트 만들기, DM에 필요합니다.</p>
+      <LangSwitch className="mb-4" />
+      <h1 className="font-display text-[26px] font-semibold text-ink">{t("PinWith에 로그인")}</h1>
+      <p className="mt-2 text-[15px] text-muted">{t("팔로우, 내 리스트 만들기, DM에 필요합니다.")}</p>
       {GOOGLE_LOGIN_ENABLED &&
         (GOOGLE_CLIENT_ID ? (
           <div className="mt-6">
@@ -94,12 +97,12 @@ export default function LoginPage() {
           </div>
         ) : (
           <button type="button" onClick={withGoogle} className="btn-quiet mt-8 w-full justify-center !py-3">
-            구글로 계속하기
+            {t("구글로 계속하기")}
           </button>
         ))}
       <form onSubmit={withEmail} className={GOOGLE_LOGIN_ENABLED ? "mt-6" : "mt-6"}>
         <label htmlFor="email" className="text-[14px] font-semibold text-ink">
-          이메일로 로그인 링크 받기
+          {t("이메일로 로그인 링크 받기")}
         </label>
         <input
           id="email"
@@ -114,32 +117,32 @@ export default function LoginPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="mt-2 w-full rounded-lg border border-rule px-3 py-2.5 text-[15px]"
-          placeholder={TEST_LOGIN ? "you@example.com  ·  테스트: test1~6, 가게 test7~9" : "you@example.com"}
+          placeholder={TEST_LOGIN ? t("you@example.com  ·  테스트: test1~6, 가게 test7~9") : "you@example.com"}
         />
         <button
           type="submit"
           disabled={state === "sending"}
           className="btn-primary mt-3 w-full justify-center !py-3 disabled:opacity-50"
         >
-          {state === "sending" ? "보내는 중" : state === "sent" ? "다시 보내기" : "로그인 링크 보내기"}
+          {state === "sending" ? t("보내는 중") : state === "sent" ? t("다시 보내기") : t("로그인 링크 보내기")}
         </button>
         <p role="status" className="mt-3 text-[14px]">
           {state === "sent" && (
             <span className="text-teal">
-              {sentTo}로 로그인 링크를 보냈습니다. 메일함(스팸함 포함)에서 링크를 누르세요.
+              {t("{email}로 로그인 링크를 보냈습니다. 메일함(스팸함 포함)에서 링크를 누르세요.", { email: sentTo })}
             </span>
           )}
           {state === "rate" && (
-            <span className="text-pin">요청이 너무 잦습니다. 1분쯤 뒤에 다시 시도하세요.</span>
+            <span className="text-pin">{t("요청이 너무 잦습니다. 1분쯤 뒤에 다시 시도하세요.")}</span>
           )}
           {state === "error" && (
-            <span className="text-pin">링크를 보내지 못했습니다. 이메일 주소를 확인하고 다시 시도하세요.</span>
+            <span className="text-pin">{t("링크를 보내지 못했습니다. 이메일 주소를 확인하고 다시 시도하세요.")}</span>
           )}
         </p>
       </form>
       <div className="mt-8 border-t border-rule pt-5">
-        <p className="text-[13px] text-muted">리스트로 수익을 내려는 큐레이터, 손님을 모으려는 가게라면</p>
-        <Link href="/biz" className="btn-quiet mt-2 w-full justify-center !py-3">상업 이용자용 콘솔</Link>
+        <p className="text-[13px] text-muted">{t("리스트로 수익을 내려는 큐레이터, 손님을 모으려는 가게라면")}</p>
+        <Link href="/biz" className="btn-quiet mt-2 w-full justify-center !py-3">{t("상업 이용자용 콘솔")}</Link>
       </div>
       </div>
     </Panel>

@@ -17,6 +17,7 @@ import { ConsentBanner } from "../Consent";
 import { Logo } from "../Logo";
 import { ShellContext, type Me, type MyList, type Scene, type Shell } from "./context";
 import type { MapView } from "../PlaceMap";
+import { useT } from "@/lib/i18n/client";
 
 const PlaceMap = dynamic(() => import("../PlaceMap").then((m) => m.PlaceMap), {
   ssr: false,
@@ -39,6 +40,7 @@ function useViewport() {
 // 앱의 뼈대: 지도가 늘 바탕에 깔려 있고, 각 기능은 그 위의 패널로 열렸다가 접힌다.
 export function MapShell({ children }: { children: ReactNode }) {
   const router = useRouter();
+  const t = useT();
   const supabase = useMemo(() => (isSupabaseConfigured() ? createClient() : null), []);
   const { w, h } = useViewport();
   const desktop = w >= 1024;
@@ -150,14 +152,14 @@ export function MapShell({ children }: { children: ReactNode }) {
 
   const startSave = useCallback(
     (item: ListItem) => {
-      if (!item.placeId) return toast("이 장소는 아직 구글 장소 정보와 연결되지 않아 담을 수 없습니다.");
+      if (!item.placeId) return toast(t("이 장소는 아직 구글 장소 정보와 연결되지 않아 담을 수 없습니다."));
       if (!me) {
         router.push(`/login?next=${encodeURIComponent(window.location.pathname)}`);
         return;
       }
       setSaving(item);
     },
-    [me, router, toast],
+    [me, router, toast, t],
   );
 
   function closeAdd() {
@@ -172,7 +174,7 @@ export function MapShell({ children }: { children: ReactNode }) {
     setSelectedId(null);
     if (places.length === 0) {
       setResults(null);
-      toast(`‘${query}’로 찾은 장소가 없습니다.`);
+      toast(t("‘{query}’로 찾은 장소가 없습니다.", { query }));
       return;
     }
     setResults({ query, places });
@@ -250,7 +252,7 @@ export function MapShell({ children }: { children: ReactNode }) {
               reopen("/");
             }
           }}
-          aria-label="PinWith 지도"
+          aria-label={t("PinWith 지도")}
           className="font-display hidden h-11 shrink-0 place-items-center rounded-xl bg-white px-3 text-[15px] font-semibold text-pin shadow-[0_2px_10px_rgba(24,34,47,0.15)] lg:grid"
         >
           <Logo size={24} />
@@ -270,14 +272,14 @@ export function MapShell({ children }: { children: ReactNode }) {
             />
           ) : (
             <Link href="/explore" className="flex h-9 items-center px-2 text-[15px] text-muted">
-              {me === undefined ? "" : "타인의 핀 둘러보기"}
+              {me === undefined ? "" : t("타인의 핀 둘러보기")}
             </Link>
           )}
         </div>
         {me && (
           <>
-            <IconLink href="/messages" label="메시지" count={badges.messages}>✉</IconLink>
-            <IconLink href="/notifications" label="알림" count={badges.notifications}>🔔</IconLink>
+            <IconLink href="/messages" label={t("메시지")} count={badges.messages}>✉</IconLink>
+            <IconLink href="/notifications" label={t("알림")} count={badges.notifications}>🔔</IconLink>
           </>
         )}
       </div>
@@ -315,7 +317,7 @@ export function MapShell({ children }: { children: ReactNode }) {
         <>
           {resultsList && (
             <section
-              aria-label="검색 결과"
+              aria-label={t("검색 결과")}
               className="fixed inset-x-0 bottom-16 top-[38dvh] z-[25] overflow-y-auto rounded-t-2xl bg-white pb-28 shadow-[0_-6px_24px_rgba(24,34,47,0.16)] lg:inset-x-auto lg:bottom-4 lg:left-4 lg:top-[76px] lg:w-[400px] lg:rounded-2xl lg:pb-16"
             >
               <ul className="divide-y divide-rule">
@@ -328,17 +330,17 @@ export function MapShell({ children }: { children: ReactNode }) {
                   </li>
                 ))}
               </ul>
-              <p className="px-5 py-3 text-right text-[12px] text-muted">Google 검색 결과</p>
+              <p className="px-5 py-3 text-right text-[12px] text-muted">{t("Google 검색 결과")}</p>
             </section>
           )}
           <div className="fixed inset-x-2 bottom-[124px] z-30 flex items-center gap-2 rounded-2xl bg-ink px-4 py-2.5 text-white shadow-lg lg:bottom-6 lg:left-4 lg:right-auto lg:w-[400px]">
             <span className="min-w-0 flex-1 truncate text-[14px]">
-              ‘{results.query}’ {results.places.length}곳 · 핀을 눌러 담기
+              {t("‘{q}’ {n}곳 · 핀을 눌러 담기", { q: results.query, n: results.places.length })}
             </span>
             <button type="button" onClick={() => setResultsList(!resultsList)} className="shrink-0 rounded-full bg-white px-3 py-1 text-[13px] font-semibold text-ink">
-              {resultsList ? "지도" : "목록"}
+              {resultsList ? t("지도") : t("목록")}
             </button>
-            <button type="button" onClick={closeResults} className="shrink-0 px-1 text-white/80 hover:text-white" aria-label="검색 결과 닫기">
+            <button type="button" onClick={closeResults} className="shrink-0 px-1 text-white/80 hover:text-white" aria-label={t("검색 결과 닫기")}>
               ✕
             </button>
           </div>
@@ -373,10 +375,10 @@ export function MapShell({ children }: { children: ReactNode }) {
             closeAdd();
             if (scene.addTarget && scene.addTarget.listId === listId) {
               scene.addTarget.onAdded(item);
-              toast(`${item.custom_title}을(를) 저장했습니다.`);
+              toast(t("{name}을(를) 저장했습니다.", { name: item.custom_title }));
             } else {
-              const name = myLists.find((l) => l.id === listId)?.title ?? "새 리스트";
-              toast(`${item.custom_title}을(를) ‘${name}’에 저장했습니다.`);
+              const name = myLists.find((l) => l.id === listId)?.title ?? t("새 리스트");
+              toast(t("{name}을(를) ‘{list}’에 저장했습니다.", { name: item.custom_title, list: name }));
               if (created) router.push(`/me/lists/${listId}`);
               else router.refresh();
             }
@@ -416,6 +418,7 @@ function PersonIcon() {
 }
 
 function NavView({ variant, me, reopen, path }: NavProps & { path: string }) {
+  const t = useT();
   const nav: { href: string; label: string; icon: React.ReactNode }[] = me
     ? [
         { href: "/", label: "지도", icon: "◎" },
@@ -447,7 +450,7 @@ function NavView({ variant, me, reopen, path }: NavProps & { path: string }) {
 
   if (variant === "top") {
     return (
-      <nav aria-label="메뉴" className="fixed right-4 top-4 z-30 hidden gap-1 rounded-full bg-white p-1 shadow-[0_2px_10px_rgba(24,34,47,0.15)] lg:flex">
+      <nav aria-label={t("메뉴")} className="fixed right-4 top-4 z-30 hidden gap-1 rounded-full bg-white p-1 shadow-[0_2px_10px_rgba(24,34,47,0.15)] lg:flex">
         {nav.map((n) => (
           <Link
             key={n.label}
@@ -456,14 +459,14 @@ function NavView({ variant, me, reopen, path }: NavProps & { path: string }) {
             aria-current={isActive(n.href) ? "page" : undefined}
             className={`rounded-full px-4 py-2 text-[14px] font-semibold ${isActive(n.href) ? "bg-ink text-white" : "text-ink hover:bg-surface"}`}
           >
-            {n.label}
+            {t(n.label)}
           </Link>
         ))}
       </nav>
     );
   }
   return (
-    <nav aria-label="메뉴" className={`fixed inset-x-0 bottom-0 z-30 grid h-16 border-t ${nav.length === 5 ? "grid-cols-5" : "grid-cols-4"} border-rule bg-white pb-[env(safe-area-inset-bottom)] lg:hidden`}>
+    <nav aria-label={t("메뉴")} className={`fixed inset-x-0 bottom-0 z-30 grid h-16 border-t ${nav.length === 5 ? "grid-cols-5" : "grid-cols-4"} border-rule bg-white pb-[env(safe-area-inset-bottom)] lg:hidden`}>
       {nav.map((n) => (
         <Link
           key={n.label}
@@ -473,7 +476,7 @@ function NavView({ variant, me, reopen, path }: NavProps & { path: string }) {
           className={`flex flex-col items-center justify-center gap-0.5 whitespace-nowrap font-semibold tracking-[-0.02em] ${nav.length === 5 ? "text-[11px]" : "text-[12px]"} ${isActive(n.href) ? "text-pin" : "text-muted"}`}
         >
           <span aria-hidden className="text-[18px] leading-none">{n.icon}</span>
-          {n.label}
+          {t(n.label)}
         </Link>
       ))}
     </nav>
@@ -481,10 +484,11 @@ function NavView({ variant, me, reopen, path }: NavProps & { path: string }) {
 }
 
 function IconLink({ href, label, count, children }: { href: string; label: string; count: number; children: ReactNode }) {
+  const t = useT();
   return (
     <Link
       href={href}
-      aria-label={count ? `${label} ${count}개 안 읽음` : label}
+      aria-label={count ? t("{label} {n}개 안 읽음", { label, n: count }) : label}
       className="relative grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white text-[18px] shadow-[0_2px_10px_rgba(24,34,47,0.15)]"
     >
       <span aria-hidden>{children}</span>

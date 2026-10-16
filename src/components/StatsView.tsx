@@ -8,6 +8,7 @@ import { createChannelLink } from "@/lib/share";
 import type { ListItem } from "@/lib/types";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { useMapScene, useShell, type Scene } from "./shell/context";
+import { useFormat, useT } from "@/lib/i18n/client";
 
 type Stats = {
   totals: { open: number; tap: number; directions: number; google: number; naver: number; kakao: number; onsite: number; devices: number };
@@ -26,10 +27,11 @@ type MyList = {
 };
 
 const PERIODS = [7, 30, 90] as const;
-const n = (v: number) => v.toLocaleString("ko-KR");
 
 // /me/stats — 내 리스트 링크가 어떻게 쓰이는지: 열림, 장소 탭, 길찾기·지도 열기, 가게 근처에서 누름, 유입 경로
 export function StatsView() {
+  const t = useT();
+  const { num: n } = useFormat();
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const { me, toast } = useShell();
@@ -79,31 +81,20 @@ export function StatsView() {
       cardExtra: (i) => {
         const s = byItem.get(i.id);
         const l = listOf.get(i.id);
-        return (
-          <div className="text-[13px] text-ink/80">
-            <p>
-              최근 {days}일: 탭 <b>{n(s?.tap ?? 0)}</b> · 길찾기·지도 열기 <b>{n(s?.act ?? 0)}</b> · 가게 근처 <b>{n(s?.onsite ?? 0)}</b>
-            </p>
-            {l && me && (
-              <Link href={`/@${me.handle}/${l.slug}`} className="mt-2 flex font-semibold text-teal">
-                ‘{l.title}’ 열기 <span className="ml-auto">›</span>
-              </Link>
-            )}
-          </div>
-        );
+        return <PinCard days={days} s={s} href={l && me ? `/@${me.handle}/${l.slug}` : null} title={l?.title ?? ""} />;
       },
     };
   }, [stats, lists, days, me]);
   useMapScene(scene);
 
   if (!stats) return <PanelLoading />;
-  const t = stats.totals;
-  const external = t.directions + t.google + t.naver + t.kakao;
+  const tot = stats.totals;
+  const external = tot.directions + tot.google + tot.naver + tot.kakao;
 
   return (
-    <Panel title={`내 통계 · 최근 ${days}일`}>
+    <Panel title={t("내 통계 · 최근 {n}일", { n: days })}>
       <div className="px-5 pb-10 pt-4">
-        <div className="flex gap-1.5" role="group" aria-label="기간">
+        <div className="flex gap-1.5" role="group" aria-label={t("기간")}>
           {PERIODS.map((p) => (
             <button
               key={p}
@@ -112,45 +103,45 @@ export function StatsView() {
               onClick={() => setDays(p)}
               className={`rounded-full px-3 py-1.5 text-[13px] font-semibold ${days === p ? "bg-ink text-white" : "bg-surface text-ink"}`}
             >
-              {p}일
+              {t("{n}일", { n: p })}
             </button>
           ))}
         </div>
 
         {/* 핵심 숫자 */}
         <div className="mt-4 grid grid-cols-2 gap-2">
-          <Tile label="링크 열림" value={t.open} hint={t.devices ? `기기 ${n(t.devices)}대 이상` : undefined} />
-          <Tile label="장소 탭" value={t.tap} />
-          <Tile label="길찾기·지도 열기" value={external} />
-          <Tile label="가게 근처에서 누름" value={t.onsite} hint="500m 안, 위치 허용한 경우만" />
+          <Tile label={t("링크 열림")} value={tot.open} hint={tot.devices ? t("기기 {n}대 이상", { n: n(tot.devices) }) : undefined} />
+          <Tile label={t("장소 탭")} value={tot.tap} />
+          <Tile label={t("길찾기·지도 열기")} value={external} />
+          <Tile label={t("가게 근처에서 누름")} value={tot.onsite} hint={t("500m 안, 위치 허용한 경우만")} />
         </div>
 
-        <Section title="날짜별 링크 열림">
+        <Section title={t("날짜별 링크 열림")}>
           <DailyBars days={days} daily={stats.daily} />
         </Section>
 
-        <Section title="어느 지도로 갔나">
+        <Section title={t("어느 지도로 갔나")}>
           <Bars
             rows={[
-              { label: "구글 길찾기", value: t.directions },
-              { label: "구글 지도", value: t.google },
-              { label: "네이버 지도", value: t.naver },
-              { label: "카카오맵", value: t.kakao },
+              { label: t("구글 길찾기"), value: tot.directions },
+              { label: t("구글 지도"), value: tot.google },
+              { label: t("네이버 지도"), value: tot.naver },
+              { label: t("카카오맵"), value: tot.kakao },
             ]}
           />
         </Section>
 
-        <Section title="리스트별">
+        <Section title={t("리스트별")}>
           {stats.lists.length === 0 ? (
-            <Empty>아직 리스트가 없습니다.</Empty>
+            <Empty>{t("아직 리스트가 없습니다.")}</Empty>
           ) : (
             <table className="w-full text-[13px]">
               <thead>
                 <tr className="text-left text-muted">
-                  <th className="py-1.5 font-normal">리스트</th>
-                  <th className="py-1.5 text-right font-normal">열림</th>
-                  <th className="py-1.5 text-right font-normal">반응</th>
-                  <th className="py-1.5 text-right font-normal">근처</th>
+                  <th className="py-1.5 font-normal">{t("리스트")}</th>
+                  <th className="py-1.5 text-right font-normal">{t("열림")}</th>
+                  <th className="py-1.5 text-right font-normal">{t("반응")}</th>
+                  <th className="py-1.5 text-right font-normal">{t("근처")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-rule border-t border-rule">
@@ -167,25 +158,25 @@ export function StatsView() {
               </tbody>
             </table>
           )}
-          <p className="mt-2 text-[12px] text-muted">반응 = 장소 탭 + 길찾기·지도 열기. 내가 연 것은 세지 않습니다.</p>
+          <p className="mt-2 text-[12px] text-muted">{t("반응 = 장소 탭 + 길찾기·지도 열기. 내가 연 것은 세지 않습니다.")}</p>
         </Section>
 
-        <Section title="반응이 많은 장소">
+        <Section title={t("반응이 많은 장소")}>
           {stats.items.length === 0 ? (
-            <Empty>아직 기록이 없습니다.</Empty>
+            <Empty>{t("아직 기록이 없습니다.")}</Empty>
           ) : (
-            <Bars rows={stats.items.slice(0, 8).map((i) => ({ label: i.title, value: i.tap + i.act, note: i.onsite ? `근처 ${i.onsite}` : undefined }))} />
+            <Bars rows={stats.items.slice(0, 8).map((i) => ({ label: i.title, value: i.tap + i.act, note: i.onsite ? t("근처 {n}", { n: n(i.onsite) }) : undefined }))} />
           )}
         </Section>
 
-        <Section title="어디서 들어왔나">
+        <Section title={t("어디서 들어왔나")}>
           {stats.referrers.length === 0 ? (
-            <Empty>아직 기록이 없습니다.</Empty>
+            <Empty>{t("아직 기록이 없습니다.")}</Empty>
           ) : (
             <Bars rows={stats.referrers.map((r) => ({ label: r.host.replace(/^www\./, ""), value: r.open }))} />
           )}
           <p className="mt-2 text-[12px] text-muted">
-            인스타그램·카톡 같은 앱 안에서 열면 출처가 안 남는 경우가 많습니다. 아래 채널별 링크를 쓰면 정확히 나눠 셀 수 있어요.
+            {t("인스타그램·카톡 같은 앱 안에서 열면 출처가 안 남는 경우가 많습니다. 아래 채널별 링크를 쓰면 정확히 나눠 셀 수 있어요.")}
           </p>
         </Section>
 
@@ -193,7 +184,7 @@ export function StatsView() {
           lists={lists}
           links={stats.links}
           onCreated={() => {
-            toast("채널 링크를 만들었습니다.");
+            toast(t("채널 링크를 만들었습니다."));
             load();
           }}
         />
@@ -215,7 +206,26 @@ function Empty({ children }: { children: React.ReactNode }) {
   return <p className="py-2 text-[14px] text-muted">{children}</p>;
 }
 
+// 지도 핀 카드: 그 장소의 최근 반응 수
+function PinCard({ days, s, href, title }: { days: number; s: { tap: number; act: number; onsite: number } | undefined; href: string | null; title: string }) {
+  const t = useT();
+  const { num: n } = useFormat();
+  return (
+    <div className="text-[13px] text-ink/80">
+      <p>
+        {t("최근 {n}일:", { n: days })} {t("탭")} <b>{n(s?.tap ?? 0)}</b> · {t("길찾기·지도 열기")} <b>{n(s?.act ?? 0)}</b> · {t("가게 근처")} <b>{n(s?.onsite ?? 0)}</b>
+      </p>
+      {href && (
+        <Link href={href} className="mt-2 flex font-semibold text-teal">
+          {t("‘{title}’ 열기", { title })} <span className="ml-auto">›</span>
+        </Link>
+      )}
+    </div>
+  );
+}
+
 function Tile({ label, value, hint }: { label: string; value: number; hint?: string }) {
+  const { num: n } = useFormat();
   return (
     <div className="rounded-xl bg-surface p-3">
       <p className="text-[12px] text-muted">{label}</p>
@@ -227,6 +237,7 @@ function Tile({ label, value, hint }: { label: string; value: number; hint?: str
 
 // 가로 막대: 한 가지 색, 값은 글자 색으로(막대 색을 글자에 쓰지 않음)
 function Bars({ rows }: { rows: { label: string; value: number; note?: string }[] }) {
+  const { num: n } = useFormat();
   const max = Math.max(1, ...rows.map((r) => r.value));
   return (
     <ul className="grid gap-1.5">
@@ -248,6 +259,8 @@ function Bars({ rows }: { rows: { label: string; value: number; note?: string }[
 
 // 날짜별 막대(한 계열): 빈 날짜도 0으로 채우고, 누르거나 올리면 그날 숫자를 보여준다
 function DailyBars({ days, daily }: { days: number; daily: Stats["daily"] }) {
+  const t = useT();
+  const { num: n, date } = useFormat();
   const series = useMemo(() => {
     const byDay = new Map(daily.map((d) => [d.d, d]));
     const out: { d: string; open: number; act: number }[] = [];
@@ -264,7 +277,7 @@ function DailyBars({ days, daily }: { days: number; daily: Stats["daily"] }) {
   const max = Math.max(1, ...series.map((s) => s.open));
   const W = 360, H = 110, gap = days > 60 ? 1 : 2;
   const bw = (W - gap * (series.length - 1)) / series.length;
-  const label = (d: string) => `${Number(d.slice(5, 7))}월 ${Number(d.slice(8, 10))}일`;
+  const label = (d: string) => date(new Date(Number(d.slice(0, 4)), Number(d.slice(5, 7)) - 1, Number(d.slice(8, 10))), { month: "short", day: "numeric" });
   const h = hover != null ? series[hover] : null;
 
   return (
@@ -272,13 +285,13 @@ function DailyBars({ days, daily }: { days: number; daily: Stats["daily"] }) {
       <p className="h-5 text-[12px] text-muted" aria-live="polite">
         {h ? (
           <>
-            {label(h.d)} · 열림 <b className="text-ink">{n(h.open)}</b> · 길찾기·지도 열기 <b className="text-ink">{n(h.act)}</b>
+            {label(h.d)} · {t("열림")} <b className="text-ink">{n(h.open)}</b> · {t("길찾기·지도 열기")} <b className="text-ink">{n(h.act)}</b>
           </>
         ) : (
-          <>하루 최대 {n(max)}회</>
+          <>{t("하루 최대 {n}회", { n: n(max) })}</>
         )}
       </p>
-      <svg viewBox={`0 0 ${W} ${H + 1}`} className="mt-1 w-full" role="img" aria-label={`최근 ${days}일 날짜별 링크 열림`} onMouseLeave={() => setHover(null)}>
+      <svg viewBox={`0 0 ${W} ${H + 1}`} className="mt-1 w-full" role="img" aria-label={t("최근 {n}일 날짜별 링크 열림", { n: days })} onMouseLeave={() => setHover(null)}>
         <line x1="0" x2={W} y1={H + 0.5} y2={H + 0.5} stroke="var(--color-rule)" />
         {series.map((s, i) => {
           const bh = s.open === 0 ? 0 : Math.max(3, (s.open / max) * (H - 4));
@@ -298,14 +311,14 @@ function DailyBars({ days, daily }: { days: number; daily: Stats["daily"] }) {
                   opacity={hover == null || hover === i ? 1 : 0.45}
                 />
               )}
-              <title>{`${label(s.d)}: 열림 ${s.open}`}</title>
+              <title>{`${label(s.d)}: ${t("열림")} ${n(s.open)}`}</title>
             </g>
           );
         })}
       </svg>
       <div className="mt-1 flex justify-between text-[11px] text-muted">
         <span>{label(series[0].d)}</span>
-        <span>오늘</span>
+        <span>{t("오늘")}</span>
       </div>
     </div>
   );
@@ -318,6 +331,8 @@ function ChannelLinks({
   links: Stats["links"];
   onCreated: () => void;
 }) {
+  const t = useT();
+  const { num: n } = useFormat();
   const [listId, setListId] = useState(lists[0]?.id ?? "");
   const [label, setLabel] = useState("");
   const [busy, setBusy] = useState(false);
@@ -349,20 +364,20 @@ function ChannelLinks({
   }
 
   return (
-    <Section title="채널별 링크">
+    <Section title={t("채널별 링크")}>
       <p className="text-[12px] text-muted">
-        같은 리스트라도 인스타 프로필, 유튜브 설명란, 카톡 오픈채팅마다 다른 링크를 쓰면 어디서 몇 명이 왔는지 따로 셉니다.
+        {t("같은 리스트라도 인스타 프로필, 유튜브 설명란, 카톡 오픈채팅마다 다른 링크를 쓰면 어디서 몇 명이 왔는지 따로 셉니다.")}
       </p>
       {lists.length > 0 && (
         <form onSubmit={create} className="mt-3 grid gap-2 rounded-xl border border-rule p-3">
-          <select value={listId || lists[0]?.id} onChange={(e) => setListId(e.target.value)} className="field" aria-label="리스트">
+          <select value={listId || lists[0]?.id} onChange={(e) => setListId(e.target.value)} className="field" aria-label={t("리스트")}>
             {lists.map((l) => (
               <option key={l.id} value={l.id}>{l.title}</option>
             ))}
           </select>
           <div className="flex gap-2">
-            <input value={label} onChange={(e) => setLabel(e.target.value)} maxLength={40} placeholder="채널 이름 (예: 인스타 프로필)" className="field" aria-label="채널 이름" />
-            <button type="submit" disabled={busy || !label.trim()} className="btn-primary shrink-0 disabled:opacity-40">만들기</button>
+            <input value={label} onChange={(e) => setLabel(e.target.value)} maxLength={40} placeholder={t("채널 이름 (예: 인스타 프로필)")} className="field" aria-label={t("채널 이름")} />
+            <button type="submit" disabled={busy || !label.trim()} className="btn-primary shrink-0 disabled:opacity-40">{t("만들기")}</button>
           </div>
         </form>
       )}
@@ -371,15 +386,15 @@ function ChannelLinks({
           {links.map((l) => (
             <li key={l.code} className="flex items-center gap-2 py-2.5 text-[13px]">
               <span className="min-w-0 flex-1">
-                <span className="block truncate font-semibold text-ink">{l.label || "기본 공유 링크"}</span>
+                <span className="block truncate font-semibold text-ink">{l.label || t("기본 공유 링크")}</span>
                 <span className="block truncate text-[12px] text-muted">
                   /s/{l.code}
                   {l.list && titleOf.get(l.list) && ` · ${titleOf.get(l.list)}`}
                 </span>
               </span>
-              <span className="shrink-0 tabular-nums text-ink">열림 {n(l.open)}</span>
+              <span className="shrink-0 tabular-nums text-ink">{t("열림")} {n(l.open)}</span>
               <button type="button" onClick={() => copy(l.code)} className="btn-quiet shrink-0 !px-2.5 !py-1 !text-[12px]">
-                {copied === l.code ? "복사됨" : "복사"}
+                {copied === l.code ? t("복사됨") : t("복사")}
               </button>
             </li>
           ))}

@@ -5,10 +5,11 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { ago } from "@/lib/social";
-import { useMonetization, won } from "@/lib/monetization";
+import { useMonetization } from "@/lib/monetization";
 import { PushToggle } from "./PushToggle";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { useShell } from "./shell/context";
+import { useFormat, useT, useTRich } from "@/lib/i18n/client";
 
 type N = {
   id: string;
@@ -21,31 +22,46 @@ type N = {
   list: { title: string; slug: string; owner: { handle: string } | null } | null;
 };
 
+// 문장 전체(번역 열쇠). <a>…</a> 자리에 보낸 사람 이름 링크가 들어간다. 빈 값이면 이름만 보인다.
 const TEXT: Record<N["kind"], string> = {
-  follow: "님이 나를 팔로우했어요",
-  like: "님이 리스트를 좋아해요",
-  comment: "님이 댓글을 남겼어요",
-  reply: "님이 내 댓글에 답글을 남겼어요",
-  share_changed: "님이 공동 편집 수익 배분을 바꿨어요",
-  resolved: "님이 내 메시지를 리스트에 반영했어요",
-  invite: "님이 리스트 공동 편집에 초대했어요",
-  invite_accepted: "님이 공동 편집 초대를 수락했어요",
-  notice: "님의 새 공지",
-  reservation: "님이 예약 문의에 답했어요",
-  reservation_new: "님의 예약 문의(가게 콘솔에서 확인)",
-  reservation_msg: "님이 예약 문의에 메시지를 보냈어요",
+  follow: "<a>{name}</a>님이 나를 팔로우했어요",
+  like: "<a>{name}</a>님이 리스트를 좋아해요",
+  comment: "<a>{name}</a>님이 댓글을 남겼어요",
+  reply: "<a>{name}</a>님이 내 댓글에 답글을 남겼어요",
+  share_changed: "<a>{name}</a>님이 공동 편집 수익 배분을 바꿨어요",
+  resolved: "<a>{name}</a>님이 내 메시지를 리스트에 반영했어요",
+  invite: "<a>{name}</a>님이 리스트 공동 편집에 초대했어요",
+  invite_accepted: "<a>{name}</a>님이 공동 편집 초대를 수락했어요",
+  notice: "<a>{name}</a>님의 새 공지",
+  reservation: "<a>{name}</a>님이 예약 문의에 답했어요",
+  reservation_new: "<a>{name}</a>님의 예약 문의(가게 콘솔에서 확인)",
+  reservation_msg: "<a>{name}</a>님이 예약 문의에 메시지를 보냈어요",
   biz_block: "",
   biz_alert: "",
   biz_review: "",
   topup_paid: "",
   payout: "",
-  dispute: "님이 이의를 제기했어요",
+  dispute: "<a>{name}</a>님이 이의를 제기했어요",
   biz_admin: "",
   ops: "",
 };
 
+// 보낸 사람이 없는 알림의 제목
+const TITLE: Partial<Record<N["kind"], string>> = {
+  biz_alert: "📊 연결된 가게 확인 필요",
+  biz_block: "🚫 가게 요청으로 리스트에서 빠짐",
+  biz_review: "🏪 가게 인증",
+  topup_paid: "💳 광고비 충전",
+  payout: "💸 지급",
+  dispute: "⚖️ 이의 제기 결과",
+  biz_admin: "🏪 운영자 조치",
+  ops: "🛠️ 운영 알림",
+};
+
 // 알림: 팔로우, 좋아요, 댓글, 공동 편집 초대, 공지. 열면 모두 읽음으로 바뀐다.
 export function Notifications() {
+  const t = useT();
+  const tRich = useTRich();
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const { me, toast, refreshBadges } = useShell();
@@ -80,9 +96,9 @@ export function Notifications() {
   async function followBack(id: string) {
     if (!me) return;
     const { error } = await supabase.from("follows").insert({ follower_id: me.id, followee_id: id });
-    if (error) return toast("팔로우하지 못했습니다.");
+    if (error) return toast(t("팔로우하지 못했습니다."));
     setFollowingBack(new Set([...followingBack, id]));
-    toast("맞팔로우했어요. 이제 리스트를 함께 편집할 수 있어요.");
+    toast(t("맞팔로우했어요. 이제 리스트를 함께 편집할 수 있어요."));
   }
 
   async function answerInvite(listId: string, accept: boolean) {
@@ -91,8 +107,8 @@ export function Notifications() {
       ? supabase.from("list_editors").update({ accepted_at: new Date().toISOString() }).eq("list_id", listId).eq("user_id", me.id)
       : supabase.from("list_editors").delete().eq("list_id", listId).eq("user_id", me.id);
     const { error } = await q;
-    if (error) return toast("이미 처리했거나 초대가 취소됐습니다.");
-    toast(accept ? "공동 편집자가 됐습니다." : "초대를 거절했습니다.");
+    if (error) return toast(t("이미 처리했거나 초대가 취소됐습니다."));
+    toast(accept ? t("공동 편집자가 됐습니다.") : t("초대를 거절했습니다."));
     if (accept) router.push(`/me/lists/${listId}`);
   }
 
@@ -102,12 +118,12 @@ export function Notifications() {
     const { error } = on
       ? await supabase.from("list_mutes").insert({ user_id: me.id, list_id: listId })
       : await supabase.from("list_mutes").delete().eq("user_id", me.id).eq("list_id", listId);
-    if (error) return toast("바꾸지 못했습니다.");
+    if (error) return toast(t("바꾸지 못했습니다."));
     const next = new Set(muted);
     if (on) next.add(listId);
     else next.delete(listId);
     setMuted(next);
-    toast(on ? "이 리스트의 알림을 껐어요." : "이 리스트의 알림을 다시 받아요.");
+    toast(on ? t("이 리스트의 알림을 껐어요.") : t("이 리스트의 알림을 다시 받아요."));
   }
 
   const money = useMonetization(!!me);
@@ -115,29 +131,30 @@ export function Notifications() {
   if (!rows) return <PanelLoading />;
 
   return (
-    <Panel title="알림">
+    <Panel title={t("알림")}>
       <div className="px-5 pb-8 pt-2">
         <div className="mb-3 mt-2">
           <PushToggle compact />
         </div>
         {money?.eligible && !money.monetizing && <MonetizeReady m={money} />}
         {rows.length === 0 ? (
-          <p className="py-8 text-[14px] text-muted">아직 알림이 없어요.</p>
+          <p className="py-8 text-[14px] text-muted">{t("아직 알림이 없어요.")}</p>
         ) : (
           <ul className="divide-y divide-rule">
             {rows.map((n) => {
-              const who = n.actor?.display_name || n.actor?.handle || "누군가";
+              const who = n.actor?.display_name || n.actor?.handle || t("누군가");
               const listHref = n.list?.owner ? `/@${n.list.owner.handle}/${n.list.slug}` : null;
               return (
                 <li key={n.id} className={`py-3 text-[14px] ${n.read_at ? "" : "bg-pin/5 -mx-5 px-5"}`}>
                   <p className="leading-snug text-ink">
                     {n.actor ? (
-                      <>
-                        <Link href={`/@${n.actor.handle}`} className="font-semibold">{who}</Link>
-                        {TEXT[n.kind]}
-                      </>
+                      (() => {
+                        const actor = n.actor;
+                        const name = <Link href={`/@${actor.handle}`} className="font-semibold">{who}</Link>;
+                        return TEXT[n.kind] ? tRich(TEXT[n.kind], { a: () => name }, { name: who }) : name;
+                      })()
                     ) : (
-                      <span className="font-semibold">{n.kind === "biz_alert" ? "📊 연결된 가게 확인 필요" : n.kind === "biz_block" ? "🚫 가게 요청으로 리스트에서 빠짐" : n.kind === "biz_review" ? "🏪 가게 인증" : n.kind === "topup_paid" ? "💳 광고비 충전" : n.kind === "payout" ? "💸 지급" : n.kind === "dispute" ? "⚖️ 이의 제기 결과" : n.kind === "biz_admin" ? "🏪 운영자 조치" : n.kind === "ops" ? "🛠️ 운영 알림" : "PinWith 알림"}</span>
+                      <span className="font-semibold">{t(TITLE[n.kind] ?? "PinWith 알림")}</span>
                     )}
                     {n.list && listHref && (
                       <>
@@ -149,28 +166,28 @@ export function Notifications() {
                   {n.body && <p className="mt-1 line-clamp-3 whitespace-pre-wrap text-[13px] text-ink/75">{n.body}</p>}
                   <p className="mt-1 flex items-center gap-2 text-[11px] text-muted">
                     {ago(n.created_at)}
-                    {n.kind === "reservation_new" && <Link href="/biz/place?tab=reservations" className="btn-primary !px-2.5 !py-1 !text-[12px]">가게 콘솔에서 보기</Link>}
-                    {(n.kind === "reservation" || n.kind === "reservation_msg") && <Link href="/me/reservations" className="btn-primary !px-2.5 !py-1 !text-[12px]">예약 문의 보기</Link>}
-                    {n.kind === "biz_alert" && <Link href="/biz/curator?tab=stores" className="btn-primary !px-2.5 !py-1 !text-[12px]">연결된 가게 보기</Link>}
-                    {(n.kind === "biz_review" || n.kind === "topup_paid") && <Link href="/biz/place" className="btn-primary !px-2.5 !py-1 !text-[12px]">가게 콘솔</Link>}
-                    {n.kind === "payout" && <Link href="/biz/curator?tab=payout" className="btn-primary !px-2.5 !py-1 !text-[12px]">지급 보기</Link>}
-                    {n.kind === "biz_admin" && <Link href="/biz" className="btn-primary !px-2.5 !py-1 !text-[12px]">콘솔 열기</Link>}
+                    {n.kind === "reservation_new" && <Link href="/biz/place?tab=reservations" className="btn-primary !px-2.5 !py-1 !text-[12px]">{t("가게 콘솔에서 보기")}</Link>}
+                    {(n.kind === "reservation" || n.kind === "reservation_msg") && <Link href="/me/reservations" className="btn-primary !px-2.5 !py-1 !text-[12px]">{t("예약 문의 보기")}</Link>}
+                    {n.kind === "biz_alert" && <Link href="/biz/curator?tab=stores" className="btn-primary !px-2.5 !py-1 !text-[12px]">{t("연결된 가게 보기")}</Link>}
+                    {(n.kind === "biz_review" || n.kind === "topup_paid") && <Link href="/biz/place" className="btn-primary !px-2.5 !py-1 !text-[12px]">{t("가게 콘솔")}</Link>}
+                    {n.kind === "payout" && <Link href="/biz/curator?tab=payout" className="btn-primary !px-2.5 !py-1 !text-[12px]">{t("지급 보기")}</Link>}
+                    {n.kind === "biz_admin" && <Link href="/biz" className="btn-primary !px-2.5 !py-1 !text-[12px]">{t("콘솔 열기")}</Link>}
                     {n.kind === "ops" && (
-                      <Link href={n.body?.includes("오류") ? "/admin?tab=errors" : "/admin?tab=usage"} className="btn-primary !px-2.5 !py-1 !text-[12px]">운영자 콘솔</Link>
+                      <Link href={n.body?.includes("오류") ? "/admin?tab=errors" : "/admin?tab=usage"} className="btn-primary !px-2.5 !py-1 !text-[12px]">{t("운영자 콘솔")}</Link>
                     )}
-                    {n.kind === "dispute" && n.actor && <Link href="/admin?tab=disputes" className="btn-primary !px-2.5 !py-1 !text-[12px]">운영자 콘솔</Link>}
+                    {n.kind === "dispute" && n.actor && <Link href="/admin?tab=disputes" className="btn-primary !px-2.5 !py-1 !text-[12px]">{t("운영자 콘솔")}</Link>}
                     {n.kind === "follow" && n.actor && !followingBack.has(n.actor.id) && (
-                      <button type="button" onClick={() => followBack(n.actor!.id)} className="btn-primary !px-2.5 !py-1 !text-[12px]">맞팔로우</button>
+                      <button type="button" onClick={() => followBack(n.actor!.id)} className="btn-primary !px-2.5 !py-1 !text-[12px]">{t("맞팔로우")}</button>
                     )}
                     {n.list_id && n.kind !== "invite" && n.kind !== "share_changed" && (
                       <button type="button" onClick={() => mute(n.list_id!, !muted.has(n.list_id!))} className="ml-auto underline">
-                        {muted.has(n.list_id) ? "알림 다시 받기" : "이 리스트 알림 끄기"}
+                        {muted.has(n.list_id) ? t("알림 다시 받기") : t("이 리스트 알림 끄기")}
                       </button>
                     )}
                     {n.kind === "invite" && n.list_id && (
                       <>
-                        <button type="button" onClick={() => answerInvite(n.list_id!, true)} className="btn-primary !px-2.5 !py-1 !text-[12px]">수락</button>
-                        <button type="button" onClick={() => answerInvite(n.list_id!, false)} className="btn-quiet !px-2.5 !py-1 !text-[12px]">거절</button>
+                        <button type="button" onClick={() => answerInvite(n.list_id!, true)} className="btn-primary !px-2.5 !py-1 !text-[12px]">{t("수락")}</button>
+                        <button type="button" onClick={() => answerInvite(n.list_id!, false)} className="btn-quiet !px-2.5 !py-1 !text-[12px]">{t("거절")}</button>
                       </>
                     )}
                   </p>
@@ -187,21 +204,22 @@ export function Notifications() {
 // 알림 맨 위 고정: 수익화 기준을 넘었는데 아직 수익화한 리스트가 없을 때만 보인다.
 // 리스트 하나라도 수익화를 켜면 사라진다.
 function MonetizeReady({ m }: { m: NonNullable<ReturnType<typeof useMonetization>> }) {
+  const t = useT();
+  const { num } = useFormat();
   const why =
     m.followers >= m.min_followers
-      ? `팔로워 ${won(m.followers)}명`
+      ? t("팔로워 {n}명", { n: num(m.followers) })
       : m.views_30d >= m.min_ad_views_30d
-        ? `최근 30일 광고 노출 ${won(m.views_30d)}회`
-        : "운영자 승인";
+        ? t("최근 30일 광고 노출 {n}회", { n: num(m.views_30d) })
+        : t("운영자 승인");
   return (
-    <section aria-label="고정된 알림" className="-mx-5 mb-2 border-b border-rule bg-[#fff7fb] px-5 py-4">
-      <p className="text-[12px] font-semibold text-pin">📌 고정</p>
-      <p className="mt-1 text-[15px] font-semibold text-ink">이제 리스트로 수익을 낼 수 있어요</p>
+    <section aria-label={t("고정된 알림")} className="-mx-5 mb-2 border-b border-rule bg-[#fff7fb] px-5 py-4">
+      <p className="text-[12px] font-semibold text-pin">{t("📌 고정")}</p>
+      <p className="mt-1 text-[15px] font-semibold text-ink">{t("이제 리스트로 수익을 낼 수 있어요")}</p>
       <p className="mt-1 text-[13px] leading-relaxed text-ink/80">
-        {why}로 수익화 기준을 넘었어요. 리스트 편집 화면에서 ‘이 리스트로 수익화할 것이다’를 켜면, 그 리스트 화면에 실제로 보인 광고 수만큼
-        광고 수익의 {m.rate_pct}%를 나눠 드려요.
+        {t("{why}로 수익화 기준을 넘었어요. 리스트 편집 화면에서 ‘이 리스트로 수익화할 것이다’를 켜면, 그 리스트 화면에 실제로 보인 광고 수만큼 광고 수익의 {pct}%를 나눠 드려요.", { why, pct: m.rate_pct })}
       </p>
-      <Link href="/" className="btn-primary mt-3 inline-flex !py-2 !text-[13px]">내 리스트에서 켜기</Link>
+      <Link href="/" className="btn-primary mt-3 inline-flex !py-2 !text-[13px]">{t("내 리스트에서 켜기")}</Link>
     </section>
   );
 }

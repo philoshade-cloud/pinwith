@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useT, useTRich } from "@/lib/i18n/client";
 
 type State = "loading" | "unsupported" | "ios_home" | "denied" | "off" | "on" | "busy";
 
@@ -18,6 +19,8 @@ const standalone = () =>
 export function PushToggle({ compact = false }: { compact?: boolean }) {
   const [state, setState] = useState<State>("loading");
   const [msg, setMsg] = useState("");
+  const t = useT();
+  const tRich = useTRich();
 
   useEffect(() => {
     (async () => {
@@ -45,10 +48,10 @@ export function PushToggle({ compact = false }: { compact?: boolean }) {
       const res = await fetch("/api/push/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(sub.toJSON()) });
       if (!res.ok) throw new Error("save");
       setState("on");
-      setMsg("이 기기로 알림을 받아요.");
+      setMsg(t("이 기기로 알림을 받아요."));
     } catch {
       setState("off");
-      setMsg("알림을 켜지 못했어요. 잠시 후 다시 시도하세요.");
+      setMsg(t("알림을 켜지 못했어요. 잠시 후 다시 시도하세요."));
     }
   }
 
@@ -61,7 +64,7 @@ export function PushToggle({ compact = false }: { compact?: boolean }) {
       await sub.unsubscribe().catch(() => {});
     }
     setState("off");
-    setMsg("이 기기의 알림을 껐어요.");
+    setMsg(t("이 기기의 알림을 껐어요."));
   }
 
   if (state === "loading") return null;
@@ -70,23 +73,23 @@ export function PushToggle({ compact = false }: { compact?: boolean }) {
     <div className={box}>
       {state === "ios_home" ? (
         <p className="text-ink/80">
-          아이폰에서 알림을 받으려면 Safari의 <b>공유 → 홈 화면에 추가</b>로 PinWith를 홈 화면에 둔 뒤, 그 아이콘으로 열어서 여기서 알림을 켜 주세요.
+          {tRich("아이폰에서 알림을 받으려면 Safari의 <b>공유 → 홈 화면에 추가</b>로 PinWith를 홈 화면에 둔 뒤, 그 아이콘으로 열어서 여기서 알림을 켜 주세요.", { b: (s) => <b>{s}</b> })}
         </p>
       ) : state === "unsupported" ? (
-        <p className="text-muted">이 브라우저는 알림을 지원하지 않아요.</p>
+        <p className="text-muted">{t("이 브라우저는 알림을 지원하지 않아요.")}</p>
       ) : state === "denied" ? (
-        <p className="text-ink/80">알림이 막혀 있어요. 브라우저(또는 휴대폰) 설정에서 이 사이트의 알림을 허용해 주세요.</p>
+        <p className="text-ink/80">{t("알림이 막혀 있어요. 브라우저(또는 휴대폰) 설정에서 이 사이트의 알림을 허용해 주세요.")}</p>
       ) : (
         <div className="flex items-center gap-3">
           <span className="flex-1 text-ink/80">
-            <b className="text-ink">이 기기로 알림 받기</b>
-            <span className="block text-[12px] text-muted">새 예약 문의, 메시지, 댓글, 정산 소식을 바로 알려 드려요.</span>
+            <b className="text-ink">{t("이 기기로 알림 받기")}</b>
+            <span className="block text-[12px] text-muted">{t("새 예약 문의, 메시지, 댓글, 정산 소식을 바로 알려 드려요.")}</span>
           </span>
           {state === "on" ? (
-            <button type="button" onClick={turnOff} className="btn-quiet shrink-0 !px-3 !py-1.5 !text-[13px]">끄기</button>
+            <button type="button" onClick={turnOff} className="btn-quiet shrink-0 !px-3 !py-1.5 !text-[13px]">{t("끄기")}</button>
           ) : (
             <button type="button" onClick={turnOn} disabled={state === "busy"} className="btn-primary shrink-0 !px-3 !py-1.5 !text-[13px] disabled:opacity-50">
-              {state === "busy" ? "켜는 중" : "켜기"}
+              {state === "busy" ? t("켜는 중") : t("켜기")}
             </button>
           )}
         </div>

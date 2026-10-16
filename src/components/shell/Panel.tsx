@@ -2,6 +2,7 @@
 
 import { useEffect, type ReactNode } from "react";
 import { useShell } from "./context";
+import { useT } from "@/lib/i18n/client";
 
 // 지도 위에 열리는 기능 패널. 접으면 제목 줄만 남고 지도가 보인다.
 // 모바일: 아래에서 올라오는 시트(아래 메뉴 위), 데스크톱: 왼쪽 카드.
@@ -15,6 +16,7 @@ export function Panel({
   children: ReactNode;
 }) {
   const { panelOpen, setPanelOpen } = useShell();
+  const t = useT();
   useEffect(() => {
     setPanelOpen(defaultOpen);
     // 화면에 들어올 때 한 번만
@@ -37,7 +39,7 @@ export function Panel({
             aria-expanded={panelOpen}
             className="shrink-0 rounded-full bg-surface px-3 py-1 text-[13px] font-semibold text-ink"
           >
-            {panelOpen ? "지도 보기 ▾" : "펼치기 ▴"}
+            {panelOpen ? t("지도 보기 ▾") : t("펼치기 ▴")}
           </button>
         </div>
       ) : (
@@ -49,7 +51,7 @@ export function Panel({
         >
           <span className="min-w-0 flex-1 truncate text-[15px] font-semibold text-ink">{title}</span>
           <span className="shrink-0 rounded-full bg-surface px-3 py-1 text-[13px] font-semibold text-ink">
-            {panelOpen ? "지도 보기 ▾" : "펼치기 ▴"}
+            {panelOpen ? t("지도 보기 ▾") : t("펼치기 ▴")}
           </span>
         </button>
       )}
@@ -59,9 +61,10 @@ export function Panel({
 }
 
 export function PanelLoading() {
+  const t = useT();
   return (
     <section className="fixed inset-x-0 bottom-16 top-[38dvh] z-20 rounded-t-2xl bg-white p-5 text-[14px] text-muted lg:inset-x-auto lg:bottom-4 lg:left-4 lg:top-[76px] lg:w-[400px] lg:rounded-2xl" aria-busy="true">
-      불러오는 중
+      {t("불러오는 중")}
     </section>
   );
 }

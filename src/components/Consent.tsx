@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useSyncExternalStore } from "react";
+import { useT } from "@/lib/i18n/client";
 
 // 개인정보 동의: "all"(분석·맞춤 광고 허용) / "essential"(꼭 필요한 것만) / null(아직 안 고름)
 export type ConsentChoice = "all" | "essential";
@@ -42,43 +43,28 @@ export function useConsent() {
   return useSyncExternalStore(subscribe, read, () => undefined as ConsentChoice | null | undefined);
 }
 
-const TEXT = {
-  ko: {
-    body: "PinWith는 서비스 운영에 꼭 필요한 저장 공간을 씁니다. 허용하시면 방문 통계와 (앞으로 붙을) 맞춤 광고에도 씁니다.",
-    essential: "필수만",
-    all: "모두 허용",
-    more: "개인정보처리방침",
-  },
-  en: {
-    body: "PinWith uses essential storage to work. If you allow, we also use it for visit statistics and (future) personalized ads.",
-    essential: "Essential only",
-    all: "Allow all",
-    more: "Privacy policy",
-  },
-};
-
 export function ConsentBanner() {
+  const t = useT();
   const consent = useConsent();
   if (consent !== null) return null;
-  const t = typeof navigator !== "undefined" && !navigator.language.startsWith("ko") ? TEXT.en : TEXT.ko;
   return (
     <div
       role="dialog"
-      aria-label="개인정보 동의"
+      aria-label={t("개인정보 동의")}
       className="fixed inset-x-2 bottom-[72px] z-[60] rounded-2xl bg-ink p-4 text-white shadow-xl lg:bottom-4 lg:left-auto lg:right-4 lg:w-[380px]"
     >
       <p className="text-[13px] leading-relaxed text-white/90">
-        {t.body}{" "}
+        {t("PinWith는 서비스 운영에 꼭 필요한 저장 공간을 씁니다. 허용하시면 방문 통계와 (앞으로 붙을) 맞춤 광고에도 씁니다.")}{" "}
         <Link href="/privacy" className="underline">
-          {t.more}
+          {t("개인정보처리방침")}
         </Link>
       </p>
       <div className="mt-3 flex justify-end gap-2">
         <button type="button" onClick={() => setConsent("essential")} className="rounded-full px-3 py-1.5 text-[13px] font-semibold text-white/80 hover:text-white">
-          {t.essential}
+          {t("필수만")}
         </button>
         <button type="button" onClick={() => setConsent("all")} className="rounded-full bg-white px-4 py-1.5 text-[13px] font-semibold text-ink">
-          {t.all}
+          {t("모두 허용")}
         </button>
       </div>
     </div>

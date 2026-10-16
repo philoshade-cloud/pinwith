@@ -6,10 +6,11 @@ import { createClient } from "@/lib/supabase/client";
 import { ago, startDm } from "@/lib/social";
 import { Comments } from "./Comments";
 import { useShell } from "./shell/context";
+import { useT } from "@/lib/i18n/client";
 
 // 메시지 보내기: 리스트·장소를 붙여서 대화를 시작한다(3.8)
 export function DmButton({
-  userId, listId, itemId, label = "메시지", className = "btn-quiet",
+  userId, listId, itemId, label = "메시지@@버튼", className = "btn-quiet",
 }: {
   userId: string;
   listId?: string;
@@ -18,6 +19,7 @@ export function DmButton({
   className?: string;
 }) {
   const router = useRouter();
+  const t = useT();
   const { me, toast } = useShell();
   const [busy, setBusy] = useState(false);
   if (me && me.id === userId) return null;
@@ -37,13 +39,14 @@ export function DmButton({
   }
   return (
     <button type="button" onClick={go} disabled={busy} className={`${className} disabled:opacity-50`}>
-      {label}
+      {t(label)}
     </button>
   );
 }
 
 // 소식 알림(3.4): 팔로우한 큐레이터별로 켠다. 팔로우 직후에는 꺼져 있다.
 export function NotifyToggle({ curatorId }: { curatorId: string }) {
+  const t = useT();
   const supabase = useMemo(() => createClient(), []);
   const { me, toast } = useShell();
   const [state, setState] = useState<boolean | null>(null);
@@ -63,17 +66,18 @@ export function NotifyToggle({ curatorId }: { curatorId: string }) {
     setState(next);
     const { error } = await supabase.from("follows").update({ notify: next }).eq("follower_id", me!.id).eq("followee_id", curatorId);
     if (error) setState(!next);
-    else toast(next ? "새 소식을 알림으로 받습니다." : "소식 알림을 껐습니다.");
+    else toast(next ? t("새 소식을 알림으로 받습니다.") : t("소식 알림을 껐습니다."));
   }
   return (
     <button type="button" onClick={toggle} aria-pressed={state} className="text-[12px] font-semibold text-muted hover:text-ink">
-      {state ? "🔔 소식 알림 켜짐" : "🔕 소식 알림 받기"}
+      {state ? `🔔 ${t("소식 알림 켜짐")}` : `🔕 ${t("소식 알림 받기")}`}
     </button>
   );
 }
 
 // 리스트 공지(3.4): 가장 최근 공지 하나를 리스트 위에 보여준다
 export function ListNotice({ listId }: { listId: string }) {
+  const t = useT();
   const supabase = useMemo(() => createClient(), []);
   const [post, setPost] = useState<{ body: string; created_at: string } | null>(null);
   useEffect(() => {
@@ -89,7 +93,7 @@ export function ListNotice({ listId }: { listId: string }) {
   if (!post) return null;
   return (
     <div className="mt-4 rounded-xl border border-pin/30 bg-pin/5 px-3 py-2.5">
-      <p className="text-[12px] font-semibold text-pin">공지 · {ago(post.created_at)}</p>
+      <p className="text-[12px] font-semibold text-pin">{t("공지 · {ago}", { ago: ago(post.created_at) })}</p>
       <p className="mt-1 whitespace-pre-wrap text-[14px] leading-relaxed text-ink">{post.body}</p>
     </div>
   );
@@ -105,6 +109,7 @@ export function ItemExtras({
   isOwner: boolean;
   publicComments?: boolean;
 }) {
+  const t = useT();
   const supabase = useMemo(() => createClient(), []);
   const { me } = useShell();
   const [open, setOpen] = useState(false);
@@ -121,9 +126,9 @@ export function ItemExtras({
     <div>
       <div className="flex flex-wrap gap-2">
         <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} className="btn-quiet !py-1.5 !text-[13px]">
-          💬 {open ? "댓글 닫기" : `댓글${count ? ` (${count})` : ""}`}
+          💬 {open ? t("댓글 닫기") : count ? t("댓글 ({n})", { n: count }) : t("댓글")}
         </button>
-        {!isOwner && <DmButton userId={ownerId} listId={listId} itemId={itemId} label="큐레이터에게 묻기" className="btn-quiet !py-1.5 !text-[13px]" />}
+        {!isOwner && <DmButton userId={ownerId} listId={listId} itemId={itemId} label={t("큐레이터에게 묻기")} className="btn-quiet !py-1.5 !text-[13px]" />}
       </div>
       {open && (
         <div className="mt-3">

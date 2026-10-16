@@ -13,6 +13,7 @@ import { ProfileQr } from "./ProfileQr";
 import { Avatar } from "./ListExplorer";
 import { Panel } from "./shell/Panel";
 import { useMapScene, useShell, type Scene } from "./shell/context";
+import { useFormat, useT } from "@/lib/i18n/client";
 
 const VIS = { public: "공개", unlisted: "링크 공개", private: "나만 보기" } as const;
 
@@ -27,6 +28,8 @@ export function CuratorView({
   defaultOpen?: boolean;
 }) {
   const router = useRouter();
+  const t = useT();
+  const { num } = useFormat();
   const { toast } = useShell();
   const [creating, setCreating] = useState(false);
 
@@ -46,11 +49,7 @@ export function CuratorView({
       listIdOf: (i) => listOf.get(i.id)?.id,
       cardExtra: (i) => {
         const l = listOf.get(i.id);
-        return l ? (
-          <Link href={`/@${curator.handle}/${l.slug}`} className="flex items-center text-[14px] font-semibold text-teal">
-            ‘{l.title}’ 리스트 열기 <span className="ml-auto">›</span>
-          </Link>
-        ) : null;
+        return l ? <OpenListLink href={`/@${curator.handle}/${l.slug}`} title={l.title} /> : null;
       },
     };
   }, [lists, curator.handle]);
@@ -64,7 +63,7 @@ export function CuratorView({
       const id = await createEmptyList();
       router.push(`/me/lists/${id}`);
     } catch {
-      toast("리스트를 만들지 못했습니다. 새로고침 후 다시 시도하세요.");
+      toast(t("리스트를 만들지 못했습니다. 새로고침 후 다시 시도하세요."));
       setCreating(false);
     }
   }
@@ -85,7 +84,7 @@ export function CuratorView({
       if (navigator.share) await navigator.share({ title: curator.displayName, url });
       else {
         await navigator.clipboard.writeText(url);
-        toast("링크를 복사했습니다.");
+        toast(t("링크를 복사했습니다."));
       }
     } catch {
       /* 취소 */
@@ -93,8 +92,8 @@ export function CuratorView({
   }
 
   const title = isOwner
-    ? `내 지도 · 리스트 ${lists.length}개 · 장소 ${placeCount}곳`
-    : `${curator.displayName} · 리스트 ${lists.length}개`;
+    ? `${t("내 지도")} · ${t("리스트 {n}개", { n: lists.length })} · ${t("장소 {n}곳", { n: placeCount })}`
+    : `${curator.displayName} · ${t("리스트 {n}개", { n: lists.length })}`;
 
   return (
     <Panel title={title} defaultOpen={defaultOpen}>
@@ -104,7 +103,7 @@ export function CuratorView({
           <div className="min-w-0 leading-tight">
             <h1 className="font-display truncate text-[24px] font-semibold tracking-[-0.02em] text-ink">{curator.displayName}</h1>
             <p className="mt-0.5 truncate text-[13px] text-muted">
-              @{curator.handle} · 팔로워 {curator.followerCount.toLocaleString("ko-KR")}
+              @{curator.handle} · {t("팔로워 {count}", { n: curator.followerCount, count: num(curator.followerCount) })}
             </p>
           </div>
         </div>
@@ -112,15 +111,15 @@ export function CuratorView({
         <div className="mt-4 flex flex-wrap gap-2">
           {isOwner ? (
             <button type="button" onClick={newList} disabled={creating} className="btn-primary disabled:opacity-50">
-              {creating ? "만드는 중" : "새 리스트 만들기"}
+              {creating ? t("만드는 중") : t("새 리스트 만들기")}
             </button>
           ) : (
             <FollowButton curatorId={curator.id} handle={curator.handle} />
           )}
-          <button type="button" onClick={share} className="btn-quiet">공유</button>
+          <button type="button" onClick={share} className="btn-quiet">{t("공유")}</button>
           <ProfileQr url={shareUrl ?? `${typeof window === "undefined" ? "" : window.location.origin}/@${curator.handle}`} name={curator.displayName} />
           {!isOwner && <DmButton userId={curator.id} />}
-          {isOwner && <Link href="/me/stats" className="btn-quiet">통계</Link>}
+          {isOwner && <Link href="/me/stats" className="btn-quiet">{t("통계")}</Link>}
         </div>
         {!isOwner && (
           <div className="mt-2">
@@ -129,7 +128,7 @@ export function CuratorView({
         )}
         {isOwner && (
           <p className="mt-4 rounded-lg bg-surface px-3 py-2 text-[13px] text-ink/80">
-            위쪽 검색창에서 장소를 찾아 리스트에 담을 수 있어요.
+            {t("위쪽 검색창에서 장소를 찾아 리스트에 담을 수 있어요.")}
           </p>
         )}
       </header>
@@ -139,8 +138,8 @@ export function CuratorView({
         {lists.length === 0 ? (
           <p className="px-5 py-6 text-[15px] text-muted">
             {isOwner
-              ? "아직 리스트가 없습니다. 위쪽 검색창에서 장소를 찾아 담거나 ‘새 리스트 만들기’를 누르세요."
-              : "아직 공개한 리스트가 없습니다."}
+              ? t("아직 리스트가 없습니다. 위쪽 검색창에서 장소를 찾아 담거나 ‘새 리스트 만들기’를 누르세요.")
+              : t("아직 공개한 리스트가 없습니다.")}
           </p>
         ) : (
           <ul>
@@ -150,13 +149,13 @@ export function CuratorView({
                   <Link href={`/@${curator.handle}/${l.slug}`} className="min-w-0 flex-1">
                     <span className="block text-[17px] font-semibold text-ink">{l.title}</span>
                     <span className="mt-1 block text-[13px] text-muted">
-                      장소 {l.itemCount}곳
-                      {isOwner && ` · ${VIS[l.visibility]}`}
-                      {l.themes.length > 0 && ` · ${l.themes.map((t) => `#${t}`).join(" ")}`}
+                      {t("장소 {n}곳", { n: l.itemCount })}
+                      {isOwner && ` · ${t(VIS[l.visibility])}`}
+                      {l.themes.length > 0 && ` · ${l.themes.map((th) => `#${th}`).join(" ")}`}
                     </span>
                   </Link>
-                  {isOwner && <Link href={`/me/lists/${l.id}`} className="btn-quiet shrink-0 !px-3">편집</Link>}
-                  {isOwner && <Link href={`/me/lists/${l.id}/notice`} className="btn-quiet shrink-0 !px-3">공지</Link>}
+                  {isOwner && <Link href={`/me/lists/${l.id}`} className="btn-quiet shrink-0 !px-3">{t("편집")}</Link>}
+                  {isOwner && <Link href={`/me/lists/${l.id}/notice`} className="btn-quiet shrink-0 !px-3">{t("공지")}</Link>}
                   <Link href={`/@${curator.handle}/${l.slug}`} aria-hidden tabIndex={-1} className="shrink-0 text-[20px] text-muted">›</Link>
                 </div>
               </li>
@@ -165,5 +164,15 @@ export function CuratorView({
         )}
       </div>
     </Panel>
+  );
+}
+
+// 지도 핀 카드 아래: 그 핀이 든 리스트 열기(지도 장면을 다시 만들지 않도록 번역은 여기서)
+function OpenListLink({ href, title }: { href: string; title: string }) {
+  const t = useT();
+  return (
+    <Link href={href} className="flex items-center text-[14px] font-semibold text-teal">
+      {t("‘{title}’ 리스트 열기", { title })} <span className="ml-auto">›</span>
+    </Link>
   );
 }

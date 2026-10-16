@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { ago } from "@/lib/social";
 import { useShell } from "./shell/context";
 import { ConfirmButton } from "./ConfirmButton";
+import { useT } from "@/lib/i18n/client";
 
 type C = {
   id: string;
@@ -24,6 +25,7 @@ export const VISIBILITY_NOTE = "댓글은 댓글을 단 사람의 팔로워와 �
 // 대댓글: 위에 더해 원래 댓글을 쓴 사람에게도 보인다. 원래 댓글을 지우면 대댓글도 지워진다.
 // 누가 볼 수 있는지는 DB(RLS)가 정하고, 여기서는 받은 것만 그린다.
 export function Comments({ itemId, ownerId, onCount, publicComments }: { itemId: string; ownerId: string; onCount?: (n: number) => void; publicComments?: boolean }) {
+  const t = useT();
   const supabase = useMemo(() => createClient(), []);
   const { me } = useShell();
   const [rows, setRows] = useState<C[] | null>(null);
@@ -46,8 +48,8 @@ export function Comments({ itemId, ownerId, onCount, publicComments }: { itemId:
   }, [supabase, itemId, onCount]);
 
   useEffect(() => {
-    const t = window.setTimeout(load, 0);
-    return () => window.clearTimeout(t);
+    const timer = window.setTimeout(load, 0);
+    return () => window.clearTimeout(timer);
   }, [load]);
 
   async function post(body: string, parentId: string | null) {
@@ -88,22 +90,22 @@ export function Comments({ itemId, ownerId, onCount, publicComments }: { itemId:
         </p>
         <p className="mt-0.5 flex flex-wrap gap-2 text-[11px] text-muted">
           {ago(c.created_at)}
-          {c.hidden_by_owner && <span>숨김</span>}
+          {c.hidden_by_owner && <span>{t("숨김")}</span>}
           {me && !c.parent_id && (
             <button type="button" onClick={() => { setReplyTo(replyTo === c.id ? null : c.id); setReplyText(""); }} className="underline">
-              답글
+              {t("답글")}
             </button>
           )}
           {isOwner && c.author_id !== me?.id && (
             <button type="button" onClick={() => setHidden(c, !c.hidden_by_owner)} className="underline">
-              {c.hidden_by_owner ? "다시 보이기" : "숨기기"}
+              {c.hidden_by_owner ? t("다시 보이기") : t("숨기기")}
             </button>
           )}
           {c.author_id === me?.id && (
             <ConfirmButton
-              label="지우기"
-              question={repliesOf(c.id).length ? `이 댓글을 지우면 대댓글 ${repliesOf(c.id).length}개도 함께 지워져요. 지울까요?` : "이 댓글을 지울까요?"}
-              confirmLabel="지우기"
+              label={t("지우기")}
+              question={repliesOf(c.id).length ? t("이 댓글을 지우면 대댓글 {n}개도 함께 지워져요. 지울까요?", { n: repliesOf(c.id).length }) : t("이 댓글을 지울까요?")}
+              confirmLabel={t("지우기")}
               onConfirm={() => remove(c)}
               className="underline"
             />
@@ -115,9 +117,9 @@ export function Comments({ itemId, ownerId, onCount, publicComments }: { itemId:
 
   return (
     <div className="text-[13px]">
-      <p className="text-[12px] text-muted">{publicComments ? "이 리스트는 댓글 논의를 함께 보여 주는 예시라서, 댓글이 누구에게나 보여요." : VISIBILITY_NOTE}</p>
-      {!me && !publicComments && <p className="mt-1 text-muted">로그인하면 내가 팔로우하는 사람들의 댓글이 보여요.</p>}
-      {me && rows?.length === 0 && <p className="mt-1 text-muted">아직 내게 보이는 댓글이 없어요.</p>}
+      <p className="text-[12px] text-muted">{publicComments ? t("이 리스트는 댓글 논의를 함께 보여 주는 예시라서, 댓글이 누구에게나 보여요.") : t(VISIBILITY_NOTE)}</p>
+      {!me && !publicComments && <p className="mt-1 text-muted">{t("로그인하면 내가 팔로우하는 사람들의 댓글이 보여요.")}</p>}
+      {me && rows?.length === 0 && <p className="mt-1 text-muted">{t("아직 내게 보이는 댓글이 없어요.")}</p>}
       <ul className="mt-2 grid max-h-60 gap-2.5 overflow-y-auto">
         {tops.map((c) => (
           <li key={c.id} className="grid gap-1.5">
@@ -141,12 +143,12 @@ export function Comments({ itemId, ownerId, onCount, publicComments }: { itemId:
                   onChange={(e) => setReplyText(e.target.value)}
                   maxLength={1000}
                   autoFocus
-                  placeholder={publicComments ? "답글 (누구에게나 보여요)" : "답글 (내 팔로워와 원래 댓글 쓴 사람에게 보여요)"}
-                  aria-label="답글"
+                  placeholder={publicComments ? t("답글 (누구에게나 보여요)") : t("답글 (내 팔로워와 원래 댓글 쓴 사람에게 보여요)")}
+                  aria-label={t("답글")}
                   className="field !py-1.5 !text-[13px]"
                 />
                 <button type="submit" disabled={busy || !replyText.trim()} className="btn-primary shrink-0 !px-3 !py-1.5 !text-[13px] disabled:opacity-40">
-                  답글
+                  {t("답글")}
                 </button>
               </form>
             )}
@@ -165,17 +167,17 @@ export function Comments({ itemId, ownerId, onCount, publicComments }: { itemId:
             value={text}
             onChange={(e) => setText(e.target.value)}
             maxLength={1000}
-            placeholder="댓글 남기기"
-            aria-label="댓글"
+            placeholder={t("댓글 남기기")}
+            aria-label={t("댓글")}
             className="field !py-1.5 !text-[13px]"
           />
           <button type="submit" disabled={busy || !text.trim()} className="btn-primary shrink-0 !px-3 !py-1.5 !text-[13px] disabled:opacity-40">
-            남기기
+            {t("남기기")}
           </button>
         </form>
       ) : (
         <Link href={`/login?next=${encodeURIComponent(typeof window === "undefined" ? "/" : window.location.pathname)}`} className="mt-2 inline-block font-semibold text-teal">
-          로그인
+          {t("로그인")}
         </Link>
       )}
     </div>

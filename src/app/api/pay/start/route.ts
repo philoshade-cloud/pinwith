@@ -68,7 +68,7 @@ export async function POST(req: Request) {
   if (error || !topup) return Response.json({ error: "insert" }, { status: 500 });
 
   const origin = new URL(req.url).origin;
-  const orderName = `PinWith 광고비 충전 · ${biz.place_name}`.slice(0, 100);
+  const orderName = `PinWith ad credit (광고비 충전) · ${biz.place_name}`.slice(0, 100);
   const form = new URLSearchParams({
     mode: "payment",
     success_url: `${origin}/biz/place?tab=billing&paid=stripe`,

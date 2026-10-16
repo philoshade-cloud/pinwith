@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ByLang } from "@/components/ByLang";
 
 export const metadata: Metadata = { title: "개인정보처리방침" };
 
 // 출시 전 법률 검토를 받는다. 도메인이 정해지면 문의 이메일을 더한다.
 export default function Privacy() {
+  return <ByLang ko={<PrivacyKo />} en={<PrivacyEn />} />;
+}
+
+function PrivacyKo() {
   return (
     <>
       <h1>개인정보처리방침</h1>
@@ -162,30 +167,181 @@ export default function Privacy() {
       <h2>11. 바뀌면</h2>
       <p>이 방침이 바뀌면 시행 7일 전(이용자 권리에 중요한 변경은 30일 전)에 서비스 안에서 알립니다.</p>
 
-      <hr />
-      <h2>Privacy Policy (English summary)</h2>
+    </>
+  );
+}
+
+function PrivacyEn() {
+  return (
+    <>
+      <h1>Privacy Policy</h1>
+      <p className="note">Effective date: October 16, 2026</p>
+
       <p>
-        PinWith is operated by STRATO TRADINGS PTE. LTD. (Singapore, UEN 202402989G), 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874.
-        Data protection officer: Adrian Kim. Contact us through the in-app <Link href="/support?type=question">support form</Link>.
+        PinWith (the “Service”) collects only the personal information the Service actually needs and uses it only for the purposes described below. This
+        policy was written with the laws of the countries where our users live in mind, including Korea’s Personal Information Protection Act, Singapore’s
+        Personal Data Protection Act (PDPA) and the EU General Data Protection Regulation (GDPR).
       </p>
+
+      <h2>1. Operator and contact</h2>
+      <ul>
+        <li>Operating company: STRATO TRADINGS PTE. LTD. (Singapore, company registration number UEN 202402989G)</li>
+        <li>Address: 5008 Ang Mo Kio Avenue 5, #04-09, TechPlace II, Singapore 569874</li>
+        <li>
+          Privacy questions and requests: <Link href="/support?type=question">support form</Link> (you can send it without signing in). Please include an
+          email address where we can reply.
+        </li>
+        <li>Data Protection Officer: Adrian Kim (CEO; contact via the support form above)</li>
+      </ul>
+
+      <h2>2. Information we collect</h2>
       <p>
-        We collect: account data (email; name and photo from Google sign-in), profile and content you create (lists, places, notes, comments, messages, follows,
-        likes, co-editing history), link-usage events, a random device ID (statistics only if you choose “Allow all”; also used to count each viewer once for ads
-        and partner billing), error reports (message, page URL, browser type), daily aggregate usage counts, push-notification endpoints if you turn them on,
-        reservation inquiries (name, phone, visit details, notes, messages), business verification data and top-up records, and curator payout details. IP
-        addresses are kept for at most one day for rate limiting. Whether a tap happened within 500 m of a place is computed on your device; we never store your
-        coordinates. Card numbers go directly to Stripe.
+        <b>When you browse without an account</b>
       </p>
+      <ul>
+        <li>
+          <b>Link usage records</b>: how many times a shared link was opened, taps on place, directions and map-app buttons, and the address of the page you
+          came from (referrer). Whether a tap happened near the store (within 500 m) is calculated only on your device and stored as a simple yes/no; your
+          location coordinates are never sent to or stored on our servers.
+        </li>
+        <li>
+          <b>Device ID</b>: a random ID generated for each browser and stored on your device, used to count repeated views and clicks by the same person only
+          once (ad impression counts, preventing duplicate partnership charges to stores, and preventing abuse). If you choose “Essential only”, the device ID
+          used for visit statistics is deleted.
+        </li>
+        <li>
+          <b>IP address</b>: our servers receive it as part of the connection. We do not store it, except that it is kept together with a request count for
+          up to one day to block bursts of support requests, payment starts or notification sign-ups in a short period.
+        </li>
+        <li>
+          <b>Error records</b>: when an error occurs on screen or on the server, we store the error details, the page address at that time and the browser
+          type (user agent) so we can fix it. These records do not include your name, email or similar details.
+        </li>
+        <li>
+          <b>Usage totals</b>: we store only daily totals of how many times Google Maps features (place cards, search, etc.) were used. We do not store who
+          used them.
+        </li>
+      </ul>
       <p>
-        Reservation details are shared only with the business you contact; curators see counts and statuses only. Comments are visible to the commenter’s
-        followers and the list owner, except on a few example lists marked as open to everyone. We do not sell personal data.
+        <b>Registered users</b>
       </p>
+      <ul>
+        <li><b>Account</b>: email address, and if you sign in with Google, the name and profile photo Google provides</li>
+        <li><b>Profile</b>: handle, name, bio, profile photo (if you uploaded one)</li>
+        <li><b>Content you create</b>: lists, places, notes, sections, tags, announcements, follows, likes, comments, and co-editing history (who changed what and when)</li>
+        <li><b>Messages</b>: messages exchanged with other users and whether you have blocked someone</li>
+        <li><b>Notifications</b>: notifications you received, and if you turn on phone or computer notifications, that device’s notification endpoint (a value created by the browser) and browser type</li>
+        <li><b>Reservation inquiries</b>: name, contact details, visit date, time and party size, requests, messages exchanged with the store, and status (confirmed, visited, no-show, cancelled)</li>
+        <li><b>Support requests and reports</b>: what you sent, an email address for our reply (optional), the list you reported, and the page address you sent it from</li>
+      </ul>
       <p>
-        Processors: Supabase (data stored in Tokyo), Vercel, Google (Sign-in, Maps Platform, AdSense when enabled), Stripe, Wise/PayPal/banks, browser push
-        services, OpenFreeMap. Retention: account data until deletion; link events up to 2 years; reservation contact details 1 year after the visit; rate-limit
-        records 1 day; payment records 5 years. You may access, correct, delete, restrict or export your data, withdraw consent, and complain to your data
-        protection authority. Users under 14 (or the local age of digital consent) may not register.
+        <b>Commercial users (stores and monetizing curators)</b>
       </p>
+      <ul>
+        <li>
+          <b>Store accounts</b>: the store (Google place), business name, business registration number, contact person’s name and contact details, supporting
+          documents such as a business registration certificate, reservation settings, billing conditions, ad credit top-up and payment records, and dispute
+          details
+        </li>
+        <li>
+          <b>Curator payout information</b>: the recipient’s legal name and name in English, payout method (Wise, PayPal or bank), account number or account
+          email, SWIFT code, country and currency, date of birth and mobile number (when the money transfer provider requires them, such as for payouts in
+          Korean won), payout requests and payout records, and dispute details
+        </li>
+      </ul>
+      <p>Card numbers are collected directly by our payment provider (Stripe); PinWith never sees or stores them.</p>
+
+      <h2>3. How we use information and our legal bases</h2>
+      <ul>
+        <li><b>Providing the Service</b> (sign-in, creating and sharing lists, comments and messages, co-editing, notifications) — performance of our contract with you</li>
+        <li><b>Curator statistics, ad revenue sharing, and store partnership settlement and payouts</b> — performance of contract</li>
+        <li><b>Delivering and handling reservation inquiries</b>, and checking no-show and cancellation rates (used only as per-store statistics, never to rate individual guests) — performance of contract</li>
+        <li><b>Verifying that a store actually operates</b> (using supporting documents and the store’s phone number) — performance of contract and fraud prevention</li>
+        <li><b>Preventing fraud and abuse, fixing errors, improving the Service, and managing costs</b> — legitimate interests</li>
+        <li><b>Keeping tax and accounting records</b> — legal obligation</li>
+        <li><b>Device ID for visit statistics, and personalized ads</b> — consent (“Allow all”). If you do not consent, you will see only non-personalized ads.</li>
+      </ul>
+      <p>We do not use information for any purpose other than those above, and we do not sell it.</p>
+
+      <h2>4. Information visible to other users</h2>
+      <ul>
+        <li><b>Public profiles and public lists</b>: your handle, name, bio and profile photo, and lists set to public or link-only, can be seen by anyone who has the link.</li>
+        <li>
+          <b>Comments</b>: visible to the commenter’s followers and to the list owner (replies are also visible to the author of the original comment).
+          Comments on a few example lists designated by the operator are visible to everyone, and this is indicated in the comment area of those lists.
+        </li>
+        <li><b>Co-editing</b>: people who edit a list together can see each other’s editing history.</li>
+        <li>
+          <b>The store you send a reservation inquiry to</b>: your name, contact details, visit details, requests and messages are delivered only to that
+          store. The store may not use them for any purpose other than handling the reservation (for example, marketing contact).
+        </li>
+        <li><b>The curator who made the list</b>: sees only the number and status of reservations that came through their list, not guests’ names or contact details.</li>
+        <li><b>Store accounts</b>: see public lists that include their store, those curators’ handles, and engagement figures.</li>
+      </ul>
+
+      <h2>5. Service providers and international transfers</h2>
+      <p>
+        PinWith is a Singapore company and entrusts the processing of information to the companies below in order to provide the Service. Information is
+        transferred over the internet while you use the Service and is processed for the retention periods below. If you do not want your information
+        transferred abroad, you can choose not to register or delete your account, but in that case you will not be able to use the Service.
+      </p>
+      <ul>
+        <li><b>Supabase</b> (US company, data stored in Tokyo, Japan) — database, sign-in and file storage: all information in section 2 above</li>
+        <li><b>Vercel</b> (US company, servers in Tokyo, Japan and elsewhere) — website hosting: connection information</li>
+        <li><b>Google</b> (US) — Google sign-in, place search and place information (Google Maps Platform), ads (Google AdSense, once introduced): sign-in information, connection information, ad consent status</li>
+        <li><b>Stripe</b> (US and Singapore) — card payments for stores’ ad credit: payment information, store name and email</li>
+        <li><b>Wise, PayPal or banks</b> — transfers to curators: payout information</li>
+        <li>
+          <b>Browser notification services</b> (the company behind your browser, such as Google, Apple or Mozilla) — delivering phone and computer
+          notifications: notification title and content
+        </li>
+        <li><b>OpenFreeMap / OpenStreetMap</b> — base map imagery: no personal information is sent</li>
+      </ul>
+
+      <h2>6. Retention and deletion</h2>
+      <ul>
+        <li>Account and content you create: until you delete your account. When you delete it, we erase it immediately (including comments you left on other people’s lists).</li>
+        <li>Link usage records: up to 2 years. After that, only statistics that cannot identify individuals are kept.</li>
+        <li>Names, contact details and messages in reservation inquiries: 1 year from the visit date. They are then deleted automatically and only count statistics are kept.</li>
+        <li>Rate-limit records containing IP addresses: up to 1 day</li>
+        <li>Error records: up to 1 year after the error is fixed</li>
+        <li>Store supporting documents: until the store account is closed (after review, viewable only by the operator)</li>
+        <li>Payment, payout and settlement records: for the period required by tax and accounting laws (5 years under Singapore law)</li>
+      </ul>
+      <p>When a retention period ends, we delete the data from our database so that it cannot be recovered. Copies remaining in backups are removed as backups rotate.</p>
+
+      <h2>7. How we keep information safe</h2>
+      <ul>
+        <li>All communication is encrypted (HTTPS), and the database uses row-level access controls so that only you and authorized people can read your data.</li>
+        <li>Operator functions and server keys are available only to designated operators, and store supporting documents are kept in private storage.</li>
+        <li>Bursts of requests in a short period are blocked automatically, and errors are logged so we can fix them quickly.</li>
+      </ul>
+
+      <h2>8. Your rights</h2>
+      <ul>
+        <li>You can access, correct and delete your information, ask us to stop processing it, or take a copy with you (portability).</li>
+        <li>You can delete your account immediately at any time with <b>Delete account</b> on your profile screen; please send any other requests through the support form above. We will respond within the period required by law.</li>
+        <li>You can withdraw consent at any time. If you clear your browser storage, the consent choice will appear again.</li>
+        <li>
+          If you are not satisfied with our response, you can file a complaint with the data protection authority in your country (for example, (Korea)
+          Personal Information Infringement Report Center (118), Personal Information Dispute Mediation Committee (1833-6972) / Singapore PDPC / data
+          protection authorities in each European country).
+        </li>
+        <li>Users in certain US states: PinWith does not sell personal information. To keep your information from being used for personalized ads, choose “Essential only”.</li>
+      </ul>
+
+      <h2>9. Cookies and device storage</h2>
+      <ul>
+        <li><b>Strictly necessary</b>: sign-in cookies, your consent choice, display settings. These cannot be turned off.</li>
+        <li><b>Only with your consent</b>: device ID for visit statistics, personalized ads (including ad companies’ cookies)</li>
+      </ul>
+      <p>On your first visit, you can choose “Essential only” or “Allow all” at the bottom of the screen. Once ads are added, a separate consent window set by the ad company may appear in the EU, the UK and elsewhere.</p>
+
+      <h2>10. Children</h2>
+      <p>Children under 14 (or under 13 to 16, depending on the country) may not register. If we learn of such an account, we will delete it.</p>
+
+      <h2>11. Changes</h2>
+      <p>If this policy changes, we will notify you within the Service 7 days before the change takes effect (30 days before for changes significant to your rights).</p>
     </>
   );
 }

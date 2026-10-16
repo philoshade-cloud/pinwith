@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useT } from "@/lib/i18n/client";
 
 // 브라우저 확인 창(confirm/prompt) 대신 화면 안에서 묻는다. 일부 휴대폰·인앱 브라우저는 확인 창을 띄우지 않아
 // 버튼이 아무 반응 없는 것처럼 보이기 때문이다.
 export function ConfirmButton({
-  label, question, confirmLabel = "확인", onConfirm, className = "btn-quiet !px-3 !py-1 !text-[12px]", withNote, noteDefault = "", noteRequired,
+  label, question, confirmLabel, onConfirm, className = "btn-quiet !px-3 !py-1 !text-[12px]", withNote, noteDefault = "", noteRequired,
 }: {
   label: React.ReactNode;
   question: string;
@@ -19,6 +20,7 @@ export function ConfirmButton({
   // 메모를 비우면 확인 버튼을 누를 수 없게
   noteRequired?: boolean;
 }) {
+  const t = useT();
   const [open, setOpen] = useState(false);
   const [note, setNote] = useState("");
   const [busy, setBusy] = useState(false);
@@ -65,9 +67,9 @@ export function ConfirmButton({
           }}
           className="btn-primary !px-3 !py-1 !text-[13px] disabled:opacity-50"
         >
-          {busy ? "처리 중" : confirmLabel}
+          {busy ? t("처리 중") : (confirmLabel ?? t("확인"))}
         </button>
-        <button type="button" onClick={() => setOpen(false)} className="btn-quiet !px-3 !py-1 !text-[13px]">취소</button>
+        <button type="button" onClick={() => setOpen(false)} className="btn-quiet !px-3 !py-1 !text-[13px]">{t("취소")}</button>
       </span>
     </span>
   );

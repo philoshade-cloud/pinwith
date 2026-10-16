@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import type { ListItem } from "@/lib/types";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { useMapScene, type Scene } from "./shell/context";
+import { tr, useFormat, useT } from "@/lib/i18n/client";
 
 type Row = {
   id: string;
@@ -20,12 +21,14 @@ type Row = {
 
 const ago = (iso: string) => {
   const d = Math.floor((Date.now() - new Date(iso).getTime()) / 864e5);
-  return d <= 0 ? "오늘" : d < 7 ? `${d}일 전` : d < 30 ? `${Math.floor(d / 7)}주 전` : `${Math.floor(d / 30)}달 전`;
+  return d <= 0 ? tr("오늘") : d < 7 ? tr("{n}일 전", { n: d }) : d < 30 ? tr("{n}주 전", { n: Math.floor(d / 7) }) : tr("{n}달 전", { n: Math.floor(d / 30) });
 };
 
 // /following — 내가 팔로우하는 사람들의 공개 리스트. 지도에는 그 리스트들의 핀을 모두 보여준다.
 export function FollowingView() {
   const router = useRouter();
+  const t = useT();
+  const { num } = useFormat();
   const supabase = useMemo(() => createClient(), []);
   const [following, setFollowing] = useState<Row[] | null>(null);
   const [liked, setLiked] = useState<Row[]>([]);
@@ -92,9 +95,7 @@ export function FollowingView() {
       cardExtra: (i) => {
         const l = listOf.get(i.id);
         return l?.owner ? (
-          <Link href={`/@${l.owner.handle}/${l.slug}`} className="flex items-center text-[14px] font-semibold text-teal">
-            {l.owner.display_name || l.owner.handle}의 ‘{l.title}’ 열기 <span className="ml-auto">›</span>
-          </Link>
+          <OpenListLink href={`/@${l.owner.handle}/${l.slug}`} owner={l.owner.display_name || l.owner.handle} title={l.title} />
         ) : null;
       },
     };
@@ -104,37 +105,37 @@ export function FollowingView() {
   if (!rows) return <PanelLoading />;
 
   return (
-    <Panel title={tab === "following" ? `팔로잉 리스트 · ${rows.length}개` : `좋아요한 리스트 · ${rows.length}개`}>
+    <Panel title={tab === "following" ? t("팔로잉 리스트 · {n}개", { n: rows.length }) : t("좋아요한 리스트 · {n}개", { n: rows.length })}>
       <div className="px-5 pb-8 pt-4">
         <div className="mb-3 flex gap-1.5" role="tablist">
-          {(["following", "liked"] as const).map((t) => (
+          {(["following", "liked"] as const).map((k) => (
             <button
-              key={t}
+              key={k}
               type="button"
               role="tab"
-              aria-selected={tab === t}
-              onClick={() => setTab(t)}
-              className={`rounded-full px-3 py-1.5 text-[13px] font-semibold ${tab === t ? "bg-ink text-white" : "bg-surface text-ink"}`}
+              aria-selected={tab === k}
+              onClick={() => setTab(k)}
+              className={`rounded-full px-3 py-1.5 text-[13px] font-semibold ${tab === k ? "bg-ink text-white" : "bg-surface text-ink"}`}
             >
-              {t === "following" ? "팔로잉" : `좋아요${liked.length ? ` ${liked.length}` : ""}`}
+              {k === "following" ? t("팔로잉") : `${t("좋아요@@탭")}${liked.length ? ` ${liked.length}` : ""}`}
             </button>
           ))}
         </div>
         {rows.length === 0 ? (
           <div className="py-6 text-[15px] text-muted">
             {tab === "liked"
-              ? "아직 좋아요한 리스트가 없어요."
+              ? t("아직 좋아요한 리스트가 없어요.")
               : people === 0
-                ? "아직 팔로우한 사람이 없어요."
-                : "팔로우한 사람들이 아직 공개 리스트를 만들지 않았어요."}
-            <Link href="/explore" className="btn-primary mt-4">타인의 핀 둘러보기</Link>
+                ? t("아직 팔로우한 사람이 없어요.")
+                : t("팔로우한 사람들이 아직 공개 리스트를 만들지 않았어요.")}
+            <Link href="/explore" className="btn-primary mt-4">{t("타인의 핀 둘러보기")}</Link>
           </div>
         ) : (
           <>
             <p className="text-[13px] text-muted">
               {tab === "following"
-                ? `팔로우하는 ${people}명의 리스트를 최근에 바뀐 순서로 보여줘요. 지도에는 모든 핀이 함께 보입니다.`
-                : "좋아요를 누른 리스트예요. 지도에는 모든 핀이 함께 보입니다."}
+                ? t("팔로우하는 {n}명의 리스트를 최근에 바뀐 순서로 보여줘요. 지도에는 모든 핀이 함께 보입니다.", { n: people })
+                : t("좋아요를 누른 리스트예요. 지도에는 모든 핀이 함께 보입니다.")}
             </p>
             <ul className="mt-3 divide-y divide-rule border-y border-rule">
               {rows.map((l) => (
@@ -142,8 +143,8 @@ export function FollowingView() {
                   <Link href={`/@${l.owner?.handle}/${l.slug}${tab === "liked" ? "?from=liked" : ""}`} className="block py-3.5 hover:bg-surface/60">
                     <span className="block text-[17px] font-semibold text-ink">{l.title}</span>
                     <span className="mt-1 block text-[13px] text-muted">
-                      {l.owner?.display_name || `@${l.owner?.handle}`} · 장소 {l.list_items.length}곳 · {ago(l.updated_at)}
-                      {l.like_count > 0 && ` · 좋아요 ${l.like_count.toLocaleString("ko-KR")}`}
+                      {l.owner?.display_name || `@${l.owner?.handle}`} · {t("장소 {n}곳", { n: l.list_items.length })} · {ago(l.updated_at)}
+                      {l.like_count > 0 && ` · ${t("좋아요 {count}", { n: l.like_count, count: num(l.like_count) })}`}
                     </span>
                   </Link>
                 </li>
@@ -153,5 +154,15 @@ export function FollowingView() {
         )}
       </div>
     </Panel>
+  );
+}
+
+// 지도 핀 카드 아래: 그 핀이 든 리스트 열기(지도 장면을 다시 만들지 않도록 번역은 여기서)
+function OpenListLink({ href, owner, title }: { href: string; owner: string; title: string }) {
+  const t = useT();
+  return (
+    <Link href={href} className="flex items-center text-[14px] font-semibold text-teal">
+      {t("{owner}의 ‘{title}’ 열기", { owner, title })} <span className="ml-auto">›</span>
+    </Link>
   );
 }

@@ -1,0 +1,27 @@
+// 영어 사전(공통): 여러 화면에서 쓰는 짧은 문구
+export const common: Record<string, string> = {
+  "확인": "OK",
+  "취소": "Cancel",
+  "처리 중": "Working…",
+  "저장": "Save",
+  "닫기": "Close",
+  "불러오는 중": "Loading",
+  "불러오는 중…": "Loading…",
+  "방금": "just now",
+  "{n}분 전": "{n} min ago",
+  "{n}시간 전": "{n}h ago|{n}h ago",
+  "{n}일 전": "{n} day ago|{n} days ago",
+  "{n}주 전": "{n} week ago|{n} weeks ago",
+  "{n}달 전": "{n} month ago|{n} months ago",
+  "언어": "Language",
+  "새 리스트": "New list",
+  // 같은 한국어, 다른 자리
+  "취소됨": "Cancelled",
+  "거절됨": "Declined",
+  "해제됨": "Off",
+  "검색어 지우기": "Clear search",
+  "지우기@@사진": "Remove",
+  "좋아요@@탭": "Liked",
+  "메시지@@버튼": "Message",
+  "메시지@@입력": "Message",
+};

@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useShell } from "./shell/context";
 import { ConfirmButton } from "./ConfirmButton";
+import { useFormat, useT, useTRich } from "@/lib/i18n/client";
 
 type Invite = {
   list_id: string;
@@ -15,6 +16,7 @@ type Invite = {
 
 // 내가 공동 편집자인 리스트와 받은 초대(3.10). 내 지도 화면에 보인다.
 export function CoEditedLists() {
+  const t = useT();
   const supabase = useMemo(() => createClient(), []);
   const { me, toast } = useShell();
   const [rows, setRows] = useState<Invite[]>([]);
@@ -30,8 +32,8 @@ export function CoEditedLists() {
   }, [supabase, me]);
 
   useEffect(() => {
-    const t = window.setTimeout(load, 0);
-    return () => window.clearTimeout(t);
+    const timer = window.setTimeout(load, 0);
+    return () => window.clearTimeout(timer);
   }, [load]);
 
   async function answer(listId: string, accept: boolean) {
@@ -40,34 +42,34 @@ export function CoEditedLists() {
       ? supabase.from("list_editors").update({ accepted_at: new Date().toISOString() }).eq("list_id", listId).eq("user_id", me.id)
       : supabase.from("list_editors").delete().eq("list_id", listId).eq("user_id", me.id);
     const { error } = await q;
-    if (error) return toast("처리하지 못했습니다.");
-    toast(accept ? "공동 편집자가 됐습니다." : "초대를 거절했습니다.");
+    if (error) return toast(t("처리하지 못했습니다."));
+    toast(accept ? t("공동 편집자가 됐습니다.") : t("초대를 거절했습니다."));
     load();
   }
 
   if (rows.length === 0) return null;
   return (
     <section className="border-t border-rule px-5 py-4" aria-labelledby="coedit-h">
-      <h2 id="coedit-h" className="text-[13px] font-semibold text-teal">함께 편집하는 리스트</h2>
+      <h2 id="coedit-h" className="text-[13px] font-semibold text-teal">{t("함께 편집하는 리스트")}</h2>
       <ul className="mt-2 grid gap-2">
         {rows.map((r) => (
           <li key={r.list_id} className="flex items-center gap-2 text-[14px]">
             <span className="min-w-0 flex-1">
               <span className="block truncate font-semibold text-ink">{r.list?.title}</span>
               <span className="block truncate text-[12px] text-muted">
-                {r.list?.owner?.display_name || r.list?.owner?.handle}의 리스트{!r.accepted_at && " · 초대받음"}
-                {r.list?.monetize && ` · 내 수익 배분 ${r.revenue_share_pct}%`}
+                {t("{name}의 리스트", { name: r.list?.owner?.display_name || r.list?.owner?.handle })}{!r.accepted_at && ` · ${t("초대받음")}`}
+                {r.list?.monetize && ` · ${t("내 수익 배분 {pct}%", { pct: r.revenue_share_pct })}`}
               </span>
             </span>
             {r.accepted_at ? (
               <>
-                <Link href={`/@${r.list?.owner?.handle}/${r.list?.slug}`} className="btn-quiet shrink-0 !px-3">보기</Link>
-                <Link href={`/me/lists/${r.list_id}`} className="btn-quiet shrink-0 !px-3">편집</Link>
+                <Link href={`/@${r.list?.owner?.handle}/${r.list?.slug}`} className="btn-quiet shrink-0 !px-3">{t("보기")}</Link>
+                <Link href={`/me/lists/${r.list_id}`} className="btn-quiet shrink-0 !px-3">{t("편집")}</Link>
               </>
             ) : (
               <>
-                <button type="button" onClick={() => answer(r.list_id, true)} className="btn-primary shrink-0 !px-3">수락</button>
-                <button type="button" onClick={() => answer(r.list_id, false)} className="btn-quiet shrink-0 !px-3">거절</button>
+                <button type="button" onClick={() => answer(r.list_id, true)} className="btn-primary shrink-0 !px-3">{t("수락")}</button>
+                <button type="button" onClick={() => answer(r.list_id, false)} className="btn-quiet shrink-0 !px-3">{t("거절")}</button>
               </>
             )}
           </li>
@@ -87,6 +89,7 @@ type Person = { id: string; handle: string; display_name: string };
 
 // 리스트 편집 화면: 공동 편집자 관리(주인만). 서로 팔로우하는 사람만 초대할 수 있다.
 export function EditorsManager({ listId, monetize }: { listId: string; monetize: boolean }) {
+  const t = useT();
   const supabase = useMemo(() => createClient(), []);
   const { me, toast } = useShell();
   const [editors, setEditors] = useState<Editor[]>([]);
@@ -111,16 +114,16 @@ export function EditorsManager({ listId, monetize }: { listId: string; monetize:
   }, [supabase, me, listId]);
 
   useEffect(() => {
-    const t = window.setTimeout(load, 0);
-    return () => window.clearTimeout(t);
+    const timer = window.setTimeout(load, 0);
+    return () => window.clearTimeout(timer);
   }, [load]);
 
   async function invite() {
     if (!me || !pick) return;
     const { error } = await supabase.from("list_editors").insert({ list_id: listId, user_id: pick, invited_by: me.id });
-    if (error) return toast("초대하지 못했습니다. 서로 팔로우하는 사이인지 확인하세요.");
+    if (error) return toast(t("초대하지 못했습니다. 서로 팔로우하는 사이인지 확인하세요."));
     setPick("");
-    toast("초대를 보냈습니다.");
+    toast(t("초대를 보냈습니다."));
     load();
   }
 
@@ -138,9 +141,9 @@ export function EditorsManager({ listId, monetize }: { listId: string; monetize:
 
   return (
     <section className="mt-10" aria-labelledby="editors-h">
-      <h2 id="editors-h" className="text-[15px] font-semibold text-ink">공동 편집자</h2>
+      <h2 id="editors-h" className="text-[15px] font-semibold text-ink">{t("공동 편집자")}</h2>
       <p className="mt-1 text-[13px] text-muted">
-        서로 팔로우하는 사람을 초대하면 함께 장소를 추가·이동·삭제하고 메모를 씁니다. 공개 범위와 주소는 주인만 바꿉니다.
+        {t("서로 팔로우하는 사람을 초대하면 함께 장소를 추가·이동·삭제하고 메모를 씁니다. 공개 범위와 주소는 주인만 바꿉니다.")}
       </p>
       {editors.length > 0 && (
         <ul className="mt-3 divide-y divide-rule border-y border-rule">
@@ -148,10 +151,10 @@ export function EditorsManager({ listId, monetize }: { listId: string; monetize:
             <li key={e.user_id} className="flex items-center gap-2 py-2.5 text-[14px]">
               <span className="min-w-0 flex-1">
                 <span className="block truncate font-semibold text-ink">{e.user?.display_name || e.user?.handle}</span>
-                <span className="block text-[12px] text-muted">{e.accepted_at ? "편집 중" : "초대 보냄"}</span>
+                <span className="block text-[12px] text-muted">{e.accepted_at ? t("편집 중") : t("초대 보냄")}</span>
               </span>
-              {monetize && <label className="flex shrink-0 items-center gap-1 text-[12px] text-muted" title="이 리스트에서 생기는 수익 중 이 사람 몫">
-                수익
+              {monetize && <label className="flex shrink-0 items-center gap-1 text-[12px] text-muted" title={t("이 리스트에서 생기는 수익 중 이 사람 몫")}>
+                {t("수익")}
                 <input
                   type="number"
                   min={0}
@@ -159,31 +162,31 @@ export function EditorsManager({ listId, monetize }: { listId: string; monetize:
                   defaultValue={e.revenue_share_pct}
                   onBlur={(ev) => setShare(e.user_id, Number(ev.target.value))}
                   className="field !w-16 !px-2 !py-1"
-                  aria-label="수익 배분(%)"
+                  aria-label={t("수익 배분(%)")}
                 />
                 %
               </label>}
-              <ConfirmButton label="빼기" question="이 사람을 공동 편집자에서 뺄까요? 이미 담은 장소와 메모는 리스트에 남아요." confirmLabel="빼기" onConfirm={() => remove(e.user_id)} className="btn-quiet shrink-0 !px-2.5" />
+              <ConfirmButton label={t("빼기")} question={t("이 사람을 공동 편집자에서 뺄까요? 이미 담은 장소와 메모는 리스트에 남아요.")} confirmLabel={t("빼기")} onConfirm={() => remove(e.user_id)} className="btn-quiet shrink-0 !px-2.5" />
             </li>
           ))}
         </ul>
       )}
       {candidates.length > 0 ? (
         <div className="mt-3 flex gap-2">
-          <select value={pick} onChange={(e) => setPick(e.target.value)} className="field" aria-label="초대할 사람">
-            <option value="">서로 팔로우하는 사람 고르기</option>
+          <select value={pick} onChange={(e) => setPick(e.target.value)} className="field" aria-label={t("초대할 사람")}>
+            <option value="">{t("서로 팔로우하는 사람 고르기")}</option>
             {candidates.map((m) => (
               <option key={m.id} value={m.id}>{m.display_name || m.handle} (@{m.handle})</option>
             ))}
           </select>
-          <button type="button" onClick={invite} disabled={!pick} className="btn-primary shrink-0 disabled:opacity-40">초대</button>
+          <button type="button" onClick={invite} disabled={!pick} className="btn-primary shrink-0 disabled:opacity-40">{t("초대")}</button>
         </div>
       ) : (
-        <p className="mt-3 text-[13px] text-muted">초대할 수 있는 사람이 없습니다. 서로 팔로우하는 사이여야 해요.</p>
+        <p className="mt-3 text-[13px] text-muted">{t("초대할 수 있는 사람이 없습니다. 서로 팔로우하는 사이여야 해요.")}</p>
       )}
       {monetize && (
         <p className="mt-2 text-[12px] text-muted">
-          수익 배분은 초대한 사람(주인)이 정하고, 편집자는 자기 몫을 볼 수 있어요. 기본값은 주인 100%이며, 바꾸면 편집자에게 알림이 가요.
+          {t("수익 배분은 초대한 사람(주인)이 정하고, 편집자는 자기 몫을 볼 수 있어요. 기본값은 주인 100%이며, 바꾸면 편집자에게 알림이 가요.")}
         </p>
       )}
     </section>
@@ -192,6 +195,7 @@ export function EditorsManager({ listId, monetize }: { listId: string; monetize:
 
 // 공동 편집자에게: 수익화가 켜진 리스트면 내 몫(주인이 바꾸면 바로 반영)
 export function MyShare({ listId }: { listId: string }) {
+  const t = useT();
   const supabase = useMemo(() => createClient(), []);
   const { me } = useShell();
   const [share, setShare] = useState<number | null>(null);
@@ -211,17 +215,21 @@ export function MyShare({ listId }: { listId: string }) {
   if (share === null) return null;
   return (
     <p className="mt-10 rounded-xl bg-surface px-4 py-3 text-[14px] text-ink">
-      이 리스트에서 내 수익 배분: <b>{share}%</b>
-      <span className="mt-0.5 block text-[12px] text-muted">리스트 주인이 정하며, 바뀌면 알림으로 알려드려요.</span>
+      {t("이 리스트에서 내 수익 배분:")} <b>{share}%</b>
+      <span className="mt-0.5 block text-[12px] text-muted">{t("리스트 주인이 정하며, 바뀌면 알림으로 알려드려요.")}</span>
     </p>
   );
 }
 
 type Change = { id: number; action: "add" | "edit" | "remove" | "move"; item_title: string | null; created_at: string; actor: { display_name: string; handle: string } | null };
-const ACTION = { add: "추가", edit: "수정", remove: "삭제", move: "순서 변경" } as const;
+// 사전 열쇠라서 문장 전체를 둔다(<b>는 굵게 쓸 사람 이름)
+const ACTION = { add: "<b>{actor}</b> 추가", edit: "<b>{actor}</b> 수정", remove: "<b>{actor}</b> 삭제", move: "<b>{actor}</b> 순서 변경" } as const;
 
 // 변경 기록(3.10): 누가 언제 무엇을
 export function ChangeLog({ listId }: { listId: string }) {
+  const t = useT();
+  const tRich = useTRich();
+  const { dateTime } = useFormat();
   const supabase = useMemo(() => createClient(), []);
   const [rows, setRows] = useState<Change[]>([]);
   const [open, setOpen] = useState(false);
@@ -238,18 +246,18 @@ export function ChangeLog({ listId }: { listId: string }) {
   return (
     <section className="mt-10">
       <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} className="text-[15px] font-semibold text-ink">
-        변경 기록 {open ? "▴" : "▾"}
+        {t("변경 기록")} {open ? "▴" : "▾"}
       </button>
       {open && (
         rows.length === 0 ? (
-          <p className="mt-2 text-[13px] text-muted">아직 기록이 없어요.</p>
+          <p className="mt-2 text-[13px] text-muted">{t("아직 기록이 없어요.")}</p>
         ) : (
           <ul className="mt-2 grid gap-1.5 text-[13px]">
             {rows.map((c) => (
               <li key={c.id} className="flex gap-2">
-                <span className="shrink-0 text-muted">{new Date(c.created_at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
+                <span className="shrink-0 text-muted">{dateTime(c.created_at, { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
                 <span className="min-w-0 text-ink/85">
-                  <b>{c.actor?.display_name || c.actor?.handle || "알 수 없음"}</b> {ACTION[c.action]}
+                  {tRich(ACTION[c.action], { b: (s) => <b>{s}</b> }, { actor: c.actor?.display_name || c.actor?.handle || t("알 수 없음") })}
                   {c.item_title && ` · ${c.item_title}`}
                 </span>
               </li>

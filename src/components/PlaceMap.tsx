@@ -5,6 +5,7 @@ import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { MAP_STYLE_URL } from "@/lib/env";
 import type { ListItem } from "@/lib/types";
+import { useT } from "@/lib/i18n/client";
 
 type Props = {
   items: ListItem[];
@@ -54,6 +55,7 @@ function declutter() {
 export function PlaceMap({
   items, selectedId, onSelect, showRoute, candidate = null, numbering, padding = DEFAULT_PADDING, tone = "pin", onReady, onView,
 }: Props) {
+  const t = useT();
   const paddingRef = useRef(padding);
   const onViewRef = useRef(onView);
   useEffect(() => {
@@ -255,7 +257,7 @@ export function PlaceMap({
         if (!meMarker.current) {
           const el = document.createElement("div");
           el.className = "me-dot";
-          el.setAttribute("aria-label", "내 위치");
+          el.setAttribute("aria-label", t("내 위치"));
           meMarker.current = new maplibregl.Marker({ element: el }).setLngLat(at).addTo(m);
         } else meMarker.current.setLngLat(at);
         m.flyTo({ center: at, zoom: Math.max(m.getZoom(), 15), offset: centerOffset(padding), duration: 700 });
@@ -267,12 +269,12 @@ export function PlaceMap({
 
   return (
     <div className="relative h-full w-full">
-      <div ref={container} className="h-full w-full" role="region" aria-label="장소 지도" />
+      <div ref={container} className="h-full w-full" role="region" aria-label={t("장소 지도")} />
       <button
         type="button"
         onClick={locate}
-        aria-label="내 위치로 이동"
-        title={locating === "denied" ? "위치 권한이 꺼져 있어요. 브라우저 설정에서 허용해 주세요." : "내 위치로 이동"}
+        aria-label={t("내 위치로 이동")}
+        title={locating === "denied" ? t("위치 권한이 꺼져 있어요. 브라우저 설정에서 허용해 주세요.") : t("내 위치로 이동")}
         className="absolute right-2 top-[112px] z-10 grid h-11 w-11 place-items-center rounded-xl bg-white text-teal shadow-[0_2px_10px_rgba(24,34,47,0.15)] lg:bottom-[86px] lg:right-[10px] lg:top-auto lg:h-[29px] lg:w-[29px] lg:rounded-md"
       >
         {locating === "busy" ? (
@@ -287,7 +289,7 @@ export function PlaceMap({
       </button>
       {locating === "denied" && (
         <p role="status" className="absolute right-2 top-[160px] z-10 max-w-[220px] rounded-lg bg-white px-3 py-2 text-[12px] text-ink shadow lg:bottom-[122px] lg:top-auto">
-          위치 권한이 꺼져 있어요. 브라우저 설정에서 이 사이트의 위치를 허용해 주세요.
+          {t("위치 권한이 꺼져 있어요. 브라우저 설정에서 이 사이트의 위치를 허용해 주세요.")}
         </p>
       )}
     </div>

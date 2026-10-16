@@ -1,8 +1,9 @@
 "use client";
 import { createClient } from "@/lib/supabase/client";
+import { tr } from "@/lib/i18n/client";
 
 // 새 리스트를 만들고 id를 돌려준다. 주소(slug)는 임시값이며 편집 화면에서 바꿀 수 있다.
-export async function createEmptyList(title = "새 리스트"): Promise<string> {
+export async function createEmptyList(title = tr("새 리스트")): Promise<string> {
   const supabase = createClient();
   const { data: auth } = await supabase.auth.getUser();
   if (!auth.user) throw new Error("not-signed-in");

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { loadPlacesLibrary, type UiKitPlace } from "@/lib/google";
 import { logUsage } from "@/lib/usage";
+import { currentLang, useT } from "@/lib/i18n/client";
 
 export type FoundPlace = { id: string; name: string; address: string; lat: number; lng: number };
 
@@ -43,6 +44,7 @@ export function PlaceSearchBox({
   // 지금 보고 있는 지도 가운데. 이 근처 결과를 먼저 보여준다.
   near?: () => { lat: number; lng: number } | null;
 }) {
+  const t = useT();
   const lib = useRef<PlacesLib | null>(null);
   const input = useRef<HTMLInputElement>(null);
   const token = useRef<unknown>(null);
@@ -103,7 +105,7 @@ export function PlaceSearchBox({
       const { suggestions: list } = await L.AutocompleteSuggestion.fetchAutocompleteSuggestions({
         input: q,
         sessionToken: token.current,
-        language: "ko",
+        language: currentLang(),
         ...(bias() ? { locationBias: bias() } : {}),
       });
       const out = list
@@ -136,7 +138,7 @@ export function PlaceSearchBox({
       const { places } = await lib.current.Place.searchByText({
         textQuery: q,
         fields: ["id", "displayName", "formattedAddress", "location"],
-        language: "ko",
+        language: currentLang(),
         maxResultCount: 15,
         ...(bias() ? { locationBias: bias() } : {}),
       });
@@ -204,17 +206,17 @@ export function PlaceSearchBox({
           onKeyDown={onKey}
           onFocus={() => suggestions.length && setOpen(true)}
           onBlur={() => window.setTimeout(() => setOpen(false), 150)}
-          placeholder={status === "error" ? "장소 검색을 불러오지 못했습니다" : "장소 이름이나 주소로 검색"}
+          placeholder={status === "error" ? t("장소 검색을 불러오지 못했습니다") : t("장소 이름이나 주소로 검색")}
           disabled={status === "error"}
           enterKeyHint="search"
           role="combobox"
           aria-controls="place-suggestions"
-          aria-label="장소 검색"
+          aria-label={t("장소 검색")}
           aria-autocomplete="list"
           aria-expanded={open}
           className="h-9 min-w-0 flex-1 bg-transparent px-2 text-[15px] text-ink outline-none placeholder:text-muted"
         />
-        {busy && <span className="px-2 text-[13px] text-muted">찾는 중</span>}
+        {busy && <span className="px-2 text-[13px] text-muted">{t("찾는 중")}</span>}
         {text && !busy && (
           <button
             type="button"
@@ -224,7 +226,7 @@ export function PlaceSearchBox({
               setOpen(false);
             }}
             className="px-2 text-muted hover:text-ink"
-            aria-label="지우기"
+            aria-label={t("검색어 지우기")}
           >
             ✕
           </button>
@@ -247,7 +249,7 @@ export function PlaceSearchBox({
           ))}
           <li className="flex items-center justify-between border-t border-rule px-3 py-1.5 text-[12px] text-muted">
             <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={searchAll} className="font-semibold text-teal">
-              ‘{text.trim()}’ 결과 모두 지도에 보기
+              {t("‘{q}’ 결과 모두 지도에 보기", { q: text.trim() })}
             </button>
             <span>Google</span>
           </li>

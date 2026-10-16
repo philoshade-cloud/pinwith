@@ -6,6 +6,7 @@ import { AdSlot } from "./AdSlot";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useShell } from "./shell/context";
+import { useFormat, useT } from "@/lib/i18n/client";
 
 // 이 확대 단계(도시 정도)보다 넓게 보고 있으면 '이 지역'으로 치지 않는다
 const LOCAL_ZOOM = 8;
@@ -32,6 +33,7 @@ const clean = (q: string) => q.replace(/[,()%*\\#]/g, " ").trim();
 
 // /explore — 다른 사람의 리스트와 큐레이터 찾기
 export function ExploreView() {
+  const t = useT();
   const supabase = useMemo(() => createClient(), []);
   const [query, setQuery] = useState("");
   const [searched, setSearched] = useState<string | null>(null);
@@ -87,7 +89,7 @@ export function ExploreView() {
       const { data: auth } = await supabase.auth.getUser();
       const uid = auth.user?.id ?? null;
       setMe(uid);
-      const notMine = (l: ListHit) => l.owner_id !== uid && (l.list_items[0]?.count ?? 0) > 0;
+      const notMine = (l: ListHit) => l.owner_id !== uid && (l.list_items?.[0]?.count ?? 0) > 0;
 
       // 새로 올라온 리스트, 인기 리스트(좋아요 순)는 함께 읽는다
       const [{ data: r }, { data: pop }] = await Promise.all([
@@ -169,7 +171,7 @@ export function ExploreView() {
   );
 
   return (
-    <Panel title="타인의 핀">
+    <Panel title={t("타인의 핀")}>
       <div className="px-5 pb-10 pt-4">
       <form
         onSubmit={(e) => {
@@ -186,23 +188,23 @@ export function ExploreView() {
             setQuery(e.target.value);
             if (!e.target.value) setSearched(null);
           }}
-          placeholder="사람 이름, @핸들, 리스트 제목, #테마"
-          aria-label="검색어"
+          placeholder={t("사람 이름, @핸들, 리스트 제목, #테마")}
+          aria-label={t("검색어")}
           className="field"
           enterKeyHint="search"
         />
-        <button type="submit" className="btn-primary shrink-0">검색</button>
+        <button type="submit" className="btn-primary shrink-0">{t("검색")}</button>
       </form>
 
-      {loading && <p className="mt-6 text-[14px] text-muted">찾는 중</p>}
+      {loading && <p className="mt-6 text-[14px] text-muted">{t("찾는 중")}</p>}
 
       {searched !== null && !loading && (
         <>
-          <Section title={`사람 ${curators.length}`}>
-            {curators.length === 0 ? <Empty>‘{searched}’와 맞는 사람이 없습니다.</Empty> : <CuratorRows rows={curators} />}
+          <Section title={t("사람 {n}", { n: curators.length })}>
+            {curators.length === 0 ? <Empty>{t("‘{q}’와 맞는 사람이 없습니다.", { q: searched })}</Empty> : <CuratorRows rows={curators} />}
           </Section>
-          <Section title={`리스트 ${lists.length}`}>
-            {lists.length === 0 ? <Empty>‘{searched}’와 맞는 공개 리스트가 없습니다.</Empty> : <ListRows rows={localFirst(lists)} pinsHere={pinsHere} />}
+          <Section title={t("리스트 {n}", { n: lists.length })}>
+            {lists.length === 0 ? <Empty>{t("‘{q}’와 맞는 공개 리스트가 없습니다.", { q: searched })}</Empty> : <ListRows rows={localFirst(lists)} pinsHere={pinsHere} />}
           </Section>
         </>
       )}
@@ -210,38 +212,38 @@ export function ExploreView() {
       {searched === null && (
         <>
           {nearby.length > 0 && (
-            <Section title="지금 지도에 보이는 지역의 리스트">
+            <Section title={t("지금 지도에 보이는 지역의 리스트")}>
               <ListRows rows={nearby} pinsHere={pinsHere} />
             </Section>
           )}
           {view && view.zoom < LOCAL_ZOOM && (
-            <p className="mt-6 rounded-xl bg-surface px-3 py-2 text-[13px] text-muted">지도를 도시 정도로 확대하면 그 지역에 핀을 꽂은 리스트를 먼저 보여 드려요.</p>
+            <p className="mt-6 rounded-xl bg-surface px-3 py-2 text-[13px] text-muted">{t("지도를 도시 정도로 확대하면 그 지역에 핀을 꽂은 리스트를 먼저 보여 드려요.")}</p>
           )}
           {following.length > 0 && (
-            <Section title="팔로우 중">
+            <Section title={t("팔로우 중")}>
               <CuratorRows rows={following} />
             </Section>
           )}
           {similar.length > 0 && (
-            <Section title="내 리스트와 겹치는 리스트">
+            <Section title={t("내 리스트와 겹치는 리스트")}>
               <ListRows rows={localFirst(similar)} pinsHere={pinsHere} />
             </Section>
           )}
           {popular.length > 0 && (
-            <Section title="인기 리스트">
+            <Section title={t("인기 리스트")}>
               <ListRows rows={localFirst(popular)} adSlot="explore-popular" pinsHere={pinsHere} />
             </Section>
           )}
           <div className="-mx-5 mt-6">
             <AdSlot slot="explore-mid" variant={2} />
           </div>
-          <Section title="새로 올라온 리스트">
-            {recent.length === 0 ? <Empty>아직 공개된 리스트가 없습니다.</Empty> : <ListRows rows={localFirst(recent)} adSlot="explore-recent" pinsHere={pinsHere} />}
+          <Section title={t("새로 올라온 리스트")}>
+            {recent.length === 0 ? <Empty>{t("아직 공개된 리스트가 없습니다.")}</Empty> : <ListRows rows={localFirst(recent)} adSlot="explore-recent" pinsHere={pinsHere} />}
           </Section>
-          <Section title="예시">
+          <Section title={t("예시")}>
             <Link href="/demo" className="block border-y border-rule py-3.5 hover:bg-surface/60">
-              <span className="block text-[17px] font-semibold text-ink">성수동 하루, 걸어서 도는 일곱 군데</span>
-              <span className="mt-1 block text-[13px] text-muted">민지의 걷는 서울 · 장소 7곳 · #서울 #성수 #하루코스</span>
+              <span className="block text-[17px] font-semibold text-ink">{t("성수동 하루, 걸어서 도는 일곱 군데")}</span>
+              <span className="mt-1 block text-[13px] text-muted">{t("민지의 걷는 서울")} · {t("장소 {n}곳", { n: 7 })} · {t("#서울 #성수 #하루코스")}</span>
             </Link>
           </Section>
         </>
@@ -286,6 +288,8 @@ function CuratorRows({ rows }: { rows: CuratorHit[] }) {
 
 // 광고 자리: 리스트 5개마다
 function ListRows({ rows, adSlot, pinsHere }: { rows: ListHit[]; adSlot?: string; pinsHere?: Map<string, number> }) {
+  const t = useT();
+  const { num } = useFormat();
   return (
     <ul className="divide-y divide-rule border-y border-rule">
       {rows.map((l, i) => (
@@ -298,11 +302,11 @@ function ListRows({ rows, adSlot, pinsHere }: { rows: ListHit[]; adSlot?: string
           <Link href={`/@${l.owner?.handle}/${l.slug}`} className="block py-3.5 hover:bg-surface/60">
             <span className="block text-[17px] font-semibold text-ink">{l.title}</span>
             <span className="mt-1 block text-[13px] text-muted">
-              {l.owner?.display_name || `@${l.owner?.handle}`} · 장소 {l.list_items[0]?.count ?? 0}곳
-              {l.overlap ? ` · 내 장소와 ${l.overlap}곳 겹침` : ""}
-              {pinsHere?.get(l.id) ? ` · 이 지역 ${pinsHere.get(l.id)}곳` : ""}
-              {l.like_count > 0 && ` · 좋아요 ${l.like_count.toLocaleString("ko-KR")}`}
-              {l.themes.length > 0 && ` · ${l.themes.map((t) => `#${t}`).join(" ")}`}
+              {l.owner?.display_name || `@${l.owner?.handle}`} · {t("장소 {n}곳", { n: l.list_items?.[0]?.count ?? 0 })}
+              {l.overlap ? ` · ${t("내 장소와 {n}곳 겹침", { n: l.overlap })}` : ""}
+              {pinsHere?.get(l.id) ? ` · ${t("이 지역 {n}곳", { n: pinsHere.get(l.id) })}` : ""}
+              {l.like_count > 0 && ` · ${t("좋아요 {count}", { n: l.like_count, count: num(l.like_count) })}`}
+              {l.themes.length > 0 && ` · ${l.themes.map((th) => `#${th}`).join(" ")}`}
             </span>
           </Link>
         </li>

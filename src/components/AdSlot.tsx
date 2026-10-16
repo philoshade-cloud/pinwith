@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { LogoMark } from "./Logo";
 import { useConsent } from "./Consent";
 import { useShell } from "./shell/context";
+import { useT } from "@/lib/i18n/client";
 
 // 광고 자리. 광고 계정(AdSense)을 연결하기 전에는 PinWith 자체 홍보를 보여준다.
 // 연결하려면 환경 변수 NEXT_PUBLIC_ADSENSE_CLIENT(ca-pub-…)와 광고 단위 id(숫자)를 넣는다:
@@ -19,6 +20,7 @@ const UNIT_EXPLORE = process.env.NEXT_PUBLIC_ADSENSE_SLOT_EXPLORE ?? "";
 // 화면 속 자리 이름 → AdSense 광고 단위 id
 const unitFor = (slot: string) => (slot.startsWith("list") ? UNIT_LIST : slot.startsWith("explore") ? UNIT_EXPLORE : "");
 
+// 문구는 한국어로 두고 그릴 때 번역한다
 const HOUSE = [
   { title: "아는 곳을 핀으로 꽂아 보세요", body: "내 단골집, 여행 코스를 지도에 모아 링크 하나로 건네요.", cta: "내 지도 만들기", href: "/login?next=/" },
   { title: "다른 사람의 지도 구경하기", body: "여행 가기 전, 그 동네를 잘 아는 사람의 리스트부터.", cta: "타인의 핀", href: "/explore" },
@@ -72,6 +74,7 @@ function useAdView(listId: string | undefined, slot: string) {
 }
 
 export function AdSlot({ slot, variant = 0, listId }: { slot: string; variant?: number; listId?: string }) {
+  const t = useT();
   const consent = useConsent();
   const { me } = useShell();
   const unit = unitFor(slot);
@@ -87,14 +90,14 @@ export function AdSlot({ slot, variant = 0, listId }: { slot: string; variant?: 
   // 로그인한 사람에게 '내 지도 만들기'는 내 리스트로
   const h = base.href.startsWith("/login") && me ? { ...base, cta: "내 리스트로", href: `/@${me.handle}` } : base;
   return (
-    <aside ref={viewRef} aria-label="PinWith 소개" className="mx-5 my-3 flex items-center gap-3 rounded-xl border border-rule bg-[#fff7fb] p-3.5">
+    <aside ref={viewRef} aria-label={t("PinWith 소개")} className="mx-5 my-3 flex items-center gap-3 rounded-xl border border-rule bg-[#fff7fb] p-3.5">
       <LogoMark size={36} />
       <div className="min-w-0 flex-1">
-        <p className="text-[14px] font-semibold text-ink">{h.title}</p>
-        <p className="mt-0.5 text-[12px] leading-snug text-muted">{h.body}</p>
+        <p className="text-[14px] font-semibold text-ink">{t(h.title)}</p>
+        <p className="mt-0.5 text-[12px] leading-snug text-muted">{t(h.body)}</p>
       </div>
       <Link href={h.href} className="shrink-0 rounded-full bg-pin px-3 py-1.5 text-[12px] font-semibold text-white">
-        {h.cta}
+        {t(h.cta)}
       </Link>
     </aside>
   );
@@ -107,6 +110,7 @@ declare global {
 }
 
 function AdSenseUnit({ unit, personalized }: { unit: string; personalized: boolean }) {
+  const t = useT();
   const ref = useRef<HTMLModElement>(null);
   useEffect(() => {
     // 같은 광고 칸에 두 번 채우지 않는다(동의 변경으로 다시 그릴 때)
@@ -130,7 +134,7 @@ function AdSenseUnit({ unit, personalized }: { unit: string; personalized: boole
   }, [personalized]);
   return (
     <div className="mx-5 my-3">
-      <p className="mb-1 text-[11px] text-muted">광고</p>
+      <p className="mb-1 text-[11px] text-muted">{t("광고")}</p>
       <ins
         ref={ref}
         className="adsbygoogle block"

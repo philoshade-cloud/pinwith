@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Avatar } from "./ListExplorer";
+import { useT } from "@/lib/i18n/client";
 
 const SIZE = 320;
 const BUCKET = "avatars";
@@ -31,6 +32,7 @@ export function AvatarPicker({ userId, name, onChange }: { userId: string; name:
   const [url, setUrl] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
+  const t = useT();
 
   useEffect(() => {
     supabase.from("profiles").select("avatar_url").eq("id", userId).maybeSingle().then(({ data }) => setUrl((data?.avatar_url as string) ?? null));
@@ -55,9 +57,9 @@ export function AvatarPicker({ userId, name, onChange }: { userId: string; name:
       const { error } = await supabase.storage.from(BUCKET).upload(path, blob, { contentType: "image/webp", cacheControl: "31536000" });
       if (error) throw error;
       await save(supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl);
-      setMsg("사진을 바꿨어요.");
+      setMsg(t("사진을 바꿨어요."));
     } catch {
-      setMsg("사진을 올리지 못했어요. 다른 사진으로 해 보세요.");
+      setMsg(t("사진을 올리지 못했어요. 다른 사진으로 해 보세요."));
     } finally {
       setBusy(false);
       if (input.current) input.current.value = "";
@@ -68,9 +70,9 @@ export function AvatarPicker({ userId, name, onChange }: { userId: string; name:
     setBusy(true);
     try {
       await save(null);
-      setMsg("사진을 지웠어요.");
+      setMsg(t("사진을 지웠어요."));
     } catch {
-      setMsg("지우지 못했어요.");
+      setMsg(t("지우지 못했어요."));
     } finally {
       setBusy(false);
     }
@@ -82,10 +84,10 @@ export function AvatarPicker({ userId, name, onChange }: { userId: string; name:
       <div className="grid gap-1">
         <div className="flex gap-2">
           <button type="button" onClick={() => input.current?.click()} disabled={busy} className="btn-quiet !py-1.5 disabled:opacity-50">
-            {busy ? "올리는 중" : url ? "사진 바꾸기" : "사진 올리기"}
+            {busy ? t("올리는 중") : url ? t("사진 바꾸기") : t("사진 올리기")}
           </button>
           {url && (
-            <button type="button" onClick={clear} disabled={busy} className="btn-quiet !py-1.5 disabled:opacity-50">지우기</button>
+            <button type="button" onClick={clear} disabled={busy} className="btn-quiet !py-1.5 disabled:opacity-50">{t("지우기@@사진")}</button>
           )}
         </div>
         {msg && <span role="status" className="text-[12px] text-muted">{msg}</span>}

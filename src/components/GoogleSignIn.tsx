@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { tr, useLang } from "@/lib/i18n/client";
 
 // 구글 클라이언트 ID(공개 값). Google Identity Services로 로그인 창을 우리 사이트에서 띄운다.
 // 이렇게 하면 구글 화면에 Supabase 주소 대신 우리 사이트 주소가 보인다.
@@ -41,6 +42,7 @@ function loadGsi(): Promise<GoogleId> {
 export function GoogleSignIn({ next, onError }: { next: string; onError: (msg: string) => void }) {
   const slot = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
+  const lang = useLang();
 
   useEffect(() => {
     let cancelled = false;
@@ -62,7 +64,7 @@ export function GoogleSignIn({ next, onError }: { next: string; onError: (msg: s
               token: res.credential,
               nonce: raw,
             });
-            if (error) onError("구글 로그인에 실패했습니다. 잠시 후 다시 시도하세요.");
+            if (error) onError(tr("구글 로그인에 실패했습니다. 잠시 후 다시 시도하세요."));
             else window.location.assign(next);
           },
         });
@@ -72,18 +74,18 @@ export function GoogleSignIn({ next, onError }: { next: string; onError: (msg: s
           size: "large",
           text: "continue_with",
           shape: "pill",
-          locale: "ko",
+          locale: lang,
           width: Math.min(slot.current.clientWidth || 360, 400),
         });
         setReady(true);
       } catch {
-        if (!cancelled) onError("구글 로그인 버튼을 불러오지 못했습니다.");
+        if (!cancelled) onError(tr("구글 로그인 버튼을 불러오지 못했습니다."));
       }
     })();
     return () => {
       cancelled = true;
     };
-  }, [next, onError]);
+  }, [next, onError, lang]);
 
   return <div ref={slot} className={`flex min-h-[44px] w-full justify-center ${ready ? "" : "rounded-full bg-surface"}`} />;
 }
