@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import type { CuratedList } from "@/lib/types";
 import { Panel } from "./shell/Panel";
 import { useMapScene, useShell, type Scene } from "./shell/context";
-import { useT } from "@/lib/i18n/client";
+import { LangSwitch, useT } from "@/lib/i18n/client";
 
 // 로그인 전 홈: 지도에는 예시 코스, 패널에는 서비스 소개.
 export function Welcome({ sample }: { sample: CuratedList }) {
@@ -21,7 +21,16 @@ export function Welcome({ sample }: { sample: CuratedList }) {
   useMapScene(scene);
 
   return (
-    <Panel title={t("PinWith · 아는 곳을 핀으로 꽂아 건네세요")}>
+    <Panel
+      title={t("PinWith · 아는 곳을 핀으로 꽂아 건네세요")}
+      // 로그인 전에도 언어를 바꿀 수 있게 제목 줄에 언어 선택
+      titleSlot={
+        <span className="flex min-w-0 items-center gap-2">
+          <span className="truncate text-[15px] font-semibold text-ink">{t("PinWith · 아는 곳을 핀으로 꽂아 건네세요")}</span>
+          <LangSwitch className="ml-auto shrink-0" />
+        </span>
+      }
+    >
       <div className="px-5 pb-8 pt-5">
         <h1 className="font-display text-[30px] font-semibold leading-[1.1] tracking-[-0.02em] text-ink">
           {t("아는 곳을 핀으로 꽂아, 링크 하나로 건네세요.")}
