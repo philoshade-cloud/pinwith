@@ -10,6 +10,11 @@
 
 ---
 
+## v0.37 — 메일 발송 사용량 확인·Facebook 로그인 숨김 (2026-10-17)
+- 0.37-1 매일 자동 작업이 Resend 사용량(`GET https://api.resend.com/usage`, Vercel 환경 변수 `RESEND_API_KEY` 전체 권한 키)을 받아 기록. 운영자 콘솔 → 서비스 사용량에 '메일 발송(Resend)' 칸(이번 달·오늘 / 한도). 하루 또는 한 달 한도의 80%를 넘으면 운영자 알림(하루 1번). 키가 없으면 '설정 전'으로 건너뜀. 운영자 콘솔 로그인 방식의 Facebook 표시를 '회사 인증 뒤'로 · `cee704e`
+- 0.37-2 Facebook 로그인은 Meta 비즈니스 인증 전까지 숨김(스위치 끔) `[DB]` · `64f8224`
+- DB: `supabase/migrations/20261017000100_facebook_off.sql` · 되돌리기: 운영자 콘솔에서 다시 켜기
+
 ## v0.36 — 카카오 로그인 빼기·메일 템플릿 영어 (2026-10-16)
 - 0.36-1 카카오 로그인은 하지 않기로 함: 로그인 버튼·운영자 콘솔 스위치·개인정보처리방침(한·영)에서 뺌. Apple 로그인은 Apple Developer Program 가입 전까지 꺼 둔 채 유지(콘솔 표시 'Apple(개발자 가입 뒤)') `[DB]` · `d4e7063`
 - DB: `supabase/migrations/20261016000200_login_flags_no_kakao.sql` · 되돌리기 `supabase/rollback/20261016000200_login_flags_no_kakao.down.sql`
