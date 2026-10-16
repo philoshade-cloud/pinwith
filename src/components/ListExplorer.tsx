@@ -165,6 +165,21 @@ export function ListExplorer({ list }: { list: CuratedList }) {
       }
     >
       <header className="px-5 pb-5 pt-4">
+        {list.siblings && list.siblings.length > 1 && (
+          <label className="mb-4 flex items-center gap-2 rounded-xl bg-surface px-3 py-2 text-[13px] font-semibold text-muted">
+            <span className="shrink-0">{isOwner ? "내 리스트" : `${list.curator.displayName}의 리스트`}</span>
+            <select
+              value={list.slug}
+              onChange={(e) => router.push(`/@${list.curator.handle}/${e.target.value}`)}
+              className="min-w-0 flex-1 truncate rounded-lg border border-rule bg-white px-2 py-1.5 text-[14px] font-semibold text-ink"
+              aria-label="다른 리스트로 바꾸기"
+            >
+              {list.siblings.map((l) => (
+                <option key={l.slug} value={l.slug}>{l.title}</option>
+              ))}
+            </select>
+          </label>
+        )}
         <div className="flex items-center gap-3">
           <Link href={isDemo ? "/demo" : `/@${list.curator.handle}`} className="flex min-w-0 flex-1 items-center gap-3">
             <Avatar name={list.curator.displayName} url={list.curator.avatarUrl} />
