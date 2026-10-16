@@ -224,7 +224,6 @@ export function ExploreView() {
     return similar;
   }, [active, followingLists, popular, similar, nearby, following, local, me]);
   const shown = localFirst(base);
-  const hereCount = shown.filter((l) => pinsHere.has(l.id)).length;
 
   return (
     <Panel title={t("타인의 핀")}>
@@ -293,9 +292,6 @@ export function ExploreView() {
       </div>
       {local && view && view.zoom < LOCAL_ZOOM && searched === null && (
         <p className="mt-2 text-[12px] text-muted">{t("지도를 도시 정도로 확대하면 그 지역에 핀을 꽂은 리스트를 먼저 보여 드려요.")}</p>
-      )}
-      {local && hereCount > 0 && searched === null && (
-        <p className="mt-2 text-[12px] text-teal">{t("지금 지도에 보이는 지역의 리스트 {n}개를 위에 보여 드려요.", { n: hereCount })}</p>
       )}
 
       {loading && <p className="mt-6 text-[14px] text-muted">{t("찾는 중")}</p>}
@@ -396,11 +392,25 @@ function ListRows({ rows, adSlot, pinsHere }: { rows: ListHit[]; adSlot?: string
             </div>
           )}
           <Link href={`/@${l.owner?.handle}/${l.slug}`} className="block py-3.5 hover:bg-surface/60">
-            <span className="block text-[17px] font-semibold text-ink">{l.title}</span>
+            <span className="flex items-center gap-1.5 text-[17px] font-semibold text-ink">
+              <span className="min-w-0">{l.title}</span>
+              {pinsHere?.get(l.id) ? (
+                <span
+                  title={t("이 지역 {n}곳", { n: pinsHere.get(l.id) })}
+                  aria-label={t("이 지역 {n}곳", { n: pinsHere.get(l.id) })}
+                  className="inline-flex shrink-0 items-center gap-0.5 rounded-full bg-teal/10 px-1.5 py-0.5 text-[11px] font-semibold text-teal"
+                >
+                  {/* 지금 지도에 보이는 지역에 핀이 있는 리스트 */}
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden>
+                    <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
+                  </svg>
+                  {pinsHere.get(l.id)}
+                </span>
+              ) : null}
+            </span>
             <span className="mt-1 block text-[13px] text-muted">
               {l.owner?.display_name || `@${l.owner?.handle}`} · {t("장소 {n}곳", { n: l.list_items?.[0]?.count ?? 0 })}
               {l.overlap ? ` · ${t("내 장소와 {n}곳 겹침", { n: l.overlap })}` : ""}
-              {pinsHere?.get(l.id) ? ` · ${t("이 지역 {n}곳", { n: pinsHere.get(l.id) })}` : ""}
               {l.like_count > 0 && ` · ${t("좋아요 {count}", { n: l.like_count, count: num(l.like_count) })}`}
               {l.themes.length > 0 && ` · ${l.themes.map((th) => `#${th}`).join(" ")}`}
             </span>
