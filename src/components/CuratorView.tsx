@@ -49,7 +49,7 @@ export function CuratorView({
       listIdOf: (i) => listOf.get(i.id)?.id,
       cardExtra: (i) => {
         const l = listOf.get(i.id);
-        return l ? <OpenListLink href={`/@${curator.handle}/${l.slug}`} title={l.title} /> : null;
+        return l ? <OpenListLink href={`/@${curator.handle}/${l.slug}`} title={l.title} placeId={i.placeId} /> : null;
       },
     };
   }, [lists, curator.handle]);
@@ -168,10 +168,11 @@ export function CuratorView({
 }
 
 // 지도 핀 카드 아래: 그 핀이 든 리스트 열기(지도 장면을 다시 만들지 않도록 번역은 여기서)
-function OpenListLink({ href, title }: { href: string; title: string }) {
+function OpenListLink({ href, title, placeId }: { href: string; title: string; placeId: string }) {
   const t = useT();
+  const { focusNext } = useShell();
   return (
-    <Link href={href} className="flex items-center text-[14px] font-semibold text-teal">
+    <Link href={href} onClick={() => focusNext(placeId)} className="flex items-center text-[14px] font-semibold text-teal">
       {t("‘{title}’ 리스트 열기", { title })} <span className="ml-auto">›</span>
     </Link>
   );

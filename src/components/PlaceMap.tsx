@@ -24,6 +24,8 @@ type Props = {
   onReady?: (getCenter: () => { lat: number; lng: number }) => void;
   // 지도를 움직일 때마다 지금 보이는 영역(패널 등에 가려진 부분은 뺌)과 확대 단계
   onView?: (view: MapView) => void;
+  // 이 장소(google place id)가 든 핀 묶음이 들어오면 화면 맞추기 대신 그 장소를 가운데 두고 확대는 그대로(한 번)
+  holdViewRef?: { current: string | null };
 };
 
 export type MapView = { s: number; w: number; n: number; e: number; zoom: number };
@@ -53,8 +55,15 @@ function declutter() {
 
 // 큐레이터의 핀만 보여주는 가벼운 지도. 자세한 정보와 길찾기는 구글·네이버 지도로 넘긴다.
 export function PlaceMap({
-  items, selectedId, onSelect, showRoute, candidate = null, numbering, padding = DEFAULT_PADDING, tone = "pin", onReady, onView,
+  items, selectedId, onSelect, showRoute, candidate = null, numbering, padding = DEFAULT_PADDING, tone = "pin", onReady, onView, holdViewRef,
 }: Props) {
+  // 위치를 지키기로 한 핀 묶음(패널이 열리고 닫혀도 다시 맞추지 않는다)
+  const heldItems = useRef<ListItem[] | null>(null);
+  // 핀을 새로 그릴 때도 고른 핀 강조를 유지하려고
+  const selectedRef = useRef(selectedId);
+  useEffect(() => {
+    selectedRef.current = selectedId;
+  });
   const t = useT();
   const paddingRef = useRef(padding);
   const onViewRef = useRef(onView);
@@ -144,6 +153,7 @@ export function PlaceMap({
       label.className = "pin-label";
       label.textContent = item.title;
       el.appendChild(label);
+      el.dataset.selected = item.id === selectedRef.current ? "true" : "false";
       el.addEventListener("click", (e) => {
         e.stopPropagation();
         onSelectRef.current(item.id);
@@ -185,6 +195,17 @@ export function PlaceMap({
   useEffect(() => {
     const m = map.current;
     if (!m || located.length === 0) return;
+    const keep = holdViewRef?.current ? located.find((i) => i.placeId === holdViewRef.current) : null;
+    if (keep) {
+      holdViewRef!.current = null;
+      heldItems.current = items;
+      m.easeTo({ center: [keep.lng!, keep.lat!], offset: centerOffset(padding), duration: 400 });
+      fitted.current = true;
+      requestAnimationFrame(declutter);
+      return;
+    }
+    if (heldItems.current === items) return;
+    heldItems.current = null;
     const bounds = new maplibregl.LngLatBounds();
     located.forEach((i) => bounds.extend([i.lng!, i.lat!]));
     // 화면이 작아 여백이 지도보다 크면 맞추기가 실패하므로 줄인다

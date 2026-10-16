@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMemo } from "react";
 import type { CuratedList } from "@/lib/types";
 import { Panel } from "./shell/Panel";
-import { useMapScene, type Scene } from "./shell/context";
+import { useMapScene, useShell, type Scene } from "./shell/context";
 import { useT } from "@/lib/i18n/client";
 
 // 로그인 전 홈: 지도에는 예시 코스, 패널에는 서비스 소개.
@@ -14,7 +14,7 @@ export function Welcome({ sample }: { sample: CuratedList }) {
     () => ({
       items: sample.items,
       showRoute: true,
-      cardExtra: () => <DemoLink />,
+      cardExtra: (i) => <DemoLink placeId={i.placeId} />,
     }),
     [sample],
   );
@@ -52,10 +52,11 @@ export function Welcome({ sample }: { sample: CuratedList }) {
 }
 
 // 지도 핀 카드 아래 링크(지도 장면을 다시 만들지 않도록 번역은 여기서)
-function DemoLink() {
+function DemoLink({ placeId }: { placeId: string }) {
   const t = useT();
+  const { focusNext } = useShell();
   return (
-    <Link href="/demo" className="flex items-center text-[14px] font-semibold text-teal">
+    <Link href="/demo" onClick={() => focusNext(placeId)} className="flex items-center text-[14px] font-semibold text-teal">
       {t("예시 리스트 전체 보기")} <span className="ml-auto">›</span>
     </Link>
   );

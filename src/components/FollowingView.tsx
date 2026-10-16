@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { ListItem } from "@/lib/types";
 import { Panel, PanelLoading } from "./shell/Panel";
-import { useMapScene, type Scene } from "./shell/context";
+import { useMapScene, useShell, type Scene } from "./shell/context";
 import { tr, useFormat, useT } from "@/lib/i18n/client";
 
 type Row = {
@@ -95,7 +95,7 @@ export function FollowingView() {
       cardExtra: (i) => {
         const l = listOf.get(i.id);
         return l?.owner ? (
-          <OpenListLink href={`/@${l.owner.handle}/${l.slug}`} owner={l.owner.display_name || l.owner.handle} title={l.title} />
+          <OpenListLink href={`/@${l.owner.handle}/${l.slug}`} owner={l.owner.display_name || l.owner.handle} title={l.title} placeId={i.placeId} />
         ) : null;
       },
     };
@@ -158,10 +158,11 @@ export function FollowingView() {
 }
 
 // 지도 핀 카드 아래: 그 핀이 든 리스트 열기(지도 장면을 다시 만들지 않도록 번역은 여기서)
-function OpenListLink({ href, owner, title }: { href: string; owner: string; title: string }) {
+function OpenListLink({ href, owner, title, placeId }: { href: string; owner: string; title: string; placeId: string }) {
   const t = useT();
+  const { focusNext } = useShell();
   return (
-    <Link href={href} className="flex items-center text-[14px] font-semibold text-teal">
+    <Link href={href} onClick={() => focusNext(placeId)} className="flex items-center text-[14px] font-semibold text-teal">
       {t("{owner}의 ‘{title}’ 열기", { owner, title })} <span className="ml-auto">›</span>
     </Link>
   );

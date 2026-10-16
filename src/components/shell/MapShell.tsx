@@ -62,6 +62,9 @@ export function MapShell({ children }: { children: ReactNode }) {
   const [resultsList, setResultsList] = useState(false);
   const centerOf = useRef<(() => { lat: number; lng: number }) | null>(null);
   const [view, setView] = useState<MapView | null>(null);
+  // 핀 카드에서 리스트를 열 때 지도 위치를 지킬 장소(google place id)
+  const pendingFocus = useRef<string | null>(null);
+  const holdView = useRef<string | null>(null);
   const resultItems: ListItem[] = useMemo(
     () =>
       (results?.places ?? []).map((p, n) => ({
@@ -199,6 +202,15 @@ export function MapShell({ children }: { children: ReactNode }) {
   const shell: Shell = {
     setScene, releaseScene, selectedId, select, panelOpen, setPanelOpen,
     me, myLists, refreshMine, toast, startSave, refreshBadges, view,
+    focusNext: (placeId) => {
+      pendingFocus.current = placeId;
+      holdView.current = placeId;
+    },
+    takeFocus: () => {
+      const p = pendingFocus.current;
+      pendingFocus.current = null;
+      return p;
+    },
   };
 
   // ── 지도 여백: 패널·버튼에 가리지 않게 ─────────
@@ -239,6 +251,7 @@ export function MapShell({ children }: { children: ReactNode }) {
           padding={padding}
           onReady={(get) => (centerOf.current = get)}
           onView={setView}
+          holdViewRef={holdView}
         />
       </div>
 

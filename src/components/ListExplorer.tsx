@@ -125,6 +125,15 @@ export function ListExplorer({ list }: { list: CuratedList }) {
     );
   }
 
+  // 지도 핀 카드의 '리스트 열기'로 왔으면 그 장소를 고른 채로 연다(지도는 그 장소에 머문다)
+  const { takeFocus } = useShell();
+  useEffect(() => {
+    const placeId = takeFocus();
+    if (!placeId) return;
+    const hit = list.items.find((i) => i.placeId === placeId);
+    if (hit) select(hit.id);
+  }, [takeFocus, list.items, select]);
+
   // 열림 기록(큐레이터 통계용): 주인이 아닌 사람이 열었을 때, 같은 탭에서는 한 번만
   useEffect(() => {
     if (isDemo || me === undefined || isOwner) return;
