@@ -20,7 +20,7 @@
 #   - 예산의 범위(프로젝트·서비스)가 넓으면 다른 서비스 요금 때문에 꺼질 수도 있다. 예산 범위를 이 프로젝트로 두세요.
 #   - 달이 바뀌면 자동으로 켜지지 않는다. 아래 '다시 켜기' 명령을 실행하세요.
 set -euo pipefail
-echo "스크립트 판: 5 (권한 반영을 기다리며 다시 시도)"
+echo "스크립트 판: 6 (예산 알림 계정에 주제 발행 권한)"
 
 PROJECT="${PROJECT:-$(gcloud config get-value project 2>/dev/null)}"
 REGION="${REGION:-asia-northeast3}"   # 서울
@@ -43,6 +43,10 @@ gcloud services enable --project "$PROJECT" \
 
 gcloud pubsub topics describe "$TOPIC" --project "$PROJECT" >/dev/null 2>&1 \
   || gcloud pubsub topics create "$TOPIC" --project "$PROJECT"
+
+# 구글 예산 알림이 이 주제에 메시지를 보낼 수 있게(콘솔에서 주제 연결이 "attempted action failed"로 실패할 때 필요)
+gcloud pubsub topics add-iam-policy-binding "$TOPIC" --project "$PROJECT" \
+  --member "serviceAccount:billing-budget-alert@system.gserviceaccount.com" --role roles/pubsub.publisher >/dev/null
 
 gcloud iam service-accounts describe "$SA" --project "$PROJECT" >/dev/null 2>&1 \
   || gcloud iam service-accounts create "$SA_NAME" --project "$PROJECT" --display-name "예산 넘으면 장소 API 끄기"
