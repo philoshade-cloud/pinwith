@@ -20,7 +20,7 @@
 #   - 예산의 범위(프로젝트·서비스)가 넓으면 다른 서비스 요금 때문에 꺼질 수도 있다. 예산 범위를 이 프로젝트로 두세요.
 #   - 달이 바뀌면 자동으로 켜지지 않는다. 아래 '다시 켜기' 명령을 실행하세요.
 set -euo pipefail
-echo "스크립트 판: 4 (빌드 계정 직접 지정)"
+echo "스크립트 판: 5 (권한 반영을 기다리며 다시 시도)"
 
 PROJECT="${PROJECT:-$(gcloud config get-value project 2>/dev/null)}"
 REGION="${REGION:-asia-northeast3}"   # 서울
@@ -89,11 +89,25 @@ PY
 
 # 환경 변수는 파일로 넘긴다(SERVICES 값의 쉼표를 gcloud가 구분 기호로 읽지 않게)
 printf 'PROJECT: "%s"\nSERVICES: "%s"\n' "$PROJECT" "$SERVICES" > "$SRC/.env.yaml"
-gcloud functions deploy "$FN" --project "$PROJECT" --gen2 --region "$REGION" --runtime python312 \
-  --source "$SRC" --entry-point stop --trigger-topic "$TOPIC" \
-  --service-account "$SA" --trigger-service-account "$SA" \
-  --build-service-account "projects/$PROJECT/serviceAccounts/$SA" \
-  --env-vars-file "$SRC/.env.yaml" --max-instances 1 --memory 256Mi --quiet
+# 함수 소스를 올려 두는 저장소(버킷)에도 읽기 권한을 직접 준다(있을 때만)
+NUM="$(gcloud projects describe "$PROJECT" --format='value(projectNumber)')"
+BUCKET="gs://gcf-v2-sources-${NUM}-${REGION}"
+if gcloud storage buckets describe "$BUCKET" >/dev/null 2>&1; then
+  gcloud storage buckets add-iam-policy-binding "$BUCKET" --member "serviceAccount:$SA" --role roles/storage.objectViewer >/dev/null
+fi
+
+# 새로 준 권한이 퍼지는 데 몇 분 걸릴 수 있어서, 권한 오류면 1분 쉬고 최대 5번 다시 시도한다
+for TRY in 1 2 3 4 5; do
+  if gcloud functions deploy "$FN" --project "$PROJECT" --gen2 --region "$REGION" --runtime python312 \
+    --source "$SRC" --entry-point stop --trigger-topic "$TOPIC" \
+    --service-account "$SA" --trigger-service-account "$SA" \
+    --build-service-account "projects/$PROJECT/serviceAccounts/$SA" \
+    --env-vars-file "$SRC/.env.yaml" --max-instances 1 --memory 256Mi --quiet; then
+    break
+  fi
+  [ "$TRY" = 5 ] && { echo "배포가 계속 실패해요. 위 오류 내용을 Claude에게 보내 주세요."; exit 1; }
+  echo "배포 실패($TRY/5). 권한이 아직 퍼지지 않았을 수 있어요. 1분 뒤 다시 시도해요…"; sleep 60
+done
 
 TEST_DATA="$(printf '{"budgetDisplayName":"test","costAmount":2,"budgetAmount":1,"currencyCode":"USD"}')"
 cat <<MSG
