@@ -20,7 +20,7 @@
 #   - 예산의 범위(프로젝트·서비스)가 넓으면 다른 서비스 요금 때문에 꺼질 수도 있다. 예산 범위를 이 프로젝트로 두세요.
 #   - 달이 바뀌면 자동으로 켜지지 않는다. 아래 '다시 켜기' 명령을 실행하세요.
 set -euo pipefail
-echo "스크립트 판: 3 (환경 변수 파일)"
+echo "스크립트 판: 4 (빌드 계정 직접 지정)"
 
 PROJECT="${PROJECT:-$(gcloud config get-value project 2>/dev/null)}"
 REGION="${REGION:-asia-northeast3}"   # 서울
@@ -47,10 +47,13 @@ gcloud pubsub topics describe "$TOPIC" --project "$PROJECT" >/dev/null 2>&1 \
 gcloud iam service-accounts describe "$SA" --project "$PROJECT" >/dev/null 2>&1 \
   || gcloud iam service-accounts create "$SA_NAME" --project "$PROJECT" --display-name "예산 넘으면 장소 API 끄기"
 # API를 켜고 끄는 권한, 그리고 Pub/Sub 메시지로 함수를 부르는 권한
-for ROLE in roles/serviceusage.serviceUsageAdmin roles/run.invoker roles/eventarc.eventReceiver; do
+# 함수를 빌드하는 권한도 이 계정에 준다(새 프로젝트는 기본 빌드 계정에 권한이 없어 빌드가 실패함)
+for ROLE in roles/serviceusage.serviceUsageAdmin roles/run.invoker roles/eventarc.eventReceiver \
+            roles/cloudbuild.builds.builder roles/logging.logWriter roles/artifactregistry.writer roles/storage.objectViewer; do
   gcloud projects add-iam-policy-binding "$PROJECT" --member "serviceAccount:$SA" --role "$ROLE" --condition=None >/dev/null
 done
 
+echo "권한이 퍼지도록 30초 기다려요…"; sleep 30
 SRC="$(mktemp -d)"
 cat > "$SRC/requirements.txt" <<'REQ'
 functions-framework==3.*
@@ -89,6 +92,7 @@ printf 'PROJECT: "%s"\nSERVICES: "%s"\n' "$PROJECT" "$SERVICES" > "$SRC/.env.yam
 gcloud functions deploy "$FN" --project "$PROJECT" --gen2 --region "$REGION" --runtime python312 \
   --source "$SRC" --entry-point stop --trigger-topic "$TOPIC" \
   --service-account "$SA" --trigger-service-account "$SA" \
+  --build-service-account "projects/$PROJECT/serviceAccounts/$SA" \
   --env-vars-file "$SRC/.env.yaml" --max-instances 1 --memory 256Mi --quiet
 
 TEST_DATA="$(printf '{"budgetDisplayName":"test","costAmount":2,"budgetAmount":1,"currencyCode":"USD"}')"
