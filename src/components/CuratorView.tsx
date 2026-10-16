@@ -30,7 +30,7 @@ export function CuratorView({
   const router = useRouter();
   const t = useT();
   const { num } = useFormat();
-  const { toast, takeFocus, select } = useShell();
+  const { toast } = useShell();
   const [creating, setCreating] = useState(false);
 
   const scene: Scene = useMemo(() => {
@@ -54,13 +54,6 @@ export function CuratorView({
     };
   }, [lists, curator.handle]);
   useMapScene(scene);
-  // 리스트에서 핀을 고른 채 '지도'로 왔으면 그 장소가 내 지도에도 있을 때 골라 둔다(지도는 그 자리에 머문다)
-  useEffect(() => {
-    const placeId = takeFocus();
-    if (!placeId) return;
-    const hit = scene.items.find((i) => i.placeId === placeId);
-    if (hit) select(hit.id);
-  }, [takeFocus, scene, select]);
 
   const placeCount = lists.reduce((n, l) => n + l.itemCount, 0);
 

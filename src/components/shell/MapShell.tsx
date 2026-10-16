@@ -234,11 +234,12 @@ export function MapShell({ children }: { children: ReactNode }) {
     setPanelOpen(href !== "/");
     setSelectedId(null);
   }, []);
-  // 리스트 등에서 핀을 고른 채 '지도'로 나가면 지도는 그 핀에 머문다
+  // 리스트 등에서 핀을 고른 채 '지도'로 나가면 지도는 그 핀을 가운데 둔 채 머문다(고른 상태는 풀린다)
   const leave = useCallback(
     (href: string) => {
       if (href !== "/" || !selected || selected.lat == null || selected.lng == null) return;
-      pendingFocus.current = selected.placeId;
+      setSelectedId(null);
+      // 지도 위치만 지키고, 지도 화면에서 그 장소를 고르지는 않는다
       holdView.current = { placeId: selected.placeId, lat: selected.lat, lng: selected.lng };
     },
     [selected],
