@@ -405,14 +405,24 @@ function Nav(props: NavProps) {
   return <NavView {...props} path={decodeURIComponent(usePathname())} />;
 }
 
+// 프로필(My) 메뉴 아이콘: 사람 모양
+function PersonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden className="block">
+      <circle cx="12" cy="8" r="4.2" />
+      <path d="M3.6 20.4c0-4.4 3.8-7.4 8.4-7.4s8.4 3 8.4 7.4c0 .6-.4.9-1 .9H4.6c-.6 0-1-.3-1-.9z" />
+    </svg>
+  );
+}
+
 function NavView({ variant, me, reopen, path }: NavProps & { path: string }) {
-  const nav = me
+  const nav: { href: string; label: string; icon: React.ReactNode }[] = me
     ? [
         { href: "/", label: "지도", icon: "◎" },
         { href: "/explore", label: "타인의 핀", icon: "⌕" },
         { href: "/following", label: "팔로잉 리스트", icon: "♥" },
         { href: `/@${me.handle}`, label: "내 리스트", icon: "☰" },
-        { href: "/me", label: "프로필", icon: "◐" },
+        { href: "/me", label: "My", icon: <PersonIcon /> },
       ]
     : [
         { href: "/", label: "지도", icon: "◎" },
