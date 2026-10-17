@@ -10,6 +10,11 @@
 
 ---
 
+## v0.42 — 언어별 예시 3개·친구들 의논 예시 (2026-10-17)
+- 0.42-1 로그인 전 '타인의 핀'·첫 화면·'예시' 탭: 언어별 예시 3개(평범한 것 · 크리에이터 스타일 · 친구들이 의논한 것)만 보여 주고 나머지는 로그인 후. 어떤 리스트를 보여 줄지는 `app_flags.examples`({ko:[[핸들,주소]…], en:[…]})로 정함. 리스트에 `is_example`(운영자만 켤 수 있음)과 '예시' 배지·안내 문구. '타인의 핀' 인기 탭이 좋아요 1개 이상인 리스트만 보여 줘서 로그인 후 '아직 공개된 리스트가 없어요'로 나오던 것 수정. 하드코딩된 성수동 예시 제거(내장 샘플은 예시를 못 불러올 때만) `[DB]` · `9048d17`
+- DB: `supabase/migrations/20261017000300_example_lists.sql` · 되돌리기 `supabase/rollback/20261017000300_example_lists.down.sql`
+- 0.42-2 데이터(이미 적용): `seed_official_lists_en2.sql`(영어 공식 7개: 파리 3일, [Vlog] 유타 마이티 5, 런던 주말, 로마 2일, 오아후 해변·먹거리, 멕시코시티, 바르셀로나), `seed_example_discussions.sql`(예시 계정 ex_ko1~3 '예시 사용자 1~3'·ex_en1~3 'Sample User 1~3', 맞팔로우·공동 편집·댓글 토론: '오사카·교토 2박 3일, 셋이 같이 짠 루트', 'NYC Long Weekend: Three Friends, One Plan'). @222·@test 리스트와 공식 계정의 부산 복사본은 '나만 보기'. 공식·예시 리스트 모두 `is_example` · `c371cc7`
+
 ## v0.41 — PinWith 공식 계정과 예시 리스트 (2026-10-17)
 - 0.41-1 PinWith 공식 계정 표시: `profiles.is_official`(운영자·DB만 켤 수 있음, 본인 수정 불가). 리스트 화면·프로필·타인의 핀 목록·검색에 '공식' 배지, 공식 리스트 아래 'PinWith 운영팀이 직접 만든 리스트예요…' 안내. 첫 화면·/demo 예시 리스트의 가상 큐레이터('민지의 걷는 서울', 팔로워 21,400·좋아요 3,120)를 공식 계정(@pinwith)·0으로 `[DB]` · `c0731a9`
 - DB: `supabase/migrations/20261017000200_official_accounts.sql` · 되돌리기 `supabase/rollback/20261017000200_official_accounts.down.sql`
