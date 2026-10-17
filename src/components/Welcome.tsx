@@ -1,22 +1,40 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
-import type { CuratedList } from "@/lib/types";
+import { useEffect, useMemo, useState } from "react";
+import type { CuratedList, ListItem } from "@/lib/types";
+import { loadExamplePins, useExampleLists } from "@/lib/examples";
+import { OfficialBadge } from "./OfficialBadge";
+import { ExampleBadge } from "./ExampleBadge";
 import { Panel } from "./shell/Panel";
 import { useMapScene, useShell, type Scene } from "./shell/context";
 import { LangSwitch, useT } from "@/lib/i18n/client";
 
-// 로그인 전 홈: 지도에는 예시 코스, 패널에는 서비스 소개.
+// 로그인 전 홈: 지도에는 화면 언어의 첫 번째 예시 리스트(못 읽으면 내장 예시 코스), 패널에는 서비스 소개와 예시 3개.
 export function Welcome({ sample }: { sample: CuratedList }) {
   const t = useT();
+  const examples = useExampleLists();
+  const first = examples?.[0];
+  const [pins, setPins] = useState<{ id: string; items: ListItem[] } | null>(null);
+  useEffect(() => {
+    if (!first) return;
+    let cancelled = false;
+    loadExamplePins(first.id).then((items) => {
+      if (!cancelled && items.some((i) => i.lat != null)) setPins({ id: first.id, items });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [first]);
+  const hasPins = pins && first && pins.id === first.id;
+  const href = hasPins ? first.href : "/demo";
   const scene: Scene = useMemo(
     () => ({
-      items: sample.items,
+      items: hasPins ? pins.items : sample.items,
       showRoute: true,
-      cardExtra: (i) => <DemoLink placeId={i.placeId} />,
+      cardExtra: (i) => <DemoLink placeId={i.placeId} href={href} />,
     }),
-    [sample],
+    [sample, hasPins, pins, href],
   );
   useMapScene(scene);
 
@@ -43,13 +61,30 @@ export function Welcome({ sample }: { sample: CuratedList }) {
           <Link href="/login?next=/" className="btn-primary justify-center !py-3 !text-[15px]">
             {t("내 지도 만들기")}
           </Link>
-          <Link href="/demo" className="btn-quiet justify-center !py-3 !text-[15px]">
-            {t("예시 리스트 보기")}
-          </Link>
           <Link href="/explore" className="btn-quiet justify-center !py-3 !text-[15px]">
             {t("다른 사람 리스트 둘러보기")}
           </Link>
         </div>
+        {examples && examples.length > 0 && (
+          <section className="mt-8">
+            <h2 className="text-[13px] font-semibold text-teal">{t("예시 리스트")}</h2>
+            <ul className="mt-2 divide-y divide-rule border-y border-rule">
+              {examples.map((l) => (
+                <li key={l.id}>
+                  <Link href={l.href} className="block py-3 hover:bg-surface/60">
+                    <span className="block text-[16px] font-semibold text-ink">{l.title}</span>
+                    <span className="mt-0.5 flex flex-wrap items-center gap-1 text-[13px] text-muted">
+                      {l.owner?.display_name}
+                      {l.owner?.is_official && <OfficialBadge />}
+                      <ExampleBadge />
+                      <span>· {t("장소 {n}곳", { n: l.list_items?.[0]?.count ?? 0 })}</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
         <p className="mt-8 text-[12px] text-muted">
           <Link href="/privacy" className="underline">{t("개인정보처리방침")}</Link>
           {" · "}
@@ -61,11 +96,11 @@ export function Welcome({ sample }: { sample: CuratedList }) {
 }
 
 // 지도 핀 카드 아래 링크(지도 장면을 다시 만들지 않도록 번역은 여기서)
-function DemoLink({ placeId }: { placeId: string }) {
+function DemoLink({ placeId, href }: { placeId: string; href: string }) {
   const t = useT();
   const { focusNext } = useShell();
   return (
-    <Link href="/demo" onClick={() => focusNext(placeId)} className="flex items-center text-[14px] font-semibold text-teal">
+    <Link href={href} onClick={() => focusNext(placeId)} className="flex items-center text-[14px] font-semibold text-teal">
       {t("예시 리스트 전체 보기")} <span className="ml-auto">›</span>
     </Link>
   );

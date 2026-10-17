@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { OfficialBadge } from "./OfficialBadge";
+import { ExampleBadge } from "./ExampleBadge";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
@@ -207,6 +208,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
               <span className="flex min-w-0 items-center gap-1.5 text-[15px] font-semibold text-ink">
                 <span className="truncate">{list.curator.displayName}</span>
                 {list.curator.official && <OfficialBadge />}
+                {list.isExample && <ExampleBadge />}
               </span>
               <span className="block truncate text-[13px] text-muted">
                 @{list.curator.handle} · {t("팔로워 {count}", { n: list.curator.followerCount, count: formatCount(list.curator.followerCount, locale) })}
@@ -221,9 +223,11 @@ export function ListExplorer({ list }: { list: CuratedList }) {
           {list.title}
         </h1>
         {list.description && <p className="mt-2 whitespace-pre-line text-[15px] leading-relaxed text-ink/80">{list.description}</p>}
-        {list.curator.official && (
+        {list.curator.official ? (
           <p className="mt-2 text-[12px] text-muted">{t("PinWith 운영팀이 직접 만든 리스트예요. 영업시간·가격은 바뀔 수 있으니 가기 전에 장소 정보를 확인하세요.")}</p>
-        )}
+        ) : list.isExample ? (
+          <p className="mt-2 text-[12px] text-muted">{t("PinWith가 공동 편집과 댓글 기능을 보여 주려고 예시 계정으로 만든 리스트예요.")}</p>
+        ) : null}
         {list.items.some((i) => i.sponsored) && (
           <p className="mt-2 text-[12px] text-muted">
             <span className="mr-1 rounded border border-rule px-1 py-px text-[11px] font-semibold text-ink/70">{t("제휴")}</span>

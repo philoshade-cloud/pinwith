@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { OfficialBadge } from "./OfficialBadge";
+import { ExampleBadge } from "./ExampleBadge";
+import { useExampleLists } from "@/lib/examples";
 import { Panel } from "./shell/Panel";
 import { AdSlot } from "./AdSlot";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -20,6 +22,8 @@ type ListHit = {
   themes: string[];
   like_count: number;
   owner_id: string;
+  // 운영팀이 만든 예시 리스트
+  is_example?: boolean;
   // 내 리스트와 겹치는 장소 수(추천용)
   overlap?: number;
   owner: { handle: string; display_name: string; is_official?: boolean } | null;
@@ -27,7 +31,7 @@ type ListHit = {
 };
 
 const LIST_SELECT =
-  "id, slug, title, themes, like_count, owner_id, owner:profiles!lists_owner_id_fkey(handle, display_name, is_official), list_items(count)";
+  "id, slug, title, themes, like_count, owner_id, is_example, owner:profiles!lists_owner_id_fkey(handle, display_name, is_official), list_items(count)";
 
 // 검색어를 PostgREST 필터에 안전하게 넣기 위해 특수문자를 뺀다.
 const clean = (q: string) => q.replace(/[,()%*\\#]/g, " ").trim();
@@ -129,8 +133,8 @@ export function ExploreView() {
       const notMine = (l: ListHit) => l.owner_id !== uid && (l.list_items?.[0]?.count ?? 0) > 0;
 
       const { data: pop } = await supabase
-        .from("lists").select(LIST_SELECT).eq("visibility", "public").gt("like_count", 0)
-        .order("like_count", { ascending: false }).limit(40);
+        .from("lists").select(LIST_SELECT).eq("visibility", "public")
+        .order("like_count", { ascending: false }).order("updated_at", { ascending: false }).limit(40);
       setPopular(((pop ?? []) as unknown as ListHit[]).filter(notMine).slice(0, 30));
 
       if (!uid) return;
@@ -221,7 +225,7 @@ export function ExploreView() {
     };
     const followIds = new Set(following.map((p) => p.id));
     if (active === "following") return merge(followingLists, local ? nearby.filter((l) => followIds.has(l.owner_id) && l.owner_id !== me) : []);
-    if (active === "popular") return merge(popular, local ? nearby.filter((l) => l.like_count > 0 && l.owner_id !== me) : []);
+    if (active === "popular") return merge(popular, local ? nearby.filter((l) => l.owner_id !== me) : []);
     return similar;
   }, [active, followingLists, popular, similar, nearby, following, local, me]);
   const shown = localFirst(base);
@@ -252,6 +256,8 @@ export function ExploreView() {
         <button type="submit" className="btn-primary shrink-0">{t("검색")}</button>
       </form>
 
+      {/* 로그인 전에는 묶음 고르기 없이 예시만 */}
+      {!!me && (
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <div role="tablist" aria-label={t("리스트 묶음")} className="flex min-w-0 gap-1.5 overflow-x-auto">
           {CATEGORIES.map((c) => {
@@ -291,7 +297,8 @@ export function ExploreView() {
           </button>
         </label>
       </div>
-      {local && view && view.zoom < LOCAL_ZOOM && searched === null && (
+      )}
+      {!!me && local && view && view.zoom < LOCAL_ZOOM && searched === null && (
         <p className="mt-2 text-[12px] text-muted">{t("지도를 도시 정도로 확대하면 그 지역에 핀을 꽂은 리스트를 먼저 보여 드려요.")}</p>
       )}
 
@@ -308,7 +315,9 @@ export function ExploreView() {
         </>
       )}
 
-      {searched === null && me !== undefined && (
+      {searched === null && me === null && <LoggedOutExamples />}
+
+      {searched === null && !!me && (
         <>
           <div className="mt-4">
             {shown.length > 0 ? (
@@ -331,14 +340,6 @@ export function ExploreView() {
           <div className="-mx-5 mt-6">
             <AdSlot slot="explore-mid" variant={2} />
           </div>
-          {!me && (
-            <Section title={t("예시")}>
-              <Link href="/demo" className="block border-y border-rule py-3.5 hover:bg-surface/60">
-                <span className="block text-[17px] font-semibold text-ink">{t("성수동 하루, 걸어서 도는 일곱 군데")}</span>
-                <span className="mt-1 block text-[13px] text-muted">PinWith <OfficialBadge /> · {t("장소 {n}곳", { n: 7 })} · {t("#서울 #성수 #하루코스")}</span>
-              </Link>
-            </Section>
-          )}
         </>
       )}
       </div>
@@ -414,7 +415,8 @@ function ListRows({ rows, adSlot, pinsHere }: { rows: ListHit[]; adSlot?: string
             </span>
             <span className="mt-1 block text-[13px] text-muted">
               {l.owner?.display_name || `@${l.owner?.handle}`}
-              {l.owner?.is_official && <OfficialBadge className="ml-1" />} · {t("장소 {n}곳", { n: l.list_items?.[0]?.count ?? 0 })}
+              {l.owner?.is_official && <OfficialBadge className="ml-1" />}
+              {l.is_example && <ExampleBadge className="ml-1" />} · {t("장소 {n}곳", { n: l.list_items?.[0]?.count ?? 0 })}
               {l.overlap ? ` · ${t("내 장소와 {n}곳 겹침", { n: l.overlap })}` : ""}
               {l.like_count > 0 && ` · ${t("좋아요 {count}", { n: l.like_count, count: num(l.like_count) })}`}
               {l.themes.length > 0 && ` · ${l.themes.map((th) => `#${th}`).join(" ")}`}
@@ -423,5 +425,28 @@ function ListRows({ rows, adSlot, pinsHere }: { rows: ListHit[]; adSlot?: string
         </li>
       ))}
     </ul>
+  );
+}
+
+// 로그인 전: 언어별 예시 3개만(나머지 리스트는 로그인하면 보임)
+function LoggedOutExamples() {
+  const t = useT();
+  const examples = useExampleLists();
+  return (
+    <>
+      <Section title={t("예시")}>
+        {examples === null ? (
+          <p className="text-[14px] text-muted">{t("불러오는 중")}</p>
+        ) : examples.length === 0 ? (
+          <Empty>{t("아직 공개된 리스트가 없습니다.")}</Empty>
+        ) : (
+          <ListRows rows={examples} />
+        )}
+      </Section>
+      <div className="mt-6 rounded-xl bg-surface px-4 py-4 text-[14px] text-ink/80">
+        {t("로그인하면 더 많은 리스트를 둘러보고, 마음에 드는 큐레이터를 팔로우할 수 있어요.")}
+        <Link href="/login?next=/explore" className="btn-primary mt-3 w-full justify-center">{t("로그인")}</Link>
+      </div>
+    </>
   );
 }

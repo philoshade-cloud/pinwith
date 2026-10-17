@@ -46,6 +46,8 @@ export type CuratedList = {
   items: ListItem[];
   // 운영자가 지정한 리스트(예시 등): 댓글을 누구나 볼 수 있다
   publicComments?: boolean;
+  // 운영팀이 만든 예시 리스트('예시' 표시)
+  isExample?: boolean;
 };
 
 export type ListSummary = {
