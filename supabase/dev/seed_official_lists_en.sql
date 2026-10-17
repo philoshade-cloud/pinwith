@@ -7,9 +7,9 @@ declare
 begin
   for rec in select * from jsonb_array_elements(doc) loop
     continue when exists (select 1 from public.lists where owner_id = o and slug = rec->>'slug');
-    insert into public.lists (owner_id, slug, title, description, visibility, kind, themes)
+    insert into public.lists (owner_id, slug, title, description, visibility, kind, themes, is_example)
     values (o, rec->>'slug', rec->>'title', rec->>'desc', 'public', (rec->>'kind')::public.list_kind,
-            array(select jsonb_array_elements_text(rec->'themes')))
+            array(select jsonb_array_elements_text(rec->'themes')), true)
     returning id into lid;
     pos := 0; si := 0;
     for sec in select * from jsonb_array_elements(rec->'sections') loop
