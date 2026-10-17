@@ -26,8 +26,10 @@ export function Panel({
   return (
     <section
       aria-label={typeof title === "string" ? title : undefined}
-      className={`fixed inset-x-0 bottom-16 z-20 flex flex-col overflow-hidden rounded-t-2xl bg-white shadow-[0_-6px_24px_rgba(24,34,47,0.16)] lg:inset-x-auto lg:bottom-auto lg:left-4 lg:top-[76px] lg:w-[400px] lg:rounded-2xl lg:shadow-[0_4px_24px_rgba(24,34,47,0.16)] ${
-        panelOpen ? "top-[38dvh] lg:bottom-4" : "h-[52px] lg:h-auto"
+      className={`fixed inset-x-0 bottom-16 z-20 flex flex-col overflow-hidden rounded-t-2xl bg-white shadow-[0_-6px_24px_rgba(24,34,47,0.16)] lg:inset-x-auto lg:left-4 lg:top-[76px] lg:w-[400px] lg:rounded-2xl lg:shadow-[0_4px_24px_rgba(24,34,47,0.16)] ${
+        // 펼치면 데스크톱에서도 화면 아래(16px)까지로 높이를 정해 안쪽 목록이 스크롤되게 한다.
+        // (예전엔 lg:bottom-auto와 lg:bottom-4가 함께 붙어 bottom-auto가 이겨, 패널이 화면 밖으로 늘어나 스크롤이 안 됐다)
+        panelOpen ? "top-[38dvh] lg:bottom-4" : "h-[52px] lg:bottom-auto lg:h-auto"
       }`}
     >
       {titleSlot ? (
