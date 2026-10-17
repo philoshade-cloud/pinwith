@@ -14,6 +14,7 @@
 - 0.41-1 PinWith 공식 계정 표시: `profiles.is_official`(운영자·DB만 켤 수 있음, 본인 수정 불가). 리스트 화면·프로필·타인의 핀 목록·검색에 '공식' 배지, 공식 리스트 아래 'PinWith 운영팀이 직접 만든 리스트예요…' 안내. 첫 화면·/demo 예시 리스트의 가상 큐레이터('민지의 걷는 서울', 팔로워 21,400·좋아요 3,120)를 공식 계정(@pinwith)·0으로 `[DB]` · `c0731a9`
 - DB: `supabase/migrations/20261017000200_official_accounts.sql` · 되돌리기 `supabase/rollback/20261017000200_official_accounts.down.sql`
 - 0.41-2 데이터(이미 적용, 다시 실행해도 중복 안 됨): `supabase/dev/seed_official_account.sql`(공식 계정 official@pinwith.me, @pinwith / 테스트 계정 6개를 '예시 사용자 · 이름'으로), `seed_official_lists_en.sql`(영어 8개: 서울 3일·시장·비 오는 날·브이로그 48시간, 부산 주말, 제주 2일, 도쿄 4일·라멘), `seed_official_lists_ko.sql`(한국어 10개: 노포·안국·카페·야경, 부산 바다·먹거리, 제주 동·서, 도쿄 3박 4일, [브이로그] 강릉 당일치기), `seed_official_coedit.sql`(부산 세 가지 루트 공동 편집·댓글 예시를 공식 계정으로 복사, 예시 계정의 공개 리스트는 '나만 보기'로). 장소 id·좌표는 구글 장소 검색 결과 · `9db5bad`
+- 0.41-3 `/sitemap.xml`(공개 리스트·큐레이터 페이지·첫 화면·타인의 핀·예시·정책, 1시간마다 갱신)과 `/robots.txt`(/api·/admin·/me·/biz·/auth·/login 제외): 검색엔진과 광고 심사 로봇이 리스트를 찾을 수 있게 · `4eb25b2`
 
 ## v0.40 — PC 패널 스크롤·지도 못 쓰는 브라우저 (2026-10-17)
 - 0.40-1 PC 화면에서 기능 패널(타인의 핀, 팔로잉, 내 리스트, My 등)의 목록이 길면 패널 안에서 마우스 휠로 스크롤됨. 펼친 패널에 데스크톱 아래 위치 클래스가 두 개(bottom-auto, bottom-4) 붙어 패널이 화면 밖으로 늘어나 스크롤이 안 되던 것 · `2f8e88b`
