@@ -101,3 +101,18 @@ export async function loadKoreanFont(text: string): Promise<ArrayBuffer | null> 
     return null;
   }
 }
+
+// 검색엔진·광고 심사 로봇이 찾을 수 있게 공개 리스트 주소를 모은다(sitemap.xml)
+export async function getPublicListPaths(): Promise<{ path: string; updatedAt: string }[]> {
+  "use cache";
+  cacheLife("hours");
+  if (!isSupabaseConfigured()) return [];
+  const { data } = await anon()
+    .from("lists")
+    .select("slug, updated_at, owner:profiles!lists_owner_id_fkey!inner(handle)")
+    .eq("visibility", "public")
+    .order("updated_at", { ascending: false })
+    .limit(5000);
+  const rows = (data ?? []) as unknown as { slug: string; updated_at: string; owner: { handle: string } }[];
+  return rows.map((r) => ({ path: `/@${r.owner.handle}/${r.slug}`, updatedAt: r.updated_at }));
+}
