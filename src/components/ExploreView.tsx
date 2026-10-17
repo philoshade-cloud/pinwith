@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { OfficialBadge } from "./OfficialBadge";
 import { Panel } from "./shell/Panel";
 import { AdSlot } from "./AdSlot";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -11,7 +12,7 @@ import { useFormat, useT } from "@/lib/i18n/client";
 // 이 확대 단계(도시 정도)보다 넓게 보고 있으면 '이 지역'으로 치지 않는다
 const LOCAL_ZOOM = 8;
 
-type CuratorHit = { id: string; handle: string; display_name: string; bio: string };
+type CuratorHit = { id: string; handle: string; display_name: string; bio: string; is_official?: boolean };
 type ListHit = {
   id: string;
   slug: string;
@@ -21,12 +22,12 @@ type ListHit = {
   owner_id: string;
   // 내 리스트와 겹치는 장소 수(추천용)
   overlap?: number;
-  owner: { handle: string; display_name: string } | null;
+  owner: { handle: string; display_name: string; is_official?: boolean } | null;
   list_items: { count: number }[];
 };
 
 const LIST_SELECT =
-  "id, slug, title, themes, like_count, owner_id, owner:profiles!lists_owner_id_fkey(handle, display_name), list_items(count)";
+  "id, slug, title, themes, like_count, owner_id, owner:profiles!lists_owner_id_fkey(handle, display_name, is_official), list_items(count)";
 
 // 검색어를 PostgREST 필터에 안전하게 넣기 위해 특수문자를 뺀다.
 const clean = (q: string) => q.replace(/[,()%*\\#]/g, " ").trim();
@@ -136,7 +137,7 @@ export function ExploreView() {
       const [{ data: f }, { data: mine }] = await Promise.all([
         supabase
           .from("follows")
-          .select("followee:profiles!follows_followee_id_fkey(id, handle, display_name, bio)")
+          .select("followee:profiles!follows_followee_id_fkey(id, handle, display_name, bio, is_official)")
           .eq("follower_id", uid)
           .order("created_at", { ascending: false }),
         // 내 리스트에 담긴 장소들
@@ -191,7 +192,7 @@ export function ExploreView() {
       const [{ data: c }, { data: l }] = await Promise.all([
         supabase
           .from("profiles")
-          .select("id, handle, display_name, bio")
+          .select("id, handle, display_name, bio, is_official")
           .or(`handle.ilike.%${q.replace(/^@/, "")}%,display_name.ilike.%${q}%`)
           .limit(10),
         supabase
@@ -334,7 +335,7 @@ export function ExploreView() {
             <Section title={t("예시")}>
               <Link href="/demo" className="block border-y border-rule py-3.5 hover:bg-surface/60">
                 <span className="block text-[17px] font-semibold text-ink">{t("성수동 하루, 걸어서 도는 일곱 군데")}</span>
-                <span className="mt-1 block text-[13px] text-muted">{t("민지의 걷는 서울")} · {t("장소 {n}곳", { n: 7 })} · {t("#서울 #성수 #하루코스")}</span>
+                <span className="mt-1 block text-[13px] text-muted">PinWith <OfficialBadge /> · {t("장소 {n}곳", { n: 7 })} · {t("#서울 #성수 #하루코스")}</span>
               </Link>
             </Section>
           )}
@@ -368,7 +369,10 @@ function CuratorRows({ rows }: { rows: CuratorHit[] }) {
               {(c.display_name || c.handle).slice(0, 1)}
             </span>
             <span className="min-w-0">
-              <span className="block truncate text-[16px] font-semibold text-ink">{c.display_name || c.handle}</span>
+              <span className="flex min-w-0 items-center gap-1.5 text-[16px] font-semibold text-ink">
+                <span className="truncate">{c.display_name || c.handle}</span>
+                {c.is_official && <OfficialBadge />}
+              </span>
               <span className="block truncate text-[13px] text-muted">@{c.handle}{c.bio && ` · ${c.bio}`}</span>
             </span>
           </Link>
@@ -409,7 +413,8 @@ function ListRows({ rows, adSlot, pinsHere }: { rows: ListHit[]; adSlot?: string
               ) : null}
             </span>
             <span className="mt-1 block text-[13px] text-muted">
-              {l.owner?.display_name || `@${l.owner?.handle}`} · {t("장소 {n}곳", { n: l.list_items?.[0]?.count ?? 0 })}
+              {l.owner?.display_name || `@${l.owner?.handle}`}
+              {l.owner?.is_official && <OfficialBadge className="ml-1" />} · {t("장소 {n}곳", { n: l.list_items?.[0]?.count ?? 0 })}
               {l.overlap ? ` · ${t("내 장소와 {n}곳 겹침", { n: l.overlap })}` : ""}
               {l.like_count > 0 && ` · ${t("좋아요 {count}", { n: l.like_count, count: num(l.like_count) })}`}
               {l.themes.length > 0 && ` · ${l.themes.map((th) => `#${th}`).join(" ")}`}

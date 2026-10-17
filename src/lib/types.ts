@@ -8,6 +8,8 @@ export type Curator = {
   avatarUrl: string | null;
   bio: string;
   followerCount: number;
+  // PinWith 운영팀 계정(공식 표시)
+  official?: boolean;
 };
 
 export type Section = { id: string; name: string; position: number };

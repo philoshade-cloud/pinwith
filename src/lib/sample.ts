@@ -3,7 +3,7 @@ import { cacheLife } from "next/cache";
 import type { CuratedList, ListItem } from "./types";
 
 // 예시 리스트: 성수동 하루 코스. 장소는 실제 장소이고, 메모는 공개 후기·소개 글을 바탕으로 썼다.
-// 큐레이터는 가상의 인물이다.
+// PinWith 공식 계정(@pinwith)이 만든 예시로 보여 준다(가상의 인물·숫자를 쓰지 않는다).
 // place_id는 서버에서 구글 Text Search로 찾는다(결과는 캐시). 좌표는 30일 안에서만 캐시한다.
 // 구글 조회가 안 되면 아래의 대략적인 좌표로 보여주고, 그 장소는 '내 리스트에 담기'를 막는다.
 
@@ -56,15 +56,16 @@ const base: Omit<CuratedList, "items"> = {
   visibility: "public",
   kind: "course",
   themes: ["서울", "성수", "하루코스", "걷기좋은"],
-  likeCount: 3120,
+  likeCount: 0,
   updatedAt: "2026-10-14T09:00:00Z",
   curator: {
     id: "demo-curator",
-    handle: "minji.walks",
-    displayName: "민지의 걷는 서울",
-    avatarUrl: null,
-    bio: "서울을 걸어서 다니며 동네별 하루 코스를 만듭니다.",
-    followerCount: 21400,
+    handle: "pinwith",
+    displayName: "PinWith",
+    avatarUrl: "/brand/pinwith-icon-1024.png",
+    bio: "PinWith 운영팀이 직접 다니고 고른 장소 리스트예요.",
+    followerCount: 0,
+    official: true,
   },
   sections: [
     { id: "s1", name: "아침", position: 0 },

@@ -15,10 +15,10 @@ async function myId(supabase: Awaited<ReturnType<typeof createClient>>) {
 }
 
 const CURATOR_FIELDS =
-  "id, handle, display_name, avatar_url, bio, followers:follows!follows_followee_id_fkey(count)";
+  "id, handle, display_name, avatar_url, bio, is_official, followers:follows!follows_followee_id_fkey(count)";
 
 type CuratorRow = {
-  id: string; handle: string; display_name: string; avatar_url: string | null; bio: string;
+  id: string; handle: string; display_name: string; avatar_url: string | null; bio: string; is_official?: boolean;
   followers: { count: number }[];
 };
 
@@ -30,6 +30,7 @@ function toCurator(p: CuratorRow): Curator {
     avatarUrl: p.avatar_url,
     bio: p.bio,
     followerCount: p.followers?.[0]?.count ?? 0,
+    official: !!p.is_official,
   };
 }
 

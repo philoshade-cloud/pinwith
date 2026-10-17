@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { OfficialBadge } from "./OfficialBadge";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { createEmptyList } from "@/lib/lists";
@@ -101,7 +102,10 @@ export function CuratorView({
         <div className="flex items-center gap-3">
           <Avatar name={curator.displayName} url={curator.avatarUrl} size={48} />
           <div className="min-w-0 leading-tight">
-            <h1 className="font-display truncate text-[24px] font-semibold tracking-[-0.02em] text-ink">{curator.displayName}</h1>
+            <h1 className="font-display flex min-w-0 items-center gap-2 text-[24px] font-semibold tracking-[-0.02em] text-ink">
+              <span className="truncate">{curator.displayName}</span>
+              {curator.official && <OfficialBadge className="font-sans tracking-normal" />}
+            </h1>
             <p className="mt-0.5 truncate text-[13px] text-muted">
               @{curator.handle} · {t("팔로워 {count}", { n: curator.followerCount, count: num(curator.followerCount) })}
             </p>
