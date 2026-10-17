@@ -81,6 +81,7 @@ export function PlaceMap({
   }, [onSelect]);
 
   const located = items.filter((i) => i.lat != null && i.lng != null);
+  const [noMap, setNoMap] = useState(false);
 
   useEffect(() => {
     if (!container.current || map.current) return;
@@ -88,13 +89,22 @@ export function PlaceMap({
     if (!maplibregl.getWorkerUrl().startsWith(window.location.origin + "/maplibre")) {
       maplibregl.setWorkerUrl(`${window.location.origin}/maplibre-gl-worker.mjs`);
     }
-    const m = new maplibregl.Map({
-      container: container.current,
-      style: MAP_STYLE_URL,
-      center: [127, 30],
-      zoom: 2.5,
-      attributionControl: false,
-    });
+    // WebGL2를 못 쓰는 브라우저(오래된 기기, 일부 검색·광고 심사 로봇)에서는 지도를 만들 수 없다.
+    // 예전엔 여기서 오류가 나 화면 전체가 '문제가 생겼어요'로 바뀌었다 → 지도 자리만 안내로 바꾸고 패널·목록은 그대로 쓴다.
+    let m: maplibregl.Map;
+    try {
+      m = new maplibregl.Map({
+        container: container.current,
+        style: MAP_STYLE_URL,
+        center: [127, 30],
+        zoom: 2.5,
+        attributionControl: false,
+      });
+    } catch {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setNoMap(true);
+      return;
+    }
     // 모바일에서는 손가락으로 확대하므로 버튼을 두지 않고, 출처 표시는 위쪽(아래는 패널이 덮음)에 둔다.
     const narrow = window.innerWidth < 1024;
     m.addControl(new maplibregl.AttributionControl({ compact: true }), narrow ? "top-right" : "bottom-right");
@@ -294,6 +304,11 @@ export function PlaceMap({
   return (
     <div className="relative h-full w-full">
       <div ref={container} className="h-full w-full" role="region" aria-label={t("장소 지도")} />
+      {noMap && (
+        <div className="absolute inset-0 grid place-items-start justify-center bg-surface px-6 pt-24 text-center text-[14px] text-muted">
+          <p>{t("이 브라우저에서는 지도를 표시할 수 없어요. 목록은 그대로 볼 수 있어요. 최신 브라우저에서 열거나 하드웨어 가속을 켜 주세요.")}</p>
+        </div>
+      )}
       <button
         type="button"
         onClick={locate}

@@ -103,6 +103,7 @@ export const shell: Record<string, string> = {
   "Apple로 계속하기": "Continue with Apple",
   "Facebook으로 계속하기": "Continue with Facebook",
   "이동하는 중…": "Redirecting…",
+  "이 브라우저에서는 지도를 표시할 수 없어요. 목록은 그대로 볼 수 있어요. 최신 브라우저에서 열거나 하드웨어 가속을 켜 주세요.": "This browser can't display the map. You can still browse the lists. Try an up-to-date browser or turn on hardware acceleration.",
   "로그인하지 못했어요. 링크가 만료됐거나 이미 쓴 링크일 수 있어요. 다시 시도해 주세요.": "Couldn't sign you in. The link may have expired or already been used. Please try again.",
   "로그인 화면을 열지 못했어요. 잠시 뒤 다시 시도하세요.": "Couldn't open the sign-in page. Please try again in a moment.",
   "이메일로 로그인 링크 받기": "Get a login link by email",
