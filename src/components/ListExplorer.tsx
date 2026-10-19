@@ -13,6 +13,7 @@ import { track } from "@/lib/track";
 import { AdSlot } from "./AdSlot";
 import { FollowButton } from "./FollowButton";
 import { LikeButton } from "./LikeButton";
+import { OwnerItemActions } from "./OwnerItemActions";
 import { DmButton, ItemExtras, ListNotice, NotifyToggle, useCommentCounts } from "./SocialBits";
 import { Panel } from "./shell/Panel";
 import { Tags } from "./shell/PinCard";
@@ -108,7 +109,15 @@ export function ListExplorer({ list }: { list: CuratedList }) {
         : null,
       cardExtra: isDemo
         ? undefined
-        : (i: ListItem) => <ItemExtras itemId={i.id} listId={list.id} ownerId={list.curator.id} isOwner={isOwner} publicComments={list.publicComments} />,
+        : (i: ListItem) =>
+            isOwner ? (
+              <div className="grid gap-3">
+                <OwnerItemActions itemId={i.id} listId={list.id} placeId={i.placeId} title={i.title} />
+                <ItemExtras itemId={i.id} listId={list.id} ownerId={list.curator.id} isOwner={isOwner} publicComments={list.publicComments} />
+              </div>
+            ) : (
+              <ItemExtras itemId={i.id} listId={list.id} ownerId={list.curator.id} isOwner={isOwner} publicComments={list.publicComments} />
+            ),
     }),
     [visibleItems, isCourse, numbering, chips, list.id, list.sections, isOwner, router, isDemo, list.curator.id],
   );

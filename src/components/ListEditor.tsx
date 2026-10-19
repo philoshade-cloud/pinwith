@@ -70,7 +70,7 @@ export function ListEditor({ listId }: { listId: string }) {
   const [sections, setSections] = useState<Section[]>([]);
   const [items, setItems] = useState<ItemRow[]>([]);
   const [newSection, setNewSection] = useState("");
-  const { selectedId, toast: flash, refreshMine, setPanelOpen } = useShell();
+  const { selectedId, select, takeFocus, toast: flash, refreshMine, setPanelOpen } = useShell();
 
   useEffect(() => {
     (async () => {
@@ -268,6 +268,22 @@ export function ListEditor({ listId }: { listId: string }) {
     [state, mapItems, savedMeta?.kind, numbering, listId, sections],
   );
   useMapScene(scene);
+
+  // 핀 카드의 '편집'으로 들어왔으면 그 장소를 골라 둔다(아래 효과가 그 장소로 스크롤)
+  useEffect(() => {
+    if (state !== "ready") return;
+    const placeId = takeFocus();
+    if (!placeId) return;
+    const hit = items.find((i) => i.place_id === placeId);
+    if (hit) {
+      setPanelOpen(true);
+      select(hit.id);
+      // 이미 같은 핀이 골라져 있으면 위 효과가 다시 돌지 않으므로 직접 스크롤
+      setTimeout(() => document.getElementById(`item-${hit.id}`)?.scrollIntoView({ behavior: "smooth", block: "center" }), 80);
+    }
+    // 목록을 다 불러온 직후 한 번만
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
 
   // 지도에서 핀을 고르면 편집 목록에서 그 장소로
   useEffect(() => {

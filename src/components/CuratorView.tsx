@@ -11,6 +11,8 @@ import { FollowButton } from "./FollowButton";
 import { CoEditedLists } from "./CoEdit";
 import { DmButton, NotifyToggle } from "./SocialBits";
 import { ProfileQr } from "./ProfileQr";
+import { ShareButton } from "./ShareButton";
+import { OwnerItemActions } from "./OwnerItemActions";
 import { Avatar } from "./ListExplorer";
 import { Panel } from "./shell/Panel";
 import { useMapScene, useShell, type Scene } from "./shell/context";
@@ -50,10 +52,17 @@ export function CuratorView({
       listIdOf: (i) => listOf.get(i.id)?.id,
       cardExtra: (i) => {
         const l = listOf.get(i.id);
-        return l ? <OpenListLink href={`/@${curator.handle}/${l.slug}`} title={l.title} placeId={i.placeId} /> : null;
+        if (!l) return null;
+        const open = <OpenListLink href={`/@${curator.handle}/${l.slug}`} title={l.title} placeId={i.placeId} />;
+        return isOwner ? (
+          <div className="grid gap-3">
+            <OwnerItemActions itemId={i.id} listId={l.id} placeId={i.placeId} title={i.title} />
+            {open}
+          </div>
+        ) : open;
       },
     };
-  }, [lists, curator.handle]);
+  }, [lists, curator.handle, isOwner]);
   useMapScene(scene);
 
   const placeCount = lists.reduce((n, l) => n + l.itemCount, 0);
@@ -160,6 +169,7 @@ export function CuratorView({
                   </Link>
                   {isOwner && <Link href={`/me/lists/${l.id}`} className="btn-quiet shrink-0 !px-3">{t("편집")}</Link>}
                   {isOwner && <Link href={`/me/lists/${l.id}/notice`} className="btn-quiet shrink-0 !px-3">{t("공지")}</Link>}
+                  {isOwner && <ShareButton target={{ listId: l.id }} title={l.title} path={`/@${curator.handle}/${l.slug}`} className="btn-quiet shrink-0 !px-3" />}
                   <Link href={`/@${curator.handle}/${l.slug}`} aria-hidden tabIndex={-1} className="shrink-0 text-[20px] text-muted">›</Link>
                 </div>
               </li>
