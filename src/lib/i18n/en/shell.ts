@@ -94,6 +94,7 @@ export const shell: Record<string, string> = {
   "다른 사람 리스트 둘러보기": "Browse other people's lists",
   "개인정보처리방침": "Privacy policy",
   "이용약관": "Terms of use",
+  "가게 사장님께": "For businesses",
   // 로그인
   "서버 연결 설정이 아직 없습니다. 환경 변수를 확인하세요.": "The server connection isn't configured yet. Check the environment variables.",
   "PinWith에 로그인": "Log in to PinWith",

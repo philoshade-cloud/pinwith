@@ -50,6 +50,8 @@ export const places: Record<string, string> = {
   "과금 모델": "Billing terms",
   "성과": "Results",
   "광고비": "Ad credit",
+  "쓰지 않은 잔액은 언제든 환불을 요청할 수 있어요.": "You can request a refund of your unused balance at any time.",
+  "환불 정책": "Refund policy",
   "새 문의": "New",
   "확정": "Confirmed",
   "거절": "Declined",

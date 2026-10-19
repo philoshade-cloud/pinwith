@@ -166,6 +166,7 @@ export const social: Record<string, string> = {
   "문의·신고하기": "Help & report",
   "개인정보처리방침": "Privacy policy",
   "이용약관": "Terms of use",
+  "가게 사장님께": "For businesses",
   "계정 삭제": "Delete account",
   "삭제": "Delete",
   "내 프로필, 리스트, 팔로우, 좋아요가 모두 지워지며 되돌릴 수 없습니다.": "Your profile, lists, follows and likes will all be erased. This can't be undone.",

@@ -211,6 +211,10 @@ export function MyPage() {
             <Link href="/privacy" className="underline">{t("개인정보처리방침")}</Link>
             {" · "}
             <Link href="/terms" className="underline">{t("이용약관")}</Link>
+            {" · "}
+            <Link href="/for-businesses" className="underline">{t("가게 사장님께")}</Link>
+            {" · "}
+            <a href="mailto:support@pinwith.me" className="underline">support@pinwith.me</a>
           </p>
           <div className="mt-4">
             <ConfirmButton

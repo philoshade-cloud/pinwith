@@ -909,7 +909,9 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
       <form onSubmit={bank} className="grid max-w-[520px] gap-3 rounded-xl border border-rule p-4">
         <h2 className="text-[16px] font-semibold">{t("광고비 충전")}</h2>
         <p className="text-[13px] text-muted">
-          {t("미리 충전한 금액에서 과금돼요. 잔액이 조건 금액보다 적어지면 과금이 멈추고, 큐레이터가 ‘광고비 지급될 때만 공개’로 담은 리스트에서는 우리 가게가 숨겨져요.")}
+          {t("미리 충전한 금액에서 과금돼요. 잔액이 조건 금액보다 적어지면 과금이 멈추고, 큐레이터가 ‘광고비 지급될 때만 공개’로 담은 리스트에서는 우리 가게가 숨겨져요.")}{" "}
+          {t("쓰지 않은 잔액은 언제든 환불을 요청할 수 있어요.")}{" "}
+          <Link href="/for-businesses#refund" target="_blank" className="underline">{t("환불 정책")}</Link>
         </p>
         <label className="grid gap-1 text-[13px] font-semibold">
           {t("가게가 있는 나라")}

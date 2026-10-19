@@ -100,7 +100,7 @@ function TermsKo() {
         </li>
         <li>
           <b>광고비</b>: 광고비는 회사의 광고 서비스(PinWith 리스트를 통한 노출·연결)에 대한 선불 이용료입니다. 카드(Stripe) 또는 계좌 입금으로 충전하며, 쓰지 않은 잔액은 문의로
-          환불을 요청할 수 있고 결제·송금 수수료를 뺀 금액을 돌려드립니다. 잔액에는 이자가 붙지 않습니다.
+          환불을 요청할 수 있고 결제·송금 수수료를 뺀 금액을 돌려드립니다. 잔액에는 이자가 붙지 않습니다. 자세한 절차는 <Link href="/for-businesses#refund">광고비 환불 정책</Link>을 따릅니다.
         </li>
         <li>
           <b>가게의 권한</b>: 가게는 특정 큐레이터를 차단할 수 있고, 그러면 그 큐레이터의 리스트에서 가게가 숨겨지며 풀릴 때까지 다시 담을 수 없습니다. 차단을 남용하면 회사가 풀
@@ -278,7 +278,8 @@ function TermsEn() {
         <li>
           <b>Ad credit</b>: ad credit is a prepaid fee for the Company’s advertising service (exposure and connections through PinWith lists). It is topped up
           by card (Stripe) or bank transfer. You may request a refund of any unused balance through the support form, and we will refund the amount minus
-          payment and transfer fees. The balance does not earn interest.
+          payment and transfer fees. The balance does not earn interest. Details are in the{" "}
+          <Link href="/for-businesses#refund">ad credit refund policy</Link>.
         </li>
         <li>
           <b>Store rights</b>: a store can block a specific curator; the store is then hidden from that curator’s lists and cannot be added again until the

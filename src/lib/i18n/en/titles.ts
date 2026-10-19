@@ -18,6 +18,7 @@ export const titles: Record<string, string> = {
   "예약 문의": "Reservation inquiry",
   "이용약관": "Terms of use",
   "개인정보처리방침": "Privacy policy",
+  "가게 사장님께": "For businesses",
   "로그인": "Log in",
   "{name}의 지도": "{name}'s map",
 };

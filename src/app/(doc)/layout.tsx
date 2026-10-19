@@ -9,6 +9,18 @@ export default function DocLayout({ children }: { children: React.ReactNode }) {
         <Logo size={28} />
       </Link>
       <article className="doc mt-8">{children}</article>
+      <footer className="mt-14 border-t border-rule pt-5 text-[13px] text-muted">
+        <p>
+          <Link href="/for-businesses" className="underline">For businesses · 가게 사장님께</Link>
+          {" · "}
+          <Link href="/terms" className="underline">Terms · 이용약관</Link>
+          {" · "}
+          <Link href="/privacy" className="underline">Privacy · 개인정보처리방침</Link>
+        </p>
+        <p className="mt-2">
+          <a href="mailto:support@pinwith.me" className="underline">support@pinwith.me</a> · STRATO TRADINGS PTE. LTD. (Singapore, UEN 202402989G)
+        </p>
+      </footer>
     </main>
   );
 }
