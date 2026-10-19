@@ -1,7 +1,7 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { serviceDb } from "@/lib/placeCoords";
 
-// Stripe가 결제 완료를 알려주면(checkout.session.completed) 서명을 확인하고 잔액에 넣는다.
+// Stripe가 결제 완료를 알려주면(checkout.session.completed, async_payment_succeeded) 서명을 확인하고 잔액에 넣는다.
 // Stripe 대시보드 → Webhooks에 이 주소를 등록하고, 받은 서명 비밀값을 STRIPE_WEBHOOK_SECRET에 넣는다.
 function verify(payload: string, header: string, secret: string) {
   const parts = Object.fromEntries(header.split(",").map((p) => p.split("=") as [string, string]));
@@ -24,7 +24,9 @@ export async function POST(req: Request) {
     type: string;
     data: { object: { id: string; payment_status?: string; amount_total?: number; currency?: string; metadata?: { topup?: string } } };
   };
-  if (event.type === "checkout.session.completed" && event.data.object.payment_status === "paid") {
+  // 국내 간편결제 등 나중에 확정되는 결제는 checkout.session.async_payment_succeeded로 온다
+  const done = event.type === "checkout.session.completed" || event.type === "checkout.session.async_payment_succeeded";
+  if (done && event.data.object.payment_status === "paid") {
     const s = event.data.object;
     const id = s.metadata?.topup;
     if (id) {
