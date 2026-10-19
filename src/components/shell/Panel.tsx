@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type PointerEvent, type ReactNode } from "react";
 import { useShell } from "./context";
 import { useT } from "@/lib/i18n/client";
 
@@ -17,6 +17,7 @@ export function Panel({
 }) {
   const { panelOpen, setPanelOpen } = useShell();
   const t = useT();
+  const drag = useDrag(panelOpen, setPanelOpen);
   useEffect(() => {
     setPanelOpen(defaultOpen);
     // 화면에 들어올 때 한 번만
@@ -33,11 +34,12 @@ export function Panel({
       }`}
     >
       {titleSlot ? (
-        <div className="flex h-[52px] shrink-0 items-center gap-2 border-b border-rule px-4">
+        <div {...drag.handlers} className="relative flex h-[52px] shrink-0 touch-none items-center gap-2 border-b border-rule px-4">
+          <Grip />
           <div className="min-w-0 flex-1">{titleSlot}</div>
           <button
             type="button"
-            onClick={() => setPanelOpen(!panelOpen)}
+            onClick={() => drag.consumed() || setPanelOpen(!panelOpen)}
             aria-expanded={panelOpen}
             className="shrink-0 rounded-full bg-surface px-3 py-1 text-[13px] font-semibold text-ink"
           >
@@ -47,10 +49,12 @@ export function Panel({
       ) : (
         <button
           type="button"
-          onClick={() => setPanelOpen(!panelOpen)}
+          {...drag.handlers}
+          onClick={() => drag.consumed() || setPanelOpen(!panelOpen)}
           aria-expanded={panelOpen}
-          className="flex h-[52px] shrink-0 items-center gap-2 border-b border-rule px-4 text-left"
+          className="relative flex h-[52px] shrink-0 touch-none items-center gap-2 border-b border-rule px-4 text-left"
         >
+          <Grip />
           <span className="min-w-0 flex-1 truncate text-[15px] font-semibold text-ink">{title}</span>
           <span className="shrink-0 rounded-full bg-surface px-3 py-1 text-[13px] font-semibold text-ink">
             {panelOpen ? t("지도 보기 ▾") : t("펼치기 ▴")}
@@ -60,6 +64,53 @@ export function Panel({
       <div className={`${panelOpen ? "block" : "hidden"} min-h-0 flex-1 overflow-y-auto overscroll-contain`}>{children}</div>
     </section>
   );
+}
+
+// 휴대폰에서 제목 줄을 위로 끌면 펼치고, 아래로 끌면 접는다(버튼을 누르지 않아도).
+const SWIPE = 24;
+function useDrag(open: boolean, setOpen: (v: boolean) => void) {
+  const start = useRef<{ y: number; id: number } | null>(null);
+  // 끌어서 여닫았으면 바로 뒤따르는 클릭(손을 뗄 때 생김)은 무시한다
+  const swiped = useRef(false);
+  return {
+    handlers: {
+      onPointerDown: (e: PointerEvent) => {
+        if (e.pointerType === "mouse") return;
+        start.current = { y: e.clientY, id: e.pointerId };
+        swiped.current = false;
+      },
+      onPointerMove: (e: PointerEvent) => {
+        const s = start.current;
+        if (!s || s.id !== e.pointerId) return;
+        const dy = e.clientY - s.y;
+        if (dy < -SWIPE && !open) {
+          setOpen(true);
+          swiped.current = true;
+          start.current = null;
+        } else if (dy > SWIPE && open) {
+          setOpen(false);
+          swiped.current = true;
+          start.current = null;
+        }
+      },
+      onPointerUp: () => {
+        start.current = null;
+      },
+      onPointerCancel: () => {
+        start.current = null;
+      },
+    },
+    consumed: () => {
+      const v = swiped.current;
+      swiped.current = false;
+      return v;
+    },
+  };
+}
+
+// 끌 수 있다는 표시(휴대폰에서만)
+function Grip() {
+  return <span aria-hidden className="pointer-events-none absolute left-1/2 top-1.5 h-1 w-9 -translate-x-1/2 rounded-full bg-rule lg:hidden" />;
 }
 
 export function PanelLoading() {
