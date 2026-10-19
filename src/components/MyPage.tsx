@@ -8,6 +8,8 @@ import { SignOutButton } from "./SignOutButton";
 import { AvatarPicker } from "./AvatarPicker";
 import { PushToggle } from "./PushToggle";
 import { ConfirmButton } from "./ConfirmButton";
+import { ShareButton } from "./ShareButton";
+import { ProfileQr } from "./ProfileQr";
 import { APP_VERSION } from "@/lib/version";
 import { useMonetization } from "@/lib/monetization";
 import { Panel, PanelLoading } from "./shell/Panel";
@@ -196,6 +198,18 @@ export function MyPage() {
             <Link href={`/@${profile.handle}`} className="btn-quiet justify-center">
               {t("내 리스트 보기")}
             </Link>
+          )}
+          {!needsHandle && (
+            <div className="grid grid-cols-[1fr_auto] gap-2">
+              <ShareButton
+                target={{ profileId: profile.id }}
+                title={profile.display_name || `@${profile.handle}`}
+                path={`/@${profile.handle}`}
+                label={t("내 지도(계정) 공유")}
+                className="btn-quiet justify-center"
+              />
+              <ProfileQr url={`${typeof window === "undefined" ? "" : window.location.origin}/@${profile.handle}`} name={profile.display_name || profile.handle} />
+            </div>
           )}
           <Link href="/me/reservations" className="btn-quiet justify-center">{t("내 예약 문의")}</Link>
           <Link href="/biz" className="btn-quiet justify-center">{t("상업 이용자용 콘솔")}</Link>
