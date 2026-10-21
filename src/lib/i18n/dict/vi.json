@@ -1024,7 +1024,23 @@
 "내 리스트에 장소를 담으면, 같은 장소를 담은 다른 사람의 리스트를 보여 드려요.": "Lưu địa điểm vào danh sách của bạn và chúng tôi sẽ gợi ý danh sách của người khác có cùng địa điểm.",
 "팔로우 중@@칩": "Đang theo dõi",
 "인기 리스트@@칩": "Nổi bật",
-"내 리스트와 겹치는 리스트@@칩": "Giống của tôi"
+"내 리스트와 겹치는 리스트@@칩": "Giống của tôi",
+"이 문서는 영어로 제공돼요. 영어본이 기준이에요.": "Tài liệu này được cung cấp bằng tiếng Anh và bản tiếng Anh có giá trị pháp lý.",
+"영수증": "Biên lai",
+"영수증을 찾을 수 없어요. 결제가 끝난 충전만 영수증이 있어요.": "Không tìm thấy biên lai. Chỉ những lần nạp đã thanh toán xong mới có biên lai.",
+"광고비 화면으로": "Quay lại tín dụng quảng cáo",
+"인쇄 · PDF로 저장": "In · Lưu dưới dạng PDF",
+"영수증 번호": "Số biên lai",
+"결제일": "Ngày thanh toán",
+"받는 분": "Xuất cho",
+"결제 방법": "Phương thức thanh toán",
+"카드 결제(Stripe)": "Thẻ (Stripe)",
+"PinWith 광고비 충전(선불 광고 이용료)": "Nạp tín dụng quảng cáo PinWith (phí quảng cáo trả trước)",
+"광고비 잔액에 {amount} 적립": "Đã cộng {amount} vào số dư tín dụng quảng cáo",
+"환불": "Hoàn tiền",
+"환불 후 결제 금액": "Tổng sau hoàn tiền",
+"결제 금액": "Tổng đã thanh toán",
+"PinWith 광고 서비스의 판매자는 STRATO TRADINGS PTE. LTD.입니다. 쓰지 않은 광고비는 환불 정책에 따라 돌려받을 수 있어요: pinwith.me/for-businesses#refund": "Bên bán dịch vụ quảng cáo PinWith là STRATO TRADINGS PTE. LTD. Tín dụng quảng cáo chưa sử dụng có thể được hoàn tiền theo chính sách hoàn tiền của chúng tôi: pinwith.me/for-businesses#refund"
 },
 "titles": {
 "가게 콘솔": "Bảng điều khiển cửa hàng",
@@ -1049,6 +1065,7 @@
 "개인정보처리방침": "Chính sách quyền riêng tư",
 "가게 사장님께": "Dành cho doanh nghiệp",
 "로그인": "Đăng nhập",
-"{name}의 지도": "Bản đồ của {name}"
+"{name}의 지도": "Bản đồ của {name}",
+"영수증": "Biên lai"
 }
 }

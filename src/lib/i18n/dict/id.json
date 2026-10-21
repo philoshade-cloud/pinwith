@@ -1024,7 +1024,23 @@
 "내 리스트에 장소를 담으면, 같은 장소를 담은 다른 사람의 리스트를 보여 드려요.": "Simpan tempat ke daftarmu, dan kami akan menampilkan daftar orang lain yang memuat tempat yang sama.",
 "팔로우 중@@칩": "Diikuti",
 "인기 리스트@@칩": "Populer",
-"내 리스트와 겹치는 리스트@@칩": "Mirip punyaku"
+"내 리스트와 겹치는 리스트@@칩": "Mirip punyaku",
+"이 문서는 영어로 제공돼요. 영어본이 기준이에요.": "Dokumen ini disediakan dalam bahasa Inggris, dan versi bahasa Inggris yang berlaku.",
+"영수증": "Kuitansi",
+"영수증을 찾을 수 없어요. 결제가 끝난 충전만 영수증이 있어요.": "Kuitansi tidak ditemukan. Hanya isi ulang yang sudah selesai dibayar yang memiliki kuitansi.",
+"광고비 화면으로": "Kembali ke kredit iklan",
+"인쇄 · PDF로 저장": "Cetak · Simpan sebagai PDF",
+"영수증 번호": "No. kuitansi",
+"결제일": "Tanggal bayar",
+"받는 분": "Ditagihkan kepada",
+"결제 방법": "Metode pembayaran",
+"카드 결제(Stripe)": "Kartu (Stripe)",
+"PinWith 광고비 충전(선불 광고 이용료)": "Isi ulang kredit iklan PinWith (biaya iklan prabayar)",
+"광고비 잔액에 {amount} 적립": "{amount} ditambahkan ke saldo kredit iklan",
+"환불": "Pengembalian dana",
+"환불 후 결제 금액": "Total setelah pengembalian dana",
+"결제 금액": "Total dibayar",
+"PinWith 광고 서비스의 판매자는 STRATO TRADINGS PTE. LTD.입니다. 쓰지 않은 광고비는 환불 정책에 따라 돌려받을 수 있어요: pinwith.me/for-businesses#refund": "Penjual layanan iklan PinWith adalah STRATO TRADINGS PTE. LTD. Kredit iklan yang belum digunakan dapat dikembalikan sesuai kebijakan pengembalian dana kami: pinwith.me/for-businesses#refund"
 },
 "titles": {
 "가게 콘솔": "Konsol toko",
@@ -1049,6 +1065,7 @@
 "개인정보처리방침": "Kebijakan privasi",
 "가게 사장님께": "Untuk pemilik usaha",
 "로그인": "Masuk",
-"{name}의 지도": "Peta {name}"
+"{name}의 지도": "Peta {name}",
+"영수증": "Kuitansi"
 }
 }

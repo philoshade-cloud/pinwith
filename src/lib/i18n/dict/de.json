@@ -1024,7 +1024,23 @@
 "내 리스트에 장소를 담으면, 같은 장소를 담은 다른 사람의 리스트를 보여 드려요.": "Merk dir Orte in deinen Listen, und wir zeigen dir Listen anderer mit denselben Orten.",
 "팔로우 중@@칩": "Gefolgt",
 "인기 리스트@@칩": "Beliebt",
-"내 리스트와 겹치는 리스트@@칩": "Wie meine"
+"내 리스트와 겹치는 리스트@@칩": "Wie meine",
+"이 문서는 영어로 제공돼요. 영어본이 기준이에요.": "Dieses Dokument wird auf Englisch bereitgestellt; maßgeblich ist die englische Fassung.",
+"영수증": "Beleg",
+"영수증을 찾을 수 없어요. 결제가 끝난 충전만 영수증이 있어요.": "Beleg nicht gefunden. Belege gibt es nur für abgeschlossene Aufladungen.",
+"광고비 화면으로": "Zurück zum Werbeguthaben",
+"인쇄 · PDF로 저장": "Drucken · Als PDF speichern",
+"영수증 번호": "Belegnr.",
+"결제일": "Zahlungsdatum",
+"받는 분": "Rechnungsempfänger",
+"결제 방법": "Zahlungsmethode",
+"카드 결제(Stripe)": "Karte (Stripe)",
+"PinWith 광고비 충전(선불 광고 이용료)": "PinWith-Werbeguthaben-Aufladung (vorausbezahlte Werbegebühr)",
+"광고비 잔액에 {amount} 적립": "{amount} dem Werbeguthaben gutgeschrieben",
+"환불": "Erstattung",
+"환불 후 결제 금액": "Gesamt nach Erstattung",
+"결제 금액": "Bezahlter Betrag",
+"PinWith 광고 서비스의 판매자는 STRATO TRADINGS PTE. LTD.입니다. 쓰지 않은 광고비는 환불 정책에 따라 돌려받을 수 있어요: pinwith.me/for-businesses#refund": "Verkäufer des PinWith-Werbedienstes ist STRATO TRADINGS PTE. LTD. Nicht genutztes Werbeguthaben kann gemäß unserer Erstattungsrichtlinie erstattet werden: pinwith.me/for-businesses#refund"
 },
 "titles": {
 "가게 콘솔": "Laden-Konsole",
@@ -1049,6 +1065,7 @@
 "개인정보처리방침": "Datenschutzerklärung",
 "가게 사장님께": "Für Unternehmen",
 "로그인": "Anmelden",
-"{name}의 지도": "Karte von {name}"
+"{name}의 지도": "Karte von {name}",
+"영수증": "Beleg"
 }
 }

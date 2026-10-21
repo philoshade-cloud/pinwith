@@ -1024,7 +1024,23 @@
 "내 리스트에 장소를 담으면, 같은 장소를 담은 다른 사람의 리스트를 보여 드려요.": "Enregistrez des lieux dans vos listes et nous vous montrerons les listes d'autres personnes contenant les mêmes lieux.",
 "팔로우 중@@칩": "Abonnements",
 "인기 리스트@@칩": "Populaires",
-"내 리스트와 겹치는 리스트@@칩": "Comme les miennes"
+"내 리스트와 겹치는 리스트@@칩": "Comme les miennes",
+"이 문서는 영어로 제공돼요. 영어본이 기준이에요.": "Ce document est fourni en anglais, et la version anglaise fait foi.",
+"영수증": "Reçu",
+"영수증을 찾을 수 없어요. 결제가 끝난 충전만 영수증이 있어요.": "Reçu introuvable. Seules les recharges finalisées ont un reçu.",
+"광고비 화면으로": "Retour au crédit publicitaire",
+"인쇄 · PDF로 저장": "Imprimer · Enregistrer en PDF",
+"영수증 번호": "N° de reçu",
+"결제일": "Date de paiement",
+"받는 분": "Facturé à",
+"결제 방법": "Moyen de paiement",
+"카드 결제(Stripe)": "Carte (Stripe)",
+"PinWith 광고비 충전(선불 광고 이용료)": "Recharge de crédit publicitaire PinWith (frais de publicité prépayés)",
+"광고비 잔액에 {amount} 적립": "{amount} ajouté au solde de crédit publicitaire",
+"환불": "Remboursement",
+"환불 후 결제 금액": "Total après remboursement",
+"결제 금액": "Total payé",
+"PinWith 광고 서비스의 판매자는 STRATO TRADINGS PTE. LTD.입니다. 쓰지 않은 광고비는 환불 정책에 따라 돌려받을 수 있어요: pinwith.me/for-businesses#refund": "Le vendeur du service publicitaire PinWith est STRATO TRADINGS PTE. LTD. Le crédit publicitaire non utilisé peut être remboursé conformément à notre politique de remboursement : pinwith.me/for-businesses#refund"
 },
 "titles": {
 "가게 콘솔": "Console du commerce",
@@ -1049,6 +1065,7 @@
 "개인정보처리방침": "Politique de confidentialité",
 "가게 사장님께": "Pour les commerces",
 "로그인": "Se connecter",
-"{name}의 지도": "Carte de {name}"
+"{name}의 지도": "Carte de {name}",
+"영수증": "Reçu"
 }
 }

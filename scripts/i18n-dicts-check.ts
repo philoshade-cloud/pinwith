@@ -2,7 +2,7 @@
 // 영어 사전(src/lib/i18n/en)에 있는데 다른 언어 사전(src/lib/i18n/dict/*.json)에 없는 문구를 언어별로 센다.
 // 빠진 문구는 화면에서 영어로 나온다(깨지지는 않음). 새 문구를 넣은 뒤 번역을 채울 때 쓴다.
 import { readdirSync, readFileSync } from "node:fs";
-import { EN, TITLES } from "../src/lib/i18n/en/index.ts";
+import { EN, TITLES } from "../src/lib/i18n/en";
 
 const dir = "src/lib/i18n/dict";
 let total = 0;

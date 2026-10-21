@@ -1024,7 +1024,23 @@
 "내 리스트에 장소를 담으면, 같은 장소를 담은 다른 사람의 리스트를 보여 드려요.": "Guarda lugares en tus listas y te mostraremos listas de otras personas con los mismos lugares.",
 "팔로우 중@@칩": "Siguiendo",
 "인기 리스트@@칩": "Populares",
-"내 리스트와 겹치는 리스트@@칩": "Como las mías"
+"내 리스트와 겹치는 리스트@@칩": "Como las mías",
+"이 문서는 영어로 제공돼요. 영어본이 기준이에요.": "Este documento se proporciona en inglés y prevalece la versión en inglés.",
+"영수증": "Recibo",
+"영수증을 찾을 수 없어요. 결제가 끝난 충전만 영수증이 있어요.": "No se encontró el recibo. Solo las recargas completadas tienen recibo.",
+"광고비 화면으로": "Volver al saldo publicitario",
+"인쇄 · PDF로 저장": "Imprimir · Guardar como PDF",
+"영수증 번호": "N.º de recibo",
+"결제일": "Fecha de pago",
+"받는 분": "Facturado a",
+"결제 방법": "Método de pago",
+"카드 결제(Stripe)": "Tarjeta (Stripe)",
+"PinWith 광고비 충전(선불 광고 이용료)": "Recarga de saldo publicitario de PinWith (tarifa de publicidad prepagada)",
+"광고비 잔액에 {amount} 적립": "{amount} añadido al saldo publicitario",
+"환불": "Reembolso",
+"환불 후 결제 금액": "Total tras el reembolso",
+"결제 금액": "Total pagado",
+"PinWith 광고 서비스의 판매자는 STRATO TRADINGS PTE. LTD.입니다. 쓰지 않은 광고비는 환불 정책에 따라 돌려받을 수 있어요: pinwith.me/for-businesses#refund": "El vendedor del servicio publicitario de PinWith es STRATO TRADINGS PTE. LTD. Puedes obtener el reembolso del saldo publicitario no utilizado según nuestra política de reembolsos: pinwith.me/for-businesses#refund"
 },
 "titles": {
 "가게 콘솔": "Consola del negocio",
@@ -1049,6 +1065,7 @@
 "개인정보처리방침": "Política de privacidad",
 "가게 사장님께": "Para negocios",
 "로그인": "Iniciar sesión",
-"{name}의 지도": "Mapa de {name}"
+"{name}의 지도": "Mapa de {name}",
+"영수증": "Recibo"
 }
 }
