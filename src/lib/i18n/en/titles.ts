@@ -9,6 +9,7 @@ export const titles: Record<string, string> = {
   "내 프로필": "My profile",
   "리스트 편집": "Edit list",
   "장소 편집": "Edit place",
+  "내 핀에서 검색": "Search my pins",
   "공지": "Notice",
   "팔로잉 리스트": "Following",
   "알림": "Notifications",

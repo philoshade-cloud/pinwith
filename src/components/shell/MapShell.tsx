@@ -9,6 +9,7 @@ import { isSupabaseConfigured } from "@/lib/env";
 import type { ListItem } from "@/lib/types";
 import { track } from "@/lib/track";
 import { PlaceSearchBox, type FoundPlace, type LoadedPlace } from "../PlaceSearch";
+import { hitHref, type SavedHit } from "@/lib/savedSearch";
 import { SaveToListSheet } from "../SaveToListSheet";
 import { AddPlaceSheet } from "./AddPlaceSheet";
 import { PinCard } from "./PinCard";
@@ -246,6 +247,28 @@ export function MapShell({ children }: { children: ReactNode }) {
   );
   const navProps = { me, reopen, leave };
 
+  // 저장한 핀 검색 결과를 고르면: 장소는 그 리스트를 열고 그 핀 카드를 띄우고, 리스트는 그 리스트로
+  const openSaved = useCallback(
+    (h: SavedHit) => {
+      setResults(null);
+      setPicked(null);
+      setCandidate(null);
+      const href = hitHref(h);
+      if (h.kind === "place" && h.place_id) {
+        // 이미 그 리스트를 보고 있으면 핀만 고른다
+        if (h.item_id && decodeURIComponent(window.location.pathname) === decodeURIComponent(href)) {
+          setSelectedId(h.item_id);
+          return;
+        }
+        pendingFocus.current = h.place_id;
+        holdView.current = { placeId: h.place_id, ...(h.lat != null && h.lng != null ? { lat: h.lat, lng: h.lng } : {}) };
+      }
+      setSelectedId(null);
+      router.push(href);
+    },
+    [router],
+  );
+
   return (
     <ShellContext.Provider value={shell}>
       {/* 바탕 지도 */}
@@ -286,6 +309,8 @@ export function MapShell({ children }: { children: ReactNode }) {
               key={searchKey}
               near={() => centerOf.current?.() ?? null}
               onResults={showResults}
+              onSavedPick={openSaved}
+              onSavedAll={(q) => router.push(`/search?q=${encodeURIComponent(q)}`)}
               onPick={(id) => {
                 setResults(null);
                 setPicked({ id });

@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { loadPlacesLibrary, type UiKitPlace } from "@/lib/google";
 import { logUsage } from "@/lib/usage";
 import { currentLang, useT } from "@/lib/i18n/client";
+import { useSavedSearch, useScopes, type SavedHit } from "@/lib/savedSearch";
+import { SavedHitRow, ScopeChips } from "./SavedHits";
 
 export type FoundPlace = { id: string; name: string; address: string; lat: number; lng: number };
 
@@ -37,10 +39,13 @@ type PlacesLib = {
 // 글자를 치면 제안 목록이 뜨고(고르면 그 장소 하나), 제안을 고르지 않고 Enter를 누르면
 // 같은 검색어로 찾은 장소 여러 곳을 지도와 목록으로 보여준다.
 export function PlaceSearchBox({
-  onPick, onResults, near,
+  onPick, onResults, near, onSavedPick, onSavedAll,
 }: {
   onPick: (placeId: string) => void;
   onResults: (query: string, places: FoundPlace[]) => void;
+  // 저장한 핀 검색(로그인했을 때): 결과를 고르면 그 장소·리스트로, '모두 보기'는 검색 화면으로
+  onSavedPick?: (hit: SavedHit) => void;
+  onSavedAll?: (query: string) => void;
   // 지금 보고 있는 지도 가운데. 이 근처 결과를 먼저 보여준다.
   near?: () => { lat: number; lng: number } | null;
 }) {
@@ -57,6 +62,10 @@ export function PlaceSearchBox({
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
   const [busy, setBusy] = useState(false);
+  const saved = !!onSavedPick;
+  const { scopes, toggle } = useScopes();
+  const savedHits = useSavedSearch(text, scopes, 6, saved);
+  const googleOn = status === "ready";
 
   useEffect(() => {
     let cancelled = false;
@@ -188,7 +197,12 @@ export function PlaceSearchBox({
       e.preventDefault();
       // 화살표로 고른 제안이 있으면 그 장소, 아니면 검색어 전체로 찾기
       if (open && active >= 0 && suggestions[active]) pick(suggestions[active]);
-      else searchAll();
+      else if (!googleOn && saved && onSavedAll && text.trim()) {
+        // 구글 검색이 꺼져 있으면 Enter는 저장한 핀 검색 화면으로
+        input.current?.blur();
+        setOpen(false);
+        onSavedAll(text.trim());
+      } else searchAll();
     }
   }
 
@@ -201,13 +215,18 @@ export function PlaceSearchBox({
           value={text}
           onChange={(e) => {
             setText(e.target.value);
+            if (saved) setOpen(!!e.target.value.trim());
             suggest(e.target.value);
           }}
           onKeyDown={onKey}
-          onFocus={() => suggestions.length && setOpen(true)}
+          onFocus={() => (suggestions.length || (saved && text.trim())) && setOpen(true)}
           onBlur={() => window.setTimeout(() => setOpen(false), 150)}
-          placeholder={status === "off" ? t("장소 검색을 잠시 쉬고 있어요") : status === "error" ? t("장소 검색을 불러오지 못했습니다") : t("장소 이름이나 주소로 검색")}
-          disabled={status === "error" || status === "off"}
+          placeholder={
+            saved
+              ? googleOn || status === "loading" ? t("내 핀이나 장소 이름·주소로 검색") : t("내 핀에서 검색")
+              : status === "off" ? t("장소 검색을 잠시 쉬고 있어요") : status === "error" ? t("장소 검색을 불러오지 못했습니다") : t("장소 이름이나 주소로 검색")
+          }
+          disabled={!saved && (status === "error" || status === "off")}
           enterKeyHint="search"
           role="combobox"
           aria-controls="place-suggestions"
@@ -232,28 +251,74 @@ export function PlaceSearchBox({
           </button>
         )}
       </div>
-      {open && suggestions.length > 0 && (
-        <ul id="place-suggestions" role="listbox" className="absolute inset-x-0 top-full z-50 mt-1.5 overflow-hidden rounded-xl bg-white py-1 shadow-[0_8px_24px_rgba(24,34,47,0.2)]">
-          {suggestions.map((s, i) => (
-            <li key={s.placeId} role="option" aria-selected={i === active}>
-              <button
-                type="button"
-                onMouseDown={(e) => e.preventDefault()}
-                onClick={() => pick(s)}
-                className={`block w-full px-3 py-2 text-left ${i === active ? "bg-surface" : "hover:bg-surface/60"}`}
-              >
-                <span className="block truncate text-[15px] text-ink">{s.main}</span>
-                {s.secondary && <span className="block truncate text-[12px] text-muted">{s.secondary}</span>}
-              </button>
-            </li>
-          ))}
-          <li className="flex items-center justify-between border-t border-rule px-3 py-1.5 text-[12px] text-muted">
-            <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={searchAll} className="font-semibold text-teal">
-              {t("‘{q}’ 결과 모두 지도에 보기", { q: text.trim() })}
-            </button>
-            <span>Google</span>
-          </li>
-        </ul>
+      {open && (suggestions.length > 0 || (saved && text.trim())) && (
+        <div className="absolute inset-x-0 top-full z-50 mt-1.5 max-h-[70dvh] overflow-y-auto overscroll-contain rounded-xl bg-white py-1 shadow-[0_8px_24px_rgba(24,34,47,0.2)]">
+          {saved && text.trim() && (
+            <section aria-label={t("내 핀에서")} className="border-b border-rule pb-1">
+              <div className="flex flex-wrap items-center gap-2 px-3 pb-1 pt-1.5">
+                <span className="text-[12px] font-semibold text-teal">{t("내 핀에서")}</span>
+                <ScopeChips scopes={scopes} toggle={toggle} />
+              </div>
+              {scopes.length === 0 ? (
+                <p className="px-3 py-1.5 text-[13px] text-muted">{t("찾을 범위를 하나 이상 고르세요.")}</p>
+              ) : savedHits === null ? (
+                <p className="px-3 py-1.5 text-[13px] text-muted">{t("찾는 중")}</p>
+              ) : savedHits.length === 0 ? (
+                <p className="px-3 py-1.5 text-[13px] text-muted">{t("저장한 핀 중에는 없어요.")}</p>
+              ) : (
+                <ul>
+                  {savedHits.slice(0, 5).map((h) => (
+                    <li key={`${h.kind}-${h.item_id ?? h.list_id}`}>
+                      <SavedHitRow hit={h} q={text} onPick={(x) => {
+                        input.current?.blur();
+                        setOpen(false);
+                        onSavedPick?.(x);
+                      }} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {onSavedAll && savedHits && savedHits.length > 0 && (
+                <button
+                  type="button"
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => {
+                    input.current?.blur();
+                    setOpen(false);
+                    onSavedAll(text.trim());
+                  }}
+                  className="block w-full px-3 py-1.5 text-left text-[12px] font-semibold text-teal"
+                >
+                  {t("‘{q}’ 내 핀에서 모두 보기", { q: text.trim() })}
+                </button>
+              )}
+            </section>
+          )}
+          {suggestions.length > 0 && (
+            <ul id="place-suggestions" role="listbox" aria-label={t("Google 장소")}>
+              {saved && <li className="px-3 pb-0.5 pt-1.5 text-[12px] font-semibold text-muted">{t("Google 장소")}</li>}
+              {suggestions.map((s, i) => (
+                <li key={s.placeId} role="option" aria-selected={i === active}>
+                  <button
+                    type="button"
+                    onMouseDown={(e) => e.preventDefault()}
+                    onClick={() => pick(s)}
+                    className={`block w-full px-3 py-2 text-left ${i === active ? "bg-surface" : "hover:bg-surface/60"}`}
+                  >
+                    <span className="block truncate text-[15px] text-ink">{s.main}</span>
+                    {s.secondary && <span className="block truncate text-[12px] text-muted">{s.secondary}</span>}
+                  </button>
+                </li>
+              ))}
+              <li className="flex items-center justify-between border-t border-rule px-3 py-1.5 text-[12px] text-muted">
+                <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={searchAll} className="font-semibold text-teal">
+                  {t("‘{q}’ 결과 모두 지도에 보기", { q: text.trim() })}
+                </button>
+                <span>Google</span>
+              </li>
+            </ul>
+          )}
+        </div>
       )}
     </div>
   );
