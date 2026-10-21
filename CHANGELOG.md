@@ -10,6 +10,11 @@
 
 ---
 
+## v0.55 — '타인의 핀' 언어 고르기, AI 답변 로봇 허용 (2026-10-22)
+- 0.55-1 '타인의 핀'(팔로우 중·인기·겹치는·이 지역)은 고른 언어로 만든 리스트만 보여 줌. 리스트 언어 = 공식·예시는 `lists.lang`, 사용자 리스트는 만든 사람의 계정 언어. 검색 결과는 언어와 관계없이 모두. My 화면에 '‘타인의 핀’에서 볼 언어'(17개 중 여러 개, 화면 언어와 따로, `profiles.explore_langs`, 비우면 화면 언어), '타인의 핀' 위에 '보는 언어 · 바꾸기' `[DB]` · `993432c`
+- DB: `supabase/migrations/20261022000300_explore_langs.sql` · 되돌리기 `supabase/rollback/20261022000300_explore_langs.down.sql`
+- 0.55-2 robots.txt: AI 검색·답변 로봇(OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User, PerplexityBot, Perplexity-User, Google-Extended 등)은 허용해 AI가 답변할 때 PinWith 페이지를 읽고 링크할 수 있게. 학습·대량 수집 로봇(GPTBot, ClaudeBot, CCBot, Bytespider, Applebot-Extended, meta-externalagent 등 22종)만 차단. `/llms.txt`(AI용 사이트 안내: 리스트 구성, 찾는 곳, 링크 요청, 학습·대량 수집 금지) · `81b3c2f`
+
 ## v0.54 — 언어별 공식 계정·현지 예시, AI 수집 로봇 차단 (2026-10-22)
 - 0.54-1 공식 계정 언어별 분리 `[DB]` · `06ee817`
   - `lists.lang`(운영자만 정함). '타인의 핀'의 인기·이 지역 목록에는 화면 언어와 같은 언어의 공식·예시 리스트만(사용자 리스트와 검색 결과는 언어와 관계없이).
