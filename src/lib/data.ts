@@ -88,6 +88,24 @@ export async function getCuratorPage(
   return { curator, lists, isOwner };
 }
 
+// 공식 계정을 언어별로 나누면서(v0.54) 옮긴 리스트: 예전 주소(/@pinwith/주소)로 오면 같은 주소의 다른 공식 계정 리스트를 찾는다.
+export async function findMovedOfficialList(rawHandle: string, slug: string): Promise<string | null> {
+  const handle = normalizeHandle(rawHandle);
+  if (handle !== "pinwith" && !handle.startsWith("pinwith_")) return null;
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("lists")
+    .select("slug, owner:profiles!lists_owner_id_fkey!inner(handle, is_official)")
+    .eq("slug", decodeURIComponent(slug))
+    .eq("visibility", "public")
+    .eq("owner.is_official", true)
+    .neq("owner.handle", handle)
+    .limit(1)
+    .maybeSingle();
+  const owner = (data as unknown as { owner: { handle: string } | null } | null)?.owner;
+  return owner ? `/@${owner.handle}/${encodeURIComponent(decodeURIComponent(slug))}` : null;
+}
+
 export async function getCuratedList(
   rawHandle: string,
   slug: string,

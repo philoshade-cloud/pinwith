@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { PanelLoading } from "@/components/shell/Panel";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { ListExplorer } from "@/components/ListExplorer";
-import { getCuratedList } from "@/lib/data";
+import { findMovedOfficialList, getCuratedList } from "@/lib/data";
 import { isSupabaseConfigured } from "@/lib/env";
 import { getListPreview } from "@/lib/public";
 
@@ -30,6 +30,10 @@ async function ListContent({ params }: { params: PageProps<"/[handle]/[slug]">["
   const { handle, slug } = await params;
   if (!isSupabaseConfigured()) notFound();
   const list = await getCuratedList(handle, slug);
-  if (!list) notFound();
+  if (!list) {
+    const moved = await findMovedOfficialList(handle, slug);
+    if (moved) permanentRedirect(moved);
+    notFound();
+  }
   return <ListExplorer list={list} />;
 }
