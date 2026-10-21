@@ -936,6 +936,7 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
         {ready === false && <p className="text-[12px] text-muted">{t("카드 결제는 연결 준비 중이에요. 지금은 계좌 입금으로 충전해 주세요.")}</p>}
         <Msg text={msg} />
       </form>
+      <Refunds b={b} dash={dash} reload={reload} />
       <div>
         <h2 className="text-[15px] font-semibold">{t("충전 기록")}</h2>
         {rows.length === 0 ? (
@@ -959,6 +960,99 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
         )}
       </div>
     </section>
+  );
+}
+
+// ── 쓰지 않은 잔액 환불 요청 ─────────────────────────
+type Refund = { id: string; amount: number; fee: number; currency: string; admin_note: string | null; status: "requested" | "processing" | "refunded" | "cancelled" | "failed"; method: string | null; source: string; reason: string | null; created_at: string; processed_at: string | null };
+const REFUND_STATUS: Record<Refund["status"], string> = { requested: "요청함", processing: "처리 중", refunded: "환불 완료", cancelled: "취소됨", failed: "처리 못 함" };
+
+function Refunds({ b, dash, reload }: { b: Business; dash: Dash; reload: () => void }) {
+  const t = useT();
+  const fmt = useFormat();
+  const { supabase } = useAuthed("/biz/place");
+  const [rows, setRows] = useState<Refund[]>([]);
+  const [amount, setAmount] = useState("");
+  const [reason, setReason] = useState("");
+  const [msg, setMsg] = useState("");
+  const load = useCallback(async () => {
+    const { data } = await supabase.from("biz_refunds").select("*").eq("business_id", b.id).order("created_at", { ascending: false });
+    setRows((data as Refund[]) ?? []);
+  }, [supabase, b.id]);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    load();
+  }, [load]);
+
+  const balance = Math.max(0, Number(dash.balance));
+  async function request(e: React.FormEvent) {
+    e.preventDefault();
+    const v = Math.round(Number(amount) * 100) / 100;
+    if (!(v > 0)) return setMsg(t("금액을 넣으세요."));
+    if (v > balance) return setMsg(t("잔액보다 많이 요청할 수 없어요."));
+    const { error } = await supabase.rpc("request_biz_refund", { p_business: b.id, p_amount: v, p_reason: reason });
+    if (error) return setMsg(error.message.includes("insufficient") ? t("잔액보다 많이 요청할 수 없어요.") : t("요청하지 못했어요."));
+    setMsg(t("환불을 요청했어요. 영업일 기준 10일 안에 처리해 드려요. 그동안 이 금액만큼 과금이 멈춰요."));
+    setAmount("");
+    setReason("");
+    load();
+    reload();
+  }
+  async function cancel(r: Refund) {
+    const { error } = await supabase.rpc("cancel_biz_refund", { p_id: r.id });
+    setMsg(error ? t("취소하지 못했어요. 이미 처리 중일 수 있어요.") : t("환불 요청을 취소했어요."));
+    load();
+    reload();
+  }
+
+  return (
+    <div className="grid max-w-[520px] gap-3 rounded-xl border border-rule p-4">
+      <h2 className="text-[16px] font-semibold">{t("쓰지 않은 잔액 환불")}</h2>
+      <p className="text-[13px] text-muted">
+        {t("남은 잔액 {amount} 안에서 언제든, 일부만도 요청할 수 있어요. 결제·송금 수수료를 뺀 금액을 카드 충전분은 원래 결제 수단으로, 계좌 충전분은 가게 명의 계좌로 돌려드려요.", { amount: money(balance, dash.currency) })}{" "}
+        <Link href="/for-businesses#refund" target="_blank" className="underline">{t("환불 정책")}</Link>
+      </p>
+      {balance > 0 && (
+        <form onSubmit={request} className="grid gap-3">
+          <label className="grid gap-1 text-[13px] font-semibold">
+            {t("환불 요청 금액({currency})", { currency: dash.currency })}
+            <span className="flex gap-2">
+              <input value={amount} onChange={(e) => setAmount(e.target.value)} inputMode="decimal" className="field flex-1" placeholder={String(balance)} />
+              <button type="button" onClick={() => setAmount(String(balance))} className="btn-quiet shrink-0 !px-3">{t("전액")}</button>
+            </span>
+          </label>
+          <label className="grid gap-1 text-[13px] font-semibold">
+            {t("사유(선택)")}
+            <input value={reason} onChange={(e) => setReason(e.target.value)} maxLength={500} className="field" />
+          </label>
+          <div>
+            <button className="btn-quiet">{t("환불 요청")}</button>
+          </div>
+        </form>
+      )}
+      <Msg text={msg} />
+      {rows.length > 0 && (
+        <ul className="divide-y divide-rule text-[14px]">
+          {rows.map((r) => (
+            <li key={r.id} className="flex flex-wrap items-center gap-2 py-2">
+              <span className="tabular-nums">{fmt.date(r.created_at)}</span>
+              <b className="tabular-nums">{money(r.amount, r.currency)}</b>
+              <span className={r.status === "refunded" ? "text-teal" : r.status === "cancelled" ? "text-muted line-through" : "text-pin"}>{t(REFUND_STATUS[r.status])}</span>
+              {r.status === "refunded" && (
+                <span className="text-[12px] text-muted">
+                  {r.method === "bank" ? t("계좌로") : t("카드로")}
+                  {Number(r.fee) > 0 && ` · ${t("수수료 {fee}", { fee: money(Number(r.fee), r.currency) })}`}
+                </span>
+              )}
+              {r.status === "cancelled" && r.admin_note && <span className="w-full text-[12px] text-muted">{r.admin_note}</span>}
+              {r.status === "requested" && (
+                <button type="button" onClick={() => cancel(r)} className="btn-quiet ml-auto !px-3 !py-1 !text-[12px]">{t("요청 취소")}</button>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 

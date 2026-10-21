@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Blocks, BizReview, Disputes, PayoutRequests, StoreQuality, Topups } from "./AdminCommerce";
+import { Blocks, BizRefunds, BizReview, Disputes, PayoutRequests, StoreQuality, Topups } from "./AdminCommerce";
 import { ErrorsPanel, UsagePanel } from "./AdminOps";
 import { ConfirmButton } from "./ConfirmButton";
 
@@ -12,7 +12,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "payout", label: "정산" },
   { id: "requests", label: "지급 요청" },
   { id: "biz", label: "가게 인증" },
-  { id: "topups", label: "광고비 충전" },
+  { id: "topups", label: "광고비 충전·환불" },
   { id: "disputes", label: "이의 제기" },
   { id: "quality", label: "예약 품질" },
   { id: "blocks", label: "차단 현황" },
@@ -68,7 +68,12 @@ export function AdminConsole() {
         {tab === "settings" && <Settings />}
         {tab === "support" && <Support />}
         {tab === "biz" && <BizReview />}
-        {tab === "topups" && <Topups />}
+        {tab === "topups" && (
+          <div className="grid gap-8">
+            <BizRefunds />
+            <Topups />
+          </div>
+        )}
         {tab === "requests" && <PayoutRequests />}
         {tab === "disputes" && <Disputes />}
         {tab === "quality" && <StoreQuality />}

@@ -149,6 +149,120 @@ export function Topups() {
   );
 }
 
+// ── 광고비 환불 요청: 카드 충전분은 Stripe로 바로, 계좌 충전분은 송금 후 '계좌 환불 완료' ─────────────────────────
+type RefundReq = {
+  id: string; business_id: string; amount: number; fee: number; currency: string; status: string; method: string | null; source: string;
+  reason: string | null; admin_note: string | null; created_at: string; processed_at: string | null;
+  biz: { place_name: string; business_name: string; contact_phone: string } | null;
+};
+const RFS: Record<string, string> = { requested: "요청", processing: "처리 중", refunded: "환불 완료", cancelled: "취소", failed: "실패" };
+
+export function BizRefunds() {
+  const supabase = useMemo(() => createClient(), []);
+  const [rows, setRows] = useState<RefundReq[]>([]);
+  const [open, setOpen] = useState(true);
+  const [fees, setFees] = useState<Record<string, string>>({});
+  const [msg, setMsg] = useState("");
+  const [busy, setBusy] = useState<string | null>(null);
+  const load = useCallback(async () => {
+    let q = supabase.from("biz_refunds").select("*, biz:businesses(place_name, business_name, contact_phone)").order("created_at", { ascending: false }).limit(200);
+    if (open) q = q.in("status", ["requested", "processing"]);
+    const { data } = await q;
+    setRows((data as unknown as RefundReq[]) ?? []);
+  }, [supabase, open]);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    load();
+  }, [load]);
+
+  async function card(r: RefundReq) {
+    setBusy(r.id);
+    setMsg("");
+    const res = await fetch("/api/pay/refund", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ refundId: r.id, fee: Number(fees[r.id] || 0) }),
+    }).catch(() => null);
+    const data = res ? await res.json().catch(() => null) : null;
+    setBusy(null);
+    setMsg(
+      res?.ok ? "Stripe로 환불했어요. 카드사에 따라 며칠 뒤 돌아가요."
+        : data?.error === "card_room" ? "카드 충전분에서 돌려줄 금액이 모자라요. 계좌로 송금한 뒤 '계좌 환불 완료'를 누르세요."
+        : data?.error === "fee" ? "수수료가 요청 금액 이상이에요."
+        : data?.error === "not_requested" ? "이미 처리 중이거나 처리된 요청이에요."
+        : `환불하지 못했어요${data?.message ? `: ${data.message}` : ""}. 메모를 확인하세요.`,
+    );
+    load();
+  }
+  async function bank(r: RefundReq, note: string) {
+    const fee = Math.max(0, Number(fees[r.id] || 0));
+    await supabase.from("biz_refunds").update({ status: "refunded", method: "bank", fee: Math.min(fee, Number(r.amount)), admin_note: note.trim() || null, processed_at: new Date().toISOString() }).eq("id", r.id).in("status", ["requested", "processing"]);
+    load();
+  }
+  async function cancel(r: RefundReq, note: string) {
+    // 취소하면 그 금액이 잔액으로 돌아간다
+    await supabase.from("biz_refunds").update({ status: "cancelled", admin_note: note.trim() || null, processed_at: new Date().toISOString() }).eq("id", r.id).in("status", ["requested", "processing"]);
+    load();
+  }
+
+  return (
+    <section className="grid gap-3">
+      <div className="flex items-center gap-3">
+        <h2 className="text-[16px] font-semibold">광고비 환불 요청</h2>
+        <label className="ml-auto flex items-center gap-1.5 text-[13px] text-muted">
+          <input type="checkbox" checked={open} onChange={(e) => setOpen(e.target.checked)} /> 처리 전만
+        </label>
+      </div>
+      <p className="text-[13px] text-muted">
+        요청한 금액은 이미 가게 잔액에서 빠져 있어요. 카드 충전분은 ‘Stripe로 환불’(최근 카드 충전부터 원래 결제 수단으로), 계좌 충전분은 가게 명의 계좌로 송금한 뒤 ‘계좌 환불 완료’를 누르세요. 수수료를 적으면 그만큼 빼고 돌려줘요(정책: 영업일 10일 안에). Stripe 대시보드에서 직접 환불한 건은 자동으로 여기에 ‘환불 완료’로 기록돼요.
+      </p>
+      {msg && <p role="status" className="text-[13px] text-ink">{msg}</p>}
+      {rows.length === 0 && <p className="text-[14px] text-muted">없어요.</p>}
+      <ul className="divide-y divide-rule text-[14px]">
+        {rows.map((r) => (
+          <li key={r.id} className="grid gap-2 py-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="tabular-nums text-muted">{new Date(r.created_at).toLocaleDateString("ko-KR")}</span>
+              <b>{r.biz?.place_name}</b>
+              <span className="text-[12px] text-muted">{r.biz?.business_name} · {r.biz?.contact_phone}</span>
+              <b className="tabular-nums">{money(r.amount, r.currency)}</b>
+              <span className={r.status === "refunded" ? "text-teal" : r.status === "cancelled" ? "text-muted" : "text-pin"}>{RFS[r.status] ?? r.status}</span>
+              {r.status === "refunded" && (
+                <span className="text-[12px] text-muted">
+                  {r.method === "bank" ? "계좌" : "Stripe"}
+                  {r.source === "stripe_dashboard" ? " · 대시보드에서 직접" : ""}
+                  {Number(r.fee) > 0 ? ` · 수수료 ${money(Number(r.fee), r.currency)}` : ""}
+                </span>
+              )}
+            </div>
+            {r.reason && <p className="text-[13px] text-ink/80">사유: {r.reason}</p>}
+            {r.admin_note && <p className="text-[13px] text-pin">{r.admin_note}</p>}
+            {(r.status === "requested" || r.status === "processing") && (
+              <div className="flex flex-wrap items-center gap-2">
+                <label className="flex items-center gap-1 text-[13px] text-muted">
+                  뺄 수수료({r.currency})
+                  <input value={fees[r.id] ?? ""} onChange={(e) => setFees({ ...fees, [r.id]: e.target.value })} inputMode="decimal" placeholder="0" className="field w-20 !py-1" />
+                </label>
+                {r.status === "requested" && (
+                  <ConfirmButton
+                    label={busy === r.id ? "환불 중…" : "Stripe로 환불"}
+                    question={`${money(Number(r.amount) - Number(fees[r.id] || 0), r.currency)}을(를) 카드 충전분에서 원래 결제 수단으로 돌려줄까요? 되돌릴 수 없어요.`}
+                    confirmLabel="Stripe로 환불"
+                    onConfirm={() => card(r)}
+                    className="btn-primary !px-3 !py-1 !text-[13px]"
+                  />
+                )}
+                <ConfirmButton label="계좌 환불 완료" question="가게 명의 계좌로 송금했나요?" withNote="송금 메모(날짜·거래 번호)" confirmLabel="계좌 환불 완료" onConfirm={(note) => bank(r, note)} className="btn-quiet !px-3 !py-1 !text-[13px]" />
+                <ConfirmButton label="요청 취소" question="이 환불 요청을 취소할까요? 금액이 가게 잔액으로 돌아가요." withNote="취소 이유(가게에도 보여요)" confirmLabel="요청 취소" onConfirm={(note) => cancel(r, note)} className="btn-quiet !px-3 !py-1 !text-[13px]" />
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 // ── 지급 요청: 지급 정보 보고 송금 후 '지급함' ─────────────────────────
 type Req = { id: string; user_id: string; amount: number; currency: string; status: string; reference: string | null; note: string | null; created_at: string; user: { handle: string } | null };
 type Prof = { user_id: string; method: string; holder_name: string; holder_name_latin: string | null; birth_date: string | null; phone: string | null; email: string | null; bank_name: string | null; account_number: string | null; swift: string | null; country: string | null; currency: string | null };

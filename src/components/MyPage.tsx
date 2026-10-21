@@ -38,7 +38,7 @@ function deleteQuestion(
   const warn: string[] = [];
   if (l && Number(l.pending_payout) > 0) warn.push(t("· 처리 중인 지급 요청 {amount}: 탈퇴하면 지급 정보가 지워져 보내 드릴 수 없어요. 지급을 받은 뒤 탈퇴하세요.", { amount: fmt(Number(l.pending_payout), l.currency, locale) }));
   if (l && Number(l.available) > 0) warn.push(t("· 아직 받지 않은 수익 {amount}: 탈퇴하면 받을 수 없어요. 상업 이용자용 콘솔에서 먼저 지급을 요청하세요.", { amount: fmt(Number(l.available), l.currency, locale) }));
-  for (const b of l?.stores ?? []) warn.push(t("· {store} 광고비 잔액 {amount}: 탈퇴 전에 문의·신고하기로 환불을 요청하세요.", { store: b.place_name, amount: fmt(Number(b.balance), l!.currency, locale) }));
+  for (const b of l?.stores ?? []) warn.push(t("· {store} 광고비 잔액 {amount}: 탈퇴 전에 상업 이용자용 콘솔의 광고비 탭에서 환불을 요청하세요.", { store: b.place_name, amount: fmt(Number(b.balance), l!.currency, locale) }));
   const base = t("계정을 삭제할까요? 내 리스트와 장소, 팔로우, 좋아요, 가게·수익 기록이 모두 지워지며 되돌릴 수 없어요.");
   return warn.length ? `${base}\n\n${t("남은 돈이 있어요:")}\n${warn.join("\n")}` : base;
 }

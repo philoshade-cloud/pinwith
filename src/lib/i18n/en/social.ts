@@ -142,8 +142,8 @@ export const social: Record<string, string> = {
     "· Pending payout {amount}: deleting your account erases your payout details, so we can't send it. Delete after you've been paid.",
   "· 아직 받지 않은 수익 {amount}: 탈퇴하면 받을 수 없어요. 상업 이용자용 콘솔에서 먼저 지급을 요청하세요.":
     "· Unclaimed earnings {amount}: you can't receive these after deleting. Request a payout in the Business console first.",
-  "· {store} 광고비 잔액 {amount}: 탈퇴 전에 문의·신고하기로 환불을 요청하세요.":
-    "· {store} ad credit balance {amount}: request a refund via Help & report before deleting.",
+  "· {store} 광고비 잔액 {amount}: 탈퇴 전에 상업 이용자용 콘솔의 광고비 탭에서 환불을 요청하세요.":
+    "· {store} ad credit balance {amount}: request a refund in the Ad credit tab of the business console before deleting.",
   "계정을 삭제할까요? 내 리스트와 장소, 팔로우, 좋아요, 가게·수익 기록이 모두 지워지며 되돌릴 수 없어요.":
     "Delete your account? Your lists, places, follows, likes, and store and earnings records will all be erased. This can't be undone.",
   "남은 돈이 있어요:": "You still have money in your account:",
