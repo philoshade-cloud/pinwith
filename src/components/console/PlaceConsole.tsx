@@ -954,6 +954,9 @@ function Billing({ b, dash, reload }: { b: Business; dash: Dash; reload: () => v
                   {r.provider === "bank" ? t("계좌 입금") : t("카드")}
                   {r.pay_currency && r.pay_currency !== r.currency && r.pay_amount ? ` · ${money(r.pay_amount, r.pay_currency)}` : ""}
                 </span>
+                {r.status === "paid" && (
+                  <Link href={`/biz/receipt/${r.id}`} className="ml-auto text-[12px] font-semibold text-teal underline">{t("영수증")}</Link>
+                )}
               </li>
             ))}
           </ul>

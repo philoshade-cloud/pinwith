@@ -30,6 +30,8 @@ export async function POST(req: Request) {
   const supabase = await createServerSupabase();
   const { data: claims } = await supabase.auth.getClaims();
   const userId = claims?.claims?.sub as string | undefined;
+  // 결제창에 미리 채울 이메일(Stripe가 이 주소로 영수증 메일을 보낸다: 대시보드 Customer emails 설정)
+  const email = claims?.claims?.email as string | undefined;
   if (!userId) return Response.json({ error: "login" }, { status: 401 });
 
   const amount = Math.round(Number(body.amount) * 100) / 100;
@@ -74,6 +76,7 @@ export async function POST(req: Request) {
     // PinWith가 판매자(merchant of record)다. 계정 기본값으로 Stripe Managed Payments가 켜져 있어도 이 결제에는 쓰지 않는다
     // (켜져 있으면 상품 세금 코드가 없다며 400으로 거절됨, 2026-10-21).
     "managed_payments[enabled]": "false",
+    ...(email ? { customer_email: email } : {}),
     success_url: `${origin}/biz/place?tab=billing&paid=stripe`,
     cancel_url: `${origin}/biz/place?tab=billing&paid=cancel`,
     client_reference_id: topup.id,
