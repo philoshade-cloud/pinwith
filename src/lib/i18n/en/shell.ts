@@ -107,6 +107,8 @@ export const shell: Record<string, string> = {
   "검색 대상": "Search in",
   "구글 장소": "Google places",
   "내 핀": "My pins",
+  "‘{q}’로 찾은 구글 장소가 없어요.": "No Google places found for ‘{q}’.",
+  "구글 장소 ‘{q}’ {n}곳 · 핀을 눌러 담기": "Google places ‘{q}’: {n} · tap a pin to save",
   "‘{q}’ 내 핀에서 모두 보기 (지도에 표시)": "See all ‘{q}’ in my pins (on the map)",
   "두 글자 이상 입력하세요.": "Type at least two characters.",
   "좋아요@@검색범위": "Liked",

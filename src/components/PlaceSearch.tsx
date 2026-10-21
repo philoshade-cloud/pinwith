@@ -171,8 +171,8 @@ export function PlaceSearchBox({
     }
   }
 
-  async function searchAll() {
-    const q = text.trim();
+  async function searchAll(raw?: string) {
+    const q = (raw ?? text).trim();
     if (!q || busy) return;
     window.clearTimeout(timer.current);
     seq.current++;
@@ -202,13 +202,20 @@ export function PlaceSearchBox({
     } else if (e.key === "Enter") {
       e.preventDefault();
       // 화살표로 고른 제안이 있으면 그 장소, 아니면 검색어 전체로 찾기
-      if (!mine && open && active >= 0 && suggestions[active]) pick(suggestions[active]);
-      else if (mine && onSavedAll && text.trim()) {
-        // 내 핀을 보고 있으면 Enter는 저장한 핀 전체 결과 화면으로
+      // 한글 입력 중 Enter는 글자를 확정하는 키이기도 해서, 확정된 글자로 한 박자 뒤에 찾는다
+      const composing = e.nativeEvent.isComposing;
+      const run = () => {
+        const q = (input.current?.value ?? text).trim();
+        if (!q) return;
+        if (!mine && open && active >= 0 && suggestions[active]) return pick(suggestions[active]);
         input.current?.blur();
         setOpen(false);
-        onSavedAll(text.trim());
-      } else searchAll();
+        // 보고 있는 쪽 그대로: 내 핀 → 저장한 핀 전체 결과 화면, 구글 장소 → 구글 결과를 지도에
+        if (mine) onSavedAll?.(q);
+        else searchAll(q);
+      };
+      if (composing) window.setTimeout(run, 0);
+      else run();
     }
   }
 
@@ -335,7 +342,7 @@ export function PlaceSearchBox({
                 </li>
               ))}
               <li className="flex items-center justify-between border-t border-rule px-3 py-1.5 text-[12px] text-muted">
-                <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={searchAll} className="font-semibold text-teal">
+                <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => searchAll()} className="font-semibold text-teal">
                   {t("‘{q}’ 결과 모두 지도에 보기", { q: text.trim() })}
                 </button>
                 <span>Google</span>

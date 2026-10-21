@@ -174,16 +174,19 @@ export function MapShell({ children }: { children: ReactNode }) {
     if (!results) setSearchKey((k) => k + 1);
   }
 
+  // 구글 결과를 보여 줄 때는 지금 화면의 패널(예: 타인의 핀)을 접는다: 패널 목록이 검색 결과처럼 보이지 않게.
+  // 결과를 닫으면 패널을 원래대로 돌린다. 결과가 없어도 다른 결과로 대신하지 않고 '없음'만 알린다.
+  const panelBefore = useRef<boolean | null>(null);
+  useEffect(() => {
+    if (!results) panelBefore.current = null;
+  }, [results]);
   function showResults(query: string, places: FoundPlace[]) {
     setSelectedId(null);
-    if (places.length === 0) {
-      setResults(null);
-      toast(t("‘{query}’로 찾은 장소가 없습니다.", { query }));
-      return;
-    }
+    if (panelBefore.current === null) panelBefore.current = panelOpen;
+    setPanelOpen(false);
     setResults({ query, places });
-    setResultsList(false);
-    if (window.innerWidth < 1024) setPanelOpen(false);
+    // 컴퓨터는 왼쪽에 결과 목록을 펼쳐 둔다(휴대폰은 지도 + 아래 줄)
+    setResultsList(places.length > 0 && window.innerWidth >= 1024);
   }
 
   function pickResult(id: string) {
@@ -197,6 +200,8 @@ export function MapShell({ children }: { children: ReactNode }) {
   function closeResults() {
     setResults(null);
     setResultsList(false);
+    if (panelBefore.current !== null) setPanelOpen(panelBefore.current);
+    panelBefore.current = null;
     setSearchKey((k) => k + 1);
   }
 
@@ -383,11 +388,15 @@ export function MapShell({ children }: { children: ReactNode }) {
           )}
           <div className="fixed inset-x-2 bottom-[124px] z-30 flex items-center gap-2 rounded-2xl bg-ink px-4 py-2.5 text-white shadow-lg lg:bottom-6 lg:left-4 lg:right-auto lg:w-[400px]">
             <span className="min-w-0 flex-1 truncate text-[14px]">
-              {t("‘{q}’ {n}곳 · 핀을 눌러 담기", { q: results.query, n: results.places.length })}
+              {results.places.length === 0
+                ? t("‘{q}’로 찾은 구글 장소가 없어요.", { q: results.query })
+                : t("구글 장소 ‘{q}’ {n}곳 · 핀을 눌러 담기", { q: results.query, n: results.places.length })}
             </span>
-            <button type="button" onClick={() => setResultsList(!resultsList)} className="shrink-0 rounded-full bg-white px-3 py-1 text-[13px] font-semibold text-ink">
-              {resultsList ? t("지도") : t("목록")}
-            </button>
+            {results.places.length > 0 && (
+              <button type="button" onClick={() => setResultsList(!resultsList)} className="shrink-0 rounded-full bg-white px-3 py-1 text-[13px] font-semibold text-ink">
+                {resultsList ? t("지도") : t("목록")}
+              </button>
+            )}
             <button type="button" onClick={closeResults} className="shrink-0 px-1 text-white/80 hover:text-white" aria-label={t("검색 결과 닫기")}>
               ✕
             </button>
