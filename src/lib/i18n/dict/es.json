@@ -1040,7 +1040,11 @@
 "환불": "Reembolso",
 "환불 후 결제 금액": "Total tras el reembolso",
 "결제 금액": "Total pagado",
-"PinWith 광고 서비스의 판매자는 STRATO TRADINGS PTE. LTD.입니다. 쓰지 않은 광고비는 환불 정책에 따라 돌려받을 수 있어요: pinwith.me/for-businesses#refund": "El vendedor del servicio publicitario de PinWith es STRATO TRADINGS PTE. LTD. Puedes obtener el reembolso del saldo publicitario no utilizado según nuestra política de reembolsos: pinwith.me/for-businesses#refund"
+"PinWith 광고 서비스의 판매자는 STRATO TRADINGS PTE. LTD.입니다. 쓰지 않은 광고비는 환불 정책에 따라 돌려받을 수 있어요: pinwith.me/for-businesses#refund": "El vendedor del servicio publicitario de PinWith es STRATO TRADINGS PTE. LTD. Puedes obtener el reembolso del saldo publicitario no utilizado según nuestra política de reembolsos: pinwith.me/for-businesses#refund",
+"언어를 하나 이상 고르세요.": "Elige al menos un idioma.",
+"‘타인의 핀’에서 볼 언어": "Idiomas en Explorar",
+"고른 언어로 만든 리스트만 ‘타인의 핀’ 목록에 보여요. 화면 언어와는 따로 정하고, 검색 결과에는 모든 언어가 나와요.": "En Explorar solo verás listas creadas en los idiomas que elijas. Es independiente del idioma de la app y la búsqueda muestra todos los idiomas.",
+"보는 언어: {langs}": "Idiomas: {langs}"
 },
 "titles": {
 "가게 콘솔": "Consola del negocio",

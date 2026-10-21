@@ -1040,7 +1040,11 @@
 "환불": "返金",
 "환불 후 결제 금액": "返金後の支払額",
 "결제 금액": "支払額",
-"PinWith 광고 서비스의 판매자는 STRATO TRADINGS PTE. LTD.입니다. 쓰지 않은 광고비는 환불 정책에 따라 돌려받을 수 있어요: pinwith.me/for-businesses#refund": "PinWith 広告サービスの販売者は STRATO TRADINGS PTE. LTD. です。未使用の広告費は返金ポリシーに基づき返金を受けられます：pinwith.me/for-businesses#refund"
+"PinWith 광고 서비스의 판매자는 STRATO TRADINGS PTE. LTD.입니다. 쓰지 않은 광고비는 환불 정책에 따라 돌려받을 수 있어요: pinwith.me/for-businesses#refund": "PinWith 広告サービスの販売者は STRATO TRADINGS PTE. LTD. です。未使用の広告費は返金ポリシーに基づき返金を受けられます：pinwith.me/for-businesses#refund",
+"언어를 하나 이상 고르세요.": "言語を1つ以上選んでください。",
+"‘타인의 핀’에서 볼 언어": "「探す」で表示する言語",
+"고른 언어로 만든 리스트만 ‘타인의 핀’ 목록에 보여요. 화면 언어와는 따로 정하고, 검색 결과에는 모든 언어가 나와요.": "選んだ言語で作られたリストだけが「探す」に表示されます。表示言語とは別に設定でき、検索結果にはすべての言語が出ます。",
+"보는 언어: {langs}": "表示中の言語：{langs}"
 },
 "titles": {
 "가게 콘솔": "お店コンソール",

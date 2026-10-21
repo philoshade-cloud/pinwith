@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { SignOutButton } from "./SignOutButton";
 import { AvatarPicker } from "./AvatarPicker";
 import { PushToggle } from "./PushToggle";
+import { ExploreLangPicker } from "./ExploreLangPicker";
 import { ConfirmButton } from "./ConfirmButton";
 import { ShareButton } from "./ShareButton";
 import { ProfileQr } from "./ProfileQr";
@@ -193,6 +194,11 @@ export function MyPage() {
         <div className="mt-8">
           <PushToggle />
         </div>
+        {!needsHandle && (
+          <div className="mt-6">
+            <ExploreLangPicker />
+          </div>
+        )}
         <div className="mt-6 grid gap-2 border-t border-rule pt-6">
           {!needsHandle && (
             <Link href={`/@${profile.handle}`} className="btn-quiet justify-center">

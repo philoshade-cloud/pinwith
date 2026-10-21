@@ -9,7 +9,9 @@ import { AdSlot } from "./AdSlot";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useShell } from "./shell/context";
-import { useFormat, useLang, useT } from "@/lib/i18n/client";
+import { LANGS } from "@/lib/i18n/core";
+import { useFormat, useT } from "@/lib/i18n/client";
+import { listLang, useExploreLangs } from "@/lib/exploreLangs";
 
 // 이 확대 단계(도시 정도)보다 넓게 보고 있으면 '이 지역'으로 치지 않는다
 const LOCAL_ZOOM = 8;
@@ -28,12 +30,12 @@ type ListHit = {
   lang?: string | null;
   // 내 리스트와 겹치는 장소 수(추천용)
   overlap?: number;
-  owner: { handle: string; display_name: string; is_official?: boolean } | null;
+  owner: { handle: string; display_name: string; is_official?: boolean; lang?: string | null } | null;
   list_items: { count: number }[];
 };
 
 const LIST_SELECT =
-  "id, slug, title, themes, like_count, owner_id, is_example, lang, owner:profiles!lists_owner_id_fkey(handle, display_name, is_official), list_items(count)";
+  "id, slug, title, themes, like_count, owner_id, is_example, lang, owner:profiles!lists_owner_id_fkey(handle, display_name, is_official, lang), list_items(count)";
 
 // 검색어를 PostgREST 필터에 안전하게 넣기 위해 특수문자를 뺀다.
 const clean = (q: string) => q.replace(/[,()%*\\#]/g, " ").trim();
@@ -59,9 +61,9 @@ function readPref(): { cat?: Category; local?: boolean } {
 // '현재 지도 지역 먼저'를 켜면 그 묶음 안에서 지금 지도에 핀이 있는 리스트를 위로 올린다.
 export function ExploreView() {
   const t = useT();
-  const lang = useLang();
-  // 언어가 정해진 리스트(공식·예시)는 지금 화면 언어와 같을 때만 목록에 넣는다(검색 결과에는 모두)
-  const langOk = useCallback((l: ListHit) => !l.lang || l.lang === lang, [lang]);
+  // '타인의 핀' 목록은 My에서 고른 언어(없으면 화면 언어)의 리스트만. 검색 결과는 언어와 관계없이 모두.
+  const { langs } = useExploreLangs();
+  const langOk = useCallback((l: ListHit) => langs.includes(listLang(l) as never), [langs]);
   const supabase = useMemo(() => createClient(), []);
   const [query, setQuery] = useState("");
   const [searched, setSearched] = useState<string | null>(null);
@@ -116,10 +118,10 @@ export function ExploreView() {
       setPinsHere(pins);
       if (rows.length === 0) return setNearby([]);
       const { data: ls } = await supabase.from("lists").select(LIST_SELECT).in("id", rows.map((r) => r.list_id));
-      setNearby(((ls ?? []) as unknown as ListHit[]).filter(langOk));
+      setNearby((ls ?? []) as unknown as ListHit[]);
     }, 500);
     return () => window.clearTimeout(timer);
-  }, [supabase, view, local, langOk]);
+  }, [supabase, view, local]);
 
   // 켜져 있으면 이 지역에 핀이 있는 리스트를 위로(핀 많은 순), 나머지는 원래 순서
   const localFirst = useCallback(
@@ -140,7 +142,7 @@ export function ExploreView() {
       const { data: pop } = await supabase
         .from("lists").select(LIST_SELECT).eq("visibility", "public")
         .order("like_count", { ascending: false }).order("updated_at", { ascending: false }).limit(80);
-      setPopular(((pop ?? []) as unknown as ListHit[]).filter(notMine).filter(langOk).slice(0, 30));
+      setPopular(((pop ?? []) as unknown as ListHit[]).filter(notMine).slice(0, 80));
 
       if (!uid) return;
       const [{ data: f }, { data: mine }] = await Promise.all([
@@ -187,7 +189,7 @@ export function ExploreView() {
         }),
       );
     })();
-  }, [supabase, langOk]);
+  }, [supabase]);
 
   const search = useCallback(
     async (raw: string) => {
@@ -229,10 +231,12 @@ export function ExploreView() {
       return [...rows, ...extra.filter((x) => !seen.has(x.id))];
     };
     const followIds = new Set(following.map((p) => p.id));
-    if (active === "following") return merge(followingLists, local ? nearby.filter((l) => followIds.has(l.owner_id) && l.owner_id !== me) : []);
-    if (active === "popular") return merge(popular, local ? nearby.filter((l) => l.owner_id !== me) : []);
-    return similar;
-  }, [active, followingLists, popular, similar, nearby, following, local, me]);
+    const rows =
+      active === "following" ? merge(followingLists, local ? nearby.filter((l) => followIds.has(l.owner_id) && l.owner_id !== me) : [])
+      : active === "popular" ? merge(popular, local ? nearby.filter((l) => l.owner_id !== me) : []).slice(0, 60)
+      : similar;
+    return rows.filter(langOk);
+  }, [active, followingLists, popular, similar, nearby, following, local, me, langOk]);
   const shown = localFirst(base);
 
   return (
@@ -261,6 +265,12 @@ export function ExploreView() {
         <button type="submit" className="btn-primary shrink-0">{t("검색")}</button>
       </form>
 
+      {!!me && searched === null && (
+        <p className="mt-3 text-[12px] text-muted">
+          {t("보는 언어: {langs}", { langs: langs.map((l) => LANGS.find((x) => x.id === l)?.label ?? l).join(", ") })}{" "}
+          <Link href="/me#explore-langs" className="font-semibold text-teal underline">{t("바꾸기")}</Link>
+        </p>
+      )}
       {/* 로그인 전에는 묶음 고르기 없이 예시만 */}
       {!!me && (
       <div className="mt-4 flex flex-wrap items-center gap-2">
