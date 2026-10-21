@@ -10,6 +10,15 @@
 
 ---
 
+## v0.46 — 광고비 환불 (2026-10-21)
+- 0.46-1 광고비 환불 `[DB]` · `4b736b8`
+  - 가게: 콘솔 광고비 탭의 '쓰지 않은 잔액 환불'에서 잔액 안의 금액(전액·일부)을 요청. 요청한 순간 그 금액이 잔액에서 빠져 과금이 멈추고, 처리 전에는 취소할 수 있음(`request_biz_refund`, `cancel_biz_refund`).
+  - 운영자: 콘솔 '광고비 충전·환불' 탭 위쪽 '광고비 환불 요청'. 'Stripe로 환불'은 최근 카드 충전부터 원래 결제 수단으로 돌려줌(`/api/pay/refund`, 수수료를 적으면 빼고, 원화 결제는 원화로). 계좌 충전분은 송금 후 '계좌 환불 완료'. '요청 취소'는 금액을 잔액으로 되돌림.
+  - Stripe 대시보드에서 직접 환불해도 웹훅 `charge.refunded`로 잔액에서 빠지고 '대시보드에서 직접'으로 기록. 결제 완료 때 Stripe 결제 id(payment_intent)를 저장.
+  - 10-21 테스트 결제 2건(대시보드 환불)은 환불 완료로 기록함. 계정 탈퇴 경고의 환불 안내도 광고비 탭으로.
+- DB: `supabase/migrations/20261021000100_biz_refunds.sql` · 되돌리기 `supabase/rollback/20261021000100_biz_refunds.down.sql`
+- Stripe에서 할 일: 제한 키에 Refunds: Write 권한, 웹훅 이벤트에 `charge.refunded` 추가
+
 ## v0.45 — 카드 결제 거절 수정 (2026-10-21)
 - 0.45-1 Stripe 결제창을 열 때 `managed_payments[enabled]=false`를 함께 보냄. 새 Stripe 계정에 Managed Payments(Stripe가 판매자)가 기본으로 켜져 있어 '상품 세금 코드가 없다'며 400으로 거절되던 것(첫 원화 테스트 10-21). PinWith가 판매자라 이 결제에는 쓰지 않음. 실패한 충전 기록 1건은 '취소됨'으로 · `c01560e`
 - 0.45-2 /for-businesses 결제 수단 안내에서 카카오페이를 뺌(싱가포르 Stripe 계정에서는 지원 안 됨), 네이버페이·삼성페이·PAYCO로 · `4a4ed76`
