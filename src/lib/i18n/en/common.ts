@@ -1,5 +1,6 @@
 // 영어 사전(공통): 여러 화면에서 쓰는 짧은 문구
 export const common: Record<string, string> = {
+  "이 문서는 영어로 제공돼요. 영어본이 기준이에요.": "This document is provided in English, and the English version governs.",
   "확인": "OK",
   "취소": "Cancel",
   "처리 중": "Working…",

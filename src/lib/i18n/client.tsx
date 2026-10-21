@@ -5,7 +5,7 @@
 // - 언어를 바꾸면 쿠키에 저장하고 새로 불러온다(모든 화면·날짜 형식이 한 번에 바뀌게).
 import { useCallback, useEffect, useSyncExternalStore, type ReactNode } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { LANG_COOKIE, LANGS, detect, localeOf, translate, translateTitle, type Lang, type Vars } from "./core";
+import { LANG_COOKIE, LANGS, detect, hasDict, isLang, isRtl, localeOf, registerDict, translate, translateTitle, type Lang, type Vars } from "./core";
 
 let active: Lang = "ko";
 const listeners = new Set<() => void>();
@@ -16,8 +16,20 @@ const subscribe = (l: () => void) => {
 
 function readCookie(): Lang | null {
   if (typeof document === "undefined") return null;
-  const m = document.cookie.match(new RegExp(`(?:^|; )${LANG_COOKIE}=(ko|en)`));
-  return (m?.[1] as Lang | undefined) ?? null;
+  const m = document.cookie.match(new RegExp(`(?:^|; )${LANG_COOKIE}=([A-Za-z-]+)`));
+  return isLang(m?.[1]) ? m[1] : null;
+}
+
+// ko·en 밖의 언어는 그 언어 사전만 따로 내려받는다(처음 한 번)
+async function loadDict(lang: Lang) {
+  if (hasDict(lang)) return true;
+  try {
+    const mod = (await import(`./dict/${lang}.json`)) as { default: { ui: Record<string, string>; titles: Record<string, string> } };
+    registerDict(lang, mod.default);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 // 지금 화면 언어(훅을 못 쓰는 도우미 함수용)
@@ -81,25 +93,33 @@ export function LangBoot() {
       lang = detect(navigator.languages?.length ? navigator.languages : [navigator.language]);
       document.cookie = `${LANG_COOKIE}=${lang}; path=/; max-age=31536000; samesite=lax`;
     }
-    document.documentElement.lang = lang;
-    if (lang !== active) {
-      active = lang;
-      listeners.forEach((l) => l());
-    }
-    // 브라우저 탭 제목: 서버는 한국어로 정하므로, 영어면 바뀔 때마다 옮긴다(화면 이동 포함)
+    const chosen = lang;
     let stopTitle = () => {};
-    if (lang === "en") {
-      const fix = () => {
-        const next = translateTitle(document.title);
-        if (next !== document.title) document.title = next;
-      };
-      fix();
-      const obs = new MutationObserver(fix);
-      obs.observe(document.head, { childList: true, subtree: true, characterData: true });
-      stopTitle = () => obs.disconnect();
-    }
-    // 다시 그린 다음 화면을 보여 준다
-    requestAnimationFrame(() => document.documentElement.classList.remove("i18n-wait"));
+    let alive = true;
+    loadDict(chosen).then((ok) => {
+      if (!alive) return;
+      // 사전을 못 받으면 영어로
+      const use: Lang = ok ? chosen : "en";
+      document.documentElement.lang = use;
+      document.documentElement.dir = isRtl(use) ? "rtl" : "ltr";
+      if (use !== active) {
+        active = use;
+        listeners.forEach((l) => l());
+      }
+      // 브라우저 탭 제목: 서버는 한국어로 정하므로, 다른 언어면 바뀔 때마다 옮긴다(화면 이동 포함)
+      if (use !== "ko") {
+        const fix = () => {
+          const next = translateTitle(document.title, use);
+          if (next !== document.title) document.title = next;
+        };
+        fix();
+        const obs = new MutationObserver(fix);
+        obs.observe(document.head, { childList: true, subtree: true, characterData: true });
+        stopTitle = () => obs.disconnect();
+      }
+      // 다시 그린 다음 화면을 보여 준다
+      requestAnimationFrame(() => document.documentElement.classList.remove("i18n-wait"));
+    });
     // 로그인한 사람의 계정 언어를 화면 언어와 맞춘다(휴대폰 알림 언어). 기기마다 한 번만.
     try {
       if (localStorage.getItem("pw_lang_synced") !== lang) {
@@ -114,7 +134,10 @@ export function LangBoot() {
     } catch {
       /* 저장이 막힌 브라우저 */
     }
-    return () => stopTitle();
+    return () => {
+      alive = false;
+      stopTitle();
+    };
   }, []);
   return null;
 }

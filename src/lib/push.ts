@@ -37,7 +37,9 @@ const TITLE_EN: Record<string, string> = {
 };
 
 // 알림 한 건을 휴대폰 알림 문구와 눌렀을 때 열 주소로 바꾼다
-export function pushPayload(n: N, lang: "ko" | "en" = "ko") {
+export function pushPayload(n: N, lang: string = "ko") {
+  // 알림 문구는 한국어·영어 두 가지: 한국어가 아니면 영어
+  lang = lang === "ko" ? "ko" : "en";
   const who = n.actor ? n.actor.display_name || `@${n.actor.handle}` : "PinWith";
   const url =
     n.kind === "reservation_new" ? "/biz/place?tab=reservations"

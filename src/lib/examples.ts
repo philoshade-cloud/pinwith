@@ -30,7 +30,9 @@ export function useExampleLists() {
     let cancelled = false;
     (async () => {
       const { data: flag } = await supabase.from("app_flags").select("value").eq("key", "examples").maybeSingle();
-      const pairs = ((flag?.value as Record<string, [string, string][]> | null)?.[lang] ?? []).slice(0, 3);
+      const byLang = flag?.value as Record<string, [string, string][]> | null;
+      // 그 언어의 예시가 아직 없으면 영어 예시
+      const pairs = (byLang?.[lang] ?? byLang?.en ?? []).slice(0, 3);
       if (!pairs.length) return !cancelled && setLists([]);
       const rows = await Promise.all(
         pairs.map(([handle, slug]) =>

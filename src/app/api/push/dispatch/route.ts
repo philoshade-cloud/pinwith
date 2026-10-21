@@ -31,7 +31,7 @@ export async function POST(req: Request) {
   const site = (await db.from("app_secrets").select("value").eq("key", "site_url").maybeSingle()).data?.value as string | undefined;
   webpush.setVapidDetails(site ?? "https://pinwith-xiea.vercel.app", keys.publicKey, keys.privateKey);
   const { data: who } = await db.from("profiles").select("lang").eq("id", claimed.user_id).maybeSingle();
-  const payload = JSON.stringify(pushPayload(claimed as unknown as Parameters<typeof pushPayload>[0], who?.lang === "en" ? "en" : "ko"));
+  const payload = JSON.stringify(pushPayload(claimed as unknown as Parameters<typeof pushPayload>[0], who?.lang && who.lang !== "ko" ? "en" : "ko"));
   let sent = 0;
   await Promise.all(
     subs.map(async (s) => {

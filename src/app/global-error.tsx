@@ -1,12 +1,16 @@
 "use client";
 import { useEffect, useSyncExternalStore } from "react";
 import { LANG_COOKIE, translate, type Lang } from "@/lib/i18n/core";
+// 이 화면은 사전을 내려받지 않으므로 한국어가 아니면 영어로 보여 준다
 import { reportError } from "@/lib/reportError";
 import { checkStale, reloadOnceIfStale } from "@/lib/buildCheck";
 
 // 앱의 언어 도구 밖에서 그려지므로 언어 쿠키를 직접 읽는다
 const noSubscribe = () => () => {};
-const cookieLang = (): Lang => (document.cookie.match(new RegExp(`(?:^|; )${LANG_COOKIE}=en`)) ? "en" : "ko");
+const cookieLang = (): Lang => {
+  const m = document.cookie.match(new RegExp(`(?:^|; )${LANG_COOKIE}=([A-Za-z-]+)`));
+  return !m || m[1] === "ko" ? "ko" : "en";
+};
 
 // 맨 바깥(루트 레이아웃)까지 오류가 올라왔을 때의 화면. 오류는 운영자 콘솔로 보낸다.
 export default function GlobalError({ error, retry }: { error: Error & { digest?: string }; retry: () => void }) {

@@ -166,7 +166,7 @@ export function Notifications() {
                       </>
                     )}
                   </p>
-                  {n.body && <p className="mt-1 line-clamp-3 whitespace-pre-wrap text-[13px] text-ink/75">{(lang === "en" && n.body_en) || n.body}</p>}
+                  {n.body && <p className="mt-1 line-clamp-3 whitespace-pre-wrap text-[13px] text-ink/75">{(lang !== "ko" && n.body_en) || n.body}</p>}
                   <p className="mt-1 flex items-center gap-2 text-[11px] text-muted">
                     {ago(n.created_at)}
                     {n.kind === "reservation_new" && <Link href="/biz/place?tab=reservations" className="btn-primary !px-2.5 !py-1 !text-[12px]">{t("가게 콘솔에서 보기")}</Link>}
