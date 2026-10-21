@@ -44,7 +44,7 @@ function Ko() {
       <h2>3. 충전 방법</h2>
       <ul>
         <li>
-          <b>카드·간편결제</b>: Stripe 결제창에서 결제합니다. 대한민국 가게는 원화(KRW)로 결제창이 열리며, 국내 카드와 카카오페이·네이버페이·삼성페이 등 Stripe가 지원하는
+          <b>카드·간편결제</b>: Stripe 결제창에서 결제합니다. 대한민국 가게는 원화(KRW)로 결제창이 열리며, 국내 카드와 네이버페이·삼성페이·PAYCO 등 Stripe가 지원하는
           방법이 표시됩니다. 카드사 인증 화면으로 이동했다가 PinWith로 돌아옵니다.
         </li>
         <li><b>계좌 입금</b>: 콘솔에서 충전을 요청하면 운영자가 입금 방법을 안내하고, 입금이 확인되면 잔액에 들어갑니다.</li>
@@ -123,7 +123,7 @@ function En() {
       <ul>
         <li>
           <b>Card and wallets</b>: pay on the Stripe Checkout page. For stores in South Korea, Checkout opens in Korean won (KRW) and shows the methods Stripe
-          supports there, such as Korean cards, Kakao Pay, Naver Pay and Samsung Pay. You may be redirected to your card issuer to authenticate and then back to PinWith.
+          supports there, such as Korean cards, Naver Pay, Samsung Pay and PAYCO. You may be redirected to your card issuer to authenticate and then back to PinWith.
         </li>
         <li><b>Bank transfer</b>: request a top-up in the console; we will send transfer instructions and add the amount once the transfer is confirmed.</li>
       </ul>
