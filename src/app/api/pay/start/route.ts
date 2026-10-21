@@ -71,6 +71,9 @@ export async function POST(req: Request) {
   const orderName = `PinWith ad credit (광고비 충전) · ${biz.place_name}`.slice(0, 100);
   const form = new URLSearchParams({
     mode: "payment",
+    // PinWith가 판매자(merchant of record)다. 계정 기본값으로 Stripe Managed Payments가 켜져 있어도 이 결제에는 쓰지 않는다
+    // (켜져 있으면 상품 세금 코드가 없다며 400으로 거절됨, 2026-10-21).
+    "managed_payments[enabled]": "false",
     success_url: `${origin}/biz/place?tab=billing&paid=stripe`,
     cancel_url: `${origin}/biz/place?tab=billing&paid=cancel`,
     client_reference_id: topup.id,
