@@ -11,7 +11,8 @@ import { Panel, PanelLoading } from "./shell/Panel";
 import { ConfirmButton } from "./ConfirmButton";
 import { ChangeLog, EditorsManager, MyShare } from "./CoEdit";
 import { useMapScene, useShell, type Scene } from "./shell/context";
-import { useT } from "@/lib/i18n/client";
+import { currentLang, useT } from "@/lib/i18n/client";
+import { LANGS } from "@/lib/i18n/core";
 
 type Meta = {
   title: string;
@@ -20,6 +21,8 @@ type Meta = {
   visibility: Visibility;
   kind: ListKind;
   themes: string;
+  // 리스트의 언어('타인의 핀'에서 그 언어를 고른 사람에게 보임)
+  lang: string;
 };
 
 type ItemRow = {
@@ -83,7 +86,7 @@ export function ListEditor({ listId }: { listId: string }) {
       const { data } = await supabase
         .from("lists")
         .select(
-          "id, owner_id, slug, title, description, visibility, kind, themes, monetize," +
+          "id, owner_id, slug, title, description, visibility, kind, themes, monetize, lang," +
             " owner:profiles!lists_owner_id_fkey(handle)," +
             " sections(id, name, position)," +
             " list_items(id, place_id, custom_title, memo, section_id, position, added_by, places(lat, lng)," +
@@ -95,7 +98,7 @@ export function ListEditor({ listId }: { listId: string }) {
 
       const row = data as unknown as {
         owner_id: string; slug: string; title: string; description: string;
-        visibility: Visibility; kind: ListKind; themes: string[]; monetize: boolean;
+        visibility: Visibility; kind: ListKind; themes: string[]; monetize: boolean; lang: string | null;
         owner: { handle: string } | null;
         sections: Section[]; list_items: ItemRow[];
       };
@@ -120,6 +123,7 @@ export function ListEditor({ listId }: { listId: string }) {
         visibility: row.visibility,
         kind: row.kind,
         themes: row.themes.map((t) => `#${t}`).join(" "),
+        lang: row.lang ?? currentLang(),
       };
       setIsOwner(owner);
       setOwnerId(row.owner_id);
@@ -167,7 +171,7 @@ export function ListEditor({ listId }: { listId: string }) {
         title: meta.title.trim(),
         description: meta.description.trim(),
         // 공개 범위와 주소는 주인만 바꾼다(공동 편집자는 DB에서도 막힘)
-        ...(isOwner ? { slug, visibility: meta.visibility } : {}),
+        ...(isOwner ? { slug, visibility: meta.visibility, lang: meta.lang } : {}),
         kind: meta.kind,
         themes,
       })
@@ -403,6 +407,15 @@ export function ListEditor({ listId }: { listId: string }) {
                   <option key={v} value={v}>{t(VISIBILITY_LABEL[v])}</option>
                 ))}
               </select>
+            </label>
+            <label className="grid gap-1 text-[13px] font-semibold text-ink">
+              {t("리스트 언어")}
+              <select value={meta.lang} onChange={(e) => setMeta({ ...meta, lang: e.target.value })} className="field">
+                {LANGS.map((l) => (
+                  <option key={l.id} value={l.id}>{l.label}</option>
+                ))}
+              </select>
+              <span className="text-[12px] font-normal text-muted">{t("‘타인의 핀’에서 이 언어를 고른 사람에게 보여요.")}</span>
             </label>
           </div>}
           {isOwner && <label className="grid gap-1 text-[13px] font-semibold text-ink">

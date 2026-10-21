@@ -5,7 +5,7 @@ import { useLang } from "@/lib/i18n/client";
 import { isLang, type Lang } from "@/lib/i18n/core";
 
 // '타인의 핀'에서 볼 언어(My 화면에서 고름, profiles.explore_langs). 고른 게 없으면 화면 언어 하나.
-// 리스트의 언어는 lists.lang(공식·예시) 또는 만든 사람의 계정 언어.
+// 리스트의 언어는 lists.lang(주인이 편집 화면에서 고름, 새 리스트는 만든 사람의 계정 언어로 시작). 비어 있으면 만든 사람의 계정 언어.
 export function listLang(l: { lang?: string | null; owner?: { lang?: string | null } | null }): string {
   return l.lang ?? l.owner?.lang ?? "ko";
 }

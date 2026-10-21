@@ -42,6 +42,8 @@ export const lists: Record<string, string> = {
   "장소를 묶는 단위입니다. 예: Day 1, 아침, 카페": "Groups for your places. e.g. Day 1, Morning, Cafés",
   "섹션 이름": "Section name",
   "삭제": "Delete",
+  "리스트 언어": "List language",
+  "‘타인의 핀’에서 이 언어를 고른 사람에게 보여요.": "Shown in Explore to people who chose this language.",
   "장소 이름을 넣으세요.": "Enter a place name.",
   "저장했어요.": "Saved.",
   "장소 편집": "Edit place",

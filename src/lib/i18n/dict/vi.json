@@ -1044,7 +1044,9 @@
 "언어를 하나 이상 고르세요.": "Hãy chọn ít nhất một ngôn ngữ.",
 "‘타인의 핀’에서 볼 언어": "Ngôn ngữ trong Khám phá",
 "고른 언어로 만든 리스트만 ‘타인의 핀’ 목록에 보여요. 화면 언어와는 따로 정하고, 검색 결과에는 모든 언어가 나와요.": "Khám phá chỉ hiện các danh sách được tạo bằng ngôn ngữ bạn chọn. Cài đặt này tách biệt với ngôn ngữ ứng dụng, còn kết quả tìm kiếm hiện mọi ngôn ngữ.",
-"보는 언어: {langs}": "Ngôn ngữ: {langs}"
+"보는 언어: {langs}": "Ngôn ngữ: {langs}",
+"리스트 언어": "Ngôn ngữ danh sách",
+"‘타인의 핀’에서 이 언어를 고른 사람에게 보여요.": "Hiện trong Khám phá cho người đã chọn ngôn ngữ này."
 },
 "titles": {
 "가게 콘솔": "Bảng điều khiển cửa hàng",
