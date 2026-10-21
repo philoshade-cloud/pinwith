@@ -20,12 +20,11 @@ export function OwnerItemActions({
   const t = useT();
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
-  const { focusNext, select, toast, refreshMine } = useShell();
+  const { select, toast, refreshMine } = useShell();
 
   function edit() {
-    // 편집 화면이 열리면 이 장소로 바로 스크롤한다
-    focusNext(placeId);
-    router.push(`/me/lists/${listId}`);
+    // 이 장소 하나만 고치는 화면
+    router.push(`/me/lists/${listId}/item/${itemId}`);
   }
 
   async function remove() {
