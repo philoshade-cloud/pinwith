@@ -43,13 +43,15 @@ export async function GET(req: Request) {
     // 3) 방문일로부터 1년이 지난 예약 문의의 이름·연락처·메시지를 지운다(개인정보처리방침 6번)
     const { data: anonymized } = await db.rpc("anonymize_old_reservations");
     const { data: budget } = await db.rpc("run_budget_check");
+    // 4) 운영자 계정이 PinWith 공식 계정의 공개 리스트를 모두 좋아요한 상태로 맞춘다(취소한 것도 되돌림)
+    const { data: officialLikes } = await db.rpc("sync_admin_official_likes");
     await db.from("rate_limits").delete().lt("window_start", new Date(Date.now() - 86400_000).toISOString());
     // 개인정보처리방침 6번의 보관 기간: 링크 이용 기록 2년, 고친 오류 기록 1년
     const ago = (days: number) => new Date(Date.now() - days * 86400_000).toISOString();
     await db.from("link_events").delete().lt("created_at", ago(730));
     await db.from("error_logs").delete().eq("resolved", true).lt("last_at", ago(365));
     const resend = await checkResend(db);
-    const detail = { checked: rows?.length ?? 0, updated, gone, expired, anonymized, budget, resend };
+    const detail = { checked: rows?.length ?? 0, updated, gone, expired, anonymized, budget, resend, officialLikes };
     await db.from("job_runs").insert({ job: "daily", ok: true, detail });
     return Response.json(detail);
   } catch (e) {
