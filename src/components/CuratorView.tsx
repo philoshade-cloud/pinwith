@@ -11,6 +11,7 @@ import { FollowButton } from "./FollowButton";
 import { CoEditedLists } from "./CoEdit";
 import { DmButton, NotifyToggle } from "./SocialBits";
 import { ProfileQr } from "./ProfileQr";
+import { AdSlot } from "./AdSlot";
 import { ShareButton } from "./ShareButton";
 import { OwnerItemActions } from "./OwnerItemActions";
 import { Avatar } from "./ListExplorer";
@@ -156,8 +157,14 @@ export function CuratorView({
           </p>
         ) : (
           <ul>
-            {lists.map((l) => (
+            {lists.map((l, i) => (
               <li key={l.id} className="border-b border-rule">
+                {/* 광고 자리: 다른 사람의 지도에서 리스트 3개 뒤(내 지도에는 없음) */}
+                {!isOwner && i === 3 && (
+                  <div className="border-b border-rule py-1">
+                    <AdSlot slot="explore-curator" variant={1} />
+                  </div>
+                )}
                 <div className="flex items-center gap-3 px-5 py-4">
                   <Link href={`/@${curator.handle}/${l.slug}`} className="min-w-0 flex-1">
                     <span className="block text-[17px] font-semibold text-ink">{l.title}</span>
@@ -175,6 +182,12 @@ export function CuratorView({
               </li>
             ))}
           </ul>
+        )}
+        {/* 리스트가 3개 이하면 목록 끝에 한 번 */}
+        {!isOwner && lists.length > 0 && lists.length <= 3 && (
+          <div className="py-1">
+            <AdSlot slot="explore-curator" variant={1} />
+          </div>
         )}
       </div>
     </Panel>

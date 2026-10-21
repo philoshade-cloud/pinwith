@@ -305,10 +305,11 @@ export function ListExplorer({ list }: { list: CuratedList }) {
             <ul>
               {g.items.map((item, ii) => (
                 <li key={item.id}>
-                  {/* 광고 자리: 장소 6곳마다 */}
+                  {/* 광고 자리: 장소 3곳 뒤 한 번, 그다음 6곳마다(휴대폰에서 목록을 끝까지 내리지 않는 사람이 많아 첫 광고를 앞당김) */}
                   {(() => {
                     const n = groups.slice(0, gi).reduce((c, x) => c + x.items.length, 0) + ii;
-                    return n > 0 && n % 6 === 0 ? <AdSlot slot="list-inline" variant={n / 6} listId={isDemo ? undefined : list.id} /> : null;
+                    const at = n === 3 || (n > 3 && (n - 3) % 6 === 0);
+                    return at ? <AdSlot slot="list-inline" variant={Math.floor((n + 3) / 6)} listId={isDemo ? undefined : list.id} /> : null;
                   })()}
                   <button
                     type="button"
