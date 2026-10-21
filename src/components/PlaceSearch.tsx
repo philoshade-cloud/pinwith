@@ -64,8 +64,12 @@ export function PlaceSearchBox({
   const [busy, setBusy] = useState(false);
   const saved = !!onSavedPick;
   const { scopes, toggle } = useScopes();
-  const savedHits = useSavedSearch(text, scopes, 6, saved);
+  // 목록 위쪽 전환: 기본은 구글 장소, '내 핀'을 누르면 저장한 핀에서 찾는다(개수는 미리 보여 줌, 구글 요금 없음)
+  const [mode, setMode] = useState<"google" | "mine">("google");
+  const savedHits = useSavedSearch(text, scopes, 50, saved);
   const googleOn = status === "ready";
+  // 구글 장소 검색이 꺼져 있으면 내 핀 검색만
+  const mine = saved && (mode === "mine" || status === "off" || status === "error");
 
   useEffect(() => {
     let cancelled = false;
@@ -87,9 +91,11 @@ export function PlaceSearchBox({
     return c ? { center: c, radius: 30000 } : undefined;
   }
 
-  function suggest(q: string) {
+  function suggest(q: string, force = false) {
     window.clearTimeout(timer.current);
     const term = q.trim();
+    // 내 핀을 보고 있는 동안에는 구글에 묻지 않는다(요금)
+    if (mine && !force) return;
     if (term.length < MIN_GOOGLE_CHARS) {
       setSuggestions([]);
       return;
@@ -196,9 +202,9 @@ export function PlaceSearchBox({
     } else if (e.key === "Enter") {
       e.preventDefault();
       // 화살표로 고른 제안이 있으면 그 장소, 아니면 검색어 전체로 찾기
-      if (open && active >= 0 && suggestions[active]) pick(suggestions[active]);
-      else if (!googleOn && saved && onSavedAll && text.trim()) {
-        // 구글 검색이 꺼져 있으면 Enter는 저장한 핀 검색 화면으로
+      if (!mine && open && active >= 0 && suggestions[active]) pick(suggestions[active]);
+      else if (mine && onSavedAll && text.trim()) {
+        // 내 핀을 보고 있으면 Enter는 저장한 핀 전체 결과 화면으로
         input.current?.blur();
         setOpen(false);
         onSavedAll(text.trim());
@@ -215,6 +221,7 @@ export function PlaceSearchBox({
           value={text}
           onChange={(e) => {
             setText(e.target.value);
+            if (!e.target.value.trim()) setMode("google");
             if (saved) setOpen(!!e.target.value.trim());
             suggest(e.target.value);
           }}
@@ -223,7 +230,7 @@ export function PlaceSearchBox({
           onBlur={() => window.setTimeout(() => setOpen(false), 150)}
           placeholder={
             saved
-              ? googleOn || status === "loading" ? t("내 핀이나 장소 이름·주소로 검색") : t("내 핀에서 검색")
+              ? googleOn || status === "loading" ? t("장소 이름이나 주소로 검색") : t("내 핀에서 검색")
               : status === "off" ? t("장소 검색을 잠시 쉬고 있어요") : status === "error" ? t("장소 검색을 불러오지 못했습니다") : t("장소 이름이나 주소로 검색")
           }
           disabled={!saved && (status === "error" || status === "off")}
@@ -252,11 +259,30 @@ export function PlaceSearchBox({
         )}
       </div>
       {open && (suggestions.length > 0 || (saved && text.trim())) && (
-        <div className="absolute inset-x-0 top-full z-50 mt-1.5 max-h-[70dvh] overflow-y-auto overscroll-contain rounded-xl bg-white py-1 shadow-[0_8px_24px_rgba(24,34,47,0.2)]">
-          {saved && text.trim() && (
-            <section aria-label={t("내 핀에서")} className="border-b border-rule pb-1">
-              <div className="flex flex-wrap items-center gap-2 px-3 pb-1 pt-1.5">
-                <span className="text-[12px] font-semibold text-teal">{t("내 핀에서")}</span>
+        <div className="absolute inset-x-0 top-full z-50 mt-1.5 max-h-[70dvh] overflow-y-auto overscroll-contain rounded-xl bg-white pb-1 shadow-[0_8px_24px_rgba(24,34,47,0.2)]">
+          {saved && (
+            <div role="tablist" aria-label={t("검색 대상")} className="sticky top-0 z-10 flex gap-1 border-b border-rule bg-white p-1.5">
+              {googleOn && (
+                <ModeTab on={!mine} onClick={() => {
+                  setMode("google");
+                  suggest(text, true);
+                }}>
+                  {t("구글 장소")}
+                </ModeTab>
+              )}
+              <ModeTab on={mine} onClick={() => setMode("mine")}>
+                {t("내 핀")}
+                {savedHits && savedHits.length > 0 && (
+                  <span className={`ml-1 rounded-full px-1.5 text-[11px] ${mine ? "bg-white/25" : "bg-pin text-white"}`}>
+                    {savedHits.length >= 50 ? "50+" : savedHits.length}
+                  </span>
+                )}
+              </ModeTab>
+            </div>
+          )}
+          {mine ? (
+            <section aria-label={t("내 핀에서")}>
+              <div className="px-3 pb-1 pt-2">
                 <ScopeChips scopes={scopes} toggle={toggle} />
               </div>
               {scopes.length === 0 ? (
@@ -267,7 +293,7 @@ export function PlaceSearchBox({
                 <p className="px-3 py-1.5 text-[13px] text-muted">{t("저장한 핀 중에는 없어요.")}</p>
               ) : (
                 <ul>
-                  {savedHits.slice(0, 5).map((h) => (
+                  {savedHits.slice(0, 8).map((h) => (
                     <li key={`${h.kind}-${h.item_id ?? h.list_id}`}>
                       <SavedHitRow hit={h} q={text} onPick={(x) => {
                         input.current?.blur();
@@ -287,16 +313,14 @@ export function PlaceSearchBox({
                     setOpen(false);
                     onSavedAll(text.trim());
                   }}
-                  className="block w-full px-3 py-1.5 text-left text-[12px] font-semibold text-teal"
+                  className="block w-full border-t border-rule px-3 py-2 text-left text-[12px] font-semibold text-teal"
                 >
-                  {t("‘{q}’ 내 핀에서 모두 보기", { q: text.trim() })}
+                  {t("‘{q}’ 내 핀에서 모두 보기 (지도에 표시)", { q: text.trim() })}
                 </button>
               )}
             </section>
-          )}
-          {suggestions.length > 0 && (
-            <ul id="place-suggestions" role="listbox" aria-label={t("Google 장소")}>
-              {saved && <li className="px-3 pb-0.5 pt-1.5 text-[12px] font-semibold text-muted">{t("Google 장소")}</li>}
+          ) : suggestions.length > 0 ? (
+            <ul id="place-suggestions" role="listbox" aria-label={t("구글 장소")}>
               {suggestions.map((s, i) => (
                 <li key={s.placeId} role="option" aria-selected={i === active}>
                   <button
@@ -317,10 +341,27 @@ export function PlaceSearchBox({
                 <span>Google</span>
               </li>
             </ul>
+          ) : (
+            <p className="px-3 py-2 text-[13px] text-muted">{text.trim().length < MIN_GOOGLE_CHARS ? t("두 글자 이상 입력하세요.") : t("찾는 중")}</p>
           )}
         </div>
       )}
     </div>
+  );
+}
+
+function ModeTab({ on, onClick, children }: { on: boolean; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={on}
+      onMouseDown={(e) => e.preventDefault()}
+      onClick={onClick}
+      className={`flex flex-1 items-center justify-center rounded-lg py-1.5 text-[13px] font-semibold ${on ? "bg-teal text-white" : "bg-surface text-ink/70"}`}
+    >
+      {children}
+    </button>
   );
 }
 
