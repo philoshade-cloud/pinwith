@@ -10,6 +10,14 @@
 
 ---
 
+## v0.54 — 언어별 공식 계정·현지 예시, AI 수집 로봇 차단 (2026-10-22)
+- 0.54-1 공식 계정 언어별 분리 `[DB]` · `06ee817`
+  - `lists.lang`(운영자만 정함). '타인의 핀'의 인기·이 지역 목록에는 화면 언어와 같은 언어의 공식·예시 리스트만(사용자 리스트와 검색 결과는 언어와 관계없이).
+  - @pinwith는 한국어 공식 계정(리스트 10개), 영어 리스트 15개는 새 @pinwith_en으로 복사(원본은 '나만 보기'). 예전 주소 `/@pinwith/<주소>`로 오면 같은 주소의 다른 언어 공식 리스트로 영구 이동.
+  - DB: `supabase/migrations/20261022000200_list_lang.sql` · 되돌리기 `supabase/rollback/20261022000200_list_lang.down.sql`
+- 0.54-2 데이터(이미 적용): 15개 언어마다 공식 계정 `pinwith_<언어>`(ja, zhcn, zhtw, es, pt, fr, de, it, ru, ar, hi, tr, th, vi, id)과 예시 계정 `ex_<언어>1~3`, 현지 예시 리스트 4개(평범한 것·크리에이터 Vlog·친구 셋의 의논(공동 편집·댓글)·먹거리), 그 시장 사람들이 관심 가질 여행지(예: 일본어 도쿄 시타마치·오타루·서울·오사카, 스페인어 마드리드·툴룸·바르셀로나·멕시코시티, 아랍어 두바이·페트라·이스탄불·카이로). 로그인 전 예시(`app_flags.examples`)를 언어마다 3개로. `supabase/dev/seed_lang_loader.sql`(도구), `supabase/dev/lang_examples/<언어>.sql` · `c879f12`
+- 0.54-3 robots.txt에서 AI 학습·수집 로봇 31종(GPTBot, ClaudeBot, CCBot, Google-Extended, Bytespider, PerplexityBot 등) 사이트 전체 차단. 검색 로봇·광고 심사 로봇은 그대로 · `32d2473`
+
 ## v0.53 — 영수증·17개 언어 (2026-10-22)
 - 0.53-1 광고비 영수증: 결제된 충전마다 '영수증' 화면(`/biz/receipt/[id]`, 인쇄·PDF 저장). 판매자(STRATO TRADINGS PTE. LTD., UEN), 받는 분(사업자명·등록번호·가게), 결제 방법, 금액(결제 통화)·적립액, 환불이 있으면 환불 후 금액. 콘솔 충전 기록에 링크. Stripe 결제창에 계정 이메일을 미리 채워, 대시보드 Customer emails를 켜면 Stripe 영수증 메일도 감 · `7312603`
 - 0.53-2 화면 언어 17개 `[DB]` · `d377041`
