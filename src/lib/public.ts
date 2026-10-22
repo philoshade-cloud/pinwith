@@ -6,7 +6,7 @@ import { normalizeHandle } from "./data";
 import { curatorLine, seoLang } from "./seo";
 
 // 공유 미리보기(카톡·인스타 링크 카드)용. 로그인 없이 누구나 보는 정보만 읽는다(RLS가 공개 범위를 판단).
-function anon() {
+export function anon() {
   return createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, { auth: { persistSession: false } });
 }
 

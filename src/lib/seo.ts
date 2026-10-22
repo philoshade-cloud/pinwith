@@ -25,7 +25,7 @@ const PLACES: Record<Lang, (n: number) => string> = {
 };
 
 const MAP_OF: Record<Lang, (name: string) => string> = {
-  ko: (s) => `${s}의 장소 지도`,
+  ko: (s) => `${s}의 지도`,
   en: (s) => `${s}'s map of places`,
   ja: (s) => `${s}のスポットマップ`,
   "zh-CN": (s) => `${s} 的地点地图`,
@@ -53,3 +53,8 @@ export const clip = (s: string, max = 160) => (s.length > max ? `${s.slice(0, ma
 
 // <script type="application/ld+json">에 넣을 문자열('<'를 바꿔 스크립트가 중간에 닫히지 않게)
 export const ldJson = (data: unknown) => JSON.stringify(data).replace(/</g, "\\u003c");
+
+// 언어별 주소 묶음(hreflang). x-default는 언어를 모르는 사람에게 보여 줄 주소.
+export function langAlternates(path: (l: Lang) => string, langs: readonly Lang[], xDefault: string): Record<string, string> {
+  return Object.fromEntries([...langs.map((l) => [l, path(l)] as const), ["x-default", xDefault] as const]);
+}

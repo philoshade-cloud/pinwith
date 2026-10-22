@@ -5,7 +5,7 @@
 // - 언어를 바꾸면 쿠키에 저장하고 새로 불러온다(모든 화면·날짜 형식이 한 번에 바뀌게).
 import { useCallback, useEffect, useSyncExternalStore, type ReactNode } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { LANG_COOKIE, LANGS, detect, hasDict, isLang, isRtl, localeOf, registerDict, translate, translateTitle, type Lang, type Vars } from "./core";
+import { LANG_COOKIE, LANGS, detect, hasDict, isLang, isRtl, langFromUrl, localeOf, registerDict, translate, translateTitle, type Lang, type Vars } from "./core";
 
 let active: Lang = "ko";
 const listeners = new Set<() => void>();
@@ -71,6 +71,11 @@ export function useTRich() {
 
 export async function setLang(lang: Lang) {
   document.cookie = `${LANG_COOKIE}=${lang}; path=/; max-age=31536000; samesite=lax`;
+  // 주소에 언어가 박혀 있으면(?lang=, /places/<언어>/) 그 부분도 새 언어로 바꿔야 바뀐다
+  const url = new URL(window.location.href);
+  const hadUrlLang = url.searchParams.has("lang") || /^\/places\/[A-Za-z-]+/.test(url.pathname);
+  url.searchParams.delete("lang");
+  url.pathname = url.pathname.replace(/^\/places\/[A-Za-z-]+/, `/places/${lang}`);
   // 로그인한 사람은 계정에도 저장(휴대폰 알림 문구를 그 언어로 보내기 위해)
   try {
     const supabase = createClient();
@@ -82,18 +87,21 @@ export async function setLang(lang: Lang) {
   } catch {
     /* 저장 실패는 무시 */
   }
-  window.location.reload();
+  if (hadUrlLang) window.location.href = url.toString();
+  else window.location.reload();
 }
 
 // 루트 레이아웃에 한 번: 언어를 정하고(쿠키 → 브라우저 언어) 화면을 그 언어로 바꾼다
 export function LangBoot() {
   useEffect(() => {
+    // 주소의 언어가 먼저(검색 결과에서 그 언어판을 눌러 들어온 경우). 쿠키가 없을 때만 그 언어를 기억한다.
+    const fromUrl = langFromUrl(window.location.pathname, window.location.search);
     let lang = readCookie();
     if (!lang) {
-      lang = detect(navigator.languages?.length ? navigator.languages : [navigator.language]);
+      lang = fromUrl ?? detect(navigator.languages?.length ? navigator.languages : [navigator.language]);
       document.cookie = `${LANG_COOKIE}=${lang}; path=/; max-age=31536000; samesite=lax`;
     }
-    const chosen = lang;
+    const chosen = fromUrl ?? lang;
     let stopTitle = () => {};
     let alive = true;
     loadDict(chosen).then((ok) => {
@@ -111,10 +119,17 @@ export function LangBoot() {
         const fix = () => {
           const next = translateTitle(document.title, use);
           if (next !== document.title) document.title = next;
+          // 설명 문구도(사전에 있는 고정 문구만. 리스트 설명처럼 사람이 쓴 글은 그대로)
+          const meta = document.querySelector('meta[name="description"]');
+          const desc = meta?.getAttribute("content");
+          if (meta && desc) {
+            const d = translate(use, desc);
+            if (d !== desc) meta.setAttribute("content", d);
+          }
         };
         fix();
         const obs = new MutationObserver(fix);
-        obs.observe(document.head, { childList: true, subtree: true, characterData: true });
+        obs.observe(document.head, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["content"] });
         stopTitle = () => obs.disconnect();
       }
       // 다시 그린 다음 화면을 보여 준다

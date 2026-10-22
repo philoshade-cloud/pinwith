@@ -201,4 +201,5 @@ export const shell: Record<string, string> = {
   "팔로우 중@@칩": "Following",
   "인기 리스트@@칩": "Popular",
   "내 리스트와 겹치는 리스트@@칩": "Like mine",
+  "좋아하는 장소를 지도에 모아 링크 하나로 건네세요.": "Collect your favorite places on a map and share them with one link.",
 };

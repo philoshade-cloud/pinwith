@@ -2,9 +2,11 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ErrorReporter } from "@/components/ErrorReporter";
 import { LangBoot } from "@/lib/i18n/client";
+import { LANG_IDS } from "@/lib/i18n/core";
 
+// 주소의 언어(?lang=, /places/<언어>/) → 쿠키 → 브라우저 언어 순.
 // 영어 사용자에게 서버가 그린 한국어가 잠깐 비치지 않도록, 언어가 정해질 때까지(최대 3초) 화면을 가린다
-const LANG_HEAD = `try{var m=document.cookie.match(/(?:^|; )pw_lang=([A-Za-z-]+)/);var n=((navigator.languages&&navigator.languages[0])||navigator.language||"ko").toLowerCase();var l=m?m[1]:(n.indexOf("ko")===0?"ko":"x");if(l!=="ko"){if(l!=="x")document.documentElement.lang=l;if(l==="ar")document.documentElement.dir="rtl";document.documentElement.classList.add("i18n-wait");setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},3000)}}catch(e){}`;
+const LANG_HEAD = `try{var ids=${JSON.stringify(LANG_IDS)};var q=location.search.match(/[?&]lang=([A-Za-z-]+)/),p=location.pathname.match(/^\\/places\\/([A-Za-z-]+)/),u=(q&&q[1])||(p&&p[1]);if(ids.indexOf(u)<0)u=null;var m=document.cookie.match(/(?:^|; )pw_lang=([A-Za-z-]+)/);var n=((navigator.languages&&navigator.languages[0])||navigator.language||"ko").toLowerCase();var l=u||(m?m[1]:(n.indexOf("ko")===0?"ko":"x"));if(l!=="ko"){if(l!=="x")document.documentElement.lang=l;if(l==="ar")document.documentElement.dir="rtl";document.documentElement.classList.add("i18n-wait");setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},3000)}}catch(e){}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://pinwith.me"),

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ByLang } from "@/components/ByLang";
 
-export const metadata: Metadata = { title: "이용약관", alternates: { canonical: "/terms" } };
+export const metadata: Metadata = { title: "이용약관", alternates: { languages: { ko: "/terms?lang=ko", en: "/terms?lang=en", "x-default": "/terms" } } };
 
 // 출시 전 법률 검토를 받는다.
 export default function Terms() {

@@ -30,6 +30,14 @@ export const LANGS: { id: Lang; label: string }[] = [
 export const isLang = (v: unknown): v is Lang => typeof v === "string" && (LANG_IDS as readonly string[]).includes(v);
 // 오른쪽에서 왼쪽으로 쓰는 언어
 export const isRtl = (lang: Lang) => lang === "ar";
+
+// 주소에 언어가 들어 있으면(?lang=ja, /places/ja/…) 쿠키보다 앞선다. 검색엔진이 언어마다 다른 주소로 색인하게(hreflang).
+export function langFromUrl(pathname: string, search: string): Lang | null {
+  const q = new URLSearchParams(search).get("lang");
+  if (isLang(q)) return q;
+  const m = /^\/places\/([A-Za-z-]+)/.exec(pathname);
+  return m && isLang(m[1]) ? m[1] : null;
+}
 export const LANG_COOKIE = "pw_lang";
 
 // 내려받은 사전(ko·en 밖의 언어)

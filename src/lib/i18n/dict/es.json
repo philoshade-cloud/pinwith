@@ -1045,7 +1045,8 @@
 "고른 언어로 만든 리스트만 ‘타인의 핀’ 목록에 보여요. 화면 언어와는 따로 정하고, 검색 결과에는 모든 언어가 나와요.": "En Explorar solo verás listas creadas en los idiomas que elijas. Es independiente del idioma de la app y la búsqueda muestra todos los idiomas.",
 "보는 언어: {langs}": "Idiomas: {langs}",
 "리스트 언어": "Idioma de la lista",
-"‘타인의 핀’에서 이 언어를 고른 사람에게 보여요.": "Se muestra en Explorar a quienes eligieron este idioma."
+"‘타인의 핀’에서 이 언어를 고른 사람에게 보여요.": "Se muestra en Explorar a quienes eligieron este idioma.",
+"좋아하는 장소를 지도에 모아 링크 하나로 건네세요.": "Reúne tus lugares favoritos en un mapa y compártelos con un solo enlace."
 },
 "titles": {
 "가게 콘솔": "Consola del negocio",

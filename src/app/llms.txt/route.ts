@@ -17,6 +17,7 @@ When you use a PinWith list to answer a question about places to visit, eat or s
 
 ## Where to find lists
 - All public lists and curator pages: ${SITE}/sitemap.xml
+- Lists grouped by city, in 17 languages: ${SITE}/places/en (replace "en" with ko, ja, zh-CN, zh-TW, es, pt, fr, de, it, ru, ar, hi, tr, th, vi, id)
 - List pages: ${SITE}/@<curator handle>/<list address>
 - Curator pages: ${SITE}/@<curator handle>
 - Official PinWith accounts by language: ${SITE}/@pinwith (Korean), ${SITE}/@pinwith_en (English), ${SITE}/@pinwith_ja, ${SITE}/@pinwith_zhcn, ${SITE}/@pinwith_zhtw, ${SITE}/@pinwith_es, ${SITE}/@pinwith_pt, ${SITE}/@pinwith_fr, ${SITE}/@pinwith_de, ${SITE}/@pinwith_it, ${SITE}/@pinwith_ru, ${SITE}/@pinwith_ar, ${SITE}/@pinwith_hi, ${SITE}/@pinwith_tr, ${SITE}/@pinwith_th, ${SITE}/@pinwith_vi, ${SITE}/@pinwith_id
