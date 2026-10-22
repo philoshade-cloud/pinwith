@@ -1,0 +1,151 @@
+{
+  "target": "r/seoulhiddengem (Reddit)",
+  "group": "host_community",
+  "based_in_korea": "unverified",
+  "msg_lang": "en",
+  "recipient_name": "r/seoulhiddengem moderators",
+  "contact_route": "Subreddit modmail (Message the mods); ask permission before posting.",
+  "source": null,
+  "hooks": [
+    "Sub exists with ~12k members per gummysearch.com/r/seoulhiddengem; common topics: advice requests, Seoul food.",
+    "Promotion rules: could not read sidebar/rules (reddit and mirrors blocked) -> unverified; treat as no self-promo without mod OK."
+  ],
+  "list": {
+    "owner": "pinwith_en",
+    "lang": "en",
+    "slug": "seoulhiddengem-starter-map",
+    "title": "Seoul hidden gems starter map",
+    "desc": "A free starter map made by PinWith for r/seoulhiddengem: quieter alleys, viewpoints and neighbourhoods beyond the usual list. Add your own finds or co-edit with friends.",
+    "kind": "collection",
+    "themes": [
+      "hidden gems",
+      "Seoul",
+      "walks",
+      "viewpoints"
+    ],
+    "sections": [
+      {
+        "name": null,
+        "items": [
+          {
+            "place_id": "ChIJW38d4qqjfDURgKFJWUkq3Mk",
+            "lat": 37.5786683,
+            "lng": 126.97310700000001,
+            "title": "Seochon alleys (서촌)",
+            "memo": "Residential hanok lanes west of Gyeongbokgung; no single entrance, just wander",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJtT8C9S-jfDURfQ_xFyliYc4",
+            "lat": 37.582584,
+            "lng": 126.9624516,
+            "title": "Suseong-dong Valley (수성동계곡)",
+            "memo": "Rocky stream valley at the foot of Inwangsan; toilets and a store at the entrance",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJJeO-o7GifDURTajw3VibV10",
+            "lat": 37.5920723,
+            "lng": 126.9671193,
+            "title": "Yun Dong-ju Literary Museum (Buam-dong)",
+            "memo": "Free small museum on the Buam-dong pass; closed Mondays",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ63NnRS6jfDURt-efnKIjXzs",
+            "lat": 37.5779788,
+            "lng": 127.00719149999999,
+            "title": "Ihwa Mural Village (이화마을)",
+            "memo": "Hillside murals and cafes; people live here, keep quiet; many murals have faded",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJj1q-SjCjfDURrEOH3_cjrMM",
+            "lat": 37.5760794,
+            "lng": 127.00898759999998,
+            "title": "Naksan Fortress Wall Trail (낙산성곽길)",
+            "memo": "City-wall walk with night lighting; steep in parts, not stroller friendly",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJt7XJo6OjfDUR0p0Mn8mDPA4",
+            "lat": 37.57819,
+            "lng": 127.01158430000001,
+            "title": "Changsin Quarry Observatory (창신동)",
+            "memo": "Cafe with rooftop view over an old quarry; buy a drink to go up; closed Mon",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJw8UIcGCifDURB0MtY-xAUqM",
+            "lat": 37.556713699999996,
+            "lng": 126.96957529999999,
+            "title": "Seoullo 7017",
+            "memo": "Elevated walkway over the tracks by Seoul Station; open 24h, nicer at night",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ9z2rCrxFezURAj903Zwv-8Y",
+            "lat": 37.5680951,
+            "lng": 126.969203,
+            "title": "Jeongdong-gil (정동길)",
+            "memo": "Historic street with modern-era buildings; ginkgo-yellow in autumn",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ666w-LCjfDURCTJtf5ivJ-I",
+            "lat": 37.564864799999995,
+            "lng": 126.9754485,
+            "title": "Deoksugung stone-wall road (덕수궁 돌담길)",
+            "memo": "Lit stone-wall path that loops toward Gwanghwamun",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJR9PIr4CjfDURC4KZJpfg0BE",
+            "lat": 37.5644888,
+            "lng": 126.9756507,
+            "title": "Jeongdong Observatory",
+            "memo": "Free view over Deoksugung from the Seosomun city-hall building; weekdays from 13:30",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJUTHRNEWifDURwLPSsZgc3Os",
+            "lat": 37.5452795,
+            "lng": 126.98506889999999,
+            "title": "Haebangchon Sinheung Market (해방촌)",
+            "memo": "Covered market with small eateries; Namsan Tower views; steep narrow streets",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ27IxU_aefDURtF7S7aPMNOg",
+            "lat": 37.514936299999995,
+            "lng": 126.89473419999999,
+            "title": "Mullae Art Village (문래창작촌)",
+            "memo": "Metal workshops mixed with street art and bars; quieter art vibe on weekends",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJgadlD86efDURv6lbSPhxU-8",
+            "lat": 37.543569,
+            "lng": 126.8997156,
+            "title": "Seonyudo Park (선유도공원)",
+            "memo": "Old water-treatment plant turned garden island; open 06:00-24:00",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,152 @@
+{
+ "target": "Style Vanity (Aly / Maria Alyssa Martinez)",
+ "group": "fan_blog",
+ "based_in_korea": "unverified",
+ "msg_lang": "en",
+ "recipient_name": "Aly",
+ "contact_route": "'Work With Us' page at stylevanity.com/want-to-advertise/; Instagram DM @itsmariaalyssa",
+ "source": {
+  "url": "https://stylevanity.com/bts-spots-in-seoul-and-busan/",
+  "title": "The Ultimate BTS Pilgrimage in Seoul & Busan Every ARMY Needs in 2026",
+  "date": "2026-06"
+ },
+ "hooks": [
+  "Published 2025-06-02, updated 2026-06-02; covers ~30 spots in Seoul, Gangneung and Busan plus a Jungkook restaurant bonus list",
+  "Tip to order the black Bangtan Salt Bread at Hyuga Cafe",
+  "Notes the HYBE Insight exhibit, merch store and cafe closed in 2023"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "stylevanity-kpop-seoul",
+  "title": "BTS spots in Seoul, from Style Vanity's pilgrimage guide",
+  "desc": "Seoul BTS spots from Style Vanity's \"The Ultimate BTS Pilgrimage in Seoul & Busan Every ARMY Needs in 2026\" (https://stylevanity.com/bts-spots-in-seoul-and-busan/). Collected by PinWith, not made by Style Vanity.",
+  "kind": "collection",
+  "themes": [
+   "BTS",
+   "K-pop",
+   "ARMY",
+   "Seoul"
+  ],
+  "sections": [
+   {
+    "name": "Trainee days (Nonhyeon)",
+    "items": [
+     {
+      "place_id": "ChIJE7YZde2jfDURn_vUiTpEFwc",
+      "lat": 37.5183879,
+      "lng": 127.0280767,
+      "title": "Yoojung Sikdang (유정식당)",
+      "memo": "Fed BTS as trainees; a Jin connection noted",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ0QLyPOyjfDURi3_9xx1vPLM",
+      "lat": 37.517557,
+      "lng": 127.02564,
+      "title": "Geumhong (금홍)",
+      "memo": "Chinese food spot from Jin and V's Telepathy episode",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ143Q6u6jfDURK33RhIsfrv0",
+      "lat": 37.5156808,
+      "lng": 127.0254108,
+      "title": "Hakdong Park",
+      "memo": "Members unwound here; RM and Jimin's swing",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ6dr5yvWjfDURi-CfqCJ9Aes",
+      "lat": 37.510287,
+      "lng": 127.0304519,
+      "title": "Hyuga Cafe (휴가)",
+      "memo": "Third dorm was upstairs; order the black Bangtan Salt Bread",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Around Seoul",
+    "items": [
+     {
+      "place_id": "ChIJPRnkva2hfDURCqRxaApya7Y",
+      "lat": 37.5244204,
+      "lng": 126.9640498,
+      "title": "HYBE Headquarters",
+      "memo": "Exterior only; Insight, merch shop and cafe closed in 2023",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ7cjjipWjfDURX5dWWWSmm6k",
+      "lat": 37.5206865,
+      "lng": 127.0122724,
+      "title": "Jamwon Hangang Park",
+      "memo": "Reunion spot from a Telepathy episode",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJkzH52WOjfDURX4VY_LpD4o4",
+      "lat": 37.5187312,
+      "lng": 127.0067959,
+      "title": "Starbucks Seoul Wave Art Center",
+      "memo": "Site of the 'Butter' special performance",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ69DJ7r2ifDUR6KOZSBr9Iq4",
+      "lat": 37.5797341,
+      "lng": 126.9693256,
+      "title": "Daeo Bookstore (대오서점)",
+      "memo": "Seoul's oldest bookstore; RM has visited twice",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJN2x0fu2ifDUR51BupseGYmE",
+      "lat": 37.5238506,
+      "lng": 126.9804702,
+      "title": "National Museum of Korea",
+      "memo": "BTS performed 'Dear Class of 2020' here",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJzdyah1CkfDURaH-M8oS9AXc",
+      "lat": 37.5158376,
+      "lng": 127.0727986,
+      "title": "Seoul Olympic Stadium",
+      "memo": "Telepathy stop; recreate Jin's Instagram photo",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJK_b0UX2jfDURmkYPvmWYm90",
+      "lat": 37.5443878,
+      "lng": 127.0374424,
+      "title": "Seoul Forest",
+      "memo": "RM favorite; look for his bench near the ginkgo trees",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJX2GTuVJFezURGK4FSyWdbak",
+      "lat": 37.5674533,
+      "lng": 126.8854782,
+      "title": "Haneul Park",
+      "memo": "Another RM bench spot",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ }
+}

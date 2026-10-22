@@ -1,0 +1,170 @@
+{
+  "target": "YIA (Yonsei Indonesia Association)",
+  "group": "host_community",
+  "based_in_korea": true,
+  "msg_lang": "id",
+  "recipient_name": "YIA Yonsei",
+  "contact_route": "Instagram DM @yia.yonsei (listed on Yonsei OIA club page).",
+  "source": null,
+  "hooks": [
+    "Listed under 'Foreign Student Associations' on Yonsei OIA's Student Clubs page as Yonsei Indonesia Association, IG @yia.yonsei.",
+    "No description or promotion rules published there; IG not fetched (unverified beyond OIA listing)."
+  ],
+  "list": {
+    "owner": "pinwith_id",
+    "lang": "id",
+    "slug": "yia-sinchon-peta-mahasiswa-baru",
+    "title": "Peta mahasiswa baru Sinchon",
+    "desc": "Peta awal gratis buatan PinWith untuk mahasiswa Indonesia di Yonsei: bank, rumah sakit, belanja, tempat belajar, makanan halal di Sinchon, Hongdae dan Itaewon, serta Masjid Pusat Seoul. Silakan salin dan edit bersama.",
+    "kind": "collection",
+    "themes": [
+      "mahasiswa baru",
+      "Sinchon",
+      "halal",
+      "Yonsei"
+    ],
+    "sections": [
+      {
+        "name": "Kebutuhan pokok",
+        "items": [
+          {
+            "place_id": "ChIJg_2jvpWYfDURsKnLkq7lw2o",
+            "lat": 37.555059199999995,
+            "lng": 126.93649979999999,
+            "title": "Stasiun Sinchon (신촌역, Line 2)",
+            "memo": "Dari stasiun jalan kaki naik Yonsei-ro sekitar 10 menit ke gerbang utama",
+            "ts_url": null,
+            "check": "Google lists odd address; coordinates are Sinchon Stn"
+          },
+          {
+            "place_id": "ChIJDyg-oY6YfDURjmNa7ENSt7c",
+            "lat": 37.5663937,
+            "lng": 126.9387066,
+            "title": "Gerbang utama Universitas Yonsei",
+            "memo": "Gerbang utama ada di ujung jalan Yonsei-ro",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJDWSfDI6YfDURHSFNpdzdc9g",
+            "lat": 37.563479,
+            "lng": 126.938335,
+            "title": "Woori Bank cabang Yonsei",
+            "memo": "Senin-Jumat 9:00-16:00; bawa paspor/ARC untuk buka rekening",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJM2EIuI-YfDURljZvEJg_DXY",
+            "lat": 37.5623371,
+            "lng": 126.9408692,
+            "title": "RS Severance (세브란스병원)",
+            "memo": "Ada pusat layanan internasional berbahasa Inggris; Senin-Jumat 8:30-17:30",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJbU0ue5qYfDURXG0fO0nar2o",
+            "lat": 37.555999199999995,
+            "lng": 126.93580689999997,
+            "title": "Hyundai Department Store Sinchon",
+            "memo": "Supermarket dan food court di lantai B1",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "Halal & ibadah",
+        "items": [
+          {
+            "place_id": "ChIJz9jnMbWjfDURJAyB1SumwgI",
+            "lat": 37.5334912,
+            "lng": 126.9975,
+            "title": "Masjid Pusat Seoul (Itaewon)",
+            "memo": "Masjid tertua di Seoul; area salat pria dan wanita; 6:00-21:00",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJzRRXNQCZfDURVNIJQEkb5RE",
+            "lat": 37.5580445,
+            "lng": 126.93504170000001,
+            "title": "Pasha Kebab & Burger (Sinchon)",
+            "memo": "Kebab dan burger berlabel halal, dekat Sinchon; buka sampai 24:00",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJOT_oMqaZfDURk6nmiqjey3I",
+            "lat": 37.553685699999996,
+            "lng": 126.9224747,
+            "title": "Busanjib Hongdae - Halal",
+            "memo": "BBQ Korea halal di Hongdae; ada ruang salat",
+            "ts_url": null,
+            "check": "sertifikat halal disebut di ulasan; cek di tempat"
+          },
+          {
+            "place_id": "ChIJEawz-XSZfDURUdl3Uixix-w",
+            "lat": 37.5558468,
+            "lng": 126.9252188,
+            "title": "Nusantaraku (Hongdae)",
+            "memo": "Masakan Indonesia di lantai 2 dekat Hongdae; ada musala",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJOzxxSfyjfDUR-L_KTLEX72A",
+            "lat": 37.5338628,
+            "lng": 126.99345520000001,
+            "title": "Bakso Rindu Kampung (Itaewon)",
+            "memo": "Bakso, soto, ayam geprek; dekat Stasiun Itaewon",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJM8KlNSujfDURxbcMhOKqItA",
+            "lat": 37.5336795,
+            "lng": 126.98902179999999,
+            "title": "Halal Korean Restaurant Gim Seonsaeng (Itaewon)",
+            "memo": "Masakan rumahan Korea versi halal; ada ruang salat; tutup Minggu",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJd0pRlUqifDUR8nKBbppg80w",
+            "lat": 37.533449999999995,
+            "lng": 126.99573310000001,
+            "title": "Foreign Food Mart (Itaewon)",
+            "memo": "Toko bahan makanan halal dan impor dekat masjid; buka sampai 24:00",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "Belajar & nongkrong",
+        "items": [
+          {
+            "place_id": "ChIJhepkj5qZfDURu1O4E6E-WXA",
+            "lat": 37.558076299999996,
+            "lng": 126.9384427,
+            "title": "Potential Study Cafe Sinchon",
+            "memo": "Kafe belajar 24 jam, meja sewa dan colokan",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJWy9o5ZOYfDURLjjAsCo_EZc",
+            "lat": 37.5587606,
+            "lng": 126.9372411,
+            "title": "Doksuri Dabang (독수리다방)",
+            "memo": "Kafe lantai 8 dengan pemandangan Sinchon; 1 minuman per orang",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,125 @@
+{
+ "target": "KoreaPeek",
+ "group": "fan_blog",
+ "based_in_korea": true,
+ "msg_lang": "en",
+ "recipient_name": "Ted K. (KoreaPeek)",
+ "contact_route": "site contact form at koreapeek.com/contact/",
+ "source": {
+  "url": "https://koreapeek.com/kdrama-filming-locations-gyeonggi-busan-beyond-2/",
+  "title": "K-Drama Filming Locations: Gyeonggi, Busan & Beyond (2026)",
+  "date": "2026-08"
+ },
+ "hooks": [
+  "Post is signed 'Ted K.', who writes he arrived in Korea in 1990 and has lived there 35 years (source article)",
+  "Groups Busan's Descendants of the Sun spots (Songdo Beach, BIFF Square, Taejongdae) and notes they cluster near Nampo Station (source article)",
+  "Has a 'Why Filmmakers Are Leaving Seoul' section; companion Seoul guide published Jan 2026 (koreapeek.com/k-drama-filming-locations-seoul/)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "koreapeek-filming-locations",
+  "title": "K-drama filming spots in Gyeonggi & Busan, from KoreaPeek's guide",
+  "desc": "Places from KoreaPeek's 'K-Drama Filming Locations: Gyeonggi, Busan & Beyond (2026)' (https://koreapeek.com/kdrama-filming-locations-gyeonggi-busan-beyond-2/). Collected by PinWith, not made by KoreaPeek.",
+  "kind": "collection",
+  "themes": [
+   "K-drama",
+   "filming locations",
+   "Busan",
+   "Gyeonggi"
+  ],
+  "sections": [
+   {
+    "name": "Gyeonggi",
+    "items": [
+     {
+      "place_id": "ChIJuy6oD8pcezURQRbto2vkJhM",
+      "lat": 37.2871202,
+      "lng": 127.01193789999999,
+      "title": "Suwon Hwaseong Fortress (수원 화성)",
+      "memo": "Article lists it for Mr. Sunshine and other period shoots.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJUSM8XqVaezUR65ah4DglaD4",
+      "lat": 37.258939,
+      "lng": 127.11811259999999,
+      "title": "Korean Folk Village (한국민속촌)",
+      "memo": "Yongin folk village the article names as a frequent drama set.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJcTadCoqLfDURjHexFkzDstI",
+      "lat": 37.788841399999995,
+      "lng": 126.69872199999999,
+      "title": "Heyri Art Village (헤이리 예술마을)",
+      "memo": "Paju art village the article ties to indie-style drama scenes.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Busan",
+    "items": [
+     {
+      "place_id": "ChIJ07EMAkXoaDURr8d2uGJp5pk",
+      "lat": 35.0754546,
+      "lng": 129.016761,
+      "title": "Songdo Beach (송도해수욕장)",
+      "memo": "Descendants of the Sun: beach walk and sunset scenes, per the article.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJL1scg6DpaDURxXQZg1kWGZ4",
+      "lat": 35.098243,
+      "lng": 129.029212,
+      "title": "BIFF Square (BIFF 광장)",
+      "memo": "Descendants of the Sun festival/street scenes; near Nampo Station.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJOfX1e0zpaDURWq5Hp5x4-SM",
+      "lat": 35.05307,
+      "lng": 129.0872,
+      "title": "Taejongdae (태종대)",
+      "memo": "Descendants of the Sun cliff scenes from the final episodes.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+      "lat": 35.097393499999995,
+      "lng": 129.0105921,
+      "title": "Gamcheon Culture Village (감천문화마을)",
+      "memo": "Alley scenes; article cites Descendants of the Sun and Moonlight Drawn by Clouds.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJudkrFArpaDURbbCzajeQs0c",
+      "lat": 35.0966339,
+      "lng": 129.0307965,
+      "title": "Jagalchi Market (자갈치시장)",
+      "memo": "Fish market used for street-food and local-life scenes in modern dramas.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJlZH9YqmSaDURWj1_pgMoFIo",
+      "lat": 35.1522807,
+      "lng": 129.15136479999998,
+      "title": "Nurimaru APEC House (누리마루 APEC하우스)",
+      "memo": "Article says Goblin used it as a wealthy character's residence.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ }
+}

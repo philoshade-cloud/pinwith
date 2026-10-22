@@ -1,0 +1,102 @@
+{
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "feipo-seoul-10-revisit",
+  "title": "肥波的首爾二刷名單：10家店",
+  "desc": "整理自肥波開吃啦影片「首爾美食地圖，最想二刷的10家店」（2025年12月）。出處：https://www.youtube.com/watch?v=0ycWDjHeFwU — 由 PinWith 整理，非創作者本人製作。",
+  "kind": "course",
+  "themes": [
+   "首爾",
+   "美食",
+   "二刷"
+  ],
+  "sections": [
+   {
+    "name": null,
+    "items": [
+     {
+      "place_id": "ChIJxft0BAClfDURKXff2Q8CBWU",
+      "lat": 37.542748,
+      "lng": 127.053961,
+      "title": "능동미나리 성수점",
+      "memo": "想二刷指數 6/5｜水芹菜生牛肉拌飯",
+      "ts_url": "https://youtu.be/0ycWDjHeFwU?t=20"
+     },
+     {
+      "place_id": "ChIJa8BN-lChfDUREGZOPGbbOSg",
+      "lat": 37.49432,
+      "lng": 127.031497,
+      "title": "강남곱 江南烤腸",
+      "memo": "想二刷指數 5/5｜綜合拼盤、韓牛大腸",
+      "ts_url": "https://youtu.be/0ycWDjHeFwU?t=173"
+     },
+     {
+      "place_id": "ChIJN3SwztWYfDURermP-vvhkrk",
+      "lat": 37.547557,
+      "lng": 126.913475,
+      "title": "각시보쌈",
+      "memo": "想二刷指數 6/5｜白切肉套餐",
+      "ts_url": "https://youtu.be/0ycWDjHeFwU?t=338"
+     },
+     {
+      "place_id": "ChIJrzYdt9OlfDURlLYgGyaP4vc",
+      "lat": 37.548925,
+      "lng": 127.054322,
+      "title": "Pizzeria Marione 마리오네",
+      "memo": "想二刷指數 6/5｜開心果肉腸披薩",
+      "ts_url": "https://youtu.be/0ycWDjHeFwU?t=483"
+     },
+     {
+      "place_id": "ChIJO85WpN6jfDURVI5DNM9JkCI",
+      "lat": 37.536009,
+      "lng": 126.972335,
+      "title": "夢炭 몽탄",
+      "memo": "想二刷指數 6/5｜稻燒牛肋、泡菜炒飯",
+      "ts_url": "https://youtu.be/0ycWDjHeFwU?t=629"
+     },
+     {
+      "place_id": "ChIJiWY0E1alfDURMaKxAl4f4uA",
+      "lat": 37.543224,
+      "lng": 127.057537,
+      "title": "꿉당 성수점",
+      "memo": "想二刷指數 5/5｜熟成梅花、五花、豬頰",
+      "ts_url": "https://youtu.be/0ycWDjHeFwU?t=847"
+     },
+     {
+      "place_id": "ChIJoZKRvJWifDURw3FTDWnDJwQ",
+      "lat": 37.576498,
+      "lng": 126.972155,
+      "title": "안주마을 海味居酒屋",
+      "memo": "想二刷指數 5/5｜甜蝦、生魷魚刺身",
+      "ts_url": "https://youtu.be/0ycWDjHeFwU?t=1024"
+     },
+     {
+      "place_id": "ChIJbzuXla2jfDURtALqyX2a8Ag",
+      "lat": 37.54267,
+      "lng": 126.973326,
+      "title": "초원",
+      "memo": "想二刷指數 5/5｜韓牛霜降、特級牛舌",
+      "ts_url": "https://youtu.be/0ycWDjHeFwU?t=1182"
+     },
+     {
+      "place_id": "ChIJEdot_OeYfDURbTNZndyFd3M",
+      "lat": 37.559538,
+      "lng": 126.921544,
+      "title": "風川鰻魚 풍천장어",
+      "memo": "想二刷指數 5/5｜白燒鰻魚套餐",
+      "ts_url": "https://youtu.be/0ycWDjHeFwU?t=1349"
+     },
+     {
+      "place_id": "ChIJ10BIFACjfDURRGNWPLahjqE",
+      "lat": 37.563686,
+      "lng": 126.991458,
+      "title": "아소토 Aalto",
+      "memo": "想二刷指數 6/5｜青甘韭菜捲、鹽烤雞頸",
+      "ts_url": "https://youtu.be/0ycWDjHeFwU?t=1499"
+     }
+    ]
+   }
+  ]
+ }
+}

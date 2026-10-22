@@ -1,0 +1,120 @@
+{
+ "list": {
+  "owner": "pinwith_ja",
+  "lang": "ja",
+  "slug": "ikoreau-busan-3n4d",
+  "title": "釜山3泊4日モデルコース：アイコさんの動画の11か所",
+  "desc": "I Korea Uの動画「釜山旅行3泊4日モデルコース」(2026年1月)に登場した場所。出典：https://www.youtube.com/watch?v=Kfivfwexhso — PinWithが整理したもので、クリエイター本人の作成ではありません。",
+  "kind": "course",
+  "themes": [
+   "釜山",
+   "モデルコース",
+   "3泊4日"
+  ],
+  "sections": [
+   {
+    "name": "1日目",
+    "items": [
+     {
+      "place_id": "ChIJX7hS4nDraDUR8zZOPw2Z0Pg",
+      "lat": 35.1523656,
+      "lng": 129.0581933,
+      "title": "ソラリア西鉄ホテル釜山",
+      "memo": "旅の拠点のホテル",
+      "ts_url": "https://youtu.be/Kfivfwexhso?t=129"
+     },
+     {
+      "place_id": "ChIJR_AMB2_raDURtkNgS_8-3FQ",
+      "lat": 35.1578157,
+      "lng": 129.0600331,
+      "title": "西面駅",
+      "memo": "ホテルの後に駅周辺を散策",
+      "ts_url": "https://youtu.be/Kfivfwexhso?t=362"
+     },
+     {
+      "place_id": "ChIJXwf-DlyNaDURmKxjwdWxY5k",
+      "lat": 35.1586975,
+      "lng": 129.1603842,
+      "title": "海雲台ビーチ",
+      "memo": "西面の次に海雲台へ",
+      "ts_url": "https://youtu.be/Kfivfwexhso?t=520"
+     },
+     {
+      "place_id": "ChIJwabeuxuMaDURXC4Rb21AQaE",
+      "lat": 35.1884543,
+      "lng": 129.2231109,
+      "title": "海東龍宮寺",
+      "memo": "機張エリア",
+      "ts_url": "https://youtu.be/Kfivfwexhso?t=810"
+     },
+     {
+      "place_id": "ChIJORLzmiOMaDURySmuJKApJhA",
+      "lat": 35.1916524,
+      "lng": 129.2137288,
+      "title": "ロッテプレミアムアウトレット東釜山",
+      "memo": "龍宮寺の後に",
+      "ts_url": "https://youtu.be/Kfivfwexhso?t=1335"
+     },
+     {
+      "place_id": "ChIJo6LBG16NaDURc8BoRthWErs",
+      "lat": 35.1632319,
+      "lng": 129.1586606,
+      "title": "153クポ麺料理 海雲台店",
+      "memo": "1日目の締めの麺料理",
+      "ts_url": null
+     }
+    ]
+   },
+   {
+    "name": "2日目",
+    "items": [
+     {
+      "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+      "lat": 35.0973935,
+      "lng": 129.0105921,
+      "title": "甘川文化村",
+      "memo": "朝食の後、最初の観光",
+      "ts_url": "https://youtu.be/Kfivfwexhso?t=2300"
+     },
+     {
+      "place_id": "ChIJ21pR1aHpaDUR_usy_ELBCvk",
+      "lat": 35.101854,
+      "lng": 129.0258719,
+      "title": "富平カントン市場",
+      "memo": "南浦洞エリアで市場めぐり",
+      "ts_url": "https://youtu.be/Kfivfwexhso?t=2875"
+     },
+     {
+      "place_id": "ChIJL1scg6DpaDURxXQZg1kWGZ4",
+      "lat": 35.098243,
+      "lng": 129.029212,
+      "title": "BIFF広場",
+      "memo": "富平市場の後に",
+      "ts_url": "https://youtu.be/Kfivfwexhso?t=3270"
+     }
+    ]
+   },
+   {
+    "name": "3日目",
+    "items": [
+     {
+      "place_id": "ChIJudkrFArpaDURbbCzajeQs0c",
+      "lat": 35.0966339,
+      "lng": 129.0307965,
+      "title": "チャガルチ市場",
+      "memo": "3日目の最初の市場",
+      "ts_url": "https://youtu.be/Kfivfwexhso?t=3380"
+     },
+     {
+      "place_id": "ChIJJWe5w-rpaDURkpa2CSfQwXs",
+      "lat": 35.0976981,
+      "lng": 129.0361688,
+      "title": "ロッテマート 光復店",
+      "memo": "チャガルチ市場の後に買い物",
+      "ts_url": "https://youtu.be/Kfivfwexhso?t=3860"
+     }
+    ]
+   }
+  ]
+ }
+}

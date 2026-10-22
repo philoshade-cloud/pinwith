@@ -1,0 +1,118 @@
+{
+ "list": {
+  "owner": "pinwith_es",
+  "lang": "es",
+  "slug": "bitacora-seul-2-dias",
+  "title": "Seúl en 2 días: los 12 lugares de Juliana y Martín",
+  "desc": "Lugares del video de Bitácora de viajero «Seúl en 2 días» (feb. 2026). Fuente: https://www.youtube.com/watch?v=O6UpYrIOk-4 — Recopilado por PinWith, no creado por los creadores.",
+  "kind": "course",
+  "themes": [
+   "Seúl",
+   "2 días",
+   "Corea"
+  ],
+  "sections": [
+   {
+    "name": null,
+    "items": [
+     {
+      "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+      "lat": 37.5511694,
+      "lng": 126.9882266,
+      "title": "N Seoul Tower",
+      "memo": "Primera parada del recorrido",
+      "ts_url": "https://youtu.be/O6UpYrIOk-4?t=64"
+     },
+     {
+      "place_id": "ChIJE_OSzJKjfDURqPqIzTBFnuI",
+      "lat": 37.5732171,
+      "lng": 127.0176409,
+      "title": "Mercado de pulgas de Dongmyo",
+      "memo": "Mercado de pulgas",
+      "ts_url": "https://youtu.be/O6UpYrIOk-4?t=176"
+     },
+     {
+      "place_id": "ChIJu5Gg2hWkfDURl7NN7FpFnis",
+      "lat": 37.5102133,
+      "lng": 127.0600186,
+      "title": "Biblioteca Starfield",
+      "memo": "En Gangnam, en la misma visita que Bongeunsa",
+      "ts_url": "https://youtu.be/O6UpYrIOk-4?t=426"
+     },
+     {
+      "place_id": "ChIJgZn6QWmkfDURaU3kwlecaEU",
+      "lat": 37.514852,
+      "lng": 127.0573766,
+      "title": "Templo Bongeunsa",
+      "memo": "Templo budista junto a la Biblioteca Starfield",
+      "ts_url": "https://youtu.be/O6UpYrIOk-4?t=426"
+     },
+     {
+      "place_id": "ChIJzfA-0lijfDURWli7b25n6HI",
+      "lat": 37.5215066,
+      "lng": 127.0311082,
+      "title": "Apgujeong Jejujip",
+      "memo": "Cerdo negro de Jeju después de la clase de K-pop",
+      "ts_url": "https://youtu.be/O6UpYrIOk-4?t=703"
+     },
+     {
+      "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+      "lat": 37.579617,
+      "lng": 126.977041,
+      "title": "Palacio Gyeongbokgung",
+      "memo": "Palacio real",
+      "ts_url": "https://youtu.be/O6UpYrIOk-4?t=1037"
+     },
+     {
+      "place_id": "ChIJod7tSseifDUR4HuzvkBA2ns",
+      "lat": 37.5816456,
+      "lng": 126.9789948,
+      "title": "Museo Nacional del Folclore",
+      "memo": "Después de Gyeongbokgung",
+      "ts_url": "https://youtu.be/O6UpYrIOk-4?t=1150"
+     },
+     {
+      "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+      "lat": 37.5814696,
+      "lng": 126.9849519,
+      "title": "Aldea Hanok de Bukchon",
+      "memo": "Aldea de casas hanok",
+      "ts_url": "https://youtu.be/O6UpYrIOk-4?t=1210"
+     },
+     {
+      "place_id": "ChIJhZT2GMWifDURcOTOySCdqGQ",
+      "lat": 37.5805723,
+      "lng": 126.9847196,
+      "title": "Baeknyeon Tojong Samgyetang",
+      "memo": "Samgyetang (sopa de pollo con ginseng)",
+      "ts_url": "https://youtu.be/O6UpYrIOk-4?t=1265"
+     },
+     {
+      "place_id": "ChIJgwhZmSWjfDURzJr5IabxSNg",
+      "lat": 37.5737007,
+      "lng": 126.9896957,
+      "title": "Pan de sal en Ikseon-dong (자연도소금빵)",
+      "memo": "Pan de sal en Ikseon-dong",
+      "ts_url": "https://youtu.be/O6UpYrIOk-4?t=1367"
+     },
+     {
+      "place_id": "ChIJIwCT4-yifDUR1E63iG76hr0",
+      "lat": 37.5691015,
+      "lng": 126.9786692,
+      "title": "Arroyo Cheonggyecheon",
+      "memo": "Paseo junto al arroyo",
+      "ts_url": "https://youtu.be/O6UpYrIOk-4?t=1448"
+     },
+     {
+      "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+      "lat": 37.5700385,
+      "lng": 126.9996038,
+      "title": "Mercado de Gwangjang",
+      "memo": "Última parada del video",
+      "ts_url": "https://youtu.be/O6UpYrIOk-4?t=1484"
+     }
+    ]
+   }
+  ]
+ }
+}

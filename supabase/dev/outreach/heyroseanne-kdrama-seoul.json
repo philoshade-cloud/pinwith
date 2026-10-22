@@ -1,0 +1,173 @@
+{
+ "target": "Hey Roseanne (Roseanne Ducut)",
+ "group": "fan_blog",
+ "based_in_korea": false,
+ "msg_lang": "en",
+ "recipient_name": "Roseanne",
+ "contact_route": "Site contact form at heyroseanne.com/contact/ (also /work-with-me/); Instagram DM @hey.roseanne",
+ "source": {
+  "url": "https://heyroseanne.com/kdrama-filming-locations-in-seoul",
+  "title": "30 Kdrama Filming Locations in Seoul (2026)",
+  "date": "2026-09"
+ },
+ "hooks": [
+  "30 Seoul locations; published 2025-08-05, byline updated 2026-09-05 (body still says 'updated as of August 2025')",
+  "Covers recent shows like Love Scout, Lovely Runner and Our Unwritten Seoul alongside classics like Goblin",
+  "Includes Common Ground with a note that XO, Kitty filmed there but isn't a K-drama"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "heyroseanne-kdrama-seoul",
+  "title": "K-drama filming spots in Seoul, from Hey Roseanne's guide",
+  "desc": "Filming spots from Hey Roseanne's \"30 Kdrama Filming Locations in Seoul (2026)\" (https://heyroseanne.com/kdrama-filming-locations-in-seoul). Collected by PinWith, not made by Roseanne Ducut.",
+  "kind": "collection",
+  "themes": [
+   "K-drama",
+   "filming locations",
+   "Seoul"
+  ],
+  "sections": [
+   {
+    "name": null,
+    "items": [
+     {
+      "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+      "lat": 37.5814696,
+      "lng": 126.9849519,
+      "title": "Bukchon Hanok Village",
+      "memo": "Personal Taste, Love Next Door finale, Our Beloved Summer stroll",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJe4Jbot2ifDUR2zWhruwyaow",
+      "lat": 37.5737132,
+      "lng": 126.9901271,
+      "title": "Ikseon-dong Hanok Village",
+      "memo": "True Beauty ep 1 outing; Love Scout coffee run through the crowds",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ8xRYr29FezUR3AtFqx2pIlw",
+      "lat": 37.5665256,
+      "lng": 127.0092236,
+      "title": "Dongdaemun Design Plaza (DDP)",
+      "memo": "Vincenzo finale reunion; Lovely Runner's Eclipse concert wait",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJrUQcQuuifDUR-IWAEQylVek",
+      "lat": 37.572389,
+      "lng": 126.9769117,
+      "title": "Gwanghwamun Square",
+      "memo": "The King: Eternal Monarch poster scene; Love Scout meetup at the gate",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ666w-LCjfDURCTJtf5ivJ-I",
+      "lat": 37.5648648,
+      "lng": 126.9754485,
+      "title": "Deoksugung Stone-wall Road",
+      "memo": "Doctor Slump walk; Extraordinary Attorney Woo ep 10 night stroll",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJDXyPRF-ifDURo-L1LXIXqj8",
+      "lat": 37.5548599,
+      "lng": 126.9792405,
+      "title": "Namsan Baekbeom Square",
+      "memo": "Love Alarm walk; Itaewon Class meeting with director Kang",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+      "lat": 37.5511694,
+      "lng": 126.9882266,
+      "title": "N Seoul Tower",
+      "memo": "Seen in Business Proposal, King the Land, Boys Over Flowers and more",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ6RPSci2jfDURXTSdf7JjYp8",
+      "lat": 37.5806571,
+      "lng": 127.0074835,
+      "title": "Naksan Park",
+      "memo": "Itaewon Class finale; Call It Love's hilltop benches",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ63NnRS6jfDURt-efnKIjXzs",
+      "lat": 37.5779788,
+      "lng": 127.0071915,
+      "title": "Ihwa Mural Village",
+      "memo": "Strong Woman Do Bong Soon's house; Love Next Door poster stairs",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ77fEAzuffDURLEWNv56G2KQ",
+      "lat": 37.5267106,
+      "lng": 126.9347112,
+      "title": "Yeouido Hangang Park",
+      "memo": "Start-Up food truck spot; Legend of the Blue Sea fireworks",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJeVnK5X-hfDURv2fEEK-332M",
+      "lat": 37.5126335,
+      "lng": 126.9984783,
+      "title": "Banpo Bridge & Hangang Park",
+      "memo": "Our Unwritten Seoul riverside scene; Itaewon Class bridge moment",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJeSDcVPuhfDURtpnHjFavX9E",
+      "lat": 37.5177627,
+      "lng": 126.9596671,
+      "title": "Nodeul Island",
+      "memo": "Start-Up's SANDBOX campus",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJN2YSAj6ZfDURgVbLv3afUAQ",
+      "lat": 37.5705673,
+      "lng": 126.8942802,
+      "title": "Oil Tank Culture Park",
+      "memo": "Start-Up's SANDBOX entrance",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJo35QAxelfDUR4jt5FPgWSIU",
+      "lat": 37.5411513,
+      "lng": 127.0659498,
+      "title": "Common Ground",
+      "memo": "Vincenzo ep 5 street food; Our Unwritten Seoul ep 11",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJH5tDs-WYfDURJGb8yuqKRwg",
+      "lat": 37.5662075,
+      "lng": 126.9192364,
+      "title": "Gyeongui Line Forest Park",
+      "memo": "Because This Is My First Life date walk; I Am Not a Robot fair",
+      "ts_url": null,
+      "check": "Long linear park; pinned at the Yeonnam-ro entrance"
+     }
+    ]
+   }
+  ]
+ }
+}

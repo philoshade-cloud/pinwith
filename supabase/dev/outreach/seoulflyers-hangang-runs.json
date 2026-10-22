@@ -1,0 +1,130 @@
+{
+  "target": "Seoul Flyers (running club)",
+  "group": "host_community",
+  "based_in_korea": true,
+  "msg_lang": "en",
+  "recipient_name": "Seoul Flyers",
+  "contact_route": "Instagram DM @seoulflyers (handle cited by expatguidekorea.com; IG itself not checked), or the club website's registration/contact route mentioned by Time Out.",
+  "source": null,
+  "hooks": [
+    "Expat Guide Korea: 200+ active members from ~30 countries; Tue track, Thu hills, Sat morning 10K; course from Ichon Hangang Park via Jamsu & Hangang bridges.",
+    "Time Out Seoul lists Seoul Flyers Running Club, meeting 3+ times a week at various locations.",
+    "No promotion rules found; IG unverified (not fetched)."
+  ],
+  "list": {
+    "owner": "pinwith_en",
+    "lang": "en",
+    "slug": "seoulflyers-hangang-runs",
+    "title": "Han River run starts & after-run food",
+    "desc": "A free starter map made by PinWith for Seoul Flyers runners: Han River and Namsan start points plus food and coffee near Yeouido and Banpo. Members can co-edit and add routes.",
+    "kind": "collection",
+    "themes": [
+      "running",
+      "Han River",
+      "Namsan",
+      "brunch"
+    ],
+    "sections": [
+      {
+        "name": "Run starts",
+        "items": [
+          {
+            "place_id": "ChIJLbK-rYyhfDURKI_UHD7qCNQ",
+            "lat": 37.5169202,
+            "lng": 126.9717022,
+            "title": "Ichon Hangang Park (이촌한강공원)",
+            "memo": "Bike/run path, toilets and drinking fountains; CU nearby; Ichon Station",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ77fEAzuffDURLEWNv56G2KQ",
+            "lat": 37.5267106,
+            "lng": 126.9347112,
+            "title": "Yeouido Hangang Park (여의도한강공원)",
+            "memo": "Wide riverside paths; Yeouinaru Station (Line 5); bike rentals",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJOY4n3RVFezURFvaFVfFmrO0",
+            "lat": 37.5103503,
+            "lng": 126.9952372,
+            "title": "Banpo Hangang Park (반포한강공원)",
+            "memo": "South-bank start by Banpo Bridge; rainbow fountain shows in season",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJJ2rJzH6lfDURExW5AGd7Nok",
+            "lat": 37.529350699999995,
+            "lng": 127.06995619999998,
+            "title": "Ttukseom Hangang Park (뚝섬한강공원)",
+            "memo": "East-side riverside start next to Jayang Station (Line 7)",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJK_b0UX2jfDURmkYPvmWYm90",
+            "lat": 37.544387799999996,
+            "lng": 127.03744239999999,
+            "title": "Seoul Forest Park (서울숲)",
+            "memo": "Tree-lined loops and lawns; Seoul Forest Station (Suin-Bundang Line)",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJtUR3dQGjfDUR_JQEiYG_2RU",
+            "lat": 37.5528597,
+            "lng": 126.9998129,
+            "title": "National Theater of Korea (Namsan loop start)",
+            "memo": "Common start for the car-free Namsan north/south loop roads",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "After the run",
+        "items": [
+          {
+            "place_id": "ChIJqQkybgCffDURzx9EbA_t6z4",
+            "lat": 37.5288591,
+            "lng": 126.93458369999998,
+            "title": "Starbucks Yeouido Hangang Park",
+            "memo": "Coffee right in the park near the river",
+            "ts_url": null,
+            "check": "small listing; confirm it is the riverside branch"
+          },
+          {
+            "place_id": "ChIJz4OjfACffDURdhog9kiXBus",
+            "lat": 37.5260497,
+            "lng": 126.928296,
+            "title": "The Hyundai Seoul (더현대 서울)",
+            "memo": "Food hall on B1 in Yeouido; opens 10:30",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJLzszLIChfDURhVOQTkJ62oA",
+            "lat": 37.5124577,
+            "lng": 126.99595199999999,
+            "title": "Sevit Island (세빛섬)",
+            "memo": "Floating islands by Banpo Park with cafes and restaurants; 11:00-21:00",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJnf5sfnehfDURVogxtlhqV9Y",
+            "lat": 37.5042371,
+            "lng": 127.00108010000001,
+            "title": "Sandeulhae Banpo (산들해)",
+            "memo": "Korean set-meal spread with refills; 2-person minimum; break 15:00-17:00",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      }
+    ]
+  }
+}

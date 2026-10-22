@@ -1,0 +1,154 @@
+{
+ "target": "Kimchee Guesthouse",
+ "group": "host_community",
+ "based_in_korea": true,
+ "msg_lang": "ko",
+ "recipient_name": "Kimchee (kimchee.live)",
+ "contact_route": "X DM @kimcheelive, Instagram DM @kimcheebusan, or Facebook page /kimcheekorea (all linked from kimchee.live)",
+ "source": null,
+ "hooks": [
+  "kimchee.live blog (6 Korean-language posts dated 2026-09-21) covers Busan only, e.g. a Seomyeon night-food guide; no Seoul local guide yet (kimchee.live/blog/ko)",
+  "Site language switcher offers EN/JA/ZH/ES, so guests are international (kimchee.live)",
+  "Koreabridge listing places Kimchee Sinchon about 5 min from Hongik Univ. Stn Exit 4 (koreabridge.net)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "kimchee-sinchon-yeonnam-map",
+  "title": "Around Sinchon & Yeonnam: guesthouse starter map",
+  "desc": "A starter map made by PinWith for guests staying around Sinchon, Hongdae and Yeonnam-dong: stations, everyday errands, cafes and cheap eats within walking distance. Not made by Kimchee Guesthouse.",
+  "kind": "collection",
+  "themes": [
+   "Sinchon",
+   "Yeonnam-dong",
+   "Hongdae",
+   "practical",
+   "guesthouse"
+  ],
+  "sections": [
+   {
+    "name": "Getting around",
+    "items": [
+     {
+      "place_id": "ChIJExW378KYfDUR8aFijbcqirQ",
+      "lat": 37.5581082,
+      "lng": 126.92595739999997,
+      "title": "Hongik Univ. Station (홍대입구역)",
+      "memo": "Line 2, AREX airport railroad and Gyeongui-Jungang line in one station.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJg_2jvpWYfDURsKnLkq7lw2o",
+      "lat": 37.555059199999995,
+      "lng": 126.93649979999999,
+      "title": "Sinchon Station (신촌역, Line 2)",
+      "memo": "Line 2 stop for Yonsei and Sinchon's main streets; one stop from Hongdae.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Errands",
+    "items": [
+     {
+      "place_id": "ChIJo9vPotqZfDURGy08d1YS12U",
+      "lat": 37.5555526,
+      "lng": 126.9362153,
+      "title": "Sinchon No.1 Pharmacy (신촌1번약국)",
+      "memo": "Pharmacy steps from Sinchon Stn; open daily, to 10pm on weekdays.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ3zogv2eZfDUROxuahA73ues",
+      "lat": 37.5568174,
+      "lng": 126.92454810000001,
+      "title": "Hongik Pharmacy (홍익약국)",
+      "memo": "Pharmacy by Hongik Univ. Stn, open daily until 11:30pm.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ5YjiKgCZfDURCf54jVNnLyE",
+      "lat": 37.5571555,
+      "lng": 126.9216287,
+      "title": "WASH PLANT laundromat",
+      "memo": "24-hour self laundromat in Donggyo-dong; coin changer, detergent included.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ10QilZaYfDURDkCnpY4N-zo",
+      "lat": 37.5562458,
+      "lng": 126.9392858,
+      "title": "Olive Young Sinchon-ro",
+      "memo": "Toiletries and skincare by Sinchon Stn; open 10am-10:30pm.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJbU0ue5qYfDURXG0fO0nar2o",
+      "lat": 37.555999199999995,
+      "lng": 126.93580689999997,
+      "title": "Hyundai Department Store Sinchon",
+      "memo": "Basement supermarket and food hall; restaurants on the 10th floor.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Walks, cafes & cheap eats",
+    "items": [
+     {
+      "place_id": "ChIJH5tDs-WYfDURJGb8yuqKRwg",
+      "lat": 37.5662075,
+      "lng": 126.91923639999999,
+      "title": "Gyeongui Line Forest Park, Yeonnam (경의선숲길)",
+      "memo": "Old rail line turned park ('Yeontral Park'); open 24 hours.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJDyg-oY6YfDURjmNa7ENSt7c",
+      "lat": 37.5663937,
+      "lng": 126.9387066,
+      "title": "Yonsei University, Sinchon Campus",
+      "memo": "Campus open for a walk, north end of Yonsei-ro.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJK05lru6YfDUR22H8d3bQr58",
+      "lat": 37.5636473,
+      "lng": 126.92373740000001,
+      "title": "Coffee Libre Yeonnam",
+      "memo": "Specialty roaster in Yeonnam's back streets; beans to take home.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJX8IY0u6YfDURYdY8NpLqbSE",
+      "lat": 37.5629139,
+      "lng": 126.9267141,
+      "title": "Hyangmi (향미)",
+      "memo": "Yeonnam Chinese spot: dumplings, xiaolongbao, beef noodle soup.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ7wOnWZSYfDURmKqpHg90a88",
+      "lat": 37.5571996,
+      "lng": 126.9355326,
+      "title": "Sosin Isso",
+      "memo": "Braised short rib stew with glass noodles; 5 spice levels, near Yonsei-ro.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,166 @@
+{
+  "target": "VSAY (Vietnamese Student Association at Yonsei)",
+  "group": "host_community",
+  "based_in_korea": true,
+  "msg_lang": "vi",
+  "recipient_name": "VSAY",
+  "contact_route": "Instagram DM @yonseivietassociation (listed on Yonsei OIA club page; link URL there uses vsayonsei).",
+  "source": null,
+  "hooks": [
+    "Listed under 'Foreign Student Associations' on Yonsei OIA's Student Clubs page with IG @yonseivietassociation.",
+    "No description or promotion rules published there; IG not fetched (unverified beyond OIA listing)."
+  ],
+  "list": {
+    "owner": "pinwith_vi",
+    "lang": "vi",
+    "slug": "vsay-sinchon-ban-do-tan-sinh-vien",
+    "title": "Bản đồ tân sinh viên Sinchon",
+    "desc": "Bản đồ khởi đầu miễn phí do PinWith làm cho sinh viên Việt Nam tại Yonsei: ngân hàng, bệnh viện, mua sắm, quán rẻ, chỗ học và quán/chợ Việt ở Seoul. Bạn có thể sao chép và cùng chỉnh sửa.",
+    "kind": "collection",
+    "themes": [
+      "du học",
+      "Sinchon",
+      "Yonsei",
+      "đồ Việt"
+    ],
+    "sections": [
+      {
+        "name": "Thiết yếu",
+        "items": [
+          {
+            "place_id": "ChIJg_2jvpWYfDURsKnLkq7lw2o",
+            "lat": 37.555059199999995,
+            "lng": 126.93649979999999,
+            "title": "Ga Sinchon (신촌역, tuyến 2)",
+            "memo": "Từ ga đi bộ lên đường Yonsei-ro khoảng 10 phút là tới cổng chính",
+            "ts_url": null,
+            "check": "Google lists odd address; coordinates are Sinchon Stn"
+          },
+          {
+            "place_id": "ChIJDyg-oY6YfDURjmNa7ENSt7c",
+            "lat": 37.5663937,
+            "lng": 126.9387066,
+            "title": "Cổng chính ĐH Yonsei (연세대 정문)",
+            "memo": "Cổng chính nằm ở cuối đường Yonsei-ro",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJDWSfDI6YfDURHSFNpdzdc9g",
+            "lat": 37.563479,
+            "lng": 126.938335,
+            "title": "Ngân hàng Woori chi nhánh Yonsei",
+            "memo": "Mở thứ 2-6, 9:00-16:00; mang hộ chiếu/thẻ ngoại kiều khi mở tài khoản",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJM2EIuI-YfDURljZvEJg_DXY",
+            "lat": 37.5623371,
+            "lng": 126.9408692,
+            "title": "Bệnh viện Severance (세브란스병원)",
+            "memo": "Có trung tâm khám quốc tế nói tiếng Anh; thứ 2-6, 8:30-17:30",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJuWttn5WYfDURI_JgL4vrQHs",
+            "lat": 37.555296,
+            "lng": 126.9355255,
+            "title": "Daiso Sinchon (다이소)",
+            "memo": "3 tầng đồ gia dụng giá rẻ cho phòng trọ; 10:00-22:00",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJbU0ue5qYfDURXG0fO0nar2o",
+            "lat": 37.555999199999995,
+            "lng": 126.93580689999997,
+            "title": "Hyundai Department Store Sinchon",
+            "memo": "Siêu thị và khu ăn uống ở tầng B1",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "Hương vị Việt Nam",
+        "items": [
+          {
+            "place_id": "ChIJAT0YPLuZfDURIIya_0Gpvos",
+            "lat": 37.551375799999995,
+            "lng": 126.9370609,
+            "title": "Phở Ông Năm 24 (gần ĐH Sogang)",
+            "memo": "Phở và cơm kiểu Việt; menu tiếng Việt và tiếng Anh",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJdZa-J-mYfDURh0r8PB6Yg3Y",
+            "lat": 37.5621119,
+            "lng": 126.924667,
+            "title": "Little Papa Pho (Yeonnam)",
+            "memo": "Phở bò, nem rán, gỏi cuốn tự cuốn; gần Hongdae",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJUcSVjQKjfDURbpXr7SwXGr8",
+            "lat": 37.5729149,
+            "lng": 127.01081549999999,
+            "title": "Triệu Vy - Asian Mart (Changsin)",
+            "memo": "Tạp hóa đồ Việt gần ga Changsin, cạnh khu Dongdaemun",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJm5U4VFejfDURdrX_goTbkU0",
+            "lat": 37.564737300000004,
+            "lng": 127.0348028,
+            "title": "Chợ Việt Nam (Wangsimni)",
+            "memo": "Tạp hóa Việt: rau, nước chấm, đồ đông lạnh; nghỉ thứ 2",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "Ăn rẻ",
+        "items": [
+          {
+            "place_id": "ChIJy7koUZSZfDUR4_fiFDInXlU",
+            "lat": 37.5659786,
+            "lng": 126.9373346,
+            "title": "Căng tin Hangyeong Hall (한경관)",
+            "memo": "Tầng 1 suất cơm, tầng 2 buffet; chỉ mở ngày thường",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "Học & đi chơi",
+        "items": [
+          {
+            "place_id": "ChIJhepkj5qZfDURu1O4E6E-WXA",
+            "lat": 37.558076299999996,
+            "lng": 126.9384427,
+            "title": "Potential Study Cafe Sinchon",
+            "memo": "Quán học 24 giờ, có bàn thuê và sạc",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJWy9o5ZOYfDURLjjAsCo_EZc",
+            "lat": 37.5587606,
+            "lng": 126.9372411,
+            "title": "Doksuri Dabang (독수리다방)",
+            "memo": "Quán cà phê tầng 8 nhìn ra Sinchon; mỗi người 1 đồ uống",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      }
+    ]
+  }
+}

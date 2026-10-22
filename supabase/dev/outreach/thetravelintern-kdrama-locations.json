@@ -1,0 +1,116 @@
+{
+ "target": "The Travel Intern",
+ "group": "fan_blog",
+ "based_in_korea": false,
+ "msg_lang": "en",
+ "recipient_name": "Trini Ng / The Travel Intern",
+ "contact_route": "site contact page at thetravelintern.com/contact/ or Instagram DM @thetravelintern",
+ "source": {
+  "url": "https://thetravelintern.com/k-pop-k-drama-filming-locations-busan-jeju/",
+  "title": "7 Must-visit K-pop and K-drama Filming Locations Out of Seoul — Busan and Jeju Travel Guide",
+  "date": "2022-05"
+ },
+ "hooks": [
+  "Covers K-pop MVs too: Oh My Girl's 'Dun Dun Dance' at Wind 1947 go-karts and Shinhwa World's arcade (source article)",
+  "Points out Legend of the Blue Sea's maze chase used Maze Land only for close-ups, main scenes shot in Spain (source article)",
+  "Sister piece '13 Iconic K-drama Filming Locations' by Shairel Foo (thetravelintern.com/k-drama-filming-locations/)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "thetravelintern-kdrama-locations",
+  "title": "K-pop & K-drama spots in Busan and Jeju, from The Travel Intern",
+  "desc": "Places from The Travel Intern's '7 Must-visit K-pop and K-drama Filming Locations Out of Seoul — Busan and Jeju Travel Guide' (https://thetravelintern.com/k-pop-k-drama-filming-locations-busan-jeju/). Collected by PinWith, not made by The Travel Intern.",
+  "kind": "collection",
+  "themes": [
+   "K-drama",
+   "K-pop MV",
+   "Busan",
+   "Jeju"
+  ],
+  "sections": [
+   {
+    "name": "Busan",
+    "items": [
+     {
+      "place_id": "ChIJz9niW5LtaDURrcHFjRuncY8",
+      "lat": 35.136814799999996,
+      "lng": 129.0760839,
+      "title": "Hansung Housing (한성주택)",
+      "memo": "Fight for My Way: played Namil Villa, the leads' home, from episode 1.",
+      "ts_url": null,
+      "check": "residential building; small Google listing, confirm exact spot"
+     },
+     {
+      "place_id": "ChIJR_w0WhPdaDURllEsxhEIA90",
+      "lat": 35.0462468,
+      "lng": 128.96315380000001,
+      "title": "Dadaepo Beach (다대포해수욕장)",
+      "memo": "The King: Eternal Monarch: Lee Gon rides a horse here in episode 1.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+      "lat": 35.097393499999995,
+      "lng": 129.0105921,
+      "title": "Gamcheon Culture Village (감천문화마을)",
+      "memo": "Running Man ep. 126 filmed on the Gamnae Community Centre roof.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJudkrFArpaDURbbCzajeQs0c",
+      "lat": 35.0966339,
+      "lng": 129.0307965,
+      "title": "Jagalchi Market (자갈치시장)",
+      "memo": "Ode to My Father chase through the crowd; Black Panther car chase.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Jeju",
+    "items": [
+     {
+      "place_id": "ChIJn3jj9rkUDTURS7YjOgUyUVU",
+      "lat": 33.458056000000006,
+      "lng": 126.94250000000001,
+      "title": "Seongsan Ilchulbong (성산일출봉)",
+      "memo": "Seen in Soyou's 'The Blue Night of Jeju Island' music video.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJbz_3tLUQDTURkoA7UPE2JWA",
+      "lat": 33.488741499999996,
+      "lng": 126.80095139999999,
+      "title": "Maze Land (메이즈랜드)",
+      "memo": "Legend of the Blue Sea ep. 2 maze chase close-ups.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJa4ejgmhVDDURmYj0wBixQ-U",
+      "lat": 33.289656,
+      "lng": 126.5887248,
+      "title": "Wind 1947 (윈드1947)",
+      "memo": "Go-kart track from Oh My Girl's 'Dun Dun Dance' MV.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJpX5ZeGZcDDURKJSPvueW0bE",
+      "lat": 33.3064428,
+      "lng": 126.3170794,
+      "title": "Jeju Shinhwa World (제주신화월드)",
+      "memo": "Neon arcade where Oh My Girl dance in the 'Dun Dun Dance' MV.",
+      "ts_url": null,
+      "check": "article names an arcade inside the resort; matched to resort listing"
+     }
+    ]
+   }
+  ]
+ }
+}

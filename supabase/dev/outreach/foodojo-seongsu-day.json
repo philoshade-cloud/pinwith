@@ -1,0 +1,136 @@
+{
+ "list": {
+  "owner": "pinwith_ja",
+  "lang": "ja",
+  "slug": "foodojo-seongsu-day",
+  "title": "聖水1日まるごと：miyuさんの動画の13か所",
+  "desc": "FOODOJOの動画「聖水完全攻略Vlog」(2026年3月)に登場したお店。出典：https://www.youtube.com/watch?v=dwCIhlAGwx4 — PinWithが整理したもので、クリエイター本人の作成ではありません。",
+  "kind": "collection",
+  "themes": [
+   "聖水",
+   "カフェ",
+   "ソウル"
+  ],
+  "sections": [
+   {
+    "name": "カフェ・ベーカリー",
+    "items": [
+     {
+      "place_id": "ChIJIdnLDAClfDUREWT7CafUV7g",
+      "lat": 37.5432858,
+      "lng": 127.0537459,
+      "title": "Haz Bakery",
+      "memo": "行列のベーカリー、ピーナッツのマンモスパンが名物",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJYUB-IAClfDURbOBduYKf9hw",
+      "lat": 37.5435843,
+      "lng": 127.0537171,
+      "title": "DOTORI OVEN 도토리오븐",
+      "memo": "どんぐり形のお菓子が人気",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJn9mGzlalfDURlwj7O1ak1Uo",
+      "lat": 37.5439021,
+      "lng": 127.0506952,
+      "title": "MilkyShop Seongsu",
+      "memo": "アメリカンレトロなドーナツ店",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJy-WONTylfDUR6nkYbwW0prg",
+      "lat": 37.5441954,
+      "lng": 127.0515838,
+      "title": "LowKey Seongsu",
+      "memo": "自家焙煎のハンドドリップ",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJQRV4XQClfDURcxyAP14zTJQ",
+      "lat": 37.5439611,
+      "lng": 127.0513053,
+      "title": "New Mix Coffee",
+      "memo": "韓国ミックスコーヒーを今風にした専門店",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJ5TW2YAClfDURXxau5WulGRg",
+      "lat": 37.5446188,
+      "lng": 127.0513146,
+      "title": "Bonanza Coffee (Puff Out)",
+      "memo": "ヨーロッパ風カフェ、散策の途中に",
+      "ts_url": null
+     }
+    ]
+   },
+   {
+    "name": "食事",
+    "items": [
+     {
+      "place_id": "ChIJxft0BAClfDURKXff2Q8CBWU",
+      "lat": 37.542748,
+      "lng": 127.0539607,
+      "title": "能洞ミナリ 聖水店 능동미나리",
+      "memo": "ミナリコムタンとユッケビビンバ、開店前から行列",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJx7CSuXSlfDURrde9reLasEo",
+      "lat": 37.5451968,
+      "lng": 127.055082,
+      "title": "石岩生塩焼き 석암생소금구이",
+      "memo": "済州豚の石板焼き、締めは石板チャパゲティ",
+      "ts_url": null
+     }
+    ]
+   },
+   {
+    "name": "ショッピング",
+    "items": [
+     {
+      "place_id": "ChIJ7WHyWwClfDURlcSMxT8orpo",
+      "lat": 37.5445496,
+      "lng": 127.051323,
+      "title": "Matin Kim Seongsu",
+      "memo": "メタルプレートのロゴの外観",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJJXs5FoWlfDURTSFCTq10BJ8",
+      "lat": 37.541768,
+      "lng": 127.0570027,
+      "title": "Kith Seoul",
+      "memo": "NY発セレクトショップの韓国初旗艦店",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJO40oQQClfDUR_vaJBpBeszU",
+      "lat": 37.5426718,
+      "lng": 127.0553783,
+      "title": "Blue Elephant Space Seongsu",
+      "memo": "アイウェア。球体メディアアート空間",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJJ1JzDTSlfDURtA7xXuWmCUo",
+      "lat": 37.5434325,
+      "lng": 127.0515319,
+      "title": "LMC Seongsu",
+      "memo": "ストリートファッション",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJDV1oNt2lfDUR9Eyha0o0usA",
+      "lat": 37.5437583,
+      "lng": 127.0522559,
+      "title": "DIOR Seongsu",
+      "memo": "外観が見どころ",
+      "ts_url": null
+     }
+    ]
+   }
+  ]
+ }
+}

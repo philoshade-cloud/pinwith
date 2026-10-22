@@ -1,0 +1,167 @@
+{
+  "target": "JSAY (Japanese Students' Association Yonsei)",
+  "group": "host_community",
+  "based_in_korea": true,
+  "msg_lang": "ja",
+  "recipient_name": "JSAY",
+  "contact_route": "Instagram DM @yonsei.jsay (listed on Yonsei OIA club page; link URL there uses yonsei_jsay).",
+  "source": null,
+  "hooks": [
+    "Listed under 'Foreign Student Associations' on Yonsei OIA's Student Clubs page with IG @yonsei.jsay.",
+    "No description or promotion rules published there; IG not fetched (unverified beyond OIA listing).",
+    "No dedicated Japanese grocery found near Sinchon/Hongdae; used Japanese ramen/udon spots instead."
+  ],
+  "list": {
+    "owner": "pinwith_ja",
+    "lang": "ja",
+    "slug": "jsay-sinchon-seikatsu-map",
+    "title": "新村（シンチョン）生活マップ",
+    "desc": "延世大学に来た日本人留学生向けにPinWithが作った無料のスターターマップです。銀行・病院・買い物・安い食事・勉強場所と、日本の味が恋しいときのお店をまとめました。コピーして自由に編集できます。",
+    "kind": "collection",
+    "themes": [
+      "留学生活",
+      "新村",
+      "延世大学",
+      "生活必需"
+    ],
+    "sections": [
+      {
+        "name": "生活の基本",
+        "items": [
+          {
+            "place_id": "ChIJg_2jvpWYfDURsKnLkq7lw2o",
+            "lat": 37.555059199999995,
+            "lng": 126.93649979999999,
+            "title": "新村駅（신촌역・2号線）",
+            "memo": "延世大へは2号線新村駅から延世路を北へ徒歩約10分",
+            "ts_url": null,
+            "check": "Google lists odd address; coordinates are Sinchon Stn"
+          },
+          {
+            "place_id": "ChIJDyg-oY6YfDURjmNa7ENSt7c",
+            "lat": 37.5663937,
+            "lng": 126.9387066,
+            "title": "延世大学 正門（연세대 정문）",
+            "memo": "延世路の突き当たりが正門",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJDWSfDI6YfDURHSFNpdzdc9g",
+            "lat": 37.563479,
+            "lng": 126.938335,
+            "title": "ウリ銀行 延世支店（우리은행）",
+            "memo": "平日9:00〜16:00。口座開設はパスポートか外国人登録証を持参",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJM2EIuI-YfDURljZvEJg_DXY",
+            "lat": 37.5623371,
+            "lng": 126.9408692,
+            "title": "セブランス病院（세브란스병원）",
+            "memo": "英語対応の国際診療センターあり。平日8:30〜17:30",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJuWttn5WYfDURI_JgL4vrQHs",
+            "lat": 37.555296,
+            "lng": 126.9355255,
+            "title": "ダイソー新村店（다이소）",
+            "memo": "3フロアの生活雑貨。部屋の備品はここで。10:00〜22:00",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJbU0ue5qYfDURXG0fO0nar2o",
+            "lat": 37.555999199999995,
+            "lng": 126.93580689999997,
+            "title": "現代百貨店 新村店（현대백화점）",
+            "memo": "B1にスーパーとフードコート、10階にレストラン",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "日本の味",
+        "items": [
+          {
+            "place_id": "ChIJ5fcLN1SZfDURVRP51eCYLug",
+            "lat": 37.5581868,
+            "lng": 126.9348282,
+            "title": "カラメン屋（가라멘야）",
+            "memo": "辛口ラーメンとメンチカツが人気。昼は行列あり",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ5VZDAACZfDURB5xxy2-jrUs",
+            "lat": 37.5572023,
+            "lng": 126.93478959999999,
+            "title": "うどん家族 新村店（우동카조쿠）",
+            "memo": "讃岐うどんととり天。月曜定休、15:00〜17:00休憩",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ65Z6xq-ZfDURYRvV-CDryLo",
+            "lat": 37.5578073,
+            "lng": 126.93727799999999,
+            "title": "やまの（야마노 라멘）",
+            "memo": "豚骨ラーメン。6席ほど、現金のみ",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "安く食べる",
+        "items": [
+          {
+            "place_id": "ChIJy7koUZSZfDUR4_fiFDInXlU",
+            "lat": 37.5659786,
+            "lng": 126.9373346,
+            "title": "漢慶館 学食（한경관）",
+            "memo": "1階は定食、2階はビュッフェ。平日のみ",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJzbEZBpSYfDURoAx0qosjLZc",
+            "lat": 37.557936399999996,
+            "lng": 126.9372656,
+            "title": "コション豚カツ（꼬숑돈까스）",
+            "memo": "1枚4,000ウォン前後の豚カツ定食。現金のみ",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "勉強・くつろぐ",
+        "items": [
+          {
+            "place_id": "ChIJhepkj5qZfDURu1O4E6E-WXA",
+            "lat": 37.558076299999996,
+            "lng": 126.9384427,
+            "title": "ポテンシャル スタディカフェ新村",
+            "memo": "24時間営業の自習カフェ。充電設備あり",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJWy9o5ZOYfDURLjjAsCo_EZc",
+            "lat": 37.5587606,
+            "lng": 126.9372411,
+            "title": "トクスリ茶房（독수리다방）",
+            "memo": "新村を見下ろす8階のカフェ。1人1ドリンク制",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      }
+    ]
+  }
+}

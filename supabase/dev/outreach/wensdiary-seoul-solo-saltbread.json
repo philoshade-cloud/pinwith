@@ -1,0 +1,149 @@
+{
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "wensdiary-seoul-solo-saltbread",
+  "title": "首爾獨旅：鹽麵包5家＋必吃清單",
+  "desc": "整理自溫室日記 Wen's Diary 影片「2026 首爾獨旅懶人包」（2026年4月）。出處：https://www.youtube.com/watch?v=dDUfJxNoQrk — 由 PinWith 整理，非創作者本人製作。",
+  "kind": "course",
+  "themes": [
+   "首爾",
+   "獨旅",
+   "鹽麵包"
+  ],
+  "sections": [
+   {
+    "name": "Day 0",
+    "items": [
+     {
+      "place_id": "ChIJgzUbIf-ZfDUR13dxKoeZjB0",
+      "lat": 37.556569,
+      "lng": 126.935433,
+      "title": "보승회관 서울신촌점",
+      "memo": "抵達新村後第一餐",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=293"
+     }
+    ]
+   },
+   {
+    "name": "Day 1",
+    "items": [
+     {
+      "place_id": "ChIJp1npFq-jfDURtn6eZYt-FZY",
+      "lat": 37.576219,
+      "lng": 126.984271,
+      "title": "Artist Bakery 안국",
+      "memo": "首爾鹽麵包 #1",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=529"
+     },
+     {
+      "place_id": "ChIJgya5EoajfDURujjGw7hHPX8",
+      "lat": 37.581729,
+      "lng": 126.983928,
+      "title": "GRANHAND. 북촌",
+      "memo": "北村順遊香氛店",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=719"
+     },
+     {
+      "place_id": "ChIJz3DQ7sSifDURyYZa5LXo-J0",
+      "lat": 37.579394,
+      "lng": 126.984622,
+      "title": "object 삼청점",
+      "memo": "三清洞選物店",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=785"
+     },
+     {
+      "place_id": "ChIJ8cDPoKejfDUR9D6gwwM57MY",
+      "lat": 37.573299,
+      "lng": 126.990514,
+      "title": "익선애뜻",
+      "memo": "益善洞行程",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=843"
+     },
+     {
+      "place_id": "ChIJy_KLudyifDUR8R3cB_PyJsU",
+      "lat": 37.576034,
+      "lng": 126.987052,
+      "title": "운현궁 雲峴宮",
+      "memo": "景點",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=970"
+     },
+     {
+      "place_id": "ChIJgwhZmSWjfDURzJr5IabxSNg",
+      "lat": 37.573701,
+      "lng": 126.989696,
+      "title": "자연도소금빵&자연도가",
+      "memo": "首爾鹽麵包 #2",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=1067"
+     },
+     {
+      "place_id": "ChIJT8ZQJEijfDURGQXF7pAAwoU",
+      "lat": 37.573876,
+      "lng": 126.990972,
+      "title": "Teafference Seoul",
+      "memo": "茶飲",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=1116"
+     },
+     {
+      "place_id": "ChIJ_9UTZzmjfDURrqaSre38fe4",
+      "lat": 37.572827,
+      "lng": 126.990979,
+      "title": "종삼육 鐘三肉",
+      "memo": "晚餐｜烤肉街燒肉",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=1342"
+     }
+    ]
+   },
+   {
+    "name": "Day 2",
+    "items": [
+     {
+      "place_id": "ChIJB9BFEbyZfDURiYJW7WW9QAI",
+      "lat": 37.564233,
+      "lng": 126.924646,
+      "title": "Butter & Shelter 연남점",
+      "memo": "首爾鹽麵包 #3（延南）",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=1688"
+     },
+     {
+      "place_id": "ChIJl6M5obmZfDURITCAdVehllQ",
+      "lat": 37.560814,
+      "lng": 126.924744,
+      "title": "풀뜯는 돼지 吃草的豬",
+      "memo": "弘大散步後用餐",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=1912"
+     }
+    ]
+   },
+   {
+    "name": "Day 3",
+    "items": [
+     {
+      "place_id": "ChIJRY-8dAClfDURVHOPxYXvVaA",
+      "lat": 37.542945,
+      "lng": 127.055226,
+      "title": "BETON 성수",
+      "memo": "首爾鹽麵包 #4",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=2488"
+     },
+     {
+      "place_id": "ChIJPxlRUAClfDURTB7mF4KH4Nc",
+      "lat": 37.543264,
+      "lng": 127.053465,
+      "title": "ETRE BAKE HOUSE",
+      "memo": "首爾鹽麵包 #5",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=2596"
+     },
+     {
+      "place_id": "ChIJ2VjdY3OlfDURa46uZH6yL34",
+      "lat": 37.548389,
+      "lng": 127.055664,
+      "title": "돼지공탕 하우 성수본점",
+      "memo": "去機場前｜清燉豬肉湯",
+      "ts_url": "https://youtu.be/dDUfJxNoQrk?t=2723"
+     }
+    ]
+   }
+  ]
+ }
+}

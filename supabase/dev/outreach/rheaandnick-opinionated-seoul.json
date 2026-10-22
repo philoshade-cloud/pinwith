@@ -1,0 +1,134 @@
+{
+ "target": "Rhea and Nick",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "en",
+ "recipient_name": "Rhea and Nick",
+ "contact_route": "Instagram DM (linked in their YouTube description) or a reply/comment on their Substack 'Twice Over'",
+ "source": {
+  "url": "https://rheaandnick.substack.com/p/seoul-food",
+  "title": "SEOUL FOOD (GUIDE)",
+  "date": "2026-01"
+ },
+ "hooks": [
+  "YouTube 'A Very Opinionated Seoul Guide (2026)' (youtu.be/OypWPyxtt5c, Feb 22, 2026) is based on two months in Seoul, with a 'where to eat and drink' chapter at 17:19, but the description names no places",
+  "In the Substack Seoul food guide they say they won't add one dak-galbi spot to their map; they also share 'our google map <3' (Substack, Aug 2026)",
+  "Guide covers Haebangchon's 잠수교집 thin pork belly with fried rice, and Namdaemun's cash-only kalguksu alley (source post)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "rheaandnick-opinionated-seoul",
+  "title": "Seoul food picks from Rhea and Nick",
+  "desc": "Places from Rhea and Nick's Substack post 'SEOUL FOOD (GUIDE)' (https://rheaandnick.substack.com/p/seoul-food), companion to their video 'A Very Opinionated Seoul Guide (2026)' (https://youtu.be/OypWPyxtt5c). Collected by PinWith, not made by Rhea and Nick.",
+  "kind": "collection",
+  "themes": [
+   "Seoul",
+   "Korean BBQ",
+   "noodles",
+   "food guide"
+  ],
+  "sections": [
+   {
+    "name": "Korean BBQ",
+    "items": [
+     {
+      "place_id": "ChIJ_Xwjc9mjfDUR16NBfLsDxUU",
+      "lat": 37.5417589,
+      "lng": 126.98712909999999,
+      "title": "Jamsugyo-jip Haebangchon (잠수교집)",
+      "memo": "Thin-sliced pork belly, then fried rice from the crispy bits and banchan.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ3QcTei2hfDURLrVdeLzhDRs",
+      "lat": 37.4885567,
+      "lng": 127.0307646,
+      "title": "Sotdukkeop Yangjae (솥뚜껑)",
+      "memo": "Pork belly on cast iron with inventive dipping sauces.",
+      "ts_url": null,
+      "check": "post says 'sotdokkeop' in Seocho-dong; matched to Yangjae main branch"
+     },
+     {
+      "place_id": "ChIJVQ5UBUmhfDURj0Q2fKftvnE",
+      "lat": 37.4847895,
+      "lng": 127.03263460000001,
+      "title": "Jangsu Jeongyuk Sikdang (장수정육식당)",
+      "memo": "Thick pork belly slices and strong banchan.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ_9UTZzmjfDURrqaSre38fe4",
+      "lat": 37.5728266,
+      "lng": 126.990979,
+      "title": "Jongsamyook (종삼육)",
+      "memo": "KBBQ in the Donui-dong back-street dining strip by Jongno 3-ga.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Chicken, stews & noodles",
+    "items": [
+     {
+      "place_id": "ChIJ6Ul8OAChfDUR4iPkKnht8-A",
+      "lat": 37.497085299999995,
+      "lng": 127.0313302,
+      "title": "Kkokkio Jangjakgui (꼬끼오장작구이)",
+      "memo": "Rotisserie chicken over scorched rice; corn cheese, draft Terra.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJF-xY3vuhfDURrbht3KphObk",
+      "lat": 37.486914299999995,
+      "lng": 127.03175229999998,
+      "title": "Obujji Yangjae (오부찌 양재점)",
+      "memo": "Budae jjigae (army stew).",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJpQf4RPWifDURhQ29iyUyHlU",
+      "lat": 37.5581963,
+      "lng": 126.97707559999999,
+      "title": "Namdaemun Kalguksu Alley",
+      "memo": "Many stalls doing kalguksu lunch sets; cash only.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJg0Ik0zeifDURoAZjqctyuoY",
+      "lat": 37.5334377,
+      "lng": 126.989982,
+      "title": "Yetnal Guksi (옛날국시)",
+      "memo": "Itaewon spot for ice-cold spicy acorn jelly rice soup (dotorimuk-bap).",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ7wOnWZSYfDURmKqpHg90a88",
+      "lat": 37.5571996,
+      "lng": 126.9355326,
+      "title": "Sosin Isso",
+      "memo": "Spicy short ribs with glass noodles, tteok and mushrooms, off Yonsei-ro.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJp_xmvkuhfDURxx1kR_gS2D4",
+      "lat": 37.4839348,
+      "lng": 127.03627170000001,
+      "title": "Manbok Guksujip (만복국수집)",
+      "memo": "Tavern for bossam, kimchi pancakes and dongdongju.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ }
+}

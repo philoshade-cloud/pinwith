@@ -1,0 +1,133 @@
+{
+ "list": {
+  "owner": "pinwith_ja",
+  "lang": "ja",
+  "slug": "momocolog-seoul-new-cafes",
+  "title": "ソウル新オープンカフェめぐり：momocologさんの6日間から12か所",
+  "desc": "momocologの動画「ソウル旅行6日間」(2026年5月)に登場したお店。出典：https://www.youtube.com/watch?v=Chw_G7YIaxs — PinWithが整理したもので、クリエイター本人の作成ではありません。",
+  "kind": "course",
+  "themes": [
+   "ソウル",
+   "カフェ",
+   "新オープン"
+  ],
+  "sections": [
+   {
+    "name": "1日目",
+    "items": [
+     {
+      "place_id": "ChIJjUaEcACZfDURWWk80hH6bjk",
+      "lat": 37.5561547,
+      "lng": 126.9309333,
+      "title": "Okkz",
+      "memo": "1日目の最初のお店",
+      "ts_url": "https://youtu.be/Chw_G7YIaxs?t=67"
+     },
+     {
+      "place_id": "ChIJVVVVVRaifDUR0o4TELGsUdA",
+      "lat": 37.5306419,
+      "lng": 126.9715498,
+      "title": "KINDERSALMON",
+      "memo": "",
+      "ts_url": "https://youtu.be/Chw_G7YIaxs?t=259"
+     }
+    ]
+   },
+   {
+    "name": "2日目",
+    "items": [
+     {
+      "place_id": "ChIJp4i8TQC9fDURGQ2vQn7SAKc",
+      "lat": 37.5890645,
+      "lng": 127.0105355,
+      "title": "Isle Bakery",
+      "memo": "2日目の最初のお店",
+      "ts_url": "https://youtu.be/Chw_G7YIaxs?t=574"
+     },
+     {
+      "place_id": "ChIJHZ9qPwC9fDURhED6Ng0EW8E",
+      "lat": 37.588142,
+      "lng": 127.0074068,
+      "title": "Café Limón",
+      "memo": "",
+      "ts_url": "https://youtu.be/Chw_G7YIaxs?t=695"
+     },
+     {
+      "place_id": "ChIJVc8g-cKYfDURq2lcpdtK5wY",
+      "lat": 37.5562719,
+      "lng": 126.9243717,
+      "title": "一片ドゥンシム 일편등심",
+      "memo": "2日目の最後の食事",
+      "ts_url": "https://youtu.be/Chw_G7YIaxs?t=1344"
+     }
+    ]
+   },
+   {
+    "name": "3日目",
+    "items": [
+     {
+      "place_id": "ChIJ8VXqkLmjfDURo8pABESu9eI",
+      "lat": 37.5263716,
+      "lng": 126.9633586,
+      "title": "Shawnino",
+      "memo": "龍山・解放村・厚岩洞エリア",
+      "ts_url": "https://youtu.be/Chw_G7YIaxs?t=1625"
+     },
+     {
+      "place_id": "ChIJPYCyy26jfDURAW56dr9lcIc",
+      "lat": 37.5446893,
+      "lng": 126.9835265,
+      "title": "Aftertaste",
+      "memo": "",
+      "ts_url": "https://youtu.be/Chw_G7YIaxs?t=1780"
+     },
+     {
+      "place_id": "ChIJu7RABwCjfDURaQvxcZI6zUw",
+      "lat": 37.5426502,
+      "lng": 126.987363,
+      "title": "Haus Bakery Service",
+      "memo": "",
+      "ts_url": "https://youtu.be/Chw_G7YIaxs?t=1883"
+     },
+     {
+      "place_id": "ChIJIf25CACjfDURq2ZdGofLy1o",
+      "lat": 37.552487,
+      "lng": 126.9765737,
+      "title": "Toast Coffee House",
+      "memo": "",
+      "ts_url": "https://youtu.be/Chw_G7YIaxs?t=2001"
+     }
+    ]
+   },
+   {
+    "name": "4日目",
+    "items": [
+     {
+      "place_id": "ChIJt_ZAU1SlfDURBdXvDnG1HDM",
+      "lat": 37.5485648,
+      "lng": 127.0457731,
+      "title": "POINTTWOFIVE.SECOND 聖水",
+      "memo": "聖水の最初のお店。TEA・THOLOGYも同じ場所",
+      "ts_url": "https://youtu.be/Chw_G7YIaxs?t=2163"
+     },
+     {
+      "place_id": "ChIJI9UbptSlfDURXBCMbd940LQ",
+      "lat": 37.5438067,
+      "lng": 127.0570939,
+      "title": "PVRE Pharmacy",
+      "memo": "",
+      "ts_url": "https://youtu.be/Chw_G7YIaxs?t=2324"
+     },
+     {
+      "place_id": "ChIJu5Mkr_qlfDUROb-FXMNgcdM",
+      "lat": 37.5383883,
+      "lng": 127.0568492,
+      "title": "Piece Layer",
+      "memo": "",
+      "ts_url": "https://youtu.be/Chw_G7YIaxs?t=2416"
+     }
+    ]
+   }
+  ]
+ }
+}

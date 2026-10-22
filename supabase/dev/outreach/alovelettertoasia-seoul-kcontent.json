@@ -1,0 +1,139 @@
+{
+ "target": "A Love Letter to Asia",
+ "group": "fan_blog",
+ "based_in_korea": false,
+ "msg_lang": "en",
+ "recipient_name": "Zhen",
+ "contact_route": "site contact page at alovelettertoasia.com/contact (also a Services & Media Kit page at /services and a Korea Facebook group)",
+ "source": {
+  "url": "https://alovelettertoasia.com/top-things-to-do-in-myeongdong/",
+  "title": "Top Things to do in Myeongdong 2026",
+  "date": "2026-06"
+ },
+ "hooks": [
+  "Says Lotte Department Store 'needs no introduction' to K-drama watchers (source article)",
+  "Prefers Shinsegae's quieter food court and recommends single-brand K-beauty stores for better freebies (source article)",
+  "Picks kal-guksu over dumplings at Michelin-listed Myeongdong Kyoja (source article)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "alovelettertoasia-seoul-kcontent",
+  "title": "Myeongdong: K-beauty, shopping & food, from A Love Letter to Asia",
+  "desc": "Places from A Love Letter to Asia's 'Top Things to do in Myeongdong 2026' (https://alovelettertoasia.com/top-things-to-do-in-myeongdong/). Collected by PinWith, not made by A Love Letter to Asia.",
+  "kind": "collection",
+  "themes": [
+   "Myeongdong",
+   "K-beauty",
+   "shopping",
+   "Seoul food"
+  ],
+  "sections": [
+   {
+    "name": "Shopping & K-beauty",
+    "items": [
+     {
+      "place_id": "ChIJ91oV-fGifDURtBoizcsB2Hc",
+      "lat": 37.564707299999995,
+      "lng": 126.98166370000001,
+      "title": "Lotte Department Store Main (롯데백화점 본점)",
+      "memo": "Famous to K-drama fans; supermarket, food court, duty-free, linked hotel.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJGXh8WPGifDURZOTN-wc3Tdc",
+      "lat": 37.56092230000001,
+      "lng": 126.98113889999999,
+      "title": "Shinsegae Main Store (신세계백화점 본점)",
+      "memo": "Author's pick for a quieter, better food court and luxury brands.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ9XDV4O-ifDURKjI94KEc1h4",
+      "lat": 37.563946,
+      "lng": 126.98516239999998,
+      "title": "Olive Young Myeongdong (올리브영 명동)",
+      "memo": "Huge Olive Young store with many brands, though fewer samples.",
+      "ts_url": null,
+      "check": "article says 'biggest store' without address; matched to Myeongdong Town flagship"
+     },
+     {
+      "place_id": "ChIJoY1oZvCifDURDKzruLYtCuU",
+      "lat": 37.5619351,
+      "lng": 126.9852954,
+      "title": "3CE Pink Space Hotel (Stylenanda)",
+      "memo": "Pink hotel-themed shop for trendy makeup and clothes; photo-friendly.",
+      "ts_url": null,
+      "check": "article calls it 'Stylenada Pink Hotel Cafe'; Google lists it as 3CE Pink Space Hotel"
+     },
+     {
+      "place_id": "ChIJa_2xkjujfDURlY8M7eSIgR8",
+      "lat": 37.5633734,
+      "lng": 126.9828862,
+      "title": "Noon Square (눈스퀘어)",
+      "memo": "Mall the article suggests for affordable international brands.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Food",
+    "items": [
+     {
+      "place_id": "ChIJW7FBDfCifDURHTpisLbVUH0",
+      "lat": 37.5610151,
+      "lng": 126.9860829,
+      "title": "Myeongdong Kyoja (명동교자)",
+      "memo": "Michelin-listed; author prefers the kal-guksu. Cold noodles are very spicy.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJvZjTMWC9fDURxnT8dx21N3U",
+      "lat": 37.5643946,
+      "lng": 126.9850185,
+      "title": "Hadongkwan (하동관)",
+      "memo": "Gomtang since 1939; closes mid-afternoon, so go early.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Sights & shows",
+    "items": [
+     {
+      "place_id": "ChIJs2hQTOWifDURk8inZqIttEQ",
+      "lat": 37.5633851,
+      "lng": 126.987436,
+      "title": "Myeongdong Cathedral (명동성당)",
+      "memo": "1898 Gothic church; English Mass on Sundays, lit up at Christmas.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJEbpmM_CifDURKJZq-oh9uxo",
+      "lat": 37.5635748,
+      "lng": 126.98361860000001,
+      "title": "Myeongdong NANTA Theatre",
+      "memo": "Non-verbal kitchen-drumming comedy show running since 1997.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJmylq-vyifDUR_r3t4Ve-w3k",
+      "lat": 37.559315,
+      "lng": 126.99447699999997,
+      "title": "Namsangol Hanok Village (남산골한옥마을)",
+      "memo": "Traditional hanok village a short trip from Myeongdong.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ }
+}

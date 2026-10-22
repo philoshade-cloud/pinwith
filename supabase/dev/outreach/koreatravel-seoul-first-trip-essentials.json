@@ -1,0 +1,139 @@
+{
+  "target": "r/koreatravel (Reddit)",
+  "group": "host_community",
+  "based_in_korea": "unverified",
+  "msg_lang": "en",
+  "recipient_name": "r/koreatravel moderators",
+  "contact_route": "Subreddit modmail (Message the mods). First message = permission request before any post.",
+  "source": null,
+  "hooks": [
+    "Sub describes itself as 'All about Korea Travel - genuine discussions, insider tips, and comprehensive travel maps'; ~230k members (gummysearch.com/r/koreatravel).",
+    "Posting rules seen on a mirror of a pinned weekly thread: standalone posts must be about travel IN South Korea; visa/entry and meetup posts go in the weekly thread.",
+    "Promotion rules: full rules page not reachable (reddit blocked); assume no self-promo without mod approval -> ask via modmail first."
+  ],
+  "list": {
+    "owner": "pinwith_en",
+    "lang": "en",
+    "slug": "koreatravel-seoul-first-trip-essentials",
+    "title": "Seoul first trip essentials",
+    "desc": "A free starter map made by PinWith for r/koreatravel members: getting in from the airport, SIM and T-money, a 24h pharmacy and the classic first-trip sights. Copy it and make it your own.",
+    "kind": "collection",
+    "themes": [
+      "first trip",
+      "Seoul",
+      "essentials",
+      "transport"
+    ],
+    "sections": [
+      {
+        "name": "Arrive & set up",
+        "items": [
+          {
+            "place_id": "ChIJEa8WyKejfDUR1upWOL4YisM",
+            "lat": 37.5535759,
+            "lng": 126.9697478,
+            "title": "AREX Travel Service Center (Seoul Station)",
+            "memo": "Airport Railroad desk at Seoul Station; express train to/from Incheon takes about 45 min",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJWRyM0OmYfDURVmpHAi1n8_8",
+            "lat": 37.558143,
+            "lng": 126.925091,
+            "title": "Travel Depot (Hongik Univ. Stn)",
+            "memo": "Prepaid SIMs and currency exchange near Hongik Univ. Station exit 3; open daily",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJJT7Yx-yifDURnKR7W5NdPkU",
+            "lat": 37.5704807,
+            "lng": 126.9761834,
+            "title": "CU convenience store (Gwanghwamun)",
+            "memo": "Convenience stores sell and top up T-money cards; refunds keep a small fee",
+            "ts_url": null,
+            "check": "refund availability varies by store; based on a single review"
+          },
+          {
+            "place_id": "ChIJc9bbFN2jfDUR_yiOj3uK0Uo",
+            "lat": 37.563153899999996,
+            "lng": 126.98371549999999,
+            "title": "Myeongdong Mega Pharmacy",
+            "memo": "Pharmacy listed as open 24 hours in Myeongdong; English-speaking staff reported",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "See & do",
+        "items": [
+          {
+            "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+            "lat": 37.579617,
+            "lng": 126.977041,
+            "title": "Gyeongbokgung Palace (경복궁)",
+            "memo": "Closed Tuesdays; entry is free if you wear hanbok; guard ceremony in the morning",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+            "lat": 37.5814696,
+            "lng": 126.9849519,
+            "title": "Bukchon Hanok Village (북촌한옥마을)",
+            "memo": "Lived-in neighbourhood: visit 10:00-17:00 and keep noise down",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+            "lat": 37.570038499999995,
+            "lng": 126.99960379999997,
+            "title": "Gwangjang Market (광장시장)",
+            "memo": "Old market for bindaetteok, gimbap and street snacks; clean toilets on site",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJJXcc9--ifDURb8zmFI_J64s",
+            "lat": 37.5641885,
+            "lng": 126.98611799999998,
+            "title": "Myeongdong shopping street (명동)",
+            "memo": "K-beauty shops and street-food stalls; Myeongdong Station (Line 4)",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ9XDV4O-ifDURKjI94KEc1h4",
+            "lat": 37.563946,
+            "lng": 126.98516239999998,
+            "title": "Olive Young Myeongdong Town",
+            "memo": "Big two-floor Olive Young; tax refund at the counter; open 10:00-22:30",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ68AiKsWYfDUROpTctLKtxtU",
+            "lat": 37.5561973,
+            "lng": 126.9250341,
+            "title": "Hongdae street (홍대)",
+            "memo": "Buskers, shops and nightlife around Hongik Univ. Station (Line 2/AREX)",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ77fEAzuffDURLEWNv56G2KQ",
+            "lat": 37.5267106,
+            "lng": 126.9347112,
+            "title": "Yeouido Hangang Park (여의도한강공원)",
+            "memo": "Han River picnic spot; mat and bike rentals, convenience-store ramyeon, open 24h",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      }
+    ]
+  }
+}

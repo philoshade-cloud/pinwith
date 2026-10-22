@@ -1,0 +1,171 @@
+{
+  "target": "Yonsei Global / Mentors Club (Yonsei exchange-student clubs)",
+  "group": "host_community",
+  "based_in_korea": true,
+  "msg_lang": "en",
+  "recipient_name": "Yonsei Global and Mentors Club",
+  "contact_route": "Instagram DM @yonseiglobal and @mentorsclub_yonsei (handles listed on Yonsei OIA 'Student Clubs Under OIA' page).",
+  "source": null,
+  "hooks": [
+    "Yonsei OIA page: Mentors Club founded 2002, runs a Buddy Program and Buddies' Night for exchange students.",
+    "Yonsei OIA page: Yonsei Global founded 2003, runs 'First Step to Korea' orientation and Global Day.",
+    "No promotion rules found; IG pages not fetched (handles verified only via the Yonsei OIA page)."
+  ],
+  "list": {
+    "owner": "pinwith_en",
+    "lang": "en",
+    "slug": "yonsei-first-month-sinchon",
+    "title": "First month in Sinchon",
+    "desc": "A free starter map made by PinWith for Yonsei exchange students: banks, hospital, shops, cheap eats and study spots around Sinchon. Copy it, add your favourites and share with your buddy group.",
+    "kind": "collection",
+    "themes": [
+      "exchange students",
+      "Sinchon",
+      "Yonsei",
+      "essentials"
+    ],
+    "sections": [
+      {
+        "name": "Essentials",
+        "items": [
+          {
+            "place_id": "ChIJg_2jvpWYfDURsKnLkq7lw2o",
+            "lat": 37.555059199999995,
+            "lng": 126.93649979999999,
+            "title": "Sinchon Station (신촌역, Line 2)",
+            "memo": "Line 2 stop for Yonsei; walk up Yonsei-ro to the main gate",
+            "ts_url": null,
+            "check": "Google lists odd address; coordinates are Sinchon Stn"
+          },
+          {
+            "place_id": "ChIJDyg-oY6YfDURjmNa7ENSt7c",
+            "lat": 37.5663937,
+            "lng": 126.9387066,
+            "title": "Yonsei University main gate (연세대 정문)",
+            "memo": "Main gate at the top of Yonsei-ro, about 10 min on foot from the station",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJDWSfDI6YfDURHSFNpdzdc9g",
+            "lat": 37.563479,
+            "lng": 126.938335,
+            "title": "Woori Bank Yonsei branch (우리은행 연세지점)",
+            "memo": "Bank branch on campus side; weekdays 9:00-16:00; bring passport/ARC",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJM2EIuI-YfDURljZvEJg_DXY",
+            "lat": 37.5623371,
+            "lng": 126.9408692,
+            "title": "Severance Hospital (세브란스병원)",
+            "memo": "International Health Care Center with English service; weekdays 8:30-17:30",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJuWttn5WYfDURI_JgL4vrQHs",
+            "lat": 37.555296,
+            "lng": 126.9355255,
+            "title": "Daiso Sinchon (다이소)",
+            "memo": "Three floors of cheap household basics for your room; 10:00-22:00",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ10QilZaYfDURDkCnpY4N-zo",
+            "lat": 37.5562458,
+            "lng": 126.9392858,
+            "title": "Olive Young Sinchon-ro",
+            "memo": "Toiletries and skincare by Sinchon Station; 10:00-22:30",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJbU0ue5qYfDURXG0fO0nar2o",
+            "lat": 37.555999199999995,
+            "lng": 126.93580689999997,
+            "title": "Hyundai Department Store Sinchon",
+            "memo": "Supermarket and food court on B1, restaurants on 10F",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJPSWxLcOYfDURgMpQj2qN4LI",
+            "lat": 37.5508451,
+            "lng": 126.91368229999999,
+            "title": "Homeplus Hapjeong (홈플러스)",
+            "memo": "Large supermarket under Mecenatpolis, Hapjeong Stn; closed some Sundays",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "Eat",
+        "items": [
+          {
+            "place_id": "ChIJy7koUZSZfDUR4_fiFDInXlU",
+            "lat": 37.5659786,
+            "lng": 126.9373346,
+            "title": "Hangyeong Hall food court (한경관)",
+            "memo": "Campus cafeteria: set meal on 1F, buffet on 2F; weekdays only",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJzbEZBpSYfDURoAx0qosjLZc",
+            "lat": 37.557936399999996,
+            "lng": 126.9372656,
+            "title": "Cochon Tonkatsu (꼬숑돈까스)",
+            "memo": "Tonkatsu set from about ₩4,000; cash only; break 16:00-17:00",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJgSiLQpSYfDURJ9HlpmvPmKU",
+            "lat": 37.5573596,
+            "lng": 126.9361257,
+            "title": "Maendorong Sikdang (맨도롱식당)",
+            "memo": "Big bowls of pork noodle soup and rice at low prices",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "Study & hang out",
+        "items": [
+          {
+            "place_id": "ChIJhepkj5qZfDURu1O4E6E-WXA",
+            "lat": 37.558076299999996,
+            "lng": 126.9384427,
+            "title": "Potential Study Cafe Sinchon",
+            "memo": "24h study cafe with rentable desks and charging",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJWy9o5ZOYfDURLjjAsCo_EZc",
+            "lat": 37.5587606,
+            "lng": 126.9372411,
+            "title": "Doksuri Dabang (독수리다방)",
+            "memo": "8th-floor cafe over Sinchon; outlets; one drink per person",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJaS2QWYSYfDURDdj5UDhrU_I",
+            "lat": 37.5618588,
+            "lng": 126.94683389999999,
+            "title": "Ewha Womans University (이화여대)",
+            "memo": "Neighbouring campus; ECC building and shop streets a short walk east",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      }
+    ]
+  }
+}

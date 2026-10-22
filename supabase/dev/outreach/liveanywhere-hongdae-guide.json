@@ -1,0 +1,107 @@
+{
+ "target": "LiveAnywhere",
+ "group": "host_community",
+ "based_in_korea": true,
+ "msg_lang": "en",
+ "recipient_name": "LiveAnywhere team",
+ "contact_route": "Inquiry/contact channel on liveanywhere.me (the blog itself lists no social handles or contact page)",
+ "source": {
+  "url": "https://blog.liveanywhere.me/hongdae-neighborhood-guide",
+  "title": "Staying in Hongdae: The Ultimate Neighborhood Guide for Travelers",
+  "date": "2026-05"
+ },
+ "hooks": [
+  "Guide first posted Dec 20, 2025 and updated May 26, 2026 (page metadata)",
+  "Its pro tip: stay in Yeonnam-dong or Mangwon instead of on the noisy main Walking Street (source article)",
+  "Points out AREX runs from Incheon Airport straight to Hongik Univ. Station with no transfer (source article)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "liveanywhere-hongdae-guide",
+  "title": "Staying in Hongdae: where to base yourself",
+  "desc": "Places from LiveAnywhere's 'Staying in Hongdae: The Ultimate Neighborhood Guide for Travelers' (https://blog.liveanywhere.me/hongdae-neighborhood-guide). Collected by PinWith, not made by LiveAnywhere.",
+  "kind": "collection",
+  "themes": [
+   "Hongdae",
+   "Yeonnam-dong",
+   "Mangwon",
+   "where to stay"
+  ],
+  "sections": [
+   {
+    "name": "Getting there",
+    "items": [
+     {
+      "place_id": "ChIJA-F312OaezURGNV_89NW7Ys",
+      "lat": 37.4475135,
+      "lng": 126.4524015,
+      "title": "Incheon Airport T1 Station (AREX)",
+      "memo": "Start of the AREX line that runs direct to Hongik Univ. Station.",
+      "ts_url": null,
+      "check": "guide just says Incheon Airport; T1 station chosen, T2 also served"
+     },
+     {
+      "place_id": "ChIJExW378KYfDUR8aFijbcqirQ",
+      "lat": 37.5581082,
+      "lng": 126.92595739999997,
+      "title": "Hongik Univ. Station (홍대입구역)",
+      "memo": "AREX stops here, so no transfer from the airport to your room.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Neighborhoods",
+    "items": [
+     {
+      "place_id": "ChIJ68AiKsWYfDUROpTctLKtxtU",
+      "lat": 37.5561973,
+      "lng": 126.9250341,
+      "title": "Hongdae Walking Street",
+      "memo": "Busking, shops, clubs till sunrise; guide warns it's loud until ~2 AM.",
+      "ts_url": null,
+      "check": "guide's 'main Walking Street' matched to Google's 'Hongdae Street'"
+     },
+     {
+      "place_id": "ChIJIcmIoeiYfDURSzYfpUjAZyg",
+      "lat": 37.5627439,
+      "lng": 126.9214088,
+      "title": "Yeonnam-dong (연남동)",
+      "memo": "Across from Hongdae station; cafe-filled and much quieter.",
+      "ts_url": null,
+      "check": "area pin (neighborhood), not a venue"
+     },
+     {
+      "place_id": "ChIJI-q5LTCZfDUREx5aEFE-fXM",
+      "lat": 37.5554884,
+      "lng": 126.89986059999998,
+      "title": "Mangwon-dong (망원동)",
+      "memo": "About 15 min on foot from Hongdae, with a local feel.",
+      "ts_url": null,
+      "check": "area pin (neighborhood), not a venue"
+     },
+     {
+      "place_id": "ChIJA6gxryiZfDURJvmbeBvdz_Y",
+      "lat": 37.5559018,
+      "lng": 126.90628539999997,
+      "title": "Mangwon Market (망원시장)",
+      "memo": "The well-known traditional market in Mangwon-dong.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJg_2jvpWYfDURsKnLkq7lw2o",
+      "lat": 37.555059199999995,
+      "lng": 126.93649979999999,
+      "title": "Sinchon (신촌역)",
+      "memo": "Calmer option within walking distance of Yeonnam, per the guide.",
+      "ts_url": null,
+      "check": "guide names the Sinchon area; pinned at Sinchon Station"
+     }
+    ]
+   }
+  ]
+ }
+}

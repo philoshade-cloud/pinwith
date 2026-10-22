@@ -1,0 +1,62 @@
+{
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "yourkoreafriend-gwangalli-5",
+  "title": "Gwangalli, Busan: 5 places a local actually recommends",
+  "desc": "Places from Your Korea Friend's video \"Where to eat in Gwangalli, Busan\" (Jun 2026). Source: https://www.youtube.com/watch?v=5fup3salHoU — Collected by PinWith, not made by the creator.",
+  "kind": "course",
+  "themes": [
+   "Busan",
+   "Gwangalli",
+   "Food"
+  ],
+  "sections": [
+   {
+    "name": null,
+    "items": [
+     {
+      "place_id": "ChIJlXZzutaSaDURHY5IvyK-P2M",
+      "lat": 35.1662326,
+      "lng": 129.1172499,
+      "title": "Eom Yong-baek Dwaeji Gukbap (엄용백돼지국밥)",
+      "memo": "Clear pork soup (dwaeji gukbap)",
+      "ts_url": "https://youtu.be/5fup3salHoU?t=28"
+     },
+     {
+      "place_id": "ChIJFUVbUQDtaDUR4suj_k1fo7o",
+      "lat": 35.1464761,
+      "lng": 129.1134965,
+      "title": "Milo Bakery (밀로제과)",
+      "memo": "Korean-style topping bread",
+      "ts_url": "https://youtu.be/5fup3salHoU?t=134"
+     },
+     {
+      "place_id": "ChIJd13rH-TtaDURYgi7r2FNPk4",
+      "lat": 35.1479544,
+      "lng": 129.1114233,
+      "title": "Bibijae",
+      "memo": "Bibimbap",
+      "ts_url": "https://youtu.be/5fup3salHoU?t=221"
+     },
+     {
+      "place_id": "ChIJdVcPNgDtaDURk1VA_-SAwLg",
+      "lat": 35.1467417,
+      "lng": 129.1138336,
+      "title": "Brown Field",
+      "memo": "Bakery cafe for desserts",
+      "ts_url": "https://youtu.be/5fup3salHoU?t=343"
+     },
+     {
+      "place_id": "ChIJ7-kSQZjtaDURR93qyYYXAGM",
+      "lat": 35.1549908,
+      "lng": 129.1184415,
+      "title": "Gwanganmok",
+      "memo": "Korean BBQ",
+      "ts_url": "https://youtu.be/5fup3salHoU?t=416"
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,158 @@
+{
+ "target": "ZenKimchi",
+ "group": "fan_blog",
+ "based_in_korea": true,
+ "msg_lang": "en",
+ "recipient_name": "Joe McPherson (ZenKimchi)",
+ "contact_route": "Tours FAQ & Contact page at zenkimchi.com/faq-and-contact-info/, or Instagram DM @zenkimchi (also on X, Threads, Bluesky)",
+ "source": {
+  "url": "https://zenkimchi.com/podcast/jongno-3-ga-the-insiders-guide-to-the-worlds-coolest-neighborhood/",
+  "title": "Jongno 3-ga: The Insider's Guide to the World's Coolest Neighborhood",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "Published Oct 17, 2026; the article already embeds a Google Map of the neighborhood sections (source article)",
+  "Picks Gongdeok on the Galmaegisal alleys for a charcoal BBQ night, noting it was on Parts Unknown (source article)",
+  "Calls Hadong Jip on Nostalgia Alley by Nagwon Arcade one of his favorites (source article)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "zenkimchi-seoul-eats",
+  "title": "Jongno 3-ga eats & nightlife, from ZenKimchi's insider guide",
+  "desc": "Places from ZenKimchi's 'Jongno 3-ga: The Insider's Guide to the World's Coolest Neighborhood' (https://zenkimchi.com/podcast/jongno-3-ga-the-insiders-guide-to-the-worlds-coolest-neighborhood/). Collected by PinWith, not made by ZenKimchi.",
+  "kind": "collection",
+  "themes": [
+   "Jongno 3-ga",
+   "Ikseon-dong",
+   "Korean food",
+   "nightlife",
+   "Seoul"
+  ],
+  "sections": [
+   {
+    "name": "Tapgol & Songhae",
+    "items": [
+     {
+      "place_id": "ChIJt5HKlueifDURHONSIuFp_3A",
+      "lat": 37.5711455,
+      "lng": 126.98832949999999,
+      "title": "Tapgol Park (탑골공원)",
+      "memo": "Former temple grounds with a stone pagoda; the guide's starting landmark.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJgfdm3t2ifDURviC1jyP8vM8",
+      "lat": 37.5721006,
+      "lng": 126.99153939999998,
+      "title": "Chicken Baengi (치킨뱅이)",
+      "memo": "1990s fried chicken chain; guide suggests the Sejong Set (plain, yangnyeom, garlic).",
+      "ts_url": null,
+      "check": "chain; guide places it on the east side of the Songhae section, this Donhwamun-ro branch is assumed"
+     },
+     {
+      "place_id": "ChIJLyeYkLajfDURPlO1JdHI0kQ",
+      "lat": 37.570904399999996,
+      "lng": 126.9891967,
+      "title": "Big Bar",
+      "memo": "Third-floor whiskey bar in the Songhae section.",
+      "ts_url": null,
+      "check": "name match only; listing in Nagwon-dong, floor/section not confirmed"
+     },
+     {
+      "place_id": "ChIJhxkAv92ifDURoaOgcs0FziQ",
+      "lat": 37.56966,
+      "lng": 126.9894516,
+      "title": "Jongno 3-ga Pocha Street (포장마차 거리)",
+      "memo": "Street-food tents by Exits 4-5; try chicken gizzards or boneless spicy feet.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Ikseon-dong",
+    "items": [
+     {
+      "place_id": "ChIJdawuLnGjfDURFoQHgAgusNI",
+      "lat": 37.5730739,
+      "lng": 126.98969489999998,
+      "title": "Salt Pond (Soha Salt Pond)",
+      "memo": "Salt bread bakery with sweet and savory versions, incl. seaweed & fish roe.",
+      "ts_url": null,
+      "check": "guide says 'Salt Pond'; Google lists 'Soha Salt Pond Ikseon-dong'"
+     },
+     {
+      "place_id": "ChIJqfJLrd2ifDUR7NO-1_ZkO5Q",
+      "lat": 37.5737721,
+      "lng": 126.98964959999999,
+      "title": "Sikmul (식물)",
+      "memo": "Hanok cafe with hidden rooms; coffee and bread by day, cocktails too.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJsQUVpN2ifDURbZ_ewvj12mQ",
+      "lat": 37.573045799999996,
+      "lng": 126.9894524,
+      "title": "Craft Roo",
+      "memo": "Craft beer spot known for its Thai sausage pizza; service can be slow.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJm3OCiNKjfDURuAmF3vV1s4k",
+      "lat": 37.5737685,
+      "lng": 126.99007069999999,
+      "title": "Jang & Paste (장앤페이스트)",
+      "memo": "Italian-Korean: gochujang pastas, sujebi in truffle cream. Book on CatchTable.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Nagwon Arcade area",
+    "items": [
+     {
+      "place_id": "ChIJM5MKad2ifDURzeiYjJo09gg",
+      "lat": 37.5726662,
+      "lng": 126.9878079,
+      "title": "Nagwon Arcade (낙원상가)",
+      "memo": "Instrument market upstairs, traditional market in the basement.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJpRy9fCyjfDURzwc8sm9S37M",
+      "lat": 37.5730821,
+      "lng": 126.9885774,
+      "title": "Cheon Nyeon Jazz Club (천년동안도)",
+      "memo": "Live jazz club just outside Nagwon Arcade.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ5-YoLwCjfDURRu-8P0-G-qc",
+      "lat": 37.5726152,
+      "lng": 126.98845359999999,
+      "title": "EDLS (이들스)",
+      "memo": "1940s-style club in Nagwon Arcade; jazz & rock, house beer, 10-15k won cover.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ-4d4Yd2ifDUROFEDNn9Vyy8",
+      "lat": 37.572179,
+      "lng": 126.98798859999998,
+      "title": "Hadong Jip (하동집)",
+      "memo": "Gukbap spot on Nostalgia Alley south of Nagwon Arcade; an author favorite.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ }
+}

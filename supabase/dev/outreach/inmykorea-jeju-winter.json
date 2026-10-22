@@ -1,0 +1,51 @@
+{
+  "target": "In My Korea",
+  "group": "fan_blog",
+  "based_in_korea": "unverified",
+  "msg_lang": "en",
+  "recipient_name": "Joel (Joel Marrinan, In My Korea)",
+  "contact_route": "Site contact form at https://inmykorea.com/contact/; also Instagram/Facebook DM to the In My Korea accounts linked in the site header/footer",
+  "source": {"url": "https://inmykorea.com/1-week-on-jeju-island-in-winter-itinerary/", "title": "What To Do On Jeju Island In Winter: Jeju Winter Itinerary 2026", "date": "2026-10"},
+  "hooks": [
+    "The 7-day itinerary is based on a January trip done by public bus and on foot, no rental car (article intro/itinerary)",
+    "On Day 2 a blizzard turned him back on Hallasan's Yeongsil trail before Witse-Oreum shelter (Day 2 section)",
+    "Includes 1991-2020 KMA monthly climate averages for Jeju City and Seogwipo, noting Jeju City gets roughly 2-4x Seoul's winter rain/snow (weather section)"
+  ],
+  "list": {
+    "owner": "pinwith_en",
+    "lang": "en",
+    "slug": "inmykorea-jeju-winter",
+    "title": "Jeju in winter, 7 days, from In My Korea's guide",
+    "desc": "The stops from In My Korea's article \"What To Do On Jeju Island In Winter: Jeju Winter Itinerary 2026\" (https://inmykorea.com/1-week-on-jeju-island-in-winter-itinerary/), on one map by day. Collected by PinWith, not made by In My Korea.",
+    "kind": "course",
+    "themes": ["Jeju", "winter", "itinerary", "public transport"],
+    "sections": [
+      {"name": "Day 1 - Jeju City", "items": [
+        {"place_id": "ChIJBdEw_1PjDDUR9XxfgFpYmjw", "lat": 33.5115133, "lng": 126.5262564, "title": "Dongmun Traditional Market (동문재래시장)", "memo": "Big Jeju City market; street food like abalone gimbap and dol hareubang bread", "ts_url": null, "check": null},
+        {"place_id": "ChIJ1YhBSmQdDTURAze0t-qJxio", "lat": 33.5031897, "lng": 126.617275, "title": "Magpie Brewery & Taproom", "memo": "Brewery with Korean-inspired beers, pizza and fried chicken", "ts_url": null, "check": null}
+      ]},
+      {"name": "Day 3 - Udo & Seongsan", "items": [
+        {"place_id": "ChIJpYqY9MdqDTURxxuRxrJxrec", "lat": 33.493234799999996, "lng": 126.96613690000001, "title": "Udo Lighthouse (우도등대)", "memo": "Hilltop lighthouse at Udo's southern tip, on the island walk", "ts_url": null, "check": null},
+        {"place_id": "ChIJn3jj9rkUDTURS7YjOgUyUVU", "lat": 33.458056000000006, "lng": 126.94250000000001, "title": "Seongsan Ilchulbong (성산일출봉)", "memo": "UNESCO volcanic crater, a top New Year sunrise spot; go early to climb", "ts_url": null, "check": null}
+      ]},
+      {"name": "Day 4 - Hamdeok & Manjanggul", "items": [
+        {"place_id": "ChIJVSv3qq_8DDURcLh4pWxZ0vA", "lat": 33.5434231, "lng": 126.66977519999998, "title": "Hamdeok Beach (함덕해수욕장)", "memo": "Golden sand set against black volcanic rocks", "ts_url": null, "check": null},
+        {"place_id": "ChIJf721YZkeDTURpGO42wZUb-E", "lat": 33.5437787, "lng": 126.6688353, "title": "Cafe Del Mundo (카페 델문도)", "memo": "Waterside cafe at Hamdeok known for fresh bakes", "ts_url": null, "check": null},
+        {"place_id": "ChIJmWohlsQZDTURppUrDPCrZrs", "lat": 33.52819720000001, "lng": 126.77176180000001, "title": "Manjanggul Lava Tube (만장굴)", "memo": "One of the world's longest lava tubes; walk to the lava column", "ts_url": null, "check": null}
+      ]},
+      {"name": "Day 5 - Pyoseon & Seogwipo", "items": [
+        {"place_id": "ChIJSYAmsDQJDTURbfgFFHplRQc", "lat": 33.322511, "lng": 126.841868, "title": "Jeju Folk Village, Pyoseon (제주민속촌)", "memo": "Traditional Jeju houses; camellias in bloom in winter", "ts_url": null, "check": null},
+        {"place_id": "ChIJQTsLr51TDDURbGXJg1JM0Sk", "lat": 33.2487163, "lng": 126.5640617, "title": "Seogwipo Maeil Olle Market (서귀포매일올레시장)", "memo": "Seogwipo's big traditional market; visited at night and for souvenirs", "ts_url": null, "check": null}
+      ]},
+      {"name": "Day 6 - Olle Trail 8 to Jungmun", "items": [
+        {"place_id": "ChIJDdwmAW1QDDURI3Krk7ygNuo", "lat": 33.2461544, "lng": 126.4494597, "title": "Yakcheonsa Temple (약천사)", "memo": "Temple with palm trees and a cave shrine; start of Olle Trail 8", "ts_url": null, "check": null},
+        {"place_id": "ChIJc9enKK5aDDURxqGjfTFYCVA", "lat": 33.2367938, "lng": 126.4254867, "title": "Jusangjeolli Cliff (주상절리대)", "memo": "Hexagonal basalt columns along Olle Trail 8", "ts_url": null, "check": null}
+      ]},
+      {"name": "Day 7 - Seogwipo", "items": [
+        {"place_id": "ChIJC3BNQ55TDDURPw7IbDbGXAU", "lat": 33.2448955, "lng": 126.56445690000001, "title": "Lee Jung-seop Art Street (이중섭거리)", "memo": "The painter's house, museum and murals in central Seogwipo", "ts_url": null, "check": null},
+        {"place_id": "ChIJ8afI-XNTDDURC7OZzyBO8KA", "lat": 33.2448567, "lng": 126.57157939999999, "title": "Jeongbang Waterfall (정방폭포)", "memo": "Waterfall dropping over black cliffs straight onto the shore", "ts_url": null, "check": null},
+        {"place_id": "ChIJ74jg4bdTDDURlhnoITehF-U", "lat": 33.239112999999996, "lng": 126.54483429999999, "title": "Oedolgae Rock (외돌개)", "memo": "Lone sea stack, about 30 min walk from Cheonjiyeon on Olle Trail 7", "ts_url": null, "check": null}
+      ]}
+    ]
+  }
+}

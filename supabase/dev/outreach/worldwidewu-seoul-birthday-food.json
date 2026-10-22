@@ -1,0 +1,126 @@
+{
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "worldwidewu-seoul-birthday-food",
+  "title": "Julie's Seoul birthday food trip — 12 spots + 1 for next time",
+  "desc": "Places from WorldwideWu's video \"3-day food vlog in SEOUL, KOREA (w/ prices)\" (Apr 2026). Source: https://www.youtube.com/watch?v=hohXc1zU5nw — Collected by PinWith, not made by the creator.",
+  "kind": "collection",
+  "themes": [
+   "Seoul",
+   "Food",
+   "3 days"
+  ],
+  "sections": [
+   {
+    "name": null,
+    "items": [
+     {
+      "place_id": "ChIJt9FDLSOjfDURZEey4raERa4",
+      "lat": 37.5675598,
+      "lng": 127.007747,
+      "title": "Daehwajeong Real Haejangguk (대화정 진짜해장국)",
+      "memo": "Haejangguk (Korean hangover soup)",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+      "lat": 37.5700385,
+      "lng": 126.9996038,
+      "title": "Gwangjang Market",
+      "memo": "",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJDcGJ-RSjfDURDxZGPtM5TrE",
+      "lat": 37.5705974,
+      "lng": 127.0004886,
+      "title": "ILHO Market (광장시장 일호상회)",
+      "memo": "Shop inside Gwangjang Market",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJxft0BAClfDURKXff2Q8CBWU",
+      "lat": 37.542748,
+      "lng": 127.0539607,
+      "title": "Neungdong Minari Seongsu (능동미나리 성수)",
+      "memo": "",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJqW7Uqo2lfDURHss_BAbwIkk",
+      "lat": 37.5423017,
+      "lng": 127.0554582,
+      "title": "Jayeondo Sogeumppang Seongsu (자연도소금빵)",
+      "memo": "Salt-bread bakery",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJ-akjQByjfDURnZ6rxLFSB6g",
+      "lat": 37.5723466,
+      "lng": 126.9889327,
+      "title": "Bukchon Mugunghwa (북촌무궁화)",
+      "memo": "",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJbRbNSUWifDUR0_7QDEywnnU",
+      "lat": 37.5449847,
+      "lng": 126.9850474,
+      "title": "Gil Bar Dak (길바닥)",
+      "memo": "",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJx6CwxdOYfDURcTPw_mx60ws",
+      "lat": 37.545828,
+      "lng": 126.9183845,
+      "title": "Anthracite Coffee Hapjeong",
+      "memo": "Anthracite's original Hapjeong cafe",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJ0YngUcKYfDURX3e-KVANdnA",
+      "lat": 37.5560188,
+      "lng": 126.9252584,
+      "title": "Hongdae Crab Kingdom (꽃게나라)",
+      "memo": "Crab restaurant in Hongdae",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJeYYRqm2ffDURsXkxvyp4fJA",
+      "lat": 37.5182241,
+      "lng": 126.9091245,
+      "title": "Wolhwa Restaurant Yeongdeungpo (월화식당)",
+      "memo": "",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJ92xBajOjfDURa2N5uQvP08c",
+      "lat": 37.5766523,
+      "lng": 126.9690595,
+      "title": "Seochon Jeontong Sundaeguk (서촌전통순대국)",
+      "memo": "Sundaeguk (blood-sausage soup) in Seochon",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJfYjlFvWifDURYSDsoxYbN80",
+      "lat": 37.559277,
+      "lng": 126.9777029,
+      "title": "Namdaemun Market",
+      "memo": "",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJ6wC71uKefDUROTN3dcLPVyY",
+      "lat": 37.5181476,
+      "lng": 126.9086483,
+      "title": "Buil Galbi (부일갈비)",
+      "memo": "Next time: the galbi spot Julie wanted to try but missed",
+      "ts_url": null
+     }
+    ]
+   }
+  ]
+ }
+}

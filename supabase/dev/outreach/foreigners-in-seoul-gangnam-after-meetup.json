@@ -1,0 +1,173 @@
+{
+  "target": "FOREIGNERS IN SEOUL! (Meetup)",
+  "group": "host_community",
+  "based_in_korea": true,
+  "msg_lang": "en",
+  "recipient_name": "Baller (Super Organizer)",
+  "contact_route": "Meetup 'Message' link to the organizers on meetup.com/foreigners-in-seoul (no public email/phone).",
+  "source": null,
+  "hooks": [
+    "Meetup page: 8,658 members; Saturday events 18:45-01:00 at MCJUCHANGO (2F), near Yeoksam Station exit 4, Gangnam (meetup.com/foreigners-in-seoul).",
+    "Page asks members to be respectful to host and bar staff; no explicit rule on promotion found -> ask organizer before sharing.",
+    "Map covers the Gangnam-Yeoksam strip, a short walk from the venue."
+  ],
+  "list": {
+    "owner": "pinwith_en",
+    "lang": "en",
+    "slug": "foreigners-in-seoul-gangnam-after-meetup",
+    "title": "Gangnam after the meetup",
+    "desc": "A free starter map made by PinWith for FOREIGNERS IN SEOUL! members: coffee, Korean BBQ, chimaek, noraebang and dessert around Gangnam Station. Share it with your table and co-edit.",
+    "kind": "collection",
+    "themes": [
+      "Gangnam",
+      "nightlife",
+      "BBQ",
+      "noraebang",
+      "dessert"
+    ],
+    "sections": [
+      {
+        "name": "Getting around",
+        "items": [
+          {
+            "place_id": "ChIJKxs2jFmhfDURPP--kvKavw0",
+            "lat": 37.497952,
+            "lng": 127.02761899999999,
+            "title": "Gangnam Station (강남역)",
+            "memo": "Line 2 and Shinbundang Line; 12 exits, check yours; Yeoksam is one stop east",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "Korean BBQ",
+        "items": [
+          {
+            "place_id": "ChIJp0aBQ1ihfDURHreGPrDz7kU",
+            "lat": 37.500883099999996,
+            "lng": 127.02748499999998,
+            "title": "Dwaeji Sanghoe (돼지상회)",
+            "memo": "All-you-can-eat pork BBQ sets; 2nd floor, up a short hill",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJZ9g_awChfDURFZnsQwQSYtA",
+            "lat": 37.493489499999995,
+            "lng": 127.0285991,
+            "title": "BBQ YUL",
+            "memo": "Pork BBQ grilled by staff; English menu; closed Sundays",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ32V8iv6hfDUR-UMjO61PeWE",
+            "lat": 37.5018151,
+            "lng": 127.0271581,
+            "title": "Damongjib Sinnonhyeon (다몽집)",
+            "memo": "Pork BBQ cooked for you; open until 05:00 most nights",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "Chimaek (chicken & beer)",
+        "items": [
+          {
+            "place_id": "ChIJwXwVvv-hfDURSopYalcQWoU",
+            "lat": 37.4946937,
+            "lng": 127.0277721,
+            "title": "Oneul Tongdak Gangnam (오늘통닭)",
+            "memo": "Large chicken pub, tablet ordering; good for groups",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ28V_Ou2hfDURaIxGsTn89NE",
+            "lat": 37.500883099999996,
+            "lng": 127.02748499999998,
+            "title": "Kyochon Chicken Gangnam Station",
+            "memo": "Honey-garlic chicken; tablet ordering; open until 05:00",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "Noraebang",
+        "items": [
+          {
+            "place_id": "ChIJsdiniAyhfDUR3lLt8CrR2xg",
+            "lat": 37.5001332,
+            "lng": 127.02761670000001,
+            "title": "Superstar Coin Noraebang (슈퍼스타코인노래연습장)",
+            "memo": "Coin karaoke, 3 songs per ₩1,000; expect a wait after 18:00",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ2TmaItmhfDUR4gC_L_dQquY",
+            "lat": 37.5007937,
+            "lng": 127.0268277,
+            "title": "Samsam Coin Noraebang (삼삼코인노래연습장)",
+            "memo": "Coin karaoke in basement 2 on Gangnam-daero; open until 02:00",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      },
+      {
+        "name": "Coffee & dessert",
+        "items": [
+          {
+            "place_id": "ChIJU6CqMS6hfDURoNmZ0I2bQOs",
+            "lat": 37.4961927,
+            "lng": 127.0308697,
+            "title": "Selected Nick's Gangnam",
+            "memo": "Multi-floor cafe with rooftop; tiramisu; open until midnight on weekdays",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJxQ0WL-GjfDURTof1w6DMceg",
+            "lat": 37.502699,
+            "lng": 127.02770759999999,
+            "title": "Upper and Under",
+            "memo": "Three-floor cafe with terraces, room for a group",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJ753azC6jfDUR2UUYwlh4N1g",
+            "lat": 37.5028303,
+            "lng": 127.02783409999999,
+            "title": "Something About Coffee",
+            "memo": "Big bakery cafe next door to Upper and Under",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJR0VTe1ihfDURIX4iwy2kBeQ",
+            "lat": 37.5010877,
+            "lng": 127.02713139999999,
+            "title": "Sulbing Gangnam (설빙)",
+            "memo": "Bingsu chain near Gangnam Stn exit 11; one bowl fits two; open until 22:00",
+            "ts_url": null,
+            "check": null
+          },
+          {
+            "place_id": "ChIJyfoO9qijfDURYCKsAxPWd-U",
+            "lat": 37.503243999999995,
+            "lng": 127.02671539999999,
+            "title": "CACHI Flower Cafe",
+            "memo": "Flower-filled cafe with cakes; oat and soy milk available",
+            "ts_url": null,
+            "check": null
+          }
+        ]
+      }
+    ]
+  }
+}

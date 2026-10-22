@@ -1,0 +1,152 @@
+{
+ "list": {
+  "owner": "pinwith",
+  "lang": "ko",
+  "slug": "yoonjeju-family-2n3d",
+  "title": "제주 2박 3일 가족 코스: 윤 제주삶 영상 속 15곳",
+  "desc": "윤 제주삶 영상 \"칭찬받는 제주 가족 여행 코스\"(2025년 4월)에 나온 장소. 출처: https://www.youtube.com/watch?v=65DswGETyjg — PinWith가 정리했으며 크리에이터가 직접 만든 리스트는 아닙니다.",
+  "kind": "course",
+  "themes": [
+   "제주",
+   "가족여행",
+   "2박3일"
+  ],
+  "sections": [
+   {
+    "name": "1일 차",
+    "items": [
+     {
+      "place_id": "ChIJD8OTMwD9DDUR8Lx-gBStBWA",
+      "lat": 33.4887834,
+      "lng": 126.5330693,
+      "title": "김재훈고사리육개장",
+      "memo": "공항 도착 후 첫 식사",
+      "ts_url": "https://youtu.be/65DswGETyjg?t=34"
+     },
+     {
+      "place_id": "ChIJmVjPcCQDDTURapZUEWACgEc",
+      "lat": 33.4485653,
+      "lng": 126.6586582,
+      "title": "제주돌문화공원",
+      "memo": "",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJ1wPQN2kdDTURwmI7umNI3xc",
+      "lat": 33.4694997,
+      "lng": 126.6650734,
+      "title": "야원",
+      "memo": "돌문화공원 다음 카페",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJMbJyapkeDTURkIp6l1JoLfY",
+      "lat": 33.5433163,
+      "lng": 126.6698513,
+      "title": "함덕서우봉해변",
+      "memo": "해변과 서우봉을 함께",
+      "ts_url": null
+     }
+    ]
+   },
+   {
+    "name": "2일 차",
+    "items": [
+     {
+      "place_id": "ChIJdxF1wn4bDTUR13aRhJtw2Yo",
+      "lat": 33.4843075,
+      "lng": 126.7000836,
+      "title": "선흘방주할머니식당",
+      "memo": "숙소에서 나와 첫 식사",
+      "ts_url": "https://youtu.be/65DswGETyjg?t=382"
+     },
+     {
+      "place_id": "ChIJLfjeK8MbDTUR9QZMV8-zxzU",
+      "lat": 33.4441972,
+      "lng": 126.7783058,
+      "title": "스누피가든",
+      "memo": "",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJAcK-iKsRDTURhb27c60bCiM",
+      "lat": 33.4672268,
+      "lng": 126.7817315,
+      "title": "우정원베이커리 제주삼나무점",
+      "memo": "스누피가든 다음 베이커리",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJl9073xgRDTUR2mwxz1DUvsg",
+      "lat": 33.4599676,
+      "lng": 126.831477,
+      "title": "용눈이오름",
+      "memo": "",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJn3jj9rkUDTURS7YjOgUyUVU",
+      "lat": 33.458056,
+      "lng": 126.9425,
+      "title": "성산일출봉",
+      "memo": "",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJhV8E4iMVDTURwZlkgN72v_4",
+      "lat": 33.4697941,
+      "lng": 126.9295006,
+      "title": "성산포수협 활어회센터",
+      "memo": "2일 차 마지막",
+      "ts_url": null
+     }
+    ]
+   },
+   {
+    "name": "3일 차",
+    "items": [
+     {
+      "place_id": "ChIJCxvU0HADDTURH07QGp6rSNw",
+      "lat": 33.4355771,
+      "lng": 126.679635,
+      "title": "우동카덴",
+      "memo": "교래손칼국수와 둘 중 하나",
+      "ts_url": "https://youtu.be/65DswGETyjg?t=655"
+     },
+     {
+      "place_id": "ChIJ3xng5GoDDTURZc9HkqAE3AQ",
+      "lat": 33.4362437,
+      "lng": 126.6757682,
+      "title": "원조교래손칼국수",
+      "memo": "우동카덴 대신 골라도 되는 곳",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJCZnaDR8DDTURW0XnZllsHHM",
+      "lat": 33.4273021,
+      "lng": 126.6616589,
+      "title": "사려니숲길",
+      "memo": "식사 후 숲길 산책",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJp-KATVH9DDURX3fRbxTKj98",
+      "lat": 33.4544416,
+      "lng": 126.5866129,
+      "title": "아침미소목장",
+      "memo": "",
+      "ts_url": null
+     },
+     {
+      "place_id": "ChIJBdEw_1PjDDUR9XxfgFpYmjw",
+      "lat": 33.5115133,
+      "lng": 126.5262564,
+      "title": "동문시장",
+      "memo": "공항 가기 전 마지막",
+      "ts_url": null
+     }
+    ]
+   }
+  ]
+ }
+}
