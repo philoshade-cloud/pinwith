@@ -15,6 +15,8 @@ export const metadata: Metadata = {
   appleWebApp: { capable: true, title: "PinWith", statusBarStyle: "default" },
   // AdSense 사이트 확인용(<meta name="google-adsense-account">). 광고 계정 번호(ca-pub-…)를 넣으면 생긴다.
   ...(process.env.NEXT_PUBLIC_ADSENSE_CLIENT ? { other: { "google-adsense-account": process.env.NEXT_PUBLIC_ADSENSE_CLIENT } } : {}),
+  // 네이버 서치어드바이저 소유 확인(10-22)
+  verification: { other: { "naver-site-verification": "dc04edf740e70f0f9b04c9afa99e4c0fae23dda2" } },
 };
 
 export const viewport: Viewport = {
