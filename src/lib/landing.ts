@@ -18,10 +18,13 @@ export type LandingList = {
   updatedAt: string;
   places: string[];
   count: number;
+  // 미리보기 그림용 핀 좌표(순서대로)
+  pins: { lat: number; lng: number }[];
+  course: boolean;
 };
 
 type Row = {
-  slug: string; title: string; description: string | null; lang: string | null; themes: string[] | null; like_count: number | null; updated_at: string;
+  slug: string; title: string; description: string | null; lang: string | null; kind: string; themes: string[] | null; like_count: number | null; updated_at: string;
   owner: { handle: string; display_name: string | null; lang: string | null };
   list_items: { position: number; custom_title: string | null; places: { lat: number | null; lng: number | null } | null }[];
 };
@@ -33,7 +36,7 @@ async function cityLists(): Promise<Record<string, LandingList[]>> {
   const { data } = await anon()
     .from("lists")
     .select(
-      "slug, title, description, lang, themes, like_count, updated_at, owner:profiles!lists_owner_id_fkey!inner(handle, display_name, lang)," +
+      "slug, title, description, lang, themes, kind, like_count, updated_at, owner:profiles!lists_owner_id_fkey!inner(handle, display_name, lang)," +
         " list_items(position, custom_title, places(lat, lng))",
     )
     .eq("visibility", "public")
@@ -56,6 +59,8 @@ async function cityLists(): Promise<Record<string, LandingList[]>> {
       updatedAt: r.updated_at,
       places: items.flatMap((i) => (i.custom_title ? [i.custom_title] : [])),
       count: items.length,
+      pins: pins.slice(0, 40),
+      course: r.kind === "course",
     };
     for (const c of CITIES) {
       const inside = pins.filter((p) => distanceKm(p.lat, p.lng, c.lat, c.lng) <= c.radius).length;

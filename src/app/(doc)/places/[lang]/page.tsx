@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { CityTiles } from "@/components/CityTiles";
 import { LangLinks } from "@/components/LangLinks";
 import { cityName, findCity } from "@/lib/cities";
 import { LANG_IDS, isLang, isRtl } from "@/lib/i18n/core";
@@ -43,23 +44,11 @@ async function CitiesContent({ params }: { params: PageProps<"/places/[lang]">["
       <h1>{lt(lang, "indexTitle")}</h1>
       <p>{lt(lang, "indexIntro")}</p>
       <LangLinks langs={LANG_IDS} current={lang} href={(l) => `/places/${l}`} />
-      <ul>
-        {mine.map((c) => (
-          <li key={c.slug}>
-            <Link href={`/places/${lang}/${c.slug}`}>{cityName(findCity(c.slug)!, lang)}</Link> · {lt(lang, "lists", { n: c.count })}
-          </li>
-        ))}
-      </ul>
+      <CityTiles items={mine.map((c) => ({ href: `/places/${lang}/${c.slug}`, name: cityName(findCity(c.slug)!, lang), sub: lt(lang, "lists", { n: c.count }) }))} />
       {rest.length > 0 && (
         <>
           <h2>{lt(lang, "otherCities")}</h2>
-          <ul>
-            {rest.map((c) => (
-              <li key={c.slug}>
-                <Link href={`/places/en/${c.slug}`} hrefLang="en">{cityName(findCity(c.slug)!, lang)}</Link> · {lt(lang, "lists", { n: c.count })}
-              </li>
-            ))}
-          </ul>
+          <CityTiles items={rest.map((c) => ({ href: `/places/en/${c.slug}`, hrefLang: "en", name: cityName(findCity(c.slug)!, lang), sub: lt(lang, "lists", { n: c.count }) }))} />
         </>
       )}
       <p className="mt-8">

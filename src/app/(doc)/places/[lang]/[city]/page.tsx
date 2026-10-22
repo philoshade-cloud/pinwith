@@ -7,6 +7,8 @@ import { isLang, isRtl, type Lang } from "@/lib/i18n/core";
 import { landingCities, landingCity, type LandingList } from "@/lib/landing";
 import { lt } from "@/lib/landingText";
 import { LangLinks } from "@/components/LangLinks";
+import { PinThumb } from "@/components/PinThumb";
+import { CityTiles } from "@/components/CityTiles";
 import { SITE, clip, langAlternates, ldJson, placesLine } from "@/lib/seo";
 
 // /places/<언어>/<도시> — 검색엔진용 도시 소개: 그 도시의 공개 리스트를 그 언어로 먼저, 다른 언어 리스트는 아래에.
@@ -88,16 +90,7 @@ async function CityContent({ params }: { params: PageProps<"/places/[lang]/[city
       {cities.length > 0 && (
         <>
           <h2>{lt(lang, "otherCities")}</h2>
-          <ul>
-            {cities.map((c) => {
-              const city = findCity(c.slug)!;
-              return (
-                <li key={c.slug}>
-                  <Link href={`/places/${lang}/${c.slug}`}>{cityName(city, lang)}</Link> · {lt(lang, "lists", { n: c.count })}
-                </li>
-              );
-            })}
-          </ul>
+          <CityTiles items={cities.map((c) => ({ href: `/places/${lang}/${c.slug}`, name: cityName(findCity(c.slug)!, lang), sub: lt(lang, "lists", { n: c.count }) }))} />
         </>
       )}
     </div>
@@ -105,20 +98,33 @@ async function CityContent({ params }: { params: PageProps<"/places/[lang]/[city
 }
 
 function ListCard({ l, lang }: { l: LandingList; lang: Lang }) {
+  // 카드 전체가 리스트 화면으로 가는 버튼(눌러서 지도로 열린다는 게 보이게)
   return (
-    <section lang={l.lang} dir="auto" className="mt-6 rounded-xl border border-rule p-4">
-      <h3 className="!mt-0">
-        <Link href={l.path}>{l.title}</Link>
-      </h3>
-      <p className="note !mt-1">
-        @{l.handle} · {placesLine(lang, l.count).replace(" · PinWith", "")}
-        {l.themes.length > 0 && ` · ${l.themes.map((t) => `#${t}`).join(" ")}`}
-      </p>
-      {l.description && <p>{clip(l.description, 220)}</p>}
-      {l.places.length > 0 && <p className="text-[14px]">📍 {l.places.slice(0, 8).join(" · ")}{l.places.length > 8 ? " …" : ""}</p>}
-      <p className="!mb-0">
-        <Link href={l.path} lang={lang}>{lt(lang, "openMap")} →</Link>
-      </p>
-    </section>
+    <Link
+      href={l.path}
+      className="group mt-4 flex items-start gap-4 rounded-2xl border border-rule bg-white p-4 no-underline shadow-sm transition hover:-translate-y-0.5 hover:border-teal hover:shadow-md"
+    >
+      <PinThumb pins={l.pins} course={l.course} />
+      <span className="min-w-0 flex-1">
+        <span lang={l.lang} dir="auto" className="block text-[17px] font-semibold leading-snug text-ink group-hover:text-teal">{l.title}</span>
+        <span className="mt-1 block text-[13px] text-muted">
+          <bdi>@{l.handle}</bdi> · {placesLine(lang, l.count).replace(" · PinWith", "")}
+        </span>
+        {l.description && <span lang={l.lang} dir="auto" className="mt-1.5 line-clamp-2 block text-[14px] leading-relaxed text-ink/80">{l.description}</span>}
+        {l.places.length > 0 && (
+          <span lang={l.lang} dir="auto" className="mt-1.5 line-clamp-2 block text-[13px] text-ink/70">📍 {l.places.slice(0, 8).join(" · ")}{l.places.length > 8 ? " …" : ""}</span>
+        )}
+        {l.themes.length > 0 && (
+          <span className="mt-2 flex flex-wrap gap-1">
+            {l.themes.map((t) => (
+              <span key={t} lang={l.lang} className="rounded-full bg-surface px-2 py-0.5 text-[12px] text-teal">#{t}</span>
+            ))}
+          </span>
+        )}
+        <span className="mt-3 inline-flex items-center gap-1 rounded-full bg-teal px-3 py-1.5 text-[13px] font-semibold text-white">
+          🗺️ {lt(lang, "openMap")} <span aria-hidden className="inline-block rtl:rotate-180">→</span>
+        </span>
+      </span>
+    </Link>
   );
 }

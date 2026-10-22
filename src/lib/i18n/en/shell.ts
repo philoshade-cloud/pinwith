@@ -205,4 +205,5 @@ export const shell: Record<string, string> = {
   "{city}의 다른 리스트 {n}개": "{n} more list in {city}|{n} more lists in {city}",
   "도시별@@칩": "By city",
   "도시별로 둘러보기": "Browse by city",
+  "메인으로 돌아가기": "Back to main",
 };

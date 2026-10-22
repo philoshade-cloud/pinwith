@@ -1049,7 +1049,8 @@
 "좋아하는 장소를 지도에 모아 링크 하나로 건네세요.": "Reúne tus lugares favoritos en un mapa y compártelos con un solo enlace.",
 "{city}의 다른 리스트 {n}개": "{n} lista más en {city}|{n} listas más en {city}",
 "도시별@@칩": "Por ciudad",
-"도시별로 둘러보기": "Explorar por ciudad"
+"도시별로 둘러보기": "Explorar por ciudad",
+"메인으로 돌아가기": "Volver al inicio"
 },
 "titles": {
 "가게 콘솔": "Consola del negocio",
