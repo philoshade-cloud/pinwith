@@ -89,3 +89,12 @@ export async function landingCity(slug: string, lang: Lang) {
   if (!langs.includes(lang)) return null;
   return { city, langs, mine: lists.filter((l) => l.lang === lang), others: lists.filter((l) => l.lang !== lang) };
 }
+
+// 이 리스트가 들어 있는 도시 페이지(리스트 화면의 '이 도시의 다른 리스트' 링크용). 없으면 null.
+export type CityRef = { slug: string; count: number; langs: Lang[] };
+export async function cityOfList(handle: string, slug: string): Promise<CityRef | null> {
+  const path = `/@${handle}/${encodeURIComponent(slug)}`;
+  const [all, pages] = await Promise.all([cityLists(), landingCities()]);
+  for (const p of pages) if ((all[p.slug] ?? []).some((l) => l.path === path)) return { slug: p.slug, count: p.count, langs: p.langs };
+  return null;
+}

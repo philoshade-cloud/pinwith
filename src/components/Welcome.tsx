@@ -8,11 +8,12 @@ import { OfficialBadge } from "./OfficialBadge";
 import { ExampleBadge } from "./ExampleBadge";
 import { Panel } from "./shell/Panel";
 import { useMapScene, useShell, type Scene } from "./shell/context";
-import { LangSwitch, useT } from "@/lib/i18n/client";
+import { LangSwitch, useLang, useT } from "@/lib/i18n/client";
 
 // 로그인 전 홈: 지도에는 화면 언어의 첫 번째 예시 리스트(못 읽으면 내장 예시 코스), 패널에는 서비스 소개와 예시 3개.
 export function Welcome({ sample }: { sample: CuratedList }) {
   const t = useT();
+  const lang = useLang();
   const examples = useExampleLists();
   const first = examples?.[0];
   const [pins, setPins] = useState<{ id: string; items: ListItem[] } | null>(null);
@@ -63,6 +64,9 @@ export function Welcome({ sample }: { sample: CuratedList }) {
           </Link>
           <Link href="/explore" className="btn-quiet justify-center !py-3 !text-[15px]">
             {t("다른 사람 리스트 둘러보기")}
+          </Link>
+          <Link href={`/places/${lang}`} className="btn-quiet justify-center !py-3 !text-[15px]">
+            {t("도시별로 둘러보기")}
           </Link>
         </div>
         {examples && examples.length > 0 && (

@@ -11,6 +11,8 @@ import { isWithinMeters } from "@/lib/links";
 import { shortLink } from "@/lib/share";
 import { track } from "@/lib/track";
 import { AdSlot } from "./AdSlot";
+import { CityLink } from "./CityLink";
+import type { CityRef } from "@/lib/landing";
 import { FollowButton } from "./FollowButton";
 import { LikeButton } from "./LikeButton";
 import { OwnerItemActions } from "./OwnerItemActions";
@@ -27,7 +29,7 @@ const formatCount = (n: number, locale: string) =>
   n.toLocaleString(locale, n >= 10000 ? { notation: "compact", maximumFractionDigits: 1 } : undefined);
 
 // 리스트 화면: 지도에는 이 리스트의 핀, 패널에는 큐레이터·설명·장소 목록.
-export function ListExplorer({ list }: { list: CuratedList }) {
+export function ListExplorer({ list, city }: { list: CuratedList; city?: CityRef | null }) {
   const router = useRouter();
   const t = useT();
   const tRich = useTRich();
@@ -250,6 +252,7 @@ export function ListExplorer({ list }: { list: CuratedList }) {
             ))}
           </ul>
         )}
+        {city && <CityLink city={city} />}
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <LikeButton listId={list.id} initialCount={list.likeCount} demo={isDemo} />
           {isDemo ? (

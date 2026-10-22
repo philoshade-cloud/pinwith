@@ -202,4 +202,7 @@ export const shell: Record<string, string> = {
   "인기 리스트@@칩": "Popular",
   "내 리스트와 겹치는 리스트@@칩": "Like mine",
   "좋아하는 장소를 지도에 모아 링크 하나로 건네세요.": "Collect your favorite places on a map and share them with one link.",
+  "{city}의 다른 리스트 {n}개": "{n} more list in {city}|{n} more lists in {city}",
+  "도시별@@칩": "By city",
+  "도시별로 둘러보기": "Browse by city",
 };

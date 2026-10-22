@@ -10,7 +10,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useShell } from "./shell/context";
 import { LANGS } from "@/lib/i18n/core";
-import { useFormat, useT } from "@/lib/i18n/client";
+import { useFormat, useLang, useT } from "@/lib/i18n/client";
 import { listLang, useExploreLangs } from "@/lib/exploreLangs";
 
 // 이 확대 단계(도시 정도)보다 넓게 보고 있으면 '이 지역'으로 치지 않는다
@@ -61,6 +61,7 @@ function readPref(): { cat?: Category; local?: boolean } {
 // '현재 지도 지역 먼저'를 켜면 그 묶음 안에서 지금 지도에 핀이 있는 리스트를 위로 올린다.
 export function ExploreView() {
   const t = useT();
+  const ui = useLang();
   // '타인의 핀' 목록은 My에서 고른 언어(없으면 화면 언어)의 리스트만. 검색 결과는 언어와 관계없이 모두.
   const { langs } = useExploreLangs();
   const langOk = useCallback((l: ListHit) => langs.includes(listLang(l) as never), [langs]);
@@ -271,6 +272,11 @@ export function ExploreView() {
           <Link href="/me#explore-langs" className="font-semibold text-teal underline">{t("바꾸기")}</Link>
         </p>
       )}
+      {me === null && (
+        <p className="mt-3">
+          <Link href={`/places/${ui}`} className="text-[14px] font-semibold text-teal">📍 {t("도시별로 둘러보기")} ›</Link>
+        </p>
+      )}
       {/* 로그인 전에는 묶음 고르기 없이 예시만 */}
       {!!me && (
       <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -298,6 +304,10 @@ export function ExploreView() {
               </button>
             );
           })}
+          {/* 도시별 소개 페이지로(화면 언어판) */}
+          <Link href={`/places/${ui}`} className="shrink-0 rounded-full bg-surface px-3 py-1.5 text-[13px] font-semibold text-ink">
+            {t("도시별@@칩")} ›
+          </Link>
         </div>
         <label className="ml-auto flex shrink-0 cursor-pointer items-center gap-2 text-[13px] font-semibold text-ink">
           <span>{t("현재 지도 지역 먼저")}</span>

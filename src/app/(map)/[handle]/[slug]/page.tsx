@@ -6,6 +6,7 @@ import { ListExplorer } from "@/components/ListExplorer";
 import { findMovedOfficialList, getCuratedList } from "@/lib/data";
 import { isSupabaseConfigured } from "@/lib/env";
 import { getListPreview } from "@/lib/public";
+import { cityOfList } from "@/lib/landing";
 import { SITE, clip, ldJson, placesLine, seoLang } from "@/lib/seo";
 
 // /@handle/slug — 큐레이터의 리스트 화면. 로그인 없이도 공개·링크 공개 리스트를 그대로 본다.
@@ -75,7 +76,7 @@ async function ListContent({ params }: { params: PageProps<"/[handle]/[slug]">["
   return (
     <>
       <ListLd handle={handle} slug={slug} />
-      <ListExplorer list={list} />
+      <ListExplorer list={list} city={list.visibility === "public" ? await cityOfList(list.curator.handle, list.slug) : null} />
     </>
   );
 }

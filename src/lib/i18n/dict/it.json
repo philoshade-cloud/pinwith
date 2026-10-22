@@ -1046,7 +1046,10 @@
 "보는 언어: {langs}": "Lingue: {langs}",
 "리스트 언어": "Lingua della lista",
 "‘타인의 핀’에서 이 언어를 고른 사람에게 보여요.": "Viene mostrata in Esplora a chi ha scelto questa lingua.",
-"좋아하는 장소를 지도에 모아 링크 하나로 건네세요.": "Raccogli i tuoi posti preferiti su una mappa e condividili con un solo link."
+"좋아하는 장소를 지도에 모아 링크 하나로 건네세요.": "Raccogli i tuoi posti preferiti su una mappa e condividili con un solo link.",
+"{city}의 다른 리스트 {n}개": "Un'altra lista a {city}|Altre {n} liste a {city}",
+"도시별@@칩": "Per città",
+"도시별로 둘러보기": "Esplora per città"
 },
 "titles": {
 "가게 콘솔": "Console del locale",
