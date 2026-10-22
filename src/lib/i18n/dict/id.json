@@ -978,7 +978,6 @@
 "로그인하지 못했어요. 링크가 만료됐거나 이미 쓴 링크일 수 있어요. 다시 시도해 주세요.": "Gagal masuk. Tautan mungkin sudah kedaluwarsa atau sudah dipakai. Silakan coba lagi.",
 "로그인 화면을 열지 못했어요. 잠시 뒤 다시 시도하세요.": "Gagal membuka halaman masuk. Silakan coba lagi sebentar lagi.",
 "이메일로 로그인 링크 받기": "Dapatkan tautan masuk lewat email",
-"you@example.com  ·  테스트: test1~6, 가게 test7~9": "you@example.com  ·  Uji: test1–6, toko test7–9",
 "다시 보내기": "Kirim ulang",
 "로그인 링크 보내기": "Kirim tautan masuk",
 "{email}로 로그인 링크를 보냈습니다. 메일함(스팸함 포함)에서 링크를 누르세요.": "Tautan masuk telah dikirim ke {email}. Periksa kotak masuk (dan folder spam) lalu ketuk tautannya.",

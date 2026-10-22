@@ -18,7 +18,7 @@ const TRAINING_BOTS = [
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: "*", allow: "/", disallow: ["/api/", "/admin", "/me", "/biz", "/auth/", "/login", "/search"] },
+      { userAgent: "*", allow: "/", disallow: ["/api/", "/admin", "/me", "/biz", "/auth/", "/login", "/search", "/messages", "/notifications", "/following", "/reserve", "/demo"] },
       { userAgent: TRAINING_BOTS, disallow: "/" },
     ],
     sitemap: `${SITE}/sitemap.xml`,

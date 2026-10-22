@@ -10,6 +10,10 @@
 
 ---
 
+## v0.58 — 출시 전 정리·검색엔진 (2026-10-22)
+- 0.58-1 테스트 로그인 제거: 로그인 칸에 'test1'처럼 치면 들어가던 기능과 안내 문구, 화면 코드에 있던 테스트 비밀번호를 모두 지움(환경 변수로 다시 켤 수도 없음). 테스트 계정 삭제 SQL은 `supabase/dev/cleanup_test_data.sql`
+- 0.58-2 검색엔진: 리스트·큐레이터 화면에 정식 주소(canonical), 구조화 데이터(리스트=장소 목록 ItemList/Place·좌표, 큐레이터=ProfilePage), 리스트 언어를 따르는 설명 문구(17개 언어). 링크로만 공유한 리스트와 공개 리스트가 없는 프로필은 검색에서 제외(noindex). 홈·타인의 핀·약관 등에도 정식 주소. robots.txt에서 메시지·알림·팔로잉·예약·데모 화면 제외. 기본 사이트 주소를 pinwith.me로
+
 ## v0.57 — 운영자 자동 좋아요 (2026-10-22)
 - 0.57-1 운영자 계정(admins)은 PinWith 공식 계정의 공개 리스트를 항상 모두 좋아요: 공식 리스트가 새로 공개될 때와 운영자가 추가될 때 바로 넣고, 매일 자동 작업(`sync_admin_official_likes`)에서 다시 맞춤(운영자가 취소해도 다음 날 되돌아옴). 지금 공식 공개 리스트 70개 모두 반영 `[DB]` · `9a61d1c`
 - DB: `supabase/migrations/20261022000500_admin_likes_official.sql` · 되돌리기 `supabase/rollback/20261022000500_admin_likes_official.down.sql`

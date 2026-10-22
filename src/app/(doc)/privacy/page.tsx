@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ByLang } from "@/components/ByLang";
 
-export const metadata: Metadata = { title: "개인정보처리방침" };
+export const metadata: Metadata = { title: "개인정보처리방침", alternates: { canonical: "/privacy" } };
 
 // 출시 전 법률 검토를 받는다.
 export default function Privacy() {

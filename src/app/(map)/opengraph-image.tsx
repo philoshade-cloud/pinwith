@@ -18,6 +18,9 @@ export default async function Image() {
       course: true,
       themes: ["맛집", "카페", "여행코스"],
       pins: s.items.flatMap((i) => (i.lat != null && i.lng != null ? [{ lat: i.lat, lng: i.lng }] : [])),
+      lang: "ko",
+      indexable: true,
+      places: [],
     },
     "list",
   );

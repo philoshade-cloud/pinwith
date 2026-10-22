@@ -978,7 +978,6 @@
 "로그인하지 못했어요. 링크가 만료됐거나 이미 쓴 링크일 수 있어요. 다시 시도해 주세요.": "No se pudo iniciar sesión. Puede que el enlace haya caducado o ya se haya usado. Inténtalo de nuevo.",
 "로그인 화면을 열지 못했어요. 잠시 뒤 다시 시도하세요.": "No se pudo abrir la página de inicio de sesión. Inténtalo de nuevo en un momento.",
 "이메일로 로그인 링크 받기": "Recibir un enlace de acceso por correo",
-"you@example.com  ·  테스트: test1~6, 가게 test7~9": "you@example.com  ·  Prueba: test1–6, negocios test7–9",
 "다시 보내기": "Reenviar",
 "로그인 링크 보내기": "Enviar enlace de acceso",
 "{email}로 로그인 링크를 보냈습니다. 메일함(스팸함 포함)에서 링크를 누르세요.": "Enviamos un enlace de acceso a {email}. Revisa tu bandeja de entrada (y la carpeta de spam) y toca el enlace.",

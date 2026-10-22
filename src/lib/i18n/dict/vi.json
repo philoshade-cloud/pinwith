@@ -978,7 +978,6 @@
 "로그인하지 못했어요. 링크가 만료됐거나 이미 쓴 링크일 수 있어요. 다시 시도해 주세요.": "Không đăng nhập được. Liên kết có thể đã hết hạn hoặc đã được dùng. Vui lòng thử lại.",
 "로그인 화면을 열지 못했어요. 잠시 뒤 다시 시도하세요.": "Không mở được trang đăng nhập. Vui lòng thử lại sau giây lát.",
 "이메일로 로그인 링크 받기": "Nhận liên kết đăng nhập qua email",
-"you@example.com  ·  테스트: test1~6, 가게 test7~9": "you@example.com  ·  Thử nghiệm: test1–6, cửa hàng test7–9",
 "다시 보내기": "Gửi lại",
 "로그인 링크 보내기": "Gửi liên kết đăng nhập",
 "{email}로 로그인 링크를 보냈습니다. 메일함(스팸함 포함)에서 링크를 누르세요.": "Chúng tôi đã gửi liên kết đăng nhập đến {email}. Hãy kiểm tra hộp thư (cả thư rác) và nhấn vào liên kết.",

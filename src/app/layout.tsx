@@ -7,7 +7,7 @@ import { LangBoot } from "@/lib/i18n/client";
 const LANG_HEAD = `try{var m=document.cookie.match(/(?:^|; )pw_lang=([A-Za-z-]+)/);var n=((navigator.languages&&navigator.languages[0])||navigator.language||"ko").toLowerCase();var l=m?m[1]:(n.indexOf("ko")===0?"ko":"x");if(l!=="ko"){if(l!=="x")document.documentElement.lang=l;if(l==="ar")document.documentElement.dir="rtl";document.documentElement.classList.add("i18n-wait");setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},3000)}}catch(e){}`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://pinwith-xiea.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://pinwith.me"),
   title: { default: "PinWith", template: "%s · PinWith" },
   description: "좋아하는 장소를 지도에 모아 링크 하나로 건네세요.",
   // 아이폰 '홈 화면에 추가' 아이콘(홈 화면 앱이어야 아이폰에서 알림을 받을 수 있다)

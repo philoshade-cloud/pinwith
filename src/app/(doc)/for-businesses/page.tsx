@@ -4,6 +4,7 @@ import { ByLang } from "@/components/ByLang";
 
 export const metadata: Metadata = {
   title: "가게 사장님께",
+  alternates: { canonical: "/for-businesses" },
   description: "PinWith 광고비(선불 충전)가 무엇에 쓰이는지, 과금 방식, 쓰지 않은 잔액 환불 정책, 판매자 정보와 문의처.",
 };
 

@@ -3,6 +3,7 @@ import { cacheLife } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL, isSupabaseConfigured } from "./env";
 import { normalizeHandle } from "./data";
+import { curatorLine, seoLang } from "./seo";
 
 // 공유 미리보기(카톡·인스타 링크 카드)용. 로그인 없이 누구나 보는 정보만 읽는다(RLS가 공개 범위를 판단).
 function anon() {
@@ -18,6 +19,10 @@ export type Preview = {
   course: boolean;
   themes: string[];
   pins: { lat: number; lng: number }[];
+  // 검색엔진용
+  lang: string;
+  indexable: boolean;
+  places: { name: string; lat: number | null; lng: number | null }[];
 };
 
 export async function getListPreview(rawHandle: string, slug: string): Promise<Preview | null> {
@@ -28,18 +33,19 @@ export async function getListPreview(rawHandle: string, slug: string): Promise<P
   const { data } = await anon()
     .from("lists")
     .select(
-      "title, description, kind, themes, owner:profiles!lists_owner_id_fkey!inner(handle, display_name)," +
-        " list_items(position, places(lat, lng))",
+      "title, description, kind, themes, lang, visibility, owner:profiles!lists_owner_id_fkey!inner(handle, display_name, lang)," +
+        " list_items(position, custom_title, places(lat, lng))",
     )
     .eq("owner.handle", handle)
     .eq("slug", decodeURIComponent(slug))
     .maybeSingle();
   if (!data) return null;
   const row = data as unknown as {
-    title: string; description: string; kind: string; themes: string[];
-    owner: { handle: string; display_name: string };
-    list_items: { position: number; places: { lat: number | null; lng: number | null } | null }[];
+    title: string; description: string; kind: string; themes: string[]; lang: string | null; visibility: string;
+    owner: { handle: string; display_name: string; lang: string | null };
+    list_items: { position: number; custom_title: string | null; places: { lat: number | null; lng: number | null } | null }[];
   };
+  const items = [...row.list_items].sort((a, b) => a.position - b.position);
   return {
     title: row.title,
     description: row.description,
@@ -48,9 +54,10 @@ export async function getListPreview(rawHandle: string, slug: string): Promise<P
     count: row.list_items.length,
     course: row.kind === "course",
     themes: row.themes,
-    pins: [...row.list_items]
-      .sort((a, b) => a.position - b.position)
-      .flatMap((i) => (i.places?.lat != null && i.places?.lng != null ? [{ lat: i.places.lat, lng: i.places.lng }] : [])),
+    pins: items.flatMap((i) => (i.places?.lat != null && i.places?.lng != null ? [{ lat: i.places.lat, lng: i.places.lng }] : [])),
+    lang: row.lang ?? row.owner.lang ?? "ko",
+    indexable: row.visibility === "public",
+    places: items.flatMap((i) => (i.custom_title ? [{ name: i.custom_title, lat: i.places?.lat ?? null, lng: i.places?.lng ?? null }] : [])),
   };
 }
 
@@ -61,7 +68,7 @@ export async function getCuratorPreview(rawHandle: string): Promise<Preview | nu
   const handle = normalizeHandle(rawHandle);
   const db = anon();
   const [{ data: p }, { data: lists }] = await Promise.all([
-    db.from("profiles").select("handle, display_name, bio").eq("handle", handle).maybeSingle(),
+    db.from("profiles").select("handle, display_name, bio, lang").eq("handle", handle).maybeSingle(),
     db
       .from("lists")
       .select("visibility, themes, owner:profiles!lists_owner_id_fkey!inner(handle), list_items(places(lat, lng))")
@@ -75,13 +82,16 @@ export async function getCuratorPreview(rawHandle: string): Promise<Preview | nu
   );
   return {
     title: p.display_name || p.handle,
-    description: p.bio || `${p.display_name || p.handle}의 장소 지도`,
+    description: p.bio || curatorLine(seoLang(p.lang), p.display_name || p.handle),
     curatorName: p.display_name || p.handle,
     handle: p.handle,
     count: pins.length,
     course: false,
     themes: [...new Set(rows.flatMap((l) => l.themes))].slice(0, 4),
     pins,
+    lang: p.lang ?? "ko",
+    indexable: rows.length > 0,
+    places: [],
   };
 }
 
