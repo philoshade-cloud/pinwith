@@ -5,9 +5,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Blocks, BizRefunds, BizReview, Disputes, PayoutRequests, StoreQuality, Topups } from "./AdminCommerce";
 import { ErrorsPanel, UsagePanel } from "./AdminOps";
+import { SocialPanel } from "./AdminSocial";
 import { ConfirmButton } from "./ConfirmButton";
 
-type Tab = "payout" | "curators" | "settings" | "support" | "biz" | "topups" | "requests" | "disputes" | "quality" | "blocks" | "usage" | "errors";
+type Tab = "payout" | "curators" | "settings" | "support" | "biz" | "topups" | "requests" | "disputes" | "quality" | "blocks" | "usage" | "errors" | "social";
 const TABS: { id: Tab; label: string }[] = [
   { id: "payout", label: "정산" },
   { id: "requests", label: "지급 요청" },
@@ -19,6 +20,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "curators", label: "큐레이터·분배율" },
   { id: "settings", label: "수익화 기준" },
   { id: "support", label: "문의·신고" },
+  { id: "social", label: "SNS 초안" },
   { id: "usage", label: "서비스 사용량" },
   { id: "errors", label: "오류" },
 ];
@@ -80,6 +82,7 @@ export function AdminConsole() {
         {tab === "blocks" && <Blocks />}
         {tab === "usage" && <UsagePanel />}
         {tab === "errors" && <ErrorsPanel />}
+        {tab === "social" && <SocialPanel />}
       </div>
     </div>
   );
