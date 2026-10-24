@@ -316,9 +316,10 @@ export function MapShell({ children }: { children: ReactNode }) {
               onResults={showResults}
               onSavedPick={openSaved}
               onSavedAll={(q) => router.push(`/search?q=${encodeURIComponent(q)}`)}
-              onPick={(id) => {
+              onPick={(id, name) => {
                 setResults(null);
-                setPicked({ id });
+                // 이름만 먼저 알고 좌표는 장소 카드가 불러오면 채운다
+                setPicked({ id, known: name ? { name, lat: NaN, lng: NaN } : undefined });
                 setCandidate(null);
                 setSelectedId(null);
               }}

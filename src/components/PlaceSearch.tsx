@@ -41,7 +41,8 @@ type PlacesLib = {
 export function PlaceSearchBox({
   onPick, onResults, near, onSavedPick, onSavedAll,
 }: {
-  onPick: (placeId: string) => void;
+  // name: 구글 제안에 나온 장소 이름(저장 화면의 이름 칸 기본값)
+  onPick: (placeId: string, name?: string) => void;
   onResults: (query: string, places: FoundPlace[]) => void;
   // 저장한 핀 검색(로그인했을 때): 결과를 고르면 그 장소·리스트로, '모두 보기'는 검색 화면으로
   onSavedPick?: (hit: SavedHit) => void;
@@ -144,7 +145,7 @@ export function PlaceSearchBox({
     token.current = null;
     setOpen(false);
     setText(s.main);
-    onPick(s.placeId);
+    onPick(s.placeId, s.main);
   }
 
   async function googleSearch(q: string): Promise<FoundPlace[]> {
