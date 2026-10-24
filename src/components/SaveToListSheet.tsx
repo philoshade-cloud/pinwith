@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { addPlaceToList, createEmptyList, DuplicatePlaceError } from "@/lib/lists";
 import type { ListItem } from "@/lib/types";
 import { useT } from "@/lib/i18n/client";
+import { useListSections } from "@/lib/useListSections";
 
 const NEW_LIST = "__new__";
 
@@ -17,6 +18,8 @@ export function SaveToListSheet({ item, onClose }: { item: ListItem; onClose: ()
   const [lists, setLists] = useState<{ id: string; title: string }[] | null>(null);
   const [listId, setListId] = useState(NEW_LIST);
   const [title, setTitle] = useState(item.title);
+  const [sectionId, setSectionId] = useState("");
+  const sections = useListSections(listId === NEW_LIST ? null : listId);
   const [memo, setMemo] = useState("");
   const [state, setState] = useState<"idle" | "saving" | "done">("idle");
   const [error, setError] = useState<string | null>(null);
@@ -50,7 +53,7 @@ export function SaveToListSheet({ item, onClose }: { item: ListItem; onClose: ()
         lng: item.lng,
         title: title.trim(),
         memo: memo.trim(),
-        sectionId: null,
+        sectionId: listId !== NEW_LIST && sections.some((s) => s.id === sectionId) ? sectionId : null,
         // 예시 리스트 항목은 DB에 없으므로 출처를 남기지 않는다
         copiedFromItemId: item.id.startsWith("demo") ? null : item.id,
       });
@@ -88,13 +91,24 @@ export function SaveToListSheet({ item, onClose }: { item: ListItem; onClose: ()
           <form onSubmit={save} className="mt-4 grid gap-3">
             <label className="grid gap-1 text-[13px] font-semibold text-ink">
               {t("넣을 리스트")}
-              <select value={listId} onChange={(e) => setListId(e.target.value)} className="field" disabled={lists === null}>
+              <select value={listId} onChange={(e) => { setListId(e.target.value); setSectionId(""); }} className="field" disabled={lists === null}>
                 {(lists ?? []).map((l) => (
                   <option key={l.id} value={l.id}>{l.title}</option>
                 ))}
                 <option value={NEW_LIST}>{t("+ 새 리스트 만들어 넣기")}</option>
               </select>
             </label>
+            {sections.length > 0 && (
+              <label className="grid gap-1 text-[13px] font-semibold text-ink">
+                {t("섹션")}
+                <select value={sectionId} onChange={(e) => setSectionId(e.target.value)} className="field">
+                  <option value="">{t("섹션 없음")}</option>
+                  {sections.map((s) => (
+                    <option key={s.id} value={s.id}>{s.name}</option>
+                  ))}
+                </select>
+              </label>
+            )}
             <label className="grid gap-1 text-[13px] font-semibold text-ink">
               {t("리스트에 보일 이름")}
               <input value={title} onChange={(e) => setTitle(e.target.value)} maxLength={120} required className="field" />

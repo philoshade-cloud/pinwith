@@ -5,6 +5,7 @@ import { addPlaceToList, createEmptyList, DuplicatePlaceError, type AddedItem } 
 import type { Section } from "@/lib/types";
 import type { LoadedPlace } from "../PlaceSearch";
 import { useT } from "@/lib/i18n/client";
+import { useListSections } from "@/lib/useListSections";
 
 const NEW_LIST = "__new__";
 
@@ -30,6 +31,9 @@ export function AddPlaceSheet({
   const [memo, setMemo] = useState("");
   const [listId, setListId] = useState(target.mode === "fixed" ? target.listId : target.lists[0]?.id ?? NEW_LIST);
   const [sectionId, setSectionId] = useState("");
+  // 리스트를 고르는 경우엔 고른 리스트의 섹션을 불러와 바로 고를 수 있게
+  const pickedSections = useListSections(target.mode === "pick" ? listId : null);
+  const sections = target.mode === "fixed" ? target.sections : pickedSections;
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -48,7 +52,7 @@ export function AddPlaceSheet({
         lng: loaded.lng,
         title: title.trim(),
         memo: memo.trim(),
-        sectionId: target.mode === "fixed" ? sectionId || null : null,
+        sectionId: !creating && sections.some((s) => s.id === sectionId) ? sectionId : null,
       });
       onAdded(destination, item, creating);
     } catch (err) {
@@ -97,7 +101,7 @@ export function AddPlaceSheet({
         {target.mode === "pick" && (
           <label className="grid gap-1 text-[13px] font-semibold text-ink">
             {t("넣을 리스트")}
-            <select value={listId} onChange={(e) => setListId(e.target.value)} className="field">
+            <select value={listId} onChange={(e) => { setListId(e.target.value); setSectionId(""); }} className="field">
               {target.lists.map((l) => (
                 <option key={l.id} value={l.id}>{l.title}</option>
               ))}
@@ -105,12 +109,12 @@ export function AddPlaceSheet({
             </select>
           </label>
         )}
-        {target.mode === "fixed" && target.sections.length > 0 && (
+        {sections.length > 0 && (
           <label className="grid gap-1 text-[13px] font-semibold text-ink">
             {t("섹션")}
             <select value={sectionId} onChange={(e) => setSectionId(e.target.value)} className="field">
               <option value="">{t("섹션 없음")}</option>
-              {target.sections.map((s) => (
+              {sections.map((s) => (
                 <option key={s.id} value={s.id}>{s.name}</option>
               ))}
             </select>
