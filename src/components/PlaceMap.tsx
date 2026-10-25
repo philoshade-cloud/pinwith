@@ -26,6 +26,8 @@ type Props = {
   onView?: (view: MapView) => void;
   // 이 장소(google place id)가 든 핀 묶음이 들어오면 화면 맞추기 대신 그 장소를 가운데 두고 확대는 그대로(한 번)
   holdViewRef?: { current: { placeId: string; lat?: number; lng?: number } | null };
+  // 앱을 처음 열었을 때의 현재 위치: 들어오면 그곳을 가운데 두고(사용자가 이미 지도를 움직였으면 그대로) 파란 점을 찍는다
+  startAt?: { lat: number; lng: number } | null;
 };
 
 export type MapView = { s: number; w: number; n: number; e: number; zoom: number };
@@ -55,8 +57,11 @@ function declutter() {
 
 // 큐레이터의 핀만 보여주는 가벼운 지도. 자세한 정보와 길찾기는 구글·네이버 지도로 넘긴다.
 export function PlaceMap({
-  items, selectedId, onSelect, showRoute, candidate = null, numbering, padding = DEFAULT_PADDING, tone = "pin", onReady, onView, holdViewRef,
+  items, selectedId, onSelect, showRoute, candidate = null, numbering, padding = DEFAULT_PADDING, tone = "pin", onReady, onView, holdViewRef, startAt = null,
 }: Props) {
+  // 사용자가 손으로 지도를 움직였는지(그랬으면 현재 위치로 옮기지 않는다)
+  const userMoved = useRef(false);
+  const hereMarker = useRef<maplibregl.Marker | null>(null);
   // 위치를 지키기로 한 핀 묶음(패널이 열리고 닫혀도 다시 맞추지 않는다)
   const heldItems = useRef<ListItem[] | null>(null);
   // 핀을 새로 그릴 때도 고른 핀 강조를 유지하려고
@@ -110,6 +115,11 @@ export function PlaceMap({
     m.addControl(new maplibregl.AttributionControl({ compact: true }), narrow ? "top-right" : "bottom-right");
     if (!narrow) m.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
     map.current = m;
+    const markMoved = (e: { originalEvent?: unknown }) => {
+      if (e.originalEvent) userMoved.current = true;
+    };
+    m.on("dragstart", markMoved);
+    m.on("zoomstart", markMoved);
     // 지도를 움직이면 겹치는 이름을 다시 정리한다
     m.on("moveend", () => declutter());
     // 가려지지 않은 부분의 네 모서리로 '지금 보이는 지역'을 알린다
@@ -253,6 +263,25 @@ export function PlaceMap({
     requestAnimationFrame(declutter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, padKey]);
+
+  // 현재 위치로 시작
+  useEffect(() => {
+    const m = map.current;
+    if (!m || !startAt) return;
+    const el = document.createElement("div");
+    el.className = "here-dot";
+    el.setAttribute("aria-label", t("현재 위치"));
+    hereMarker.current?.remove();
+    hereMarker.current = new maplibregl.Marker({ element: el }).setLngLat([startAt.lng, startAt.lat]).addTo(m);
+    if (!userMoved.current) {
+      // 이후 같은 핀 묶음이 다시 그려지거나 핀이 더해져도 화면을 전체 보기로 되돌리지 않게
+      heldItems.current = items;
+      fitted.current = true;
+      m.easeTo({ center: [startAt.lng, startAt.lat], zoom: Math.max(m.getZoom(), 14), offset: centerOffset(paddingRef.current), duration: 600 });
+    }
+    // 위치가 들어올 때 한 번만
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startAt]);
 
   // 선택 강조
   useEffect(() => {

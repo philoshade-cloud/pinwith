@@ -105,6 +105,29 @@ export function MapShell({ children }: { children: ReactNode }) {
     };
   }, [supabase, refreshMine]);
 
+  // ── 앱을 처음 열었을 때(홈 지도) 현재 위치로 시작 ─────
+  // 로그인한 사람이 홈(/)으로 들어왔을 때만, 이 화면을 연 동안 한 번. 위치 권한을 거절했으면 묻지 않고 예전처럼 내 핀 전체를 보여 준다.
+  const [startAt, setStartAt] = useState<{ lat: number; lng: number } | null>(null);
+  const triedHere = useRef(false);
+  useEffect(() => {
+    if (!me || triedHere.current) return;
+    triedHere.current = true;
+    if (window.location.pathname !== "/" || !("geolocation" in navigator)) return;
+    (async () => {
+      try {
+        const status = await navigator.permissions?.query({ name: "geolocation" });
+        if (status?.state === "denied") return;
+      } catch {
+        /* 권한 상태를 못 읽는 브라우저는 그냥 물어본다 */
+      }
+      navigator.geolocation.getCurrentPosition(
+        (pos) => setStartAt({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+        () => {},
+        { timeout: 8000, maximumAge: 300000 },
+      );
+    })();
+  }, [me]);
+
   // ── 메시지·알림 숫자 ─────────────────────
   const [badges, setBadges] = useState({ messages: 0, notifications: 0 });
   const refreshBadges = useCallback(async () => {
@@ -294,6 +317,7 @@ export function MapShell({ children }: { children: ReactNode }) {
           onReady={(get) => (centerOf.current = get)}
           onView={setView}
           holdViewRef={holdView}
+          startAt={startAt}
         />
       </div>
 

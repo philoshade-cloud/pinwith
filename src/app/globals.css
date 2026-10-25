@@ -220,3 +220,14 @@ body {
 
 /* 언어가 정해질 때까지 화면 가리기(src/app/layout.tsx) */
 .i18n-wait body { visibility: hidden; }
+
+/* 지도 위 현재 위치 점 */
+.here-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: #1a73e8;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 6px rgba(26, 115, 232, 0.2), 0 1px 4px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
