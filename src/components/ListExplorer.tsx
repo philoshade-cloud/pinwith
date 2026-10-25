@@ -9,7 +9,7 @@ import { createClient } from "@/lib/supabase/client";
 import type { CuratedList, ListItem } from "@/lib/types";
 import { isWithinMeters } from "@/lib/links";
 import { shortLink } from "@/lib/share";
-import { track } from "@/lib/track";
+import { track, useListVisit } from "@/lib/track";
 import { AdSlot } from "./AdSlot";
 import { CityLink } from "./CityLink";
 import type { CityRef } from "@/lib/landing";
@@ -18,7 +18,7 @@ import { LikeButton } from "./LikeButton";
 import { OwnerItemActions } from "./OwnerItemActions";
 import { DmButton, ItemExtras, ListNotice, NotifyToggle, useCommentCounts } from "./SocialBits";
 import { Panel } from "./shell/Panel";
-import { Tags } from "./shell/PinCard";
+import { Tags, videoTime } from "./shell/PinCard";
 import { useMapScene, useShell, type Scene } from "./shell/context";
 import { useFormat, useT, useTRich } from "@/lib/i18n/client";
 
@@ -86,7 +86,10 @@ export function ListExplorer({ list, city }: { list: CuratedList; city?: CityRef
               key={sec.id}
               type="button"
               aria-pressed={section === sec.id}
-              onClick={() => setSection(sec.id)}
+              onClick={() => {
+                setSection(sec.id);
+                if (!isDemo) track("section", { listId: list.id, meta: { name: sec.name } });
+              }}
               className={`shrink-0 rounded-full px-3 py-1.5 text-[13px] font-semibold shadow-[0_1px_6px_rgba(24,34,47,0.15)] transition-colors ${
                 section === sec.id ? "bg-ink text-white" : "bg-white text-ink"
               }`}
@@ -96,7 +99,7 @@ export function ListExplorer({ list, city }: { list: CuratedList; city?: CityRef
           ))}
         </div>
       ),
-    [list.sections, hasLoose, section, sectionsLabel, allLabel, otherLabel],
+    [list.sections, hasLoose, section, sectionsLabel, allLabel, otherLabel, isDemo, list.id],
   );
 
   const scene: Scene = useMemo(
@@ -132,6 +135,7 @@ export function ListExplorer({ list, city }: { list: CuratedList; city?: CityRef
       (pos) => {
         setHere({ lat: pos.coords.latitude, lng: pos.coords.longitude });
         setSort("nearest");
+        if (!isDemo) track("sort_near", { listId: list.id });
       },
       () => toast(t("위치 권한이 없어 큐레이터 순서로 보여줍니다.")),
       { timeout: 5000 },
@@ -161,6 +165,9 @@ export function ListExplorer({ list, city }: { list: CuratedList; city?: CityRef
     track("open", { listId: list.id, code: code && /^[A-Za-z0-9]{4,12}$/.test(code) ? code : null });
   }, [isDemo, me, isOwner, list.id]);
 
+  // 들어올 때마다 'view', 떠날 때 머문 시간(주인 제외)
+  useListVisit(list.id, !isDemo && me !== undefined && !isOwner);
+
   // 내 리스트면 공유용 짧은 링크를 미리 만들어 둔다(공유 창은 누른 즉시 떠야 해서)
   const [shareUrl, setShareUrl] = useState<string | null>(null);
   useEffect(() => {
@@ -174,6 +181,7 @@ export function ListExplorer({ list, city }: { list: CuratedList; city?: CityRef
 
   async function share() {
     const url = shareUrl ?? window.location.href;
+    if (!isDemo && !isOwner) track("share", { listId: list.id });
     try {
       if (navigator.share) await navigator.share({ title: list.title, url });
       else {
@@ -258,7 +266,7 @@ export function ListExplorer({ list, city }: { list: CuratedList; city?: CityRef
           {isDemo ? (
             <Link href="/login?next=/demo" className="btn-primary">{t("팔로우")}</Link>
           ) : (
-            !isOwner && <FollowButton curatorId={list.curator.id} handle={list.curator.handle} />
+            !isOwner && <FollowButton curatorId={list.curator.id} handle={list.curator.handle} listId={list.id} />
           )}
           <button type="button" onClick={share} className="btn-quiet">{t("공유")}</button>
           {!isDemo && !isOwner && <DmButton userId={list.curator.id} listId={list.id} />}
@@ -325,6 +333,11 @@ export function ListExplorer({ list, city }: { list: CuratedList; city?: CityRef
                         <span className="text-[13px] font-semibold tabular-nums text-pin">{numbering.get(item.id)}</span>
                       )}
                       <span className="text-[16px] font-semibold text-ink">{item.title}</span>
+                      {item.videoUrl && (
+                        <span className="shrink-0 text-[12px] font-semibold text-teal" title={t("영상에서 보기")}>
+                          ▶{videoTime(item.videoUrl) ? ` ${videoTime(item.videoUrl)}` : ""}
+                        </span>
+                      )}
                       {item.sponsored && (
                         <span title={t("큐레이터가 이 가게와의 제휴로 보상을 받을 수 있어요")} className="rounded border border-rule px-1 py-px text-[11px] font-semibold text-ink/70">
                           {t("제휴")}

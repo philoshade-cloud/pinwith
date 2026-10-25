@@ -4,9 +4,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useT } from "@/lib/i18n/client";
+import { track } from "@/lib/track";
 
 // 팔로우/팔로우 취소. 로그인 전이면 로그인 화면으로 보낸 뒤 이 화면으로 돌아온다.
-export function FollowButton({ curatorId, handle, className = "" }: { curatorId: string; handle: string; className?: string }) {
+// listId: 리스트 화면에서 눌렀으면 그 리스트의 반응으로도 기록한다
+export function FollowButton({ curatorId, handle, className = "", listId }: { curatorId: string; handle: string; className?: string; listId?: string }) {
   const t = useT();
   const [me, setMe] = useState<string | null | undefined>(undefined);
   const [following, setFollowing] = useState(false);
@@ -44,7 +46,10 @@ export function FollowButton({ curatorId, handle, className = "" }: { curatorId:
     const { error } = following
       ? await supabase.from("follows").delete().eq("follower_id", me).eq("followee_id", curatorId)
       : await supabase.from("follows").insert({ follower_id: me, followee_id: curatorId });
-    if (!error) setFollowing(!following);
+    if (!error) {
+      if (!following && listId) track("follow", { listId });
+      setFollowing(!following);
+    }
     setBusy(false);
   }
 

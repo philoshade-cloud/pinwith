@@ -167,6 +167,7 @@ export const lists: Record<string, string> = {
   "이미 그 리스트에 있는 장소입니다.": "This place is already in that list.",
   "담지 못했습니다. 잠시 후 다시 시도하세요.": "Couldn't save. Please try again in a moment.",
   "내 리스트에 담기": "Save to my list",
+  "영상에서 보기": "Watch in video",
   "닫기": "Close",
   "{title}을(를) 담았습니다.": "Saved {title}.",
   "내 리스트에서 보기": "View in my list",

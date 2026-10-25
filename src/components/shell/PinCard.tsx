@@ -18,6 +18,23 @@ export function Tags({ tags }: { tags: string[] }) {
   );
 }
 
+// 영상 링크의 시작 시각(t=90, t=1m30s, start=90)을 1:30 꼴로. 없으면 null.
+export function videoTime(url: string): string | null {
+  try {
+    const u = new URL(url);
+    const raw = u.searchParams.get("t") ?? u.searchParams.get("start") ?? u.hash.match(/t=([0-9hms]+)/)?.[1] ?? null;
+    if (!raw) return null;
+    const m = raw.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s?)?$/);
+    if (!m) return null;
+    const sec = Number(m[1] ?? 0) * 3600 + Number(m[2] ?? 0) * 60 + Number(m[3] ?? 0);
+    if (!sec) return null;
+    const h = Math.floor(sec / 3600), mm = Math.floor((sec % 3600) / 60), ss = sec % 60;
+    return h ? `${h}:${String(mm).padStart(2, "0")}:${String(ss).padStart(2, "0")}` : `${mm}:${String(ss).padStart(2, "0")}`;
+  } catch {
+    return null;
+  }
+}
+
 // 지도에서 핀을 누르면 뜨는 카드. 길찾기·외부 지도·담기는 어느 화면에서나 같다.
 export function PinCard({
   item, listId, onClose, onSave, extra,
@@ -50,8 +67,26 @@ export function PinCard({
           onOpen={onClose}
           className="btn-primary shrink-0 whitespace-nowrap !px-3 !py-1.5 !text-[13px]"
         />
+        {item.videoUrl && /^https?:\/\//.test(item.videoUrl) && (
+          <a
+            href={item.videoUrl}
+            target="_blank"
+            rel="noopener"
+            onClick={() => log("video")}
+            className="btn-primary shrink-0 whitespace-nowrap !bg-teal !px-3 !py-1.5 !text-[13px]"
+          >
+            ▶ {t("영상에서 보기")}{videoTime(item.videoUrl) ? ` ${videoTime(item.videoUrl)}` : ""}
+          </a>
+        )}
         <ExternalLinks item={item} onEvent={log} compact />
-        <button type="button" onClick={() => onSave(item)} className="btn-quiet shrink-0 whitespace-nowrap !px-3 !py-1.5 !text-[13px]">
+        <button
+          type="button"
+          onClick={() => {
+            log("save_place");
+            onSave(item);
+          }}
+          className="btn-quiet shrink-0 whitespace-nowrap !px-3 !py-1.5 !text-[13px]"
+        >
           {t("내 리스트에 담기")}
         </button>
       </div>

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useFormat, useT } from "@/lib/i18n/client";
+import { track } from "@/lib/track";
 
 // 1만 이상은 짧게(한국어 1.2만, 영어 12K)
 const fmt = (n: number, locale: string) => n.toLocaleString(locale, n >= 10000 ? { notation: "compact", maximumFractionDigits: 1 } : undefined);
@@ -45,6 +46,7 @@ export function LikeButton({ listId, initialCount, demo = false }: { listId: str
     const { error } = next
       ? await supabase.from("list_likes").insert({ list_id: listId, user_id: me })
       : await supabase.from("list_likes").delete().eq("list_id", listId).eq("user_id", me);
+    if (!error && next) track("like", { listId });
     if (error) {
       setLiked(!next);
       setCount((c) => c + (next ? -1 : 1));

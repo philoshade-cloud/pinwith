@@ -5,10 +5,12 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Blocks, BizRefunds, BizReview, Disputes, PayoutRequests, StoreQuality, Topups } from "./AdminCommerce";
 import { ErrorsPanel, UsagePanel } from "./AdminOps";
+import { ActivityPanel } from "./AdminActivity";
 import { ConfirmButton } from "./ConfirmButton";
 
-type Tab = "payout" | "curators" | "settings" | "support" | "biz" | "topups" | "requests" | "disputes" | "quality" | "blocks" | "usage" | "errors";
+type Tab = "activity" | "payout" | "curators" | "settings" | "support" | "biz" | "topups" | "requests" | "disputes" | "quality" | "blocks" | "usage" | "errors";
 const TABS: { id: Tab; label: string }[] = [
+  { id: "activity", label: "리스트 반응" },
   { id: "payout", label: "정산" },
   { id: "requests", label: "지급 요청" },
   { id: "biz", label: "가게 인증" },
@@ -63,6 +65,7 @@ export function AdminConsole() {
         ))}
       </nav>
       <div className="mt-6">
+        {tab === "activity" && <ActivityPanel />}
         {tab === "payout" && <Payouts />}
         {tab === "curators" && <Curators />}
         {tab === "settings" && <Settings />}
