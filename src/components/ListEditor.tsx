@@ -9,6 +9,7 @@ import { shortLink } from "@/lib/share";
 import type { ListItem, ListKind, Section, Visibility } from "@/lib/types";
 import { Panel, PanelLoading } from "./shell/Panel";
 import { ConfirmButton } from "./ConfirmButton";
+import { OwnerItemActions } from "./OwnerItemActions";
 import { ChangeLog, EditorsManager, MyShare } from "./CoEdit";
 import { useMapScene, useShell, type Scene } from "./shell/context";
 import { currentLang, useT } from "@/lib/i18n/client";
@@ -69,7 +70,8 @@ export function ListEditor({ listId }: { listId: string }) {
   const money = useMonetization();
   const [meta, setMeta] = useState<Meta | null>(null);
   const [savedMeta, setSavedMeta] = useState<Meta | null>(null);
-  const [metaMsg, setMetaMsg] = useState<string | null>(null);
+  const [metaMsg, setMetaMsgRaw] = useState<{ text: string; error: boolean } | null>(null);
+  const setMetaMsg = (text: string, error = true) => setMetaMsgRaw({ text, error });
   const [sections, setSections] = useState<Section[]>([]);
   const [items, setItems] = useState<ItemRow[]>([]);
   const [newSection, setNewSection] = useState("");
@@ -183,7 +185,7 @@ export function ListEditor({ listId }: { listId: string }) {
     const next = { ...meta, slug, themes: themes.map((t) => `#${t}`).join(" ") };
     setMeta(next);
     setSavedMeta(next);
-    setMetaMsg(t("저장했습니다."));
+    setMetaMsg(t("저장했습니다."), false);
   }
 
   // '이 리스트로 수익화할 것이다': 켜야 공동 편집자별 수익 배분을 정하고 보여준다
@@ -263,13 +265,24 @@ export function ListEditor({ listId }: { listId: string }) {
             showRoute: savedMeta?.kind === "course",
             numbering,
             listIdOf: () => listId,
+            // 지도에서 핀을 고르면 카드에서 바로 편집·삭제
+            cardExtra: (i: ListItem) => (
+              <OwnerItemActions itemId={i.id} listId={listId} placeId={i.placeId} title={i.title} />
+            ),
             addTarget: {
               listId,
               sections,
-              onAdded: (item) => setItems((list) => [...list, item as ItemRow]),
+              onAdded: (item) => {
+                setItems((list) => [...list, item as ItemRow]);
+                // 저장하면서 새 섹션을 만들었으면 섹션 목록을 다시 불러온다
+                const sid = (item as ItemRow).section_id;
+                if (sid && !sections.some((x) => x.id === sid))
+                  supabase.from("sections").select("id, name, position").eq("list_id", listId).order("position")
+                    .then(({ data }) => data && setSections(data));
+              },
             },
           },
-    [state, mapItems, savedMeta?.kind, numbering, listId, sections],
+    [state, mapItems, savedMeta?.kind, numbering, listId, sections, supabase],
   );
   useMapScene(scene);
 
@@ -288,6 +301,16 @@ export function ListEditor({ listId }: { listId: string }) {
     // 목록을 다 불러온 직후 한 번만
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
+
+  // 핀 카드·검색 장소 카드에서 이 리스트의 장소를 지우면 목록에서도 뺀다
+  useEffect(() => {
+    const on = (e: Event) => {
+      const d = (e as CustomEvent<{ itemId: string; listId: string }>).detail;
+      if (d?.listId === listId) setItems((list) => list.filter((i) => i.id !== d.itemId));
+    };
+    window.addEventListener("pw-item-removed", on);
+    return () => window.removeEventListener("pw-item-removed", on);
+  }, [listId]);
 
   // 지도에서 핀을 고르면 편집 목록에서 그 장소로
   useEffect(() => {
@@ -357,16 +380,26 @@ export function ListEditor({ listId }: { listId: string }) {
 
   return (
     <Panel title={t("편집 · {title}", { title: savedMeta.title })}>
-      <div className="px-5 pb-10 pt-4">
-        <nav className="flex items-center gap-2">
-          <Link href={viewHref} className="btn-quiet">{t("리스트 보기")}</Link>
+      <div className="px-5 pb-10">
+        {/* 패널을 내려도 늘 보이는 윗줄: 저장 버튼과 바로가기 */}
+        <div className="sticky top-0 z-10 -mx-5 flex items-center gap-2 border-b border-rule bg-white px-5 py-2.5">
+          <button type="submit" form="list-meta" disabled={!metaDirty} className="btn-primary shrink-0 !py-1.5 disabled:opacity-40">
+            {t("변경 저장")}
+          </button>
+          {/* 저장한 뒤 다시 고치기 시작하면 '저장했습니다'는 지운다. 오류는 고칠 때까지 둔다 */}
+          <span role="status" className={`min-w-0 flex-1 truncate text-[13px] ${metaMsg?.error ? "text-pin" : "text-muted"}`}>
+            {metaMsg && (metaMsg.error || !metaDirty) ? metaMsg.text : metaDirty ? t("저장하지 않은 변경이 있어요") : ""}
+          </span>
+          <Link href={viewHref} className="btn-quiet shrink-0 !py-1.5">{t("리스트 보기")}</Link>
+        </div>
+        <nav className="mt-4 flex flex-wrap items-center gap-2">
           <Link href={`/me/lists/${listId}/notice`} className="btn-quiet">{t("공지")}</Link>
           <Link href="/me/stats" className="btn-quiet">{t("통계")}</Link>
           <button type="button" onClick={copyLink} className="btn-quiet">{t("링크 복사")}</button>
         </nav>
 
         {/* 리스트 정보 */}
-        <form onSubmit={saveMeta} className="mt-6 grid gap-4">
+        <form id="list-meta" onSubmit={saveMeta} className="mt-6 grid gap-4">
           <label className="grid gap-1 text-[13px] font-semibold text-ink">
             {t("제목")}
             <input
@@ -429,12 +462,7 @@ export function ListEditor({ listId }: { listId: string }) {
               />
             </span>
           </label>}
-          <div className="flex items-center gap-3">
-            <button type="submit" disabled={!metaDirty} className="btn-primary disabled:opacity-40">
-              {t("변경 저장")}
-            </button>
-            {metaMsg && <span role="status" className="text-[14px] text-muted">{metaMsg}</span>}
-          </div>
+          <p className="text-[12px] text-muted">{t("제목·설명·공개 범위 등은 위쪽 ‘변경 저장’으로 저장해요. 섹션과 장소는 바꾸는 즉시 저장돼요.")}</p>
         </form>
 
         {/* 섹션 */}

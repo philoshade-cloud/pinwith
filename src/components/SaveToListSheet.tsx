@@ -7,6 +7,7 @@ import { addPlaceToList, createEmptyList, DuplicatePlaceError } from "@/lib/list
 import type { ListItem } from "@/lib/types";
 import { useT } from "@/lib/i18n/client";
 import { useListSections } from "@/lib/useListSections";
+import { NEW_SECTION, resolveSection, SectionPicker } from "./SectionPicker";
 
 const NEW_LIST = "__new__";
 
@@ -19,6 +20,7 @@ export function SaveToListSheet({ item, onClose }: { item: ListItem; onClose: ()
   const [listId, setListId] = useState(NEW_LIST);
   const [title, setTitle] = useState(item.title);
   const [sectionId, setSectionId] = useState("");
+  const [newSection, setNewSection] = useState("");
   const sections = useListSections(listId === NEW_LIST ? null : listId);
   const [memo, setMemo] = useState("");
   const [state, setState] = useState<"idle" | "saving" | "done">("idle");
@@ -42,10 +44,12 @@ export function SaveToListSheet({ item, onClose }: { item: ListItem; onClose: ()
   async function save(e: React.FormEvent) {
     e.preventDefault();
     if (item.lat == null || item.lng == null || !title.trim() || state === "saving") return;
+    if (sectionId === NEW_SECTION && !newSection.trim()) return setError(t("새 섹션 이름을 입력하세요."));
     setState("saving");
     setError(null);
     try {
       const target = listId === NEW_LIST ? await createEmptyList() : listId;
+      const section = await resolveSection(target, sectionId, newSection, listId === NEW_LIST ? [] : sections);
       await addPlaceToList({
         listId: target,
         placeId: item.placeId,
@@ -53,7 +57,7 @@ export function SaveToListSheet({ item, onClose }: { item: ListItem; onClose: ()
         lng: item.lng,
         title: title.trim(),
         memo: memo.trim(),
-        sectionId: listId !== NEW_LIST && sections.some((s) => s.id === sectionId) ? sectionId : null,
+        sectionId: section,
         // 예시 리스트 항목은 DB에 없으므로 출처를 남기지 않는다
         copiedFromItemId: item.id.startsWith("demo") ? null : item.id,
       });
@@ -98,17 +102,7 @@ export function SaveToListSheet({ item, onClose }: { item: ListItem; onClose: ()
                 <option value={NEW_LIST}>{t("+ 새 리스트 만들어 넣기")}</option>
               </select>
             </label>
-            {sections.length > 0 && (
-              <label className="grid gap-1 text-[13px] font-semibold text-ink">
-                {t("섹션")}
-                <select value={sectionId} onChange={(e) => setSectionId(e.target.value)} className="field">
-                  <option value="">{t("섹션 없음")}</option>
-                  {sections.map((s) => (
-                    <option key={s.id} value={s.id}>{s.name}</option>
-                  ))}
-                </select>
-              </label>
-            )}
+            <SectionPicker sections={sections} value={sectionId} onChange={setSectionId} newName={newSection} onNewName={setNewSection} />
             <label className="grid gap-1 text-[13px] font-semibold text-ink">
               {t("리스트에 보일 이름")}
               <input value={title} onChange={(e) => setTitle(e.target.value)} maxLength={120} required className="field" />

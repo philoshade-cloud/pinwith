@@ -9,13 +9,15 @@ import { useT } from "@/lib/i18n/client";
 
 // 내 리스트의 핀 카드: 그 장소를 바로 편집하거나 리스트에서 뺀다.
 export function OwnerItemActions({
-  itemId, listId, placeId, title, onDeleted,
+  itemId, listId, placeId, title, onDeleted, onLeave,
 }: {
   itemId: string;
   listId: string;
   placeId: string;
   title: string;
   onDeleted?: () => void;
+  // 편집 화면으로 넘어가기 직전(예: 검색 장소 카드를 닫기)
+  onLeave?: () => void;
 }) {
   const t = useT();
   const router = useRouter();
@@ -24,6 +26,7 @@ export function OwnerItemActions({
 
   function edit() {
     // 이 장소 하나만 고치는 화면
+    onLeave?.();
     router.push(`/me/lists/${listId}/item/${itemId}`);
   }
 
@@ -33,6 +36,8 @@ export function OwnerItemActions({
     select(null);
     toast(t("‘{title}’을(를) 리스트에서 뺐어요.", { title }));
     onDeleted?.();
+    // 열려 있는 편집 화면 등이 목록에서 빼도록 알린다
+    window.dispatchEvent(new CustomEvent("pw-item-removed", { detail: { itemId, listId } }));
     router.refresh();
     refreshMine();
   }

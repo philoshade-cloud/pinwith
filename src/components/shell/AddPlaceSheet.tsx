@@ -6,6 +6,7 @@ import type { Section } from "@/lib/types";
 import type { LoadedPlace } from "../PlaceSearch";
 import { useT } from "@/lib/i18n/client";
 import { useListSections } from "@/lib/useListSections";
+import { NEW_SECTION, resolveSection, SectionPicker } from "../SectionPicker";
 
 const NEW_LIST = "__new__";
 
@@ -31,6 +32,7 @@ export function AddPlaceSheet({
   const [memo, setMemo] = useState("");
   const [listId, setListId] = useState(target.mode === "fixed" ? target.listId : target.lists[0]?.id ?? NEW_LIST);
   const [sectionId, setSectionId] = useState("");
+  const [newSection, setNewSection] = useState("");
   // 리스트를 고르는 경우엔 고른 리스트의 섹션을 불러와 바로 고를 수 있게
   const pickedSections = useListSections(target.mode === "pick" ? listId : null);
   const sections = target.mode === "fixed" ? target.sections : pickedSections;
@@ -40,11 +42,13 @@ export function AddPlaceSheet({
   async function add(e: React.FormEvent) {
     e.preventDefault();
     if (!loaded || !title.trim() || saving) return;
+    if (sectionId === NEW_SECTION && !newSection.trim()) return setError(t("새 섹션 이름을 입력하세요."));
     setSaving(true);
     setError(null);
     try {
       const creating = target.mode === "pick" && listId === NEW_LIST;
       const destination = target.mode === "fixed" ? target.listId : creating ? await createEmptyList() : listId;
+      const section = await resolveSection(destination, sectionId, newSection, creating ? [] : sections);
       const item = await addPlaceToList({
         listId: destination,
         placeId,
@@ -52,7 +56,7 @@ export function AddPlaceSheet({
         lng: loaded.lng,
         title: title.trim(),
         memo: memo.trim(),
-        sectionId: !creating && sections.some((s) => s.id === sectionId) ? sectionId : null,
+        sectionId: section,
       });
       onAdded(destination, item, creating);
     } catch (err) {
@@ -109,17 +113,7 @@ export function AddPlaceSheet({
             </select>
           </label>
         )}
-        {sections.length > 0 && (
-          <label className="grid gap-1 text-[13px] font-semibold text-ink">
-            {t("섹션")}
-            <select value={sectionId} onChange={(e) => setSectionId(e.target.value)} className="field">
-              <option value="">{t("섹션 없음")}</option>
-              {sections.map((s) => (
-                <option key={s.id} value={s.id}>{s.name}</option>
-              ))}
-            </select>
-          </label>
-        )}
+        <SectionPicker sections={sections} value={sectionId} onChange={setSectionId} newName={newSection} onNewName={setNewSection} />
         {error && <p role="alert" className="text-[14px] text-pin">{error}</p>}
         <button type="submit" disabled={!loaded || !title.trim() || saving} className="btn-primary justify-center !py-2.5 disabled:opacity-40">
           {saving ? t("저장하는 중") : t("저장")}

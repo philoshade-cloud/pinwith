@@ -166,10 +166,14 @@ export function MapShell({ children }: { children: ReactNode }) {
     [me, router, toast, t],
   );
 
+  // 검색창에서 장소를 고르면 지금 패널(예: 리스트 편집)을 접어 장소 카드만 보이게 하고, 카드를 닫거나 저장하면 되돌린다
+  const pickPanelBefore = useRef<boolean | null>(null);
   function closeAdd() {
     setPicked(null);
     setSaveAs(null);
     setCandidate(null);
+    if (pickPanelBefore.current !== null && !results) setPanelOpen(pickPanelBefore.current);
+    pickPanelBefore.current = null;
     // 검색 결과를 보던 중이면 결과는 그대로 둔다(다른 곳도 이어서 담을 수 있게)
     if (!results) setSearchKey((k) => k + 1);
   }
@@ -317,7 +321,11 @@ export function MapShell({ children }: { children: ReactNode }) {
               onSavedPick={openSaved}
               onSavedAll={(q) => router.push(`/search?q=${encodeURIComponent(q)}`)}
               onPick={(id, name) => {
+                if (pickPanelBefore.current === null) pickPanelBefore.current = panelBefore.current ?? panelOpen;
+                panelBefore.current = null;
+                setPanelOpen(false);
                 setResults(null);
+                setResultsList(false);
                 // 이름만 먼저 알고 좌표는 장소 카드가 불러오면 채운다
                 setPicked({ id, known: name ? { name, lat: NaN, lng: NaN } : undefined });
                 setCandidate(null);
