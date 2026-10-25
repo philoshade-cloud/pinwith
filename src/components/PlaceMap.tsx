@@ -25,7 +25,9 @@ type Props = {
   // 지도를 움직일 때마다 지금 보이는 영역(패널 등에 가려진 부분은 뺌)과 확대 단계
   onView?: (view: MapView) => void;
   // 이 장소(google place id)가 든 핀 묶음이 들어오면 화면 맞추기 대신 그 장소를 가운데 두고 확대는 그대로(한 번)
-  holdViewRef?: { current: { placeId: string; lat?: number; lng?: number } | null };
+  holdViewRef?: { current: { placeId: string; lat?: number; lng?: number; zoom?: number } | null };
+  // 다음 핀 선택 때 이 확대 단계까지 당겨서 보여 준다(검색으로 내 핀을 골랐을 때, 한 번)
+  zoomNextRef?: { current: number | null };
   // 앱을 처음 열었을 때의 현재 위치: 들어오면 그곳을 가운데 두고(사용자가 이미 지도를 움직였으면 그대로) 파란 점을 찍는다
   startAt?: { lat: number; lng: number } | null;
 };
@@ -57,7 +59,7 @@ function declutter() {
 
 // 큐레이터의 핀만 보여주는 가벼운 지도. 자세한 정보와 길찾기는 구글·네이버 지도로 넘긴다.
 export function PlaceMap({
-  items, selectedId, onSelect, showRoute, candidate = null, numbering, padding = DEFAULT_PADDING, tone = "pin", onReady, onView, holdViewRef, startAt = null,
+  items, selectedId, onSelect, showRoute, candidate = null, numbering, padding = DEFAULT_PADDING, tone = "pin", onReady, onView, holdViewRef, startAt = null, zoomNextRef,
 }: Props) {
   // 사용자가 손으로 지도를 움직였는지(그랬으면 현재 위치로 옮기지 않는다)
   const userMoved = useRef(false);
@@ -222,7 +224,8 @@ export function PlaceMap({
     if (keep) {
       holdViewRef!.current = null;
       heldItems.current = items;
-      m.easeTo({ center: [keep.lng!, keep.lat!], offset: centerOffset(padding), duration: 400 });
+      const zoom = hold?.zoom ? Math.max(m.getZoom(), hold.zoom) : m.getZoom();
+      m.easeTo({ center: [keep.lng!, keep.lat!], zoom, offset: centerOffset(padding), duration: 400 });
       fitted.current = true;
       requestAnimationFrame(declutter);
       return;
@@ -291,7 +294,10 @@ export function PlaceMap({
     requestAnimationFrame(declutter);
     const sel = selectedId ? located.find((i) => i.id === selectedId) : null;
     if (sel && map.current) {
-      map.current.easeTo({ center: [sel.lng!, sel.lat!], offset: centerOffset(padding), duration: 400 });
+      const want = zoomNextRef?.current ?? null;
+      if (zoomNextRef) zoomNextRef.current = null;
+      const zoom = want ? Math.max(map.current.getZoom(), want) : map.current.getZoom();
+      map.current.easeTo({ center: [sel.lng!, sel.lat!], zoom, offset: centerOffset(padding), duration: want ? 600 : 400 });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedId]);

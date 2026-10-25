@@ -26,6 +26,8 @@ const PlaceMap = dynamic(() => import("../PlaceMap").then((m) => m.PlaceMap), {
 });
 
 const EMPTY: Scene = { items: [] };
+// 검색으로 고른 내 핀을 보여 줄 확대 단계
+const FOCUS_ZOOM = 16;
 
 function useViewport() {
   const [vp, setVp] = useState({ w: 1280, h: 800 });
@@ -65,7 +67,9 @@ export function MapShell({ children }: { children: ReactNode }) {
   const [view, setView] = useState<MapView | null>(null);
   // 핀 카드에서 리스트를 열 때 지도 위치를 지킬 장소(google place id)
   const pendingFocus = useRef<string | null>(null);
-  const holdView = useRef<{ placeId: string; lat?: number; lng?: number } | null>(null);
+  const holdView = useRef<{ placeId: string; lat?: number; lng?: number; zoom?: number } | null>(null);
+  // 검색으로 내 핀을 고르면 다음 선택 때 그 핀까지 확대
+  const zoomNext = useRef<number | null>(null);
   const resultItems: ListItem[] = useMemo(
     () =>
       (results?.places ?? []).map((p, n) => ({
@@ -287,18 +291,24 @@ export function MapShell({ children }: { children: ReactNode }) {
       setCandidate(null);
       const href = hitHref(h);
       if (h.kind === "place" && h.place_id) {
+        // 그 핀을 가운데 두고 동네가 보이게 확대한다
+        zoomNext.current = FOCUS_ZOOM;
+        // 그 화면에서 핀이 골라지지 않으면 다음에 누르는 다른 핀까지 확대하지 않게 잠시 뒤 지운다
+        window.setTimeout(() => (zoomNext.current = null), 4000);
         // 이미 그 리스트를 보고 있으면 핀만 고른다
         if (h.item_id && decodeURIComponent(window.location.pathname) === decodeURIComponent(href)) {
-          setSelectedId(h.item_id);
+          setSelectedId(null);
+          // 휴대폰에서는 패널을 접어 지도와 핀 카드가 보이게(select가 접는다)
+          window.setTimeout(() => select(h.item_id!), 0);
           return;
         }
         pendingFocus.current = h.place_id;
-        holdView.current = { placeId: h.place_id, ...(h.lat != null && h.lng != null ? { lat: h.lat, lng: h.lng } : {}) };
+        holdView.current = { placeId: h.place_id, zoom: FOCUS_ZOOM, ...(h.lat != null && h.lng != null ? { lat: h.lat, lng: h.lng } : {}) };
       }
       setSelectedId(null);
       router.push(href);
     },
-    [router],
+    [router, select],
   );
 
   return (
@@ -317,6 +327,7 @@ export function MapShell({ children }: { children: ReactNode }) {
           onReady={(get) => (centerOf.current = get)}
           onView={setView}
           holdViewRef={holdView}
+          zoomNextRef={zoomNext}
           startAt={startAt}
         />
       </div>
