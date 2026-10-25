@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { addPlaceToList, createEmptyList, DuplicatePlaceError, type AddedItem } from "@/lib/lists";
+import { addPlaceToList, createEmptyList, DuplicatePlaceError, pickDefaultList, rememberLastList, type AddedItem } from "@/lib/lists";
 import type { Section } from "@/lib/types";
 import type { LoadedPlace } from "../PlaceSearch";
 import { useT } from "@/lib/i18n/client";
@@ -30,7 +30,7 @@ export function AddPlaceSheet({
   // 구글 이름은 기본값으로만 쓰고, 큐레이터가 확인한 이름을 저장한다.
   const [title, setTitle] = useState(place.name);
   const [memo, setMemo] = useState("");
-  const [listId, setListId] = useState(target.mode === "fixed" ? target.listId : target.lists[0]?.id ?? NEW_LIST);
+  const [listId, setListId] = useState(() => (target.mode === "fixed" ? target.listId : pickDefaultList(target.lists) ?? NEW_LIST));
   const [sectionId, setSectionId] = useState("");
   const [newSection, setNewSection] = useState("");
   // 리스트를 고르는 경우엔 고른 리스트의 섹션을 불러와 바로 고를 수 있게
@@ -58,6 +58,7 @@ export function AddPlaceSheet({
         memo: memo.trim(),
         sectionId: section,
       });
+      rememberLastList(destination);
       onAdded(destination, item, creating);
     } catch (err) {
       setError(

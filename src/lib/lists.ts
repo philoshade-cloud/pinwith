@@ -89,3 +89,22 @@ export async function addPlaceToList(item: NewItem): Promise<AddedItem> {
   if (error || !data) throw error ?? new Error("insert-failed");
   return data as unknown as AddedItem;
 }
+
+// 마지막으로 장소를 저장한 리스트(다음 저장 때 먼저 골라 둔다). 이 기기에만 남는 편의 값.
+const LAST_LIST_KEY = "pw_last_list";
+export function rememberLastList(listId: string) {
+  try {
+    localStorage.setItem(LAST_LIST_KEY, listId);
+  } catch {
+    /* 저장소를 못 쓰면 넘어간다 */
+  }
+}
+export function pickDefaultList(lists: { id: string }[]): string | null {
+  try {
+    const last = localStorage.getItem(LAST_LIST_KEY);
+    if (last && lists.some((l) => l.id === last)) return last;
+  } catch {
+    /* 무시 */
+  }
+  return lists[0]?.id ?? null;
+}

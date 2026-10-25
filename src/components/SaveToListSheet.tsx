@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { addPlaceToList, createEmptyList, DuplicatePlaceError } from "@/lib/lists";
+import { addPlaceToList, createEmptyList, DuplicatePlaceError, pickDefaultList, rememberLastList } from "@/lib/lists";
 import type { ListItem } from "@/lib/types";
 import { useT } from "@/lib/i18n/client";
 import { useListSections } from "@/lib/useListSections";
@@ -37,7 +37,8 @@ export function SaveToListSheet({ item, onClose }: { item: ListItem; onClose: ()
         .eq("owner_id", auth.user.id)
         .order("updated_at", { ascending: false });
       setLists(data ?? []);
-      if (data && data.length > 0) setListId(data[0].id);
+      const first = pickDefaultList(data ?? []);
+      if (first) setListId(first);
     })();
   }, [supabase]);
 
@@ -61,6 +62,7 @@ export function SaveToListSheet({ item, onClose }: { item: ListItem; onClose: ()
         // 예시 리스트 항목은 DB에 없으므로 출처를 남기지 않는다
         copiedFromItemId: item.id.startsWith("demo") ? null : item.id,
       });
+      rememberLastList(target);
       setSavedTo(target);
       setState("done");
     } catch (err) {
