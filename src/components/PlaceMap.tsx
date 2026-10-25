@@ -218,6 +218,20 @@ export function PlaceMap({
       return;
     }
     if (heldItems.current === items) return;
+    // 위치를 지키는 중에 같은 핀 묶음이 다시 오거나(새로 불러오기) 핀이 더해지기·빠지기만 했으면 화면을 그대로 둔다.
+    // (예: 장소를 저장하면 목록을 다시 불러오는데, 그때 지도가 전체로 줄어들지 않게) 다른 리스트로 바뀌면 다시 맞춘다.
+    const held = heldItems.current;
+    if (held) {
+      const before = new Set(held.map((i) => i.id));
+      const after = new Set(items.map((i) => i.id));
+      const grew = [...before].every((id) => after.has(id));
+      const shrank = [...after].every((id) => before.has(id));
+      if (grew || shrank) {
+        heldItems.current = items;
+        requestAnimationFrame(declutter);
+        return;
+      }
+    }
     heldItems.current = null;
     const bounds = new maplibregl.LngLatBounds();
     located.forEach((i) => bounds.extend([i.lng!, i.lat!]));

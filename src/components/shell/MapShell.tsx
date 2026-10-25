@@ -438,6 +438,8 @@ export function MapShell({ children }: { children: ReactNode }) {
           onBack={() => setSaveAs(null)}
           onClose={closeAdd}
           onAdded={(listId, item, created) => {
+            // 방금 저장한 장소를 가운데 둔 채 머문다(목록이 다시 그려져도 전체 보기로 줄이지 않음)
+            holdView.current = { placeId: picked.id, lat: saveAs.lat, lng: saveAs.lng };
             closeAdd();
             if (scene.addTarget && scene.addTarget.listId === listId) {
               scene.addTarget.onAdded(item);
