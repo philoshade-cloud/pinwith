@@ -11,6 +11,8 @@ export default function DocLayout({ children }: { children: React.ReactNode }) {
         <p>
           <Link href="/places" className="underline">Cities · 도시별 리스트</Link>
           {" · "}
+          <Link href="/for-creators" className="underline">For creators · 크리에이터께</Link>
+          {" · "}
           <Link href="/for-businesses" className="underline">For businesses · 가게 사장님께</Link>
           {" · "}
           <Link href="/terms" className="underline">Terms · 이용약관</Link>

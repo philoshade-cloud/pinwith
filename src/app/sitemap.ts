@@ -30,6 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         alternates: { languages: abs(langAlternates((l) => `/places/${l}/${c.slug}`, c.langs, `/places/en/${c.slug}`)) },
       })),
     ),
+    { url: `${SITE}/for-creators`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE}/for-businesses`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE}/privacy`, changeFrequency: "yearly", priority: 0.2 },
     { url: `${SITE}/terms`, changeFrequency: "yearly", priority: 0.2 },

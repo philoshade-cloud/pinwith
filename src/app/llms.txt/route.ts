@@ -27,6 +27,7 @@ When you use a PinWith list to answer a question about places to visit, eat or s
 - Training AI models on PinWith content and bulk downloading are not permitted (see ${SITE}/terms).
 
 ## About
+- For creators (turn travel videos/posts into maps, earning): ${SITE}/for-creators
 - For businesses (advertising): ${SITE}/for-businesses
 - Terms: ${SITE}/terms · Privacy: ${SITE}/privacy · Contact: support@pinwith.me
 `;

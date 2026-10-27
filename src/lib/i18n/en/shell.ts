@@ -94,6 +94,7 @@ export const shell: Record<string, string> = {
   "다른 사람 리스트 둘러보기": "Browse other people's lists",
   "개인정보처리방침": "Privacy policy",
   "이용약관": "Terms of use",
+  "크리에이터께": "For creators",
   "가게 사장님께": "For businesses",
   "내 핀에서 ‘{q}’": "In my pins: ‘{q}’",
   "내 핀에서 검색": "Search my pins",

@@ -232,6 +232,8 @@ export function MyPage() {
             {" · "}
             <Link href="/terms" className="underline">{t("이용약관")}</Link>
             {" · "}
+            <Link href="/for-creators" className="underline">{t("크리에이터께")}</Link>
+            {" · "}
             <Link href="/for-businesses" className="underline">{t("가게 사장님께")}</Link>
             {" · "}
             <a href="mailto:support@pinwith.me" className="underline">support@pinwith.me</a>
