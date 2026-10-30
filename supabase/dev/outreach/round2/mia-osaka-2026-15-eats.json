@@ -1,0 +1,190 @@
+{
+ "row": "J10",
+ "target": "Mia Holiday",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "zh-TW",
+ "recipient_name": "Mia",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=AGoI_t7gXIM",
+  "title": "大阪2026最新🇯🇵19間美食攻略🌟零中伏｜私藏名單大公開｜道頓堀、梅田、黑門市場必吃美食、甜品、宵夜",
+  "date": "2026-03"
+ },
+ "hooks": [
+  "Ends at Izumisano Aozora fish market: oysters, then a seafood bowl (chapters 22:47, 23:47)",
+  "Kuromon Market century-old shop's thick soy milk (chapter 04:38)",
+  "'Osaka's thickest-cut beef tongue' at a Shinsaibashi yakiniku (chapter 20:17)"
+ ],
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "mia-osaka-2026-15-eats",
+  "title": "大阪美食2026零中伏：Mia Holiday的15間",
+  "desc": "取自Mia Holiday的影片〈大阪2026最新🇯🇵19間美食攻略🌟零中伏｜私藏名單大公開〉https://www.youtube.com/watch?v=AGoI_t7gXIM 。由PinWith整理，並非Mia Holiday製作。",
+  "kind": "collection",
+  "themes": [
+   "大阪",
+   "大阪美食",
+   "道頓堀",
+   "梅田",
+   "放題"
+  ],
+  "sections": [
+   {
+    "name": "難波・道頓堀・心齋橋",
+    "items": [
+     {
+      "place_id": "ChIJAQC0qmvnAGARz_nB6wA8nJ8",
+      "lat": 34.6653787,
+      "lng": 135.5039637,
+      "title": "千房 千日前本店（千房）",
+      "memo": "影片第一間：IG爆紅的「噴射」大阪燒",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=18",
+      "check": null
+     },
+     {
+      "place_id": "ChIJOyWRIQDnAGAR0cfkYuLIhpg",
+      "lat": 34.6650099,
+      "lng": 135.5059037,
+      "title": "日本橋 鶴屋（すき焼き・しゃぶしゃぶ）",
+      "memo": "主打抵食的國產牛壽喜燒",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=95",
+      "check": null
+     },
+     {
+      "place_id": "ChIJJYsl10HnAGARmCmBnrNOMnI",
+      "lat": 34.6662019,
+      "lng": 135.5065961,
+      "title": "高橋食品（黑門市場）",
+      "memo": "黑門市場百年老店的濃豆漿",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=278",
+      "check": null
+     },
+     {
+      "place_id": "ChIJNfDR3HnnAGARoBwYjCKbXJg",
+      "lat": 34.6677597,
+      "lng": 135.5010546,
+      "title": "OKINI燒肉 難波店",
+      "memo": "道頓堀一帶的和牛燒肉",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=586",
+      "check": null
+     },
+     {
+      "place_id": "ChIJlWRE0TTnAGARcynt34yuEMM",
+      "lat": 34.673657999999996,
+      "lng": 135.501791,
+      "title": "黒毛和牛とタンとハラミ焼肉 心斎橋店",
+      "memo": "Mia說的大阪最厚切牛舌",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=1217",
+      "check": "Google名稱為Yakiniku Gorichan，地址與說明欄相同（茶茶心斎橋ビル2F）"
+     }
+    ]
+   },
+   {
+    "name": "梅田・天神橋",
+    "items": [
+     {
+      "place_id": "ChIJpc8bW9vmAGARMdisEu3GKVg",
+      "lat": 34.6971004,
+      "lng": 135.51164749999998,
+      "title": "中村屋（天神橋筋商店街）",
+      "memo": "天神橋筋商店街的人氣可樂餅店",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=402",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ4ZH0nkXnAGARabtyTEJLBWQ",
+      "lat": 34.7077497,
+      "lng": 135.50679929999998,
+      "title": "Truffle BAKERY 大阪店",
+      "memo": "要排隊的人氣麵包店",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=517",
+      "check": "說明欄未寫分店，此為大阪店（中崎町）"
+     },
+     {
+      "place_id": "ChIJHThWGQDnAGAR51eqlzhEqDI",
+      "lat": 34.70187130000001,
+      "lng": 135.49336789999998,
+      "title": "らぁ麺 鴨と葱 梅田店",
+      "memo": "人氣鴨湯拉麵",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=644",
+      "check": null
+     },
+     {
+      "place_id": "ChIJq00cb8DnAGARB2VK9gnuh6Q",
+      "lat": 34.7029857,
+      "lng": 135.4959266,
+      "title": "Afternoon Tea LOVE & TABLE LUCUA大阪店",
+      "memo": "人氣千層水果蛋糕",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=722",
+      "check": null
+     },
+     {
+      "place_id": "ChIJY2t6EJLmAGAR-VU44gf8VFs",
+      "lat": 34.7047004,
+      "lng": 135.4981647,
+      "title": "ぼてぢゅう 阪急三番街店（BOTEJYU）",
+      "memo": "影片裡的大阪元祖店",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=895",
+      "check": null
+     },
+     {
+      "place_id": "ChIJsZ_Ep1XnAGARZiXZv2VPgnM",
+      "lat": 34.7026713,
+      "lng": 135.50257349999998,
+      "title": "うおしん酒場 梅田鉄板部",
+      "memo": "牡蠣放題那段介紹的店，說明欄建議訂位時註明牡蠣放題",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=989",
+      "check": "說明欄另註有一間的牡蠣放題已結束，出發前請先確認方案"
+     },
+     {
+      "place_id": "ChIJvVYRM-fnAGARCUjEWz-Nchw",
+      "lat": 34.6996825,
+      "lng": 135.50085199999998,
+      "title": "梅田 すし継",
+      "memo": "高級壽司放題，需要訂位",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=1064",
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "泉佐野（臨空城）",
+    "items": [
+     {
+      "place_id": "ChIJnSb6dnHJAGARWmjjnLBv49M",
+      "lat": 34.4125538,
+      "lng": 135.3019064,
+      "title": "燒肉Dining OneKarubi 臨空城店",
+      "memo": "和牛燒肉放題",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=1265",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ57twdwrIAGARbqoHo6LHgHI",
+      "lat": 34.42041,
+      "lng": 135.315189,
+      "title": "泉佐野漁協 青空市場",
+      "memo": "吃生蠔和海鮮的漁市場，離關西機場不遠",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=1367",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ57twdwrIAGARZvC3v-u8lug",
+      "lat": 34.4201536,
+      "lng": 135.3153156,
+      "title": "裕太朗寿し（青空市場內）",
+      "memo": "青空市場內的海鮮丼",
+      "ts_url": "https://youtu.be/AGoI_t7gXIM?t=1427",
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "我把您的大阪19間美食整理成一張地圖了",
+  "body": "Mia您好，我是 PinWith 的 Adrian，PinWith 是一個地圖清單 App。\n\n從黑門市場高橋食品的濃豆漿，一路吃到泉佐野青空市場的生蠔，路線很完整。我把其中 15 個地點整理成一張地圖：https://pinwith.me/@pinwith_zhtw/mia-osaka-2026-15-eats\n\n目前是私人狀態：只有拿到這個連結的人才能打開，如果您不希望我這樣做，我會直接刪除。\n\n透過 PinWith，您的觀眾可以跟著您的腳步走：重溫您去過的地方，或用一張地圖規劃自己的旅程，而且是用他們自己的語言。這能讓您的內容觸及更多人。\n\n如果您喜歡，我可以把它移到您的帳號並標註為您的作品，方便您放在影片說明欄。像這樣的清單也能為策展者帶來額外收入：https://pinwith.me/for-creators?lang=zh-TW\n如果用不到，不必回覆。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

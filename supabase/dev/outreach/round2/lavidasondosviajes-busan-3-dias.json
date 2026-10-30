@@ -1,0 +1,190 @@
+{
+ "row": "O3",
+ "target": "La vida son dos viajes",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "es",
+ "recipient_name": "Paula",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://lavidasondosviajes.com/corea-del-sur/que-ver-en-busan/",
+  "title": "Qué ver en Busan en 2 y 3 días: ruta, mapa y consejos",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "They missed the Sky Capsule (Mipo to Cheongsapo) because tickets were sold out, and advise booking early (Day 2 section)",
+  "Recommends LOTTE Department Store Gwangbok at nightfall for its indoor waterfall and free observatory (Day 1 section)",
+  "Gwangalli is her favorite beach, with views of Gwangan Bridge (Day 3 section)"
+ ],
+ "list": {
+  "owner": "pinwith_es",
+  "lang": "es",
+  "slug": "lavidasondosviajes-busan-3-dias",
+  "title": "Busan en 3 días: las 15 paradas de La vida son dos viajes",
+  "desc": "Lugares de la ruta 'Qué ver en Busan en 2 y 3 días: ruta, mapa y consejos' (https://lavidasondosviajes.com/corea-del-sur/que-ver-en-busan/). Recopilado por PinWith, no creado por La vida son dos viajes.",
+  "kind": "course",
+  "themes": [
+   "Busan",
+   "Corea del Sur",
+   "playas",
+   "mercados",
+   "itinerario"
+  ],
+  "sections": [
+   {
+    "name": "Día 1",
+    "items": [
+     {
+      "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+      "lat": 35.097393499999995,
+      "lng": 129.0105921,
+      "title": "Aldea Cultural de Gamcheon (감천문화마을)",
+      "memo": "Casas de colores en la ladera; mejor llegar temprano y buscar al Principito.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJudkrFArpaDURbbCzajeQs0c",
+      "lat": 35.0966339,
+      "lng": 129.0307965,
+      "title": "Mercado de Jagalchi (자갈치시장)",
+      "memo": "El mayor mercado de pescado y marisco del país.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJfYLMelSTaDURFlCRfk5W1PA",
+      "lat": 35.1013575,
+      "lng": 129.0281978,
+      "title": "Mercado de Gukje (국제시장)",
+      "memo": "Mercado enorme donde se vende de casi todo.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ07EMAkXoaDURr8d2uGJp5pk",
+      "lat": 35.0754546,
+      "lng": 129.016761,
+      "title": "Playa de Songdo (송도해수욕장)",
+      "memo": "Playa para la tarde del primer día; a la familia le encantó.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJQehEaUToaDURU7CTL4IJmZY",
+      "lat": 35.0763876,
+      "lng": 129.0236199,
+      "title": "Busan Air Cruise, estación Songdo Bay (송도해상케이블카)",
+      "memo": "Teleférico que cruza la bahía con vistas a la costa.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJxycp5AzpaDUR62VgFgUIPV0",
+      "lat": 35.0981871,
+      "lng": 129.0366183,
+      "title": "LOTTE Department Store Gwangbok (롯데백화점 광복점)",
+      "memo": "Cascada interior y mirador gratis; ideal al anochecer.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ21pR1aHpaDUR_usy_ELBCvk",
+      "lat": 35.101853999999996,
+      "lng": 129.0258719,
+      "title": "Mercado Bupyeong Kkangtong (부평깡통시장)",
+      "memo": "De los mejores sitios de Busan para comida callejera.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Día 2",
+    "items": [
+     {
+      "place_id": "ChIJwabeuxuMaDURXC4Rb21AQaE",
+      "lat": 35.1884543,
+      "lng": 129.2231109,
+      "title": "Templo Haedong Yonggungsa (해동용궁사)",
+      "memo": "Templo sobre los acantilados; temprano se evitan los grupos.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJXwf-DlyNaDURmKxjwdWxY5k",
+      "lat": 35.158697499999995,
+      "lng": 129.16038419999998,
+      "title": "Playa de Haeundae (해운대해수욕장)",
+      "memo": "La playa más famosa, con paseo marítimo y mercado cerca.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJnbg-nA2NaDUR3DK_vogcxaI",
+      "lat": 35.1597946,
+      "lng": 129.1699193,
+      "title": "BUSAN X the SKY (부산엑스더스카이)",
+      "memo": "Mirador de pago que, según el blog, sí merece la entrada.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJfdIYWwuNaDURDx-eqtUjCkg",
+      "lat": 35.158284,
+      "lng": 129.17276719999998,
+      "title": "Sky Capsule, estación Mipo (해운대블루라인파크 미포정거장)",
+      "memo": "Ida a Cheongsapo en cápsula y vuelta en Beach Train; reserva pronto.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJUQsDVhuNaDURJo5GeByloeQ",
+      "lat": 35.1640365,
+      "lng": 129.1967173,
+      "title": "Mirador Cheongsapo Daritdol (청사포 다릿돌전망대)",
+      "memo": "Pasarela suspendida sobre el mar junto al pueblo pesquero.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Día 3",
+    "items": [
+     {
+      "place_id": "ChIJVRLdCsjtaDURcdummQTLnRk",
+      "lat": 35.1006767,
+      "lng": 129.12440089999998,
+      "title": "Oryukdo Skywalk (오륙도 스카이워크)",
+      "memo": "Pasarela con suelo de cristal sobre los acantilados.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJxw7HJy_taDUR-xaSTeHwbf8",
+      "lat": 35.1531696,
+      "lng": 129.118666,
+      "title": "Playa de Gwangalli (광안리해수욕장)",
+      "memo": "Su playa favorita, con vistas al puente Gwangan; buena para comer.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJDT_5v8aSaDURXW8rEbumGh8",
+      "lat": 35.168233799999996,
+      "lng": 129.1295279,
+      "title": "Spa Land Centum City (스파랜드 센텀시티)",
+      "memo": "Piscinas, saunas y baños termales para cerrar el viaje.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "He puesto tu ruta por Busan en un solo mapa",
+  "body": "Hola Paula, soy Adrian, de PinWith, una app de listas en mapa.\n\nLeí tu ruta por Busan y me quedé con lo de la Sky Capsule agotada: ese aviso de reservar con tiempo le va a ahorrar un disgusto a más de uno. He puesto 15 de los lugares en un solo mapa: https://pinwith.me/@pinwith_es/lavidasondosviajes-busan-3-dias\n\nDe momento es privado: solo se abre con este enlace, y lo borro si prefieres que no exista.\n\nCon PinWith, tus lectores pueden seguir tus pasos: volver a los sitios donde estuviste o planear su propio viaje desde un solo mapa, en su propio idioma. Así tu contenido llega más lejos.\n\nSi te gusta, lo paso a tu cuenta, con tu crédito, para que puedas enlazarlo en el post. Las listas como esta también pueden dar ingresos extra a quienes las crean: https://pinwith.me/for-creators?lang=es\nSi no te resulta útil, no hace falta que respondas.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

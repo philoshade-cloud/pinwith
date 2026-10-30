@@ -1,0 +1,205 @@
+{
+ "row": "O5",
+ "target": "Mike and Mery TV",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "es",
+ "recipient_name": "Mike y Mery",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://mikeandmerytv.com/20-cosas-que-ver-y-hacer-en-seul-con-itinerario-y-mapa/",
+  "title": "20 cosas que ver en Seúl. Con itinerario y mapa",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "Ssamziegil has a toilet-themed café, mentioned as a curiosity (Compras section)",
+  "At Gaeseong Dumpling House the portions were so big they had leftovers for dinner (Comida section)",
+  "Google Maps didn't work well in Ihwa, so some murals were hard to find (Ihwa Mural Village section)"
+ ],
+ "list": {
+  "owner": "pinwith_es",
+  "lang": "es",
+  "slug": "mikeandmery-seul-6-dias",
+  "title": "Seúl en 6 días: las 15 paradas de Mike and Mery",
+  "desc": "Lugares del itinerario de '20 cosas que ver en Seúl. Con itinerario y mapa' (https://mikeandmerytv.com/20-cosas-que-ver-y-hacer-en-seul-con-itinerario-y-mapa/). Recopilado por PinWith, no creado por Mike and Mery.",
+  "kind": "course",
+  "themes": [
+   "Seúl",
+   "Corea del Sur",
+   "palacios",
+   "mercados",
+   "itinerario"
+  ],
+  "sections": [
+   {
+    "name": "Día 1",
+    "items": [
+     {
+      "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+      "lat": 37.5814696,
+      "lng": 126.9849519,
+      "title": "Bukchon Hanok Village (북촌한옥마을)",
+      "memo": "Barrio de hanoks en alto; mejor temprano, y con hanbok si te apetece.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+      "lat": 37.579617,
+      "lng": 126.977041,
+      "title": "Palacio Gyeongbokgung (경복궁)",
+      "memo": "El palacio que más les gustó; cierra los martes y con hanbok entras gratis.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJIwCT4-yifDUR1E63iG76hr0",
+      "lat": 37.569101499999995,
+      "lng": 126.97866919999998,
+      "title": "Canal Cheonggyecheon (청계천)",
+      "memo": "Antiguo arroyo convertido en paseo verde en pleno centro.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJHYhJ5OmifDURMOSQ2D-6lFY",
+      "lat": 37.5738369,
+      "lng": 126.982202,
+      "title": "Templo Jogyesa (조계사)",
+      "memo": "Templo budista junto a Insadong, cierre del primer día.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Día 2",
+    "items": [
+     {
+      "place_id": "ChIJOTEaKmiffDURNTst1Jzcm_c",
+      "lat": 37.5149717,
+      "lng": 126.93863420000001,
+      "title": "Mercado de pescado de Noryangjin (노량진수산시장)",
+      "memo": "Mercado de pescado con el que arranca el día 2.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ68AiKsWYfDUROpTctLKtxtU",
+      "lat": 37.5561973,
+      "lng": 126.9250341,
+      "title": "Hongdae (홍대)",
+      "memo": "Barrio de estudiantes con tiendas vintage; aquí cenaron su barbacoa favorita.",
+      "ts_url": null,
+      "check": "Area pin (Hongdae street); the BBQ place itself is unnamed in the post"
+     }
+    ]
+   },
+   {
+    "name": "Día 3",
+    "items": [
+     {
+      "place_id": "ChIJJXcc9--ifDURb8zmFI_J64s",
+      "lat": 37.5641885,
+      "lng": 126.98611799999998,
+      "title": "Myeong-dong (명동)",
+      "memo": "Cosmética coreana y puestos de comida callejera.",
+      "ts_url": null,
+      "check": "Area pin (Myeongdong shopping street)"
+     },
+     {
+      "place_id": "ChIJfYjlFvWifDURYSDsoxYbN80",
+      "lat": 37.559277,
+      "lng": 126.9777029,
+      "title": "Mercado de Namdaemun (남대문시장)",
+      "memo": "El mercado más antiguo del país; cierra los domingos.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Día 4",
+    "items": [
+     {
+      "place_id": "ChIJ63NnRS6jfDURt-efnKIjXzs",
+      "lat": 37.5779788,
+      "lng": 127.00719149999999,
+      "title": "Ihwa Mural Village (이화벽화마을)",
+      "memo": "Murales y callejones en lo alto; mejor por la mañana.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+      "lat": 37.570038499999995,
+      "lng": 126.99960379999997,
+      "title": "Mercado de Gwangjang (광장시장)",
+      "memo": "Famoso por las tortitas de judías mungo.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Día 5",
+    "items": [
+     {
+      "place_id": "ChIJQRutlcKifDURiMoaUPYmWX4",
+      "lat": 37.5743024,
+      "lng": 126.9849036,
+      "title": "Ssamziegil, Insadong (쌈지길)",
+      "memo": "En Insadong-gil; dentro hay una cafetería temática de inodoros.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJe4Jbot2ifDUR2zWhruwyaow",
+      "lat": 37.5737132,
+      "lng": 126.99012710000001,
+      "title": "Ikseon-dong (익선동)",
+      "memo": "Hanoks convertidos en cafés; aquí se alojaron la primera vez.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+      "lat": 37.5511694,
+      "lng": 126.98822659999999,
+      "title": "N Seoul Tower, Namsan (N서울타워)",
+      "memo": "Vistas desde la montaña, en teleférico o a pie, con candados del amor.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Día 6",
+    "items": [
+     {
+      "place_id": "ChIJo35QAxelfDUR4jt5FPgWSIU",
+      "lat": 37.541151299999996,
+      "lng": 127.0659498,
+      "title": "Common Ground (커먼그라운드)",
+      "memo": "Espacio hecho con contenedores, en la ruta de Seongsu.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJu7dpc45FezURhLMS5U5eaJk",
+      "lat": 37.5125295,
+      "lng": 127.10230500000002,
+      "title": "Seoul Sky, Lotte World Tower (서울스카이)",
+      "memo": "Mirador para cerrar el viaje; entrada de 27.000 wones según el post.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "He puesto vuestro itinerario de Seúl en un solo mapa",
+  "body": "Hola Mike y Mery, soy Adrian, de PinWith, una app de listas en mapa.\n\nLeí vuestra guía de Seúl y me reí con la cafetería de inodoros de Ssamziegil, y con los dumplings de Gaeseong que os dieron para cenar también. He puesto 15 de los lugares de vuestro itinerario en un solo mapa: https://pinwith.me/@pinwith_es/mikeandmery-seul-6-dias\n\nDe momento es privado: solo se abre con este enlace, y lo borro si preferís que no exista.\n\nCon PinWith, vuestros lectores pueden seguir vuestros pasos: volver a los sitios donde estuvisteis o planear su propio viaje desde un solo mapa, en su propio idioma. Así vuestro contenido llega más lejos.\n\nSi os gusta, lo paso a vuestra cuenta, con vuestro crédito, para que podáis enlazarlo en el post. Las listas como esta también pueden dar ingresos extra a quienes las crean: https://pinwith.me/for-creators?lang=es\nSi no os resulta útil, no hace falta que respondáis.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

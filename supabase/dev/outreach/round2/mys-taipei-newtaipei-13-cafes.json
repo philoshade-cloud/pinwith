@@ -1,0 +1,166 @@
+{
+ "row": "J7",
+ "target": "Mys旅人誌",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "zh-TW",
+ "recipient_name": "Mys",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://sekainomys.com/taipei_cafe/",
+  "title": "【2026台北咖啡廳】精選13間台北咖啡店推薦。台北下午茶、甜點推薦、新北咖啡廳推薦(菜單、電話)",
+  "date": "2026-01"
+ },
+ "hooks": [
+  "Includes Eden Garden in Luzhou, a plant shop with home-propagated plants, plant workshops and daily handmade desserts (article #12)",
+  "Out of office in Xinyi is a ~250-ping basement space doing brunch, coffee and drinks (article #9)",
+  "Split into 9 Taipei cafes and 4 New Taipei cafes (Tamsui, Sanxia, Luzhou, Banqiao) (article)"
+ ],
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "mys-taipei-newtaipei-13-cafes",
+  "title": "台北・新北咖啡廳13間：Mys旅人誌的推薦名單",
+  "desc": "取自Mys旅人誌〈【2026台北咖啡廳】精選13間台北咖啡店推薦。台北下午茶、甜點推薦、新北咖啡廳推薦(菜單、電話)〉https://sekainomys.com/taipei_cafe/ 。由PinWith整理，並非Mys旅人誌製作。",
+  "kind": "collection",
+  "themes": [
+   "台北咖啡廳",
+   "新北咖啡廳",
+   "下午茶",
+   "甜點"
+  ],
+  "sections": [
+   {
+    "name": "台北市",
+    "items": [
+     {
+      "place_id": "ChIJCUYshtWrQjQRsI3M0yTmJK4",
+      "lat": 25.0430389,
+      "lng": 121.54636680000002,
+      "title": "Cafejiasong 咖央",
+      "memo": "老屋二樓的韓系咖啡廳，木頭與鐵件家具配水晶燈；忠孝敦化站約3分",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJOSHdzpqpQjQReth3v_hHnTk",
+      "lat": 25.043903099999998,
+      "lng": 121.52769039999998,
+      "title": "Simple Kaffa 興波咖啡（華山旗艦店）",
+      "memo": "前WBC冠軍創立，不接受訂位；近善導寺站",
+      "ts_url": null,
+      "check": "文章未寫分店，依「近善導寺站」對應華山旗艦店"
+     },
+     {
+      "place_id": "ChIJjybOnpmpQjQRHVLG0Qemneo",
+      "lat": 25.053298500000004,
+      "lng": 121.52213379999999,
+      "title": "羊毛與花-光點",
+      "memo": "在前美國領事館的光點台北裡，三面玻璃加上滿滿綠意",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJweYvMo2rQjQRL7scWF8WiuU",
+      "lat": 25.040366,
+      "lng": 121.57112790000001,
+      "title": "Utroo café 寓所咖啡",
+      "memo": "灰白牆面搭配藝術展覽，有早午餐風的義大利麵與飯類",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ8TuKLOqrQjQRSrGsTe4tu2o",
+      "lat": 25.052356999999997,
+      "lng": 121.554531,
+      "title": "Remember Me Café 記得我咖啡",
+      "memo": "不限時有插座，供應義大利麵、燉飯與輕食；小巨蛋站約3分",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ57K_BaerQjQRt5DQdkcV2EI",
+      "lat": 25.0424364,
+      "lng": 121.56696199999999,
+      "title": "小青苑 Cyan Cafe",
+      "memo": "被植物包圍，有復古家具和怪獸公仔收藏，自家烘豆",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJCRed4JmpQjQRpOEwyWt1wwU",
+      "lat": 25.020628799999997,
+      "lng": 121.5329411,
+      "title": "達文西咖啡 溫州店",
+      "memo": "搬到溫州街後的新店，半開放吧台，旁邊附會議室",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ8QH-FZ2pQjQRjtr1CP5Rmew",
+      "lat": 25.021338699999998,
+      "lng": 121.53285739999998,
+      "title": "山徑拾光 TRAIL COFFEE",
+      "memo": "公館住宅巷弄裡的山系小店，暖黃燈光",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJNRRR_burQjQRCpM8T_l1_zc",
+      "lat": 25.041356,
+      "lng": 121.56557099999999,
+      "title": "Out of office 不在辦公室",
+      "memo": "市府站1號出口，約250坪地下空間，早午餐咖啡和酒都有",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "新北市",
+    "items": [
+     {
+      "place_id": "ChIJwcqwLFilQjQRRHMgQ_k0Xxg",
+      "lat": 25.171512399999997,
+      "lng": 121.4427212,
+      "title": "空兩格café 復古咖啡館（淡水）",
+      "memo": "老紅磚和斑駁木門，有鹹派和氣泡飲",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJH110Z00baDQRkt9_DvZse5o",
+      "lat": 24.9346718,
+      "lng": 121.36738669999998,
+      "title": "Qm159 清琳咖啡（三峽）",
+      "memo": "三峽老街附近的白色鐵皮屋，歐風室內，寵物友善",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJHaRSozepQjQRlpY5SXPEx4o",
+      "lat": 25.0828128,
+      "lng": 121.4769494,
+      "title": "Eden Garden 伊登園（蘆洲）",
+      "memo": "植物店結合咖啡，賣自家繁殖植物，有植栽課和每日手作甜點",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJs6RubGSpQjQRWBjxAMLz1qU",
+      "lat": 25.0128361,
+      "lng": 121.4706195,
+      "title": "旭舊咖啡（板橋）",
+      "memo": "老屋改建的人氣早午餐店，可租場地辦活動；板新站約5分",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "我把您的台北咖啡廳13間整理成一張地圖了",
+  "body": "Mys您好，我是 PinWith 的 Adrian，PinWith 是一個地圖清單 App。\n\n您把蘆洲的伊登園也寫了進去：一間能買自家繁殖植物、還有植栽課的咖啡廳，真的很少見。我把其中 13 個地點整理成一張地圖：https://pinwith.me/@pinwith_zhtw/mys-taipei-newtaipei-13-cafes\n\n目前是私人狀態：只有拿到這個連結的人才能打開，如果您不希望我這樣做，我會直接刪除。\n\n透過 PinWith，您的讀者可以跟著您的腳步走：重溫您去過的地方，或用一張地圖規劃自己的旅程，而且是用他們自己的語言。這能讓您的內容觸及更多人。\n\n如果您喜歡，我可以把它移到您的帳號並標註為您的作品，方便您放在文章裡。像這樣的清單也能為策展者帶來額外收入：https://pinwith.me/for-creators?lang=zh-TW\n如果用不到，不必回覆。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

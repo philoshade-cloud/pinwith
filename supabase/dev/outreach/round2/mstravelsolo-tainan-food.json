@@ -1,0 +1,189 @@
+{
+ "row": "E19",
+ "target": "Ms Travel Solo",
+ "group": "fan_blog",
+ "based_in_korea": false,
+ "msg_lang": "en",
+ "recipient_name": "Queenie",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.mstravelsolo.com/best-tainan-food/",
+  "title": "Best Food in Tainan: Where and What to Eat in Tainan Taiwan",
+  "date": "2026-02"
+ },
+ "hooks": [
+  "Yi Wei Pin and Fu Sheng Hao in Yongle Market each sell only two items (source article)",
+  "Chikan coffin bread is hidden inside Kangle Market (source article)",
+  "Covers 54 spots grouped by dish, from beef soup to tofu pudding (source article)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "mstravelsolo-tainan-food",
+  "title": "Best food in Tainan: Queenie's 15 must-eats",
+  "desc": "Places from Ms Travel Solo's 'Best Food in Tainan: Where and What to Eat in Tainan Taiwan' (https://www.mstravelsolo.com/best-tainan-food/). Collected by PinWith, not made by Ms Travel Solo.",
+  "kind": "collection",
+  "themes": [
+   "Tainan",
+   "Taiwanese food",
+   "breakfast",
+   "street food"
+  ],
+  "sections": [
+   {
+    "name": "Beef soup, congee & milkfish",
+    "items": [
+     {
+      "place_id": "ChIJcd4QHXt2bjQRfM7pW4nrtaE",
+      "lat": 22.9902056,
+      "lng": 120.19657749999999,
+      "title": "A Cun Beef Soup (阿村第二代牛肉湯)",
+      "memo": "Beef soup on Bao An Road, serving since 1968; Michelin-recognized.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJd2V9k2h2bjQR2QrUIg9vI0M",
+      "lat": 23.0000073,
+      "lng": 120.19224090000002,
+      "title": "A Hsing Congee (阿星鹹粥)",
+      "memo": "Bib Gourmand milkfish belly and oyster congee; closed Mondays.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ54Pf_2F2bjQRAMH-nhBgbAQ",
+      "lat": 22.9957939,
+      "lng": 120.2050935,
+      "title": "Fu Tai Table 3rd Gen (福泰飯桌 第三代)",
+      "memo": "80+ years old; minced pork rice and fried milkfish belly.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJaWl8c4h2bjQRtS2L4ueUMz8",
+      "lat": 22.990003599999998,
+      "lng": 120.206722,
+      "title": "Yong Kee Milkfish Ball (永記虱目魚丸)",
+      "memo": "Milkfish ball soups and minced pork rice from 6:30 am.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ5R6mXu92bjQRAZ252zZvhyE",
+      "lat": 23.0080994,
+      "lng": 120.2214137,
+      "title": "Kaiyuan Mackerel Thick Soup (開元紅燒土魠魚羹)",
+      "memo": "Fried Spanish mackerel thick soup; Michelin pick with English menu.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Noodles, rice cakes & dumplings",
+    "items": [
+     {
+      "place_id": "ChIJwe_HQGN2bjQRq4DHLs6aj48",
+      "lat": 22.9923333,
+      "lng": 120.2037083,
+      "title": "Du Hsiao Yueh (度小月擔仔麵)",
+      "memo": "Danzai noodles and minced pork rice from a name dating to 1895.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJOQURVGF2bjQRDx8EQOisObM",
+      "lat": 22.997164899999998,
+      "lng": 120.1996052,
+      "title": "Small Park Danzai Noodles (小公園擔仔麵)",
+      "memo": "Bib Gourmand dry danzai noodles; closed Tuesday and Wednesday.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJPas6rmZ2bjQRPxhFrp7gRAI",
+      "lat": 22.997551299999998,
+      "lng": 120.19889880000001,
+      "title": "Yi Wei Pin (一味品碗粿魚羹)",
+      "memo": "Bib Gourmand; only bowl rice cake and milkfish thick soup.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJezCwC8p3bjQRDdtipPr_yZQ",
+      "lat": 22.997550399999998,
+      "lng": 120.199,
+      "title": "Fu Sheng Hao (富盛號)",
+      "memo": "Two items only: bowl rice cake and swordfish thick soup.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJy3nZ-2F2bjQRAfpYzggB2k8",
+      "lat": 22.9959727,
+      "lng": 120.2046874,
+      "title": "Luo Cheng Migao (落成米糕)",
+      "memo": "Bib Gourmand migao, very popular.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJVfASdWJ2bjQRvBZf3GL0HOE",
+      "lat": 22.9943034,
+      "lng": 120.2049991,
+      "title": "Zai Fa Hao (再發號百年肉粽)",
+      "memo": "Century-old shop with three kinds of sticky rice dumplings.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Snacks & sweets",
+    "items": [
+     {
+      "place_id": "ChIJ9X1wvmR2bjQRsqhUCAqPWhI",
+      "lat": 22.9923802,
+      "lng": 120.1961384,
+      "title": "Chikan Coffin Bread (赤崁棺材板)",
+      "memo": "Coffin bread hidden inside Kangle Market; curry version too.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJwcrlsWZ2bjQRuSR57DvjKOE",
+      "lat": 22.997564300000004,
+      "lng": 120.1989031,
+      "title": "A Song Gua Bao (阿松割包)",
+      "memo": "Gua bao with pork, pork skin or tongue, served with pork broth.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJCzZbxWZ2bjQR6CUWOMHz1hI",
+      "lat": 22.997564600000004,
+      "lng": 120.19904910000001,
+      "title": "Jin De Spring Rolls (金得春捲)",
+      "memo": "Sells only popiah, fresh spring rolls; closed Tuesdays.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJC_GkyqjYbTQR8AlhjOqU_0w",
+      "lat": 22.9998689,
+      "lng": 120.15329369999999,
+      "title": "Tongji Anping Douhua (同記安平豆花)",
+      "memo": "Tofu pudding from the Anping shop; three locations in Tainan.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your Tainan food guide on one map",
+  "body": "Hi Queenie, I'm Adrian from PinWith, a map-list app.\n\nGrouping 54 spots by dish, down to two-item shops like Fu Sheng Hao in Yongle Market, makes Tainan so much easier to plan. I put 15 of the places into one map: https://pinwith.me/@pinwith_en/mstravelsolo-tainan-food\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your readers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it in the post. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

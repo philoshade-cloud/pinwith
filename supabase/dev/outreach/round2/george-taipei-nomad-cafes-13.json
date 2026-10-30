@@ -1,0 +1,172 @@
+{
+ "row": "J8",
+ "target": "喬治 George",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "zh-TW",
+ "recipient_name": "喬治 George",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.georgeleelife.com/recommended-cafes-in-taipei-for-digital-nomads-nearby-mrt-6",
+  "title": "2026最新｜台北不限時有插座咖啡廳推薦（捷運松江南京、行天宮、中山國小篇）｜有插座適合數位遊牧、遠距工作",
+  "date": "2026-04"
+ },
+ "hooks": [
+  "Rates every cafe on light, price and noise, and notes exactly which seats have sockets (article)",
+  "瑤池墮宮 YCDG stays open until 01:00, cash only, desk lamps above most seats (article #13)",
+  "8%ice CAFÉ: only the 2F window bar stools have sockets, 1.5h limit when full (article #12)"
+ ],
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "george-taipei-nomad-cafes-13",
+  "title": "台北不限時有插座咖啡廳：喬治 George 的13間（松江南京・行天宮・中山國小）",
+  "desc": "取自喬治 George〈2026最新｜台北不限時有插座咖啡廳推薦（捷運松江南京、行天宮、中山國小篇）〉https://www.georgeleelife.com/recommended-cafes-in-taipei-for-digital-nomads-nearby-mrt-6 。由PinWith整理，並非喬治 George製作。",
+  "kind": "collection",
+  "themes": [
+   "台北咖啡廳",
+   "不限時",
+   "有插座",
+   "數位遊牧",
+   "中山區"
+  ],
+  "sections": [
+   {
+    "name": "松江南京站",
+    "items": [
+     {
+      "place_id": "ChIJFam_hyK1QjQRyW5zld0ZepU",
+      "lat": 25.0466746,
+      "lng": 121.5319511,
+      "title": "德佈Debut Cafe",
+      "memo": "只收現金；有榻榻米座位區，座位附插座",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJK03tDaSpQjQR_yXBS05DpaY",
+      "lat": 25.0547169,
+      "lng": 121.53171990000001,
+      "title": "旅徒咖啡",
+      "memo": "二樓小店，假日客滿限時2小時；提拉米蘇酒味濃",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJMUCICmGpQjQR266OmpSXaBU",
+      "lat": 25.050871599999997,
+      "lng": 121.53413160000001,
+      "title": "GIVE ME PIE",
+      "memo": "招牌鹹派超過10種口味；靠牆座位有插座",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJzf7RSMGpQjQRHo5NlOYGPIQ",
+      "lat": 25.050943699999998,
+      "lng": 121.536383,
+      "title": "TWATUTIAN Coffee & Co.",
+      "memo": "客滿限時90分鐘；二樓採光好，有插座的桌子只有三張",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJC_wscmGpQjQRtXrgvhvFthA",
+      "lat": 25.0505522,
+      "lng": 121.5336382,
+      "title": "93巷人文空間",
+      "memo": "可翻閱天下文化的書和雜誌；插座在座位前方",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "行天宮站",
+    "items": [
+     {
+      "place_id": "ChIJvWmFPV-pQjQRu_TYuwH_cBo",
+      "lat": 25.0584222,
+      "lng": 121.534909,
+      "title": "CAFE RACO",
+      "memo": "平日上午常客滿，建議先打電話；喝得到少見的越南咖啡",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJE0QYpEupQjQRhRm_nJkkyFs",
+      "lat": 25.0573649,
+      "lng": 121.53266699999999,
+      "title": "風潮咖啡",
+      "memo": "營業到22:30；一個人去多半坐吧台或後方六人大桌",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJOZxEWF2pQjQRhCu3Te92_0Y",
+      "lat": 25.058213199999997,
+      "lng": 121.5280099,
+      "title": "老三咖啡",
+      "memo": "07:00開到22:00；11點後有飯麵，插座在靠牆靠窗位",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJB7GdU1mpQjQRXyvVL4N00rQ",
+      "lat": 25.0618953,
+      "lng": 121.5319409,
+      "title": "SU SU CAFE 粟粟咖啡",
+      "memo": "週日公休、只收LINE Pay；午間商業午餐附南瓜濃湯",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJjxJVu4KpQjQRptkRW5Ftsvg",
+      "lat": 25.05753,
+      "lng": 121.53176020000001,
+      "title": "Dream House coffee",
+      "memo": "招牌咖啡飯；週二公休，插座在座位上方牆邊",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "中山國小站",
+    "items": [
+     {
+      "place_id": "ChIJ_8WLFWipQjQRc0d1b_tGhI4",
+      "lat": 25.0610049,
+      "lng": 121.52426039999999,
+      "title": "澳氏咖啡 Aussie Cafe",
+      "memo": "招牌澳洲肉派；假日限時2小時",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJCw3n6TWrQjQRv3BRablqFqE",
+      "lat": 25.0628827,
+      "lng": 121.5273682,
+      "title": "8%ice CAFÉ 民權店",
+      "memo": "07:00開門；只有二樓靠窗高腳椅有插座，客滿限時1.5小時",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJSaaF3AepQjQRNWEjmML4q30",
+      "lat": 25.0619896,
+      "lng": 121.5251147,
+      "title": "瑤池墮宮 YCDG",
+      "memo": "營業到凌晨1點、只收現金；座位寬敞，上方多有檯燈",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "我把您的台北不限時咖啡廳整理成一張地圖了",
+  "body": "喬治您好，我是 PinWith 的 Adrian，PinWith 是一個地圖清單 App。\n\n連哪幾張桌子有插座、瑤池墮宮營業到凌晨一點都寫得清清楚楚，對遠距工作的人非常實用。我把其中 13 個地點整理成一張地圖：https://pinwith.me/@pinwith_zhtw/george-taipei-nomad-cafes-13\n\n目前是私人狀態：只有拿到這個連結的人才能打開，如果您不希望我這樣做，我會直接刪除。\n\n透過 PinWith，您的讀者可以跟著您的腳步走：重溫您去過的地方，或用一張地圖規劃自己的旅程，而且是用他們自己的語言。這能讓您的內容觸及更多人。\n\n如果您喜歡，我可以把它移到您的帳號並標註為您的作品，方便您放在文章裡。像這樣的清單也能為策展者帶來額外收入：https://pinwith.me/for-creators?lang=zh-TW\n如果用不到，不必回覆。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

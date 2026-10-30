@@ -1,0 +1,107 @@
+{
+ "row": "J9",
+ "target": "Stephen Leung 吃喝玩樂",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "zh-TW",
+ "recipient_name": "Stephen",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=fxUWLPDwRM8",
+  "title": "【曼谷美食2026】一網打盡曼谷最新10間不踩雷餐廳推薦 | 超濃泰奶 40年老店 準米芝蓮 Fine Dining 爆紅甜品 隱世古宅菜 慢煮海南雞 | #Stephen吃喝玩樂",
+  "date": "2026-07"
+ },
+ "hooks": [
+  "Chapter 14:38: 40-year-old braised duck shop on Song Wat Road (video chapters)",
+  "Stayed at Carlton Hotel Bangkok Sukhumvit and ate at its Wah Lok Cantonese restaurant (chapters 20:00, 33:00)",
+  "Uploaded 2026-07-30; each description entry lists hours and recommended dishes (video description)"
+ ],
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "stephen-bangkok-food-2026",
+  "title": "曼谷不踩雷美食2026：Stephen吃喝玩樂的7間",
+  "desc": "取自Stephen Leung的影片〈【曼谷美食2026】一網打盡曼谷最新10間不踩雷餐廳推薦〉https://www.youtube.com/watch?v=fxUWLPDwRM8 。由PinWith整理，並非Stephen Leung製作。",
+  "kind": "collection",
+  "themes": [
+   "曼谷",
+   "曼谷美食",
+   "泰國",
+   "泰奶"
+  ],
+  "sections": [
+   {
+    "name": null,
+    "items": [
+     {
+      "place_id": "ChIJVcaybhCf4jARtrXfEXQs4R4",
+      "lat": 13.7408077,
+      "lng": 100.56787410000001,
+      "title": "Siam Nora",
+      "memo": "影片介紹的第一間餐廳，在素坤逸一帶",
+      "ts_url": "https://youtu.be/fxUWLPDwRM8?t=141",
+      "check": "說明欄地址為Sukhumvit 23，Google地址為Sukhumvit 31 Yaek 4，請確認"
+     },
+     {
+      "place_id": "ChIJa4joIF-f4jARcWKlNcB2d7M",
+      "lat": 13.732531999999999,
+      "lng": 100.5663278,
+      "title": "A KEEN House（Emsphere店）",
+      "memo": "Emsphere商場地面層的分店",
+      "ts_url": "https://youtu.be/fxUWLPDwRM8?t=360",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ_0P3hgOZ4jARaor-5UJtKgo",
+      "lat": 13.737409900000001,
+      "lng": 100.5133056,
+      "title": "KHIRI Thai Tea",
+      "memo": "泰奶專門店",
+      "ts_url": "https://youtu.be/fxUWLPDwRM8?t=640",
+      "check": "說明欄寫Charoen Krung路（Pom Prap），此為Talat Noi的旗艦店，請確認分店"
+     },
+     {
+      "place_id": "ChIJj1EAGdqf4jARlhbpXcxfhi8",
+      "lat": 13.746565799999999,
+      "lng": 100.53963449999999,
+      "title": "Thong Smith（Central World 3樓）",
+      "memo": "船麵店，說明欄列出Central World 3樓分店",
+      "ts_url": "https://youtu.be/fxUWLPDwRM8?t=769",
+      "check": null
+     },
+     {
+      "place_id": "ChIJl2RaBQCf4jARw-LyUbmqdL4",
+      "lat": 13.728603399999999,
+      "lng": 100.5379067,
+      "title": "Parkside Market（Dusit Central Park）",
+      "memo": "Dusit Central Park地下的美食廣場",
+      "ts_url": "https://youtu.be/fxUWLPDwRM8?t=1547",
+      "check": null
+     },
+     {
+      "place_id": "ChIJd6XhIfef4jARz1jVBhCFsPI",
+      "lat": 13.734665699999999,
+      "lng": 100.56449819999999,
+      "title": "華樂中餐廳 Wah Lok（Carlton Hotel）",
+      "memo": "Carlton Hotel Bangkok Sukhumvit二樓的粵菜館，影片也介紹了這間酒店",
+      "ts_url": "https://youtu.be/fxUWLPDwRM8?t=1980",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ3-gsGtue4jARUvFiDoFV4XA",
+      "lat": 13.7433663,
+      "lng": 100.54414899999999,
+      "title": "上味海鮮 Savoey（Mercury Tower）",
+      "memo": "Chidlom的Mercury Tower二樓分店",
+      "ts_url": "https://youtu.be/fxUWLPDwRM8?t=2287",
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "我把您的曼谷10間美食整理成一張地圖了",
+  "body": "Stephen您好，我是 PinWith 的 Adrian，PinWith 是一個地圖清單 App。\n\n看到您連Song Wat那間40年的滷水鴨老店都找到了。我把其中 7 個地點整理成一張地圖：https://pinwith.me/@pinwith_zhtw/stephen-bangkok-food-2026\n\n目前是私人狀態：只有拿到這個連結的人才能打開，如果您不希望我這樣做，我會直接刪除。\n\n透過 PinWith，您的觀眾可以跟著您的腳步走：重溫您去過的地方，或用一張地圖規劃自己的旅程，而且是用他們自己的語言。這能讓您的內容觸及更多人。\n\n如果您喜歡，我可以把它移到您的帳號並標註為您的作品，方便您放在影片說明欄。像這樣的清單也能為策展者帶來額外收入：https://pinwith.me/for-creators?lang=zh-TW\n如果用不到，不必回覆。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

@@ -1,0 +1,200 @@
+{
+ "row": "O6",
+ "target": "Viajapinha",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "pt",
+ "recipient_name": "Thaís",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://viajapinha.com.br/roteiro-em-seul-o-que-fazer-em-4-5-6-dias-coreia-do-sul/",
+  "title": "Roteiro em Seul: O que fazer em 4, 5 ou 6 dias na Coreia do Sul",
+  "date": "2026-08"
+ },
+ "hooks": [
+  "Ate at Kyoja (Myeongdong): beef soup with noodles and dumplings (Dia 1)",
+  "Cafe Onion Anguk had a queue before 9am, so she went to Dotori Café instead (Dia 2)",
+  "Went up Namsan by bus because the cable car was under renovation, then walked down the city wall trail (Dia 1)"
+ ],
+ "list": {
+  "owner": "pinwith_pt",
+  "lang": "pt",
+  "slug": "viajapinha-seul-6-dias",
+  "title": "Seul em 6 dias: as 15 paradas da Viajapinha",
+  "desc": "Lugares de 'Roteiro em Seul: O que fazer em 4, 5 ou 6 dias na Coreia do Sul' (https://viajapinha.com.br/roteiro-em-seul-o-que-fazer-em-4-5-6-dias-coreia-do-sul/). O dia 3 (bate-volta a Busan) ficou de fora. Coletado pelo PinWith, não feito pela Viajapinha.",
+  "kind": "course",
+  "themes": [
+   "Seul",
+   "Coreia do Sul",
+   "roteiro",
+   "palácios",
+   "Gangnam"
+  ],
+  "sections": [
+   {
+    "name": "Dia 1",
+    "items": [
+     {
+      "place_id": "ChIJN2x0fu2ifDUR51BupseGYmE",
+      "lat": 37.523850599999996,
+      "lng": 126.98047020000001,
+      "title": "Museu Nacional da Coreia (국립중앙박물관)",
+      "memo": "O maior museu do país, com mais de 12 mil peças e entrada grátis.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJmylq-vyifDUR_r3t4Ve-w3k",
+      "lat": 37.559315,
+      "lng": 126.99447699999997,
+      "title": "Namsangol Hanok Village (남산골한옥마을)",
+      "memo": "Cinco casas tradicionais aos pés da torre; só se vê por fora.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+      "lat": 37.5511694,
+      "lng": 126.98822659999999,
+      "title": "N Seoul Tower (N서울타워)",
+      "memo": "Subida perto das 16h para o pôr do sol; a descida pela muralha cansa.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJW7FBDfCifDURHTpisLbVUH0",
+      "lat": 37.5610151,
+      "lng": 126.9860829,
+      "title": "Myeongdong Kyoja (명동교자)",
+      "memo": "Jantar do Guia Michelin: sopa com macarrão e dumplings.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Dia 2",
+    "items": [
+     {
+      "place_id": "ChIJIwCT4-yifDUR1E63iG76hr0",
+      "lat": 37.569101499999995,
+      "lng": 126.97866919999998,
+      "title": "Riacho Cheonggyecheon (청계천)",
+      "memo": "Passeio matinal no riacho revitalizado em 2003.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ4wh0zluifDURaFBW2pdrKf8",
+      "lat": 37.5794309,
+      "lng": 126.9910426,
+      "title": "Palácio Changdeokgung e Jardim Secreto (창덕궁)",
+      "memo": "Chegue na abertura: os ingressos do jardim podem esgotar.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+      "lat": 37.5814696,
+      "lng": 126.9849519,
+      "title": "Bukchon Hanok Village (북촌한옥마을)",
+      "memo": "Vila residencial histórica, visitável das 10h às 17h.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJHYhJ5OmifDURMOSQ2D-6lFY",
+      "lat": 37.5738369,
+      "lng": 126.982202,
+      "title": "Templo Jogyesa (조계사)",
+      "memo": "Templo budista ao lado de Insadong.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJQRutlcKifDURiMoaUPYmWX4",
+      "lat": 37.5743024,
+      "lng": 126.9849036,
+      "title": "Ssamziegil, Insadong (쌈지길)",
+      "memo": "Destaque da rua principal de Insadong, com artesanato e cerâmica.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJfYjlFvWifDURYSDsoxYbN80",
+      "lat": 37.559277,
+      "lng": 126.9777029,
+      "title": "Mercado Namdaemun (남대문시장)",
+      "memo": "O mercado mais antigo de Seul, com street food.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Dia 4",
+    "items": [
+     {
+      "place_id": "ChIJ8cRRtD-ifDURoBcqFZyRluE",
+      "lat": 37.5366131,
+      "lng": 126.97710679999997,
+      "title": "Museu da Guerra (전쟁기념관)",
+      "memo": "Equipamentos militares na área externa; grátis, fecha às segundas.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ8xRYr29FezUR3AtFqx2pIlw",
+      "lat": 37.5665256,
+      "lng": 127.00922360000001,
+      "title": "Dongdaemun Design Plaza (DDP)",
+      "memo": "Prédio futurista projetado por Zaha Hadid.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Dia 5",
+    "items": [
+     {
+      "place_id": "ChIJu5Gg2hWkfDURl7NN7FpFnis",
+      "lat": 37.5102133,
+      "lng": 127.06001859999999,
+      "title": "Starfield Library, COEX (별마당도서관)",
+      "memo": "Biblioteca instagramável no shopping; a estátua do Psy fica em frente.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJu7dpc45FezURhLMS5U5eaJk",
+      "lat": 37.5125295,
+      "lng": 127.10230500000002,
+      "title": "Seoul Sky, Lotte World Tower (서울스카이)",
+      "memo": "Observatório no maior edifício da Coreia, ao lado do Lotte World.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Dia 6",
+    "items": [
+     {
+      "place_id": "ChIJWTP6EbylfDURiLzaVEe1_Zg",
+      "lat": 37.5380654,
+      "lng": 127.05894859999998,
+      "title": "Haus Nowhere, Seongsu (하우스 노웨어)",
+      "memo": "Loja da Gentle Monster no antigo bairro industrial de Seongsu.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "Coloquei seu roteiro de Seul em um só mapa",
+  "body": "Oi Thaís, sou o Adrian, do PinWith, um app de listas em mapa.\n\nLi seu roteiro de Seul e gostei muito de você contar até a fila do Cafe Onion antes das 9h e a troca pelo Dotori Café. Coloquei 15 dos lugares em um só mapa: https://pinwith.me/@pinwith_pt/viajapinha-seul-6-dias\n\nPor enquanto ele é privado: só abre com este link, e eu apago se você preferir.\n\nCom o PinWith, seus leitores podem seguir seus passos: rever os lugares por onde você passou ou planejar a própria viagem a partir de um só mapa, no idioma deles. Isso ajuda seu conteúdo a ir mais longe.\n\nSe gostar, eu passo o mapa para a sua conta, com o crédito para você, e você pode colocar o link no post. Listas assim também podem gerar uma renda extra para quem faz a curadoria: https://pinwith.me/for-creators?lang=pt\nSe não for útil, não precisa responder.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

@@ -1,0 +1,195 @@
+{
+ "row": "O11",
+ "target": "Claironyva",
+ "group": "creator",
+ "based_in_korea": "unverified",
+ "msg_lang": "fr",
+ "recipient_name": "Claire",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://claironyva.com/seoul-une-semaine-que-voir-que-faire",
+  "title": "Séoul en une semaine, que voir, que faire ?",
+  "date": "2026-07"
+ },
+ "hooks": [
+  "Mandu at the Gwangjang Market stall featured in Street Food Asia (Jour 2)",
+  "Collects stamps in a small notebook; found raised 3D stamps on the Mongchon fortress path (Jour 4)",
+  "First published 2024-02, updated 2026-07; stayed at the same Myeong-dong hotel in 2024 and 2025"
+ ],
+ "list": {
+  "owner": "pinwith_fr",
+  "lang": "fr",
+  "slug": "claironyva-seoul-une-semaine",
+  "title": "Séoul en une semaine : les 15 étapes de Claironyva",
+  "desc": "D'après « Séoul en une semaine, que voir, que faire ? » (https://claironyva.com/seoul-une-semaine-que-voir-que-faire). Rassemblé par PinWith, non réalisé par Claironyva.",
+  "kind": "course",
+  "themes": [
+   "Séoul",
+   "Corée du Sud",
+   "Une semaine",
+   "Palais",
+   "Premier voyage"
+  ],
+  "sections": [
+   {
+    "name": "Jour 2",
+    "items": [
+     {
+      "place_id": "ChIJ8xRYr29FezUR3AtFqx2pIlw",
+      "lat": 37.5665256,
+      "lng": 127.00922360000001,
+      "title": "Dongdaemun Design Plaza (동대문디자인플라자)",
+      "memo": "Bâtiment futuriste souvent vu dans les K-dramas ; un tournage en fermait une partie.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ63NnRS6jfDURt-efnKIjXzs",
+      "lat": 37.5779788,
+      "lng": 127.00719149999999,
+      "title": "Village mural d'Ihwa (이화벽화마을)",
+      "memo": "Street art à la descente du mont Naksan ; un de ses cafés a servi de décor de K-drama.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+      "lat": 37.570038499999995,
+      "lng": 126.99960379999997,
+      "title": "Marché de Gwangjang (광장시장)",
+      "memo": "Mandu goûtés à un stand vu dans la série Street Food Asia.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJMcWZMY2ifDUR2NLv8F3Togc",
+      "lat": 37.5658862,
+      "lng": 126.97490169999999,
+      "title": "Palais Deoksugung (덕수궁)",
+      "memo": "Entrée 1 000 wons, gratuite le dernier mercredi du mois ; visite guidée de Seokjojeon.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+      "lat": 37.5511694,
+      "lng": 126.98822659999999,
+      "title": "N Seoul Tower (N서울타워)",
+      "memo": "Ses lumières changent de couleur selon la qualité de l'air.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Jour 4",
+    "items": [
+     {
+      "place_id": "ChIJu7dpc45FezURhLMS5U5eaJk",
+      "lat": 37.5125295,
+      "lng": 127.10230500000002,
+      "title": "Seoul Sky, Lotte World Tower (서울스카이)",
+      "memo": "Au sommet de la plus haute tour du pays : entrée 29 000 wons, Sky Bridge 120 000.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJu5Gg2hWkfDURl7NN7FpFnis",
+      "lat": 37.5102133,
+      "lng": 127.06001859999999,
+      "title": "Bibliothèque Starfield, COEX (별마당 도서관)",
+      "memo": "Bibliothèque géante du COEX, près des mains géantes de Psy (Gangnam Style).",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJgZn6QWmkfDURaU3kwlecaEU",
+      "lat": 37.514852,
+      "lng": 127.0573766,
+      "title": "Temple Bongeunsa (봉은사)",
+      "memo": "Temple voisin du COEX, avec sa statue du « Bouddha du futur ».",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJeVnK5X-hfDURv2fEEK-332M",
+      "lat": 37.5126335,
+      "lng": 126.99847829999999,
+      "title": "Pont Banpo, fontaine arc-en-ciel (반포대교 달빛무지개분수)",
+      "memo": "Spectacle de fontaine lumineuse le soir, avec vue sur la N Seoul Tower.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Jour 5",
+    "items": [
+     {
+      "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+      "lat": 37.5814696,
+      "lng": 126.9849519,
+      "title": "Village Bukchon Hanok (북촌한옥마을)",
+      "memo": "Depuis fin 2024, certaines zones ne sont ouvertes aux visiteurs que de 10 h à 17 h.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+      "lat": 37.579617,
+      "lng": 126.977041,
+      "title": "Palais Gyeongbokgung (경복궁)",
+      "memo": "Le plus grand palais de Séoul : 3 000 wons, fermé le mardi.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ4wh0zluifDURaFBW2pdrKf8",
+      "lat": 37.5794309,
+      "lng": 126.9910426,
+      "title": "Palais Changdeokgung (창덕궁)",
+      "memo": "Palais plus calme ; la visite du jardin secret se fait en groupe d'environ 70 personnes.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Jour 6",
+    "items": [
+     {
+      "place_id": "ChIJw8UIcGCifDURB0MtY-xAUqM",
+      "lat": 37.556713699999996,
+      "lng": 126.96957529999999,
+      "title": "Seoullo 7017 (서울로7017)",
+      "memo": "Ancienne voie ferrée devenue promenade, comparée à la High Line de New York.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ8cRRtD-ifDURoBcqFZyRluE",
+      "lat": 37.5366131,
+      "lng": 126.97710679999997,
+      "title": "Mémorial de la guerre de Corée (전쟁기념관)",
+      "memo": "Musée gratuit ; une appli transforme le téléphone en audioguide.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJH5tDs-WYfDURJGb8yuqKRwg",
+      "lat": 37.5662075,
+      "lng": 126.91923639999999,
+      "title": "Parc forestier de la ligne Gyeongui (경의선숲길)",
+      "memo": "Ancienne voie ferrée devenue parc de 6,3 km, jolie au printemps avec les cerisiers.",
+      "ts_url": null,
+      "check": "park is long; pin is the Yeonnam-dong section near Hongdae"
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "J'ai mis votre Séoul en une semaine sur une seule carte",
+  "body": "Bonjour Claire, je suis Adrian, de PinWith, une appli de listes sur carte.\n\nJ'ai aimé les tampons en relief trouvés le long du sentier de la forteresse Mongchon, et les mandu du stand de Street Food Asia au marché de Gwangjang. J'ai placé 15 des lieux sur une seule carte : https://pinwith.me/@pinwith_fr/claironyva-seoul-une-semaine\n\nElle est privée pour l'instant : seul ce lien permet de l'ouvrir, et je la supprime si vous préférez.\n\nAvec PinWith, vos lecteurs peuvent suivre vos pas : revoir les lieux où vous êtes allée ou préparer leur propre voyage à partir d'une seule carte, dans leur propre langue. Cela aide votre contenu à aller plus loin.\n\nSi elle vous plaît, je la transfère sur votre compte, à votre nom, pour que vous puissiez la mettre en lien dans l'article. Ce type de liste peut aussi rapporter un revenu complémentaire aux curateurs : https://pinwith.me/for-creators?lang=fr\nPas besoin de répondre si ce n'est pas utile.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

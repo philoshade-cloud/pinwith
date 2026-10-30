@@ -1,0 +1,190 @@
+{
+ "row": "O8",
+ "target": "Ideias na Mala",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "pt",
+ "recipient_name": "Mari",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://ideiasnamala.com/que-fazer-tokyo/",
+  "title": "O que fazer em Tóquio: 15 atrações imperdíveis + Roteiro de 3, 4 e 5 dias",
+  "date": "2026-01"
+ },
+ "hooks": [
+  "Suggests watching Shibuya Crossing from Hoshino Coffee inside MAGNET by Shibuya 109 or the L'Occitane café (Shibuya section)",
+  "Says she still hasn't gone up Tokyo Skytree (Vistas do alto section)",
+  "Harry Potter section: Akasaka station with 42 wizard portraits and a Time-Turner replica"
+ ],
+ "list": {
+  "owner": "pinwith_pt",
+  "lang": "pt",
+  "slug": "ideiasnamala-toquio-3-dias",
+  "title": "Tóquio em 3 dias: as 15 paradas do Ideias na Mala",
+  "desc": "Lugares do roteiro de 3 dias de 'O que fazer em Tóquio: 15 atrações imperdíveis + Roteiro de 3, 4 e 5 dias' (https://ideiasnamala.com/que-fazer-tokyo/). Coletado pelo PinWith, não feito pelo Ideias na Mala.",
+  "kind": "course",
+  "themes": [
+   "Tóquio",
+   "Japão",
+   "roteiro",
+   "templos",
+   "mirantes"
+  ],
+  "sections": [
+   {
+    "name": "Dia 1",
+    "items": [
+     {
+      "place_id": "ChIJK9EM68qLGGARacmu4KJj5SA",
+      "lat": 35.659482,
+      "lng": 139.7005596,
+      "title": "Cruzamento de Shibuya (渋谷スクランブル交差点)",
+      "memo": "Oito semáforos abrindo juntos; dá para ver do alto em cafés ao redor.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJx1e971eLGGARum8w_tnpFwI",
+      "lat": 35.6590552,
+      "lng": 139.7006288,
+      "title": "Estátua do Hachiko (ハチ公像)",
+      "memo": "Homenagem ao cão que esperou o dono na estação por 10 anos.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJlVne8bqMGGARtX5O6ojMvsI",
+      "lat": 35.6710335,
+      "lng": 139.7051821,
+      "title": "Takeshita Street, Harajuku (竹下通り)",
+      "memo": "Rua estreita e lotada de lojas coloridas e alternativas.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ5SZMmreMGGARcz8QSTiJyo8",
+      "lat": 35.6763976,
+      "lng": 139.6993259,
+      "title": "Meiji Jingu (明治神宮)",
+      "memo": "Santuário xintoísta de 1920, entrada grátis, com barris de saquê.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Dia 2",
+    "items": [
+     {
+      "place_id": "ChIJ8T1GpMGOGGARDYGSgpooDWw",
+      "lat": 35.7147651,
+      "lng": 139.7966553,
+      "title": "Templo Sensō-ji e Nakamise, Asakusa (浅草寺)",
+      "memo": "Templo budista mais antigo de Tóquio, grátis, com a rua Nakamise na frente.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ__-AdayOGGAR6EGPwvcpzTA",
+      "lat": 35.6979149,
+      "lng": 139.77195709999998,
+      "title": "Akihabara Radio Kaikan (秋葉原ラジオ会館)",
+      "memo": "Parada do roteiro em Akihabara, bairro de eletrônicos, mangá e anime.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJEX3XFIOOGGAR3XdJvRjWLyM",
+      "lat": 35.7188351,
+      "lng": 139.7765215,
+      "title": "Museu Nacional de Tóquio, Ueno (東京国立博物館)",
+      "memo": "Dentro do Parque Ueno, junto com museus e o zoológico.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJh7eDrwCPGGARCs9fpCkKS2U",
+      "lat": 35.710068199999995,
+      "lng": 139.7746009,
+      "title": "Ameya-Yokochō (アメ横)",
+      "memo": "Rua de comércio perto de Ueno, no fim da tarde do dia 2.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ18IK6x2KGGARKTc2yLS-030",
+      "lat": 35.6300488,
+      "lng": 139.77569119999998,
+      "title": "Odaiba Marine Park (お台場海浜公園)",
+      "memo": "Ilha artificial com Rainbow Bridge e mini Estátua da Liberdade.",
+      "ts_url": null,
+      "check": "Article also lists the Odaiba Gundam; the Unicorn Gundam display was due to end Aug 2026, so it was left out"
+     }
+    ]
+   },
+   {
+    "name": "Dia 3",
+    "items": [
+     {
+      "place_id": "ChIJPfFaQhOMGGAR-QPbNQoAG6M",
+      "lat": 35.6867824,
+      "lng": 139.75714449999998,
+      "title": "Jardins Leste do Palácio Imperial (皇居東御苑)",
+      "memo": "Jardins abertos ao público, com ruínas do Castelo de Edo.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJK0TdDneLGGARVxJ3MHC0emY",
+      "lat": 35.6600712,
+      "lng": 139.7292907,
+      "title": "Tokyo City View, Roppongi Hills (東京シティビュー)",
+      "memo": "Mirante no 52º andar da Mori Tower; ingresso inclui o Mori Art Museum.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJzRzI3HSNGGARRwZW6AtJfi0",
+      "lat": 35.6950521,
+      "lng": 139.70191169999998,
+      "title": "Cabeça do Godzilla, Shinjuku (ゴジラヘッド)",
+      "memo": "No topo do Shinjuku Toho Building, em Kabukichō.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJKQAKAOSLGGARwGhpOXWgfYo",
+      "lat": 35.6731273,
+      "lng": 139.7672138,
+      "title": "Itoya, Ginza (銀座伊東屋)",
+      "memo": "Papelaria na parada de Ginza, junto à Chūō-dori.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJW2cLzSGLGGARXAKXv6EkbqI",
+      "lat": 35.6647703,
+      "lng": 139.7702515,
+      "title": "Mercado Externo de Tsukiji (築地場外市場)",
+      "memo": "Ficou no lugar antigo quando o atacado foi para Toyosu em 2018.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ35ov0dCOGGARKvdDH7NPHX0",
+      "lat": 35.7100627,
+      "lng": 139.81070040000003,
+      "title": "Tokyo Skytree (東京スカイツリー)",
+      "memo": "634 metros, inaugurada em 2012; a autora ainda não subiu.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "Coloquei seu roteiro de Tóquio em um só mapa",
+  "body": "Oi Mari, sou o Adrian, do PinWith, um app de listas em mapa.\n\nLi seu guia de Tóquio e adorei a dica de ver o cruzamento de Shibuya do Hoshino Coffee, dentro da MAGNET: é o tipo de detalhe que só quem foi conhece. Coloquei 15 dos lugares do roteiro de 3 dias em um só mapa: https://pinwith.me/@pinwith_pt/ideiasnamala-toquio-3-dias\n\nPor enquanto ele é privado: só abre com este link, e eu apago se você preferir.\n\nCom o PinWith, seus leitores podem seguir seus passos: rever os lugares por onde você passou ou planejar a própria viagem a partir de um só mapa, no idioma deles. Isso ajuda seu conteúdo a ir mais longe.\n\nSe gostar, eu passo o mapa para a sua conta, com o crédito para você, e você pode colocar o link no post. Listas assim também podem gerar uma renda extra para quem faz a curadoria: https://pinwith.me/for-creators?lang=pt\nSe não for útil, não precisa responder.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

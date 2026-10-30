@@ -1,0 +1,144 @@
+{
+ "row": "J4",
+ "target": "雙人徐 (Double Xu)",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "zh-TW",
+ "recipient_name": "雙人徐",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=FReouc9mvZo",
+  "title": "首爾美食-明洞篇",
+  "date": "2026-03"
+ },
+ "hooks": [
+  "Description highlights a poached chicken soup set at Sarangbang Kalguksu (0:50) and Michelin dumplings at Myeongdong Kyoja (3:30)",
+  "Free Gyeongbokgung view from the National Museum of Korean Contemporary History (8:29)",
+  "Ends with Yuktongryeong BBQ (14:40), the spot they recommend above the rest"
+ ],
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "doublexu-seoul-myeongdong-food",
+  "title": "首爾明洞美食：雙人徐的11個地點",
+  "desc": "整理自雙人徐的 YouTube 影片〈首爾美食-明洞篇〉(https://www.youtube.com/watch?v=FReouc9mvZo)。由 PinWith 整理，非雙人徐本人製作。",
+  "kind": "course",
+  "themes": [
+   "首爾",
+   "明洞",
+   "美食",
+   "米其林",
+   "藍緞帶"
+  ],
+  "sections": [
+   {
+    "name": null,
+    "items": [
+     {
+      "place_id": "ChIJZRMwxPmjfDURjPe6XKxQRPM",
+      "lat": 37.563280899999995,
+      "lng": 126.9913673,
+      "title": "莎朗房刀削麵 (사랑방칼국수)",
+      "memo": "明洞美食第一站，影片介紹這裡的燉雞湯套餐。",
+      "ts_url": "https://youtu.be/FReouc9mvZo?t=50",
+      "check": null
+     },
+     {
+      "place_id": "ChIJW7FBDfCifDURHTpisLbVUH0",
+      "lat": 37.5610151,
+      "lng": 126.9860829,
+      "title": "明洞餃子 本店 (명동교자)",
+      "memo": "米其林推薦的餃子和刀削麵。",
+      "ts_url": "https://youtu.be/FReouc9mvZo?t=210",
+      "check": null
+     },
+     {
+      "place_id": "ChIJN7N09qyjfDURqvaRjevwNmI",
+      "lat": 37.5584498,
+      "lng": 126.98629879999999,
+      "title": "明洞在美路 (명동재미로)",
+      "memo": "明洞坡道上的漫畫彩繪街。",
+      "ts_url": "https://youtu.be/FReouc9mvZo?t=300",
+      "check": null
+     },
+     {
+      "place_id": "ChIJu0peeTSjfDURJ1_Wt6FTfb0",
+      "lat": 37.555322,
+      "lng": 126.98527720000001,
+      "title": "木覓山房 (목멱산방)",
+      "memo": "南山腳下的韓屋餐廳，影片吃米其林拌飯。",
+      "ts_url": "https://youtu.be/FReouc9mvZo?t=355",
+      "check": "Google English name 'Mokmyeoksan Horaengi'; same address as 목멱산방 in Namsan Park"
+     },
+     {
+      "place_id": "ChIJs2hQTOWifDURk8inZqIttEQ",
+      "lat": 37.5633851,
+      "lng": 126.987436,
+      "title": "明洞聖堂 (명동성당)",
+      "memo": "明洞的哥德式天主教堂。",
+      "ts_url": "https://youtu.be/FReouc9mvZo?t=404",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ_ebK-eqifDURv0tXr2TktaU",
+      "lat": 37.573943199999995,
+      "lng": 126.9779299,
+      "title": "大韓民國歷史博物館 (대한민국역사박물관)",
+      "memo": "免費就能從這裡看到景福宮景色。",
+      "ts_url": "https://youtu.be/FReouc9mvZo?t=509",
+      "check": null
+     },
+     {
+      "place_id": "ChIJlWSxdY6jfDUResGGH9Bfrak",
+      "lat": 37.5710694,
+      "lng": 126.97892900000001,
+      "title": "OLIVE BETTER 光化門店 (올리브베러 광화문점)",
+      "memo": "光化門的健康食品、保健品專門店。",
+      "ts_url": "https://youtu.be/FReouc9mvZo?t=545",
+      "check": null
+     },
+     {
+      "place_id": "ChIJk8x74-yifDURXVhW9zZEvZk",
+      "lat": 37.5690744,
+      "lng": 126.97759210000001,
+      "title": "清溪廣場 (청계광장)",
+      "memo": "清溪川起點的廣場。",
+      "ts_url": "https://youtu.be/FReouc9mvZo?t=665",
+      "check": null
+     },
+     {
+      "place_id": "ChIJxT-vBwCjfDUR9B8Jnh-_t2I",
+      "lat": 37.5572439,
+      "lng": 126.9858525,
+      "title": "南山豬排 本店 (남산돈까스 본점)",
+      "memo": "往南山路上的炸豬排店，逛完清溪廣場後的一餐。",
+      "ts_url": "https://youtu.be/FReouc9mvZo?t=700",
+      "check": "several shops claim 남산돈까스 본점; matched '101번지 남산돈까스 본점'"
+     },
+     {
+      "place_id": "ChIJDXyPRF-ifDURo-L1LXIXqj8",
+      "lat": 37.554859900000004,
+      "lng": 126.9792405,
+      "title": "南山公園白凡廣場 (남산공원 백범광장)",
+      "memo": "可以看南山塔與城牆的觀景點。",
+      "ts_url": "https://youtu.be/FReouc9mvZo?t=810",
+      "check": null
+     },
+     {
+      "place_id": "ChIJxWxiPfGifDURBq3mcWArhHs",
+      "lat": 37.5611575,
+      "lng": 126.9828364,
+      "title": "肉統領 明洞本店 (육통령 명동본점)",
+      "memo": "最後一站的烤肉，影片最推薦的一間。",
+      "ts_url": "https://youtu.be/FReouc9mvZo?t=880",
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "我把您的首爾明洞美食影片整理成一張地圖了",
+  "body": "雙人徐您好，我是 PinWith 的 Adrian，我們在做一個用地圖整理清單的 App。\n\n看完影片很想照著走一次，尤其是在大韓民國歷史博物館免費看景福宮那段，還有最後您最推薦的肉統領烤肉。我把影片裡 11 個地點整理成一張地圖：https://pinwith.me/@pinwith_zhtw/doublexu-seoul-myeongdong-food\n\n目前是私人狀態，只有這個連結能打開；如果您不希望保留，我會直接刪除。\n\n透過 PinWith，您的觀眾可以跟著您的腳步走：重溫您去過的地方，或用一張地圖規劃自己的旅程，而且是用他們自己的語言。這能讓您的內容觸及更多人。\n\n如果您喜歡，我可以把它轉到您的帳號，標註為您的作品，方便您放在影片說明欄。這類清單也能為策展人帶來額外收入：https://pinwith.me/for-creators?lang=zh-TW\n如果用不到，不回覆也沒關係。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

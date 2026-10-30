@@ -1,0 +1,189 @@
+{
+ "row": "E16",
+ "target": "CNXlocal",
+ "group": "fan_blog",
+ "based_in_korea": false,
+ "msg_lang": "en",
+ "recipient_name": "Kristifer",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://cnxlocal.com/best-cafes-to-eat-work-and-play-in-chiang-mai/",
+  "title": "Best Cafes in Chiang Mai (2026): 40+ Reviewed by a Local",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "Marks closed cafes like CRATE Cafe and Chapterone/cm instead of quietly deleting them (source article)",
+  "Calls The Baristro Asian Style, with its Japanese zen garden, the top cafe (source article)",
+  "Advises getting to Maled Coffee Roasters before 1 pm because it sells out (source article)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "cnxlocal-chiang-mai-cafes",
+  "title": "Best cafes in Chiang Mai: CNXlocal's 15 open picks",
+  "desc": "Places from CNXlocal's 'Best Cafes in Chiang Mai (2026): 40+ Reviewed by a Local' (https://cnxlocal.com/best-cafes-to-eat-work-and-play-in-chiang-mai/). Collected by PinWith, not made by CNXlocal.",
+  "kind": "collection",
+  "themes": [
+   "Chiang Mai",
+   "cafes",
+   "work-friendly",
+   "coffee"
+  ],
+  "sections": [
+   {
+    "name": "Good for work",
+    "items": [
+     {
+      "place_id": "ChIJkZyVmJs62jARav_dgGLEBr0",
+      "lat": 18.7883705,
+      "lng": 98.9831919,
+      "title": "Akha Ama Phrasingh",
+      "memo": "Fast Wi-Fi but no power outlets; try the soda lemon drink.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJcUsSde072jARmm1KV_VWDdc",
+      "lat": 18.7896578,
+      "lng": 98.9645828,
+      "title": "General Coffee",
+      "memo": "Free Wi-Fi and plenty of plugs; blueberry cheesecake square.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJdzmGkns62jARwQV4eGmoUHs",
+      "lat": 18.789704099999998,
+      "lng": 98.9624077,
+      "title": "Maled Coffee Roasters (โรงคั่วเมล็ด)",
+      "memo": "Roasts in-house; banoffee cake sells out, so go before 1 pm.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ_6jLpRI72jARDuzOmvtod04",
+      "lat": 18.7870605,
+      "lng": 99.00887809999999,
+      "title": "GRAPH Contemporary",
+      "memo": "Lots of plugs and seats in whitewashed brick; square butter cake.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ7QFAccox2jARVVmcCm8rc3g",
+      "lat": 18.7761779,
+      "lng": 98.9860262,
+      "title": "Beam&Col. coffee bar",
+      "memo": "Coworking in a former ice factory at Weave Artisan Society; carrot cake.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ-xSCcH462jARWWlZ5Q_jBT0",
+      "lat": 18.7874528,
+      "lng": 98.96658649999999,
+      "title": "The Barn Eatery And Design",
+      "memo": "Greenhouse-style spot for working late, busy with students.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Coffee & brunch",
+    "items": [
+     {
+      "place_id": "ChIJrb2zRAw72jARrpEEmKjGnXI",
+      "lat": 18.7931194,
+      "lng": 98.9721762,
+      "title": "GRAPH quarter",
+      "memo": "Bakery hub for all GRAPH branches; craft-soda coffee with seaweed.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJIdQIQbc72jARb7Z3AF_aLSg",
+      "lat": 18.7990977,
+      "lng": 98.9672264,
+      "title": "Ristr8to Original (Nimman)",
+      "memo": "Coconut mocha; small with no A/C, so better for coffee than laptops.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ4Y9ZNjs72jARKQrxPkI-8tY",
+      "lat": 18.7783552,
+      "lng": 98.9508931,
+      "title": "Sensation Coffee Roasters",
+      "memo": "Roasts in-house; cappuccino with chocolate mousse cake.",
+      "ts_url": null,
+      "check": "recent Google reviews say it moved about 300 m; pin may lag"
+     },
+     {
+      "place_id": "ChIJhZLPLWI62jARkfYqJJsDaFA",
+      "lat": 18.799068,
+      "lng": 98.966128,
+      "title": "The Larder Cafe & Bar",
+      "memo": "Aussie-style brunch, smoked-salmon open sandwich; often a queue.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Gardens & hangouts",
+    "items": [
+     {
+      "place_id": "ChIJ9T2bGy872jARyAyAWix9M0o",
+      "lat": 18.789947899999998,
+      "lng": 98.9516702,
+      "title": "The Baristro Asian Style",
+      "memo": "Japanese zen garden and slow matcha bar; the guide's top cafe.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJsyN09PE72jARrFl9p-zWaWE",
+      "lat": 18.8104759,
+      "lng": 98.9670261,
+      "title": "Cafe Arte",
+      "memo": "Rooms, courtyards and gardens; brownies; closed Thursdays.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJTf9571sx2jARn6X9sNgW-dM",
+      "lat": 18.7615467,
+      "lng": 98.9349448,
+      "title": "Fernpresso at Lake",
+      "memo": "Big lawn on the CMU campus plus an A/C room with plugs.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJXRCq688x2jAReOyg1GvocIY",
+      "lat": 18.7618421,
+      "lng": 98.98931490000001,
+      "title": "Much Room Cafe",
+      "memo": "Shaded by Lanna trees; chicken tikka masala with naan.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJi8wcuYE72jARx4JZzJi6olg",
+      "lat": 18.7942225,
+      "lng": 99.00111559999999,
+      "title": "Fringe.th Cafe and Restaurant",
+      "memo": "Eclectic decor; turns into a bar with live music at night.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your Chiang Mai cafe guide on one map",
+  "body": "Hi Kristifer, I'm Adrian from PinWith, a map-list app.\n\nI liked that you still list the cafes that closed, like CRATE, so readers don't waste a trip. I put 15 of the places into one map: https://pinwith.me/@pinwith_en/cnxlocal-chiang-mai-cafes\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your readers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it in the post. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

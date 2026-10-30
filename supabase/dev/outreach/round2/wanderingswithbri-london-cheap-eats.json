@@ -1,0 +1,184 @@
+{
+ "row": "E22",
+ "target": "Wanderings With Bri",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "en",
+ "recipient_name": "Bri",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://wanderingswithbri.com/cheap-eats-london/",
+  "title": "Cheap Eats London: 25 Best Budget Eats in Central London [2026]",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "Devi Dhaba: three curries with rice for GBP 6 (Budget Friendly Restaurants)",
+  "Beigel Bake on Brick Lane, open 24/7 (Grab-and-Go)",
+  "Section on Too Good To Go and supermarket meal deals"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "wanderingswithbri-london-cheap-eats",
+  "title": "Cheap eats in central London: Bri's 15 budget spots",
+  "desc": "Places from Wanderings With Bri's \"Cheap Eats London: 25 Best Budget Eats in Central London [2026]\" (https://wanderingswithbri.com/cheap-eats-london/). Collected by PinWith, not made by Bri.",
+  "kind": "collection",
+  "themes": [
+   "London",
+   "cheap eats",
+   "budget travel",
+   "street food"
+  ],
+  "sections": [
+   {
+    "name": "Budget restaurants",
+    "items": [
+     {
+      "place_id": "ChIJBS8tKT8bdkgRlUzYr3nKauU",
+      "lat": 51.5311021,
+      "lng": -0.1198515,
+      "title": "Pizza Union King's Cross",
+      "memo": "12-inch pizzas from about GBP 4 to 7.50.",
+      "ts_url": null,
+      "check": "article names King's Cross and Holborn; King's Cross branch used"
+     },
+     {
+      "place_id": "ChIJtRRu9iQbdkgRqt8jDR1osYw",
+      "lat": 51.5290963,
+      "lng": -0.1319957,
+      "title": "Roti King (Euston)",
+      "memo": "Malaysian mains GBP 9.50-11.95; try the dhal or a murtabak.",
+      "ts_url": null,
+      "check": "several branches in London; original Euston branch used"
+     },
+     {
+      "place_id": "ChIJZ8aAttMEdkgRFtcdGcvlzV4",
+      "lat": 51.5111876,
+      "lng": -0.13235590000000003,
+      "title": "C & R Cafe Restaurant",
+      "memo": "Chinatown noodle and rice mains around GBP 14.50.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJN4xC2ywbdkgRw6jKHfSG0sQ",
+      "lat": 51.5158347,
+      "lng": -0.13275979999999998,
+      "title": "Govinda's (Soho Street)",
+      "memo": "Vegetarian and vegan dishes from GBP 3.50 to 5.50.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJaWyAJCgbdkgRjSgEr1sMre4",
+      "lat": 51.5227705,
+      "lng": -0.138962,
+      "title": "Indian YMCA Restaurant",
+      "memo": "Canteen-style Indian food, GBP 4.50-9.50 a dish.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ5XXX0T4bdkgRMuUY0NgGXR0",
+      "lat": 51.5232902,
+      "lng": -0.082217,
+      "title": "Devi Dhaba",
+      "memo": "Three curries with rice for GBP 6.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJM28WNzobdkgRsnoCwh_o648",
+      "lat": 51.5275221,
+      "lng": -0.12451559999999999,
+      "title": "Thenga Cafe",
+      "memo": "Vegan-friendly mains at about GBP 11.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJRw8qfLkEdkgR6_et2uOEqu4",
+      "lat": 51.5014806,
+      "lng": -0.1114583,
+      "title": "Marie's Thai Cafe",
+      "memo": "Fry-ups by day, Thai dishes GBP 8-12 later on.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJNaDQ7ysbdkgRDy6jd1VTylI",
+      "lat": 51.519422899999995,
+      "lng": -0.13595840000000003,
+      "title": "ICCO Pizza (Goodge Street)",
+      "memo": "\"The People's Pizzeria\": 12-inch pizzas GBP 4-9.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Grab-and-go",
+    "items": [
+     {
+      "place_id": "ChIJPXN_fNIEdkgRg6DhnlDgPMU",
+      "lat": 51.511989899999996,
+      "lng": -0.1297546,
+      "title": "Chinatown Bakery",
+      "memo": "Cheap buns and pastries for breakfast or a snack.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJUe_EX7McdkgRtk96QW0KTlc",
+      "lat": 51.5168918,
+      "lng": -0.07337840000000001,
+      "title": "Petticoat Lane Market",
+      "memo": "Affordable international street food stalls.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJk79wm6oEdkgRCeXuQfFjp_8",
+      "lat": 51.513093,
+      "lng": -0.093764,
+      "title": "Porterford Butchers",
+      "memo": "Butcher doing hearty sandwiches to take away.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJz0GXnqwbdkgR4ML_hlQyNrc",
+      "lat": 51.521597899999996,
+      "lng": -0.11023229999999999,
+      "title": "Aria Golden Grill (Leather Lane)",
+      "memo": "Leather Lane stall known for big portions.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ1WyAHrQcdkgRr8cIfGqxsi4",
+      "lat": 51.5199388,
+      "lng": -0.0754794,
+      "title": "Sud Italia",
+      "memo": "Wood-fired Neapolitan pizza from a food truck.",
+      "ts_url": null,
+      "check": "article gives no location; Spitalfields stand used"
+     },
+     {
+      "place_id": "ChIJjUgahq0ddkgRDLV2zZrg4ck",
+      "lat": 51.5244985,
+      "lng": -0.0717608,
+      "title": "Beigel Bake (Brick Lane)",
+      "memo": "Brick Lane bagels, open 24/7.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your London cheap eats guide on one map",
+  "body": "Hi Bri, I'm Adrian from PinWith, a map-list app.\n\nThree curries with rice for GBP 6 at Devi Dhaba is the kind of tip I'd never find on my own, and the 24/7 Beigel Bake stop is a classic. I put 15 of the places into one map: https://pinwith.me/@pinwith_en/wanderingswithbri-london-cheap-eats\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your readers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it in the post. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

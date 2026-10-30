@@ -1,0 +1,135 @@
+{
+ "row": "E11",
+ "target": "Markyana",
+ "group": "fan_blog",
+ "based_in_korea": "unverified",
+ "msg_lang": "en",
+ "recipient_name": "Yana",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://markyana.com/posts/best-korean-restaurants-seoul/",
+  "title": "Best Korean Restaurants in Seoul 2026 Guide",
+  "date": "2026-07"
+ },
+ "hooks": [
+  "Notes queues at Tosokchon Samgyetang on summer boknal days (source article)",
+  "Splits picks into price tiers, e.g. Gwangjang Market bindaetteok and mayak gimbap at 3,000-8,000 won (source article)",
+  "Article updated July 1, 2026 (source article)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "markyana-seoul-korean-restaurants",
+  "title": "Best Korean restaurants in Seoul: Markyana's 9 picks",
+  "desc": "Places from Markyana's 'Best Korean Restaurants in Seoul 2026 Guide' (https://markyana.com/posts/best-korean-restaurants-seoul/). Collected by PinWith, not made by Markyana.",
+  "kind": "collection",
+  "themes": [
+   "Seoul",
+   "Korean food",
+   "fine dining",
+   "Korean BBQ"
+  ],
+  "sections": [
+   {
+    "name": "Fine dining & royal cuisine",
+    "items": [
+     {
+      "place_id": "ChIJjXuM24mjfDURSwmouRnxNlM",
+      "lat": 37.5253386,
+      "lng": 127.04414519999999,
+      "title": "Mingles (밍글스)",
+      "memo": "Modern Korean tasting menus, Michelin-recognized through 2026.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJLwsYxYijfDURiJD-QZw6MYU",
+      "lat": 37.525673399999995,
+      "lng": 127.04108459999999,
+      "title": "Jungsik (정식당)",
+      "memo": "Tasting menus from about 180,000 won; called Korea's best-known fine dining.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJOR_CoAGjfDUR2V_mqY0oxF8",
+      "lat": 37.5870767,
+      "lng": 126.9693932,
+      "title": "Jihwaja (지화자)",
+      "memo": "Royal court cuisine such as gujeolpan, about 50,000-80,000 won per person.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Korean BBQ & beef",
+    "items": [
+     {
+      "place_id": "ChIJ_f318Y6jfDURJT8z3uE0U9I",
+      "lat": 37.5249265,
+      "lng": 127.03259049999998,
+      "title": "Samwon Garden (삼원가든)",
+      "memo": "Hanwoo in a traditional setting with gardens; upscale, 80,000-150,000 won pp.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJD17NeIevfDURGjz7mwDYqgE",
+      "lat": 37.5102009,
+      "lng": 127.12602640000001,
+      "title": "Byeokje Galbi (벽제갈비)",
+      "memo": "Upscale hanwoo with expert butchering and grilling guidance.",
+      "ts_url": null,
+      "check": "article names no branch; Bangi flagship chosen"
+     },
+     {
+      "place_id": "ChIJP1IxUUqifDUR2NBF3aY0UUs",
+      "lat": 37.535049,
+      "lng": 126.9939672,
+      "title": "Maple Tree House (Itaewon)",
+      "memo": "Mid-range pork and beef BBQ without Gangnam's premium prices.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Soups, noodles & market food",
+    "items": [
+     {
+      "place_id": "ChIJb5OOGL6ifDURU29ID3t8aOA",
+      "lat": 37.577778599999995,
+      "lng": 126.9715909,
+      "title": "Tosokchon Samgyetang (토속촌 삼계탕)",
+      "memo": "Ginseng chicken soup; expect queues on summer boknal days.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJW7FBDfCifDURHTpisLbVUH0",
+      "lat": 37.5610151,
+      "lng": 126.9860829,
+      "title": "Myeongdong Kyoja (명동교자)",
+      "memo": "Kalguksu, hand-cut noodle soup, around 10,000 won a bowl.",
+      "ts_url": null,
+      "check": "two Myeongdong branches; main store chosen"
+     },
+     {
+      "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+      "lat": 37.570038499999995,
+      "lng": 126.99960379999997,
+      "title": "Gwangjang Market (광장시장)",
+      "memo": "Bindaetteok and mayak gimbap for 3,000-8,000 won.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your Seoul Korean restaurants guide on one map",
+  "body": "Hi Yana, I'm Adrian from PinWith, a map-list app.\n\nYour note about the summer boknal queues at Tosokchon was exactly the kind of tip people need. I put 9 of the places into one map: https://pinwith.me/@pinwith_en/markyana-seoul-korean-restaurants\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your readers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it in the post. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

@@ -1,0 +1,167 @@
+{
+ "row": "J3",
+ "target": "PJ大俠 (PJ大俠愛旅行。深活)",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "zh-TW",
+ "recipient_name": "PJ大俠",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://pj20120619.pixnet.net/blog/posts/8234811065",
+  "title": "【韓國】2026最新!! 濟州島自由行4天要花多少錢?! 實際花費列給你(附景點/餐廳/交通/住宿花費清單參考)",
+  "date": "2026-05"
+ },
+ "hooks": [
+  "Day 2 城山日出峰: 5,000 won, about 1 hour up and down",
+  "Day 2 松堂童話村 has Jeju's largest Starbucks",
+  "Day 3 山房山 rapeseed flowers peak late March to mid-April, entry 1,000 won"
+ ],
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "pjdaxia-jeju-4-days",
+  "title": "濟州島4天自由行：PJ大俠的12個景點",
+  "desc": "整理自 PJ大俠的文章〈【韓國】2026最新!! 濟州島自由行4天要花多少錢?! 實際花費列給你〉(https://pj20120619.pixnet.net/blog/posts/8234811065)。由 PinWith 整理，非 PJ大俠本人製作。",
+  "kind": "course",
+  "themes": [
+   "濟州島",
+   "自由行",
+   "4天",
+   "景點花費"
+  ],
+  "sections": [
+   {
+    "name": "第1天",
+    "items": [
+     {
+      "place_id": "ChIJFUMOgbLkDDURsHuqz9O_RDA",
+      "lat": 33.5157583,
+      "lng": 126.51163460000001,
+      "title": "龍頭岩 (용두암)",
+      "memo": "免費參觀，可以順路逛附近的溪谷和吊橋。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJBdEw_1PjDDUR9XxfgFpYmjw",
+      "lat": 33.5115133,
+      "lng": 126.5262564,
+      "title": "東門市場 (동문시장)",
+      "memo": "免費入場，第一天吃飯的好去處，營業到晚上9點。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJK1UCDqrkDDURwsYol08j-xY",
+      "lat": 33.513622999999995,
+      "lng": 126.5220324,
+      "title": "濟州牧官衙 (제주목 관아)",
+      "memo": "成人門票1,500韓元，附近有不少韓服出租店。",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "第2天",
+    "items": [
+     {
+      "place_id": "ChIJ-5DfghYTDTUR8RaKuI4FID4",
+      "lat": 33.424209499999996,
+      "lng": 126.93111100000002,
+      "title": "涉地可支 (섭지코지)",
+      "memo": "免費、隨時可去；海邊風很大，要注意安全。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJn3jj9rkUDTURS7YjOgUyUVU",
+      "lat": 33.458056000000006,
+      "lng": 126.94250000000001,
+      "title": "城山日出峰 (성산일출봉)",
+      "memo": "世界自然遺產，門票5,000韓元，登頂來回約1小時。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJDc7_4acFDTURCeP2N2OCFfI",
+      "lat": 33.4360552,
+      "lng": 126.731794,
+      "title": "松堂童話村 (송당 동화마을)",
+      "memo": "免費參觀，有濟州最大的星巴克。",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "第3天",
+    "items": [
+     {
+      "place_id": "ChIJ61OlORtDDDURx5JJ_7vzEIw",
+      "lat": 33.2410682,
+      "lng": 126.3134467,
+      "title": "山房山 油菜花 (산방산)",
+      "memo": "油菜花田1,000韓元，3月下旬到4月中最美。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJI9pHulD1DDURR1SI8elRLgA",
+      "lat": 33.4623497,
+      "lng": 126.31034869999999,
+      "title": "涯月海岸 (애월)",
+      "memo": "免費，濟州有名的果凍海，附近咖啡廳很多。",
+      "ts_url": null,
+      "check": "article says Aewol coast; Aewol cafe street pin used"
+     },
+     {
+      "place_id": "ChIJl3EiIin8DDURZmkyh34ZllE",
+      "lat": 33.423746099999995,
+      "lng": 126.5579748,
+      "title": "觀音寺 (관음사)",
+      "memo": "免費參觀，進入祈福區前要脫鞋。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJISh-Xu0DDTUROxfzWeIn6Qg",
+      "lat": 33.394967799999996,
+      "lng": 126.6839679,
+      "title": "思連伊林道 (사려니숲길)",
+      "memo": "免費，濟州31個祕境之一，時間不夠時的好備案。",
+      "ts_url": null,
+      "check": "article name 恩連岳林道 read as Saryeoni Forest Path; Red Oreum entrance pin"
+     }
+    ]
+   },
+   {
+    "name": "第4天",
+    "items": [
+     {
+      "place_id": "ChIJF2wgtzz7DDURDzj9E87gjLI",
+      "lat": 33.497936300000006,
+      "lng": 126.4531587,
+      "title": "梨湖木馬燈塔 (이호테우 해변)",
+      "memo": "紅白馬造型燈塔，只能在外面拍照，不能進去。",
+      "ts_url": null,
+      "check": "pin is Iho Tewoo Beach; the horse lighthouses are at its end"
+     },
+     {
+      "place_id": "ChIJ99rwl6P7DDURcucEskFO9Kg",
+      "lat": 33.509257999999996,
+      "lng": 126.47197489999999,
+      "title": "道頭洞彩虹海岸道路 (도두동 무지개해안도로)",
+      "memo": "離濟州機場約10分鐘車程；不要踩彩色護欄。",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "我把您的濟州島4天行程整理成一張地圖了",
+  "body": "PJ大俠您好，我是 PinWith 的 Adrian，我們在做一個用地圖整理清單的 App。\n\n您把每個景點的門票都列得很清楚，像城山日出峰5,000韓元、登頂來回大約1小時，還提醒山房山油菜花3月下旬到4月中最美，規劃起來很方便。我把文中 12 個地點整理成一張地圖：https://pinwith.me/@pinwith_zhtw/pjdaxia-jeju-4-days\n\n目前是私人狀態，只有這個連結能打開；如果您不希望保留，我會直接刪除。\n\n透過 PinWith，您的讀者可以跟著您的腳步走：重溫您去過的地方，或用一張地圖規劃自己的旅程，而且是用他們自己的語言。這能讓您的內容觸及更多人。\n\n如果您喜歡，我可以把它轉到您的帳號，標註為您的作品，方便您放在文章裡。這類清單也能為策展人帶來額外收入：https://pinwith.me/for-creators?lang=zh-TW\n如果用不到，不回覆也沒關係。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

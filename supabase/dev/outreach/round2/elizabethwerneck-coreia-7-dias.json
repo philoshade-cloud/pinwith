@@ -1,0 +1,209 @@
+{
+ "row": "O7",
+ "target": "Elizabeth Werneck",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "pt",
+ "recipient_name": "Elizabeth",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://elizabethwerneck.com/coreia-do-sul-roteiro/",
+  "title": "Coreia do Sul: roteiro de 5, 7 ou 10 dias em 2026",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "Gyeongbokgung: 3,000 KRW adult ticket, usually closed Tuesdays, last entry 17:00 in Sept/Oct (Day 1)",
+  "KTX Seoul to Busan in about 2.5 hours, reference fare 59,800 KRW (7-day itinerary, Day 5)",
+  "Gwangalli recommended at night for the Gwangan Bridge view (7-day itinerary, Day 6)"
+ ],
+ "list": {
+  "owner": "pinwith_pt",
+  "lang": "pt",
+  "slug": "elizabethwerneck-coreia-7-dias",
+  "title": "Coreia do Sul em 7 dias: as 15 paradas de Elizabeth Werneck",
+  "desc": "Lugares do roteiro de 7 dias (Seul e Busan) de 'Coreia do Sul: roteiro de 5, 7 ou 10 dias em 2026' (https://elizabethwerneck.com/coreia-do-sul-roteiro/). Coletado pelo PinWith, não feito por Elizabeth Werneck.",
+  "kind": "course",
+  "themes": [
+   "Coreia do Sul",
+   "Seul",
+   "Busan",
+   "roteiro"
+  ],
+  "sections": [
+   {
+    "name": "Dia 1",
+    "items": [
+     {
+      "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+      "lat": 37.579617,
+      "lng": 126.977041,
+      "title": "Palácio Gyeongbokgung (경복궁)",
+      "memo": "Palácio principal da dinastia Joseon; 3.000 KRW, costuma fechar às terças.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+      "lat": 37.5814696,
+      "lng": 126.9849519,
+      "title": "Bukchon Hanok Village (북촌한옥마을)",
+      "memo": "Casas tradicionais em área residencial: respeite as regras de acesso.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Dia 2",
+    "items": [
+     {
+      "place_id": "ChIJJXcc9--ifDURb8zmFI_J64s",
+      "lat": 37.5641885,
+      "lng": 126.98611799999998,
+      "title": "Myeongdong (명동)",
+      "memo": "Lojas de cosméticos, restaurantes e comida de rua.",
+      "ts_url": null,
+      "check": "Area pin (Myeongdong shopping street)"
+     },
+     {
+      "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+      "lat": 37.5511694,
+      "lng": 126.98822659999999,
+      "title": "N Seoul Tower (N서울타워)",
+      "memo": "No monte Namsan; o preço depende do tipo de ingresso.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Dia 3",
+    "items": [
+     {
+      "place_id": "ChIJu5Gg2hWkfDURl7NN7FpFnis",
+      "lat": 37.5102133,
+      "lng": 127.06001859999999,
+      "title": "Starfield Library, COEX (별마당도서관)",
+      "memo": "Conhecida pelas estantes gigantes dentro do COEX Mall.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJgZn6QWmkfDURaU3kwlecaEU",
+      "lat": 37.514852,
+      "lng": 127.0573766,
+      "title": "Templo Bongeunsa (봉은사)",
+      "memo": "Templo budista ao lado do COEX; silêncio nas áreas de oração.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Dia 4",
+    "items": [
+     {
+      "place_id": "ChIJ68AiKsWYfDUROpTctLKtxtU",
+      "lat": 37.5561973,
+      "lng": 126.9250341,
+      "title": "Hongdae (홍대)",
+      "memo": "Cafés, lojas independentes e música perto da Universidade Hongik.",
+      "ts_url": null,
+      "check": "Area pin (Hongdae street)"
+     },
+     {
+      "place_id": "ChIJLYxgq8KifDUREa853A2w8Lk",
+      "lat": 37.5743033,
+      "lng": 126.9844135,
+      "title": "Insadong (인사동길)",
+      "memo": "Casas de chá, artesanato e opção de alugar hanbok.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Dia 5",
+    "items": [
+     {
+      "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+      "lat": 35.097393499999995,
+      "lng": 129.0105921,
+      "title": "Aldeia Cultural de Gamcheon, Busan (감천문화마을)",
+      "memo": "Casas coloridas na encosta, após cerca de 2h30 de KTX desde Seul.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Dia 6",
+    "items": [
+     {
+      "place_id": "ChIJwabeuxuMaDURXC4Rb21AQaE",
+      "lat": 35.1884543,
+      "lng": 129.2231109,
+      "title": "Templo Haedong Yonggungsa (해동용궁사)",
+      "memo": "Templo costeiro sobre formações rochosas.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJXwf-DlyNaDURmKxjwdWxY5k",
+      "lat": 35.158697499999995,
+      "lng": 129.16038419999998,
+      "title": "Praia de Haeundae (해운대해수욕장)",
+      "memo": "Praia urbana; perto ficam o Beach Train e a Sky Capsule.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJxw7HJy_taDUR-xaSTeHwbf8",
+      "lat": 35.1531696,
+      "lng": 129.118666,
+      "title": "Praia de Gwangalli (광안리해수욕장)",
+      "memo": "Melhor à noite, com vista para a ponte Gwangan.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Dia 7",
+    "items": [
+     {
+      "place_id": "ChIJudkrFArpaDURbbCzajeQs0c",
+      "lat": 35.0966339,
+      "lng": 129.0307965,
+      "title": "Mercado Jagalchi (자갈치시장)",
+      "memo": "Grande mercado de frutos do mar de Busan.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJL1scg6DpaDURxXQZg1kWGZ4",
+      "lat": 35.098243,
+      "lng": 129.029212,
+      "title": "BIFF Square (BIFF광장)",
+      "memo": "Praça ligada ao Festival Internacional de Cinema de Busan.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJq0OD23TpaDURTv9SBp0VWtI",
+      "lat": 35.101191299999996,
+      "lng": 129.0323697,
+      "title": "Busan Tower, Yongdusan Park (부산타워)",
+      "memo": "Torre no parque Yongdusan, perto das ruas de compras de Nampo-dong.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "Coloquei seu roteiro da Coreia em um só mapa",
+  "body": "Oi Elizabeth, sou o Adrian, do PinWith, um app de listas em mapa.\n\nLi seu roteiro da Coreia do Sul e achei ótimo o nível de detalhe, como o aviso de que o Gyeongbokgung costuma fechar às terças e a dica de ver Gwangalli à noite. Coloquei 15 dos lugares do roteiro de 7 dias em um só mapa: https://pinwith.me/@pinwith_pt/elizabethwerneck-coreia-7-dias\n\nPor enquanto ele é privado: só abre com este link, e eu apago se você preferir.\n\nCom o PinWith, seus leitores podem seguir seus passos: rever os lugares por onde você passou ou planejar a própria viagem a partir de um só mapa, no idioma deles. Isso ajuda seu conteúdo a ir mais longe.\n\nSe gostar, eu passo o mapa para a sua conta, com o crédito para você, e você pode colocar o link no post. Listas assim também podem gerar uma renda extra para quem faz a curadoria: https://pinwith.me/for-creators?lang=pt\nSe não for útil, não precisa responder.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

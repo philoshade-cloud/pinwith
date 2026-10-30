@@ -1,0 +1,176 @@
+{
+ "row": "J2",
+ "target": "小不點 Paine (小不點看世界.Paine世界旅遊趣)",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "zh-TW",
+ "recipient_name": "Paine",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.paine0602.com/seoul-travel/",
+  "title": "2026韓國首爾自由行懶人包｜第一次去首爾五天四夜行程、住宿區域、交通卡、換錢與必去景點",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "Day 3 starts at 望遠市場, described as more everyday-local than 廣藏市場",
+  "Day 1 南山首爾塔: no need to go up the tower, the night view and love locks are enough",
+  "Day 2 仁寺洞 links 宮 開城餃子 (궁개성만두)"
+ ],
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "paine-seoul-5-days",
+  "title": "首爾五天四夜：小不點 Paine 的13個行程點",
+  "desc": "整理自小不點看世界.Paine世界旅遊趣的文章〈2026韓國首爾自由行懶人包｜第一次去首爾五天四夜行程、住宿區域、交通卡、換錢與必去景點〉(https://www.paine0602.com/seoul-travel/)。由 PinWith 整理，非小不點 Paine 本人製作。",
+  "kind": "course",
+  "themes": [
+   "首爾",
+   "自由行",
+   "第一次去首爾",
+   "五天四夜"
+  ],
+  "sections": [
+   {
+    "name": "第1天",
+    "items": [
+     {
+      "place_id": "ChIJJXcc9--ifDURb8zmFI_J64s",
+      "lat": 37.5641885,
+      "lng": 126.98611799999998,
+      "title": "明洞 (명동)",
+      "memo": "第一天不排太滿，先在明洞散步熟悉環境。",
+      "ts_url": null,
+      "check": "area pin (Google 'Myeondong Shopping Street')"
+     },
+     {
+      "place_id": "ChIJfYjlFvWifDURYSDsoxYbN80",
+      "lat": 37.559277,
+      "lng": 126.9777029,
+      "title": "南大門市場 (남대문시장)",
+      "memo": "買伴手禮、生活用品、童裝和帽子的好地方。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+      "lat": 37.5511694,
+      "lng": 126.98822659999999,
+      "title": "南山首爾塔 (N서울타워)",
+      "memo": "搭公車或纜車上山；不登塔，看夜景和愛情鎖也很值得。",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "第2天",
+    "items": [
+     {
+      "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+      "lat": 37.579617,
+      "lng": 126.977041,
+      "title": "景福宮 (경복궁)",
+      "memo": "先租韓服再進宮拍照，第一次去很推薦。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+      "lat": 37.5814696,
+      "lng": 126.9849519,
+      "title": "北村韓屋村 (북촌한옥마을)",
+      "memo": "有居民住在這裡，拍照放低音量，別在家門口停太久。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ_ae0p86ifDURYCc5vk2z_5Q",
+      "lat": 37.5837936,
+      "lng": 126.98191829999999,
+      "title": "三清洞 (삼청동)",
+      "memo": "從北村一路走過來，文中附了起司年糕鍋店可參考。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJBXBbv8KifDURu3CVFSwMyjg",
+      "lat": 37.5742823,
+      "lng": 126.98540829999999,
+      "title": "宮 開城餃子 仁寺洞 (궁개성만두)",
+      "memo": "逛仁寺洞時的用餐選擇。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJe4Jbot2ifDUR2zWhruwyaow",
+      "lat": 37.5737132,
+      "lng": 126.99012710000001,
+      "title": "益善洞韓屋村 (익선동)",
+      "memo": "韓屋改造的巷弄咖啡廳、甜點店；平日人比較少。",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "第3天",
+    "items": [
+     {
+      "place_id": "ChIJA6gxryiZfDURJvmbeBvdz_Y",
+      "lat": 37.5559018,
+      "lng": 126.90628539999997,
+      "title": "望遠市場 (망원시장)",
+      "memo": "比廣藏市場更有在地生活感，買小吃和零食。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ68AiKsWYfDUROpTctLKtxtU",
+      "lat": 37.5561973,
+      "lng": 126.9250341,
+      "title": "弘大 (홍대)",
+      "memo": "逛街買衣服、看街頭表演，晚餐吃烤肉。",
+      "ts_url": null,
+      "check": "area pin"
+     },
+     {
+      "place_id": "ChIJH5tDs-WYfDURJGb8yuqKRwg",
+      "lat": 37.5662075,
+      "lng": 126.91923639999999,
+      "title": "延南洞 京義線林道 (경의선숲길)",
+      "memo": "延南洞咖啡廳、小店多，適合慢慢散步。",
+      "ts_url": null,
+      "check": "article names Yeonnam-dong only; Gyeongui Line Forest Park pin used for the area"
+     }
+    ]
+   },
+   {
+    "name": "第4天",
+    "items": [
+     {
+      "place_id": "ChIJK_b0UX2jfDURmkYPvmWYm90",
+      "lat": 37.544387799999996,
+      "lng": 127.03744239999999,
+      "title": "首爾林 (서울숲)",
+      "memo": "市區方案：逛完聖水洞，下午來散步。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJeVnK5X-hfDURv2fEEK-332M",
+      "lat": 37.5126335,
+      "lng": 126.99847829999999,
+      "title": "盤浦大橋月光彩虹噴泉 (반포대교 달빛무지개분수)",
+      "memo": "天氣好的晚上到漢江看夜景、吃泡麵。",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "我把您的首爾五天四夜行程整理成一張地圖了",
+  "body": "Paine 您好，我是 PinWith 的 Adrian，我們在做一個用地圖整理清單的 App。\n\n很喜歡您把望遠市場排在第三天，說它比廣藏市場更有生活感，還提醒南山首爾塔不一定要登塔，看夜景和愛情鎖就很有韓國感。我把文中 13 個地點整理成一張地圖：https://pinwith.me/@pinwith_zhtw/paine-seoul-5-days\n\n目前是私人狀態，只有這個連結能打開；如果您不希望保留，我會直接刪除。\n\n透過 PinWith，您的讀者可以跟著您的腳步走：重溫您去過的地方，或用一張地圖規劃自己的旅程，而且是用他們自己的語言。這能讓您的內容觸及更多人。\n\n如果您喜歡，我可以把它轉到您的帳號，標註為您的作品，方便您放在文章裡。這類清單也能為策展人帶來額外收入：https://pinwith.me/for-creators?lang=zh-TW\n如果用不到，不回覆也沒關係。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

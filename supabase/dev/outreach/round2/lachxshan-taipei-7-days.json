@@ -1,0 +1,125 @@
+{
+ "row": "E3",
+ "target": "LACH X SHAN",
+ "group": "creator",
+ "based_in_korea": "unverified",
+ "msg_lang": "en",
+ "recipient_name": "Lach and Shan",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=Aelq12cvUQk",
+  "title": "7 days in Taipei, Taiwan | most underrated city in Asia?!",
+  "date": "2026-09"
+ },
+ "hooks": [
+  "A summer typhoon hits mid-trip (chapter 15:01)",
+  "They go back to Chifeng Street for shopping (chapters 5:19 and 16:28)",
+  "Jiufen day trip (17:36) and Elephant Mountain walk for the city view (20:56)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "lachxshan-taipei-7-days",
+  "title": "7 days in Taipei: LACH X SHAN's 9 stops",
+  "desc": "Places from LACH X SHAN's video '7 days in Taipei, Taiwan | most underrated city in Asia?!' (https://www.youtube.com/watch?v=Aelq12cvUQk). Collected by PinWith, not made by LACH X SHAN.",
+  "kind": "collection",
+  "themes": [
+   "Taipei",
+   "night markets",
+   "temples",
+   "7 days"
+  ],
+  "sections": [
+   {
+    "name": null,
+    "items": [
+     {
+      "place_id": "ChIJCd7n16ipQjQRihzEWF4z6Pg",
+      "lat": 25.037310599999998,
+      "lng": 121.49986539999999,
+      "title": "Longshan Temple (艋舺龍山寺)",
+      "memo": "First sight after a Taiwanese breakfast.",
+      "ts_url": "https://youtu.be/Aelq12cvUQk?t=141",
+      "check": null
+     },
+     {
+      "place_id": "ChIJeXELiROpQjQR1REJMdOO8Xo",
+      "lat": 25.0551019,
+      "lng": 121.50998299999998,
+      "title": "Dihua Street (迪化街)",
+      "memo": "Old-street wander early in the week.",
+      "ts_url": "https://youtu.be/Aelq12cvUQk?t=274",
+      "check": null
+     },
+     {
+      "place_id": "ChIJTZ-x02upQjQR-DecmBEnFcw",
+      "lat": 25.0553262,
+      "lng": 121.519628,
+      "title": "Chifeng Street (赤峰街)",
+      "memo": "Visited twice: first to explore, later to shop after the typhoon.",
+      "ts_url": "https://youtu.be/Aelq12cvUQk?t=319",
+      "check": null
+     },
+     {
+      "place_id": "ChIJu8BdQQmpQjQRyAwMGhhFVD8",
+      "lat": 25.0440334,
+      "lng": 121.5073206,
+      "title": "Ximending (西門町)",
+      "memo": "Short stop in the Ximending walking district.",
+      "ts_url": "https://youtu.be/Aelq12cvUQk?t=404",
+      "check": null
+     },
+     {
+      "place_id": "ChIJxUXPVmupQjQRtBB6oj-S5qI",
+      "lat": 25.0566808,
+      "lng": 121.51536410000001,
+      "title": "Ningxia Night Market (寧夏夜市)",
+      "memo": "Their first night market of the trip.",
+      "ts_url": "https://youtu.be/Aelq12cvUQk?t=440",
+      "check": null
+     },
+     {
+      "place_id": "ChIJTamiuZ2pQjQRsmnfkkID6UM",
+      "lat": 25.035501999999997,
+      "lng": 121.5201832,
+      "title": "Chiang Kai-shek Memorial Hall (中正紀念堂)",
+      "memo": "Long segment here, just before the summer typhoon arrives.",
+      "ts_url": "https://youtu.be/Aelq12cvUQk?t=615",
+      "check": null
+     },
+     {
+      "place_id": "ChIJcZT7-hdFXTQR0qekplqCFV8",
+      "lat": 25.109806,
+      "lng": 121.84522299999999,
+      "title": "Jiufen Old Street (九份老街)",
+      "memo": "Day trip out of the city.",
+      "ts_url": "https://youtu.be/Aelq12cvUQk?t=1056",
+      "check": null
+     },
+     {
+      "place_id": "ChIJI1oAUBmrQjQR9nmyvzkOe5A",
+      "lat": 25.027375,
+      "lng": 121.57096190000001,
+      "title": "Elephant Mountain Trail (象山步道)",
+      "memo": "Walk up for the city view.",
+      "ts_url": "https://youtu.be/Aelq12cvUQk?t=1257",
+      "check": null
+     },
+     {
+      "place_id": "ChIJg6W0DZyrQjQR9vZdgYMRoj0",
+      "lat": 25.0508854,
+      "lng": 121.5774891,
+      "title": "Raohe Street Night Market (饒河街觀光夜市)",
+      "memo": "Final chapter of the video.",
+      "ts_url": "https://youtu.be/Aelq12cvUQk?t=1317",
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your 7 days in Taipei video on one map",
+  "body": "Hi Lach and Shan, I'm Adrian from PinWith, a map-list app.\n\nGetting caught by a summer typhoon mid-trip and then heading back to Chifeng Street to shop made me laugh. I put 9 of the places into one map: https://pinwith.me/@pinwith_en/lachxshan-taipei-7-days\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your viewers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it under your videos. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

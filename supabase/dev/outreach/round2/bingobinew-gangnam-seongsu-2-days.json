@@ -1,0 +1,102 @@
+{
+ "row": "E2",
+ "target": "Bingo and Binew",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "en",
+ "recipient_name": "Bingo and Binew",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=l9LPqoaOlik",
+  "title": "Two days in Gangnam and Seongsu! Seoul, South Korea travel vlog",
+  "date": "2026-02"
+ },
+ "hooks": [
+  "Day 1 starts with a pork belly bossam set meal in Gangnam (chapter 0:00)",
+  "Day 2 ends at Kodak Corner Shop and a gimbap dinner in Seongsu (chapter 25:55)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "bingobinew-gangnam-seongsu-2-days",
+  "title": "Gangnam & Seongsu in 2 days: Bingo and Binew's 6 stops",
+  "desc": "Places from Bingo and Binew's video \"Two days in Gangnam and Seongsu! Seoul, South Korea travel vlog\" (Feb 2026). Source: https://www.youtube.com/watch?v=l9LPqoaOlik. Collected by PinWith, not made by Bingo and Binew.",
+  "kind": "course",
+  "themes": [
+   "Seoul",
+   "Gangnam",
+   "Seongsu",
+   "Cafes"
+  ],
+  "sections": [
+   {
+    "name": "Day 1: Gangnam",
+    "items": [
+     {
+      "place_id": "ChIJEQGi7LmjfDURU_WbBWW4j-s",
+      "lat": 37.5263607,
+      "lng": 127.0311998,
+      "title": "Bunker Company Apgujeong",
+      "memo": "Specialty coffee stop while exploring Apgujeong and Cheongdam",
+      "ts_url": "https://youtu.be/l9LPqoaOlik?t=272",
+      "check": "video says 'Bunker Coffee'; matched to Bunker Company Apgujeong"
+     },
+     {
+      "place_id": "ChIJIRVdC6pFezUR02aa2I7i57A",
+      "lat": 37.5118346,
+      "lng": 127.0597871,
+      "title": "Starfield COEX Mall",
+      "memo": "Shopping, a luxury food court and CU Dessert in the video",
+      "ts_url": "https://youtu.be/l9LPqoaOlik?t=516",
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Day 2: Seongsu",
+    "items": [
+     {
+      "place_id": "ChIJ16TVlVClfDURZ6lnG_TQ4gY",
+      "lat": 37.546133,
+      "lng": 127.0431495,
+      "title": "Grandmother's Recipe (할머니의 레시피)",
+      "memo": "Korean set-meal restaurant near Seoul Forest",
+      "ts_url": "https://youtu.be/l9LPqoaOlik?t=835",
+      "check": null
+     },
+     {
+      "place_id": "ChIJAU-JUbSlfDURMBGiHKBvGEA",
+      "lat": 37.5466115,
+      "lng": 127.0426888,
+      "title": "Perment Bakeshop Seoul Forest",
+      "memo": "Bakery stop before the park",
+      "ts_url": "https://youtu.be/l9LPqoaOlik?t=1109",
+      "check": null
+     },
+     {
+      "place_id": "ChIJK_b0UX2jfDURmkYPvmWYm90",
+      "lat": 37.5443878,
+      "lng": 127.0374424,
+      "title": "Seoul Forest Park",
+      "memo": "Walk in the big park next to Seongsu",
+      "ts_url": "https://youtu.be/l9LPqoaOlik?t=1109",
+      "check": null
+     },
+     {
+      "place_id": "ChIJP24LOgClfDURpRDCRw_OqYs",
+      "lat": 37.5431112,
+      "lng": 127.0543075,
+      "title": "Kodak Corner Shop Seongsu",
+      "memo": "Retro Kodak apparel shop, then Seongsu at night",
+      "ts_url": "https://youtu.be/l9LPqoaOlik?t=1555",
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your Gangnam & Seongsu vlog on one map",
+  "body": "Hi Bingo and Binew, I'm Adrian from PinWith, a map-list app.\n\nYour two days in Gangnam and Seongsu looked like the perfect mix, from the pork belly bossam set to Kodak Corner Shop at night. I put 6 of the places into one map, and each pin opens your video at that moment: https://pinwith.me/@pinwith_en/bingobinew-gangnam-seongsu-2-days\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your viewers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it under your videos. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

@@ -1,0 +1,191 @@
+{
+ "row": "O16",
+ "target": "Alla fine di un viaggio",
+ "group": "creator",
+ "based_in_korea": "unverified",
+ "msg_lang": "it",
+ "recipient_name": "Monica",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.allafinediunviaggio.com/2026/02/27/cosa-vedere-a-seoul-in-quattro-giorni-guida-alla-capitale-della-corea-del-sud/",
+  "title": "Cosa vedere a Seoul in quattro giorni? Guida alla capitale della Corea del Sud",
+  "date": "2026-02"
+ },
+ "hooks": [
+  "Suguksa described as the only Buddhist temple in South Korea painted entirely gold (Templi)",
+  "Her pick for an informal dinner is Gwangjang Market (Mercati)",
+  "Says a night in a hanok is worth it; recommends spring or mid-November"
+ ],
+ "list": {
+  "owner": "pinwith_it",
+  "lang": "it",
+  "slug": "allafinediunviaggio-seoul-4-giorni",
+  "title": "Seul in 4 giorni: le 14 tappe di Alla fine di un viaggio",
+  "desc": "Da «Cosa vedere a Seoul in quattro giorni? Guida alla capitale della Corea del Sud» (https://www.allafinediunviaggio.com/2026/02/27/cosa-vedere-a-seoul-in-quattro-giorni-guida-alla-capitale-della-corea-del-sud/). Raccolta da PinWith, non creata da Alla fine di un viaggio.",
+  "kind": "collection",
+  "themes": [
+   "Seul",
+   "Corea del Sud",
+   "Palazzi",
+   "Templi",
+   "Mercati"
+  ],
+  "sections": [
+   {
+    "name": "Palazzi",
+    "items": [
+     {
+      "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+      "lat": 37.579617,
+      "lng": 126.977041,
+      "title": "Gyeongbokgung (경복궁)",
+      "memo": "Il palazzo reale più grande e famoso di Seul.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ4wh0zluifDURaFBW2pdrKf8",
+      "lat": 37.5794309,
+      "lng": 126.9910426,
+      "title": "Changdeokgung (창덕궁)",
+      "memo": "Patrimonio UNESCO dal 1997, con il giardino segreto Huwon.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Villaggi tradizionali",
+    "items": [
+     {
+      "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+      "lat": 37.5814696,
+      "lng": 126.9849519,
+      "title": "Bukchon Hanok Village (북촌한옥마을)",
+      "memo": "Hanok in collina, molti oggi guest house, bar o caffè; meglio arrivare presto.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJe4Jbot2ifDUR2zWhruwyaow",
+      "lat": 37.5737132,
+      "lng": 126.99012710000001,
+      "title": "Ikseon-dong (익선동)",
+      "memo": "Botteghe artigiane e bar vivaci tra le case tradizionali.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJR2GkpsKifDURh6X4t1FUx1Y",
+      "lat": 37.573284099999995,
+      "lng": 126.98560630000001,
+      "title": "Insadong-gil (인사동길)",
+      "memo": "Quartiere dell'arte con oltre cento gallerie e qualche sala da tè tradizionale.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ63NnRS6jfDURt-efnKIjXzs",
+      "lat": 37.5779788,
+      "lng": 127.00719149999999,
+      "title": "Ihwa Village (이화벽화마을)",
+      "memo": "Murales e street art sulle pendici del monte Naksan.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJmylq-vyifDUR_r3t4Ve-w3k",
+      "lat": 37.559315,
+      "lng": 126.99447699999997,
+      "title": "Namsangol Hanok Village (남산골한옥마을)",
+      "memo": "Ingresso gratuito, vita tradizionale in mostra e cerimonie del tè.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Templi",
+    "items": [
+     {
+      "place_id": "ChIJHYhJ5OmifDURMOSQ2D-6lFY",
+      "lat": 37.5738369,
+      "lng": 126.982202,
+      "title": "Tempio Jogyesa (조계사)",
+      "memo": "Lanterne colorate sullo sfondo dei grattacieli moderni.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ19KfUtGZfDUR4Uv6O5jcVJ4",
+      "lat": 37.6159229,
+      "lng": 126.9050875,
+      "title": "Tempio Suguksa (수국사)",
+      "memo": "Secondo l'autrice, l'unico tempio buddista coreano dipinto tutto d'oro.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJgZn6QWmkfDURaU3kwlecaEU",
+      "lat": 37.514852,
+      "lng": 127.0573766,
+      "title": "Tempio Bongeunsa (봉은사)",
+      "memo": "A Gangnam, con una statua del Buddha Maitreya alta oltre 20 metri.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Quartieri e torri",
+    "items": [
+     {
+      "place_id": "ChIJo35QAxelfDUR4jt5FPgWSIU",
+      "lat": 37.541151299999996,
+      "lng": 127.0659498,
+      "title": "Common Ground (커먼그라운드)",
+      "memo": "Centro commerciale dallo stile hipster.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+      "lat": 37.5511694,
+      "lng": 126.98822659999999,
+      "title": "Namsan Tower (N서울타워)",
+      "memo": "Consigliata al tramonto; si sale a piedi o in funivia.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJu7dpc45FezURhLMS5U5eaJk",
+      "lat": 37.5125295,
+      "lng": 127.10230500000002,
+      "title": "Lotte World Tower, Seoul Sky (서울스카이)",
+      "memo": "123 piani; osservatori dal 117° al 121° piano, con pavimento di vetro.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Mercati",
+    "items": [
+     {
+      "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+      "lat": 37.570038499999995,
+      "lng": 126.99960379999997,
+      "title": "Mercato di Gwangjang (광장시장)",
+      "memo": "La casa dello street food, scelta dall'autrice per una cena informale.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "Ho messo la tua Seul in 4 giorni su un'unica mappa",
+  "body": "Ciao Monica, sono Adrian di PinWith, un'app di liste su mappa.\n\nNon conoscevo Suguksa, il tempio tutto d'oro di cui parli, e mi è piaciuta la tua scelta del mercato di Gwangjang per una cena informale. Ho messo 14 dei luoghi su un'unica mappa: https://pinwith.me/@pinwith_it/allafinediunviaggio-seoul-4-giorni\n\nPer ora è privata: solo questo link la apre, e la cancello se preferisci.\n\nCon PinWith i tuoi lettori possono seguire i tuoi passi: ritrovare i luoghi che hai visitato o pianificare il proprio viaggio da un'unica mappa, nella propria lingua. Così i tuoi contenuti arrivano più lontano.\n\nSe ti piace, la sposto sul tuo account, con il tuo nome, così puoi metterne il link nell'articolo. Liste come questa possono anche far guadagnare un reddito extra ai curatori: https://pinwith.me/for-creators?lang=it\nNessuna risposta necessaria se non ti è utile.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

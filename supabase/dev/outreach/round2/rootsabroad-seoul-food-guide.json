@@ -1,0 +1,176 @@
+{
+ "row": "E7",
+ "target": "Roots Abroad",
+ "group": "creator",
+ "based_in_korea": "unverified",
+ "msg_lang": "en",
+ "recipient_name": "Moritz and Frédérique",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://rootsabroadtravel.com/where-to-eat-in-seoul/",
+  "title": "What & Where to Eat in Seoul: Ultimate Seoul Food Guide 2026",
+  "date": "2026-02"
+ },
+ "hooks": [
+  "Tosokchon Samgyetang serves a small glass of ginseng wine with the soup",
+  "They loved the yuzu ramen at Anguk Restaurant Doma",
+  "Smoke Town in Itaewon has robot waiters"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "rootsabroad-seoul-food-guide",
+  "title": "What to eat in Seoul: Roots Abroad's 13 favorites",
+  "desc": "Places from Roots Abroad's 'What & Where to Eat in Seoul: Ultimate Seoul Food Guide 2026' (https://rootsabroadtravel.com/where-to-eat-in-seoul/). Collected by PinWith, not made by Roots Abroad.",
+  "kind": "collection",
+  "themes": [
+   "Seoul",
+   "food",
+   "Korean classics",
+   "noodles"
+  ],
+  "sections": [
+   {
+    "name": "Korean classics",
+    "items": [
+     {
+      "place_id": "ChIJb5OOGL6ifDURU29ID3t8aOA",
+      "lat": 37.577778599999995,
+      "lng": 126.9715909,
+      "title": "Tosokchon Samgyetang (토속촌 삼계탕)",
+      "memo": "Ginseng chicken soup in a hanok near Gyeongbokgung, with ginseng wine.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJU-tNF72jfDUR74otWmzssuk",
+      "lat": 37.57420380000001,
+      "lng": 126.99064529999998,
+      "title": "Ikseon Tonkatsu (익선돈가스)",
+      "memo": "Big, tender Korean-style pork cutlets with curry sauce.",
+      "ts_url": null,
+      "check": "Small Google listing; name matches but confirm it is the same shop"
+     },
+     {
+      "place_id": "ChIJ2c4g_d2ifDUR_4RLSsQ4PtE",
+      "lat": 37.5713198,
+      "lng": 126.99151289999999,
+      "title": "Yeongchunok (영춘옥)",
+      "memo": "75+ years old; gomtang with a rich, milky beef bone broth.",
+      "ts_url": null,
+      "check": "Google lists 'Young Chun Ok'"
+     },
+     {
+      "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+      "lat": 37.570038499999995,
+      "lng": 126.99960379999997,
+      "title": "Gwangjang Market (광장시장)",
+      "memo": "Market from 1905; go for crispy mung bean bindaetteok.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Noodles & dumplings",
+    "items": [
+     {
+      "place_id": "ChIJZ1rutVGjfDURwHcw6YZ3hQU",
+      "lat": 37.5745113,
+      "lng": 126.98462479999999,
+      "title": "Gossine Donghae Makguksu, Jongno (고씨네동해막국수 종로직영점)",
+      "memo": "Hanok-style spot for bibimbap and cold buckwheat noodles.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJJUs1xLOjfDURw5XbT68PJxs",
+      "lat": 37.5732895,
+      "lng": 126.9863115,
+      "title": "Bangtae Makguksu (방태막국수)",
+      "memo": "Bibim and mul makguksu, plus bossam pork belly.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJBWL6TCWjfDURDXNNGmciff8",
+      "lat": 37.5784958,
+      "lng": 126.982261,
+      "title": "Bukchon Son-mandu, Samcheong-dong (북촌손만두 삼청동)",
+      "memo": "Steamed and fried mandu platters and mandu soup near Bukchon.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJW7FBDfCifDURHTpisLbVUH0",
+      "lat": 37.5610151,
+      "lng": 126.9860829,
+      "title": "Myeongdong Kyoja (명동교자 본점)",
+      "memo": "50+ years, four-item menu: kalguksu and steamed mandu.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Chicken, BBQ & ramen",
+    "items": [
+     {
+      "place_id": "ChIJv-poNdyifDURL47z4YZAxyM",
+      "lat": 37.5735959,
+      "lng": 126.9904693,
+      "title": "Art Monster Ikseon-dong (아트몬스터 익선동)",
+      "memo": "Cozy chimaek: double-fried chicken with craft beer.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJH1tJyXGjfDUR6WfVPaL-fq8",
+      "lat": 37.5778278,
+      "lng": 126.98648270000001,
+      "title": "Anguk Restaurant Doma (도마)",
+      "memo": "Mostly Korean BBQ, but the yuzu ramen was their favorite here.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Burgers & Western",
+    "items": [
+     {
+      "place_id": "ChIJTUzsMwCjfDURcb7FpHabQwM",
+      "lat": 37.534993899999996,
+      "lng": 126.99689470000001,
+      "title": "Smoke Town (스모크타운)",
+      "memo": "American BBQ platters, brisket and pulled pork, with robot waiters.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJa8qYawCjfDURyrvQYn1WxcM",
+      "lat": 37.5248974,
+      "lng": 127.0392938,
+      "title": "Se7en Patty Burger (세븐패티버거)",
+      "memo": "Smash burgers and fries they rank among their best.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ33Z6sm-jfDURwxUtbQimVt8",
+      "lat": 37.5671469,
+      "lng": 126.98129739999999,
+      "title": "Daily Fix Euljiro (데일리픽스 을지로)",
+      "memo": "Known for its truffle burger.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your Seoul food guide on one map",
+  "body": "Hi Moritz and Frédérique, I'm Adrian from PinWith, a map-list app.\n\nThe little glass of ginseng wine with the samgyetang at Tosokchon and your love for Doma's yuzu ramen stuck with me. I put 13 of the places into one map: https://pinwith.me/@pinwith_en/rootsabroad-seoul-food-guide\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your readers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it in the post. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

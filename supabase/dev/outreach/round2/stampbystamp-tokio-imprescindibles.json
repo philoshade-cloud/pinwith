@@ -1,0 +1,177 @@
+{
+ "row": "O4",
+ "target": "Stamp by Stamp Travel",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "es",
+ "recipient_name": "Leyre y Urko",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.stampbystamptravel.com/guia-de-tokio/",
+  "title": "Guía de Tokio: Qué ver y hacer en 2026",
+  "date": "2026-03"
+ },
+ "hooks": [
+  "Neighborhood guide ends with Yotsugi, a quiet residential area with Captain Tsubasa (Oliver y Benji) statues, pitched as a mini geek route (Guía de barrios)",
+  "Intro mentions a Shinjuku ramen alley where barely three people fit (Introducción)",
+  "Lists Shibuya Sky, Tokyo Tower and the Metropolitan Government Building as the viewpoints (Mejores lugares)"
+ ],
+ "list": {
+  "owner": "pinwith_es",
+  "lang": "es",
+  "slug": "stampbystamp-tokio-imprescindibles",
+  "title": "Tokio imprescindible: los 13 lugares de Stamp by Stamp Travel",
+  "desc": "Lugares de la 'Guía de Tokio: Qué ver y hacer en 2026' (https://www.stampbystamptravel.com/guia-de-tokio/). Recopilado por PinWith, no creado por Stamp by Stamp Travel.",
+  "kind": "collection",
+  "themes": [
+   "Tokio",
+   "Japón",
+   "barrios",
+   "miradores",
+   "templos"
+  ],
+  "sections": [
+   {
+    "name": "Barrios",
+    "items": [
+     {
+      "place_id": "ChIJK9EM68qLGGARacmu4KJj5SA",
+      "lat": 35.659482,
+      "lng": 139.7005596,
+      "title": "Cruce de Shibuya (渋谷スクランブル交差点)",
+      "memo": "El famoso paso de cebra; Shibuya es su barrio favorito para caminar.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ-6Jke9eMGGARtltoSsIaeE8",
+      "lat": 35.6949043,
+      "lng": 139.7014074,
+      "title": "Kabukicho, Shinjuku (歌舞伎町一番街)",
+      "memo": "Neones y vida nocturna en Shinjuku, buen primer contacto con Tokio.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJzdWdgh2MGGARh4kg2pVZL3c",
+      "lat": 35.699647299999995,
+      "lng": 139.7713703,
+      "title": "Akihabara (秋葉原電気街)",
+      "memo": "Anime, manga, figuras y recreativas; merece la pena aunque no compres.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJu2-DAeeLGGARUZipC7OFRmA",
+      "lat": 35.671222799999995,
+      "lng": 139.7664859,
+      "title": "Ginza (銀座)",
+      "memo": "El barrio más elegante: grandes almacenes y edificios iluminados de noche.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJlVne8bqMGGARtX5O6ojMvsI",
+      "lat": 35.6710335,
+      "lng": 139.7051821,
+      "title": "Calle Takeshita, Harajuku (竹下通り)",
+      "memo": "Moda alternativa, dulces y cafés raros en el barrio más joven.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJMwpiebSMGGARPr_454zHvDQ",
+      "lat": 35.6700649,
+      "lng": 139.6949656,
+      "title": "Parque Yoyogi (代々木公園)",
+      "memo": "Parada verde de Harajuku, junto al santuario Meiji.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJZft8gGmPGGARUeGpIuZ-8Do",
+      "lat": 35.7341538,
+      "lng": 139.8341188,
+      "title": "Estatua de Oliver (Tsubasa), Yotsugi (四つ木)",
+      "memo": "Yotsugi esconde estatuas de Oliver y Benji: una mini ruta friki.",
+      "ts_url": null,
+      "check": "Statue sits in Tsubasa Park; a March 2026 review says the park was under renovation"
+     }
+    ]
+   },
+   {
+    "name": "Templos",
+    "items": [
+     {
+      "place_id": "ChIJ8T1GpMGOGGARDYGSgpooDWw",
+      "lat": 35.7147651,
+      "lng": 139.7966553,
+      "title": "Templo Senso-ji, Asakusa (浅草寺)",
+      "memo": "El Tokio tradicional de farolillos; Asakusa se recorre bien a pie temprano.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ5SZMmreMGGARcz8QSTiJyo8",
+      "lat": 35.6763976,
+      "lng": 139.6993259,
+      "title": "Santuario Meiji Jingu (明治神宮)",
+      "memo": "Uno de sus dos templos imprescindibles, al lado de Harajuku.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Miradores",
+    "items": [
+     {
+      "place_id": "ChIJ4Rr2JWiLGGARcyRSHuZ-9G8",
+      "lat": 35.6586719,
+      "lng": 139.7019848,
+      "title": "Shibuya Sky (渋谷スカイ)",
+      "memo": "Mirador sobre Shibuya, en su lista de imprescindibles.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJCewJkL2LGGAR3Qmk0vCTGkg",
+      "lat": 35.6585805,
+      "lng": 139.7454329,
+      "title": "Torre de Tokio (東京タワー)",
+      "memo": "Otro de los tres miradores que recomiendan.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJnctryNSMGGARLv4MknPFseU",
+      "lat": 35.689733,
+      "lng": 139.6916563,
+      "title": "Gobierno Metropolitano de Tokio (東京都庁)",
+      "memo": "Mirador en los rascacielos de Shinjuku.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Ocio",
+    "items": [
+     {
+      "place_id": "ChIJ18IK6x2KGGARKTc2yLS-030",
+      "lat": 35.6300488,
+      "lng": 139.77569119999998,
+      "title": "Odaiba (お台場海浜公園)",
+      "memo": "La isla de ocio que incluyen entre los mejores planes de Tokio.",
+      "ts_url": null,
+      "check": "Guide names Odaiba only as an area; pinned at Odaiba Marine Park"
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "He puesto vuestra guía de Tokio en un solo mapa",
+  "body": "Hola Leyre y Urko, soy Adrian, de PinWith, una app de listas en mapa.\n\nLeí vuestra guía de Tokio y me encantó que acabarais en Yotsugi, con las estatuas de Oliver y Benji: no es un barrio que salga en muchas guías. He puesto 13 de los lugares en un solo mapa: https://pinwith.me/@pinwith_es/stampbystamp-tokio-imprescindibles\n\nDe momento es privado: solo se abre con este enlace, y lo borro si preferís que no exista.\n\nCon PinWith, vuestros lectores pueden seguir vuestros pasos: volver a los sitios donde estuvisteis o planear su propio viaje desde un solo mapa, en su propio idioma. Así vuestro contenido llega más lejos.\n\nSi os gusta, lo paso a vuestra cuenta, con vuestro crédito, para que podáis enlazarlo en el post. Las listas como esta también pueden dar ingresos extra a quienes las crean: https://pinwith.me/for-creators?lang=es\nSi no os resulta útil, no hace falta que respondáis.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

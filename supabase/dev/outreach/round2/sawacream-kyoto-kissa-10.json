@@ -1,0 +1,133 @@
+{
+ "row": "N4",
+ "target": "sawa Cream (sawa)",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "ja",
+ "recipient_name": "sawa",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=_kfoQfCqRcU",
+  "title": "Kyoto vlog｜京都おすすめ喫茶店まとめ10選￤教えたくないほど良すぎる喫茶店の沼へようこそ。￤京都カフェ巡り.京都旅行",
+  "date": "2026-02"
+ },
+ "hooks": [
+  "タイトルの「喫茶店の沼へようこそ」（動画タイトル）",
+  "京都市内だけでなく長岡京の純喫茶フルールまで入っている（概要欄の店舗リスト）",
+  "AUSGANGと喫茶若山がすぐ近く（概要欄の地図リンク）"
+ ],
+ "list": {
+  "owner": "pinwith_ja",
+  "lang": "ja",
+  "slug": "sawacream-kyoto-kissa-10",
+  "kind": "collection",
+  "themes": [
+   "京都",
+   "喫茶店",
+   "カフェ巡り"
+  ],
+  "sections": [
+   {
+    "name": null,
+    "items": [
+     {
+      "place_id": "ChIJS_NLQQAJAWAROlf1Zm7-ohs",
+      "lat": 34.997234299999995,
+      "lng": 135.7654401,
+      "title": "喫茶ジャニー",
+      "memo": "動画の1軒目。下京区",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ6WzgKO0HAWARIqpCtdnvosI",
+      "lat": 34.9923994,
+      "lng": 135.7439023,
+      "title": "Cafe AUSGANG",
+      "memo": "動画の2軒目。下京区・丹波口エリア",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJt3eBbSIGAWARS26X2GCdSpo",
+      "lat": 34.9926307,
+      "lng": 135.7460245,
+      "title": "喫茶 若山",
+      "memo": "動画の3軒目。AUSGANGのすぐ近く",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJWcy3tUcHAWARNV97nfr2u-8",
+      "lat": 35.0279361,
+      "lng": 135.7460001,
+      "title": "cafe origi",
+      "memo": "動画の4軒目。上京区・西陣",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJYaMvL-EHAWARhPtjk50UsRo",
+      "lat": 35.021696299999995,
+      "lng": 135.7448619,
+      "title": "喫茶ヒトクチヤ",
+      "memo": "動画の5軒目。上京区",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJdR1yhgcIAWARq_92LFSLUqc",
+      "lat": 35.0410724,
+      "lng": 135.75231879999998,
+      "title": "喫茶 翡翠",
+      "memo": "動画の6軒目。北区・紫野",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ0bRnyYIJAWAR4JPpo7GRmLk",
+      "lat": 35.0134494,
+      "lng": 135.77975469999998,
+      "title": "喫茶me",
+      "memo": "動画の7軒目。左京区・岡崎",
+      "ts_url": null,
+      "check": "Google上の名称は「Café me」（岡崎）。同じ店か要確認"
+     },
+     {
+      "place_id": "ChIJa2oB6GgEAWARq_gTjC0_6Lo",
+      "lat": 34.924455099999996,
+      "lng": 135.6917417,
+      "title": "純喫茶 フルール",
+      "memo": "動画の8軒目。長岡京市",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ8Z7XfrYIAWARjC2Bd-GCbew",
+      "lat": 34.9894019,
+      "lng": 135.7689162,
+      "title": "喫茶アマゾン",
+      "memo": "動画の9軒目。東山区・三十三間堂の近く",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJbypm3oAIAWARm7lUBldgck4",
+      "lat": 35.0122973,
+      "lng": 135.7556248,
+      "title": "喫茶 マドラグ",
+      "memo": "動画の10軒目。中京区",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ],
+  "title": "sawaさんの京都喫茶店：10軒",
+  "desc": "sawa Cream の動画「京都おすすめ喫茶店まとめ10選」（2026年2月）に登場したお店。出典：https://www.youtube.com/watch?v=_kfoQfCqRcU — PinWithが整理したもので、クリエイター本人の作成ではありません。"
+ },
+ "message": {
+  "subject": "京都喫茶店10選を1枚の地図にまとめました",
+  "body": "sawaさん\n\nはじめまして、地図リストアプリ PinWith の Adrian です。\n\n市内の喫茶店だけでなく長岡京の純喫茶フルールまで入っていて、まさに「喫茶店の沼」だなと思いながら拝見しました。動画に出てきた 10 か所を一枚の地図にまとめました：https://pinwith.me/@pinwith_ja/sawacream-kyoto-kissa-10\n\n今は非公開で、このリンクからしか開けません。不要でしたらすぐに削除します。\n\nPinWith を使うと、視聴者の方がsawaさんの足跡をたどれます。行った場所を見返したり、同じ地図で自分の旅を計画したりでき、それぞれの言語で見られます。動画がより多くの人に届くきっかけになると思います。\n\n気に入っていただけたら、sawaさんのアカウントにお移しし、sawaさんの作品として表示します。動画の概要欄にリンクを貼っていただけます。こうしたリストはキュレーターの副収入にもなります：https://pinwith.me/for-creators?lang=ja\nお役に立たなければ、返信は不要です。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

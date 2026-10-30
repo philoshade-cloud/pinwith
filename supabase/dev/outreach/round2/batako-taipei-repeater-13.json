@@ -1,0 +1,176 @@
+{
+ "row": "N5",
+ "target": "バタ子の50歳からの韓国の歩き方 (バタ子)",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "ja",
+ "recipient_name": "バタ子",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=clbJOs55GaU",
+  "title": "どこ行くべきか迷ったら見て【台湾旅行】絶対満足！台北リピーターの激推し13＊パンダ/観光/パイナップルケーキ/朝食/観光地/夜市/喫茶店/カフェ",
+  "date": "2026-04"
+ },
+ "hooks": [
+  "台湾に15回以上行ったリピーターとしての激推し（概要欄）",
+  "鼎泰豊はA13店のほうが比較的空いているという補足（概要欄）",
+  "動物園・猫空から基隆の夜市まで一本で回れる構成（概要欄の地図リンク）"
+ ],
+ "list": {
+  "owner": "pinwith_ja",
+  "lang": "ja",
+  "slug": "batako-taipei-repeater-13",
+  "kind": "collection",
+  "themes": [
+   "台北",
+   "台湾旅行",
+   "夜市",
+   "カフェ"
+  ],
+  "sections": [
+   {
+    "name": "観光",
+    "items": [
+     {
+      "place_id": "ChIJj4EySmCqQjQRZte0Cf0G_qo",
+      "lat": 24.9985635,
+      "lng": 121.58098570000001,
+      "title": "台北市立動物園",
+      "memo": "パンダに会える動物園",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJTY0S4y0AaDQRyctkZ1R1f2Q",
+      "lat": 24.968719999999998,
+      "lng": 121.58825999999998,
+      "title": "猫空（猫空ロープウェイ猫空駅）",
+      "memo": "動物園とあわせて紹介された山のエリア",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ0x2UmTtPXTQRdjB7xutkDpA",
+      "lat": 25.1524456,
+      "lng": 121.76911760000002,
+      "title": "基隆 正濱漁港のカラフルハウス",
+      "memo": "基隆のカラフルな家並み",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJeXELiROpQjQR1REJMdOO8Xo",
+      "lat": 25.0551019,
+      "lng": 121.50998299999998,
+      "title": "迪化街",
+      "memo": "老街の散策スポット",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "朝ごはん・食事",
+    "items": [
+     {
+      "place_id": "ChIJff6pZXCpQjQRHi3vcbjQip8",
+      "lat": 25.0442333,
+      "lng": 121.5248433,
+      "title": "阜杭豆漿",
+      "memo": "台湾式朝ごはんの人気店",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ04wMKmypQjQRk8QeLevjJO8",
+      "lat": 25.050362399999997,
+      "lng": 121.51984379999999,
+      "title": "四海豆漿大王",
+      "memo": "台湾式朝ごはん",
+      "ts_url": null,
+      "check": "概要欄の店名で照合。支店は要確認"
+     },
+     {
+      "place_id": "ChIJQXcl6LarQjQRGUMnQ18F0lE",
+      "lat": 25.033337099999997,
+      "lng": 121.56465960000001,
+      "title": "鼎泰豊 101店",
+      "memo": "概要欄ではA13店のほうが空いているとの補足あり",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "カフェ・喫茶",
+    "items": [
+     {
+      "place_id": "ChIJ-cSqt7ipQjQRCgAYNhr8Sqw",
+      "lat": 25.0557163,
+      "lng": 121.513129,
+      "title": "Wangtea Lab 當代茶吧",
+      "memo": "現代的な台湾茶のティーバー",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJE68F9QipQjQRMZMejOOrL9g",
+      "lat": 25.043450999999997,
+      "lng": 121.504387,
+      "title": "上林珈琲",
+      "memo": "西門の喫茶店",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJl2NC-COpQjQRdZmgrZeaUrc",
+      "lat": 25.053465799999998,
+      "lng": 121.5093488,
+      "title": "TWATUTIA Coffee & Co.",
+      "memo": "大稻埕のカフェ",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJYzadabmpQjQRSOKgsZ3UYPk",
+      "lat": 25.052159399999997,
+      "lng": 121.5112881,
+      "title": "SIDOLI RADIO 小島裡",
+      "memo": "大稻埕のカフェ",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "夜市",
+    "items": [
+     {
+      "place_id": "ChIJY5adFT5OXTQRHkmS-RPdhB0",
+      "lat": 25.1282405,
+      "lng": 121.74355790000001,
+      "title": "基隆廟口夜市",
+      "memo": "基隆の夜市",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJg6W0DZyrQjQR9vZdgYMRoj0",
+      "lat": 25.0508854,
+      "lng": 121.5774891,
+      "title": "饒河街觀光夜市",
+      "memo": "台北の夜市",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ],
+  "title": "バタ子さんの台北激推し：13か所",
+  "desc": "バタ子の50歳からの韓国の歩き方 の動画「台北リピーターの激推し13」（2026年4月）に登場した場所。出典：https://www.youtube.com/watch?v=clbJOs55GaU — PinWithが整理したもので、クリエイター本人の作成ではありません。"
+ },
+ "message": {
+  "subject": "台北激推し13を1枚の地図にまとめました",
+  "body": "バタ子さん\n\nはじめまして、地図リストアプリ PinWith の Adrian です。\n\n台北に15回以上通っている方ならではの選び方で、鼎泰豊はA13店のほうが空いているという補足まで、とても参考になりました。動画に出てきた 13 か所を一枚の地図にまとめました：https://pinwith.me/@pinwith_ja/batako-taipei-repeater-13\n\n今は非公開で、このリンクからしか開けません。不要でしたらすぐに削除します。\n\nPinWith を使うと、視聴者の方がバタ子さんの足跡をたどれます。行った場所を見返したり、同じ地図で自分の旅を計画したりでき、それぞれの言語で見られます。動画がより多くの人に届くきっかけになると思います。\n\n気に入っていただけたら、バタ子さんのアカウントにお移しし、バタ子さんの作品として表示します。動画の概要欄にリンクを貼っていただけます。こうしたリストはキュレーターの副収入にもなります：https://pinwith.me/for-creators?lang=ja\nお役に立たなければ、返信は不要です。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

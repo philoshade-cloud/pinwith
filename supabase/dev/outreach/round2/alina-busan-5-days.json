@@ -1,0 +1,191 @@
+{
+ "row": "J1",
+ "target": "Alina 愛琳娜",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "zh-TW",
+ "recipient_name": "Alina",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://alinalife.tw/busan5days/",
+  "title": "2026釜山自由行》5天4夜行程表＋花費、交通住宿攻略",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "Day 2 lunch at 錦繡河豚: drink the plain soup first, then add white vinegar",
+  "Day 5 Gijang Market snow crab is priced by weight, ask the total first",
+  "Day 3 白淺灘文化村 has many stairs, wear sneakers; ha:nok hanok cafe on Day 5"
+ ],
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "alina-busan-5-days",
+  "title": "釜山5天4夜：Alina 愛琳娜的14個行程點",
+  "desc": "整理自 Alina 愛琳娜的文章〈2026釜山自由行》5天4夜行程表＋花費、交通住宿攻略〉(https://alinalife.tw/busan5days/)。由 PinWith 整理，非 Alina 愛琳娜本人製作。",
+  "kind": "course",
+  "themes": [
+   "釜山",
+   "自由行",
+   "5天4夜",
+   "海雲台",
+   "影島"
+  ],
+  "sections": [
+   {
+    "name": "第1天",
+    "items": [
+     {
+      "place_id": "ChIJUQsDVhuNaDURJo5GeByloeQ",
+      "lat": 35.1640365,
+      "lng": 129.1967173,
+      "title": "青沙浦踏石展望台 (청사포 다릿돌전망대)",
+      "memo": "抵達第一天到青沙浦看海、紅白燈塔，適合放空一下。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJy48lzEWNaDURRh-refpJyNw",
+      "lat": 35.1648405,
+      "lng": 129.1576274,
+      "title": "海理團路 (해리단길)",
+      "memo": "小店多在11點後才開，下午2到5點來逛最剛好。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJAwlBgCONaDURdmNRS85syro",
+      "lat": 35.1649621,
+      "lng": 129.1693981,
+      "title": "PURADAK 炸雞 海雲台店 (푸라닭)",
+      "memo": "第一晚的晚餐，點黑蒜口味炸雞。",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "第2天",
+    "items": [
+     {
+      "place_id": "ChIJfdIYWwuNaDURDx-eqtUjCkg",
+      "lat": 35.158284,
+      "lng": 129.17276719999998,
+      "title": "海雲台藍線公園 尾浦站 (해운대 블루라인파크)",
+      "memo": "天空膠囊小火車很熱門，記得事先上網預約。",
+      "ts_url": null,
+      "check": "capsule train runs Mipo to Cheongsapo; Mipo station pin used"
+     },
+     {
+      "place_id": "ChIJb6ju4GeNaDURuR1LsbcI5lw",
+      "lat": 35.162420499999996,
+      "lng": 129.16450609999998,
+      "title": "錦繡河豚 海雲台總店 (금수복국)",
+      "memo": "午餐吃河豚湯，先喝原味再加白醋。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJnbg-nA2NaDUR3DK_vogcxaI",
+      "lat": 35.1597946,
+      "lng": 129.1699193,
+      "title": "BUSAN X the SKY 展望台",
+      "memo": "海雲台高樓上的觀景台，拍照很好看。",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "第3天",
+    "items": [
+     {
+      "place_id": "ChIJseGsfh7paDURigYilgTVojA",
+      "lat": 35.0782798,
+      "lng": 129.0453198,
+      "title": "白淺灘文化村 (흰여울문화마을)",
+      "memo": "影島海邊小村，階梯很多，穿好走的球鞋。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ4cySXFTvaDUR6qQVhmEg1hg",
+      "lat": 35.0604486,
+      "lng": 129.0779732,
+      "title": "太宗台烤貝村 (태종대 조개구이촌)",
+      "memo": "影島午餐吃海邊烤貝。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJQ9qENgvvaDURqYzOp6H74D4",
+      "lat": 35.0859877,
+      "lng": 129.0763838,
+      "title": "P.ARK 咖啡廳 (피아크)",
+      "memo": "大片玻璃看海景，配甜點休息。",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "第4天",
+    "items": [
+     {
+      "place_id": "ChIJ90WPaGeNaDUR0qwheqRFQz8",
+      "lat": 35.1633286,
+      "lng": 129.1613654,
+      "title": "海雲台元祖奶奶牛肉湯飯 (해운대원조할매국밥)",
+      "memo": "第4天的早餐，海雲台老字號牛肉湯飯。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ8XYSxfKNaDURFuMe6s2K4us",
+      "lat": 35.1962445,
+      "lng": 129.21493759999998,
+      "title": "釜山樂天冒險世界 (롯데월드 어드벤처 부산)",
+      "memo": "東釜山的戶外遊樂園。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ-5-zWheNaDUR5_hcfQgCFk8",
+      "lat": 35.1940567,
+      "lng": 129.2186386,
+      "title": "Skyline Luge 斜坡滑車 (스카이라인 루지)",
+      "memo": "建議平日週二、週三去，避開週末排隊。",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "第5天",
+    "items": [
+     {
+      "place_id": "ChIJve0UExiPaDURAbPXW8OzpsU",
+      "lat": 35.2438418,
+      "lng": 129.2151228,
+      "title": "機張市場 (기장시장)",
+      "memo": "吃松葉蟹和蟹膏拌飯；秤重計價，先問清楚總價。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJFy7P8GuPaDUR8IEYkJ6qysM",
+      "lat": 35.217297599999995,
+      "lng": 129.1996944,
+      "title": "ha:nok 韓屋咖啡廳 (하녹)",
+      "memo": "整棟韓屋改成的咖啡廳，推薦點甜點。",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "我把您的釜山5天4夜行程整理成一張地圖了",
+  "body": "Alina 您好，我是 PinWith 的 Adrian，我們在做一個用地圖整理清單的 App。\n\n看到您提醒在錦繡河豚要先喝原味湯再加白醋，還有機張市場的松葉蟹是秤重計價、要先問總價，這些小細節真的很實用。我把文中 14 個地點整理成一張地圖：https://pinwith.me/@pinwith_zhtw/alina-busan-5-days\n\n目前是私人狀態，只有這個連結能打開；如果您不希望保留，我會直接刪除。\n\n透過 PinWith，您的讀者可以跟著您的腳步走：重溫您去過的地方，或用一張地圖規劃自己的旅程，而且是用他們自己的語言。這能讓您的內容觸及更多人。\n\n如果您喜歡，我可以把它轉到您的帳號，標註為您的作品，方便您放在文章裡。這類清單也能為策展人帶來額外收入：https://pinwith.me/for-creators?lang=zh-TW\n如果用不到，不回覆也沒關係。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

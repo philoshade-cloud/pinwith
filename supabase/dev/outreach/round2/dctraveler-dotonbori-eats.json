@@ -1,0 +1,181 @@
+{
+ "row": "E20",
+ "target": "The Directionally Challenged Traveler",
+ "group": "fan_blog",
+ "based_in_korea": false,
+ "msg_lang": "en",
+ "recipient_name": "Pam",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://directionallychallengedtraveler.com/where-to-eat-in-dotonbori-osaka/",
+  "title": "Where to eat in Dotonbori",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "Otako's octopus pieces make up about 80% of each takoyaki ball (source article)",
+  "Kushikatsu Daruma is recognizable by the angry Daruma statue outside (source article)",
+  "Updated Oct 14, 2026 (first published Feb 2020) (source article)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "dctraveler-dotonbori-eats",
+  "title": "Where to eat in Dotonbori: Pam's 13 picks",
+  "desc": "Places from The Directionally Challenged Traveler's 'Where to eat in Dotonbori' (https://directionallychallengedtraveler.com/where-to-eat-in-dotonbori-osaka/). Collected by PinWith, not made by The Directionally Challenged Traveler.",
+  "kind": "collection",
+  "themes": [
+   "Osaka",
+   "Dotonbori",
+   "street food",
+   "takoyaki"
+  ],
+  "sections": [
+   {
+    "name": "Takoyaki",
+    "items": [
+     {
+      "place_id": "ChIJza-i6hHnAGAR07AQeEhDkh0",
+      "lat": 34.6687742,
+      "lng": 135.5027298,
+      "title": "Takoyaki Wanaka (わなか)",
+      "memo": "Probably the widest takoyaki variety in Dotonbori.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ1VjE9hTnAGAR6QXoCkTEYj4",
+      "lat": 34.6692402,
+      "lng": 135.50319919999998,
+      "title": "Acchichi Honpo (あっちち本舗)",
+      "memo": "One of the takoyaki stands on Pam's shortlist.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJU3WQMmXnAGARss7JPdOEprc",
+      "lat": 34.668673399999996,
+      "lng": 135.50331549999999,
+      "title": "Otako (本家大たこ)",
+      "memo": "Huge octopus pieces, about 80% of each ball.",
+      "ts_url": null,
+      "check": "matched 'Honke Ootako Dotonbori Honten'"
+     },
+     {
+      "place_id": "ChIJAQDAkxTnAGARbcvABiIOasw",
+      "lat": 34.66867,
+      "lng": 135.50219640000003,
+      "title": "Takoyaki Juhachiban (十八番)",
+      "memo": "Takoyaki surrounded with crunchy tempura bits.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Okonomiyaki",
+    "items": [
+     {
+      "place_id": "ChIJvRX1cBPnAGARzhcHALQCKbw",
+      "lat": 34.668065,
+      "lng": 135.50097599999998,
+      "title": "Ajinoya (味乃家)",
+      "memo": "Best-known okonomiyaki; less flour and cabbage so it's lighter. Lines form.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJp6r1whTnAGARQi9RHXsUEtA",
+      "lat": 34.668354799999996,
+      "lng": 135.5032226,
+      "title": "Mizuno (美津の)",
+      "memo": "Named as a great okonomiyaki option.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Beef, kushikatsu & gyoza",
+    "items": [
+     {
+      "place_id": "ChIJ710ooxTnAGARTLd6nZ16PSc",
+      "lat": 34.6678017,
+      "lng": 135.5021825,
+      "title": "Matsusakagyu Yakiniku M Hozenji Hanare",
+      "memo": "Well-known Matsusaka beef yakiniku near Hozenji.",
+      "ts_url": null,
+      "check": "matched 'Yakiniku M Hanare Branch' in Namba 1-chome"
+     },
+     {
+      "place_id": "ChIJ2YfF7RTnAGARvwILJIgrP7c",
+      "lat": 34.668835099999995,
+      "lng": 135.502638,
+      "title": "Kushikatsu Daruma Dotonbori (だるま)",
+      "memo": "Look for the angry Daruma statue outside.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJiTkQhxTnAGARBAfw4nqx0kU",
+      "lat": 34.6687875,
+      "lng": 135.502013,
+      "title": "Osaka Ohsho (大阪王将)",
+      "memo": "Easy to spot thanks to the giant gyoza on the front.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Ramen",
+    "items": [
+     {
+      "place_id": "ChIJ5Z1H6hTnAGARPgWM8w032I8",
+      "lat": 34.6686495,
+      "lng": 135.5029649,
+      "title": "Kamukura Dotonbori (神座)",
+      "memo": "Wide variety of ramen; noodles are never overcooked.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJs0wJ7BTnAGARb7rarouI46o",
+      "lat": 34.6686694,
+      "lng": 135.5030523,
+      "title": "Kinryu Ramen (金龍ラーメン)",
+      "memo": "Ramen on Pam's list, right on the main strip.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Fugu & sweets",
+    "items": [
+     {
+      "place_id": "ChIJNTYGrdTnAGARZmMXLlml3mI",
+      "lat": 34.6623496,
+      "lng": 135.4539902,
+      "title": "Takoyasu",
+      "memo": "Smaller fugu restaurant near Asashiobashi Station.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ63rK2mrnAGARmhZZX0xYTw0",
+      "lat": 34.6672921,
+      "lng": 135.5043207,
+      "title": "Naruto Taiyaki Hompo (鳴門鯛焼本舗)",
+      "memo": "A good starting point for taiyaki.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your Dotonbori food guide on one map",
+  "body": "Hi Pam, I'm Adrian from PinWith, a map-list app.\n\nOtako's octopus taking up 80% of each takoyaki ball is the detail I keep repeating to friends. I put 13 of the places into one map: https://pinwith.me/@pinwith_en/dctraveler-dotonbori-eats\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your readers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it in the post. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

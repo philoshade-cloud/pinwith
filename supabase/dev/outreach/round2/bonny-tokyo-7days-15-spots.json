@@ -1,0 +1,190 @@
+{
+ "row": "J6",
+ "target": "波妞食境秀",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "zh-TW",
+ "recipient_name": "波妞",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=K7szDYZXu2s",
+  "title": "日本 東京 七天六夜自由行懶人包 ！原宿、表參道、吉祥寺逛什麼？無雷清酒居酒屋！童話貓咪城堡？雙醬沾麵黑毛和牛壽喜燒！Kitty娃娃御守！東京下町區隱藏新玩法！住宿美食景點一次看！｜波妞食境秀",
+  "date": "2026-06"
+ },
+ "hooks": [
+  "Compilation title promises a fairy-tale cat castle in Kichijoji and double-sauce tsukemen with kuroge wagyu sukiyaki (video title, via search result)",
+  "Shitamachi episode: Aidaya, new brand from a ramen shop with 7 straight years of Michelin Bib Gourmand, tsukemen + sukiyaki (episode 3ER2WlA0wUc chapters)",
+  "Harajuku episode: Rahmen Eddie's ramen that looks like a giant's cappuccino (episode tLnl8T7DktQ chapters)"
+ ],
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "bonny-tokyo-7days-15-spots",
+  "title": "東京七天六夜：波妞食境秀的15個地點",
+  "desc": "取自波妞食境秀的影片〈日本 東京 七天六夜自由行懶人包！原宿、表參道、吉祥寺逛什麼？…〉https://www.youtube.com/watch?v=K7szDYZXu2s 。由PinWith整理，並非波妞食境秀製作。",
+  "kind": "collection",
+  "themes": [
+   "東京",
+   "自由行",
+   "吉祥寺",
+   "原宿",
+   "美食"
+  ],
+  "sections": [
+   {
+    "name": "吉祥寺",
+    "items": [
+     {
+      "place_id": "ChIJLWaVdDXuGGART_Pg1R3CZ4A",
+      "lat": 35.699747599999995,
+      "lng": 139.57370179999998,
+      "title": "井之頭恩賜公園（井の頭恩賜公園）",
+      "memo": "吉祥寺篇第一站，城市裡可以划天鵝船的大公園",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJE2wPgzzvGGARSN11duU4wmY",
+      "lat": 35.7043268,
+      "lng": 139.5754783,
+      "title": "シフク食堂（Shifuku Shokudō）",
+      "memo": "吉祥寺的咖哩店，受當地女性喜愛、口味每天不同",
+      "ts_url": null,
+      "check": "說明欄列出店名，與咖哩章節的對應為推測"
+     },
+     {
+      "place_id": "ChIJC_BkRUnuGGAR3tojGiIY-RA",
+      "lat": 35.7045998,
+      "lng": 139.57468839999999,
+      "title": "吉祥寺 Petit村（吉祥寺プティット村）",
+      "memo": "像童話裡的貓咪城堡，可愛療癒小物很多",
+      "ts_url": null,
+      "check": "說明欄列出店名，與貓咪城堡章節的對應為推測"
+     },
+     {
+      "place_id": "ChIJ1Ti4JxDvGGARKNzXJAQ25tI",
+      "lat": 35.704002599999995,
+      "lng": 139.5749785,
+      "title": "Soybean Farm（ソイビーンファーム）",
+      "memo": "超過30種味噌的專賣店，想帶道地日本味回家必來",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJEerD2EfuGGARNzol9ZsrCkg",
+      "lat": 35.703975,
+      "lng": 139.579041,
+      "title": "吉祥寺 さとう（Satou）",
+      "memo": "吉祥寺名物：黑毛和牛炸肉餅",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "原宿・表參道・新宿",
+    "items": [
+     {
+      "place_id": "ChIJIwNTvbGNGGARO9IK6sxdxsQ",
+      "lat": 35.66844,
+      "lng": 139.70656449999998,
+      "title": "AFURI辛紅 原宿（薬膳らーめん AFURI辛紅）",
+      "memo": "藥膳拉麵，說明欄標示營業時間11:00–22:00",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ88wNf--NGGARK0ZDHm1ifCU",
+      "lat": 35.6694234,
+      "lng": 139.7099634,
+      "title": "BAGGAGE COFFEE（バゲージコーヒー）",
+      "memo": "原宿表參道篇說明欄列出的咖啡店",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJu1uP9aOMGGARiZH5QxSqDm0",
+      "lat": 35.667733,
+      "lng": 139.7065474,
+      "title": "Kiddy Land 原宿店（キデイランド）",
+      "memo": "好幾層樓的卡通周邊，喜歡玩偶的人必逛",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJwdosX5HyGGAR6eiPH-7d2u4",
+      "lat": 35.705010699999995,
+      "lng": 139.6645965,
+      "title": "青二才（中野）",
+      "memo": "愛喝日本酒不能錯過的居酒屋",
+      "ts_url": null,
+      "check": "說明欄只寫「青二才」，對應為中野的青二才，請確認是否同一間"
+     },
+     {
+      "place_id": "ChIJtf2-G2GNGGARCnW_VYnpjNU",
+      "lat": 35.688609,
+      "lng": 139.7131973,
+      "title": "Rahmen Eddie",
+      "memo": "看起來像卡布奇諾的拉麵",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJPyOTG8KMGGARh_IXobWxHmo",
+      "lat": 35.685176299999995,
+      "lng": 139.7100517,
+      "title": "新宿御苑",
+      "memo": "春天賞櫻、秋天賞楓的大庭園",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "深川・上野・秋葉原",
+    "items": [
+     {
+      "place_id": "ChIJK11I4BGJGGAR5mZswigcu58",
+      "lat": 35.6717809,
+      "lng": 139.799519,
+      "title": "富岡八幡宮",
+      "memo": "有橫綱力士碑和超大黃金神轎",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJR2JEzGCPGGARdPJDgHnVbuI",
+      "lat": 35.7082346,
+      "lng": 139.77587119999998,
+      "title": "あいだや（Aidaya）",
+      "memo": "必比登拉麵店旗下新品牌，沾麵加壽喜燒雙重吃法",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJh7eDrwCPGGARCs9fpCkKS2U",
+      "lat": 35.710068199999995,
+      "lng": 139.7746009,
+      "title": "上野阿美橫商店街（アメ横）",
+      "memo": "上野阿美橫商店街巡禮",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJdcSC2EiNGGARx_bz33r_-eI",
+      "lat": 35.698132799999996,
+      "lng": 139.7747761,
+      "title": "GENERAL STORE RAILYARD 秋葉原",
+      "memo": "JR直營鐵道商品店，有山手線發車音樂鑰匙圈和SUICA企鵝周邊",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "我把您的東京七天六夜整理成一張地圖了",
+  "body": "波妞您好，我是 PinWith 的 Adrian，PinWith 是一個地圖清單 App。\n\n從吉祥寺的童話貓咪城堡，到上野那碗雙醬沾麵配黑毛和牛壽喜燒，七天的路線很好跟。我把其中 15 個地點整理成一張地圖：https://pinwith.me/@pinwith_zhtw/bonny-tokyo-7days-15-spots\n\n目前是私人狀態：只有拿到這個連結的人才能打開，如果您不希望我這樣做，我會直接刪除。\n\n透過 PinWith，您的觀眾可以跟著您的腳步走：重溫您去過的地方，或用一張地圖規劃自己的旅程，而且是用他們自己的語言。這能讓您的內容觸及更多人。\n\n如果您喜歡，我可以把它移到您的帳號並標註為您的作品，方便您放在影片說明欄。像這樣的清單也能為策展者帶來額外收入：https://pinwith.me/for-creators?lang=zh-TW\n如果用不到，不必回覆。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

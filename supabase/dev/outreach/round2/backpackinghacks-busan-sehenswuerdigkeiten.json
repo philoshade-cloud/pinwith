@@ -1,0 +1,185 @@
+{
+ "row": "O14",
+ "target": "Backpacking Hacks",
+ "group": "creator",
+ "based_in_korea": "unverified",
+ "msg_lang": "de",
+ "recipient_name": "Claudia",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://backpackinghacks.de/busan/",
+  "title": "Busan Sehenswürdigkeiten: Hippe Hafenstadt in Korea",
+  "date": "2026-04"
+ },
+ "hooks": [
+  "Bought chopsticks for her sister at Bujeon Market (Geheimtipps)",
+  "Walked the coastal path from Haeundae instead of the Sky Capsule, which she found too slow",
+  "Published 2024-11, last modified 2026-04"
+ ],
+ "list": {
+  "owner": "pinwith_de",
+  "lang": "de",
+  "slug": "backpackinghacks-busan-sehenswuerdigkeiten",
+  "title": "Busan Sehenswürdigkeiten: die 15 Orte von Backpacking Hacks",
+  "desc": "Nach „Busan Sehenswürdigkeiten: Hippe Hafenstadt in Korea“ (https://backpackinghacks.de/busan/). Von PinWith zusammengestellt, nicht von Backpacking Hacks erstellt.",
+  "kind": "collection",
+  "themes": [
+   "Busan",
+   "Südkorea",
+   "Tempel",
+   "Strände",
+   "Geheimtipps"
+  ],
+  "sections": [
+   {
+    "name": "Sehenswürdigkeiten",
+    "items": [
+     {
+      "place_id": "ChIJXwf-DlyNaDURmKxjwdWxY5k",
+      "lat": 35.158697499999995,
+      "lng": 129.16038419999998,
+      "title": "Haeundae Beach (해운대해수욕장)",
+      "memo": "Rund 1,5 km langer Strand mit etwa 10 Millionen Besuchern im Jahr.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJnbg-nA2NaDUR3DK_vogcxaI",
+      "lat": 35.1597946,
+      "lng": 129.1699193,
+      "title": "BUSAN X the SKY",
+      "memo": "Aussichtsdeck im höchsten Gebäude Busans, 360°-Blick, knapp 20 € Eintritt.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJAeJVSEyMaDURJSl7wzo7GTI",
+      "lat": 35.17861250000001,
+      "lng": 129.19971329999998,
+      "title": "Songjeong Beach (송정해수욕장)",
+      "memo": "Kleinerer Strand mit Surfanfängern und einem Park am Ende.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJwabeuxuMaDURXC4Rb21AQaE",
+      "lat": 35.1884543,
+      "lng": 129.2231109,
+      "title": "Haedong Yonggungsa (해동용궁사)",
+      "memo": "Tempel auf Klippen am Meer, im 14. Jh. gegründet; abends angenehm ruhig.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJudkrFArpaDURbbCzajeQs0c",
+      "lat": 35.0966339,
+      "lng": 129.0307965,
+      "title": "Jagalchi-Fischmarkt (자갈치시장)",
+      "memo": "Laut Artikel Südkoreas größter Fischmarkt; manche Tiere sind noch lebendig.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+      "lat": 35.097393499999995,
+      "lng": 129.0105921,
+      "title": "Gamcheon Culture Village (감천문화마을)",
+      "memo": "Bunte Häuser am Hang, stark besucht; der Autorin war es zu voll.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Geheimtipps",
+    "items": [
+     {
+      "place_id": "ChIJSwlooCvpaDURdRvrkd-H0bs",
+      "lat": 35.0979479,
+      "lng": 129.0367383,
+      "title": "Dachterrasse Lotte Kaufhaus Gwangbok (롯데백화점 광복점 하늘전망대)",
+      "memo": "Kostenlose Dachterrasse (10–20 Uhr), Eingang schwer zu finden.",
+      "ts_url": null,
+      "check": "article says only 'Lotte shopping center near the harbor'; Gwangbok branch assumed"
+     },
+     {
+      "place_id": "ChIJseGsfh7paDURigYilgTVojA",
+      "lat": 35.0782798,
+      "lng": 129.0453198,
+      "title": "Huinnyeoul Culture Village (흰여울문화마을)",
+      "memo": "Weiß getünchtes Hangdorf auf Yeongdo, einst Heimat von Geflüchteten.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJaWN272fraDURAU2hpzzh4Ig",
+      "lat": 35.162726899999996,
+      "lng": 129.0613381,
+      "title": "Bujeon-Markt (부전시장)",
+      "memo": "Weitläufiger Markt für Essen, Kleidung und Alltagswaren.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJYeuKwGTraDUR-U5PAfT2Uoo",
+      "lat": 35.155398999999996,
+      "lng": 129.0673266,
+      "title": "Jeonpo Cafe Street (전포카페거리)",
+      "memo": "Café-Straße, die der Autorin besser gefiel als die Young Street.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ-4yc9TvraDURorjIIUAF0uU",
+      "lat": 35.175428800000006,
+      "lng": 129.04338819999998,
+      "title": "Samgwangsa (삼광사)",
+      "memo": "Detailreiche Schnitzereien, Statuen und Malereien am Hang nördlich von Bujeon.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJsQ63-9KWaDURQmHr0J6VF_4",
+      "lat": 35.2839899,
+      "lng": 129.0687639,
+      "title": "Beomeosa (범어사)",
+      "memo": "Im Jahr 678 gegründet, im Wald gelegen, nach einem Brand kleiner wiederaufgebaut.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJGSXy6PSUaDURzoq9VP9osUg",
+      "lat": 35.221508299999996,
+      "lng": 129.0488444,
+      "title": "Seokbulsa (석불사)",
+      "memo": "In den Fels gehauene Buddha-Figuren, zu Fuß ab Beomeosa erreichbar.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJDT_5v8aSaDURXW8rEbumGh8",
+      "lat": 35.168233799999996,
+      "lng": 129.1295279,
+      "title": "Spa Land Centum City (스파랜드)",
+      "memo": "Moderne, große Wellness-Badeanlage, kein traditionelles Badehaus.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJIRoZUbLpaDURbFFQrCefAYg",
+      "lat": 35.0615805,
+      "lng": 129.0205254,
+      "title": "Songdo Sky Park (송도 스카이파크)",
+      "memo": "Mit der Seilbahn über das Meer erreichbar; der Küstenweg darunter wurde zerstört.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "Ich habe deine Busan-Sehenswürdigkeiten auf einer Karte gesammelt",
+  "body": "Hallo Claudia, ich bin Adrian von PinWith, einer App für Listen auf der Karte.\n\nMir gefiel, dass du den Küstenweg ab Haeundae statt der Sky Capsule gelaufen bist und auf dem Bujeon-Markt Stäbchen für deine Schwester gekauft hast. Ich habe 15 der Orte auf eine Karte gebracht: https://pinwith.me/@pinwith_de/backpackinghacks-busan-sehenswuerdigkeiten\n\nSie ist vorerst privat: Nur dieser Link öffnet sie, und ich lösche sie, wenn dir das lieber ist.\n\nMit PinWith können deine Leserinnen und Leser in deine Fußstapfen treten: die Orte, an denen du warst, wiederfinden oder ihre eigene Reise auf einer Karte planen, in ihrer eigenen Sprache. So erreicht dein Beitrag noch mehr Menschen.\n\nWenn sie dir gefällt, übertrage ich sie auf dein Konto, mit dir als Urheberin, damit du sie im Beitrag verlinken kannst. Solche Listen können Kuratorinnen und Kuratoren außerdem ein Zusatzeinkommen bringen: https://pinwith.me/for-creators?lang=de\nKeine Antwort nötig, falls es nicht passt.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

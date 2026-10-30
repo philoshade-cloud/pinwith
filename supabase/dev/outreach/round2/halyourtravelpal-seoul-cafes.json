@@ -1,0 +1,199 @@
+{
+ "row": "E10",
+ "target": "Hal Your Travel Pal",
+ "group": "creator",
+ "based_in_korea": "unverified",
+ "msg_lang": "en",
+ "recipient_name": "Hallie",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://halyourtravelpal.com/best-cafes-in-seoul/",
+  "title": "The 24 best cafes in Seoul 2026",
+  "date": "2026-02"
+ },
+ "hooks": [
+  "Nakwon Station has a train-themed cake conveyor belt",
+  "Manhole Coffee: library-style basement with antique British books",
+  "Cafe Pokpo has front-row seats facing a big waterfall"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "halyourtravelpal-seoul-cafes",
+  "title": "Seoul cafes: 15 picks from Hal Your Travel Pal",
+  "desc": "Places from Hal Your Travel Pal's 'The 24 best cafes in Seoul 2026' (https://halyourtravelpal.com/best-cafes-in-seoul/). Collected by PinWith, not made by Hal Your Travel Pal.",
+  "kind": "collection",
+  "themes": [
+   "Seoul",
+   "cafes",
+   "desserts",
+   "coffee"
+  ],
+  "sections": [
+   {
+    "name": "Ikseon & Anguk",
+    "items": [
+     {
+      "place_id": "ChIJFSe90eejfDURnI3qwtRtTF8",
+      "lat": 37.573882499999996,
+      "lng": 126.98976230000001,
+      "title": "Cheongsudang (청수당)",
+      "memo": "Hanok outside, nature-themed inside; made-to-order soufflés.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJv8pAfwyjfDURBQRZnfH9Y_E",
+      "lat": 37.5733648,
+      "lng": 126.9900717,
+      "title": "Nakwon Station (낙원역)",
+      "memo": "Train-station hanok cafe with a cake conveyor; try the peanut cream latte.",
+      "ts_url": null,
+      "check": "Google lists it as 'Nakwon'"
+     },
+     {
+      "place_id": "ChIJo2dXLFujfDURqfUuFYQ1wKA",
+      "lat": 37.5734454,
+      "lng": 126.9900693,
+      "title": "Cheese Industry (치즈인더스트리)",
+      "memo": "House-made cheese in its cheesecakes; farmhouse-style space.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJLXL2BvijfDURmTrYFPQIGUc",
+      "lat": 37.5776235,
+      "lng": 126.9865541,
+      "title": "Cafe Onion Anguk (카페어니언 안국)",
+      "memo": "Hanok cafe; the sugar-dusted pandoro is the star.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Bukchon & Dongdaemun",
+    "items": [
+     {
+      "place_id": "ChIJl-1O9M-ifDURXTy12d932SU",
+      "lat": 37.5823512,
+      "lng": 126.98522179999998,
+      "title": "Green Mile Coffee Bukchon (그린마일커피)",
+      "memo": "Small modern cafe with a rooftop view over Bukchon; go on a clear day.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJaTTIe6ejfDURo-TQQHxrpXk",
+      "lat": 37.5716967,
+      "lng": 127.00985689999999,
+      "title": "Cafe Jeonggeurida (카페 정그리다)",
+      "memo": "Tropical theme, coconut mango drinks, views of the city gate and wall.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Itaewon",
+    "items": [
+     {
+      "place_id": "ChIJ7SwF4I6jfDUReIhp5tpQgCk",
+      "lat": 37.540344499999996,
+      "lng": 126.9932768,
+      "title": "Savage Garden (새비지가든)",
+      "memo": "Vegan botanical cafe with indoor ponds and vegan yogurt bowls.",
+      "ts_url": null,
+      "check": "Google lists it as a vegetarian restaurant sharing space with Lazy Farmers"
+     }
+    ]
+   },
+   {
+    "name": "Sinsa, Apgujeong & Gangnam",
+    "items": [
+     {
+      "place_id": "ChIJ0Ve9itOjfDUReSiOwB-KdSw",
+      "lat": 37.5189948,
+      "lng": 127.02207759999999,
+      "title": "Coorownie (쿠라우니)",
+      "memo": "British-themed bakery known for cookie-brownie bars.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ0W3WzWWjfDURg5fIIEEWubU",
+      "lat": 37.5210489,
+      "lng": 127.02181630000001,
+      "title": "Nudake Sinsa (누데이크 신사)",
+      "memo": "Croissant-only cafe; the onigiri-shaped croissant is the signature.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJKdA733ijfDUR67iu-TmxFCc",
+      "lat": 37.526758799999996,
+      "lng": 127.03971819999998,
+      "title": "Mooni Apgujeong (무니)",
+      "memo": "Pink dollhouse-style cafe with big milkshakes and a rooftop.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ753azC6jfDUR2UUYwlh4N1g",
+      "lat": 37.5028303,
+      "lng": 127.02783409999999,
+      "title": "Something About Coffee (썸띵어바웃커피)",
+      "memo": "Three floors, a big bakery, and cheesecake as the signature.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "West Seoul",
+    "items": [
+     {
+      "place_id": "ChIJi7CiGmmZfDUROfKS29Xgl3I",
+      "lat": 37.5466607,
+      "lng": 126.91847399999999,
+      "title": "Perception (퍼셉션)",
+      "memo": "Award-winning wooden ceiling and about 15 house-brewed coffees.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJJ-DNSEKZfDUReqsayg-FMGA",
+      "lat": 37.566187600000006,
+      "lng": 126.9209838,
+      "title": "Brady's Coffee (브래디스커피)",
+      "memo": "Floral cafe in Yeonnam; pink passion ade and salt butter bread.",
+      "ts_url": null,
+      "check": "Google lists 'Brady's Coffee Bar'"
+     },
+     {
+      "place_id": "ChIJy6lYoCSffDURjXG8VsP1d2Y",
+      "lat": 37.5291417,
+      "lng": 126.90382689999998,
+      "title": "Manhole Coffee (맨홀커피)",
+      "memo": "Down the stairs into a library of antique British books; manhole cream coffee.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJpUe3M9mZfDURrJz6bVtZK2A",
+      "lat": 37.581328299999996,
+      "lng": 126.9370339,
+      "title": "Cafe Pokpo (카페 폭포)",
+      "memo": "Front-row seats facing a large waterfall; trails nearby.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your Seoul cafe guide on one map",
+  "body": "Hi Hallie, I'm Adrian from PinWith, a map-list app.\n\nThe cake conveyor belt at Nakwon Station and the waterfall seats at Cafe Pokpo went straight onto my own list. I put 15 of the places into one map: https://pinwith.me/@pinwith_en/halyourtravelpal-seoul-cafes\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your readers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it in the post. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

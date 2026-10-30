@@ -1,0 +1,194 @@
+{
+ "row": "E14",
+ "target": "Thailand with Tereza",
+ "group": "fan_blog",
+ "based_in_korea": false,
+ "msg_lang": "en",
+ "recipient_name": "Tereza",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://thailandwithtereza.com/where-to-eat-in-bangkok/",
+  "title": "Where to Eat in Bangkok: Best Restaurants I Tried in 2026",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "Boonlert Egg Noodle shows six Michelin Guide stickers, the latest from 2026 (source article)",
+  "Dan Dan Noodle in Ari costs 105 THB and fills with office workers at lunch (source article)",
+  "Article updated Oct 8, 2026 (source article)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "tereza-bangkok-where-to-eat",
+  "title": "Where to eat in Bangkok: Tereza's 15 restaurants",
+  "desc": "Places from Thailand with Tereza's 'Where to Eat in Bangkok: Best Restaurants I Tried in 2026' (https://thailandwithtereza.com/where-to-eat-in-bangkok/). Collected by PinWith, not made by Thailand with Tereza.",
+  "kind": "collection",
+  "themes": [
+   "Bangkok",
+   "Thai food",
+   "noodles",
+   "street food"
+  ],
+  "sections": [
+   {
+    "name": "Old Town & Chinatown",
+    "items": [
+     {
+      "place_id": "ChIJuyAMy0CZ4jARcJcKfKgoW-E",
+      "lat": 13.7597659,
+      "lng": 100.5123167,
+      "title": "Boonlert Egg Noodle",
+      "memo": "Egg noodles with grilled pork and wontons; six Michelin stickers.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ4bKx4ymZ4jARDJgMkAYFKGw",
+      "lat": 13.7499174,
+      "lng": 100.50498220000001,
+      "title": "Dim Sum Zai",
+      "memo": "Crispy shrimp rice rolls, xiao long bao and chili-oil dumplings by Sam Yot.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJTR7xCDiZ4jARXB6cqm1sy6U",
+      "lat": 13.7534266,
+      "lng": 100.49837610000002,
+      "title": "Sae Phun",
+      "memo": "Prawn wontons with egg noodles in clear soup; years of Michelin stickers.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJWZU0mRGZ4jARFdWbuetBFRo",
+      "lat": 13.7520958,
+      "lng": 100.4983613,
+      "title": "K. Panich",
+      "memo": "Michelin-listed mango sticky rice; closed Sundays.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJn0B4CwCZ4jAR7lU8Qm_vGag",
+      "lat": 13.741213499999999,
+      "lng": 100.5083799,
+      "title": "Lanzhou Noodles",
+      "memo": "Hand-pulled noodles in five types; beef fried noodles or braised beef soup.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJRTJGvSaZ4jARbspb9Zzuahc",
+      "lat": 13.7403239,
+      "lng": 100.5140143,
+      "title": "Ba Hao",
+      "memo": "Scallion pancakes and beef dumplings; cocktails like the Drunken Mistress.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJy6QILCCZ4jAR5iOyP7Olb5M",
+      "lat": 13.738215499999999,
+      "lng": 100.5075808,
+      "title": "Urai Braised Goose",
+      "memo": "Braised goose with a vinegar, ginger and garlic dip; split opening hours.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJQwxg5faZ4jARsduVVYDfCgA",
+      "lat": 13.7360369,
+      "lng": 100.50994870000001,
+      "title": "Naam 1608",
+      "memo": "Old wooden riverside house on Song Wat; first-floor tables for sunset.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Ari",
+    "items": [
+     {
+      "place_id": "ChIJJcL7pG6d4jARPf2QJ7KBJRM",
+      "lat": 13.7806464,
+      "lng": 100.5444806,
+      "title": "Dan Dan Noodle (Ari)",
+      "memo": "Classic dan dan noodles for 105 THB; busy with the office lunch crowd.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ21RHAG2f4jARLB-pTpXMXh8",
+      "lat": 13.776446799999999,
+      "lng": 100.53941929999999,
+      "title": "O'ganic Concept ARI",
+      "memo": "Farm-to-table using produce from its own farm; Korean chicken bibimbap.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Sukhumvit, Thong Lo & Ekkamai",
+    "items": [
+     {
+      "place_id": "ChIJa7RbIkGf4jARxc9xrSROCts",
+      "lat": 13.738573299999999,
+      "lng": 100.55906039999999,
+      "title": "Bartels Asok",
+      "memo": "Sourdough brunch, grilled cheese and Cheeky Chicken; the larger branch.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJSXZuFVKe4jARv_g_Qlm5CCE",
+      "lat": 13.7367128,
+      "lng": 100.5844228,
+      "title": "Kenji's Lab",
+      "memo": "Premium Japanese seafood, sushi, oysters and pasta; try sparkling sake.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJQequg9Wf4jAR3tL-_vBHxos",
+      "lat": 13.7169686,
+      "lng": 100.58192780000002,
+      "title": "NEUA.NEUR.BKK",
+      "memo": "Extra-spicy khao soi and dried-beef fried rice; open kitchen.",
+      "ts_url": null,
+      "check": "matched listing on Soi Suk Chai (Phra Khanong), walking distance from BTS Ekkamai"
+     }
+    ]
+   },
+   {
+    "name": "Silom & beyond",
+    "items": [
+     {
+      "place_id": "ChIJ3Y_BlKaf4jARyFbSwo0npP8",
+      "lat": 13.7243048,
+      "lng": 100.5296774,
+      "title": "Nuea Mek (Silom)",
+      "memo": "Khao soi and Thai wagyu with sticky rice in a turquoise courtyard.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJqQZQtYmh4jARclHIe_IbDAM",
+      "lat": 13.6692979,
+      "lng": 100.56762979999999,
+      "title": "Coconut Lane (Bang Kachao)",
+      "memo": "Cafe and stay with a terrace over palm trees; duck pad kra pao.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your Bangkok restaurant guide on one map",
+  "body": "Hi Tereza, I'm Adrian from PinWith, a map-list app.\n\nCounting the six Michelin stickers on Boonlert Egg Noodle's wall is now on my list for the next Bangkok trip. I put 15 of the places into one map: https://pinwith.me/@pinwith_en/tereza-bangkok-where-to-eat\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your readers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it in the post. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

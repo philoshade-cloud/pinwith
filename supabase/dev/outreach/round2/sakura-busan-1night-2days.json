@@ -1,0 +1,185 @@
+{
+ "row": "J13",
+ "target": "井上咲楽",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "ja",
+ "recipient_name": "井上咲楽さん",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=Y20LNXVwzAo",
+  "title": "釜山1泊2日ぼっち旅（正式タイトル未確認）",
+  "date": "2026-04"
+ },
+ "hooks": [
+  "First trip to Busan with no set plan: beach, Korean food, cafes and zakka shops (video description)",
+  "Day 1 dinner chapter 45:39 is the marinated crab; Haemakki Ganjang Gejang listed in the description",
+  "Day 2: Huinnyeoul Culture Village (chapter 1:13:17), then dwaeji-gukbap for lunch (description)"
+ ],
+ "list": {
+  "owner": "pinwith_ja",
+  "lang": "ja",
+  "slug": "sakura-busan-1night-2days",
+  "title": "釜山1泊2日ひとり旅：井上咲楽さんの15スポット",
+  "desc": "井上咲楽さんのYouTube動画（釜山1泊2日のひとり旅）https://www.youtube.com/watch?v=Y20LNXVwzAo の説明欄に登場する場所です。PinWithがまとめたもので、井上咲楽さんが作成したものではありません。",
+  "kind": "course",
+  "themes": [
+   "釜山",
+   "韓国旅行",
+   "ひとり旅",
+   "カンジャンケジャン",
+   "影島"
+  ],
+  "sections": [
+   {
+    "name": "1日目",
+    "items": [
+     {
+      "place_id": "ChIJ5xwvxl2NaDURp-2al86xb8E",
+      "lat": 35.1611033,
+      "lng": 129.160662,
+      "title": "ケミチプ 海雲台店（개미집 해운대점）",
+      "memo": "1日目のランチ。タコ入り鍋で知られるチェーン店",
+      "ts_url": "https://youtu.be/Y20LNXVwzAo?t=659",
+      "check": "チェーン店のため支店は推定（海雲台店）"
+     },
+     {
+      "place_id": "ChIJfdIYWwuNaDURDx-eqtUjCkg",
+      "lat": 35.158284,
+      "lng": 129.17276719999998,
+      "title": "海雲台ブルーラインパーク 尾浦駅（해운대블루라인파크）",
+      "memo": "海沿いを走る列車に乗るパート",
+      "ts_url": "https://youtu.be/Y20LNXVwzAo?t=1597",
+      "check": null
+     },
+     {
+      "place_id": "ChIJUQsDVhuNaDURJo5GeByloeQ",
+      "lat": 35.1640365,
+      "lng": 129.1967173,
+      "title": "青沙浦タリットル展望台（청사포 다릿돌전망대）",
+      "memo": "海の上に突き出たガラス床のスカイウォーク",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJAyG2fACNaDUReX5L3jyRkPs",
+      "lat": 35.1603382,
+      "lng": 129.1706577,
+      "title": "自然島塩パン（자연도소금빵）",
+      "memo": "尾浦駅のすぐ近くにある塩パン店",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ_____6ySaDURjuB33f8djxY",
+      "lat": 35.160339199999996,
+      "lng": 129.1663637,
+      "title": "ヘマッキ カンジャンケジャン（해마끼 간장게장）",
+      "memo": "1日目の夕食。カニの醤油漬けカンジャンケジャン",
+      "ts_url": "https://youtu.be/Y20LNXVwzAo?t=2739",
+      "check": null
+     },
+     {
+      "place_id": "ChIJCXner12NaDURvTHbPe3S9tU",
+      "lat": 35.161453699999996,
+      "lng": 129.16224889999998,
+      "title": "海雲台伝統市場（해운대전통시장）",
+      "memo": "海雲台の食べ歩き市場",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJix8ZnTPtaDURA4tBnQ6w9PM",
+      "lat": 35.1541919,
+      "lng": 129.1270348,
+      "title": "ミラク・ザ・マーケット（밀락더마켓）",
+      "memo": "広安大橋が見える民楽の複合マーケット",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "2日目",
+    "items": [
+     {
+      "place_id": "ChIJ55WrjvnpaDURC5yHDkuHzcQ",
+      "lat": 35.0798024,
+      "lng": 129.0437483,
+      "title": "HAVING MOMENT（해빙모먼트）",
+      "memo": "2日目の朝カフェ。影島の海沿い",
+      "ts_url": "https://youtu.be/Y20LNXVwzAo?t=4180",
+      "check": null
+     },
+     {
+      "place_id": "ChIJseGsfh7paDURigYilgTVojA",
+      "lat": 35.0782798,
+      "lng": 129.0453198,
+      "title": "白い浅瀬文化村（흰여울문화마을）",
+      "memo": "海沿いの路地にカフェや雑貨店が並ぶ影島の村",
+      "ts_url": "https://youtu.be/Y20LNXVwzAo?t=4397",
+      "check": null
+     },
+     {
+      "place_id": "ChIJly1jgc_paDURMh4eKiSofxM",
+      "lat": 35.0782157,
+      "lng": 129.0454452,
+      "title": "ソソハン・ヒンヨウル（소소한 흰여울）",
+      "memo": "白い浅瀬文化村の雑貨店",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJBYS8kB3paDUReDgxtZov4J4",
+      "lat": 35.075354499999996,
+      "lng": 129.0478359,
+      "title": "白い浅瀬海岸トンネル（흰여울해안터널）",
+      "memo": "村の先にある海岸トンネル",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJp8TTyUjpaDURvRS-4_2mDFU",
+      "lat": 35.0766093,
+      "lng": 129.04727839999998,
+      "title": "FIRSTAGE COFFEE（퍼스테이지 커피）",
+      "memo": "白い浅瀬の道沿いにある海の見えるカフェ",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJZVfIz2_raDURX46kdZBMm8Y",
+      "lat": 35.1559205,
+      "lng": 129.0584735,
+      "title": "水営本家テジクッパ（수영본가돼지국밥）",
+      "memo": "2日目のランチ。釜山名物の豚スープご飯",
+      "ts_url": "https://youtu.be/Y20LNXVwzAo?t=5537",
+      "check": "同名店が複数ある可能性。西面の店舗を選択（帰り道の雑貨店と同エリア）"
+     },
+     {
+      "place_id": "ChIJUVuDva3raDURGbqrTVE-E8Q",
+      "lat": 35.154644,
+      "lng": 129.0626,
+      "title": "AVIVERE Company（西面）",
+      "memo": "西面の雑貨セレクトショップ",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJb4CLdgDraDURShDdfwt6Vds",
+      "lat": 35.1579409,
+      "lng": 129.0657037,
+      "title": "ヌーセレクト（누셀렉 Nous Select）",
+      "memo": "田浦洞の雑貨店",
+      "ts_url": null,
+      "check": "Googleのピン位置と実際の入口がずれているとの口コミあり"
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "釜山1泊2日の旅を1枚の地図にまとめました",
+  "body": "井上咲楽さん\n\nはじめまして、PinWithのAdrianと申します。PinWithは地図でリストを共有できるアプリです。\n\n1日目の夜のカンジャンケジャンから、2日目の白い浅瀬文化村、そしてテジクッパまで、ひとり旅の流れがそのまま伝わってきました。その中から15か所を1枚の地図にまとめました：https://pinwith.me/@pinwith_ja/sakura-busan-1night-2days\n\n今は非公開で、このリンクを知っている人だけが開けます。ご希望でなければすぐに削除します。\n\nPinWithなら、視聴者の方が井上咲楽さんの足跡をたどれます。訪れた場所を振り返ったり、1枚の地図から自分の旅を計画したりでき、それぞれの言語で使えます。コンテンツがより遠くまで届くきっかけになります。\n\n気に入っていただけたら、井上咲楽さんのアカウントにクレジット付きで移しますので、動画の説明欄にリンクを貼っていただけます。こうしたリストはキュレーターの副収入にもなります：https://pinwith.me/for-creators?lang=ja\nお役に立たなければ、返信は不要です。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

@@ -1,0 +1,180 @@
+{
+ "row": "J12",
+ "target": "東松寛文 リーマントラベラー",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "ja",
+ "recipient_name": "東松さん",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.ryman-traveler.com/entry/2026/09/04/052952",
+  "title": "バンコクのおすすめカフェ15選｜2026年最新、コーヒーもタイティーも全部行って選びました",
+  "date": "2026-09"
+ },
+ "hooks": [
+  "Bartels Thonglor serves its 24-48h naturally fermented bread only within 3 hours of baking (article #3)",
+  "Compares colorless Thai teas: Chongdee's 100% Ceylon tea, plus ChaTraMue's natural version as a bonus (articles #5, bonus)",
+  "Ends with a section on how to route all 15 cafes (15軒のまわり方)"
+ ],
+ "list": {
+  "owner": "pinwith_ja",
+  "lang": "ja",
+  "slug": "ryman-bangkok-cafes-14",
+  "title": "バンコクのおすすめカフェ14軒：リーマントラベラー東松寛文さんの記事から",
+  "desc": "東松寛文さんのブログ記事「バンコクのおすすめカフェ15選｜2026年最新、コーヒーもタイティーも全部行って選びました」（https://www.ryman-traveler.com/entry/2026/09/04/052952）に登場するカフェです。PinWithがまとめたもので、東松寛文さんが作成したものではありません。",
+  "kind": "collection",
+  "themes": [
+   "バンコク",
+   "カフェ",
+   "タイティー",
+   "コーヒー"
+  ],
+  "sections": [
+   {
+    "name": "シーロム・サトーン・ルンピニー",
+    "items": [
+     {
+      "place_id": "ChIJkT8LJMaf4jAR3wbDEsbBs50",
+      "lat": 13.7289585,
+      "lng": 100.5369958,
+      "title": "UNO! Coffee（Dusit Central Park）",
+      "memo": "ゲイシャのアイスアメリカーノが85バーツ。LGフロア",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJw-4wf36f4jARzyiDPXRjKfU",
+      "lat": 13.7216461,
+      "lng": 100.54610389999999,
+      "title": "Fran's Sathorn",
+      "memo": "名物はベルベット・エッグ＆ベーコン（390バーツ）",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJW928cACf4jARRI5D8J0Q370",
+      "lat": 13.726859699999999,
+      "lng": 100.5458232,
+      "title": "Chongdee Teahouse（ワン・バンコク）",
+      "memo": "着色料なし、セイロン茶100%の「色のない」タイティー",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ6cdONgCf4jARccY_WNO6N1E",
+      "lat": 13.727051,
+      "lng": 100.5454512,
+      "title": "スターバックス リザーブ ワン・バンコク",
+      "memo": "約230席。1階はドイ・インタノンの棚田がテーマ",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJJ81-5QOf4jARSs8atyGtSKA",
+      "lat": 13.722295899999999,
+      "lng": 100.5444955,
+      "title": "bo.bkk",
+      "memo": "ランクラブ発のカフェ。Time Out Bangkokの2026年ベスト新店",
+      "ts_url": null,
+      "check": "Google上の名称は「Bo」。サトーン・ソイ1の店舗と判断"
+     },
+     {
+      "place_id": "ChIJT29AVh2f4jARABeSGyANpH8",
+      "lat": 13.726827,
+      "lng": 100.5373132,
+      "title": "Two Men Bagel House（シーロム）",
+      "memo": "バンコク限定のココナッツパンダン・ベーグルが60バーツ",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJb_NZsPCf4jARFXmCw4-EsE0",
+      "lat": 13.7269671,
+      "lng": 100.53730159999999,
+      "title": "Wide Awake Coffee",
+      "memo": "コーヒー50バーツから。平日7〜16時のみで週末休み",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "トンロー・エカマイ",
+    "items": [
+     {
+      "place_id": "ChIJRYG-ZEmf4jARsi5wK97SIJU",
+      "lat": 13.734196899999999,
+      "lng": 100.5825169,
+      "title": "Bartels Thonglor",
+      "memo": "24〜48時間発酵のパンを焼き上がり3時間以内だけ出す",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJqxGE_P-f4jARBR5CUhKahps",
+      "lat": 13.731418999999999,
+      "lng": 100.58441499999999,
+      "title": "The Office Thonglor",
+      "memo": "昼はカフェ、20時からはDJとバーの雰囲気。ペットOK",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJuw2bEVef4jARdoegpARYRMQ",
+      "lat": 13.730648599999999,
+      "lng": 100.5780252,
+      "title": "C.P.S. Coffee（スクンビット53旗艦店）",
+      "memo": "白い曲線の外壁がそのまま大階段になる旗艦店",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJXRPFPHyf4jARqZ-osiSrras",
+      "lat": 13.7330711,
+      "lng": 100.5823669,
+      "title": "BEANS Coffee Roasters（トンロー）",
+      "memo": "ドリンクを決めてから15種類以上の豆を選べる",
+      "ts_url": null,
+      "check": "記事は店舗を指定していないため、発祥地トンローの店舗を選択"
+     }
+    ]
+   },
+   {
+    "name": "ソンワット・タラートノーイ",
+    "items": [
+     {
+      "place_id": "ChIJ_-ZEZACZ4jAR4tQj-latOcM",
+      "lat": 13.7378313,
+      "lng": 100.50675299999999,
+      "title": "% Arabica Song Wat",
+      "memo": "adidas Originalsの2階で川を眺める。ロゴ入りブラウニー120バーツ",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJdyQ-KHiZ4jARKSlrlcav6AI",
+      "lat": 13.7392718,
+      "lng": 100.5060305,
+      "title": "Local Boys Coffee（ソンワット）",
+      "memo": "ドリンクをその場で缶に密封。ピーナッツバターコーヒー160バーツ",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ_0P3hgOZ4jARaor-5UJtKgo",
+      "lat": 13.737409900000001,
+      "lng": 100.5133056,
+      "title": "KHIRI Thai Tea（タラートノーイ）",
+      "memo": "名物「On Cloud」は凍らせたタイティーのかき氷（130バーツ）",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "バンコクのおすすめカフェ15選を1枚の地図にまとめました",
+  "body": "東松さん\n\nはじめまして、PinWithのAdrianと申します。PinWithは地図でリストを共有できるアプリです。\n\nBartelsのパンは焼き上がりから3時間以内しか出さない、という話や、色のないタイティーの飲み比べまで、全部回って選んだ記事ならではの情報だと感じました。その中から14か所を1枚の地図にまとめました：https://pinwith.me/@pinwith_ja/ryman-bangkok-cafes-14\n\n今は非公開で、このリンクを知っている人だけが開けます。ご希望でなければすぐに削除します。\n\nPinWithなら、読者の方が東松さんの足跡をたどれます。訪れた場所を振り返ったり、1枚の地図から自分の旅を計画したりでき、それぞれの言語で使えます。コンテンツがより遠くまで届くきっかけになります。\n\n気に入っていただけたら、東松さんのアカウントにクレジット付きで移しますので、記事の中にリンクを貼っていただけます。こうしたリストはキュレーターの副収入にもなります：https://pinwith.me/for-creators?lang=ja\nお役に立たなければ、返信は不要です。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

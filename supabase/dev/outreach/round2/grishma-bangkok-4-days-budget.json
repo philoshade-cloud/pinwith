@@ -1,0 +1,199 @@
+{
+ "row": "E4",
+ "target": "Grishma Udayawar",
+ "group": "creator",
+ "based_in_korea": "unverified",
+ "msg_lang": "en",
+ "recipient_name": "Grishma",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=qDBiLumuFAM",
+  "title": "Bangkok Travel Guide 2026 | 4 Days Budget Itinerary, Floating Market, Street Food & Shopping",
+  "date": "2026-03"
+ },
+ "hooks": [
+  "Day 2 is a day trip to Ayutthaya (chapter 12:28)",
+  "Day trip to the Maeklong Railway Market plus a floating market, ending at the Dragon Temple (19:07 to 23:29)",
+  "Picks Cabbages & Condoms as the 'unique restaurant' (17:44); stays at Siam Eco Hostel and Bed Station"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "grishma-bangkok-4-days-budget",
+  "title": "Bangkok in 4 days on a budget: Grishma's 15 stops",
+  "desc": "Places from Grishma Udayawar's video 'Bangkok Travel Guide 2026 | 4 Days Budget Itinerary, Floating Market, Street Food & Shopping' (https://www.youtube.com/watch?v=qDBiLumuFAM). Collected by PinWith, not made by Grishma Udayawar.",
+  "kind": "course",
+  "themes": [
+   "Bangkok",
+   "temples",
+   "budget",
+   "day trips"
+  ],
+  "sections": [
+   {
+    "name": "Old town & temples",
+    "items": [
+     {
+      "place_id": "ChIJxU5YeBaZ4jARvm8EVZYGjGk",
+      "lat": 13.7527976,
+      "lng": 100.504823,
+      "title": "Thipsamai Pad Thai (ทิพย์สมัย)",
+      "memo": "The famous pad Thai stop that opens the food part of the video.",
+      "ts_url": "https://youtu.be/qDBiLumuFAM?t=149",
+      "check": null
+     },
+     {
+      "place_id": "ChIJPzZsMU6Z4jARQUzvk913bCo",
+      "lat": 13.7498558,
+      "lng": 100.4915765,
+      "title": "The Grand Palace (พระบรมมหาราชวัง)",
+      "memo": "First big sight; the Emerald Buddha temple is inside the same complex.",
+      "ts_url": "https://youtu.be/qDBiLumuFAM?t=200",
+      "check": null
+     },
+     {
+      "place_id": "ChIJgcxFcQWZ4jARLsIR9Qia9H0",
+      "lat": 13.7464237,
+      "lng": 100.4927733,
+      "title": "Wat Pho (วัดโพธิ์)",
+      "memo": "Next temple after the Grand Palace.",
+      "ts_url": "https://youtu.be/qDBiLumuFAM?t=384",
+      "check": null
+     },
+     {
+      "place_id": "ChIJaSv_6gaZ4jARnbiUVn6Z_YY",
+      "lat": 13.743865200000002,
+      "lng": 100.488444,
+      "title": "Wat Arun, Temple of Dawn (วัดอรุณ)",
+      "memo": "Temple of Dawn, the last temple before hostel check-in.",
+      "ts_url": "https://youtu.be/qDBiLumuFAM?t=437",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ95Nh9yGZ4jARAjfcG2uIZFg",
+      "lat": 13.7373794,
+      "lng": 100.5129349,
+      "title": "Chinatown, Yaowarat Road (เยาวราช)",
+      "memo": "Chinatown evening stop, listed with the night markets.",
+      "ts_url": "https://youtu.be/qDBiLumuFAM?t=604",
+      "check": null
+     },
+     {
+      "place_id": "ChIJDR23yhKZ4jARdqd5AHsct0A",
+      "lat": 13.7589206,
+      "lng": 100.4972578,
+      "title": "Khao San Road (ถนนข้าวสาร)",
+      "memo": "Backpacker street, also in her night-market list.",
+      "ts_url": "https://youtu.be/qDBiLumuFAM?t=671",
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Day 2: Ayutthaya day trip",
+    "items": [
+     {
+      "place_id": "ChIJuRKQJBB04jARRP9leJCqh4E",
+      "lat": 14.3436484,
+      "lng": 100.5415458,
+      "title": "Wat Chaiwatthanaram (วัดไชยวัฒนาราม)",
+      "memo": "One of the Ayutthaya temples on the Day 2 trip.",
+      "ts_url": null,
+      "check": "Chapter covers Ayutthaya as a whole; no per-temple time"
+     },
+     {
+      "place_id": "ChIJ-UkaTEl04jAR2QgEGFAM1dU",
+      "lat": 14.3569443,
+      "lng": 100.5675112,
+      "title": "Wat Mahathat, Ayutthaya (วัดมหาธาตุ)",
+      "memo": "Ayutthaya temple from her Day 2 list.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ4dTQxkZ04jARljZU5XA_yr0",
+      "lat": 14.3558722,
+      "lng": 100.5580695,
+      "title": "Wat Phra Si Sanphet (วัดพระศรีสรรเพชญ์)",
+      "memo": "Also on the Ayutthaya temple list.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Back in Bangkok",
+    "items": [
+     {
+      "place_id": "ChIJFaEvxI2f4jARuJg4tlwgJLQ",
+      "lat": 13.736327300000001,
+      "lng": 100.55793349999999,
+      "title": "Cabbages & Condoms",
+      "memo": "Her pick for a 'unique restaurant' in Bangkok.",
+      "ts_url": "https://youtu.be/qDBiLumuFAM?t=1064",
+      "check": null
+     },
+     {
+      "place_id": "ChIJuWuZbh6f4jAReZMEm2xxgzM",
+      "lat": 13.7379635,
+      "lng": 100.5604058,
+      "title": "Terminal 21 Asok",
+      "memo": "Mall stop in Asok.",
+      "ts_url": "https://youtu.be/qDBiLumuFAM?t=1098",
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Railway market day trip",
+    "items": [
+     {
+      "place_id": "ChIJ10pbl47T4jAR7qFFA1HY2Ds",
+      "lat": 13.4074289,
+      "lng": 99.9985032,
+      "title": "Maeklong Railway Market (ตลาดร่มหุบ)",
+      "memo": "Railway market, paired with a floating market on one day-trip ticket.",
+      "ts_url": "https://youtu.be/qDBiLumuFAM?t=1207",
+      "check": null
+     },
+     {
+      "place_id": "ChIJG4YKPrnr4jARohkpoLqBN4U",
+      "lat": 13.7358272,
+      "lng": 100.2153441,
+      "title": "Wat Sam Phran, Dragon Temple (วัดสามพราน)",
+      "memo": "The Dragon Temple, last stop of that day trip.",
+      "ts_url": "https://youtu.be/qDBiLumuFAM?t=1409",
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Riverside & skyline",
+    "items": [
+     {
+      "place_id": "ChIJFRjwgc2Z4jAR9JIadoa9YBY",
+      "lat": 13.7268131,
+      "lng": 100.51036669999999,
+      "title": "ICONSIAM",
+      "memo": "Long riverside mall segment.",
+      "ts_url": "https://youtu.be/qDBiLumuFAM?t=1500",
+      "check": null
+     },
+     {
+      "place_id": "ChIJGzV2mdKY4jARdIb62T7BoE4",
+      "lat": 13.7240107,
+      "lng": 100.52847709999999,
+      "title": "King Power Mahanakhon SkyWalk",
+      "memo": "SkyWalk visit, the final stop before the outro.",
+      "ts_url": "https://youtu.be/qDBiLumuFAM?t=1770",
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your Bangkok 4-day budget guide on one map",
+  "body": "Hi Grishma, I'm Adrian from PinWith, a map-list app.\n\nThe day that combined the Maeklong Railway Market with a floating market and ended at the Dragon Temple looked like a great day trip. I put 15 of the places into one map: https://pinwith.me/@pinwith_en/grishma-bangkok-4-days-budget\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your viewers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it under your videos. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

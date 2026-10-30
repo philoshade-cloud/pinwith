@@ -1,0 +1,143 @@
+{
+ "row": "N2",
+ "target": "Lester 萊斯特",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "zh-TW",
+ "recipient_name": "Lester",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=hvhCyNfoj8A",
+  "title": "【福岡又有新景點？】福岡值得一去再去｜2026最新景點、在地美食、福岡機場交通懶人包",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "博多站新亮點明治公園（02:44 章節）",
+  "藥院的 Coffee County、Abeki 起司蛋糕、むつか堂（08:02–11:07 章節）",
+  "跑到下山門的壱岐神社一の鳥居（12:07 章節）"
+ ],
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "lester-fukuoka-2026-new-spots",
+  "kind": "course",
+  "themes": [
+   "福岡",
+   "博多",
+   "藥院",
+   "天神"
+  ],
+  "sections": [
+   {
+    "name": null,
+    "items": [
+     {
+      "place_id": "ChIJ_Rk0VQCRQTUR43OiELbL-5s",
+      "lat": 33.5884719,
+      "lng": 130.4175069,
+      "title": "明治公園（博多站）",
+      "memo": "影片介紹的博多站新亮點",
+      "ts_url": "https://youtu.be/hvhCyNfoj8A?t=164",
+      "check": null
+     },
+     {
+      "place_id": "ChIJTfHVFgCRQTURbmm70K0EOWs",
+      "lat": 33.5888448,
+      "lng": 130.41843799999998,
+      "title": "Shake Shack 博多店",
+      "memo": "西日本城市銀行大樓一樓，同棟還有藍瓶",
+      "ts_url": "https://youtu.be/hvhCyNfoj8A?t=272",
+      "check": null
+     },
+     {
+      "place_id": "ChIJYWEnUoWRQTURrebwFOFNt3U",
+      "lat": 33.587238299999996,
+      "lng": 130.4003656,
+      "title": "大砲拉麵 天神今泉店",
+      "memo": "博多豚骨拉麵",
+      "ts_url": "https://youtu.be/hvhCyNfoj8A?t=334",
+      "check": "影片只寫「大砲拉麵」，分店未確認"
+     },
+     {
+      "place_id": "ChIJB75aDpyRQTURP4AEu1gPRKs",
+      "lat": 33.5807797,
+      "lng": 130.40495909999999,
+      "title": "Coffee County Fukuoka",
+      "memo": "藥院的質感咖啡店",
+      "ts_url": "https://youtu.be/hvhCyNfoj8A?t=482",
+      "check": null
+     },
+     {
+      "place_id": "ChIJN8W0HXiRQTURssGgm-vr0aM",
+      "lat": 33.5775186,
+      "lng": 130.400514,
+      "title": "Abeki",
+      "memo": "起司蛋糕",
+      "ts_url": "https://youtu.be/hvhCyNfoj8A?t=583",
+      "check": null
+     },
+     {
+      "place_id": "ChIJhYuX8neRQTURsb2-uRIbFCQ",
+      "lat": 33.576903,
+      "lng": 130.40127999999999,
+      "title": "KURASUKOTO",
+      "memo": "藥院一帶的咖啡店",
+      "ts_url": "https://youtu.be/hvhCyNfoj8A?t=621",
+      "check": null
+     },
+     {
+      "place_id": "ChIJL5yGMoKRQTURSufntJJi5wI",
+      "lat": 33.5821833,
+      "lng": 130.3962493,
+      "title": "むつか堂 藥院本店",
+      "memo": "麵包店本店",
+      "ts_url": "https://youtu.be/hvhCyNfoj8A?t=667",
+      "check": null
+     },
+     {
+      "place_id": "ChIJGfF8E_TtQTURmFwF3XDuZv8",
+      "lat": 33.5835109,
+      "lng": 130.3043586,
+      "title": "壱岐神社 一の鳥居",
+      "memo": "下山門站附近的海邊鳥居",
+      "ts_url": "https://youtu.be/hvhCyNfoj8A?t=727",
+      "check": null
+     },
+     {
+      "place_id": "ChIJZRRDIOuRQTURqqUMKI48O78",
+      "lat": 33.5852169,
+      "lng": 130.3944333,
+      "title": "CAITAC 廣場花園",
+      "memo": "赤坂、大名逛街後順路",
+      "ts_url": "https://youtu.be/hvhCyNfoj8A?t=906",
+      "check": null
+     },
+     {
+      "place_id": "ChIJgy76nV6RQTUR8-HHCJ6UVQo",
+      "lat": 33.587134899999995,
+      "lng": 130.39048499999998,
+      "title": "燒鳥 大川",
+      "memo": "燒鳥店",
+      "ts_url": "https://youtu.be/hvhCyNfoj8A?t=979",
+      "check": "影片寫「燒鳥大川」，以赤坂的やきとり大川比對"
+     },
+     {
+      "place_id": "ChIJT6f-DQCRQTURW4q2KwXhbz4",
+      "lat": 33.5909049,
+      "lng": 130.4007109,
+      "title": "天神商業中心 2（Tenjin Business Center 2）",
+      "memo": "天神商圈的新大樓",
+      "ts_url": "https://youtu.be/hvhCyNfoj8A?t=1059",
+      "check": null
+     }
+    ]
+   }
+  ],
+  "title": "Lester 的福岡新景點：11 站一路玩",
+  "desc": "整理自 Lester 萊斯特 的影片「【福岡又有新景點？】福岡值得一去再去｜2026最新景點、在地美食、福岡機場交通懶人包」（2026年10月）。出處：https://www.youtube.com/watch?v=hvhCyNfoj8A — 由 PinWith 整理，非創作者本人製作。"
+ },
+ "message": {
+  "subject": "我把您的福岡新景點影片整理成一張地圖了",
+  "body": "Lester 您好，我是 PinWith 的 Adrian，PinWith 是一個地圖清單 App。\n\n從博多站的明治公園一路走到藥院吃 Abeki 起司蛋糕，再特地跑去下山門看壱岐神社的鳥居，這條路線很有新意。我把裡面的 11 個地點整理成一張地圖：https://pinwith.me/@pinwith_zhtw/lester-fukuoka-2026-new-spots\n\n目前是私人狀態，只有這個連結能打開；如果您不希望我保留，我會直接刪除。\n\n用 PinWith，您的觀眾可以跟著您的足跡走：回顧您去過的地方，或用同一張地圖規劃自己的旅行，而且能用他們自己的語言看。這能讓您的內容觸及更多人。\n\n如果您喜歡，我可以把清單轉到您的帳號、標明是您的作品，讓您放在影片說明欄。這類清單也能為策展人帶來額外收入：https://pinwith.me/for-creators?lang=zh-TW\n如果用不到，不用回覆也沒關係。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

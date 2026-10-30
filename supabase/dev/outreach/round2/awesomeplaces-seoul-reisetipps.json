@@ -1,0 +1,158 @@
+{
+ "row": "O15",
+ "target": "awesome places",
+ "group": "creator",
+ "based_in_korea": "unverified",
+ "msg_lang": "de",
+ "recipient_name": "Karina",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.awesome-places.de/seoul-sehenswuerdigkeiten-meine-besten-reisetipps/",
+  "title": "Seoul Sehenswürdigkeiten – meine besten Reisetipps",
+  "date": "2026-01"
+ },
+ "hooks": [
+  "Walked up Namsan on quiet wooden stairs until hundreds of Seoul high school students arrived (N Seoul Tower)",
+  "Found the Starfield Library especially atmospheric in the evening",
+  "Paid about 8 € for a slice of cake at Rain Report Café (not mapped: branch unclear)"
+ ],
+ "list": {
+  "owner": "pinwith_de",
+  "lang": "de",
+  "slug": "awesomeplaces-seoul-reisetipps",
+  "title": "Seoul Sehenswürdigkeiten: Karinas 11 beste Tipps",
+  "desc": "Nach „Seoul Sehenswürdigkeiten – meine besten Reisetipps“ (https://www.awesome-places.de/seoul-sehenswuerdigkeiten-meine-besten-reisetipps/). Von PinWith zusammengestellt, nicht von awesome places erstellt.",
+  "kind": "collection",
+  "themes": [
+   "Seoul",
+   "Südkorea",
+   "Paläste",
+   "Reisetipps"
+  ],
+  "sections": [
+   {
+    "name": "Paläste",
+    "items": [
+     {
+      "place_id": "ChIJ4wh0zluifDURaFBW2pdrKf8",
+      "lat": 37.5794309,
+      "lng": 126.9910426,
+      "title": "Changdeokgung und Geheimer Garten (창덕궁)",
+      "memo": "270 Jahre Hauptresidenz; der Geheime Garten (Huwon) nur mit Führung.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+      "lat": 37.579617,
+      "lng": 126.977041,
+      "title": "Gyeongbokgung (경복궁)",
+      "memo": "Größter der fünf Königspaläste, streng geometrisch angelegt.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJz7ocWtiifDURU-HmRwLa3yQ",
+      "lat": 37.5746313,
+      "lng": 126.9938158,
+      "title": "Jongmyo-Schrein (종묘)",
+      "memo": "Im Royal Palace Pass (10.000 Won) zusammen mit vier Palästen enthalten.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Viertel",
+    "items": [
+     {
+      "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+      "lat": 37.5814696,
+      "lng": 126.9849519,
+      "title": "Bukchon Hanok Village (북촌한옥마을)",
+      "memo": "Über 900 Hanoks; Besuchszeiten für Touristen auf 10–17 Uhr begrenzt.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJR2GkpsKifDURh6X4t1FUx1Y",
+      "lat": 37.573284099999995,
+      "lng": 126.98560630000001,
+      "title": "Insadong (인사동길)",
+      "memo": "Galerien, Teehäuser und Antiquitäten; alle Ladenschilder auf Koreanisch.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ8xRYr29FezUR3AtFqx2pIlw",
+      "lat": 37.5665256,
+      "lng": 127.00922360000001,
+      "title": "Dongdaemun Design Plaza (동대문디자인플라자)",
+      "memo": "Futuristischer Bau im Modeviertel Dongdaemun, dessen Malls lange offen haben.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Sehenswürdigkeiten",
+    "items": [
+     {
+      "place_id": "ChIJu5Gg2hWkfDURl7NN7FpFnis",
+      "lat": 37.5102133,
+      "lng": 127.06001859999999,
+      "title": "Starfield Library, COEX (별마당 도서관)",
+      "memo": "Regale über 10 m hoch; abends laut Karina besonders stimmungsvoll.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJgZn6QWmkfDURaU3kwlecaEU",
+      "lat": 37.514852,
+      "lng": 127.0573766,
+      "title": "Bongeunsa-Tempel (봉은사)",
+      "memo": "Über 1.200 Jahre alt, rund 23 m hoher Maitreya-Buddha, Eintritt frei.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+      "lat": 37.5511694,
+      "lng": 126.98822659999999,
+      "title": "N Seoul Tower (N서울타워)",
+      "memo": "236,7 m hoher Turm auf dem Namsan, seit 1980 für Besucher geöffnet.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJk8x74-yifDURXVhW9zZEvZk",
+      "lat": 37.5690744,
+      "lng": 126.97759210000001,
+      "title": "Cheonggyecheon, Cheonggye Plaza (청계천)",
+      "memo": "Rund 11 km langer Bach, freigelegt nach dem Abriss einer Hochstraße.",
+      "ts_url": null,
+      "check": "pin is Cheonggye Plaza, the stream's starting point"
+     }
+    ]
+   },
+   {
+    "name": "Shopping",
+    "items": [
+     {
+      "place_id": "ChIJ9XDV4O-ifDURKjI94KEc1h4",
+      "lat": 37.563946,
+      "lng": 126.98516239999998,
+      "title": "Olive Young Myeongdong Flagship (올리브영 명동타운)",
+      "memo": "Koreas größter Beauty-Store; fast alles darf getestet werden.",
+      "ts_url": null,
+      "check": "Google lists the flagship as 'Olive Young Myeongdong Town'"
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "Ich habe deine Seoul-Tipps auf einer Karte gesammelt",
+  "body": "Hallo Karina, ich bin Adrian von PinWith, einer App für Listen auf der Karte.\n\nIch musste schmunzeln, als auf den ruhigen Holztreppen am Namsan plötzlich Hunderte Schülerinnen und Schüler neben euch standen. Ich habe 11 der Orte auf eine Karte gebracht: https://pinwith.me/@pinwith_de/awesomeplaces-seoul-reisetipps\n\nSie ist vorerst privat: Nur dieser Link öffnet sie, und ich lösche sie, wenn dir das lieber ist.\n\nMit PinWith können deine Leserinnen und Leser in deine Fußstapfen treten: die Orte, an denen du warst, wiederfinden oder ihre eigene Reise auf einer Karte planen, in ihrer eigenen Sprache. So erreicht dein Beitrag noch mehr Menschen.\n\nWenn sie dir gefällt, übertrage ich sie auf dein Konto, mit dir als Urheberin, damit du sie im Beitrag verlinken kannst. Solche Listen können Kuratorinnen und Kuratoren außerdem ein Zusatzeinkommen bringen: https://pinwith.me/for-creators?lang=de\nKeine Antwort nötig, falls es nicht passt.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

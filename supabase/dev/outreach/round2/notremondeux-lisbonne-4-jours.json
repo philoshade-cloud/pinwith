@@ -1,0 +1,177 @@
+{
+ "row": "O13",
+ "target": "Notre Mondeux",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "fr",
+ "recipient_name": "Anaïs et Mathieu",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://notremondeux.com/visiter-lisbonne-en-3-jours/",
+  "title": "Visiter Lisbonne en 4 jours : itinéraire et incontournables",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "Coup de cœur for Miradouro de Santa Luzia, loved getting lost in Alfama (Jour 1)",
+  "Torre de Belém was surrounded by barriers and they could not visit the Jerónimos cloister (Jour 3)",
+  "Post published 2026-09 / updated 2026-10, but the trip itself was August 2019"
+ ],
+ "list": {
+  "owner": "pinwith_fr",
+  "lang": "fr",
+  "slug": "notremondeux-lisbonne-4-jours",
+  "title": "Lisbonne en 4 jours : les 13 étapes de Notre Mondeux",
+  "desc": "D'après « Visiter Lisbonne en 4 jours : itinéraire et incontournables » (https://notremondeux.com/visiter-lisbonne-en-3-jours/). Rassemblé par PinWith, non réalisé par Notre Mondeux.",
+  "kind": "course",
+  "themes": [
+   "Lisbonne",
+   "Portugal",
+   "Miradouros",
+   "Belém",
+   "4 jours"
+  ],
+  "sections": [
+   {
+    "name": "Jour 1",
+    "items": [
+     {
+      "place_id": "ChIJm9xRPnc0GQ0RGWK34RwdbpI",
+      "lat": 38.7098339,
+      "lng": -9.1329535,
+      "title": "Cathédrale Sé de Lisbonne",
+      "memo": "L'un des plus anciens monuments de Lisbonne, de style roman.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJx-Rwl4QzGQ0RaSfN7SE7IEE",
+      "lat": 38.7116956,
+      "lng": -9.1301972,
+      "title": "Miradouro de Santa Luzia",
+      "memo": "Coup de cœur des auteurs : arches, azulejos et vue sur l'Alfama et le Tage.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJm8MOtHc0GQ0R1zPkmUFwwLQ",
+      "lat": 38.713909199999996,
+      "lng": -9.1334762,
+      "title": "Château Saint-Georges (Castelo de São Jorge)",
+      "memo": "Ancienne forteresse qui domine les quartiers historiques.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJYzmNq4kzGQ0R8PmcMe8PyEY",
+      "lat": 38.7164509,
+      "lng": -9.1315937,
+      "title": "Miradouro da Graça",
+      "memo": "Après quelques rues de montée, vue sur les toits, le château et le Tage.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Jour 2",
+    "items": [
+     {
+      "place_id": "ChIJY0ulMHo0GQ0RROAoa18vUzA",
+      "lat": 38.7072828,
+      "lng": -9.136361299999999,
+      "title": "Praça do Comércio",
+      "memo": "Grande esplanade au bord du Tage, bordée de bâtiments jaunes.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ5fcMh3k0GQ0RsEli_Fck5sQ",
+      "lat": 38.7084447,
+      "lng": -9.136824299999999,
+      "title": "Arco da Rua Augusta",
+      "memo": "Arc monumental à l'entrée de la rue Augusta, avec accès possible au sommet.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJdWBeWYc0GQ0RktxySU7hjxM",
+      "lat": 38.7070608,
+      "lng": -9.1456691,
+      "title": "Time Out Market",
+      "memo": "Halle gourmande dans le Mercado da Ribeira, près de Cais do Sodré.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJsWFT1YYzGQ0RU7vqEjeW4ck",
+      "lat": 38.7158971,
+      "lng": -9.140089399999999,
+      "title": "Casa do Alentejo",
+      "memo": "Cour intérieure d'inspiration mauresque, avec un restaurant.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Jour 3",
+    "items": [
+     {
+      "place_id": "ChIJ5dveYa80GQ0RrEP1FKqq6zM",
+      "lat": 38.703460199999995,
+      "lng": -9.1787831,
+      "title": "LX Factory",
+      "memo": "Friche industrielle d'Alcântara devenue espace créatif, avec la librairie Ler Devagar.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJS5zCw0LLHg0R7euWjjRddYc",
+      "lat": 38.6978909,
+      "lng": -9.206703899999999,
+      "title": "Monastère des Hiéronymites (Mosteiro dos Jerónimos)",
+      "memo": "Monastère manuélin classé à l'UNESCO ; les auteurs n'ont pas pu visiter le cloître.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJS5zCw0LLHg0RP1FSz63cAjA",
+      "lat": 38.691583699999995,
+      "lng": -9.215977299999999,
+      "title": "Tour de Belém",
+      "memo": "Tour du XVIe siècle qui gardait l'entrée du port ; entourée de barrières à leur visite.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJW3H9LkXLHg0RZZZttMb27_8",
+      "lat": 38.6975105,
+      "lng": -9.203227600000002,
+      "title": "Pastéis de Belém",
+      "memo": "Pâtisserie historique, réputée pour sa recette traditionnelle de pastéis de nata.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Jour 4",
+    "items": [
+     {
+      "place_id": "ChIJPcfcnuc0GQ0Rgerp5o_yC2Q",
+      "lat": 38.6786319,
+      "lng": -9.1713326,
+      "title": "Sanctuaire du Cristo Rei (Almada)",
+      "memo": "Esplanade gratuite avec vue sur Lisbonne ; la plateforme panoramique est payante.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "J'ai mis votre Lisbonne en 4 jours sur une seule carte",
+  "body": "Bonjour Anaïs et Mathieu, je suis Adrian, de PinWith, une appli de listes sur carte.\n\nJ'ai souri en lisant que la tour de Belém était cachée derrière des barrières, et votre coup de cœur pour le miradouro de Santa Luzia donne envie d'y monter. J'ai placé 13 des lieux sur une seule carte : https://pinwith.me/@pinwith_fr/notremondeux-lisbonne-4-jours\n\nElle est privée pour l'instant : seul ce lien permet de l'ouvrir, et je la supprime si vous préférez.\n\nAvec PinWith, vos lecteurs peuvent suivre vos pas : revoir les lieux où vous êtes allés ou préparer leur propre voyage à partir d'une seule carte, dans leur propre langue. Cela aide votre contenu à aller plus loin.\n\nSi elle vous plaît, je la transfère sur votre compte, à votre nom, pour que vous puissiez la mettre en lien dans l'article. Ce type de liste peut aussi rapporter un revenu complémentaire aux curateurs : https://pinwith.me/for-creators?lang=fr\nPas besoin de répondre si ce n'est pas utile.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

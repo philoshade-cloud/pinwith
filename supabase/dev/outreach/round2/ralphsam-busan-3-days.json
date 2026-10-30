@@ -1,0 +1,134 @@
+{
+ "row": "E1",
+ "target": "Ralph & Sam",
+ "group": "creator",
+ "based_in_korea": "unverified",
+ "msg_lang": "en",
+ "recipient_name": "Ralph and Sam",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=VGDzLY-pu-U",
+  "title": "3 Days in Busan, South Korea 🇰🇷 Best Cafes, Restaurants, Beaches & Things to Do | Travel Guide 2026",
+  "date": "2026-06"
+ },
+ "hooks": [
+  "Samgwangsa Lotus Lantern Festival chapter (27:10); description calls it once a year with 40,000+ lanterns",
+  "Food chapters: grilled eel (11:01), yeast-aged samgyupsal (25:03), Michelin Guide bulgogi (38:31)",
+  "Rainy-day chapter (13:04) and Busan Sky Capsule ride (07:26)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "ralphsam-busan-3-days",
+  "title": "Busan in 3 days: Ralph & Sam's 10 stops",
+  "desc": "Places from Ralph & Sam's video '3 Days in Busan, South Korea: Best Cafes, Restaurants, Beaches & Things to Do' (https://www.youtube.com/watch?v=VGDzLY-pu-U). Collected by PinWith, not made by Ralph & Sam.",
+  "kind": "course",
+  "themes": [
+   "Busan",
+   "beaches",
+   "cafes",
+   "3 days"
+  ],
+  "sections": [
+   {
+    "name": null,
+    "items": [
+     {
+      "place_id": "ChIJqxrVY9jraDURTqBi-qe-mAI",
+      "lat": 35.115224999999995,
+      "lng": 129.04224299999998,
+      "title": "Busan Station (부산역)",
+      "memo": "Arrival point after the train ride down from Seoul.",
+      "ts_url": "https://youtu.be/VGDzLY-pu-U?t=65",
+      "check": null
+     },
+     {
+      "place_id": "ChIJXwf-DlyNaDURmKxjwdWxY5k",
+      "lat": 35.158697499999995,
+      "lng": 129.16038419999998,
+      "title": "Haeundae Beach (해운대해수욕장)",
+      "memo": "Their hotel is near this beach, per the video description.",
+      "ts_url": "https://youtu.be/VGDzLY-pu-U?t=257",
+      "check": null
+     },
+     {
+      "place_id": "ChIJCXner12NaDURvTHbPe3S9tU",
+      "lat": 35.161453699999996,
+      "lng": 129.16224889999998,
+      "title": "Haeundae Traditional Market (해운대전통시장)",
+      "memo": "Market stroll right after their first look at the beach.",
+      "ts_url": "https://youtu.be/VGDzLY-pu-U?t=312",
+      "check": null
+     },
+     {
+      "place_id": "ChIJfdIYWwuNaDURDx-eqtUjCkg",
+      "lat": 35.158284,
+      "lng": 129.17276719999998,
+      "title": "Haeundae Blueline Park, Mipo Station (해운대블루라인파크 미포정거장)",
+      "memo": "Station for the Busan Sky Capsule coastal ride shown in the video.",
+      "ts_url": "https://youtu.be/VGDzLY-pu-U?t=446",
+      "check": "Video does not say which station they boarded at; Mipo is the Haeundae end"
+     },
+     {
+      "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+      "lat": 35.097393499999995,
+      "lng": 129.0105921,
+      "title": "Gamcheon Culture Village (감천문화마을)",
+      "memo": "Colorful hillside village, visited after the rainy-day part of the trip.",
+      "ts_url": "https://youtu.be/VGDzLY-pu-U?t=1031",
+      "check": null
+     },
+     {
+      "place_id": "ChIJP0Hor0zpaDUR9a2lOgOA-3I",
+      "lat": 35.0962779,
+      "lng": 129.009235,
+      "title": "DUF Coffee (더프커피)",
+      "memo": "Cafe stop right after Gamcheon; it sits inside the village.",
+      "ts_url": "https://youtu.be/VGDzLY-pu-U?t=1225",
+      "check": null
+     },
+     {
+      "place_id": "ChIJYeuKwGTraDUR-U5PAfT2Uoo",
+      "lat": 35.155398999999996,
+      "lng": 129.0673266,
+      "title": "Jeonpo Cafe Street (전포카페거리)",
+      "memo": "Jeonpo neighborhood wander, just before the samgyupsal chapter.",
+      "ts_url": "https://youtu.be/VGDzLY-pu-U?t=1324",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ-4yc9TvraDURorjIIUAF0uU",
+      "lat": 35.175428800000006,
+      "lng": 129.04338819999998,
+      "title": "Samgwangsa Temple (삼광사)",
+      "memo": "Lotus Lantern Festival visit; they cite 40,000+ lanterns, once a year.",
+      "ts_url": "https://youtu.be/VGDzLY-pu-U?t=1630",
+      "check": null
+     },
+     {
+      "place_id": "ChIJxw7HJy_taDUR-xaSTeHwbf8",
+      "lat": 35.1531696,
+      "lng": 129.118666,
+      "title": "Gwangalli Beach (광안리해수욕장)",
+      "memo": "Seen by day, then again at night after the Michelin Guide bulgogi.",
+      "ts_url": "https://youtu.be/VGDzLY-pu-U?t=2228",
+      "check": null
+     },
+     {
+      "place_id": "ChIJDfcSIsGSaDUR7DKMmkKpoxU",
+      "lat": 35.172868799999996,
+      "lng": 128.9471783,
+      "title": "Gimhae International Airport (김해국제공항)",
+      "memo": "Last stop: flying out of Busan.",
+      "ts_url": "https://youtu.be/VGDzLY-pu-U?t=2466",
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your 3 Days in Busan video on one map",
+  "body": "Hi Ralph and Sam, I'm Adrian from PinWith, a map-list app.\n\nThe Samgwangsa lantern festival segment, with its 40,000+ lanterns, really stood out, and so did the grilled eel stop. I put 10 of the places into one map: https://pinwith.me/@pinwith_en/ralphsam-busan-3-days\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your viewers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it under your videos. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

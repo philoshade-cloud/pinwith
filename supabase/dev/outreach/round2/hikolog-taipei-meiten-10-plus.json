@@ -1,0 +1,143 @@
+{
+ "row": "N3",
+ "target": "HIKOLOG / TAIWAN",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "ja",
+ "recipient_name": "HIKOLOG",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=xXjGG8etdP4",
+  "title": "【台北グルメ完全版】台湾好きが本気で選んだ！絶対に食べるべき名店10選＋α",
+  "date": "2026-08"
+ },
+ "hooks": [
+  "一軒目が富霸王豬腳（00:33 チャプター）",
+  "雙月食品社、阿城鵝肉、杭州小籠湯包と続く後半（12:16〜17:18 チャプター）",
+  "最後は三重の今大魯肉飯（21:04 チャプター）"
+ ],
+ "list": {
+  "owner": "pinwith_ja",
+  "lang": "ja",
+  "slug": "hikolog-taipei-meiten-10-plus",
+  "kind": "course",
+  "themes": [
+   "台北",
+   "台湾グルメ",
+   "老舗",
+   "小吃"
+  ],
+  "sections": [
+   {
+    "name": null,
+    "items": [
+     {
+      "place_id": "ChIJO2QW8mCpQjQRyMjgSoG-j7o",
+      "lat": 25.053318599999997,
+      "lng": 121.533574,
+      "title": "富霸王豬腳（フーバーワン）",
+      "memo": "豚足の煮込み",
+      "ts_url": "https://youtu.be/xXjGG8etdP4?t=33",
+      "check": null
+     },
+     {
+      "place_id": "ChIJU21B8GupQjQRRRTsNGB9Qrg",
+      "lat": 25.0588524,
+      "lng": 121.51797490000001,
+      "title": "川畝園麵食館",
+      "memo": "麺と点心の食堂",
+      "ts_url": "https://youtu.be/xXjGG8etdP4?t=155",
+      "check": null
+     },
+     {
+      "place_id": "ChIJvSbgmQypQjQRPX7acLGaOj4",
+      "lat": 25.044524,
+      "lng": 121.51261849999999,
+      "title": "城中老牌牛肉拉麵大王",
+      "memo": "牛肉麺",
+      "ts_url": "https://youtu.be/xXjGG8etdP4?t=272",
+      "check": null
+     },
+     {
+      "place_id": "ChIJeXELiROpQjQRLfS3rOlt4j0",
+      "lat": 25.0546625,
+      "lng": 121.5102536,
+      "title": "林合發油飯店",
+      "memo": "永楽市場の油飯",
+      "ts_url": "https://youtu.be/xXjGG8etdP4?t=379",
+      "check": null
+     },
+     {
+      "place_id": "ChIJN5sMgIWpQjQRBVYjMgpDIYg",
+      "lat": 25.024535699999998,
+      "lng": 121.52902150000001,
+      "title": "師園鹽酥雞 本店",
+      "memo": "台湾式唐揚げ（鹽酥雞）",
+      "ts_url": "https://youtu.be/xXjGG8etdP4?t=496",
+      "check": null
+     },
+     {
+      "place_id": "ChIJubVE0QypQjQR_SbZicsVSxA",
+      "lat": 25.0457149,
+      "lng": 121.51376020000001,
+      "title": "劉山東小吃店",
+      "memo": "牛肉麺",
+      "ts_url": "https://youtu.be/xXjGG8etdP4?t=624",
+      "check": null
+     },
+     {
+      "place_id": "ChIJgbsfD3GpQjQR7z5ZO22KdVQ",
+      "lat": 25.0437017,
+      "lng": 121.5220376,
+      "title": "雙月食品社 青島店",
+      "memo": "後半の一軒（12:16〜）",
+      "ts_url": "https://youtu.be/xXjGG8etdP4?t=736",
+      "check": "動画では店舗名のみ、支店は未確認（青島店で照合）"
+     },
+     {
+      "place_id": "ChIJj50p7F2pQjQR4PKzyg50owk",
+      "lat": 25.0564063,
+      "lng": 121.5303624,
+      "title": "阿城鵝肉",
+      "memo": "ガチョウ肉",
+      "ts_url": "https://youtu.be/xXjGG8etdP4?t=899",
+      "check": null
+     },
+     {
+      "place_id": "ChIJDyLXkuXQDRQRfQ16QD6UkH0",
+      "lat": 25.0574647,
+      "lng": 121.54532819999999,
+      "title": "杭州小籠湯包 民生旗艦店",
+      "memo": "小籠包",
+      "ts_url": "https://youtu.be/xXjGG8etdP4?t=1038",
+      "check": null
+     },
+     {
+      "place_id": "ChIJCS3smIKpQjQR4DmZvSDel1s",
+      "lat": 25.0347819,
+      "lng": 121.527097,
+      "title": "江記東門豆花",
+      "memo": "豆花",
+      "ts_url": "https://youtu.be/xXjGG8etdP4?t=1191",
+      "check": null
+     },
+     {
+      "place_id": "ChIJyxws_B-pQjQR-OlL3aVgbIo",
+      "lat": 25.064408999999998,
+      "lng": 121.4915464,
+      "title": "今大魯肉飯",
+      "memo": "魯肉飯（三重）",
+      "ts_url": "https://youtu.be/xXjGG8etdP4?t=1264",
+      "check": null
+     }
+    ]
+   }
+  ],
+  "title": "HIKOLOGの台北名店：11軒",
+  "desc": "HIKOLOG / TAIWAN の動画「【台北グルメ完全版】台湾好きが本気で選んだ！絶対に食べるべき名店10選＋α」（2026年8月）に登場したお店。出典：https://www.youtube.com/watch?v=xXjGG8etdP4 — PinWithが整理したもので、クリエイター本人の作成ではありません。"
+ },
+ "message": {
+  "subject": "台北グルメ10選＋αを1枚の地図にまとめました",
+  "body": "HIKOLOGさん\n\nはじめまして、地図リストアプリ PinWith の Adrian です。\n\n富霸王の豚足から始まって、最後に今大魯肉飯で締める流れがとても台北らしく、楽しく拝見しました。動画に出てきた 11 か所を一枚の地図にまとめました：https://pinwith.me/@pinwith_ja/hikolog-taipei-meiten-10-plus\n\n今は非公開で、このリンクからしか開けません。不要でしたらすぐに削除します。\n\nPinWith を使うと、視聴者の方がHIKOLOGさんの足跡をたどれます。行った場所を見返したり、同じ地図で自分の旅を計画したりでき、それぞれの言語で見られます。動画がより多くの人に届くきっかけになると思います。\n\n気に入っていただけたら、HIKOLOGさんのアカウントにお移しし、HIKOLOGさんの作品として表示します。動画の概要欄にリンクを貼っていただけます。こうしたリストはキュレーターの副収入にもなります：https://pinwith.me/for-creators?lang=ja\nお役に立たなければ、返信は不要です。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

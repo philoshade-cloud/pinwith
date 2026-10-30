@@ -1,0 +1,192 @@
+{
+ "row": "J11",
+ "target": "Andy遊樂園",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "zh-TW",
+ "recipient_name": "Andy",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=vREUacTBZDQ",
+  "title": "2026東京美食「走訪八大地方精選15款好吃」",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "Local shops in Nishi-Sugamo and Narimasu (chapter 8:38)",
+  "$10 otoro at Narimasu DONKI (chapter 8:38)"
+ ],
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "andy-tokyo-2026-15-eats",
+  "title": "2026東京美食：Andy遊樂園走訪八大地方嘅15間店",
+  "desc": "整理自 Andy遊樂園 影片「2026東京美食 走訪八大地方精選15款好吃」(2026年10月)。出處：https://www.youtube.com/watch?v=vREUacTBZDQ 。由 PinWith 整理，並非創作者本人製作。",
+  "kind": "collection",
+  "themes": [
+   "東京",
+   "美食",
+   "在地小店"
+  ],
+  "sections": [
+   {
+    "name": "銀座・有樂町",
+    "items": [
+     {
+      "place_id": "ChIJX05jZOaLGGAR2rUy9EXaYLk",
+      "lat": 35.6705477,
+      "lng": 139.77015,
+      "title": "銀座八五 (Ginza Hachigou)",
+      "memo": "米芝蓮拉麵小店，影片開場第一站",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=56",
+      "check": null
+     },
+     {
+      "place_id": "ChIJAY_5nxyLGGAR8mpwX8Biul0",
+      "lat": 35.6696389,
+      "lng": 139.7690948,
+      "title": "丸七炸豬扒 銀座店 (とんかつ 丸七)",
+      "memo": "厚切炸豬扒，座位少要排隊",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=152",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ3Q5zleCLGGARnuvHr-FOgMM",
+      "lat": 35.6699002,
+      "lng": 139.7691376,
+      "title": "五代目花山烏冬 銀座店",
+      "memo": "闊身烏冬名店",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=152",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ_9oVOZ-LGGARTMN4dW-AI-4",
+      "lat": 35.6715607,
+      "lng": 139.7705344,
+      "title": "塩麵包屋 pain･maison 銀座店",
+      "memo": "鹽麵包專門店",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=152",
+      "check": null
+     },
+     {
+      "place_id": "ChIJQf-98haLGGARlRETqJZunE4",
+      "lat": 35.6703288,
+      "lng": 139.7590179,
+      "title": "炭燒富士鰻魚 有樂町店 (炭焼 うな富士)",
+      "memo": "名古屋名物炭燒鰻魚",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=269",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ8efq7_yLGGARoWIgnVt4R7Q",
+      "lat": 35.6792719,
+      "lng": 139.7682008,
+      "title": "玉丁本店 八重洲店",
+      "memo": "名古屋味噌煮込烏冬",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=269",
+      "check": "description says 玉丁本店 without branch; matched Yaesu"
+     }
+    ]
+   },
+   {
+    "name": "新宿・青山",
+    "items": [
+     {
+      "place_id": "ChIJvUEnaNqMGGAR46u74Waa6FM",
+      "lat": 35.6910075,
+      "lng": 139.7026367,
+      "title": "MOMO PARADISE 新宿東口店",
+      "memo": "A5和牛壽喜燒放題",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=423",
+      "check": null
+     },
+     {
+      "place_id": "ChIJT0DjHgCLGGARsk5Uj9f203k",
+      "lat": 35.6648961,
+      "lng": 139.7136236,
+      "title": "Sweet Check 蛋包飯",
+      "memo": "即場切開嘅滑蛋蛋包飯",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=423",
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "西巢鴨・成增・西葛西",
+    "items": [
+     {
+      "place_id": "ChIJ5YRpJn6NGGAR4i3-cAay44Q",
+      "lat": 35.744132,
+      "lng": 139.7288106,
+      "title": "しゃぶ辰 西巢鴨店",
+      "memo": "在地人小店，平價壽喜燒",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=518",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ8yKRHHXsGGARvVGUyQC9-6Q",
+      "lat": 35.7766365,
+      "lng": 139.6317505,
+      "title": "中華めん処 道頓堀 成增",
+      "memo": "成增在地拉麵店",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=518",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ29_hKQbtGGARq1Up3Y5ZNtU",
+      "lat": 35.7781313,
+      "lng": 139.6304655,
+      "title": "MEGA Don Quijote 成增店",
+      "memo": "影片入面買$10件大拖羅嘅地方",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=518",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ3bx1TuCHGGARwGVo9-Qn-6E",
+      "lat": 35.6649918,
+      "lng": 139.8565401,
+      "title": "炭火焼肉・焼鳥大将 (西葛西)",
+      "memo": "CP值高嘅七輪燒肉",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=646",
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "淺草三小吃",
+    "items": [
+     {
+      "place_id": "ChIJv2iQGTuPGGAR_eCa-tK4fJ4",
+      "lat": 35.7147474,
+      "lng": 139.7944546,
+      "title": "浅草うなな 鰻魚飯團",
+      "memo": "國產鰻魚燒飯糰",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=711",
+      "check": null
+     },
+     {
+      "place_id": "ChIJSTVEQMCOGGARa74pG98OyD0",
+      "lat": 35.7146332,
+      "lng": 139.7951685,
+      "title": "淺草 花月堂 本店",
+      "memo": "雪糕菠蘿包",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=711",
+      "check": null
+     },
+     {
+      "place_id": "ChIJ8YF44F2NGGARN4BRSgUlAGc",
+      "lat": 35.7151561,
+      "lng": 139.7951921,
+      "title": "寿清庵茶室 淺草店",
+      "memo": "抹茶可麗餅",
+      "ts_url": "https://youtu.be/vREUacTBZDQ?t=711",
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "我將你嘅2026東京美食整理成一張地圖",
+  "body": "Andy 你好，我係 PinWith 嘅 Adrian，PinWith 係一個用地圖整理清單嘅 App。\n\n睇完你嘅「2026東京美食」，西巢鴨同成增呢啲在地人小店真係好少人拍，仲有成增 DONKI 嘅 $10 大拖羅。我將片入面 15 間店整理咗喺一張地圖上，每個點都可以直接跳到影片嗰一段：https://pinwith.me/@pinwith_zhtw/andy-tokyo-2026-15-eats\n\n暫時係私人狀態，只有呢條連結先打得開；如果你唔想保留，我會即刻刪除。\n\n用 PinWith，觀眾可以跟住你嘅足跡：再去你去過嘅店，或者用一張地圖用自己嘅語言計劃行程，令你嘅內容傳得更遠。\n\n如果你鍾意，我可以將佢轉到你嘅帳戶，註明係你嘅作品，你可以放喺影片說明欄。呢類清單之後亦可以為創作者帶來額外收入：https://pinwith.me/for-creators?lang=zh-TW\n如果用唔到，唔使回覆都得。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

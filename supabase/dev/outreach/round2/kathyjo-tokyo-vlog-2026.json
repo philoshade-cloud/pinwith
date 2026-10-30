@@ -1,0 +1,139 @@
+{
+ "row": "E5",
+ "target": "Kathy Jo",
+ "group": "creator",
+ "based_in_korea": "unverified",
+ "msg_lang": "en",
+ "recipient_name": "Kathy",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=j2AvXymvZIw",
+  "title": "TOKYO TRAVEL VLOG 2026 🌸 our itinerary, food tour, tsukiji fish market, best coffee",
+  "date": "2026-07"
+ },
+ "hooks": [
+  "Description lists the places in video order, starting with Dogenzaka Mammoth and Hikiniku to Come",
+  "Notes Sushi Hatsume is where Andrew went for omakase (description)",
+  "Calls it probably one of her longest videos (description)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "kathyjo-tokyo-vlog-2026",
+  "title": "Tokyo food & coffee: Kathy Jo's 10 spots from her 2026 vlog",
+  "desc": "Places from Kathy Jo's video 'TOKYO TRAVEL VLOG 2026: our itinerary, food tour, tsukiji fish market, best coffee' (https://www.youtube.com/watch?v=j2AvXymvZIw). Collected by PinWith, not made by Kathy Jo.",
+  "kind": "collection",
+  "themes": [
+   "Tokyo",
+   "food",
+   "coffee",
+   "Ginza"
+  ],
+  "sections": [
+   {
+    "name": "Food",
+    "items": [
+     {
+      "place_id": "ChIJHceZBlaLGGAR1ezdqkbboHI",
+      "lat": 35.6577081,
+      "lng": 139.6965121,
+      "title": "Dogenzaka Mammoth (道玄坂マンモス)",
+      "memo": "First place in her list, in Shibuya's Dogenzaka.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJsWJ80PiNGGAR8aSF8OFJeu4",
+      "lat": 35.6593105,
+      "lng": 139.69755379999998,
+      "title": "Hikiniku to Come, Shibuya (挽肉と米 渋谷)",
+      "memo": "Listed right after Mammoth in her place list.",
+      "ts_url": null,
+      "check": "Chain has several branches; Shibuya assumed (next to Dogenzaka Mammoth)"
+     },
+     {
+      "place_id": "ChIJeThxfACLGGARtQZdxLhkKrs",
+      "lat": 35.6465933,
+      "lng": 139.71614739999998,
+      "title": "Ebisu Sushi Hatsume",
+      "memo": "Where Andrew went for omakase.",
+      "ts_url": null,
+      "check": "Description says 'Sushi Hatsume'; Google lists 'Ebisu Sushi Hatsume'"
+     },
+     {
+      "place_id": "ChIJW2cLzSGLGGARXAKXv6EkbqI",
+      "lat": 35.6647703,
+      "lng": 139.7702515,
+      "title": "Tsukiji Outer Market (築地場外市場)",
+      "memo": "The Tsukiji fish market stop named in the video title.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJkwhr8eaLGGARrddg76pSrV4",
+      "lat": 35.6705604,
+      "lng": 139.76546779999998,
+      "title": "Ginza Steak (銀座ステーキ)",
+      "memo": "Steak stop in Ginza.",
+      "ts_url": null,
+      "check": "Two Ginza Steak branches nearby; video branch not stated"
+     },
+     {
+      "place_id": "ChIJAyOyEOKLGGARz0szOUKPsBI",
+      "lat": 35.6264119,
+      "lng": 139.7214881,
+      "title": "Menya Sign",
+      "memo": "Last place in her list.",
+      "ts_url": null,
+      "check": "Only Google match is in Nishi-Gotanda"
+     }
+    ]
+   },
+   {
+    "name": "Coffee & sweets",
+    "items": [
+     {
+      "place_id": "ChIJp-Xs136LGGARavbO827ycn8",
+      "lat": 35.6249112,
+      "lng": 139.72538749999998,
+      "title": "SAISON Bakery & Coffee",
+      "memo": "Bakery-cafe stop early in the video.",
+      "ts_url": null,
+      "check": "Google match is in Gotanda; branch not stated in video"
+     },
+     {
+      "place_id": "ChIJCwW9-4yJGGARAHRZAhU1gBU",
+      "lat": 35.6661115,
+      "lng": 139.7651615,
+      "title": "Atelier Matcha",
+      "memo": "Matcha stop right after Tsukiji.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJP2BtW-CLGGAR_-5-Dk9pFoE",
+      "lat": 35.6710713,
+      "lng": 139.77080379999998,
+      "title": "Bongen Coffee Ginza",
+      "memo": "One of the coffee stops behind 'best coffee' in the title.",
+      "ts_url": null,
+      "check": "Bongen also has a Nihonbashi shop; Ginza assumed"
+     },
+     {
+      "place_id": "ChIJ57Hp_52LGGARvt4ghJExG_g",
+      "lat": 35.6727584,
+      "lng": 139.77129449999998,
+      "title": "Age.3 Ginza",
+      "memo": "Ginza stop near the end of her list.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your Tokyo vlog 2026 on one map",
+  "body": "Hi Kathy, I'm Adrian from PinWith, a map-list app.\n\nYour list goes from Dogenzaka Mammoth and Hikiniku to Come all the way to Andrew's omakase at Sushi Hatsume, which made me hungry. I put 10 of the places into one map: https://pinwith.me/@pinwith_en/kathyjo-tokyo-vlog-2026\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your viewers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it under your videos. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

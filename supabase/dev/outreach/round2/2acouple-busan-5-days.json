@@ -1,0 +1,157 @@
+{
+ "row": "J5",
+ "target": "2A Couple (2A夫妻)",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "zh-TW",
+ "recipient_name": "2A夫妻",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.youtube.com/watch?v=5j21GgKNHPc",
+  "title": "釜山自由行攻略懶人包🇰🇷5天4夜行程規劃❗️釜山通行證、甘川洞文化村、白淺灘文化村、釜山膠囊列車、海雲台、Olive Young必買❗️ 2A夫妻",
+  "date": "2026-02"
+ },
+ "hooks": [
+  "Video title names Visit Busan Pass, Gamcheon, Huinnyeoul, the capsule train and Haeundae",
+  "Gyeongju day trip from Busan in hanbok with cherry blossoms; afternoon tea at 청수당 (from their Threads post on the same trip, Day 4, 2025-04-08)",
+  "EP1 of the series covers 富平罐頭市場 and Gamcheon"
+ ],
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "2acouple-busan-5-days",
+  "title": "釜山5天4夜＋慶州：2A夫妻的12個景點",
+  "desc": "整理自 2A夫妻的 YouTube 影片〈釜山自由行攻略懶人包 5天4夜行程規劃〉(https://www.youtube.com/watch?v=5j21GgKNHPc)。由 PinWith 整理，非 2A夫妻本人製作。",
+  "kind": "collection",
+  "themes": [
+   "釜山",
+   "慶州",
+   "自由行",
+   "5天4夜"
+  ],
+  "sections": [
+   {
+    "name": "釜山",
+    "items": [
+     {
+      "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+      "lat": 35.097393499999995,
+      "lng": 129.0105921,
+      "title": "甘川洞文化村 (감천문화마을)",
+      "memo": "釜山山坡上的彩色小屋村，行程必去景點之一。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ21pR1aHpaDUR_usy_ELBCvk",
+      "lat": 35.101853999999996,
+      "lng": 129.0258719,
+      "title": "富平罐頭市場 (부평깡통시장)",
+      "memo": "和甘川洞排在同一天的市場。",
+      "ts_url": null,
+      "check": "named in EP1 of the same series, not in the summary video's title"
+     },
+     {
+      "place_id": "ChIJseGsfh7paDURigYilgTVojA",
+      "lat": 35.0782798,
+      "lng": 129.0453198,
+      "title": "白淺灘文化村 (흰여울문화마을)",
+      "memo": "影島海邊的文化村。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJfdIYWwuNaDURDx-eqtUjCkg",
+      "lat": 35.158284,
+      "lng": 129.17276719999998,
+      "title": "海雲台藍線公園 膠囊列車 尾浦站 (블루라인파크)",
+      "memo": "搭海邊的釜山膠囊列車。",
+      "ts_url": null,
+      "check": "Mipo station pin used for the capsule train"
+     },
+     {
+      "place_id": "ChIJXwf-DlyNaDURmKxjwdWxY5k",
+      "lat": 35.158697499999995,
+      "lng": 129.16038419999998,
+      "title": "海雲台海水浴場 (해운대해수욕장)",
+      "memo": "釜山最有名的海灘。",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "慶州一日遊",
+    "items": [
+     {
+      "place_id": "ChIJ13ANOUNOZjURBcoz1tMkAMw",
+      "lat": 35.8381282,
+      "lng": 129.2108206,
+      "title": "大陵苑 (대릉원)",
+      "memo": "新羅古墳公園，天馬塚也在園內。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJHfYz6F9OZjUR21CWHW9f18M",
+      "lat": 35.8298626,
+      "lng": 129.2150361,
+      "title": "慶州校村 (경주 교촌마을)",
+      "memo": "穿著韓服逛的傳統村落。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJA8nY8ExPZjURPC-8kcf4l4E",
+      "lat": 35.837660899999996,
+      "lng": 129.209724,
+      "title": "皇理團路 (황리단길)",
+      "memo": "慶州逛街的韓屋小店街。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJNcuMjy1PZjURWd_BWJGNk-A",
+      "lat": 35.8350643,
+      "lng": 129.210826,
+      "title": "清水塘 慶州 (청수당)",
+      "memo": "慶州一日遊的下午茶。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJa4qtrmdOZjURguRnUl7UqSg",
+      "lat": 35.8347306,
+      "lng": 129.2190014,
+      "title": "瞻星臺 (첨성대)",
+      "memo": "新羅時代的天文台。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJI6-IFWBOZjURG2fe65bJAs0",
+      "lat": 35.8291928,
+      "lng": 129.21812130000004,
+      "title": "月精橋 (월정교)",
+      "memo": "慶州一日遊中，瞻星臺之後的下一站。",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ9SUiOHBOZjUR_YnH8Lbjzt0",
+      "lat": 35.8348173,
+      "lng": 129.2265645,
+      "title": "東宮與月池 (동궁과 월지)",
+      "memo": "慶州一日遊排在最後的景點。",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "我把您的釜山5天4夜攻略整理成一張地圖了",
+  "body": "2A夫妻您好，我是 PinWith 的 Adrian，我們在做一個用地圖整理清單的 App。\n\n很喜歡您從釜山出發的慶州一日遊，穿韓服配櫻花逛校村，再到清水塘喝下午茶，真的很想照著走一次。我把這趟行程的 12 個地點整理成一張地圖：https://pinwith.me/@pinwith_zhtw/2acouple-busan-5-days\n\n目前是私人狀態，只有這個連結能打開；如果您不希望保留，我會直接刪除。\n\n透過 PinWith，您的觀眾可以跟著您的腳步走：重溫您去過的地方，或用一張地圖規劃自己的旅程，而且是用他們自己的語言。這能讓您的內容觸及更多人。\n\n如果您喜歡，我可以把它轉到您的帳號，標註為您的作品，方便您放在影片說明欄。這類清單也能為策展人帶來額外收入：https://pinwith.me/for-creators?lang=zh-TW\n如果用不到，不回覆也沒關係。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

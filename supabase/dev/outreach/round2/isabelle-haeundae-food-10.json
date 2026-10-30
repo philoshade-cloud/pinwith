@@ -1,0 +1,153 @@
+{
+ "row": "N1",
+ "target": "Isabelle日本零時差 (Isabelle)",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "zh-TW",
+ "recipient_name": "Isabelle",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://japanzerolag.com/?p=10958",
+  "title": "福岡出發｜別再只吃豬肉湯飯！釜山海雲台美食10選：五花肉燒肉、海鮮鍋、辣炒章魚",
+  "date": "2026-06 (updated 2026-10)"
+ },
+ "hooks": [
+  "從福岡坐船到釜山（文章開頭的路線說明）",
+  "伍班長烤盤邊緣那一圈蒸蛋（伍班長段落）",
+  "以前愛去的 다퍼주는집 已經歇業（文末備註）"
+ ],
+ "list": {
+  "owner": "pinwith_zhtw",
+  "lang": "zh-TW",
+  "slug": "isabelle-haeundae-food-10",
+  "kind": "collection",
+  "themes": [
+   "釜山",
+   "海雲台",
+   "美食",
+   "青沙浦"
+  ],
+  "sections": [
+   {
+    "name": "燒肉・餐廳",
+    "items": [
+     {
+      "place_id": "ChIJFb7Ke16NaDURO0tdP7zkFtw",
+      "lat": 35.1615099,
+      "lng": 129.15916750000002,
+      "title": "伍班長烤肉（오반장）",
+      "memo": "炭火烤牛豬肉，烤盤邊緣一圈蒸蛋",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ6_vih16NaDURd47LIvAYobU",
+      "lat": 35.1610861,
+      "lng": 129.1590465,
+      "title": "味贊王鹽烤肉（맛찬들왕소금구이）",
+      "memo": "約3公分厚的熟成五花肉，店員桌邊代烤",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ7yJ-F6-NaDURT2PY5ebM_XU",
+      "lat": 35.161941399999996,
+      "lng": 129.1598222,
+      "title": "MIU 韓牛（미우 숯불갈비）",
+      "memo": "五花肉與韓牛，由店員幫忙烤",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJpb6RdDyNaDURoDirlMaYeJg",
+      "lat": 35.1577128,
+      "lng": 129.172401,
+      "title": "麻雀磨坊（참새방앗간）",
+      "memo": "大鐵鍋蛤蜊海鮮蒸鍋",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJpz2jRgKNaDUReaWQsDhI4jc",
+      "lat": 35.1624927,
+      "lng": 129.1942719,
+      "title": "道熙家（도희네）",
+      "memo": "青沙浦海景炭烤扇貝拼盤",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJb8KZCmiNaDURmgBM4Q1RiB8",
+      "lat": 35.162628399999996,
+      "lng": 129.1650085,
+      "title": "海雲台蔘雞湯（해운대소문난삼계탕）",
+      "memo": "人蔘雞湯專門店",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ5xwvxl2NaDURp-2al86xb8E",
+      "lat": 35.1611033,
+      "lng": 129.160662,
+      "title": "螞蟻家辣炒章魚（개미집 해운대점）",
+      "memo": "辣炒章魚，24小時營業",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ-0oV3V2NaDURrn4n89y_AG0",
+      "lat": 35.1615822,
+      "lng": 129.1604592,
+      "title": "密陽血腸豬肉湯飯（밀양순대돼지국밥 해운대점）",
+      "memo": "血腸豬肉湯飯",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "咖啡廳",
+    "items": [
+     {
+      "place_id": "ChIJrdqf5AKNaDURcOGHRuagcWI",
+      "lat": 35.1611366,
+      "lng": 129.1936685,
+      "title": "Cafe Rooftop 青沙浦（카페루프탑）",
+      "memo": "頂樓有吊床和沙發座，點了拿鐵",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJBz9T2GuNaDUROI9MAy8VAxU",
+      "lat": 35.160891,
+      "lng": 129.1934966,
+      "title": "Liberta 青沙浦店（리베르타）",
+      "memo": "海景咖啡與烘焙",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "景點",
+    "items": [
+     {
+      "place_id": "ChIJfdIYWwuNaDURDx-eqtUjCkg",
+      "lat": 35.158284,
+      "lng": 129.17276719999998,
+      "title": "海雲台藍線公園 尾浦站",
+      "memo": "天空膠囊列車與海岸列車的起點",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   }
+  ],
+  "title": "Isabelle 的釜山海雲台：11 個美食與海景點",
+  "desc": "整理自 Isabelle日本零時差 的文章「福岡出發｜別再只吃豬肉湯飯！釜山海雲台美食10選：五花肉燒肉、海鮮鍋、辣炒章魚」（2026年6月）。出處：https://japanzerolag.com/?p=10958 — 由 PinWith 整理，非創作者本人製作。"
+ },
+ "message": {
+  "subject": "我把您的海雲台美食10選整理成一張地圖了",
+  "body": "Isabelle 您好，我是 PinWith 的 Adrian，PinWith 是一個地圖清單 App。\n\n從福岡坐船過去、在伍班長看烤盤邊那圈蒸蛋慢慢熟，這篇海雲台整理讀起來很有畫面。我把裡面的 11 個地點整理成一張地圖：https://pinwith.me/@pinwith_zhtw/isabelle-haeundae-food-10\n\n目前是私人狀態，只有這個連結能打開；如果您不希望我保留，我會直接刪除。\n\n用 PinWith，您的讀者可以跟著您的足跡走：回顧您去過的地方，或用同一張地圖規劃自己的旅行，而且能用他們自己的語言看。這能讓您的內容觸及更多人。\n\n如果您喜歡，我可以把清單轉到您的帳號、標明是您的作品，讓您放在文章裡。這類清單也能為策展人帶來額外收入：https://pinwith.me/for-creators?lang=zh-TW\n如果用不到，不用回覆也沒關係。\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

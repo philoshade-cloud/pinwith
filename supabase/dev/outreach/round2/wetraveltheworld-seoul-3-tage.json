@@ -1,0 +1,134 @@
+{
+ "row": "E25",
+ "target": "We Travel the World (wetraveltheworld.de)",
+ "group": "creator",
+ "based_in_korea": false,
+ "msg_lang": "de",
+ "recipient_name": "Caro & Martin",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://wetraveltheworld.de/seoul-reisetipps-sehenswuerdigkeiten/",
+  "title": "Seoul in 3 Tagen – 7 Dinge, die du in dieser facettenreichen Stadt nicht verpassen solltest",
+  "date": "2026-08"
+ },
+ "hooks": [
+  "Tongin Market: swap cash for tokens (1 token = 500 Won) and fill a tray at Cafe Dosirak (section 5)",
+  "Free entry to Gyeongbokgung when wearing a hanbok (section 4)",
+  "Starfield Library at COEX with 13 m shelves and 50,000+ books (section 3); article by guest author Shaolin Tran"
+ ],
+ "list": {
+  "owner": "pinwith_de",
+  "lang": "de",
+  "slug": "wetraveltheworld-seoul-3-tage",
+  "title": "Seoul in 3 Tagen: die 10 Orte von We Travel the World",
+  "desc": "Orte aus dem Artikel \"Seoul in 3 Tagen – 7 Dinge, die du in dieser facettenreichen Stadt nicht verpassen solltest\" auf We Travel the World (https://wetraveltheworld.de/seoul-reisetipps-sehenswuerdigkeiten/). Von PinWith zusammengestellt, nicht von We Travel the World erstellt.",
+  "kind": "collection",
+  "themes": [
+   "Seoul",
+   "Südkorea",
+   "Sehenswürdigkeiten",
+   "Städtereise"
+  ],
+  "sections": [
+   {
+    "name": null,
+    "items": [
+     {
+      "place_id": "ChIJu7dpc45FezURhLMS5U5eaJk",
+      "lat": 37.5125295,
+      "lng": 127.10230500000002,
+      "title": "Seoul Sky im Lotte World Tower (서울스카이)",
+      "memo": "Aussichtsplattform im höchsten Wolkenkratzer Südkoreas, mit Glasboden.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJESJ9VqalfDUR9NRANup1KT8",
+      "lat": 37.513679200000006,
+      "lng": 127.10420870000002,
+      "title": "Lotte World Mall (롯데월드몰)",
+      "memo": "Einkaufszentrum im selben Komplex wie der Tower in Jamsil.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJgf4OJaelfDURmDvA_sHyPUM",
+      "lat": 37.5111158,
+      "lng": 127.09816699999999,
+      "title": "Lotte World (롯데월드)",
+      "memo": "Freizeitpark direkt neben dem Tower; Tagespass im Artikel verlinkt.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJb3-VnEOlfDUR9W6Wig50HsE",
+      "lat": 37.527933999999995,
+      "lng": 127.0409421,
+      "title": "K-Star Road (케이스타로드)",
+      "memo": "Gangnam: Bärenfiguren (Gangnamdol) der K-Pop-Stars entlang der Straße.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJu5Gg2hWkfDURl7NN7FpFnis",
+      "lat": 37.5102133,
+      "lng": 127.06001859999999,
+      "title": "Starfield Library (별마당 도서관)",
+      "memo": "Bibliothek in der COEX Mall mit 13 m hohen Regalen, Eintritt frei.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+      "lat": 37.579617,
+      "lng": 126.977041,
+      "title": "Gyeongbokgung-Palast (경복궁)",
+      "memo": "Im Hanbok ist der Eintritt frei; Verleihläden an den Eingängen.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+      "lat": 37.5814696,
+      "lng": 126.9849519,
+      "title": "Bukchon Hanok Village (북촌한옥마을)",
+      "memo": "Altes Viertel der Palastbediensteten, heute mit Teehäusern und Lokalen.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJYxd6fL6ifDURy7wm894BUcQ",
+      "lat": 37.5807649,
+      "lng": 126.97067559999999,
+      "title": "Tongin-Markt (통인시장)",
+      "memo": "Markt von 1941; im Café Dosirak Münzen tauschen und das Tablett füllen.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJJXcc9--ifDURb8zmFI_J64s",
+      "lat": 37.5641885,
+      "lng": 126.98611799999998,
+      "title": "Myeongdong (명동)",
+      "memo": "Shopping und Drogerien; Streetfood-Stände ab 16 Uhr.",
+      "ts_url": null,
+      "check": "area pin (Google 'Myeondong Shopping Street')"
+     },
+     {
+      "place_id": "ChIJ68AiKsWYfDUROpTctLKtxtU",
+      "lat": 37.5561973,
+      "lng": 126.9250341,
+      "title": "Hongdae (홍대)",
+      "memo": "Studentenviertel für den Abend: Chimaek und Karaoke.",
+      "ts_url": null,
+      "check": "area pin; CaFace cafe from the article skipped (status unclear)"
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "Ich habe euren Seoul-Guide auf einer Karte gesammelt",
+  "body": "Hallo Caro und Martin, ich bin Adrian von PinWith, einer App für Listen auf der Karte.\n\nDer Tipp mit dem Café Dosirak auf dem Tongin-Markt, wo man Münzen tauscht und sich sein Tablett an den Ständen füllt, hat mir in Shaolins Seoul-Artikel besonders gefallen. Ich habe 10 der Orte auf eine Karte gebracht: https://pinwith.me/@pinwith_de/wetraveltheworld-seoul-3-tage\n\nSie ist vorerst privat: Nur dieser Link öffnet sie, und ich lösche sie gern, wenn euch das lieber ist.\n\nMit PinWith können eure Leserinnen und Leser euren Spuren folgen: die Orte nachbesuchen, an denen ihr wart, oder ihre eigene Reise auf einer Karte planen, in ihrer eigenen Sprache. So erreichen eure Inhalte noch mehr Menschen.\n\nWenn sie euch gefällt, übertrage ich sie auf euer Konto, mit euch als Urhebern, damit ihr sie im Artikel verlinken könnt. Mit Listen wie dieser können Kuratoren außerdem etwas dazuverdienen: https://pinwith.me/for-creators?lang=de\nKeine Antwort nötig, falls es nicht passt.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

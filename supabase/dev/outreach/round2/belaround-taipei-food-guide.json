@@ -1,0 +1,162 @@
+{
+ "row": "E18",
+ "target": "Bel Around the World",
+ "group": "fan_blog",
+ "based_in_korea": false,
+ "msg_lang": "en",
+ "recipient_name": "Bel",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.belaroundtheworld.com/taipei-food-guide-taiwan/",
+  "title": "Taipei Food Guide: What To Eat And Where To Eat It, Taiwan",
+  "date": "2026-10"
+ },
+ "hooks": [
+  "Raohe Night Market pepper buns baked in a tandoor-like clay oven, NTD 60 (source article)",
+  "At Din Tai Fung you can watch chefs fold the dumplings through a glass window (source article)",
+  "Lists each night market with its nearest MRT station (source article)"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "belaround-taipei-food-guide",
+  "title": "Taipei food guide: Bel's 12 places to eat",
+  "desc": "Places from Bel Around the World's 'Taipei Food Guide: What To Eat And Where To Eat It, Taiwan' (https://www.belaroundtheworld.com/taipei-food-guide-taiwan/). Collected by PinWith, not made by Bel Around the World.",
+  "kind": "collection",
+  "themes": [
+   "Taipei",
+   "Taiwanese food",
+   "night markets",
+   "street food"
+  ],
+  "sections": [
+   {
+    "name": "Restaurants & bakeries",
+    "items": [
+     {
+      "place_id": "ChIJgRdW94KpQjQRODiapkz_DB0",
+      "lat": 25.0329382,
+      "lng": 121.52811109999998,
+      "title": "Yong Kang Beef Noodle (永康牛肉麵)",
+      "memo": "Beef noodle soup with long-simmered broth, near Dongmen Station.",
+      "ts_url": null,
+      "check": "Google lists Lane 31, Jinshan S. Rd; article says Yongkang St"
+     },
+     {
+      "place_id": "ChIJff6pZXCpQjQRHi3vcbjQip8",
+      "lat": 25.0442333,
+      "lng": 121.5248433,
+      "title": "Fu Hang Soy Milk (阜杭豆漿)",
+      "memo": "Soy milk, youtiao and scallion pancakes; crowded, so go early.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJbTKSE4KpQjQRXDZZI57v-pM",
+      "lat": 25.0335035,
+      "lng": 121.53011799999999,
+      "title": "Din Tai Fung Xinyi (鼎泰豐 信義店)",
+      "memo": "Xiao long bao; watch the dumplings being made through the glass.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJdzzG5pSrQjQR8r_CfyXqf7U",
+      "lat": 25.0512434,
+      "lng": 121.5614407,
+      "title": "Chia Te Bakery (佳德糕餅)",
+      "memo": "Pineapple cakes from the Nanjing East Road bakery.",
+      "ts_url": null,
+      "check": "article lists No. 99; Google lists No. 88"
+     },
+     {
+      "place_id": "ChIJy4mRTgmpQjQRfoMOoGKOUZw",
+      "lat": 25.0445025,
+      "lng": 121.50740869999998,
+      "title": "Hot-Star Large Fried Chicken (豪大大雞排)",
+      "memo": "Huge fried chicken cutlet.",
+      "ts_url": null,
+      "check": "article gives No. 17 Chengdu Rd; matched the Ximending shop on Hanzhong St"
+     }
+    ]
+   },
+   {
+    "name": "Night markets",
+    "items": [
+     {
+      "place_id": "ChIJg6W0DZyrQjQR9vZdgYMRoj0",
+      "lat": 25.0508854,
+      "lng": 121.5774891,
+      "title": "Raohe Night Market (饒河街夜市)",
+      "memo": "Stinky tofu with pickled cabbage, peanut ice cream rolls, grilled squid.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJ5w5U9purQjQRJAjF-Pc-FfY",
+      "lat": 25.0509544,
+      "lng": 121.5773857,
+      "title": "Fuzhou Shizu Pepper Bun (福州世祖胡椒餅)",
+      "memo": "Clay-oven pepper buns filled with peppery pork, about NTD 60.",
+      "ts_url": null,
+      "check": "article names the Raohe pepper bun, not this exact stall"
+     },
+     {
+      "place_id": "ChIJxUXPVmupQjQRtBB6oj-S5qI",
+      "lat": 25.0566808,
+      "lng": 121.51536410000001,
+      "title": "Ningxia Night Market (寧夏夜市)",
+      "memo": "Small, food-focused, mostly local vendors; lu rou fan and ba wan.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJBa_9xLGuQjQRKfnnhr5twuc",
+      "lat": 25.0884972,
+      "lng": 121.52435039999999,
+      "title": "Shilin Night Market (士林夜市)",
+      "memo": "Taro balls in warm syrup, fried milk and a basement food court.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJB4taPsurQjQRLl26j8d9Xbo",
+      "lat": 25.0301412,
+      "lng": 121.5542672,
+      "title": "Tonghua Night Market (臨江街夜市)",
+      "memo": "Laid-back local market near Taipei 101; ai yu jelly drinks.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJDdo_4cKpQjQRb4wdglMtMYc",
+      "lat": 25.008415600000003,
+      "lng": 121.51172709999999,
+      "title": "Lehua Night Market (樂華夜市)",
+      "memo": "Away from the centre and popular with locals; oyster omelettes.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Tea",
+    "items": [
+     {
+      "place_id": "ChIJTW8Gs4epQjQRRA0-FAu_O0k",
+      "lat": 25.0245484,
+      "lng": 121.53448440000001,
+      "title": "Wistaria Tea House (紫藤廬)",
+      "memo": "Tea house the guide suggests for a tea ceremony.",
+      "ts_url": null,
+      "check": "article places it in Dadaocheng; the Wistaria Tea House found is in Da'an"
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your Taipei food guide on one map",
+  "body": "Hi Bel, I'm Adrian from PinWith, a map-list app.\n\nYour pepper bun tip for Raohe, baked in that tandoor-like clay oven, was the first thing I pinned. I put 12 of the places into one map: https://pinwith.me/@pinwith_en/belaround-taipei-food-guide\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your readers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it in the post. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}

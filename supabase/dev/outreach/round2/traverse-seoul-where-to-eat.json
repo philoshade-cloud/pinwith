@@ -1,0 +1,204 @@
+{
+ "row": "E6",
+ "target": "Traverse (Megan Arz)",
+ "group": "creator",
+ "based_in_korea": "unverified",
+ "msg_lang": "en",
+ "recipient_name": "Megan",
+ "contact_route": "email (in targets tab)",
+ "source": {
+  "url": "https://www.traverse-blog.com/where-to-eat-seoul/",
+  "title": "Where to Eat in Seoul: My Complete Guide to Seoul's Best Food",
+  "date": "2026-01"
+ },
+ "hooks": [
+  "Rates every spot out of 10; Jayeondo Sogeumppang and Alto Espresso Bar both get 10/10",
+  "Went back to Alto Espresso Bar four days in a row; owner showed her a frozen-sphere brew method",
+  "Hyodo Chicken came recommended by her food tour guide"
+ ],
+ "list": {
+  "owner": "pinwith_en",
+  "lang": "en",
+  "slug": "traverse-seoul-where-to-eat",
+  "title": "Where to eat in Seoul: Megan's 15 picks from Traverse",
+  "desc": "Places from Traverse's 'Where to Eat in Seoul: My Complete Guide to Seoul's Best Food' (https://www.traverse-blog.com/where-to-eat-seoul/). Collected by PinWith, not made by Megan Arz / Traverse.",
+  "kind": "collection",
+  "themes": [
+   "Seoul",
+   "food",
+   "cafes",
+   "Korean BBQ"
+  ],
+  "sections": [
+   {
+    "name": "Cafes & bakeries",
+    "items": [
+     {
+      "place_id": "ChIJdawuLnGjfDURFoQHgAgusNI",
+      "lat": 37.5730739,
+      "lng": 126.98969489999998,
+      "title": "Soha Salt Pond (소하염전)",
+      "memo": "6/10: salt bread in flavors like truffle and peanut.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJgwhZmSWjfDURzJr5IabxSNg",
+      "lat": 37.573700699999996,
+      "lng": 126.98969569999998,
+      "title": "Jayeondo Sogeumppang (자연도소금빵)",
+      "memo": "10/10: only sells packs of four salt breads; quick kiosk ordering.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJexMMvLCjfDURVabq-JcrDsw",
+      "lat": 37.57252,
+      "lng": 126.987016,
+      "title": "Alto Coffee Bar (알토)",
+      "memo": "10/10 and her best espresso in Seoul; she went four days running.",
+      "ts_url": null,
+      "check": "Blog says 'Alto Espresso Bar'; Google lists 'Alto Coffee Bar'"
+     },
+     {
+      "place_id": "ChIJLXL2BvijfDURmTrYFPQIGUc",
+      "lat": 37.5776235,
+      "lng": 126.9865541,
+      "title": "Cafe Onion Anguk (카페어니언 안국)",
+      "memo": "7/10: pastries in a 1920s hanok; rich and messy, so eat in.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJo2dXLFujfDURqfUuFYQ1wKA",
+      "lat": 37.5734454,
+      "lng": 126.9900693,
+      "title": "Cheese Industry (치즈인더스트리)",
+      "memo": "8/10: ranch-themed bakery with cheese desserts and cheese drinks.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Market",
+    "items": [
+     {
+      "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+      "lat": 37.570038499999995,
+      "lng": 126.99960379999997,
+      "title": "Gwangjang Market (광장시장)",
+      "memo": "10/10: bindaetteok, mayak gimbap, tteokbokki; she suggests a food tour.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Fried chicken",
+    "items": [
+     {
+      "place_id": "ChIJH85zMJajfDURM1UUcjKX0Lo",
+      "lat": 37.5209532,
+      "lng": 127.0375118,
+      "title": "Hyodo Chicken (효도치킨)",
+      "memo": "9/10: tip from her food guide; anchovy and shishito flavors.",
+      "ts_url": null,
+      "check": "Gangnam branch on Dosan-daero chosen; post only says Gangnam"
+     },
+     {
+      "place_id": "ChIJ3Z9DalijfDURF9-yJz0H3xE",
+      "lat": 37.534071399999995,
+      "lng": 126.9938508,
+      "title": "Kyochon Pilbang (교촌필방)",
+      "memo": "6/10: speakeasy chicken spot; she did the six-dish omakase.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Korean BBQ",
+    "items": [
+     {
+      "place_id": "ChIJR5v6Z8qjfDUR6U4Ug5W1iH0",
+      "lat": 37.5765897,
+      "lng": 126.97381039999998,
+      "title": "Kukbingwan (국빈관)",
+      "memo": "9/10: 100% Korean beef over charcoal; staff help first-timers.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJhwklg_qifDURQDLm0Ant2yQ",
+      "lat": 37.5617081,
+      "lng": 126.98644589999998,
+      "title": "Wangbijib Myeongdong (왕비집 명동)",
+      "memo": "8/10: samgyeopsal, bulgogi and lots of banchan.",
+      "ts_url": null,
+      "check": "Several Myeongdong branches; main store chosen"
+     }
+    ]
+   },
+   {
+    "name": "Korean & fusion",
+    "items": [
+     {
+      "place_id": "ChIJQTx4LwijfDURVXpSuS4O6T4",
+      "lat": 37.5796227,
+      "lng": 127.0099036,
+      "title": "Woo Mool Zip (우물집)",
+      "memo": "7/10: private rooms and set menus; loved the K-drama-like setting.",
+      "ts_url": null,
+      "check": "Brand has more than one location; Jongno (Changsin) one chosen"
+     },
+     {
+      "place_id": "ChIJlWePZcSZfDURlUryOhxXQLk",
+      "lat": 37.554915099999995,
+      "lng": 126.92284810000001,
+      "title": "Jangin Dakgalbi Hongdae (장인닭갈비 홍대)",
+      "memo": "9/10: spicy dakgalbi with optional cheese; big portions.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJhQ2TrvOjfDURtEDUP48cAQ0",
+      "lat": 37.57355220000001,
+      "lng": 126.98957519999999,
+      "title": "Ikseon Chwihyang (익선취향)",
+      "memo": "7/10: Korean-Italian; she liked the cream pasta over the rose.",
+      "ts_url": null,
+      "check": null
+     },
+     {
+      "place_id": "ChIJbS0WnoulfDUROvcR0nVjN18",
+      "lat": 37.5398972,
+      "lng": 127.05621919999999,
+      "title": "Seongsu Darak (성수다락)",
+      "memo": "9/10: TikTok find; spicy ragu pasta and a creamy omelette.",
+      "ts_url": null,
+      "check": null
+     }
+    ]
+   },
+   {
+    "name": "Bars",
+    "items": [
+     {
+      "place_id": "ChIJv-poNdyifDURL47z4YZAxyM",
+      "lat": 37.5735959,
+      "lng": 126.9904693,
+      "title": "Art Monster Ikseon-dong (아트몬스터 익선동)",
+      "memo": "7/10: craft beer bar with plants and neon; truffle pizza on the menu.",
+      "ts_url": null,
+      "check": "Post says Jongno District; Ikseon-dong branch assumed"
+     }
+    ]
+   }
+  ]
+ },
+ "message": {
+  "subject": "I listed your Seoul food guide on one map",
+  "body": "Hi Megan, I'm Adrian from PinWith, a map-list app.\n\nYour 10/10 for Jayeondo Sogeumppang and the four mornings in a row at Alto Espresso Bar sold me on both. I put 15 of the places into one map: https://pinwith.me/@pinwith_en/traverse-seoul-where-to-eat\n\nIt's private for now: only this link opens it, and I'll delete it if you'd rather I didn't.\n\nWith PinWith, your readers can follow in your footsteps: revisit the places you went or plan their own trip from one map, in their own language. That helps your content reach further.\n\nIf you like it, I'll move it to your account, credited to you, so you can link it in the post. Lists like this can also earn curators extra income: https://pinwith.me/for-creators?lang=en\nNo reply needed if it's not useful.\n\nAdrian\nPinWith · pinwith.me"
+ }
+}
