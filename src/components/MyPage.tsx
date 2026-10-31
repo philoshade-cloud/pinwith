@@ -228,6 +228,8 @@ export function MyPage() {
           <p>
             PinWith v{APP_VERSION}
             {" · "}
+            <Link href="/about" className="underline">{t("PinWith 소개")}</Link>
+            {" · "}
             <Link href="/privacy" className="underline">{t("개인정보처리방침")}</Link>
             {" · "}
             <Link href="/terms" className="underline">{t("이용약관")}</Link>

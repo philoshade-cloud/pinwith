@@ -90,6 +90,8 @@ export function Welcome({ sample }: { sample: CuratedList }) {
           </section>
         )}
         <p className="mt-8 text-[12px] text-muted">
+          <Link href="/about" className="underline">{t("PinWith 소개")}</Link>
+          {" · "}
           <Link href="/privacy" className="underline">{t("개인정보처리방침")}</Link>
           {" · "}
           <Link href="/terms" className="underline">{t("이용약관")}</Link>
