@@ -133,7 +133,7 @@ export const shell: Record<string, string> = {
   "예시 리스트": "Example lists",
   "PinWith가 공동 편집과 댓글 기능을 보여 주려고 예시 계정으로 만든 리스트예요.": "An example made by PinWith with sample accounts to show co-editing and comments.",
   "PinWith가 기능을 보여 주려고 만든 예시 리스트예요": "An example list made by PinWith to show what you can do",
-  "로그인하면 더 많은 리스트를 둘러보고, 마음에 드는 큐레이터를 팔로우할 수 있어요.": "Log in to browse more lists and follow curators you like.",
+  "로그인하면 내 리스트를 만들고, 큐레이터를 팔로우하고, 마음에 드는 리스트에 좋아요를 누를 수 있어요.": "Log in to make your own lists, follow curators and like the lists you love.",
   "공식": "Official",
   "PinWith 운영팀이 직접 만든 리스트예요": "Made by the PinWith team",
   "PinWith 운영팀이 직접 만든 리스트예요. 영업시간·가격은 바뀔 수 있으니 가기 전에 장소 정보를 확인하세요.": "Made by the PinWith team. Hours and prices can change, so check the place details before you go.",

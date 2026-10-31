@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { OfficialBadge } from "./OfficialBadge";
 import { ExampleBadge } from "./ExampleBadge";
-import { useExampleLists } from "@/lib/examples";
 import { Panel } from "./shell/Panel";
 import { AdSlot } from "./AdSlot";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -142,8 +141,8 @@ export function ExploreView() {
 
       const { data: pop } = await supabase
         .from("lists").select(LIST_SELECT).eq("visibility", "public")
-        .order("like_count", { ascending: false }).order("updated_at", { ascending: false }).limit(80);
-      setPopular(((pop ?? []) as unknown as ListHit[]).filter(notMine).slice(0, 80));
+        .order("like_count", { ascending: false }).order("updated_at", { ascending: false }).limit(200);
+      setPopular(((pop ?? []) as unknown as ListHit[]).filter(notMine));
 
       if (!uid) return;
       const [{ data: f }, { data: mine }] = await Promise.all([
@@ -272,13 +271,8 @@ export function ExploreView() {
           <Link href="/me#explore-langs" className="font-semibold text-teal underline">{t("바꾸기")}</Link>
         </p>
       )}
-      {me === null && (
-        <p className="mt-3">
-          <Link href={`/places/${ui}`} className="text-[14px] font-semibold text-teal">📍 {t("도시별로 둘러보기")} ›</Link>
-        </p>
-      )}
-      {/* 로그인 전에는 묶음 고르기 없이 예시만 */}
-      {!!me && (
+      {/* 묶음 고르기는 누구나. '팔로우 중'·'내 리스트와 겹치는'은 로그인해야 눌림 */}
+      {me !== undefined && (
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <div role="tablist" aria-label={t("리스트 묶음")} className="flex min-w-0 gap-1.5 overflow-x-auto">
           {CATEGORIES.map((c) => {
@@ -323,7 +317,7 @@ export function ExploreView() {
         </label>
       </div>
       )}
-      {!!me && local && view && view.zoom < LOCAL_ZOOM && searched === null && (
+      {me !== undefined && local && view && view.zoom < LOCAL_ZOOM && searched === null && (
         <p className="mt-2 text-[12px] text-muted">{t("지도를 도시 정도로 확대하면 그 지역에 핀을 꽂은 리스트를 먼저 보여 드려요.")}</p>
       )}
 
@@ -340,9 +334,8 @@ export function ExploreView() {
         </>
       )}
 
-      {searched === null && me === null && <LoggedOutExamples />}
-
-      {searched === null && !!me && (
+      {/* 구경은 로그인 없이 누구나: 공개 리스트 전부 */}
+      {searched === null && me !== undefined && (
         <>
           <div className="mt-4">
             {shown.length > 0 ? (
@@ -365,6 +358,7 @@ export function ExploreView() {
           <div className="-mx-5 mt-6">
             <AdSlot slot="explore-mid" variant={2} />
           </div>
+          {me === null && <LoginNudge />}
         </>
       )}
       </div>
@@ -453,25 +447,13 @@ function ListRows({ rows, adSlot, pinsHere }: { rows: ListHit[]; adSlot?: string
   );
 }
 
-// 로그인 전: 언어별 예시 3개만(나머지 리스트는 로그인하면 보임)
-function LoggedOutExamples() {
+// 로그인 전: 목록 아래에 로그인하면 할 수 있는 일 안내(구경은 로그인 없이 가능)
+function LoginNudge() {
   const t = useT();
-  const examples = useExampleLists();
   return (
-    <>
-      <Section title={t("예시")}>
-        {examples === null ? (
-          <p className="text-[14px] text-muted">{t("불러오는 중")}</p>
-        ) : examples.length === 0 ? (
-          <Empty>{t("아직 공개된 리스트가 없습니다.")}</Empty>
-        ) : (
-          <ListRows rows={examples} />
-        )}
-      </Section>
-      <div className="mt-6 rounded-xl bg-surface px-4 py-4 text-[14px] text-ink/80">
-        {t("로그인하면 더 많은 리스트를 둘러보고, 마음에 드는 큐레이터를 팔로우할 수 있어요.")}
-        <Link href="/login?next=/explore" className="btn-primary mt-3 w-full justify-center">{t("로그인")}</Link>
-      </div>
-    </>
+    <div className="mt-6 rounded-xl bg-surface px-4 py-4 text-[14px] text-ink/80">
+      {t("로그인하면 내 리스트를 만들고, 큐레이터를 팔로우하고, 마음에 드는 리스트에 좋아요를 누를 수 있어요.")}
+      <Link href="/login?next=/explore" className="btn-primary mt-3 w-full justify-center">{t("로그인")}</Link>
+    </div>
   );
 }
