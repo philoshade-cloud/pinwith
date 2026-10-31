@@ -1,0 +1,161 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "bangkok-4-days-budget-route",
+ "title": "Bangkok on a budget: 4 days with Ayutthaya and the railway market",
+ "desc": "A four-day budget route around Bangkok, from old-town temples to day trips to Ayutthaya and the Maeklong Railway Market, organised by area and day.",
+ "kind": "course",
+ "themes": [
+  "Bangkok",
+  "temples",
+  "budget",
+  "day trips"
+ ],
+ "sections": [
+  {
+   "name": "Old town & temples",
+   "items": [
+    {
+     "place_id": "ChIJxU5YeBaZ4jARvm8EVZYGjGk",
+     "lat": 13.7527976,
+     "lng": 100.504823,
+     "title": "Thipsamai Pad Thai (ทิพย์สมัย)",
+     "memo": "Well-known pad Thai shop in the old town.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJPzZsMU6Z4jARQUzvk913bCo",
+     "lat": 13.7498558,
+     "lng": 100.4915765,
+     "title": "The Grand Palace (พระบรมมหาราชวัง)",
+     "memo": "Royal palace complex; the Emerald Buddha temple is inside.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJgcxFcQWZ4jARLsIR9Qia9H0",
+     "lat": 13.7464237,
+     "lng": 100.4927733,
+     "title": "Wat Pho (วัดโพธิ์)",
+     "memo": "Temple next to the Grand Palace, home of the Reclining Buddha.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJaSv_6gaZ4jARnbiUVn6Z_YY",
+     "lat": 13.743865200000002,
+     "lng": 100.488444,
+     "title": "Wat Arun, Temple of Dawn (วัดอรุณ)",
+     "memo": "Temple of Dawn on the west bank of the river.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ95Nh9yGZ4jARAjfcG2uIZFg",
+     "lat": 13.7373794,
+     "lng": 100.5129349,
+     "title": "Chinatown, Yaowarat Road (เยาวราช)",
+     "memo": "Chinatown's main street; best in the evening for street food.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJDR23yhKZ4jARdqd5AHsct0A",
+     "lat": 13.7589206,
+     "lng": 100.4972578,
+     "title": "Khao San Road (ถนนข้าวสาร)",
+     "memo": "Backpacker street with night-time stalls and bars.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Day 2: Ayutthaya day trip",
+   "items": [
+    {
+     "place_id": "ChIJuRKQJBB04jARRP9leJCqh4E",
+     "lat": 14.3436484,
+     "lng": 100.5415458,
+     "title": "Wat Chaiwatthanaram (วัดไชยวัฒนาราม)",
+     "memo": "Riverside Ayutthaya temple with Khmer-style prangs.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ-UkaTEl04jAR2QgEGFAM1dU",
+     "lat": 14.3569443,
+     "lng": 100.5675112,
+     "title": "Wat Mahathat, Ayutthaya (วัดมหาธาตุ)",
+     "memo": "Ayutthaya temple ruins, known for the Buddha head in tree roots.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ4dTQxkZ04jARljZU5XA_yr0",
+     "lat": 14.3558722,
+     "lng": 100.5580695,
+     "title": "Wat Phra Si Sanphet (วัดพระศรีสรรเพชญ์)",
+     "memo": "Three large chedis in Ayutthaya's former royal temple.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Back in Bangkok",
+   "items": [
+    {
+     "place_id": "ChIJFaEvxI2f4jARuJg4tlwgJLQ",
+     "lat": 13.736327300000001,
+     "lng": 100.55793349999999,
+     "title": "Cabbages & Condoms",
+     "memo": "Quirky themed Thai restaurant in Sukhumvit.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJuWuZbh6f4jAReZMEm2xxgzM",
+     "lat": 13.7379635,
+     "lng": 100.5604058,
+     "title": "Terminal 21 Asok",
+     "memo": "Mall at Asok with each floor themed on a world city.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Railway market day trip",
+   "items": [
+    {
+     "place_id": "ChIJ10pbl47T4jAR7qFFA1HY2Ds",
+     "lat": 13.4074289,
+     "lng": 99.9985032,
+     "title": "Maeklong Railway Market (ตลาดร่มหุบ)",
+     "memo": "Market where trains pass right through the stalls.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJG4YKPrnr4jARohkpoLqBN4U",
+     "lat": 13.7358272,
+     "lng": 100.2153441,
+     "title": "Wat Sam Phran, Dragon Temple (วัดสามพราน)",
+     "memo": "The Dragon Temple, a pink tower wrapped by a dragon; pairs with the railway market.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Riverside & skyline",
+   "items": [
+    {
+     "place_id": "ChIJFRjwgc2Z4jAR9JIadoa9YBY",
+     "lat": 13.7268131,
+     "lng": 100.51036669999999,
+     "title": "ICONSIAM",
+     "memo": "Large riverside mall with an indoor floating-market food hall.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJGzV2mdKY4jARdIb62T7BoE4",
+     "lat": 13.7240107,
+     "lng": 100.52847709999999,
+     "title": "King Power Mahanakhon SkyWalk",
+     "memo": "Glass-floor observation deck atop the Mahanakhon tower.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

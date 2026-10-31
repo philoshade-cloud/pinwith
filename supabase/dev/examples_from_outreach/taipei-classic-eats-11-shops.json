@@ -1,0 +1,109 @@
+{
+ "owner": "pinwith_ja",
+ "lang": "ja",
+ "slug": "taipei-classic-eats-11-shops",
+ "title": "台北で食べたい老舗グルメ11軒",
+ "desc": "牛肉麺、魯肉飯、小籠包、豆花など、台北の定番グルメが味わえる名店をまとめたマップです。",
+ "kind": "course",
+ "themes": [
+  "台北",
+  "台湾グルメ",
+  "老舗",
+  "小吃"
+ ],
+ "sections": [
+  {
+   "name": null,
+   "items": [
+    {
+     "place_id": "ChIJO2QW8mCpQjQRyMjgSoG-j7o",
+     "lat": 25.053318599999997,
+     "lng": 121.533574,
+     "title": "富霸王豬腳（フーバーワン）",
+     "memo": "豚足の煮込みが名物の店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJU21B8GupQjQRRRTsNGB9Qrg",
+     "lat": 25.0588524,
+     "lng": 121.51797490000001,
+     "title": "川畝園麵食館",
+     "memo": "麺と点心の食堂",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJvSbgmQypQjQRPX7acLGaOj4",
+     "lat": 25.044524,
+     "lng": 121.51261849999999,
+     "title": "城中老牌牛肉拉麵大王",
+     "memo": "老舗の牛肉麺店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJeXELiROpQjQRLfS3rOlt4j0",
+     "lat": 25.0546625,
+     "lng": 121.5102536,
+     "title": "林合發油飯店",
+     "memo": "永楽市場の油飯の店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJN5sMgIWpQjQRBVYjMgpDIYg",
+     "lat": 25.024535699999998,
+     "lng": 121.52902150000001,
+     "title": "師園鹽酥雞 本店",
+     "memo": "台湾式唐揚げ（鹽酥雞）の店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJubVE0QypQjQR_SbZicsVSxA",
+     "lat": 25.0457149,
+     "lng": 121.51376020000001,
+     "title": "劉山東小吃店",
+     "memo": "牛肉麺の老舗",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJgbsfD3GpQjQR7z5ZO22KdVQ",
+     "lat": 25.0437017,
+     "lng": 121.5220376,
+     "title": "雙月食品社 青島店",
+     "memo": "台湾の家庭料理の店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJj50p7F2pQjQR4PKzyg50owk",
+     "lat": 25.0564063,
+     "lng": 121.5303624,
+     "title": "阿城鵝肉",
+     "memo": "ガチョウ肉の店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJDyLXkuXQDRQRfQ16QD6UkH0",
+     "lat": 25.0574647,
+     "lng": 121.54532819999999,
+     "title": "杭州小籠湯包 民生旗艦店",
+     "memo": "小籠包の店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJCS3smIKpQjQR4DmZvSDel1s",
+     "lat": 25.0347819,
+     "lng": 121.527097,
+     "title": "江記東門豆花",
+     "memo": "豆花の店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJyxws_B-pQjQR-OlL3aVgbIo",
+     "lat": 25.064408999999998,
+     "lng": 121.4915464,
+     "title": "今大魯肉飯",
+     "memo": "三重エリアの魯肉飯の店",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

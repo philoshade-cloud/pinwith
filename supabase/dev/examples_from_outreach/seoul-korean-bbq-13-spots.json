@@ -1,0 +1,130 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "seoul-korean-bbq-13-spots",
+ "title": "Seoul Korean BBQ: 13 spots for pork and beef",
+ "desc": "A map of Korean BBQ restaurants across Seoul, split into pork (samgyeopsal, moksal, galbi) and beef or mixed grills, with price ranges where known.",
+ "kind": "collection",
+ "themes": [
+  "Seoul",
+  "Korean BBQ",
+  "samgyeopsal",
+  "galbi"
+ ],
+ "sections": [
+  {
+   "name": "Pork",
+   "items": [
+    {
+     "place_id": "ChIJFRmIDRGjfDUR2nv7h8qMx2Y",
+     "lat": 37.5570994,
+     "lng": 127.0116712,
+     "title": "Geumdwaeji Sikdang (금돼지식당)",
+     "memo": "Premium pork, known for nunkkot moksal; about 25,000-45,000 won pp.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJxb4Cp02jfDURZrG-LHnQQGE",
+     "lat": 37.5740852,
+     "lng": 127.02696429999999,
+     "title": "Yukjeon Sikdang (육전식당)",
+     "memo": "Thick-cut pork belly and pork neck, about 25,000-40,000 won pp.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJqfTTJaeYfDURTvox_bUC6Mk",
+     "lat": 37.541982999999995,
+     "lng": 126.95111759999999,
+     "title": "Mapo Jeong Daepo (정대포)",
+     "memo": "Galmaegisal skirt meat grilled with an egg ring around the pan.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJZ4M289qYfDURRQkth17c-c8",
+     "lat": 37.5519762,
+     "lng": 126.9196031,
+     "title": "Cheongdonok (청돈옥)",
+     "memo": "Aged pork including a tomahawk-style cut; English menu.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJZ9g_awChfDURFZnsQwQSYtA",
+     "lat": 37.493489499999995,
+     "lng": 127.0285991,
+     "title": "BBQ YUL Gangnam",
+     "memo": "Aged pork grilled at the table; 30,000-50,000 won pp.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJYz59k4-jfDUR7szEuiMOq6k",
+     "lat": 37.5279016,
+     "lng": 127.03088210000001,
+     "title": "Sinmi Sikdang (신미식당)",
+     "memo": "Chargrilled spicy pork ribs plus gamjatang in Apgujeong.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJE6-d_eajfDURD_MKNf3aw9I",
+     "lat": 37.520763599999995,
+     "lng": 127.03274329999999,
+     "title": "Mapo Sutbulgalbi (마포숯불갈비)",
+     "memo": "Bone-in pork galbi in a large dining room, open very late.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJzYLVRReifDURJ5ajOQF97do",
+     "lat": 37.5328327,
+     "lng": 126.97102759999999,
+     "title": "Samgakjeong (삼각정)",
+     "memo": "Mosori-sal and grilled pork skin; dinner-only hours.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJwXiLP-CifDURg8Q2HfLxWK8",
+     "lat": 37.567982799999996,
+     "lng": 126.9958945,
+     "title": "Sammijung (삼미정)",
+     "memo": "Samgyeopsal in Euljiro with indoor and outdoor alley seating.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Beef & mixed",
+   "items": [
+    {
+     "place_id": "ChIJO85WpN6jfDURVI5DNM9JkCI",
+     "lat": 37.5360085,
+     "lng": 126.97233519999997,
+     "title": "Mongtan (몽탄)",
+     "memo": "Straw-smoked u-dae galbi beef short rib, about 40,000-70,000 won pp.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ_f318Y6jfDURJT8z3uE0U9I",
+     "lat": 37.5249265,
+     "lng": 127.03259049999998,
+     "title": "Samwon Garden (삼원가든)",
+     "memo": "Marinated and plain beef galbi; reservations advised for dinner.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJiSKLNRekfDURMGzbJdA_GNg",
+     "lat": 37.5021874,
+     "lng": 127.05639380000001,
+     "title": "Daechi Jeongyuk Sikdang (대치정육식당)",
+     "memo": "Butcher-shop style beef inside ribs and pork cheek; few side dishes.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJb3K9qIiifDUR2z_brhuDMVs",
+     "lat": 37.5659791,
+     "lng": 126.9651097,
+     "title": "Hanok Grace (한옥그레이스)",
+     "memo": "Pork and Korean beef platters served in a hanok; closed Sundays.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

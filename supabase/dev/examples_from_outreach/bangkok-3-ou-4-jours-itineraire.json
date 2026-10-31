@@ -1,0 +1,133 @@
+{
+ "owner": "pinwith_fr",
+ "lang": "fr",
+ "slug": "bangkok-3-ou-4-jours-itineraire",
+ "title": "Bangkok en 3 ou 4 jours : itinéraire en 12 étapes",
+ "desc": "Un itinéraire de 3 à 4 jours à Bangkok, des grands temples aux marchés et rooftops, organisé jour par jour.",
+ "kind": "course",
+ "themes": [
+  "Bangkok",
+  "Thaïlande",
+  "Temples",
+  "Rooftop",
+  "3 jours"
+ ],
+ "sections": [
+  {
+   "name": "Jour 1",
+   "items": [
+    {
+     "place_id": "ChIJPzZsMU6Z4jARQUzvk913bCo",
+     "lat": 13.7498558,
+     "lng": 100.4915765,
+     "title": "Grand Palais et Wat Phra Kaew (พระบรมมหาราชวัง)",
+     "memo": "Arriver dès l'ouverture (vers 8 h 30) pour éviter la foule ; 500 THB, avec le temple du Bouddha d'Émeraude.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJgcxFcQWZ4jARLsIR9Qia9H0",
+     "lat": 13.7464237,
+     "lng": 100.4927733,
+     "title": "Wat Pho (วัดโพธิ์)",
+     "memo": "À 10 minutes à pied du palais, célèbre pour son Bouddha couché de 46 m.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJaSv_6gaZ4jARnbiUVn6Z_YY",
+     "lat": 13.743865200000002,
+     "lng": 100.488444,
+     "title": "Wat Arun (วัดอรุณ)",
+     "memo": "Rejoint en bateau public (15-20 THB) ; incontournable au coucher du soleil.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJg86wsZ-Z4jARYyyrIYV1rpw",
+     "lat": 13.744047799999999,
+     "lng": 100.4917704,
+     "title": "Restaurant Chom Arun",
+     "memo": "Sur l'autre rive, vue panoramique sur le Wat Arun au coucher du soleil.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Jour 2",
+   "items": [
+    {
+     "place_id": "ChIJG3NE3m-Z4jARYgTQb3MpaqY",
+     "lat": 13.7762696,
+     "lng": 100.4565981,
+     "title": "Marché flottant de Taling Chan (ตลาดน้ำตลิ่งชัน)",
+     "memo": "Petit marché flottant, moins spectaculaire, mais pratique sans quitter la ville.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ95Nh9yGZ4jARAjfcG2uIZFg",
+     "lat": 13.7373794,
+     "lng": 100.5129349,
+     "title": "Chinatown, Yaowarat Road (เยาวราช)",
+     "memo": "Artère de Chinatown pour les dim sum, les nouilles et la street food.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Jour 3",
+   "items": [
+    {
+     "place_id": "ChIJP-MtN12Z4jARlEBmga-oF4w",
+     "lat": 13.7527691,
+     "lng": 100.50667449999999,
+     "title": "Wat Saket, Mont d'Or (วัดสระเกศ)",
+     "memo": "Environ 300 marches, entrée 50 THB, panorama sur Bangkok.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJIeWu482e4jARYymvLJqTQ58",
+     "lat": 13.7461302,
+     "lng": 100.53477919999999,
+     "title": "Siam Paragon",
+     "memo": "Grand centre commercial ouvert de 10 h à 22 h.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJWVT7hDKZ4jARGJOhe21RhOk",
+     "lat": 13.7493569,
+     "lng": 100.5281613,
+     "title": "Maison de Jim Thompson",
+     "memo": "Maison thaïe traditionnelle et collection d'art asiatique ; entrée 200 THB.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJPXYszxSf4jARvqTluQfT_is",
+     "lat": 13.722396799999999,
+     "lng": 100.5805317,
+     "title": "Tichuca Rooftop Bar",
+     "memo": "Au 46e étage de la tour T-One, décor jungle ; cher, mais la vue vaut le prix.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Jour 4",
+   "items": [
+    {
+     "place_id": "ChIJG7BL7Saf4jARNmn5AQiyAaw",
+     "lat": 13.731428099999999,
+     "lng": 100.5416984,
+     "title": "Parc Lumpini (สวนลุมพินี)",
+     "memo": "Espace vert pour marcher ou regarder le tai-chi et le yoga.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ3fiD6BSc4jARS324hNeR8ZE",
+     "lat": 13.799781,
+     "lng": 100.55042449999999,
+     "title": "Marché de Chatuchak (ตลาดนัดจตุจักร)",
+     "memo": "Le week-end seulement : shopping et spécialités locales.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

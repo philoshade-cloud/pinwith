@@ -1,0 +1,141 @@
+{
+ "owner": "pinwith_es",
+ "lang": "es",
+ "slug": "tokio-13-lugares-imprescindibles",
+ "title": "Qué ver en Tokio: 13 lugares imprescindibles",
+ "desc": "Trece lugares imprescindibles de Tokio, organizados en barrios, templos, miradores y ocio.",
+ "kind": "collection",
+ "themes": [
+  "Tokio",
+  "Japón",
+  "barrios",
+  "miradores",
+  "templos"
+ ],
+ "sections": [
+  {
+   "name": "Barrios",
+   "items": [
+    {
+     "place_id": "ChIJK9EM68qLGGARacmu4KJj5SA",
+     "lat": 35.659482,
+     "lng": 139.7005596,
+     "title": "Cruce de Shibuya (渋谷スクランブル交差点)",
+     "memo": "El famoso paso de cebra; Shibuya es ideal para recorrer a pie.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ-6Jke9eMGGARtltoSsIaeE8",
+     "lat": 35.6949043,
+     "lng": 139.7014074,
+     "title": "Kabukicho, Shinjuku (歌舞伎町一番街)",
+     "memo": "Neones y vida nocturna en Shinjuku, buen primer contacto con Tokio.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJzdWdgh2MGGARh4kg2pVZL3c",
+     "lat": 35.699647299999995,
+     "lng": 139.7713703,
+     "title": "Akihabara (秋葉原電気街)",
+     "memo": "Anime, manga, figuras y recreativas; merece la pena aunque no compres.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJu2-DAeeLGGARUZipC7OFRmA",
+     "lat": 35.671222799999995,
+     "lng": 139.7664859,
+     "title": "Ginza (銀座)",
+     "memo": "El barrio más elegante: grandes almacenes y edificios iluminados de noche.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJlVne8bqMGGARtX5O6ojMvsI",
+     "lat": 35.6710335,
+     "lng": 139.7051821,
+     "title": "Calle Takeshita, Harajuku (竹下通り)",
+     "memo": "Moda alternativa, dulces y cafés curiosos en el barrio más joven.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJMwpiebSMGGARPr_454zHvDQ",
+     "lat": 35.6700649,
+     "lng": 139.6949656,
+     "title": "Parque Yoyogi (代々木公園)",
+     "memo": "Parada verde de Harajuku, junto al santuario Meiji.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJZft8gGmPGGARUeGpIuZ-8Do",
+     "lat": 35.7341538,
+     "lng": 139.8341188,
+     "title": "Estatua de Oliver (Tsubasa), Yotsugi (四つ木)",
+     "memo": "Yotsugi esconde estatuas de Oliver y Benji: una mini ruta para fans.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Templos",
+   "items": [
+    {
+     "place_id": "ChIJ8T1GpMGOGGARDYGSgpooDWw",
+     "lat": 35.7147651,
+     "lng": 139.7966553,
+     "title": "Templo Senso-ji, Asakusa (浅草寺)",
+     "memo": "El Tokio tradicional de farolillos; Asakusa se recorre bien a pie temprano.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ5SZMmreMGGARcz8QSTiJyo8",
+     "lat": 35.6763976,
+     "lng": 139.6993259,
+     "title": "Santuario Meiji Jingu (明治神宮)",
+     "memo": "Santuario sintoísta rodeado de bosque, al lado de Harajuku.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Miradores",
+   "items": [
+    {
+     "place_id": "ChIJ4Rr2JWiLGGARcyRSHuZ-9G8",
+     "lat": 35.6586719,
+     "lng": 139.7019848,
+     "title": "Shibuya Sky (渋谷スカイ)",
+     "memo": "Mirador al aire libre sobre Shibuya; conviene reservar para el atardecer.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJCewJkL2LGGAR3Qmk0vCTGkg",
+     "lat": 35.6585805,
+     "lng": 139.7454329,
+     "title": "Torre de Tokio (東京タワー)",
+     "memo": "Torre icónica con mirador; muy bonita iluminada de noche.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJnctryNSMGGARLv4MknPFseU",
+     "lat": 35.689733,
+     "lng": 139.6916563,
+     "title": "Gobierno Metropolitano de Tokio (東京都庁)",
+     "memo": "Mirador gratuito en los rascacielos de Shinjuku.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Ocio",
+   "items": [
+    {
+     "place_id": "ChIJ18IK6x2KGGARKTc2yLS-030",
+     "lat": 35.6300488,
+     "lng": 139.77569119999998,
+     "title": "Odaiba (お台場海浜公園)",
+     "memo": "Isla artificial de ocio con centros comerciales y vistas a la bahía.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

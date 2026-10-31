@@ -1,0 +1,161 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "mexico-city-tacos-15-taquerias",
+ "title": "Mexico City tacos: 15 taquerias by neighborhood",
+ "desc": "Fifteen taco stands and taquerias across Mexico City, grouped by neighborhood from Narvarte and Roma to Juarez, Condesa and Centro.",
+ "kind": "collection",
+ "themes": [
+  "Mexico City",
+  "tacos",
+  "street food",
+  "taquerias"
+ ],
+ "sections": [
+  {
+   "name": "Narvarte & Roma Sur",
+   "items": [
+    {
+     "place_id": "ChIJnZBjSN3_0YURnkzMrNIlI6E",
+     "lat": 19.4027915,
+     "lng": -99.1686695,
+     "title": "Tacos Los Caramelos",
+     "memo": "Asada taco on a flour tortilla, on the Narvarte and Roma Sur edge.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ4Ub_7Ab_0YUR59EuwtrbyzE",
+     "lat": 19.3895704,
+     "lng": -99.15306609999999,
+     "title": "La Taquiza al Carbon",
+     "memo": "Al pastor carved from the trompo in Narvarte.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJVU4N5gb_0YURZrVDZ6ssFm0",
+     "lat": 19.3888873,
+     "lng": -99.15307879999999,
+     "title": "Tacos Tony",
+     "memo": "Ask for the suadero en trozo (in chunks).",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Roma Norte",
+   "items": [
+    {
+     "place_id": "ChIJNwWOsK7_0YUR2SCReMI2b50",
+     "lat": 19.4190878,
+     "lng": -99.1640686,
+     "title": "Tacos Beto",
+     "memo": "Suadero and longaniza cooked on a comal de bola.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJfb7_qTn_0YURa8ln-Col3ck",
+     "lat": 19.417105499999998,
+     "lng": -99.16449159999999,
+     "title": "Tacos El Gato Volador",
+     "memo": "Open 24 hours; try the chupa, a mix of fillings.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJZ-dNcTr_0YURvT79FclhNi0",
+     "lat": 19.419889299999998,
+     "lng": -99.16051069999999,
+     "title": "Birria Estilo Jalisco",
+     "memo": "Birria tacos plus consome from a stand running since 1992.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJORuPU03_0YURXFaB95uFEPg",
+     "lat": 19.414881599999998,
+     "lng": -99.16475779999999,
+     "title": "Los Tacos de Homero",
+     "memo": "Go for the cochinita pibil.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJv2uZomL_0YURpS0yCbOx0rk",
+     "lat": 19.4176943,
+     "lng": -99.1557899,
+     "title": "Tizne Tacomotora",
+     "memo": "Kalbi-style brisket taco.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Juarez & San Rafael",
+   "items": [
+    {
+     "place_id": "ChIJ7S80Mb7_0YURUrepme5L1WA",
+     "lat": 19.4289581,
+     "lng": -99.1564554,
+     "title": "Taquitos de Mixiote Castelan",
+     "memo": "Lamb mixiote tacos in Juarez.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJhUDTiVf_0YURH_9BKcIsG-8",
+     "lat": 19.4233381,
+     "lng": -99.1722432,
+     "title": "Tacos La Soledad",
+     "memo": "Campechano with a choice of quesillo or provolone.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJSSYgX0__0YURKhUSXw-nMqU",
+     "lat": 19.4272745,
+     "lng": -99.1598823,
+     "title": "El Turuleto",
+     "memo": "Seafood tacos; the Galan is a creamy shrimp taco.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJS9ONDHr50YURYMZWB3q_oiI",
+     "lat": 19.4375994,
+     "lng": -99.1594609,
+     "title": "Porcino",
+     "memo": "House-smoked pork tacos, just north of Juarez in San Rafael.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Condesa",
+   "items": [
+    {
+     "place_id": "ChIJJX-3tkb_0YURq7m4haNuVj0",
+     "lat": 19.414198600000002,
+     "lng": -99.1722422,
+     "title": "Barbacoa Dani",
+     "memo": "Lamb barbacoa; order the espalda (back) cut.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Centro",
+   "items": [
+    {
+     "place_id": "ChIJy1qXM9L-0YUR4Vx7bOb8jFA",
+     "lat": 19.4283994,
+     "lng": -99.1371241,
+     "title": "Taqueria El Torito",
+     "memo": "Suadero and tripa campechano, serving since 1957.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJK_3tPeL_0YURFX1xTcYmlwc",
+     "lat": 19.4303796,
+     "lng": -99.13524900000002,
+     "title": "Tacos de Canasta Don Kaly",
+     "memo": "Basket tacos; the mole verde one is the pick.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

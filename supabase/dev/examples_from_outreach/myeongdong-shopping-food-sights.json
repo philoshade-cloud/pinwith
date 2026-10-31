@@ -1,0 +1,111 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "myeongdong-shopping-food-sights",
+ "title": "Myeongdong guide: K-beauty, shopping, food & sights",
+ "desc": "Myeongdong in Seoul, grouped into shopping and K-beauty, food, and sights and shows.",
+ "kind": "collection",
+ "themes": [
+  "Myeongdong",
+  "K-beauty",
+  "shopping",
+  "Seoul food"
+ ],
+ "sections": [
+  {
+   "name": "Shopping & K-beauty",
+   "items": [
+    {
+     "place_id": "ChIJ91oV-fGifDURtBoizcsB2Hc",
+     "lat": 37.564707299999995,
+     "lng": 126.98166370000001,
+     "title": "Lotte Department Store Main (롯데백화점 본점)",
+     "memo": "Flagship department store with supermarket, food court and duty-free; known from K-dramas.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJGXh8WPGifDURZOTN-wc3Tdc",
+     "lat": 37.56092230000001,
+     "lng": 126.98113889999999,
+     "title": "Shinsegae Main Store (신세계백화점 본점)",
+     "memo": "Quieter flagship with a strong food hall and luxury brands.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ9XDV4O-ifDURKjI94KEc1h4",
+     "lat": 37.563946,
+     "lng": 126.98516239999998,
+     "title": "Olive Young Myeongdong (올리브영 명동)",
+     "memo": "Large Olive Young flagship with a wide range of Korean beauty brands; fewer testers than smaller stores.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJoY1oZvCifDURDKzruLYtCuU",
+     "lat": 37.5619351,
+     "lng": 126.9852954,
+     "title": "3CE Pink Space Hotel (Stylenanda)",
+     "memo": "Pink hotel-themed store for trendy makeup and clothes; very photogenic.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJa_2xkjujfDURlY8M7eSIgR8",
+     "lat": 37.5633734,
+     "lng": 126.9828862,
+     "title": "Noon Square (눈스퀘어)",
+     "memo": "Mall with affordable international fashion brands.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Food",
+   "items": [
+    {
+     "place_id": "ChIJW7FBDfCifDURHTpisLbVUH0",
+     "lat": 37.5610151,
+     "lng": 126.9860829,
+     "title": "Myeongdong Kyoja (명동교자)",
+     "memo": "Michelin-listed noodle house; try the kalguksu. The cold noodles are very spicy.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJvZjTMWC9fDURxnT8dx21N3U",
+     "lat": 37.5643946,
+     "lng": 126.9850185,
+     "title": "Hadongkwan (하동관)",
+     "memo": "Gomtang (beef bone soup) since 1939; closes mid-afternoon, so go early.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Sights & shows",
+   "items": [
+    {
+     "place_id": "ChIJs2hQTOWifDURk8inZqIttEQ",
+     "lat": 37.5633851,
+     "lng": 126.987436,
+     "title": "Myeongdong Cathedral (명동성당)",
+     "memo": "Gothic cathedral from 1898; English Mass on Sundays, lit up at Christmas.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJEbpmM_CifDURKJZq-oh9uxo",
+     "lat": 37.5635748,
+     "lng": 126.98361860000001,
+     "title": "Myeongdong NANTA Theatre",
+     "memo": "Long-running non-verbal kitchen-drumming comedy show.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJmylq-vyifDUR_r3t4Ve-w3k",
+     "lat": 37.559315,
+     "lng": 126.99447699999997,
+     "title": "Namsangol Hanok Village (남산골한옥마을)",
+     "memo": "Traditional hanok village a short trip from Myeongdong.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

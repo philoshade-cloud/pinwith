@@ -1,0 +1,152 @@
+{
+ "owner": "pinwith_zhtw",
+ "lang": "zh-TW",
+ "slug": "osaka-food-guide-15-eats",
+ "title": "大阪必吃美食：15間餐廳與甜點",
+ "desc": "大阪難波、道頓堀、心齋橋、梅田到泉佐野的美食地圖，涵蓋燒肉、大阪燒、拉麵、甜點與放題，依區域分類。",
+ "kind": "collection",
+ "themes": [
+  "大阪",
+  "大阪美食",
+  "道頓堀",
+  "梅田",
+  "放題"
+ ],
+ "sections": [
+  {
+   "name": "難波・道頓堀・心齋橋",
+   "items": [
+    {
+     "place_id": "ChIJAQC0qmvnAGARz_nB6wA8nJ8",
+     "lat": 34.6653787,
+     "lng": 135.5039637,
+     "title": "千房 千日前本店（千房）",
+     "memo": "大阪燒老店，人氣的「噴射」大阪燒。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJOyWRIQDnAGAR0cfkYuLIhpg",
+     "lat": 34.6650099,
+     "lng": 135.5059037,
+     "title": "日本橋 鶴屋（すき焼き・しゃぶしゃぶ）",
+     "memo": "主打抵食的國產牛壽喜燒",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJJYsl10HnAGARmCmBnrNOMnI",
+     "lat": 34.6662019,
+     "lng": 135.5065961,
+     "title": "高橋食品（黑門市場）",
+     "memo": "黑門市場百年老店的濃豆漿",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJNfDR3HnnAGARoBwYjCKbXJg",
+     "lat": 34.6677597,
+     "lng": 135.5010546,
+     "title": "OKINI燒肉 難波店",
+     "memo": "道頓堀一帶的和牛燒肉",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJlWRE0TTnAGARcynt34yuEMM",
+     "lat": 34.673657999999996,
+     "lng": 135.501791,
+     "title": "黒毛和牛とタンとハラミ焼肉 心斎橋店",
+     "memo": "主打厚切牛舌的燒肉店。",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "梅田・天神橋",
+   "items": [
+    {
+     "place_id": "ChIJpc8bW9vmAGARMdisEu3GKVg",
+     "lat": 34.6971004,
+     "lng": 135.51164749999998,
+     "title": "中村屋（天神橋筋商店街）",
+     "memo": "天神橋筋商店街的人氣可樂餅店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ4ZH0nkXnAGARabtyTEJLBWQ",
+     "lat": 34.7077497,
+     "lng": 135.50679929999998,
+     "title": "Truffle BAKERY 大阪店",
+     "memo": "要排隊的人氣麵包店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJHThWGQDnAGAR51eqlzhEqDI",
+     "lat": 34.70187130000001,
+     "lng": 135.49336789999998,
+     "title": "らぁ麺 鴨と葱 梅田店",
+     "memo": "人氣鴨湯拉麵",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJq00cb8DnAGARB2VK9gnuh6Q",
+     "lat": 34.7029857,
+     "lng": 135.4959266,
+     "title": "Afternoon Tea LOVE & TABLE LUCUA大阪店",
+     "memo": "人氣千層水果蛋糕",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJY2t6EJLmAGAR-VU44gf8VFs",
+     "lat": 34.7047004,
+     "lng": 135.4981647,
+     "title": "ぼてぢゅう 阪急三番街店（BOTEJYU）",
+     "memo": "大阪燒老字號，阪急三番街店。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJsZ_Ep1XnAGARZiXZv2VPgnM",
+     "lat": 34.7026713,
+     "lng": 135.50257349999998,
+     "title": "うおしん酒場 梅田鉄板部",
+     "memo": "牡蠣放題的鐵板居酒屋，訂位時註明放題方案。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJvVYRM-fnAGARCUjEWz-Nchw",
+     "lat": 34.6996825,
+     "lng": 135.50085199999998,
+     "title": "梅田 すし継",
+     "memo": "高級壽司放題，需要訂位",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "泉佐野（臨空城）",
+   "items": [
+    {
+     "place_id": "ChIJnSb6dnHJAGARWmjjnLBv49M",
+     "lat": 34.4125538,
+     "lng": 135.3019064,
+     "title": "燒肉Dining OneKarubi 臨空城店",
+     "memo": "和牛燒肉放題",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ57twdwrIAGARbqoHo6LHgHI",
+     "lat": 34.42041,
+     "lng": 135.315189,
+     "title": "泉佐野漁協 青空市場",
+     "memo": "吃生蠔和海鮮的漁市場，離關西機場不遠",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ57twdwrIAGARZvC3v-u8lug",
+     "lat": 34.4201536,
+     "lng": 135.3153156,
+     "title": "裕太朗寿し（青空市場內）",
+     "memo": "青空市場內的海鮮丼",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

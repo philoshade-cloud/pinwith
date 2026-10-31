@@ -1,0 +1,140 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "hanoi-street-food-13-spots",
+ "title": "Hanoi street food: 13 spots for pho, banh mi and egg coffee",
+ "desc": "Hanoi street food by dish: bánh mì, bún and bánh xèo, phở, plus sweets and egg coffee around the Old Quarter.",
+ "kind": "collection",
+ "themes": [
+  "Hanoi",
+  "street food",
+  "pho",
+  "egg coffee"
+ ],
+ "sections": [
+  {
+   "name": "Bánh mì",
+   "items": [
+    {
+     "place_id": "ChIJtRY3u3SrNTERs95UQ9jA--s",
+     "lat": 21.036113,
+     "lng": 105.84857699999999,
+     "title": "Bánh Mì 25",
+     "memo": "Order it with avocado; the sandwiches are huge and cheap.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJb-nIxTyrNTER2N7x05ZIZKU",
+     "lat": 21.037596399999998,
+     "lng": 105.851976,
+     "title": "Bamichao (Vua Bánh Mì Chảo)",
+     "memo": "Bánh mì chảo thập cẩm: pan bread with mixed meats, cheese and eggs.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Bún & bánh xèo",
+   "items": [
+    {
+     "place_id": "ChIJY89m6cCrNTERG-N0Fy4dWBw",
+     "lat": 21.0343417,
+     "lng": 105.854475,
+     "title": "Bún Chả Ta",
+     "memo": "Bún chả with spring rolls; pairs well with a Saigon beer.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJF5qJQL6rNTER5PCg1SoKopo",
+     "lat": 21.0322493,
+     "lng": 105.8482095,
+     "title": "Bún Chả Đắc Kim",
+     "memo": "Bún chả at communal tables on tiny plastic stools.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ7_EaCb6rNTER8wxjCPDCtiQ",
+     "lat": 21.032158499999998,
+     "lng": 105.84691120000001,
+     "title": "Bún Bò Nam Bộ Bách Phương",
+     "memo": "Stir-fried beef noodle salad, best with a cold Bia Sài Gòn.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJyUnfC76rNTERW7TJaTDeSTc",
+     "lat": 21.0320859,
+     "lng": 105.84690080000001,
+     "title": "Mr Bảy Miền Tây",
+     "memo": "Crispy bánh xèo you cut, roll in rice paper and dip.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Phở",
+   "items": [
+    {
+     "place_id": "ChIJIUjGf7-rNTERX1M5pIsHFiU",
+     "lat": 21.0334599,
+     "lng": 105.85214619999999,
+     "title": "Phở Sướng",
+     "memo": "Pho served with fried tofu cakes.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJAQWxiJWrNTER69Gq01PMo_g",
+     "lat": 21.0304701,
+     "lng": 105.84876,
+     "title": "Phở 10 Lý Quốc Sư",
+     "memo": "Pho under a big mound of coriander.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJO7qN1b2rNTERi1n8m8ji4QU",
+     "lat": 21.0336237,
+     "lng": 105.8465147,
+     "title": "Phở Gia Truyền Bát Đàn",
+     "memo": "Classic family-run pho; add the spicy peppers.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Sweets & egg coffee",
+   "items": [
+    {
+     "place_id": "ChIJAdytvr-rNTERMpC8MIMieg8",
+     "lat": 21.032423400000003,
+     "lng": 105.85056410000001,
+     "title": "King Roti Hàng Gai",
+     "memo": "Messy chocolate roti; ask for extra napkins.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJl7OUwr-rNTERr7RCHxAFMNU",
+     "lat": 21.031592699999997,
+     "lng": 105.8508961,
+     "title": "The Note Coffee",
+     "memo": "Egg coffee among walls of sticky notes; a small is plenty.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJXTOF7sCrNTERY3MOxYpAo_w",
+     "lat": 21.0334664,
+     "lng": 105.854518,
+     "title": "Cà Phê Giảng",
+     "memo": "Egg coffee since 1946, made with yolks when milk was scarce.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJwYgVi7-rNTERLWjR63qaaFg",
+     "lat": 21.0320036,
+     "lng": 105.8521694,
+     "title": "Cà Phê Đinh",
+     "memo": "Second-floor egg coffee up a dim hallway near Hoan Kiem Lake.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

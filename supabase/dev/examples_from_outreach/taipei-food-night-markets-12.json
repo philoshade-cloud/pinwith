@@ -1,0 +1,127 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "taipei-food-night-markets-12",
+ "title": "What to eat in Taipei: 12 restaurants and night markets",
+ "desc": "Where to eat in Taipei: beef noodles, soy milk breakfasts, dumplings, pineapple cakes and the main night markets, plus a tea house.",
+ "kind": "collection",
+ "themes": [
+  "Taipei",
+  "Taiwanese food",
+  "night markets",
+  "street food"
+ ],
+ "sections": [
+  {
+   "name": "Restaurants & bakeries",
+   "items": [
+    {
+     "place_id": "ChIJgRdW94KpQjQRODiapkz_DB0",
+     "lat": 25.0329382,
+     "lng": 121.52811109999998,
+     "title": "Yong Kang Beef Noodle (永康牛肉麵)",
+     "memo": "Beef noodle soup with long-simmered broth, near Dongmen Station.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJff6pZXCpQjQRHi3vcbjQip8",
+     "lat": 25.0442333,
+     "lng": 121.5248433,
+     "title": "Fu Hang Soy Milk (阜杭豆漿)",
+     "memo": "Soy milk, youtiao and scallion pancakes; crowded, so go early.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJbTKSE4KpQjQRXDZZI57v-pM",
+     "lat": 25.0335035,
+     "lng": 121.53011799999999,
+     "title": "Din Tai Fung Xinyi (鼎泰豐 信義店)",
+     "memo": "Xiao long bao; watch the dumplings being made through the glass.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJdzzG5pSrQjQR8r_CfyXqf7U",
+     "lat": 25.0512434,
+     "lng": 121.5614407,
+     "title": "Chia Te Bakery (佳德糕餅)",
+     "memo": "Pineapple cakes from the Nanjing East Road bakery.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJy4mRTgmpQjQRfoMOoGKOUZw",
+     "lat": 25.0445025,
+     "lng": 121.50740869999998,
+     "title": "Hot-Star Large Fried Chicken (豪大大雞排)",
+     "memo": "Huge fried chicken cutlet.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Night markets",
+   "items": [
+    {
+     "place_id": "ChIJg6W0DZyrQjQR9vZdgYMRoj0",
+     "lat": 25.0508854,
+     "lng": 121.5774891,
+     "title": "Raohe Night Market (饒河街夜市)",
+     "memo": "Stinky tofu with pickled cabbage, peanut ice cream rolls, grilled squid.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ5w5U9purQjQRJAjF-Pc-FfY",
+     "lat": 25.0509544,
+     "lng": 121.5773857,
+     "title": "Fuzhou Shizu Pepper Bun (福州世祖胡椒餅)",
+     "memo": "Clay-oven pepper buns filled with peppery pork, about NTD 60.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJxUXPVmupQjQRtBB6oj-S5qI",
+     "lat": 25.0566808,
+     "lng": 121.51536410000001,
+     "title": "Ningxia Night Market (寧夏夜市)",
+     "memo": "Small, food-focused, mostly local vendors; lu rou fan and ba wan.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJBa_9xLGuQjQRKfnnhr5twuc",
+     "lat": 25.0884972,
+     "lng": 121.52435039999999,
+     "title": "Shilin Night Market (士林夜市)",
+     "memo": "Taro balls in warm syrup, fried milk and a basement food court.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJB4taPsurQjQRLl26j8d9Xbo",
+     "lat": 25.0301412,
+     "lng": 121.5542672,
+     "title": "Tonghua Night Market (臨江街夜市)",
+     "memo": "Laid-back local market near Taipei 101; ai yu jelly drinks.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJDdo_4cKpQjQRb4wdglMtMYc",
+     "lat": 25.008415600000003,
+     "lng": 121.51172709999999,
+     "title": "Lehua Night Market (樂華夜市)",
+     "memo": "Away from the centre and popular with locals; oyster omelettes.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Tea",
+   "items": [
+    {
+     "place_id": "ChIJTW8Gs4epQjQRRA0-FAu_O0k",
+     "lat": 25.0245484,
+     "lng": 121.53448440000001,
+     "title": "Wistaria Tea House (紫藤廬)",
+     "memo": "Historic tea house, a good place to try a traditional tea ceremony.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

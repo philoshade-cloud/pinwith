@@ -1,0 +1,85 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "suwon-kdrama-filming-locations",
+ "title": "Suwon K-drama filming locations: 8 spots to visit",
+ "desc": "K-drama filming locations around Suwon, centred on Hwaseong Fortress and Haenggung-dong; an easy day trip from Seoul.",
+ "kind": "collection",
+ "themes": [
+  "K-drama",
+  "filming locations",
+  "Suwon",
+  "day trip"
+ ],
+ "sections": [
+  {
+   "name": null,
+   "items": [
+    {
+     "place_id": "ChIJ-9mTDcpcezURGKmU0K6Uykg",
+     "lat": 37.28746,
+     "lng": 127.0176056,
+     "title": "Hwahongmun Gate (Buksumun)",
+     "memo": "Fortress gate seen in Lovely Runner; best around sunset.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJgcIxDMpcezURPiQ5d54tMT4",
+     "lat": 37.2875289,
+     "lng": 127.0180362,
+     "title": "Banghwasuryujeong Pavilion",
+     "memo": "Pavilion linked to Twenty-Five Twenty-One; great city views from the walls.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJLcPybOpDezURtmvy1Pt6HKo",
+     "lat": 37.2847327,
+     "lng": 127.0136077,
+     "title": "Mong Ted Cafe (Im Sol's House)",
+     "memo": "Cafe used as Im Sol's house in Lovely Runner; try the coffee and salt bread.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJD3STZORDezURt_EoLj7Qxa8",
+     "lat": 37.2837222,
+     "lng": 127.0115424,
+     "title": "Kazaguruma (카자구루마)",
+     "memo": "Exterior of the gimbap shop in Extraordinary Attorney Woo; serves katsu.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ9W-siPtdezURdJl_W5UvCqc",
+     "lat": 37.2855639,
+     "lng": 127.0165658,
+     "title": "Haenggung-dong",
+     "memo": "Neighbourhood used in several dramas; murals and indie cafes.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJCRJLTDZDezUR5HNU9y_TFg8",
+     "lat": 37.2775525,
+     "lng": 127.0167348,
+     "title": "Suwon Hwaseong Fortress",
+     "memo": "UNESCO-listed fortress linked to Twenty-Five Twenty-One; walk the wall.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJNX3wrwpFezURBvrNMv-6hZI",
+     "lat": 37.2652416,
+     "lng": 127.0377224,
+     "title": "Wolhwawon Garden (월화원)",
+     "memo": "Chinese-style garden seen in Moon Lovers: Scarlet Heart Ryeo.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJl8Rhv8dCezURIb5_SH12N7w",
+     "lat": 37.2880985,
+     "lng": 126.9763495,
+     "title": "Suwon Irwol Arboretum",
+     "memo": "Arboretum fans link to Queen of Tears (unconfirmed); greenhouse walks.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

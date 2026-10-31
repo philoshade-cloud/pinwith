@@ -1,0 +1,152 @@
+{
+ "owner": "pinwith_pt",
+ "lang": "pt",
+ "slug": "tokyo-3-day-classic-itinerary",
+ "title": "Tóquio em 3 dias: roteiro clássico com 15 paradas",
+ "desc": "Mapa de um roteiro de 3 dias em Tóquio, organizado por dia, com templos, santuários, mirantes, mercados e bairros clássicos.",
+ "kind": "course",
+ "themes": [
+  "Tóquio",
+  "Japão",
+  "roteiro",
+  "templos",
+  "mirantes"
+ ],
+ "sections": [
+  {
+   "name": "Dia 1",
+   "items": [
+    {
+     "place_id": "ChIJK9EM68qLGGARacmu4KJj5SA",
+     "lat": 35.659482,
+     "lng": 139.7005596,
+     "title": "Cruzamento de Shibuya (渋谷スクランブル交差点)",
+     "memo": "Oito semáforos abrindo juntos; dá para ver do alto em cafés ao redor.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJx1e971eLGGARum8w_tnpFwI",
+     "lat": 35.6590552,
+     "lng": 139.7006288,
+     "title": "Estátua do Hachiko (ハチ公像)",
+     "memo": "Homenagem ao cão que esperou o dono na estação por cerca de 10 anos.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJlVne8bqMGGARtX5O6ojMvsI",
+     "lat": 35.6710335,
+     "lng": 139.7051821,
+     "title": "Takeshita Street, Harajuku (竹下通り)",
+     "memo": "Rua estreita e lotada de lojas coloridas e alternativas.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ5SZMmreMGGARcz8QSTiJyo8",
+     "lat": 35.6763976,
+     "lng": 139.6993259,
+     "title": "Meiji Jingu (明治神宮)",
+     "memo": "Santuário xintoísta de 1920, entrada grátis, com barris de saquê.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Dia 2",
+   "items": [
+    {
+     "place_id": "ChIJ8T1GpMGOGGARDYGSgpooDWw",
+     "lat": 35.7147651,
+     "lng": 139.7966553,
+     "title": "Templo Sensō-ji e Nakamise, Asakusa (浅草寺)",
+     "memo": "Templo budista mais antigo de Tóquio, grátis, com a rua Nakamise na frente.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ__-AdayOGGAR6EGPwvcpzTA",
+     "lat": 35.6979149,
+     "lng": 139.77195709999998,
+     "title": "Akihabara Radio Kaikan (秋葉原ラジオ会館)",
+     "memo": "Prédio de lojas de anime, mangá e colecionáveis em Akihabara.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJEX3XFIOOGGAR3XdJvRjWLyM",
+     "lat": 35.7188351,
+     "lng": 139.7765215,
+     "title": "Museu Nacional de Tóquio, Ueno (東京国立博物館)",
+     "memo": "Dentro do Parque Ueno, junto com outros museus e o zoológico.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJh7eDrwCPGGARCs9fpCkKS2U",
+     "lat": 35.710068199999995,
+     "lng": 139.7746009,
+     "title": "Ameya-Yokochō (アメ横)",
+     "memo": "Rua de comércio animada perto da estação de Ueno.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ18IK6x2KGGARKTc2yLS-030",
+     "lat": 35.6300488,
+     "lng": 139.77569119999998,
+     "title": "Odaiba Marine Park (お台場海浜公園)",
+     "memo": "Ilha artificial com vista da Rainbow Bridge e uma mini Estátua da Liberdade.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Dia 3",
+   "items": [
+    {
+     "place_id": "ChIJPfFaQhOMGGAR-QPbNQoAG6M",
+     "lat": 35.6867824,
+     "lng": 139.75714449999998,
+     "title": "Jardins Leste do Palácio Imperial (皇居東御苑)",
+     "memo": "Jardins abertos ao público, com ruínas do Castelo de Edo.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJK0TdDneLGGARVxJ3MHC0emY",
+     "lat": 35.6600712,
+     "lng": 139.7292907,
+     "title": "Tokyo City View, Roppongi Hills (東京シティビュー)",
+     "memo": "Mirante no 52º andar da Mori Tower; ingresso inclui o Mori Art Museum.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJzRzI3HSNGGARRwZW6AtJfi0",
+     "lat": 35.6950521,
+     "lng": 139.70191169999998,
+     "title": "Cabeça do Godzilla, Shinjuku (ゴジラヘッド)",
+     "memo": "No topo do Shinjuku Toho Building, em Kabukichō.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJKQAKAOSLGGARwGhpOXWgfYo",
+     "lat": 35.6731273,
+     "lng": 139.7672138,
+     "title": "Itoya, Ginza (銀座伊東屋)",
+     "memo": "Papelaria de vários andares em Ginza, na Chūō-dori.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJW2cLzSGLGGARXAKXv6EkbqI",
+     "lat": 35.6647703,
+     "lng": 139.7702515,
+     "title": "Mercado Externo de Tsukiji (築地場外市場)",
+     "memo": "Ficou no lugar antigo quando o atacado foi para Toyosu em 2018.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ35ov0dCOGGARKvdDH7NPHX0",
+     "lat": 35.7100627,
+     "lng": 139.81070040000003,
+     "title": "Tokyo Skytree (東京スカイツリー)",
+     "memo": "Torre de 634 metros, inaugurada em 2012, com mirantes no alto.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

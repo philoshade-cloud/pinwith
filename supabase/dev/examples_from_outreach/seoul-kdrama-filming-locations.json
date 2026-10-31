@@ -1,0 +1,140 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "seoul-kdrama-filming-locations",
+ "title": "Seoul K-drama filming locations: 15 spots to visit",
+ "desc": "K-drama filming locations around Seoul, from hanok villages and palaces to Han River parks, each with the shows filmed there.",
+ "kind": "collection",
+ "themes": [
+  "K-drama",
+  "filming locations",
+  "Seoul"
+ ],
+ "sections": [
+  {
+   "name": null,
+   "items": [
+    {
+     "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+     "lat": 37.5814696,
+     "lng": 126.9849519,
+     "title": "Bukchon Hanok Village",
+     "memo": "Hanok alleys seen in Personal Taste, Love Next Door and Our Beloved Summer.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJe4Jbot2ifDUR2zWhruwyaow",
+     "lat": 37.5737132,
+     "lng": 126.9901271,
+     "title": "Ikseon-dong Hanok Village",
+     "memo": "Hanok-lined lanes from True Beauty and Love Scout; busy on weekends, go early.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ8xRYr29FezUR3AtFqx2pIlw",
+     "lat": 37.5665256,
+     "lng": 127.0092236,
+     "title": "Dongdaemun Design Plaza (DDP)",
+     "memo": "Futuristic landmark seen in the Vincenzo finale and Lovely Runner.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJrUQcQuuifDUR-IWAEQylVek",
+     "lat": 37.572389,
+     "lng": 126.9769117,
+     "title": "Gwanghwamun Square",
+     "memo": "Central square featured in The King: Eternal Monarch and Love Scout.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ666w-LCjfDURCTJtf5ivJ-I",
+     "lat": 37.5648648,
+     "lng": 126.9754485,
+     "title": "Deoksugung Stone-wall Road",
+     "memo": "Stone-wall walk from Doctor Slump and Extraordinary Attorney Woo; lovely at night.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJDXyPRF-ifDURo-L1LXIXqj8",
+     "lat": 37.5548599,
+     "lng": 126.9792405,
+     "title": "Namsan Baekbeom Square",
+     "memo": "Namsan square seen in Love Alarm and Itaewon Class.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+     "lat": 37.5511694,
+     "lng": 126.9882266,
+     "title": "N Seoul Tower",
+     "memo": "Iconic tower from Business Proposal, King the Land, Boys Over Flowers and more.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ6RPSci2jfDURXTSdf7JjYp8",
+     "lat": 37.5806571,
+     "lng": 127.0074835,
+     "title": "Naksan Park",
+     "memo": "Hilltop park on the old city wall, seen in Itaewon Class and Call It Love.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ63NnRS6jfDURt-efnKIjXzs",
+     "lat": 37.5779788,
+     "lng": 127.0071915,
+     "title": "Ihwa Mural Village",
+     "memo": "Mural village from Strong Woman Do Bong Soon and Love Next Door; residential, keep quiet.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ77fEAzuffDURLEWNv56G2KQ",
+     "lat": 37.5267106,
+     "lng": 126.9347112,
+     "title": "Yeouido Hangang Park",
+     "memo": "Riverside park from Start-Up and Legend of the Blue Sea; fireworks festival in autumn.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJeVnK5X-hfDURv2fEEK-332M",
+     "lat": 37.5126335,
+     "lng": 126.9984783,
+     "title": "Banpo Bridge & Hangang Park",
+     "memo": "Riverside scenes from Our Unwritten Seoul and Itaewon Class; rainbow fountain at night.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJeSDcVPuhfDURtpnHjFavX9E",
+     "lat": 37.5177627,
+     "lng": 126.9596671,
+     "title": "Nodeul Island",
+     "memo": "Han River island used as Start-Up's SANDBOX campus.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJN2YSAj6ZfDURgVbLv3afUAQ",
+     "lat": 37.5705673,
+     "lng": 126.8942802,
+     "title": "Oil Tank Culture Park",
+     "memo": "Former oil depot turned culture park, used as Start-Up's SANDBOX entrance.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJo35QAxelfDUR4jt5FPgWSIU",
+     "lat": 37.5411513,
+     "lng": 127.0659498,
+     "title": "Common Ground",
+     "memo": "Container mall seen in Vincenzo and Our Unwritten Seoul.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJH5tDs-WYfDURJGb8yuqKRwg",
+     "lat": 37.5662075,
+     "lng": 126.9192364,
+     "title": "Gyeongui Line Forest Park",
+     "memo": "Linear park on an old rail line, seen in Because This Is My First Life and I Am Not a Robot.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

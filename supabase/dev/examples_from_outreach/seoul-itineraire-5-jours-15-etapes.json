@@ -1,0 +1,162 @@
+{
+ "owner": "pinwith_fr",
+ "lang": "fr",
+ "slug": "seoul-itineraire-5-jours-15-etapes",
+ "title": "Itinéraire de 5 jours à Séoul : 15 incontournables",
+ "desc": "Un itinéraire de 5 jours à Séoul, jour par jour : palais, temples, marchés, quartiers historiques et musées.",
+ "kind": "course",
+ "themes": [
+  "Séoul",
+  "Corée du Sud",
+  "palais",
+  "marchés",
+  "itinéraire"
+ ],
+ "sections": [
+  {
+   "name": "Jour 1",
+   "items": [
+    {
+     "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+     "lat": 37.579617,
+     "lng": 126.977041,
+     "title": "Palais Gyeongbokgung (경복궁)",
+     "memo": "Le plus grand palais royal, achevé en 1395 ; gratuit en hanbok.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ6xwTRt6jfDUR7FQKdD1sSp0",
+     "lat": 37.5780502,
+     "lng": 126.9798327,
+     "title": "Nuldam Space (늘담 경복궁점)",
+     "memo": "Café où l'on écrit une lettre cachetée, envoyée un an plus tard.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJHYhJ5OmifDURMOSQ2D-6lFY",
+     "lat": 37.5738369,
+     "lng": 126.982202,
+     "title": "Temple Jogyesa (조계사)",
+     "memo": "Pavillon coloré, arbres centenaires et lanternes au printemps.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Jour 2",
+   "items": [
+    {
+     "place_id": "ChIJMcWZMY2ifDUR2NLv8F3Togc",
+     "lat": 37.5658862,
+     "lng": 126.97490169999999,
+     "title": "Palais Deoksugung (덕수궁)",
+     "memo": "Petit palais face aux gratte-ciel, cerisiers au printemps.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJfYjlFvWifDURYSDsoxYbN80",
+     "lat": 37.559277,
+     "lng": 126.9777029,
+     "title": "Marché de Namdaemun (남대문시장)",
+     "memo": "Le plus vieux marché ; allée du galchi-jorim et Kalguksu Alley.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJs2hQTOWifDURk8inZqIttEQ",
+     "lat": 37.5633851,
+     "lng": 126.987436,
+     "title": "Cathédrale de Myeongdong (명동성당)",
+     "memo": "Se visite gratuitement au cœur du quartier shopping.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ8xRYr29FezUR3AtFqx2pIlw",
+     "lat": 37.5665256,
+     "lng": 127.00922360000001,
+     "title": "Dongdaemun Design Plaza (DDP)",
+     "memo": "Courbes signées Zaha Hadid, rooftop et expos parfois gratuites.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Jour 3",
+   "items": [
+    {
+     "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+     "lat": 37.5511694,
+     "lng": 126.98822659999999,
+     "title": "N Seoul Tower, Namsan (N서울타워)",
+     "memo": "Téléphérique, bus ou à pied ; vue panoramique sur la ville.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+     "lat": 37.5814696,
+     "lng": 126.9849519,
+     "title": "Village de Bukchon (북촌한옥마을)",
+     "memo": "Hanoks de 600 ans ; plus calme autour du Bukchon Hanok Hall.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ4wh0zluifDURaFBW2pdrKf8",
+     "lat": 37.5794309,
+     "lng": 126.9910426,
+     "title": "Palais Changdeokgung (창덕궁)",
+     "memo": "Palais classé à l'UNESCO ; Jardin secret en visite guidée à réserver.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Jour 4",
+   "items": [
+    {
+     "place_id": "ChIJ63NnRS6jfDURt-efnKIjXzs",
+     "lat": 37.5779788,
+     "lng": 127.00719149999999,
+     "title": "Ihwa Dong Mural Village (이화벽화마을)",
+     "memo": "Rénové en 2006 : plus de 70 artistes ont peint fresques et escaliers.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+     "lat": 37.570038499999995,
+     "lng": 126.99960379999997,
+     "title": "Marché de Gwangjang (광장시장)",
+     "memo": "Grand marché couvert de street food ; tteokbokki très épicés.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJN2x0fu2ifDUR51BupseGYmE",
+     "lat": 37.523850599999996,
+     "lng": 126.98047020000001,
+     "title": "Musée national de Corée (국립중앙박물관)",
+     "memo": "Gratuit ; salle de la Contemplation, nocturnes mercredi et samedi.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Jour 5",
+   "items": [
+    {
+     "place_id": "ChIJ90LQ63ilfDURHhNpoDq3rPI",
+     "lat": 37.5074069,
+     "lng": 127.0520052,
+     "title": "Tombes royales de Seolleung et Jeongneung (선릉과 정릉)",
+     "memo": "Parc peu fréquenté avec deux tombes royales de 500 ans.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJu5Gg2hWkfDURl7NN7FpFnis",
+     "lat": 37.5102133,
+     "lng": 127.06001859999999,
+     "title": "Starfield Library, COEX (별마당도서관)",
+     "memo": "Immense bibliothèque au cœur du centre commercial COEX, très photogénique.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

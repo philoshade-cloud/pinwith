@@ -1,0 +1,140 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "seongsu-cafes-beauty-shops",
+ "title": "Seongsu-dong: 13 cafés, K-beauty stores and shops",
+ "desc": "A map of Seongsu-dong, Seoul's warehouse district, grouped into shopping, cafés and sweets, K-beauty flagships and outdoors.",
+ "kind": "collection",
+ "themes": [
+  "Seongsu",
+  "K-beauty",
+  "cafes",
+  "Seoul"
+ ],
+ "sections": [
+  {
+   "name": "Shopping & pop-ups",
+   "items": [
+    {
+     "place_id": "ChIJo35QAxelfDUR4jt5FPgWSIU",
+     "lat": 37.541151299999996,
+     "lng": 127.0659498,
+     "title": "Common Ground (커먼그라운드)",
+     "memo": "Shipping-container mall with pop-ups, shows and exhibitions.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJlVo6miClfDURWoU9Uy5BX78",
+     "lat": 37.5444502,
+     "lng": 127.0553861,
+     "title": "Monami Store Seongsu (모나미스토어 성수점)",
+     "memo": "Stationery concept store: mix your own ink, build and engrave a pen.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJDV1oNt2lfDUR9Eyha0o0usA",
+     "lat": 37.5437583,
+     "lng": 127.0522559,
+     "title": "Dior Seongsu (디올 성수)",
+     "memo": "Concept space modeled on 30 Montaigne; many just photograph outside.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Cafes & sweets",
+   "items": [
+    {
+     "place_id": "ChIJi_M445OkfDURBV_ePY2qCHo",
+     "lat": 37.541838399999996,
+     "lng": 127.0564636,
+     "title": "Daelim Changgo (대림창고)",
+     "memo": "Converted warehouses with cafes, restaurants and art.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ46OeZQClfDURJ0Y02e7-8mM",
+     "lat": 37.5428451,
+     "lng": 127.05416899999999,
+     "title": "Han Jung Sun (한정선)",
+     "memo": "Fruit-filled chapssaltteok rice cakes; takeaway only.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJgfybwn6lfDURA_M5ojT63b8",
+     "lat": 37.5415153,
+     "lng": 127.0569694,
+     "title": "Seongsu Yeonbang (성수연방)",
+     "memo": "Three-floor complex with cafes, restaurants, a bookstore and shop.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "K-beauty",
+   "items": [
+    {
+     "place_id": "ChIJ14znQAClfDURT1IQuqyAwlA",
+     "lat": 37.544115100000006,
+     "lng": 127.05455599999999,
+     "title": "Olive Young N Seongsu (올리브영N 성수)",
+     "memo": "Called Korea's largest Olive Young, with a K-pop zone and photo zones.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJsy6u20mlfDURQOlVT0xmv6U",
+     "lat": 37.5444101,
+     "lng": 127.0591197,
+     "title": "Amore Seongsu (아모레 성수)",
+     "memo": "Free product testing, OSulloc cafe upstairs and a rooftop. Closed Mon.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJqyeWTgClfDURYfb3ntG2rng",
+     "lat": 37.543788600000006,
+     "lng": 127.05052549999999,
+     "title": "Amuse Seongsu (어뮤즈 성수)",
+     "memo": "Pink two-floor flagship; fill your own Mini Tint lid.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJYaYyExWlfDURaI0QfIIWBHo",
+     "lat": 37.5437671,
+     "lng": 127.05260439999999,
+     "title": "Tamburins Seongsu (탬버린즈 성수)",
+     "memo": "Fragrance brand from Gentle Monster's makers, known for exhibitions.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJTzdVeQClfDURbR6FDxuzKTg",
+     "lat": 37.543946999999996,
+     "lng": 127.05248780000001,
+     "title": "TIRTIR Seongsu (티르티르 성수)",
+     "memo": "Mask Fit Red Cushion brand; AI skin analysis and custom lip station.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJiyAoscilfDUReObBY1P_BxI",
+     "lat": 37.541334,
+     "lng": 127.05494999999999,
+     "title": "Innisfree The Isle (이니스프리 디아일)",
+     "memo": "Flagship with a calm in-store cafe for drinks and desserts.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Outdoors",
+   "items": [
+    {
+     "place_id": "ChIJK_b0UX2jfDURmkYPvmWYm90",
+     "lat": 37.544387799999996,
+     "lng": 127.03744239999999,
+     "title": "Seoul Forest (서울숲)",
+     "memo": "Former royal hunting grounds; blossoms, skate park, deer in Eco Forest.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

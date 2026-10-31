@@ -1,0 +1,119 @@
+{
+ "owner": "pinwith_zhtw",
+ "lang": "zh-TW",
+ "slug": "busan-haeundae-food-cafes-11",
+ "title": "釜山海雲台美食地圖：11間餐廳與海景咖啡",
+ "desc": "釜山海雲台與青沙浦一帶的燒肉、海鮮、湯飯與海景咖啡廳，依餐廳、咖啡廳、景點分類。",
+ "kind": "collection",
+ "themes": [
+  "釜山",
+  "海雲台",
+  "美食",
+  "青沙浦"
+ ],
+ "sections": [
+  {
+   "name": "燒肉・餐廳",
+   "items": [
+    {
+     "place_id": "ChIJFb7Ke16NaDURO0tdP7zkFtw",
+     "lat": 35.1615099,
+     "lng": 129.15916750000002,
+     "title": "伍班長烤肉（오반장）",
+     "memo": "炭火烤牛豬肉，烤盤邊緣一圈蒸蛋",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ6_vih16NaDURd47LIvAYobU",
+     "lat": 35.1610861,
+     "lng": 129.1590465,
+     "title": "味贊王鹽烤肉（맛찬들왕소금구이）",
+     "memo": "約3公分厚的熟成五花肉，店員桌邊代烤",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ7yJ-F6-NaDURT2PY5ebM_XU",
+     "lat": 35.161941399999996,
+     "lng": 129.1598222,
+     "title": "MIU 韓牛（미우 숯불갈비）",
+     "memo": "五花肉與韓牛，由店員幫忙烤",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJpb6RdDyNaDURoDirlMaYeJg",
+     "lat": 35.1577128,
+     "lng": 129.172401,
+     "title": "麻雀磨坊（참새방앗간）",
+     "memo": "大鐵鍋蛤蜊海鮮蒸鍋",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJpz2jRgKNaDUReaWQsDhI4jc",
+     "lat": 35.1624927,
+     "lng": 129.1942719,
+     "title": "道熙家（도희네）",
+     "memo": "青沙浦海景炭烤扇貝拼盤",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJb8KZCmiNaDURmgBM4Q1RiB8",
+     "lat": 35.162628399999996,
+     "lng": 129.1650085,
+     "title": "海雲台蔘雞湯（해운대소문난삼계탕）",
+     "memo": "人蔘雞湯專門店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ5xwvxl2NaDURp-2al86xb8E",
+     "lat": 35.1611033,
+     "lng": 129.160662,
+     "title": "螞蟻家辣炒章魚（개미집 해운대점）",
+     "memo": "辣炒章魚，24小時營業",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ-0oV3V2NaDURrn4n89y_AG0",
+     "lat": 35.1615822,
+     "lng": 129.1604592,
+     "title": "密陽血腸豬肉湯飯（밀양순대돼지국밥 해운대점）",
+     "memo": "血腸豬肉湯飯",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "咖啡廳",
+   "items": [
+    {
+     "place_id": "ChIJrdqf5AKNaDURcOGHRuagcWI",
+     "lat": 35.1611366,
+     "lng": 129.1936685,
+     "title": "Cafe Rooftop 青沙浦（카페루프탑）",
+     "memo": "頂樓有吊床和沙發座的海景咖啡廳。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJBz9T2GuNaDUROI9MAy8VAxU",
+     "lat": 35.160891,
+     "lng": 129.1934966,
+     "title": "Liberta 青沙浦店（리베르타）",
+     "memo": "海景咖啡與烘焙",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "景點",
+   "items": [
+    {
+     "place_id": "ChIJfdIYWwuNaDURDx-eqtUjCkg",
+     "lat": 35.158284,
+     "lng": 129.17276719999998,
+     "title": "海雲台藍線公園 尾浦站",
+     "memo": "天空膠囊列車與海岸列車的起點",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

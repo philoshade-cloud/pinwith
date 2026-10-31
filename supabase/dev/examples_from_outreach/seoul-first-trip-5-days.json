@@ -1,0 +1,140 @@
+{
+ "owner": "pinwith_zhtw",
+ "lang": "zh-TW",
+ "slug": "seoul-first-trip-5-days",
+ "title": "首爾初訪五天四夜：13個必去景點",
+ "desc": "第一次去首爾的五天四夜行程地圖，包含明洞、景福宮、北村、弘大與漢江等，依天數排列。",
+ "kind": "course",
+ "themes": [
+  "首爾",
+  "自由行",
+  "第一次去首爾",
+  "五天四夜"
+ ],
+ "sections": [
+  {
+   "name": "第1天",
+   "items": [
+    {
+     "place_id": "ChIJJXcc9--ifDURb8zmFI_J64s",
+     "lat": 37.5641885,
+     "lng": 126.98611799999998,
+     "title": "明洞 (명동)",
+     "memo": "第一天不排太滿，先在明洞散步熟悉環境。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJfYjlFvWifDURYSDsoxYbN80",
+     "lat": 37.559277,
+     "lng": 126.9777029,
+     "title": "南大門市場 (남대문시장)",
+     "memo": "買伴手禮、生活用品、童裝和帽子的好地方。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+     "lat": 37.5511694,
+     "lng": 126.98822659999999,
+     "title": "南山首爾塔 (N서울타워)",
+     "memo": "搭公車或纜車上山；不登塔，看夜景和愛情鎖也很值得。",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "第2天",
+   "items": [
+    {
+     "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+     "lat": 37.579617,
+     "lng": 126.977041,
+     "title": "景福宮 (경복궁)",
+     "memo": "先租韓服再進宮拍照，第一次去很推薦。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+     "lat": 37.5814696,
+     "lng": 126.9849519,
+     "title": "北村韓屋村 (북촌한옥마을)",
+     "memo": "有居民住在這裡，拍照放低音量，別在家門口停太久。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ_ae0p86ifDURYCc5vk2z_5Q",
+     "lat": 37.5837936,
+     "lng": 126.98191829999999,
+     "title": "三清洞 (삼청동)",
+     "memo": "從北村步行可到，咖啡廳與小餐館多的街區。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJBXBbv8KifDURu3CVFSwMyjg",
+     "lat": 37.5742823,
+     "lng": 126.98540829999999,
+     "title": "宮 開城餃子 仁寺洞 (궁개성만두)",
+     "memo": "逛仁寺洞時的用餐選擇。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJe4Jbot2ifDUR2zWhruwyaow",
+     "lat": 37.5737132,
+     "lng": 126.99012710000001,
+     "title": "益善洞韓屋村 (익선동)",
+     "memo": "韓屋改造的巷弄咖啡廳、甜點店；平日人比較少。",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "第3天",
+   "items": [
+    {
+     "place_id": "ChIJA6gxryiZfDURJvmbeBvdz_Y",
+     "lat": 37.5559018,
+     "lng": 126.90628539999997,
+     "title": "望遠市場 (망원시장)",
+     "memo": "比廣藏市場更有在地生活感，買小吃和零食。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ68AiKsWYfDUROpTctLKtxtU",
+     "lat": 37.5561973,
+     "lng": 126.9250341,
+     "title": "弘大 (홍대)",
+     "memo": "逛街買衣服、看街頭表演，晚餐吃烤肉。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJH5tDs-WYfDURJGb8yuqKRwg",
+     "lat": 37.5662075,
+     "lng": 126.91923639999999,
+     "title": "延南洞 京義線林道 (경의선숲길)",
+     "memo": "延南洞咖啡廳、小店多，適合慢慢散步。",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "第4天",
+   "items": [
+    {
+     "place_id": "ChIJK_b0UX2jfDURmkYPvmWYm90",
+     "lat": 37.544387799999996,
+     "lng": 127.03744239999999,
+     "title": "首爾林 (서울숲)",
+     "memo": "逛完聖水洞後，下午來散步的大公園。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJeVnK5X-hfDURv2fEEK-332M",
+     "lat": 37.5126335,
+     "lng": 126.99847829999999,
+     "title": "盤浦大橋月光彩虹噴泉 (반포대교 달빛무지개분수)",
+     "memo": "天氣好的晚上到漢江看夜景、吃泡麵。",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

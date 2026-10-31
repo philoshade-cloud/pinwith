@@ -1,0 +1,118 @@
+{
+ "owner": "pinwith_ja",
+ "lang": "ja",
+ "slug": "busan-4-days-model-course",
+ "title": "釜山3泊4日の定番モデルコース：11スポット",
+ "desc": "釜山を3泊4日でめぐるモデルコース。西面・海雲台・機張から南浦洞まで、観光・市場・グルメを日ごとに整理しています。",
+ "kind": "course",
+ "themes": [
+  "釜山",
+  "モデルコース",
+  "3泊4日"
+ ],
+ "sections": [
+  {
+   "name": "1日目",
+   "items": [
+    {
+     "place_id": "ChIJX7hS4nDraDUR8zZOPw2Z0Pg",
+     "lat": 35.1523656,
+     "lng": 129.0581933,
+     "title": "ソラリア西鉄ホテル釜山",
+     "memo": "旅の拠点にしやすいホテル",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJR_AMB2_raDURtkNgS_8-3FQ",
+     "lat": 35.1578157,
+     "lng": 129.0600331,
+     "title": "西面駅",
+     "memo": "釜山随一の繁華街。駅周辺に飲食店や地下街が集まる",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJXwf-DlyNaDURmKxjwdWxY5k",
+     "lat": 35.1586975,
+     "lng": 129.1603842,
+     "title": "海雲台ビーチ",
+     "memo": "釜山を代表するビーチ。海沿いの散策も楽しい",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJwabeuxuMaDURXC4Rb21AQaE",
+     "lat": 35.1884543,
+     "lng": 129.2231109,
+     "title": "海東龍宮寺",
+     "memo": "海沿いの岩場に建つ寺院。機張エリアにある",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJORLzmiOMaDURySmuJKApJhA",
+     "lat": 35.1916524,
+     "lng": 129.2137288,
+     "title": "ロッテプレミアムアウトレット東釜山",
+     "memo": "海東龍宮寺から近い大型アウトレット",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJo6LBG16NaDURc8BoRthWErs",
+     "lat": 35.1632319,
+     "lng": 129.1586606,
+     "title": "153クポ麺料理 海雲台店",
+     "memo": "海雲台エリアで麺料理が食べられる店",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "2日目",
+   "items": [
+    {
+     "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+     "lat": 35.0973935,
+     "lng": 129.0105921,
+     "title": "甘川文化村",
+     "memo": "カラフルな家並みが続く坂の村。朝の早い時間が歩きやすい",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ21pR1aHpaDUR_usy_ELBCvk",
+     "lat": 35.101854,
+     "lng": 129.0258719,
+     "title": "富平カントン市場",
+     "memo": "南浦洞エリアの市場。夜市も有名",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJL1scg6DpaDURxXQZg1kWGZ4",
+     "lat": 35.098243,
+     "lng": 129.029212,
+     "title": "BIFF広場",
+     "memo": "屋台グルメが並ぶ南浦洞の広場。富平市場から徒歩圏",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "3日目",
+   "items": [
+    {
+     "place_id": "ChIJudkrFArpaDURbbCzajeQs0c",
+     "lat": 35.0966339,
+     "lng": 129.0307965,
+     "title": "チャガルチ市場",
+     "memo": "韓国最大級の水産市場。2階で刺身や海鮮が食べられる",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJJWe5w-rpaDURkpa2CSfQwXs",
+     "lat": 35.0976981,
+     "lng": 129.0361688,
+     "title": "ロッテマート 光復店",
+     "memo": "お土産のまとめ買いに便利な大型スーパー",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,90 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "busan-jeju-kdrama-kpop-locations",
+ "title": "Busan & Jeju filming locations: 8 K-drama and K-pop spots",
+ "desc": "K-drama, variety show and K-pop music video filming locations outside Seoul, grouped into Busan and Jeju.",
+ "kind": "collection",
+ "themes": [
+  "K-drama",
+  "K-pop MV",
+  "Busan",
+  "Jeju"
+ ],
+ "sections": [
+  {
+   "name": "Busan",
+   "items": [
+    {
+     "place_id": "ChIJz9niW5LtaDURrcHFjRuncY8",
+     "lat": 35.136814799999996,
+     "lng": 129.0760839,
+     "title": "Hansung Housing (한성주택)",
+     "memo": "Fight for My Way: the leads' home, Namil Villa, from episode 1.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJR_w0WhPdaDURllEsxhEIA90",
+     "lat": 35.0462468,
+     "lng": 128.96315380000001,
+     "title": "Dadaepo Beach (다대포해수욕장)",
+     "memo": "The King: Eternal Monarch: the horse-riding scene in episode 1.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+     "lat": 35.097393499999995,
+     "lng": 129.0105921,
+     "title": "Gamcheon Culture Village (감천문화마을)",
+     "memo": "Running Man ep. 126 was filmed on the Gamnae Community Centre roof.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJudkrFArpaDURbbCzajeQs0c",
+     "lat": 35.0966339,
+     "lng": 129.0307965,
+     "title": "Jagalchi Market (자갈치시장)",
+     "memo": "Chase scenes in Ode to My Father and Black Panther.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Jeju",
+   "items": [
+    {
+     "place_id": "ChIJn3jj9rkUDTURS7YjOgUyUVU",
+     "lat": 33.458056000000006,
+     "lng": 126.94250000000001,
+     "title": "Seongsan Ilchulbong (성산일출봉)",
+     "memo": "Featured in Soyou's 'The Blue Night of Jeju Island' music video.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJbz_3tLUQDTURkoA7UPE2JWA",
+     "lat": 33.488741499999996,
+     "lng": 126.80095139999999,
+     "title": "Maze Land (메이즈랜드)",
+     "memo": "Maze chase scenes in Legend of the Blue Sea ep. 2.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJa4ejgmhVDDURmYj0wBixQ-U",
+     "lat": 33.289656,
+     "lng": 126.5887248,
+     "title": "Wind 1947 (윈드1947)",
+     "memo": "Go-kart track from Oh My Girl's 'Dun Dun Dance' MV.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJpX5ZeGZcDDURKJSPvueW0bE",
+     "lat": 33.3064428,
+     "lng": 126.3170794,
+     "title": "Jeju Shinhwa World (제주신화월드)",
+     "memo": "Neon arcade from Oh My Girl's 'Dun Dun Dance' MV.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

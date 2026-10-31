@@ -1,0 +1,100 @@
+{
+ "owner": "pinwith_ja",
+ "lang": "ja",
+ "slug": "kyoto-kissaten-coffee-10",
+ "title": "京都の喫茶店めぐり：10軒",
+ "desc": "京都市内と長岡京の喫茶店10軒を集めた地図。レトロな純喫茶からカフェまで。",
+ "kind": "collection",
+ "themes": [
+  "京都",
+  "喫茶店",
+  "カフェ巡り"
+ ],
+ "sections": [
+  {
+   "name": null,
+   "items": [
+    {
+     "place_id": "ChIJS_NLQQAJAWAROlf1Zm7-ohs",
+     "lat": 34.997234299999995,
+     "lng": 135.7654401,
+     "title": "喫茶ジャニー",
+     "memo": "下京区の喫茶店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ6WzgKO0HAWARIqpCtdnvosI",
+     "lat": 34.9923994,
+     "lng": 135.7439023,
+     "title": "Cafe AUSGANG",
+     "memo": "下京区・丹波口エリアのカフェ",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJt3eBbSIGAWARS26X2GCdSpo",
+     "lat": 34.9926307,
+     "lng": 135.7460245,
+     "title": "喫茶 若山",
+     "memo": "Cafe AUSGANGのすぐ近くの喫茶店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJWcy3tUcHAWARNV97nfr2u-8",
+     "lat": 35.0279361,
+     "lng": 135.7460001,
+     "title": "cafe origi",
+     "memo": "上京区・西陣のカフェ",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJYaMvL-EHAWARhPtjk50UsRo",
+     "lat": 35.021696299999995,
+     "lng": 135.7448619,
+     "title": "喫茶ヒトクチヤ",
+     "memo": "上京区の喫茶店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJdR1yhgcIAWARq_92LFSLUqc",
+     "lat": 35.0410724,
+     "lng": 135.75231879999998,
+     "title": "喫茶 翡翠",
+     "memo": "北区・紫野の喫茶店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ0bRnyYIJAWAR4JPpo7GRmLk",
+     "lat": 35.0134494,
+     "lng": 135.77975469999998,
+     "title": "喫茶me",
+     "memo": "左京区・岡崎の喫茶店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJa2oB6GgEAWARq_gTjC0_6Lo",
+     "lat": 34.924455099999996,
+     "lng": 135.6917417,
+     "title": "純喫茶 フルール",
+     "memo": "長岡京市の純喫茶",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ8Z7XfrYIAWARjC2Bd-GCbew",
+     "lat": 34.9894019,
+     "lng": 135.7689162,
+     "title": "喫茶アマゾン",
+     "memo": "東山区・三十三間堂の近くの喫茶店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJbypm3oAIAWARm7lUBldgck4",
+     "lat": 35.0122973,
+     "lng": 135.7556248,
+     "title": "喫茶 マドラグ",
+     "memo": "中京区の喫茶店",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

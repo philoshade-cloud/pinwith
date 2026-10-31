@@ -1,0 +1,153 @@
+{
+ "owner": "pinwith_id",
+ "lang": "id",
+ "slug": "tokyo-5-day-first-trip",
+ "title": "Rute Tokyo 5 hari untuk pemula: 14 tempat wajib",
+ "desc": "Rencana perjalanan 5 hari di Tokyo untuk kunjungan pertama, dari Asakusa hingga Tokyo DisneySea, disusun per hari.",
+ "kind": "course",
+ "themes": [
+  "Tokyo",
+  "Jepang",
+  "Itinerary 5 hari",
+  "Wisata pertama kali"
+ ],
+ "sections": [
+  {
+   "name": "Hari 1",
+   "items": [
+    {
+     "place_id": "ChIJ8T1GpMGOGGARDYGSgpooDWw",
+     "lat": 35.7147651,
+     "lng": 139.7966553,
+     "title": "Kuil Sensō-ji (浅草寺)",
+     "memo": "Kompleks kuil Buddha tertua dan paling sakral di kawasan Asakusa.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ0YwG28aOGGARvRKAXIBWqNk",
+     "lat": 35.7111163,
+     "lng": 139.7963656,
+     "title": "Gerbang Kaminarimon (雷門)",
+     "memo": "Gerbang dengan lentera merah raksasa, spot foto favorit.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJPd37MMGOGGARvJ2hfxoiNVE",
+     "lat": 35.711841299999996,
+     "lng": 139.7964542,
+     "title": "Jalan Nakamise (仲見世通り)",
+     "memo": "Jalan belanja ramai untuk kipas, yukata, dan suvenir.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ35ov0dCOGGARKvdDH7NPHX0",
+     "lat": 35.7100627,
+     "lng": 139.81070040000003,
+     "title": "Tokyo Skytree (東京スカイツリー)",
+     "memo": "Menara penyiaran yang disebut tertinggi di dunia, lengkap dengan dek observasi.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Hari 2",
+   "items": [
+    {
+     "place_id": "ChIJK9EM68qLGGARacmu4KJj5SA",
+     "lat": 35.659482,
+     "lng": 139.7005596,
+     "title": "Persimpangan Shibuya (渋谷スクランブル交差点)",
+     "memo": "Disebut sebagai penyeberangan pejalan kaki tersibuk di dunia.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJx1e971eLGGARum8w_tnpFwI",
+     "lat": 35.6590552,
+     "lng": 139.7006288,
+     "title": "Patung Hachiko (ハチ公像)",
+     "memo": "Tempat mampir berfoto di depan Stasiun Shibuya.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ5SZMmreMGGARcz8QSTiJyo8",
+     "lat": 35.6763976,
+     "lng": 139.6993259,
+     "title": "Kuil Meiji Jingu (明治神宮)",
+     "memo": "Kuil yang dikelilingi hutan lebat, suasananya tenang.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJlVne8bqMGGARtX5O6ojMvsI",
+     "lat": 35.6710335,
+     "lng": 139.7051821,
+     "title": "Jalan Takeshita (竹下通り)",
+     "memo": "Pusat fesyen anak muda di Harajuku; Marion Crepes juga ada di sini.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJSTdtYqGMGGAR3XD4H-GfStY",
+     "lat": 35.667355,
+     "lng": 139.707743,
+     "title": "Omotesando (表参道)",
+     "memo": "Jalan elegan dan teduh untuk jalan santai di sore hari.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Hari 3",
+   "items": [
+    {
+     "place_id": "ChIJPyOTG8KMGGARh_IXobWxHmo",
+     "lat": 35.685176299999995,
+     "lng": 139.7100517,
+     "title": "Shinjuku Gyoen (新宿御苑)",
+     "memo": "Taman luas bekas tempat istirahat keluarga kekaisaran, gaya Jepang dan Eropa.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJzdWdgh2MGGARh4kg2pVZL3c",
+     "lat": 35.699647299999995,
+     "lng": 139.7713703,
+     "title": "Akihabara (秋葉原)",
+     "memo": "Surga penggemar anime dan video game, termasuk maid cafe.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Hari 4",
+   "items": [
+    {
+     "place_id": "ChIJW2cLzSGLGGARXAKXv6EkbqI",
+     "lat": 35.6647703,
+     "lng": 139.7702515,
+     "title": "Pasar Luar Tsukiji (築地場外市場)",
+     "memo": "Pasar makanan laut segar; disarankan datang pagi-pagi.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJu2-DAeeLGGARUZipC7OFRmA",
+     "lat": 35.671222799999995,
+     "lng": 139.7664859,
+     "title": "Distrik Ginza (銀座)",
+     "memo": "Distrik belanja paling mewah di Jepang dengan butik-butik ternama.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Hari 5",
+   "items": [
+    {
+     "place_id": "ChIJszdHEQN9GGARJS23SnAdR0E",
+     "lat": 35.6267108,
+     "lng": 139.8850779,
+     "title": "Tokyo DisneySea (東京ディズニーシー)",
+     "memo": "Taman bertema laut di tepi Teluk Tokyo, disebut satu-satunya di dunia.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

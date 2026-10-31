@@ -1,0 +1,155 @@
+{
+ "owner": "pinwith_zhtw",
+ "lang": "zh-TW",
+ "slug": "tokyo-food-15-local-eats",
+ "title": "東京美食地圖：8個地區15間好店",
+ "desc": "東京15間美食店，涵蓋銀座、有樂町、新宿、西巢鴨、成增、西葛西及淺草，按地區分類。",
+ "kind": "collection",
+ "themes": [
+  "東京",
+  "美食",
+  "在地小店"
+ ],
+ "sections": [
+  {
+   "name": "銀座・有樂町",
+   "items": [
+    {
+     "place_id": "ChIJX05jZOaLGGAR2rUy9EXaYLk",
+     "lat": 35.6705477,
+     "lng": 139.77015,
+     "title": "銀座八五 (Ginza Hachigou)",
+     "memo": "獲米芝蓮推介的拉麵小店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJAY_5nxyLGGAR8mpwX8Biul0",
+     "lat": 35.6696389,
+     "lng": 139.7690948,
+     "title": "丸七炸豬扒 銀座店 (とんかつ 丸七)",
+     "memo": "厚切炸豬扒，座位少，常要排隊",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ3Q5zleCLGGARnuvHr-FOgMM",
+     "lat": 35.6699002,
+     "lng": 139.7691376,
+     "title": "五代目花山烏冬 銀座店",
+     "memo": "闊身烏冬名店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ_9oVOZ-LGGARTMN4dW-AI-4",
+     "lat": 35.6715607,
+     "lng": 139.7705344,
+     "title": "塩麵包屋 pain･maison 銀座店",
+     "memo": "鹽麵包專門店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJQf-98haLGGARlRETqJZunE4",
+     "lat": 35.6703288,
+     "lng": 139.7590179,
+     "title": "炭燒富士鰻魚 有樂町店 (炭焼 うな富士)",
+     "memo": "名古屋名物炭燒鰻魚",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ8efq7_yLGGARoWIgnVt4R7Q",
+     "lat": 35.6792719,
+     "lng": 139.7682008,
+     "title": "玉丁本店 八重洲店",
+     "memo": "名古屋味噌煮込烏冬",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "新宿・青山",
+   "items": [
+    {
+     "place_id": "ChIJvUEnaNqMGGAR46u74Waa6FM",
+     "lat": 35.6910075,
+     "lng": 139.7026367,
+     "title": "MOMO PARADISE 新宿東口店",
+     "memo": "A5和牛壽喜燒放題",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJT0DjHgCLGGARsk5Uj9f203k",
+     "lat": 35.6648961,
+     "lng": 139.7136236,
+     "title": "Sweet Check 蛋包飯",
+     "memo": "即場切開的滑蛋蛋包飯",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "西巢鴨・成增・西葛西",
+   "items": [
+    {
+     "place_id": "ChIJ5YRpJn6NGGAR4i3-cAay44Q",
+     "lat": 35.744132,
+     "lng": 139.7288106,
+     "title": "しゃぶ辰 西巢鴨店",
+     "memo": "在地人小店，平價壽喜燒",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ8yKRHHXsGGARvVGUyQC9-6Q",
+     "lat": 35.7766365,
+     "lng": 139.6317505,
+     "title": "中華めん処 道頓堀 成增",
+     "memo": "成增在地拉麵店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ29_hKQbtGGARq1Up3Y5ZNtU",
+     "lat": 35.7781313,
+     "lng": 139.6304655,
+     "title": "MEGA Don Quijote 成增店",
+     "memo": "大型驚安殿堂，超市區有平價刺身",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ3bx1TuCHGGARwGVo9-Qn-6E",
+     "lat": 35.6649918,
+     "lng": 139.8565401,
+     "title": "炭火焼肉・焼鳥大将 (西葛西)",
+     "memo": "CP值高的七輪燒肉",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "淺草三小吃",
+   "items": [
+    {
+     "place_id": "ChIJv2iQGTuPGGAR_eCa-tK4fJ4",
+     "lat": 35.7147474,
+     "lng": 139.7944546,
+     "title": "浅草うなな 鰻魚飯團",
+     "memo": "國產鰻魚燒飯糰",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJSTVEQMCOGGARa74pG98OyD0",
+     "lat": 35.7146332,
+     "lng": 139.7951685,
+     "title": "淺草 花月堂 本店",
+     "memo": "雪糕菠蘿包名店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ8YF44F2NGGARN4BRSgUlAGc",
+     "lat": 35.7151561,
+     "lng": 139.7951921,
+     "title": "寿清庵茶室 淺草店",
+     "memo": "抹茶可麗餅",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,157 @@
+{
+ "owner": "pinwith_pt",
+ "lang": "pt",
+ "slug": "toquio-roteiro-4-dias-bairros",
+ "title": "Roteiro de 4 dias em Tóquio: 15 lugares por bairro",
+ "desc": "Roteiro de quatro dias em Tóquio organizado por bairro: templos, mirantes, bares, compras e jardins, de Asakusa a Ginza.",
+ "kind": "course",
+ "themes": [
+  "Tóquio",
+  "Japão",
+  "roteiro",
+  "bares",
+  "compras"
+ ],
+ "sections": [
+  {
+   "name": "Dia 1",
+   "items": [
+    {
+     "place_id": "ChIJ8T1GpMGOGGARDYGSgpooDWw",
+     "lat": 35.7147651,
+     "lng": 139.7966553,
+     "title": "Templo Senso-ji, Asakusa (浅草寺)",
+     "memo": "Grátis, das 6h às 17h; o portão Kaminarimon é o ponto de foto.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJSTVEQMCOGGARa74pG98OyD0",
+     "lat": 35.7146332,
+     "lng": 139.7951685,
+     "title": "Asakusa Kagetsudo (浅草花月堂)",
+     "memo": "Melon pan gigante e quentinho, a poucos passos do templo.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJGU_M2aeOGGARdnOLcMYXuXs",
+     "lat": 35.698917,
+     "lng": 139.774798,
+     "title": "Yodobashi Akiba (ヨドバシAkiba)",
+     "memo": "Nove andares de eletrônicos, câmeras e games em Akihabara.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJnctryNSMGGARLv4MknPFseU",
+     "lat": 35.689733,
+     "lng": 139.6916563,
+     "title": "Tokyo Metropolitan Government Building (東京都庁)",
+     "memo": "Mirante gratuito em Shinjuku.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJr7mGZdmMGGARjxoMFeHApXE",
+     "lat": 35.6941118,
+     "lng": 139.70476109999998,
+     "title": "Golden Gai, Shinjuku (ゴールデン街)",
+     "memo": "Mais de 200 barzinhos em vielas; alguns cabem só umas sete pessoas.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJP9eKBdeMGGAR0zzBXJNVj5A",
+     "lat": 35.692703699999996,
+     "lng": 139.6995778,
+     "title": "Omoide Yokocho (思い出横丁)",
+     "memo": "Izakayas de yakitori e saquê ao lado da estação de Shinjuku.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Dia 2",
+   "items": [
+    {
+     "place_id": "ChIJx1e971eLGGARum8w_tnpFwI",
+     "lat": 35.6590552,
+     "lng": 139.7006288,
+     "title": "Estátua do Hachiko, Shibuya (ハチ公像)",
+     "memo": "Ao lado há um posto turístico com carimbo grátis.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ4Rr2JWiLGGARcyRSHuZ-9G8",
+     "lat": 35.6586719,
+     "lng": 139.7019848,
+     "title": "Shibuya Sky (渋谷スカイ)",
+     "memo": "Mirante 360°, cerca de ¥2.200; costuma esgotar.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJpwDSAViLGGARVaJ_WUwQrt8",
+     "lat": 35.6599499,
+     "lng": 139.70153299999998,
+     "title": "Nonbei Yokocho, Shibuya (のんべい横丁)",
+     "memo": "Viela para pular de bar em bar à noite.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Dia 3",
+   "items": [
+    {
+     "place_id": "ChIJlVne8bqMGGARtX5O6ojMvsI",
+     "lat": 35.6710335,
+     "lng": 139.7051821,
+     "title": "Takeshita Street, Harajuku (竹下通り)",
+     "memo": "Rua da moda jovem em Harajuku; famosa pelos crepes, como os da Marion Crêpes.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ5SZMmreMGGARcz8QSTiJyo8",
+     "lat": 35.6763976,
+     "lng": 139.6993259,
+     "title": "Meiji Jingu (明治神宮)",
+     "memo": "Santuário xintoísta a uns 10 minutos a pé de Harajuku, grátis.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJAQAsR--LGGAR_AmB8WMDy88",
+     "lat": 35.6697688,
+     "lng": 139.76417619999998,
+     "title": "Ginza Six (GINZA SIX)",
+     "memo": "Marcas de luxo, Tsutaya Books e jardim no terraço grátis.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJKQAKAOSLGGARwGhpOXWgfYo",
+     "lat": 35.6731273,
+     "lng": 139.7672138,
+     "title": "Itoya, Ginza (銀座伊東屋)",
+     "memo": "Papelaria clássica de Ginza.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Dia 4",
+   "items": [
+    {
+     "place_id": "ChIJh7eDrwCPGGARCs9fpCkKS2U",
+     "lat": 35.710068199999995,
+     "lng": 139.7746009,
+     "title": "Mercado Ameyoko, Ueno (アメ横)",
+     "memo": "Roupas, cosméticos, comida e relógios e bolsas de segunda mão.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJPyOTG8KMGGARh_IXobWxHmo",
+     "lat": 35.685176299999995,
+     "lng": 139.7100517,
+     "title": "Shinjuku Gyoen (新宿御苑)",
+     "memo": "Jardim nacional, ¥500, ótimo na época das cerejeiras.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

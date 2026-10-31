@@ -1,0 +1,135 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "seoul-kpop-idol-cafes-restaurants",
+ "title": "Seoul K-pop pilgrimage: 13 idol-visited cafés and restaurants",
+ "desc": "A map of Seoul cafés and restaurants linked to K-pop idols, grouped by BTS, SEVENTEEN and other groups, with what to order at each.",
+ "kind": "collection",
+ "themes": [
+  "K-pop",
+  "idol spots",
+  "Seoul food",
+  "cafes"
+ ],
+ "sections": [
+  {
+   "name": "BTS",
+   "items": [
+    {
+     "place_id": "ChIJHfEWUYqhfDURjI3ObVh-S30",
+     "lat": 37.518049,
+     "lng": 126.9787035,
+     "title": "Wasedaya (Ichon)",
+     "memo": "Yakiniku spot visited by BTS's RM in 2025; he left an autograph",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ5wjOMAClfDURYXgfF2hRq5c",
+     "lat": 37.5240942,
+     "lng": 127.04052329999999,
+     "title": "Hwayeon Sanjang (Cheongdam)",
+     "memo": "Galbi restaurant visited by BTS's V; premium galbi is the pick",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJreT1pgqifDURERoqKccPSFc",
+     "lat": 37.5466263,
+     "lng": 126.9544763,
+     "title": "Jindaegam Mapo Branch",
+     "memo": "Jungkook has dined here; try chadolbagi with the scallop set",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJE7YZde2jfDURn_vUiTpEFwc",
+     "lat": 37.5183879,
+     "lng": 127.0280767,
+     "title": "Yoojung Sikdang (유정식당)",
+     "memo": "BTS's trainee-days restaurant; order the black pork dolsot bibimbap",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ6dr5yvWjfDURi-CfqCJ9Aes",
+     "lat": 37.510287,
+     "lng": 127.0304519,
+     "title": "Cafe Hyuga (휴가)",
+     "memo": "Cafe in the building of BTS's former dorm; EXO's Kai has visited too",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "SEVENTEEN",
+   "items": [
+    {
+     "place_id": "ChIJFRmIDRGjfDUR2nv7h8qMx2Y",
+     "lat": 37.5570994,
+     "lng": 127.0116712,
+     "title": "Geumdwaeji Sikdang (금돼지식당)",
+     "memo": "Michelin-listed pork BBQ visited by Jeonghan; samgyeopsal with perilla kimchi",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJtX_vLOujfDURvfd4kqWugOk",
+     "lat": 37.5215111,
+     "lng": 127.038601,
+     "title": "Dosan Ttukbaegi (Cheongdam)",
+     "memo": "Mingyu is said to be a regular; order the galbitang",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ41hbfumjfDURGREQjVp5X0U",
+     "lat": 37.5182854,
+     "lng": 127.0214464,
+     "title": "Daebongjip Sinsa (대봉집)",
+     "memo": "Appeared on a SEVENTEEN livestream; frozen daepae samgyeopsal",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Other groups",
+   "items": [
+    {
+     "place_id": "ChIJLXL2BvijfDURmTrYFPQIGUc",
+     "lat": 37.5776235,
+     "lng": 126.9865541,
+     "title": "Cafe Onion Anguk",
+     "memo": "Bakery cafe inside a hanok, linked to NCT's Taeyong",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJtftAMZGkfDUR-dM7GT6Vl3g",
+     "lat": 37.5428241,
+     "lng": 127.0543732,
+     "title": "Somunnan Seongsu Gamjatang",
+     "memo": "Gamjatang (pork bone stew) spot linked to Stray Kids' Felix",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJHcO7mrOjfDURNDborrQL22w",
+     "lat": 37.5348321,
+     "lng": 127.0008554,
+     "title": "Downtowner Hannam",
+     "memo": "Premium burgers; linked to TXT's Soobin and used as an MV filming site",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJNQ3m-j-jfDURjUgkTKrY16o",
+     "lat": 37.5732519,
+     "lng": 126.9900717,
+     "title": "Seoul Coffee Ikseon",
+     "memo": "Hanok cafe linked to SHINee's Key; ice cream and butter red bean bread",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ_bja3XqkfDURGweqfzvLnmY",
+     "lat": 37.5239654,
+     "lng": 127.049586,
+     "title": "Yeongcheon Yeonghwa Cheongdam",
+     "memo": "SUPER JUNIOR-linked spot; Korean beef yukhoe bibimbap",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

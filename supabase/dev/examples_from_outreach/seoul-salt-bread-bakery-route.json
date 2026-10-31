@@ -1,0 +1,147 @@
+{
+ "owner": "pinwith_zhtw",
+ "lang": "zh-TW",
+ "slug": "seoul-salt-bread-bakery-route",
+ "title": "首爾一個人也好玩：4天鹽麵包麵包店＋美食路線",
+ "desc": "首爾4天行程地圖，串起5家鹽麵包名店與新村、北村、益善洞、延南、聖水的美食和景點，依天數排列。",
+ "kind": "course",
+ "themes": [
+  "首爾",
+  "獨旅",
+  "鹽麵包"
+ ],
+ "sections": [
+  {
+   "name": "Day 0",
+   "items": [
+    {
+     "place_id": "ChIJgzUbIf-ZfDUR13dxKoeZjB0",
+     "lat": 37.556569,
+     "lng": 126.935433,
+     "title": "보승회관 서울신촌점",
+     "memo": "新村的湯飯店，適合抵達後的第一餐",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Day 1",
+   "items": [
+    {
+     "place_id": "ChIJp1npFq-jfDURtn6eZYt-FZY",
+     "lat": 37.576219,
+     "lng": 126.984271,
+     "title": "Artist Bakery 안국",
+     "memo": "安國站附近的人氣鹽麵包店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJgya5EoajfDURujjGw7hHPX8",
+     "lat": 37.581729,
+     "lng": 126.983928,
+     "title": "GRANHAND. 북촌",
+     "memo": "北村的香氛品牌門市，可順路逛",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJz3DQ7sSifDURyYZa5LXo-J0",
+     "lat": 37.579394,
+     "lng": 126.984622,
+     "title": "object 삼청점",
+     "memo": "三清洞的選物店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ8cDPoKejfDUR9D6gwwM57MY",
+     "lat": 37.573299,
+     "lng": 126.990514,
+     "title": "익선애뜻",
+     "memo": "益善洞韓屋巷弄裡的店家，可順遊周邊",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJy_KLudyifDUR8R3cB_PyJsU",
+     "lat": 37.576034,
+     "lng": 126.987052,
+     "title": "운현궁 雲峴宮",
+     "memo": "朝鮮王室宅邸遺址，位在仁寺洞附近",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJgwhZmSWjfDURzJr5IabxSNg",
+     "lat": 37.573701,
+     "lng": 126.989696,
+     "title": "자연도소금빵&자연도가",
+     "memo": "鹽麵包專門店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJT8ZQJEijfDURGQXF7pAAwoU",
+     "lat": 37.573876,
+     "lng": 126.990972,
+     "title": "Teafference Seoul",
+     "memo": "茶飲店，可歇腳喝茶",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ_9UTZzmjfDURrqaSre38fe4",
+     "lat": 37.572827,
+     "lng": 126.990979,
+     "title": "종삼육 鐘三肉",
+     "memo": "鐘路三街烤肉街的燒肉店，適合晚餐",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Day 2",
+   "items": [
+    {
+     "place_id": "ChIJB9BFEbyZfDURiYJW7WW9QAI",
+     "lat": 37.564233,
+     "lng": 126.924646,
+     "title": "Butter & Shelter 연남점",
+     "memo": "延南洞的鹽麵包店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJl6M5obmZfDURITCAdVehllQ",
+     "lat": 37.560814,
+     "lng": 126.924744,
+     "title": "풀뜯는 돼지 吃草的豬",
+     "memo": "弘大一帶的豬肉料理餐廳，適合散步後用餐",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Day 3",
+   "items": [
+    {
+     "place_id": "ChIJRY-8dAClfDURVHOPxYXvVaA",
+     "lat": 37.542945,
+     "lng": 127.055226,
+     "title": "BETON 성수",
+     "memo": "聖水洞的鹽麵包店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJPxlRUAClfDURTB7mF4KH4Nc",
+     "lat": 37.543264,
+     "lng": 127.053465,
+     "title": "ETRE BAKE HOUSE",
+     "memo": "聖水一帶的烘焙坊",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ2VjdY3OlfDURa46uZH6yL34",
+     "lat": 37.548389,
+     "lng": 127.055664,
+     "title": "돼지공탕 하우 성수본점",
+     "memo": "聖水的豬肉湯飯店，清燉湯頭",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

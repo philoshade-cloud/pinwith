@@ -1,0 +1,122 @@
+{
+ "owner": "pinwith_zhtw",
+ "lang": "zh-TW",
+ "slug": "busan-gyeongju-5-days-route",
+ "title": "釜山＋慶州5天4夜自由行：12個必去景點",
+ "desc": "釜山5天4夜行程地圖，分為釜山市區景點與慶州一日遊兩部分，涵蓋文化村、海灘、市場與新羅古蹟。",
+ "kind": "collection",
+ "themes": [
+  "釜山",
+  "慶州",
+  "自由行",
+  "5天4夜"
+ ],
+ "sections": [
+  {
+   "name": "釜山",
+   "items": [
+    {
+     "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+     "lat": 35.097393499999995,
+     "lng": 129.0105921,
+     "title": "甘川洞文化村 (감천문화마을)",
+     "memo": "山坡上的彩色小屋村，釜山代表性景點之一",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ21pR1aHpaDUR_usy_ELBCvk",
+     "lat": 35.101853999999996,
+     "lng": 129.0258719,
+     "title": "富平罐頭市場 (부평깡통시장)",
+     "memo": "釜山知名傳統市場，小吃攤多，可與甘川洞排同一天",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJseGsfh7paDURigYilgTVojA",
+     "lat": 35.0782798,
+     "lng": 129.0453198,
+     "title": "白淺灘文化村 (흰여울문화마을)",
+     "memo": "影島海邊的文化村，可沿海岸步道散步",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJfdIYWwuNaDURDx-eqtUjCkg",
+     "lat": 35.158284,
+     "lng": 129.17276719999998,
+     "title": "海雲台藍線公園 膠囊列車 尾浦站 (블루라인파크)",
+     "memo": "從尾浦站搭乘沿海行駛的膠囊列車",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJXwf-DlyNaDURmKxjwdWxY5k",
+     "lat": 35.158697499999995,
+     "lng": 129.16038419999998,
+     "title": "海雲台海水浴場 (해운대해수욕장)",
+     "memo": "釜山最有名的海灘",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "慶州一日遊",
+   "items": [
+    {
+     "place_id": "ChIJ13ANOUNOZjURBcoz1tMkAMw",
+     "lat": 35.8381282,
+     "lng": 129.2108206,
+     "title": "大陵苑 (대릉원)",
+     "memo": "新羅古墳公園，天馬塚也在園內",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJHfYz6F9OZjUR21CWHW9f18M",
+     "lat": 35.8298626,
+     "lng": 129.2150361,
+     "title": "慶州校村 (경주 교촌마을)",
+     "memo": "可穿韓服漫步的傳統村落",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJA8nY8ExPZjURPC-8kcf4l4E",
+     "lat": 35.837660899999996,
+     "lng": 129.209724,
+     "title": "皇理團路 (황리단길)",
+     "memo": "慶州的韓屋小店街，咖啡廳與小店林立",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJNcuMjy1PZjURWd_BWJGNk-A",
+     "lat": 35.8350643,
+     "lng": 129.210826,
+     "title": "清水塘 慶州 (청수당)",
+     "memo": "皇理團路一帶的人氣韓屋咖啡廳，適合下午茶",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJa4qtrmdOZjURguRnUl7UqSg",
+     "lat": 35.8347306,
+     "lng": 129.2190014,
+     "title": "瞻星臺 (첨성대)",
+     "memo": "新羅時代的天文台",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJI6-IFWBOZjURG2fe65bJAs0",
+     "lat": 35.8291928,
+     "lng": 129.21812130000004,
+     "title": "月精橋 (월정교)",
+     "memo": "復原的新羅時代木橋，鄰近瞻星臺與校村",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ9SUiOHBOZjUR_YnH8Lbjzt0",
+     "lat": 35.8348173,
+     "lng": 129.2265645,
+     "title": "東宮與月池 (동궁과 월지)",
+     "memo": "新羅王宮遺址，夜景尤其有名，適合排在最後",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

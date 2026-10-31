@@ -1,0 +1,162 @@
+{
+ "owner": "pinwith_pt",
+ "lang": "pt",
+ "slug": "seul-roteiro-5-dias-classico",
+ "title": "Roteiro de 5 dias em Seul: 15 lugares imperdíveis",
+ "desc": "Roteiro por Seul dividido por dia: museus, palácios, vilas hanok, mercados, Gangnam e Seongsu.",
+ "kind": "course",
+ "themes": [
+  "Seul",
+  "Coreia do Sul",
+  "roteiro",
+  "palácios",
+  "Gangnam"
+ ],
+ "sections": [
+  {
+   "name": "Dia 1",
+   "items": [
+    {
+     "place_id": "ChIJN2x0fu2ifDUR51BupseGYmE",
+     "lat": 37.523850599999996,
+     "lng": 126.98047020000001,
+     "title": "Museu Nacional da Coreia (국립중앙박물관)",
+     "memo": "O maior museu do país, com mais de 12 mil peças e entrada grátis.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJmylq-vyifDUR_r3t4Ve-w3k",
+     "lat": 37.559315,
+     "lng": 126.99447699999997,
+     "title": "Namsangol Hanok Village (남산골한옥마을)",
+     "memo": "Cinco casas tradicionais aos pés da N Seoul Tower; só se vê por fora.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+     "lat": 37.5511694,
+     "lng": 126.98822659999999,
+     "title": "N Seoul Tower (N서울타워)",
+     "memo": "Suba perto das 16h para ver o pôr do sol; a descida pela muralha é cansativa.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJW7FBDfCifDURHTpisLbVUH0",
+     "lat": 37.5610151,
+     "lng": 126.9860829,
+     "title": "Myeongdong Kyoja (명동교자)",
+     "memo": "Restaurante do Guia Michelin: kalguksu (sopa com macarrão) e dumplings.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Dia 2",
+   "items": [
+    {
+     "place_id": "ChIJIwCT4-yifDUR1E63iG76hr0",
+     "lat": 37.569101499999995,
+     "lng": 126.97866919999998,
+     "title": "Riacho Cheonggyecheon (청계천)",
+     "memo": "Passeio no riacho revitalizado em 2003, bom pela manhã.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ4wh0zluifDURaFBW2pdrKf8",
+     "lat": 37.5794309,
+     "lng": 126.9910426,
+     "title": "Palácio Changdeokgung e Jardim Secreto (창덕궁)",
+     "memo": "Chegue na abertura: os ingressos do Jardim Secreto podem esgotar.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+     "lat": 37.5814696,
+     "lng": 126.9849519,
+     "title": "Bukchon Hanok Village (북촌한옥마을)",
+     "memo": "Vila residencial histórica, visitável das 10h às 17h.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJHYhJ5OmifDURMOSQ2D-6lFY",
+     "lat": 37.5738369,
+     "lng": 126.982202,
+     "title": "Templo Jogyesa (조계사)",
+     "memo": "Templo budista ao lado de Insadong.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJQRutlcKifDURiMoaUPYmWX4",
+     "lat": 37.5743024,
+     "lng": 126.9849036,
+     "title": "Ssamziegil, Insadong (쌈지길)",
+     "memo": "Destaque da rua principal de Insadong, com artesanato e cerâmica.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJfYjlFvWifDURYSDsoxYbN80",
+     "lat": 37.559277,
+     "lng": 126.9777029,
+     "title": "Mercado Namdaemun (남대문시장)",
+     "memo": "O mercado mais antigo de Seul, com street food.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Dia 3",
+   "items": [
+    {
+     "place_id": "ChIJ8cRRtD-ifDURoBcqFZyRluE",
+     "lat": 37.5366131,
+     "lng": 126.97710679999997,
+     "title": "Museu da Guerra (전쟁기념관)",
+     "memo": "Equipamentos militares na área externa; grátis, fecha às segundas.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ8xRYr29FezUR3AtFqx2pIlw",
+     "lat": 37.5665256,
+     "lng": 127.00922360000001,
+     "title": "Dongdaemun Design Plaza (DDP)",
+     "memo": "Prédio futurista de formas curvas, com exposições e mercado noturno ao redor.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Dia 4",
+   "items": [
+    {
+     "place_id": "ChIJu5Gg2hWkfDURl7NN7FpFnis",
+     "lat": 37.5102133,
+     "lng": 127.06001859999999,
+     "title": "Starfield Library, COEX (별마당도서관)",
+     "memo": "Biblioteca de estantes gigantes dentro do shopping COEX.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJu7dpc45FezURhLMS5U5eaJk",
+     "lat": 37.5125295,
+     "lng": 127.10230500000002,
+     "title": "Seoul Sky, Lotte World Tower (서울스카이)",
+     "memo": "Observatório no maior edifício da Coreia, ao lado do Lotte World.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Dia 5",
+   "items": [
+    {
+     "place_id": "ChIJWTP6EbylfDURiLzaVEe1_Zg",
+     "lat": 37.5380654,
+     "lng": 127.05894859999998,
+     "title": "Haus Nowhere, Seongsu (하우스 노웨어)",
+     "memo": "Loja da Gentle Monster no antigo bairro industrial de Seongsu.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

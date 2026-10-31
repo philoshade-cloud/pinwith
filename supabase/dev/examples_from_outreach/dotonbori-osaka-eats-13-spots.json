@@ -1,0 +1,145 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "dotonbori-osaka-eats-13-spots",
+ "title": "Dotonbori food guide: 13 places to eat in Osaka",
+ "desc": "Where to eat along Dotonbori in Osaka, grouped by dish: takoyaki, okonomiyaki, beef, ramen, fugu and sweets.",
+ "kind": "collection",
+ "themes": [
+  "Osaka",
+  "Dotonbori",
+  "street food",
+  "takoyaki"
+ ],
+ "sections": [
+  {
+   "name": "Takoyaki",
+   "items": [
+    {
+     "place_id": "ChIJza-i6hHnAGAR07AQeEhDkh0",
+     "lat": 34.6687742,
+     "lng": 135.5027298,
+     "title": "Takoyaki Wanaka (わなか)",
+     "memo": "Takoyaki shop with one of the widest flavour selections in the area.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ1VjE9hTnAGAR6QXoCkTEYj4",
+     "lat": 34.6692402,
+     "lng": 135.50319919999998,
+     "title": "Acchichi Honpo (あっちち本舗)",
+     "memo": "Popular takoyaki stand on the Dotonbori strip.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJU3WQMmXnAGARss7JPdOEprc",
+     "lat": 34.668673399999996,
+     "lng": 135.50331549999999,
+     "title": "Otako (本家大たこ)",
+     "memo": "Takoyaki with very large octopus pieces in each ball.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJAQDAkxTnAGARbcvABiIOasw",
+     "lat": 34.66867,
+     "lng": 135.50219640000003,
+     "title": "Takoyaki Juhachiban (十八番)",
+     "memo": "Takoyaki topped with crunchy tempura bits.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Okonomiyaki",
+   "items": [
+    {
+     "place_id": "ChIJvRX1cBPnAGARzhcHALQCKbw",
+     "lat": 34.668065,
+     "lng": 135.50097599999998,
+     "title": "Ajinoya (味乃家)",
+     "memo": "Well-known okonomiyaki spot; lighter style with less flour. Expect a queue.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJp6r1whTnAGARQi9RHXsUEtA",
+     "lat": 34.668354799999996,
+     "lng": 135.5032226,
+     "title": "Mizuno (美津の)",
+     "memo": "Long-running okonomiyaki restaurant near Dotonbori.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Beef, kushikatsu & gyoza",
+   "items": [
+    {
+     "place_id": "ChIJ710ooxTnAGARTLd6nZ16PSc",
+     "lat": 34.6678017,
+     "lng": 135.5021825,
+     "title": "Matsusakagyu Yakiniku M Hozenji Hanare",
+     "memo": "Matsusaka beef yakiniku near Hozenji Temple.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ2YfF7RTnAGARvwILJIgrP7c",
+     "lat": 34.668835099999995,
+     "lng": 135.502638,
+     "title": "Kushikatsu Daruma Dotonbori (だるま)",
+     "memo": "Classic Osaka kushikatsu; look for the angry Daruma statue outside.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJiTkQhxTnAGARBAfw4nqx0kU",
+     "lat": 34.6687875,
+     "lng": 135.502013,
+     "title": "Osaka Ohsho (大阪王将)",
+     "memo": "Gyoza chain, easy to spot by the giant gyoza on the front.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Ramen",
+   "items": [
+    {
+     "place_id": "ChIJ5Z1H6hTnAGARPgWM8w032I8",
+     "lat": 34.6686495,
+     "lng": 135.5029649,
+     "title": "Kamukura Dotonbori (神座)",
+     "memo": "Ramen chain with a range of bowls; open late.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJs0wJ7BTnAGARb7rarouI46o",
+     "lat": 34.6686694,
+     "lng": 135.5030523,
+     "title": "Kinryu Ramen (金龍ラーメン)",
+     "memo": "Ramen stand on the main strip, recognisable by its big dragon sign.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Fugu & sweets",
+   "items": [
+    {
+     "place_id": "ChIJNTYGrdTnAGARZmMXLlml3mI",
+     "lat": 34.6623496,
+     "lng": 135.4539902,
+     "title": "Takoyasu",
+     "memo": "Smaller fugu (pufferfish) restaurant near Asashiobashi Station.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ63rK2mrnAGARmhZZX0xYTw0",
+     "lat": 34.6672921,
+     "lng": 135.5043207,
+     "title": "Naruto Taiyaki Hompo (鳴門鯛焼本舗)",
+     "memo": "Taiyaki shop; a good place to try the fish-shaped cake.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

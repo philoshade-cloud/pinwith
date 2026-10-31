@@ -1,0 +1,152 @@
+{
+ "owner": "pinwith_zhtw",
+ "lang": "zh-TW",
+ "slug": "tokyo-7-days-15-spots",
+ "title": "東京7天6夜自由行：吉祥寺到秋葉原的15個地點",
+ "desc": "東京七天六夜自由行地圖，依區域分為吉祥寺、原宿・表參道・新宿、深川・上野・秋葉原，包含美食、購物與景點。",
+ "kind": "collection",
+ "themes": [
+  "東京",
+  "自由行",
+  "吉祥寺",
+  "原宿",
+  "美食"
+ ],
+ "sections": [
+  {
+   "name": "吉祥寺",
+   "items": [
+    {
+     "place_id": "ChIJLWaVdDXuGGART_Pg1R3CZ4A",
+     "lat": 35.699747599999995,
+     "lng": 139.57370179999998,
+     "title": "井之頭恩賜公園（井の頭恩賜公園）",
+     "memo": "市區裡可以划天鵝船的大公園",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJE2wPgzzvGGARSN11duU4wmY",
+     "lat": 35.7043268,
+     "lng": 139.5754783,
+     "title": "シフク食堂（Shifuku Shokudō）",
+     "memo": "吉祥寺的咖哩店，口味每天不同",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJC_BkRUnuGGAR3tojGiIY-RA",
+     "lat": 35.7045998,
+     "lng": 139.57468839999999,
+     "title": "吉祥寺 Petit村（吉祥寺プティット村）",
+     "memo": "像童話貓咪城堡的小店街，可愛小物很多",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ1Ti4JxDvGGARKNzXJAQ25tI",
+     "lat": 35.704002599999995,
+     "lng": 139.5749785,
+     "title": "Soybean Farm（ソイビーンファーム）",
+     "memo": "超過30種味噌的專賣店，適合買伴手禮",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJEerD2EfuGGARNzol9ZsrCkg",
+     "lat": 35.703975,
+     "lng": 139.579041,
+     "title": "吉祥寺 さとう（Satou）",
+     "memo": "吉祥寺名物：黑毛和牛炸肉餅",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "原宿・表參道・新宿",
+   "items": [
+    {
+     "place_id": "ChIJIwNTvbGNGGARO9IK6sxdxsQ",
+     "lat": 35.66844,
+     "lng": 139.70656449999998,
+     "title": "AFURI辛紅 原宿（薬膳らーめん AFURI辛紅）",
+     "memo": "原宿的藥膳拉麵店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ88wNf--NGGARK0ZDHm1ifCU",
+     "lat": 35.6694234,
+     "lng": 139.7099634,
+     "title": "BAGGAGE COFFEE（バゲージコーヒー）",
+     "memo": "原宿表參道一帶的咖啡店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJu1uP9aOMGGARiZH5QxSqDm0",
+     "lat": 35.667733,
+     "lng": 139.7065474,
+     "title": "Kiddy Land 原宿店（キデイランド）",
+     "memo": "好幾層樓的卡通周邊店，喜歡玩偶的人必逛",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJwdosX5HyGGAR6eiPH-7d2u4",
+     "lat": 35.705010699999995,
+     "lng": 139.6645965,
+     "title": "青二才（中野）",
+     "memo": "中野的居酒屋，愛喝日本酒的人不能錯過",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJtf2-G2GNGGARCnW_VYnpjNU",
+     "lat": 35.688609,
+     "lng": 139.7131973,
+     "title": "Rahmen Eddie",
+     "memo": "外觀像卡布奇諾的拉麵",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJPyOTG8KMGGARh_IXobWxHmo",
+     "lat": 35.685176299999995,
+     "lng": 139.7100517,
+     "title": "新宿御苑",
+     "memo": "春天賞櫻、秋天賞楓的大庭園",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "深川・上野・秋葉原",
+   "items": [
+    {
+     "place_id": "ChIJK11I4BGJGGAR5mZswigcu58",
+     "lat": 35.6717809,
+     "lng": 139.799519,
+     "title": "富岡八幡宮",
+     "memo": "有橫綱力士碑和超大黃金神轎的神社",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJR2JEzGCPGGARdPJDgHnVbuI",
+     "lat": 35.7082346,
+     "lng": 139.77587119999998,
+     "title": "あいだや（Aidaya）",
+     "memo": "必比登拉麵店旗下新品牌，沾麵加壽喜燒雙重吃法",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJh7eDrwCPGGARCs9fpCkKS2U",
+     "lat": 35.710068199999995,
+     "lng": 139.7746009,
+     "title": "上野阿美橫商店街（アメ横）",
+     "memo": "上野熱鬧的商店街，零食、乾貨、藥妝都有",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJdcSC2EiNGGARx_bz33r_-eI",
+     "lat": 35.698132799999996,
+     "lng": 139.7747761,
+     "title": "GENERAL STORE RAILYARD 秋葉原",
+     "memo": "JR直營鐵道商品店，有山手線與SUICA企鵝周邊",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

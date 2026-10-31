@@ -1,0 +1,100 @@
+{
+ "owner": "pinwith_zhtw",
+ "lang": "zh-TW",
+ "slug": "seoul-food-10-must-revisit",
+ "title": "首爾美食10選：值得一再回訪的人氣店",
+ "desc": "首爾10家人氣餐廳地圖，涵蓋烤腸、熟成豬肉、韓牛、鰻魚、白切肉與披薩等，附推薦必點菜色。",
+ "kind": "course",
+ "themes": [
+  "首爾",
+  "美食",
+  "二刷"
+ ],
+ "sections": [
+  {
+   "name": null,
+   "items": [
+    {
+     "place_id": "ChIJxft0BAClfDURKXff2Q8CBWU",
+     "lat": 37.542748,
+     "lng": 127.053961,
+     "title": "능동미나리 성수점",
+     "memo": "招牌是水芹菜生牛肉拌飯",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJa8BN-lChfDUREGZOPGbbOSg",
+     "lat": 37.49432,
+     "lng": 127.031497,
+     "title": "강남곱 江南烤腸",
+     "memo": "韓式烤腸店，推薦綜合拼盤與韓牛大腸",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJN3SwztWYfDURermP-vvhkrk",
+     "lat": 37.547557,
+     "lng": 126.913475,
+     "title": "각시보쌈",
+     "memo": "白切肉（菠菜包肉）專門店，點套餐最划算",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJrzYdt9OlfDURlLYgGyaP4vc",
+     "lat": 37.548925,
+     "lng": 127.054322,
+     "title": "Pizzeria Marione 마리오네",
+     "memo": "披薩店，開心果肉腸披薩是人氣口味",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJO85WpN6jfDURVI5DNM9JkCI",
+     "lat": 37.536009,
+     "lng": 126.972335,
+     "title": "夢炭 몽탄",
+     "memo": "稻草燻烤牛肋名店，最後可點泡菜炒飯",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJiWY0E1alfDURMaKxAl4f4uA",
+     "lat": 37.543224,
+     "lng": 127.057537,
+     "title": "꿉당 성수점",
+     "memo": "熟成豬肉燒烤，梅花、五花、豬頰都推薦",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJoZKRvJWifDURw3FTDWnDJwQ",
+     "lat": 37.576498,
+     "lng": 126.972155,
+     "title": "안주마을 海味居酒屋",
+     "memo": "海鮮居酒屋，推薦甜蝦與生魷魚刺身",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJbzuXla2jfDURtALqyX2a8Ag",
+     "lat": 37.54267,
+     "lng": 126.973326,
+     "title": "초원",
+     "memo": "韓牛燒肉，霜降與特級牛舌是招牌",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJEdot_OeYfDURbTNZndyFd3M",
+     "lat": 37.559538,
+     "lng": 126.921544,
+     "title": "風川鰻魚 풍천장어",
+     "memo": "鰻魚專門店，推薦白燒鰻魚套餐",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ10BIFACjfDURRGNWPLahjqE",
+     "lat": 37.563686,
+     "lng": 126.991458,
+     "title": "아소토 Aalto",
+     "memo": "小酒館風餐廳，青甘韭菜捲與鹽烤雞頸",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

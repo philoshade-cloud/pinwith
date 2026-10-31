@@ -1,0 +1,161 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "seoul-cafes-15-best-picks",
+ "title": "Best cafes in Seoul: 15 spots by neighbourhood",
+ "desc": "Standout cafes and dessert spots across Seoul, grouped by neighbourhood from Ikseon-dong to Gangnam and the west side.",
+ "kind": "collection",
+ "themes": [
+  "Seoul",
+  "cafes",
+  "desserts",
+  "coffee"
+ ],
+ "sections": [
+  {
+   "name": "Ikseon & Anguk",
+   "items": [
+    {
+     "place_id": "ChIJFSe90eejfDURnI3qwtRtTF8",
+     "lat": 37.573882499999996,
+     "lng": 126.98976230000001,
+     "title": "Cheongsudang (청수당)",
+     "memo": "Hanok outside, nature-themed inside; made-to-order soufflés.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJv8pAfwyjfDURBQRZnfH9Y_E",
+     "lat": 37.5733648,
+     "lng": 126.9900717,
+     "title": "Nakwon Station (낙원역)",
+     "memo": "Train-station-themed hanok cafe with a cake conveyor; try the peanut cream latte.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJo2dXLFujfDURqfUuFYQ1wKA",
+     "lat": 37.5734454,
+     "lng": 126.9900693,
+     "title": "Cheese Industry (치즈인더스트리)",
+     "memo": "Cheesecakes made with house-made cheese; farmhouse-style space.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJLXL2BvijfDURmTrYFPQIGUc",
+     "lat": 37.5776235,
+     "lng": 126.9865541,
+     "title": "Cafe Onion Anguk (카페어니언 안국)",
+     "memo": "Hanok cafe; the sugar-dusted pandoro is the signature.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Bukchon & Dongdaemun",
+   "items": [
+    {
+     "place_id": "ChIJl-1O9M-ifDURXTy12d932SU",
+     "lat": 37.5823512,
+     "lng": 126.98522179999998,
+     "title": "Green Mile Coffee Bukchon (그린마일커피)",
+     "memo": "Small modern cafe with a rooftop view over Bukchon; best on a clear day.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJaTTIe6ejfDURo-TQQHxrpXk",
+     "lat": 37.5716967,
+     "lng": 127.00985689999999,
+     "title": "Cafe Jeonggeurida (카페 정그리다)",
+     "memo": "Tropical-themed cafe with coconut mango drinks and views of the city wall.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Itaewon",
+   "items": [
+    {
+     "place_id": "ChIJ7SwF4I6jfDUReIhp5tpQgCk",
+     "lat": 37.540344499999996,
+     "lng": 126.9932768,
+     "title": "Savage Garden (새비지가든)",
+     "memo": "Vegan botanical cafe with indoor ponds and vegan yogurt bowls.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Sinsa, Apgujeong & Gangnam",
+   "items": [
+    {
+     "place_id": "ChIJ0Ve9itOjfDUReSiOwB-KdSw",
+     "lat": 37.5189948,
+     "lng": 127.02207759999999,
+     "title": "Coorownie (쿠라우니)",
+     "memo": "British-themed bakery known for cookie-brownie bars.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ0W3WzWWjfDURg5fIIEEWubU",
+     "lat": 37.5210489,
+     "lng": 127.02181630000001,
+     "title": "Nudake Sinsa (누데이크 신사)",
+     "memo": "Croissant-focused cafe; the onigiri-shaped croissant is the signature.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJKdA733ijfDUR67iu-TmxFCc",
+     "lat": 37.526758799999996,
+     "lng": 127.03971819999998,
+     "title": "Mooni Apgujeong (무니)",
+     "memo": "Pink dollhouse-style cafe with big milkshakes and a rooftop.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ753azC6jfDUR2UUYwlh4N1g",
+     "lat": 37.5028303,
+     "lng": 127.02783409999999,
+     "title": "Something About Coffee (썸띵어바웃커피)",
+     "memo": "Three-floor cafe with a large bakery; cheesecake is the signature.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "West Seoul",
+   "items": [
+    {
+     "place_id": "ChIJi7CiGmmZfDUROfKS29Xgl3I",
+     "lat": 37.5466607,
+     "lng": 126.91847399999999,
+     "title": "Perception (퍼셉션)",
+     "memo": "Award-winning wooden ceiling and around 15 house-brewed coffees.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJJ-DNSEKZfDUReqsayg-FMGA",
+     "lat": 37.566187600000006,
+     "lng": 126.9209838,
+     "title": "Brady's Coffee (브래디스커피)",
+     "memo": "Floral cafe in Yeonnam; pink passion ade and salt butter bread.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJy6lYoCSffDURjXG8VsP1d2Y",
+     "lat": 37.5291417,
+     "lng": 126.90382689999998,
+     "title": "Manhole Coffee (맨홀커피)",
+     "memo": "Basement cafe lined with antique British books; try the manhole cream coffee.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJpUe3M9mZfDURrJz6bVtZK2A",
+     "lat": 37.581328299999996,
+     "lng": 126.9370339,
+     "title": "Cafe Pokpo (카페 폭포)",
+     "memo": "Seats facing a large waterfall; walking trails nearby.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

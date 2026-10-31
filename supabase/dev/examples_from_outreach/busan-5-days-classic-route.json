@@ -1,0 +1,154 @@
+{
+ "owner": "pinwith_zhtw",
+ "lang": "zh-TW",
+ "slug": "busan-5-days-classic-route",
+ "title": "釜山5天4夜經典行程：14個景點",
+ "desc": "釜山5天4夜的行程地圖，涵蓋海雲台、青沙浦、影島與機張，依天數排列景點與餐廳。",
+ "kind": "course",
+ "themes": [
+  "釜山",
+  "自由行",
+  "5天4夜",
+  "海雲台",
+  "影島"
+ ],
+ "sections": [
+  {
+   "name": "第1天",
+   "items": [
+    {
+     "place_id": "ChIJUQsDVhuNaDURJo5GeByloeQ",
+     "lat": 35.1640365,
+     "lng": 129.1967173,
+     "title": "青沙浦踏石展望台 (청사포 다릿돌전망대)",
+     "memo": "看海和紅白燈塔的步道展望台，適合抵達日輕鬆走走。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJy48lzEWNaDURRh-refpJyNw",
+     "lat": 35.1648405,
+     "lng": 129.1576274,
+     "title": "海理團路 (해리단길)",
+     "memo": "小店多在11點後才開，下午2到5點來逛最剛好。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJAwlBgCONaDURdmNRS85syro",
+     "lat": 35.1649621,
+     "lng": 129.1693981,
+     "title": "PURADAK 炸雞 海雲台店 (푸라닭)",
+     "memo": "韓國連鎖炸雞，招牌是黑蒜口味。",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "第2天",
+   "items": [
+    {
+     "place_id": "ChIJfdIYWwuNaDURDx-eqtUjCkg",
+     "lat": 35.158284,
+     "lng": 129.17276719999998,
+     "title": "海雲台藍線公園 尾浦站 (해운대 블루라인파크)",
+     "memo": "天空膠囊小火車很熱門，記得事先上網預約。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJb6ju4GeNaDURuR1LsbcI5lw",
+     "lat": 35.162420499999996,
+     "lng": 129.16450609999998,
+     "title": "錦繡河豚 海雲台總店 (금수복국)",
+     "memo": "午餐吃河豚湯，先喝原味再加白醋。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJnbg-nA2NaDUR3DK_vogcxaI",
+     "lat": 35.1597946,
+     "lng": 129.1699193,
+     "title": "BUSAN X the SKY 展望台",
+     "memo": "海雲台高樓上的觀景台，拍照很好看。",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "第3天",
+   "items": [
+    {
+     "place_id": "ChIJseGsfh7paDURigYilgTVojA",
+     "lat": 35.0782798,
+     "lng": 129.0453198,
+     "title": "白淺灘文化村 (흰여울문화마을)",
+     "memo": "影島海邊小村，階梯很多，穿好走的球鞋。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ4cySXFTvaDUR6qQVhmEg1hg",
+     "lat": 35.0604486,
+     "lng": 129.0779732,
+     "title": "太宗台烤貝村 (태종대 조개구이촌)",
+     "memo": "影島午餐吃海邊烤貝。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJQ9qENgvvaDURqYzOp6H74D4",
+     "lat": 35.0859877,
+     "lng": 129.0763838,
+     "title": "P.ARK 咖啡廳 (피아크)",
+     "memo": "大片玻璃看海景，配甜點休息。",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "第4天",
+   "items": [
+    {
+     "place_id": "ChIJ90WPaGeNaDUR0qwheqRFQz8",
+     "lat": 35.1633286,
+     "lng": 129.1613654,
+     "title": "海雲台元祖奶奶牛肉湯飯 (해운대원조할매국밥)",
+     "memo": "海雲台老字號牛肉湯飯，適合當早餐。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ8XYSxfKNaDURFuMe6s2K4us",
+     "lat": 35.1962445,
+     "lng": 129.21493759999998,
+     "title": "釜山樂天冒險世界 (롯데월드 어드벤처 부산)",
+     "memo": "東釜山的戶外遊樂園。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ-5-zWheNaDUR5_hcfQgCFk8",
+     "lat": 35.1940567,
+     "lng": 129.2186386,
+     "title": "Skyline Luge 斜坡滑車 (스카이라인 루지)",
+     "memo": "建議平日週二、週三去，避開週末排隊。",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "第5天",
+   "items": [
+    {
+     "place_id": "ChIJve0UExiPaDURAbPXW8OzpsU",
+     "lat": 35.2438418,
+     "lng": 129.2151228,
+     "title": "機張市場 (기장시장)",
+     "memo": "吃松葉蟹和蟹膏拌飯；秤重計價，先問清楚總價。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJFy7P8GuPaDUR8IEYkJ6qysM",
+     "lat": 35.217297599999995,
+     "lng": 129.1996944,
+     "title": "ha:nok 韓屋咖啡廳 (하녹)",
+     "memo": "整棟韓屋改成的咖啡廳，推薦點甜點。",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

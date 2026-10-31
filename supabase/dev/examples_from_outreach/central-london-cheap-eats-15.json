@@ -1,0 +1,146 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "central-london-cheap-eats-15",
+ "title": "Central London on a budget: 15 cheap eats",
+ "desc": "A map of budget-friendly places to eat in central London, split into sit-down restaurants and grab-and-go spots, with typical prices.",
+ "kind": "collection",
+ "themes": [
+  "London",
+  "cheap eats",
+  "budget travel",
+  "street food"
+ ],
+ "sections": [
+  {
+   "name": "Budget restaurants",
+   "items": [
+    {
+     "place_id": "ChIJBS8tKT8bdkgRlUzYr3nKauU",
+     "lat": 51.5311021,
+     "lng": -0.1198515,
+     "title": "Pizza Union King's Cross",
+     "memo": "12-inch pizzas from about GBP 4 to 7.50.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJtRRu9iQbdkgRqt8jDR1osYw",
+     "lat": 51.5290963,
+     "lng": -0.1319957,
+     "title": "Roti King (Euston)",
+     "memo": "Malaysian mains GBP 9.50-11.95; try the dhal or a murtabak.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJZ8aAttMEdkgRFtcdGcvlzV4",
+     "lat": 51.5111876,
+     "lng": -0.13235590000000003,
+     "title": "C & R Cafe Restaurant",
+     "memo": "Chinatown noodle and rice mains around GBP 14.50.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJN4xC2ywbdkgRw6jKHfSG0sQ",
+     "lat": 51.5158347,
+     "lng": -0.13275979999999998,
+     "title": "Govinda's (Soho Street)",
+     "memo": "Vegetarian and vegan dishes from GBP 3.50 to 5.50.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJaWyAJCgbdkgRjSgEr1sMre4",
+     "lat": 51.5227705,
+     "lng": -0.138962,
+     "title": "Indian YMCA Restaurant",
+     "memo": "Canteen-style Indian food, GBP 4.50-9.50 a dish.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ5XXX0T4bdkgRMuUY0NgGXR0",
+     "lat": 51.5232902,
+     "lng": -0.082217,
+     "title": "Devi Dhaba",
+     "memo": "Three curries with rice for around GBP 6.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJM28WNzobdkgRsnoCwh_o648",
+     "lat": 51.5275221,
+     "lng": -0.12451559999999999,
+     "title": "Thenga Cafe",
+     "memo": "Vegan-friendly mains at about GBP 11.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJRw8qfLkEdkgR6_et2uOEqu4",
+     "lat": 51.5014806,
+     "lng": -0.1114583,
+     "title": "Marie's Thai Cafe",
+     "memo": "Fry-ups by day, Thai dishes GBP 8-12 later on.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJNaDQ7ysbdkgRDy6jd1VTylI",
+     "lat": 51.519422899999995,
+     "lng": -0.13595840000000003,
+     "title": "ICCO Pizza (Goodge Street)",
+     "memo": "Known as \"The People's Pizzeria\": 12-inch pizzas GBP 4-9.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Grab-and-go",
+   "items": [
+    {
+     "place_id": "ChIJPXN_fNIEdkgRg6DhnlDgPMU",
+     "lat": 51.511989899999996,
+     "lng": -0.1297546,
+     "title": "Chinatown Bakery",
+     "memo": "Cheap buns and pastries for breakfast or a snack.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJUe_EX7McdkgRtk96QW0KTlc",
+     "lat": 51.5168918,
+     "lng": -0.07337840000000001,
+     "title": "Petticoat Lane Market",
+     "memo": "Affordable international street food stalls.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJk79wm6oEdkgRCeXuQfFjp_8",
+     "lat": 51.513093,
+     "lng": -0.093764,
+     "title": "Porterford Butchers",
+     "memo": "Butcher doing hearty sandwiches to take away.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJz0GXnqwbdkgR4ML_hlQyNrc",
+     "lat": 51.521597899999996,
+     "lng": -0.11023229999999999,
+     "title": "Aria Golden Grill (Leather Lane)",
+     "memo": "Leather Lane stall known for big portions.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ1WyAHrQcdkgRr8cIfGqxsi4",
+     "lat": 51.5199388,
+     "lng": -0.0754794,
+     "title": "Sud Italia",
+     "memo": "Wood-fired Neapolitan pizza from a food truck.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJjUgahq0ddkgRDLV2zZrg4ck",
+     "lat": 51.5244985,
+     "lng": -0.0717608,
+     "title": "Beigel Bake (Brick Lane)",
+     "memo": "East London bagel shop, open 24/7; salt beef bagels are the classic.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

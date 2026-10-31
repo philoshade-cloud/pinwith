@@ -1,0 +1,109 @@
+{
+ "owner": "pinwith_zhtw",
+ "lang": "zh-TW",
+ "slug": "fukuoka-new-spots-and-local-eats",
+ "title": "福岡新景點與在地美食：11 個推薦地點",
+ "desc": "福岡博多、天神、藥院一帶的新景點、咖啡店與在地美食，依路線順序排列。",
+ "kind": "course",
+ "themes": [
+  "福岡",
+  "博多",
+  "藥院",
+  "天神"
+ ],
+ "sections": [
+  {
+   "name": null,
+   "items": [
+    {
+     "place_id": "ChIJ_Rk0VQCRQTUR43OiELbL-5s",
+     "lat": 33.5884719,
+     "lng": 130.4175069,
+     "title": "明治公園（博多站）",
+     "memo": "博多站附近的新景點",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJTfHVFgCRQTURbmm70K0EOWs",
+     "lat": 33.5888448,
+     "lng": 130.41843799999998,
+     "title": "Shake Shack 博多店",
+     "memo": "西日本城市銀行大樓一樓，同棟還有藍瓶咖啡",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJYWEnUoWRQTURrebwFOFNt3U",
+     "lat": 33.587238299999996,
+     "lng": 130.4003656,
+     "title": "大砲拉麵 天神今泉店",
+     "memo": "博多豚骨拉麵",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJB75aDpyRQTURP4AEu1gPRKs",
+     "lat": 33.5807797,
+     "lng": 130.40495909999999,
+     "title": "Coffee County Fukuoka",
+     "memo": "藥院的質感咖啡店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJN8W0HXiRQTURssGgm-vr0aM",
+     "lat": 33.5775186,
+     "lng": 130.400514,
+     "title": "Abeki",
+     "memo": "起司蛋糕名店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJhYuX8neRQTURsb2-uRIbFCQ",
+     "lat": 33.576903,
+     "lng": 130.40127999999999,
+     "title": "KURASUKOTO",
+     "memo": "藥院一帶的咖啡店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJL5yGMoKRQTURSufntJJi5wI",
+     "lat": 33.5821833,
+     "lng": 130.3962493,
+     "title": "むつか堂 藥院本店",
+     "memo": "麵包店本店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJGfF8E_TtQTURmFwF3XDuZv8",
+     "lat": 33.5835109,
+     "lng": 130.3043586,
+     "title": "壱岐神社 一の鳥居",
+     "memo": "下山門站附近的海邊鳥居",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJZRRDIOuRQTURqqUMKI48O78",
+     "lat": 33.5852169,
+     "lng": 130.3944333,
+     "title": "CAITAC 廣場花園",
+     "memo": "赤坂、大名逛街時可順路",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJgy76nV6RQTUR8-HHCJ6UVQo",
+     "lat": 33.587134899999995,
+     "lng": 130.39048499999998,
+     "title": "燒鳥 大川",
+     "memo": "燒鳥店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJT6f-DQCRQTURW4q2KwXhbz4",
+     "lat": 33.5909049,
+     "lng": 130.4007109,
+     "title": "天神商業中心 2（Tenjin Business Center 2）",
+     "memo": "天神商圈的新大樓",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

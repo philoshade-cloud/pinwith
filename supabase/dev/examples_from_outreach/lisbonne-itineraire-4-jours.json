@@ -1,0 +1,141 @@
+{
+ "owner": "pinwith_fr",
+ "lang": "fr",
+ "slug": "lisbonne-itineraire-4-jours",
+ "title": "Itinéraire de 4 jours à Lisbonne : 13 incontournables",
+ "desc": "Un itinéraire de quatre jours à Lisbonne : Alfama et ses miradouros, la Baixa, Belém et le Cristo Rei, organisé jour par jour.",
+ "kind": "course",
+ "themes": [
+  "Lisbonne",
+  "Portugal",
+  "Miradouros",
+  "Belém",
+  "4 jours"
+ ],
+ "sections": [
+  {
+   "name": "Jour 1",
+   "items": [
+    {
+     "place_id": "ChIJm9xRPnc0GQ0RGWK34RwdbpI",
+     "lat": 38.7098339,
+     "lng": -9.1329535,
+     "title": "Cathédrale Sé de Lisbonne",
+     "memo": "L'un des plus anciens monuments de Lisbonne, de style roman.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJx-Rwl4QzGQ0RaSfN7SE7IEE",
+     "lat": 38.7116956,
+     "lng": -9.1301972,
+     "title": "Miradouro de Santa Luzia",
+     "memo": "Arches, azulejos et vue sur l'Alfama et le Tage.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJm8MOtHc0GQ0R1zPkmUFwwLQ",
+     "lat": 38.713909199999996,
+     "lng": -9.1334762,
+     "title": "Château Saint-Georges (Castelo de São Jorge)",
+     "memo": "Ancienne forteresse qui domine les quartiers historiques.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJYzmNq4kzGQ0R8PmcMe8PyEY",
+     "lat": 38.7164509,
+     "lng": -9.1315937,
+     "title": "Miradouro da Graça",
+     "memo": "Après quelques rues de montée, vue sur les toits, le château et le Tage.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Jour 2",
+   "items": [
+    {
+     "place_id": "ChIJY0ulMHo0GQ0RROAoa18vUzA",
+     "lat": 38.7072828,
+     "lng": -9.136361299999999,
+     "title": "Praça do Comércio",
+     "memo": "Grande esplanade au bord du Tage, bordée de bâtiments jaunes.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ5fcMh3k0GQ0RsEli_Fck5sQ",
+     "lat": 38.7084447,
+     "lng": -9.136824299999999,
+     "title": "Arco da Rua Augusta",
+     "memo": "Arc monumental à l'entrée de la rue Augusta, avec accès possible au sommet.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJdWBeWYc0GQ0RktxySU7hjxM",
+     "lat": 38.7070608,
+     "lng": -9.1456691,
+     "title": "Time Out Market",
+     "memo": "Halle gourmande dans le Mercado da Ribeira, près de Cais do Sodré.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJsWFT1YYzGQ0RU7vqEjeW4ck",
+     "lat": 38.7158971,
+     "lng": -9.140089399999999,
+     "title": "Casa do Alentejo",
+     "memo": "Cour intérieure d'inspiration mauresque, avec un restaurant.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Jour 3",
+   "items": [
+    {
+     "place_id": "ChIJ5dveYa80GQ0RrEP1FKqq6zM",
+     "lat": 38.703460199999995,
+     "lng": -9.1787831,
+     "title": "LX Factory",
+     "memo": "Friche industrielle d'Alcântara devenue espace créatif, avec la librairie Ler Devagar.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJS5zCw0LLHg0R7euWjjRddYc",
+     "lat": 38.6978909,
+     "lng": -9.206703899999999,
+     "title": "Monastère des Hiéronymites (Mosteiro dos Jerónimos)",
+     "memo": "Monastère manuélin classé à l'UNESCO ; le cloître se visite avec un billet.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJS5zCw0LLHg0RP1FSz63cAjA",
+     "lat": 38.691583699999995,
+     "lng": -9.215977299999999,
+     "title": "Tour de Belém",
+     "memo": "Tour du XVIe siècle qui gardait l'entrée du port.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJW3H9LkXLHg0RZZZttMb27_8",
+     "lat": 38.6975105,
+     "lng": -9.203227600000002,
+     "title": "Pastéis de Belém",
+     "memo": "Pâtisserie historique, réputée pour sa recette traditionnelle de pastéis de nata.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Jour 4",
+   "items": [
+    {
+     "place_id": "ChIJPcfcnuc0GQ0Rgerp5o_yC2Q",
+     "lat": 38.6786319,
+     "lng": -9.1713326,
+     "title": "Sanctuaire du Cristo Rei (Almada)",
+     "memo": "Esplanade gratuite avec vue sur Lisbonne ; la plateforme panoramique est payante.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

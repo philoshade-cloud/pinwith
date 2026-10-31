@@ -1,0 +1,116 @@
+{
+ "owner": "pinwith_es",
+ "lang": "es",
+ "slug": "seul-2-dias-ruta-clasica",
+ "title": "Seúl en 2 días: ruta clásica de 12 lugares",
+ "desc": "Ruta de dos días por Seúl con 12 paradas: palacios, templos, aldeas hanok, mercados y comida coreana, en orden de visita.",
+ "kind": "course",
+ "themes": [
+  "Seúl",
+  "2 días",
+  "Corea"
+ ],
+ "sections": [
+  {
+   "name": null,
+   "items": [
+    {
+     "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+     "lat": 37.5511694,
+     "lng": 126.9882266,
+     "title": "N Seoul Tower",
+     "memo": "Torre en el monte Namsan con miradores sobre toda la ciudad",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJE_OSzJKjfDURqPqIzTBFnuI",
+     "lat": 37.5732171,
+     "lng": 127.0176409,
+     "title": "Mercado de pulgas de Dongmyo",
+     "memo": "Mercado de pulgas con ropa vintage, antigüedades y objetos de segunda mano",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJu5Gg2hWkfDURl7NN7FpFnis",
+     "lat": 37.5102133,
+     "lng": 127.0600186,
+     "title": "Biblioteca Starfield",
+     "memo": "Biblioteca dentro del centro comercial COEX en Gangnam; se combina con Bongeunsa",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJgZn6QWmkfDURaU3kwlecaEU",
+     "lat": 37.514852,
+     "lng": 127.0573766,
+     "title": "Templo Bongeunsa",
+     "memo": "Templo budista en Gangnam, frente a la Biblioteca Starfield",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJzfA-0lijfDURWli7b25n6HI",
+     "lat": 37.5215066,
+     "lng": 127.0311082,
+     "title": "Apgujeong Jejujip",
+     "memo": "Restaurante de cerdo negro de Jeju a la parrilla en Apgujeong",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+     "lat": 37.579617,
+     "lng": 126.977041,
+     "title": "Palacio Gyeongbokgung",
+     "memo": "El mayor de los palacios reales de la dinastía Joseon",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJod7tSseifDUR4HuzvkBA2ns",
+     "lat": 37.5816456,
+     "lng": 126.9789948,
+     "title": "Museo Nacional del Folclore",
+     "memo": "Museo sobre la vida tradicional coreana, dentro del recinto de Gyeongbokgung",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+     "lat": 37.5814696,
+     "lng": 126.9849519,
+     "title": "Aldea Hanok de Bukchon",
+     "memo": "Barrio de casas tradicionales hanok entre dos palacios; es zona residencial, visita en silencio",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJhZT2GMWifDURcOTOySCdqGQ",
+     "lat": 37.5805723,
+     "lng": 126.9847196,
+     "title": "Baeknyeon Tojong Samgyetang",
+     "memo": "Samgyetang: sopa de pollo entero con ginseng, cerca de Gyeongbokgung",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJgwhZmSWjfDURzJr5IabxSNg",
+     "lat": 37.5737007,
+     "lng": 126.9896957,
+     "title": "Pan de sal en Ikseon-dong (자연도소금빵)",
+     "memo": "Panadería de pan de sal en el barrio hanok de Ikseon-dong",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJIwCT4-yifDUR1E63iG76hr0",
+     "lat": 37.5691015,
+     "lng": 126.9786692,
+     "title": "Arroyo Cheonggyecheon",
+     "memo": "Paseo junto al arroyo restaurado en pleno centro",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+     "lat": 37.5700385,
+     "lng": 126.9996038,
+     "title": "Mercado de Gwangjang",
+     "memo": "Mercado tradicional famoso por el bindaetteok y la comida callejera",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

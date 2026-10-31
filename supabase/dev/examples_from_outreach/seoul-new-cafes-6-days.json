@@ -1,0 +1,131 @@
+{
+ "owner": "pinwith_ja",
+ "lang": "ja",
+ "slug": "seoul-new-cafes-6-days",
+ "title": "ソウルの新しいカフェ巡り：6日間で回る12軒",
+ "desc": "ソウルの新しいカフェやベーカリーを中心に、エリアごとに日別で回れるようまとめた12か所のマップです。",
+ "kind": "course",
+ "themes": [
+  "ソウル",
+  "カフェ",
+  "新オープン"
+ ],
+ "sections": [
+  {
+   "name": "1日目",
+   "items": [
+    {
+     "place_id": "ChIJjUaEcACZfDURWWk80hH6bjk",
+     "lat": 37.5561547,
+     "lng": 126.9309333,
+     "title": "Okkz",
+     "memo": "延南洞・弘大エリアのお店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJVVVVVRaifDUR0o4TELGsUdA",
+     "lat": 37.5306419,
+     "lng": 126.9715498,
+     "title": "KINDERSALMON",
+     "memo": "龍山エリアのお店",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "2日目",
+   "items": [
+    {
+     "place_id": "ChIJp4i8TQC9fDURGQ2vQn7SAKc",
+     "lat": 37.5890645,
+     "lng": 127.0105355,
+     "title": "Isle Bakery",
+     "memo": "城北洞エリアのベーカリー",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJHZ9qPwC9fDURhED6Ng0EW8E",
+     "lat": 37.588142,
+     "lng": 127.0074068,
+     "title": "Café Limón",
+     "memo": "城北洞エリアのカフェ。Isle Bakeryから歩ける距離",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJVc8g-cKYfDURq2lcpdtK5wY",
+     "lat": 37.5562719,
+     "lng": 126.9243717,
+     "title": "一片ドゥンシム 일편등심",
+     "memo": "延南洞エリアの焼肉店。牛ロース（ドゥンシム）が看板",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "3日目",
+   "items": [
+    {
+     "place_id": "ChIJ8VXqkLmjfDURo8pABESu9eI",
+     "lat": 37.5263716,
+     "lng": 126.9633586,
+     "title": "Shawnino",
+     "memo": "龍山・二村洞エリアのお店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJPYCyy26jfDURAW56dr9lcIc",
+     "lat": 37.5446893,
+     "lng": 126.9835265,
+     "title": "Aftertaste",
+     "memo": "解放村エリアのお店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJu7RABwCjfDURaQvxcZI6zUw",
+     "lat": 37.5426502,
+     "lng": 126.987363,
+     "title": "Haus Bakery Service",
+     "memo": "解放村エリアのベーカリー",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJIf25CACjfDURq2ZdGofLy1o",
+     "lat": 37.552487,
+     "lng": 126.9765737,
+     "title": "Toast Coffee House",
+     "memo": "厚岩洞エリアのカフェ",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "4日目",
+   "items": [
+    {
+     "place_id": "ChIJt_ZAU1SlfDURBdXvDnG1HDM",
+     "lat": 37.5485648,
+     "lng": 127.0457731,
+     "title": "POINTTWOFIVE.SECOND 聖水",
+     "memo": "聖水のカフェ。TEA・THOLOGYも同じ場所に入っている",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJI9UbptSlfDURXBCMbd940LQ",
+     "lat": 37.5438067,
+     "lng": 127.0570939,
+     "title": "PVRE Pharmacy",
+     "memo": "聖水エリアのお店",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJu5Mkr_qlfDUROb-FXMNgcdM",
+     "lat": 37.5383883,
+     "lng": 127.0568492,
+     "title": "Piece Layer",
+     "memo": "聖水エリアのお店",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

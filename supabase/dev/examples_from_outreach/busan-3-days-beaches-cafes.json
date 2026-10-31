@@ -1,0 +1,101 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "busan-3-days-beaches-cafes",
+ "title": "Busan in 3 days: beaches, cafes and culture in 10 stops",
+ "desc": "A three-day Busan route from arrival to departure, covering Haeundae, Gamcheon, Jeonpo, Samgwangsa and Gwangalli in visiting order.",
+ "kind": "course",
+ "themes": [
+  "Busan",
+  "beaches",
+  "cafes",
+  "3 days"
+ ],
+ "sections": [
+  {
+   "name": "Busan",
+   "items": [
+    {
+     "place_id": "ChIJqxrVY9jraDURTqBi-qe-mAI",
+     "lat": 35.115224999999995,
+     "lng": 129.04224299999998,
+     "title": "Busan Station (부산역)",
+     "memo": "KTX terminal and main arrival point from Seoul.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJXwf-DlyNaDURmKxjwdWxY5k",
+     "lat": 35.158697499999995,
+     "lng": 129.16038419999998,
+     "title": "Haeundae Beach (해운대해수욕장)",
+     "memo": "Busan's best-known beach, with plenty of hotels nearby.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJCXner12NaDURvTHbPe3S9tU",
+     "lat": 35.161453699999996,
+     "lng": 129.16224889999998,
+     "title": "Haeundae Traditional Market (해운대전통시장)",
+     "memo": "Traditional market near the beach for street food.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJfdIYWwuNaDURDx-eqtUjCkg",
+     "lat": 35.158284,
+     "lng": 129.17276719999998,
+     "title": "Haeundae Blueline Park, Mipo Station (해운대블루라인파크 미포정거장)",
+     "memo": "Station for the Sky Capsule coastal rail ride.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+     "lat": 35.097393499999995,
+     "lng": 129.0105921,
+     "title": "Gamcheon Culture Village (감천문화마을)",
+     "memo": "Colorful hillside village of painted houses and alleys.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJP0Hor0zpaDUR9a2lOgOA-3I",
+     "lat": 35.0962779,
+     "lng": 129.009235,
+     "title": "DUF Coffee (더프커피)",
+     "memo": "Cafe inside Gamcheon Culture Village.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJYeuKwGTraDUR-U5PAfT2Uoo",
+     "lat": 35.155398999999996,
+     "lng": 129.0673266,
+     "title": "Jeonpo Cafe Street (전포카페거리)",
+     "memo": "Neighborhood packed with independent cafes.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ-4yc9TvraDURorjIIUAF0uU",
+     "lat": 35.175428800000006,
+     "lng": 129.04338819999998,
+     "title": "Samgwangsa Temple (삼광사)",
+     "memo": "Temple known for its yearly Lotus Lantern Festival with 40,000+ lanterns.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJxw7HJy_taDUR-xaSTeHwbf8",
+     "lat": 35.1531696,
+     "lng": 129.118666,
+     "title": "Gwangalli Beach (광안리해수욕장)",
+     "memo": "Beach facing Gwangan Bridge; worth seeing by day and lit up at night.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJDfcSIsGSaDUR7DKMmkKpoxU",
+     "lat": 35.172868799999996,
+     "lng": 128.9471783,
+     "title": "Gimhae International Airport (김해국제공항)",
+     "memo": "Busan's airport for departures.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,106 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "tokyo-food-coffee-10-spots",
+ "title": "Tokyo food and coffee: 10 places to try",
+ "desc": "Restaurants, markets, cafés and sweet shops around Tokyo, including Shibuya, Ebisu, Tsukiji and Ginza, grouped into food and coffee.",
+ "kind": "collection",
+ "themes": [
+  "Tokyo",
+  "food",
+  "coffee",
+  "Ginza"
+ ],
+ "sections": [
+  {
+   "name": "Food",
+   "items": [
+    {
+     "place_id": "ChIJHceZBlaLGGAR1ezdqkbboHI",
+     "lat": 35.6577081,
+     "lng": 139.6965121,
+     "title": "Dogenzaka Mammoth (道玄坂マンモス)",
+     "memo": "Restaurant in the Dogenzaka area of Shibuya.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJsWJ80PiNGGAR8aSF8OFJeu4",
+     "lat": 35.6593105,
+     "lng": 139.69755379999998,
+     "title": "Hikiniku to Come, Shibuya (挽肉と米 渋谷)",
+     "memo": "Popular hamburg steak and rice set grilled over charcoal; expect a queue.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJeThxfACLGGARtQZdxLhkKrs",
+     "lat": 35.6465933,
+     "lng": 139.71614739999998,
+     "title": "Ebisu Sushi Hatsume",
+     "memo": "Omakase sushi counter in Ebisu; book ahead.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJW2cLzSGLGGARXAKXv6EkbqI",
+     "lat": 35.6647703,
+     "lng": 139.7702515,
+     "title": "Tsukiji Outer Market (築地場外市場)",
+     "memo": "Seafood and street-food stalls; go in the morning, many shops close by early afternoon.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJkwhr8eaLGGARrddg76pSrV4",
+     "lat": 35.6705604,
+     "lng": 139.76546779999998,
+     "title": "Ginza Steak (銀座ステーキ)",
+     "memo": "Steak restaurant in Ginza.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJAyOyEOKLGGARz0szOUKPsBI",
+     "lat": 35.6264119,
+     "lng": 139.7214881,
+     "title": "Menya Sign",
+     "memo": "Noodle shop; good for a casual bowl.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Coffee & sweets",
+   "items": [
+    {
+     "place_id": "ChIJp-Xs136LGGARavbO827ycn8",
+     "lat": 35.6249112,
+     "lng": 139.72538749999998,
+     "title": "SAISON Bakery & Coffee",
+     "memo": "Bakery-café for pastries and coffee.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJCwW9-4yJGGARAHRZAhU1gBU",
+     "lat": 35.6661115,
+     "lng": 139.7651615,
+     "title": "Atelier Matcha",
+     "memo": "Matcha-focused café for drinks and sweets.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJP2BtW-CLGGAR_-5-Dk9pFoE",
+     "lat": 35.6710713,
+     "lng": 139.77080379999998,
+     "title": "Bongen Coffee Ginza",
+     "memo": "Small specialty coffee shop in Ginza.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ57Hp_52LGGARvt4ghJExG_g",
+     "lat": 35.6727584,
+     "lng": 139.77129449999998,
+     "title": "Age.3 Ginza",
+     "memo": "Ginza shop known for fried cream-filled buns.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

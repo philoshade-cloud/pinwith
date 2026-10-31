@@ -1,0 +1,136 @@
+{
+ "owner": "pinwith_zhtw",
+ "lang": "zh-TW",
+ "slug": "taipei-zhongshan-laptop-cafes",
+ "title": "台北中山區不限時咖啡廳：13間有插座的工作好去處",
+ "desc": "台北捷運松江南京、行天宮、中山國小站周邊的不限時咖啡廳，依車站分區，並註明插座位置與用餐限制。",
+ "kind": "collection",
+ "themes": [
+  "台北咖啡廳",
+  "不限時",
+  "有插座",
+  "數位遊牧",
+  "中山區"
+ ],
+ "sections": [
+  {
+   "name": "松江南京站",
+   "items": [
+    {
+     "place_id": "ChIJFam_hyK1QjQRyW5zld0ZepU",
+     "lat": 25.0466746,
+     "lng": 121.5319511,
+     "title": "德佈Debut Cafe",
+     "memo": "只收現金；有榻榻米座位區，座位附插座",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJK03tDaSpQjQR_yXBS05DpaY",
+     "lat": 25.0547169,
+     "lng": 121.53171990000001,
+     "title": "旅徒咖啡",
+     "memo": "二樓小店，假日客滿限時2小時；提拉米蘇酒味濃",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJMUCICmGpQjQR266OmpSXaBU",
+     "lat": 25.050871599999997,
+     "lng": 121.53413160000001,
+     "title": "GIVE ME PIE",
+     "memo": "招牌鹹派超過10種口味；靠牆座位有插座",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJzf7RSMGpQjQRHo5NlOYGPIQ",
+     "lat": 25.050943699999998,
+     "lng": 121.536383,
+     "title": "TWATUTIAN Coffee & Co.",
+     "memo": "客滿限時90分鐘；二樓採光好，有插座的桌子只有三張",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJC_wscmGpQjQRtXrgvhvFthA",
+     "lat": 25.0505522,
+     "lng": 121.5336382,
+     "title": "93巷人文空間",
+     "memo": "可翻閱天下文化的書和雜誌；插座在座位前方",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "行天宮站",
+   "items": [
+    {
+     "place_id": "ChIJvWmFPV-pQjQRu_TYuwH_cBo",
+     "lat": 25.0584222,
+     "lng": 121.534909,
+     "title": "CAFE RACO",
+     "memo": "平日上午常客滿，建議先打電話；喝得到少見的越南咖啡",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJE0QYpEupQjQRhRm_nJkkyFs",
+     "lat": 25.0573649,
+     "lng": 121.53266699999999,
+     "title": "風潮咖啡",
+     "memo": "營業到22:30；一個人去多半坐吧台或後方六人大桌",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJOZxEWF2pQjQRhCu3Te92_0Y",
+     "lat": 25.058213199999997,
+     "lng": 121.5280099,
+     "title": "老三咖啡",
+     "memo": "07:00開到22:00；11點後有飯麵，插座在靠牆靠窗位",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJB7GdU1mpQjQRXyvVL4N00rQ",
+     "lat": 25.0618953,
+     "lng": 121.5319409,
+     "title": "SU SU CAFE 粟粟咖啡",
+     "memo": "週日公休、只收LINE Pay；午間商業午餐附南瓜濃湯",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJjxJVu4KpQjQRptkRW5Ftsvg",
+     "lat": 25.05753,
+     "lng": 121.53176020000001,
+     "title": "Dream House coffee",
+     "memo": "招牌咖啡飯；週二公休，插座在座位上方牆邊",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "中山國小站",
+   "items": [
+    {
+     "place_id": "ChIJ_8WLFWipQjQRc0d1b_tGhI4",
+     "lat": 25.0610049,
+     "lng": 121.52426039999999,
+     "title": "澳氏咖啡 Aussie Cafe",
+     "memo": "招牌澳洲肉派；假日限時2小時",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJCw3n6TWrQjQRv3BRablqFqE",
+     "lat": 25.0628827,
+     "lng": 121.5273682,
+     "title": "8%ice CAFÉ 民權店",
+     "memo": "07:00開門；只有二樓靠窗高腳椅有插座，客滿限時1.5小時",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJSaaF3AepQjQRNWEjmML4q30",
+     "lat": 25.0619896,
+     "lng": 121.5251147,
+     "title": "瑤池墮宮 YCDG",
+     "memo": "營業到凌晨1點、只收現金；座位寬敞，上方多有檯燈",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

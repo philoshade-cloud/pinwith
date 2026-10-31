@@ -1,0 +1,100 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "busan-cafes-8-coffee-spots",
+ "title": "Busan cafés: 8 coffee spots by the sea and beyond",
+ "desc": "Eight Busan cafés, many with ocean views, grouped by area: Haeundae & Gijang, Gwangalli, Yeongdo and Jeonpo.",
+ "kind": "collection",
+ "themes": [
+  "Busan",
+  "cafes",
+  "ocean views",
+  "coffee"
+ ],
+ "sections": [
+  {
+   "name": "Haeundae & Gijang",
+   "items": [
+    {
+     "place_id": "ChIJ4Q1rYnSNaDURPjAJeCysT_w",
+     "lat": 35.157617,
+     "lng": 129.1729163,
+     "title": "Tide Roasters (타이드)",
+     "memo": "Long ocean-facing bar for about a dozen; lovely right before sunset.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJbanmhfSNaDURtt1N0sfVwwQ",
+     "lat": 35.1824072,
+     "lng": 129.2088791,
+     "title": "Coralani (코랄라니)",
+     "memo": "Tiered decks over the sea near Haedong Yonggungsa; pricier than average.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Gwangalli & Suyeong",
+   "items": [
+    {
+     "place_id": "ChIJ1wbBDhztaDURjatpyTazgyY",
+     "lat": 35.150743299999995,
+     "lng": 129.1137737,
+     "title": "Little Aus",
+     "memo": "Australian-style brunch and flat whites; falafel bowl with hummus.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ82UaXcvtaDURbO1fob2eAHI",
+     "lat": 35.1547349,
+     "lng": 129.1199283,
+     "title": "Chaseonchaek (차선책)",
+     "memo": "Black sesame cake and injeolmi lattes by Gwangalli; gluten-free options.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJswHVbwDtaDUROiW8H7twJwY",
+     "lat": 35.1547583,
+     "lng": 129.1197477,
+     "title": "Working Holiday",
+     "memo": "Bright beach-facing windows, good for a laptop or just relaxing.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Yeongdo",
+   "items": [
+    {
+     "place_id": "ChIJFZ5PbQDvaDURgXUDcENX1eE",
+     "lat": 35.0601051,
+     "lng": 129.0715361,
+     "title": "Thrill on the Mug (스릴온더머그)",
+     "memo": "Stadium-style seats on the cliffs; outdoor tables shut in strong wind.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ55WrjvnpaDURC5yHDkuHzcQ",
+     "lat": 35.0798024,
+     "lng": 129.0437483,
+     "title": "Having Moment (해빙모먼트)",
+     "memo": "Warehouse interior with sea and skyline views; strong, fairly priced coffee.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Jeonpo",
+   "items": [
+    {
+     "place_id": "ChIJYeuKwGTraDUR-U5PAfT2Uoo",
+     "lat": 35.155398999999996,
+     "lng": 129.0673266,
+     "title": "Jeonpo Cafe Street (전포카페거리)",
+     "memo": "Walkable street of coffee shops that smells of roasting beans.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

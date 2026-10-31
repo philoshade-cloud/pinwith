@@ -1,0 +1,157 @@
+{
+ "owner": "pinwith_es",
+ "lang": "es",
+ "slug": "seul-15-lugares-imprescindibles",
+ "title": "Seúl imprescindible: 15 lugares para tu viaje",
+ "desc": "Mapa con 15 lugares clave de Seúl: palacios, mercados, miradores y paseos, organizados por zonas de la ciudad.",
+ "kind": "collection",
+ "themes": [
+  "Seúl",
+  "Corea del Sur",
+  "qué ver",
+  "palacios",
+  "mercados"
+ ],
+ "sections": [
+  {
+   "name": "Centro histórico",
+   "items": [
+    {
+     "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+     "lat": 37.579617,
+     "lng": 126.977041,
+     "title": "Palacio Gyeongbokgung",
+     "memo": "El Royal Palace Pass (10.000 wones) no incluye el Jardín Secreto.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+     "lat": 37.5814696,
+     "lng": 126.9849519,
+     "title": "Bukchon Hanok Village",
+     "memo": "Barrio residencial de casas hanok; gratis, pero hay que ir en silencio.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJz7ocWtiifDURU-HmRwLa3yQ",
+     "lat": 37.5746313,
+     "lng": 126.9938158,
+     "title": "Santuario de Jongmyo",
+     "memo": "Honra a los ancestros de la familia real Joseon; entrada de 1.000 wones.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJHYhJ5OmifDURMOSQ2D-6lFY",
+     "lat": 37.5738369,
+     "lng": 126.982202,
+     "title": "Templo Jogyesa",
+     "memo": "Templo budista gratuito en pleno centro.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJe4Jbot2ifDUR2zWhruwyaow",
+     "lat": 37.5737132,
+     "lng": 126.99012710000001,
+     "title": "Ikseon-dong Hanok Village",
+     "memo": "Callejones de hanoks con cafés y tiendas, junto a Insadong.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJR9PIr4CjfDURC4KZJpfg0BE",
+     "lat": 37.5644888,
+     "lng": 126.9756507,
+     "title": "Jeongdong Observatory",
+     "memo": "Planta 13 del edificio Seosomun del Ayuntamiento; gratis.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Namsan y Seoullo",
+   "items": [
+    {
+     "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+     "lat": 37.5511694,
+     "lng": 126.98822659999999,
+     "title": "Torre N Seoul (Namsan)",
+     "memo": "Mirador a 236 m; el teleférico ronda los 10 € ida y vuelta.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJw8UIcGCifDURB0MtY-xAUqM",
+     "lat": 37.556713699999996,
+     "lng": 126.96957529999999,
+     "title": "Seoullo 7017",
+     "memo": "Parque elevado sobre un antiguo viaducto; para pasear con un café.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Cheonggyecheon y Dongdaemun",
+   "items": [
+    {
+     "place_id": "ChIJIwCT4-yifDUR1E63iG76hr0",
+     "lat": 37.569101499999995,
+     "lng": 126.97866919999998,
+     "title": "Arroyo Cheonggyecheon",
+     "memo": "Estuvo bajo una autopista hasta su restauración en 2005; bonito de noche.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ_xCS_d-jfDURgqxl66H3dd8",
+     "lat": 37.5685891,
+     "lng": 126.9818622,
+     "title": "HiKR GROUND",
+     "memo": "Centro gratuito de la Organización de Turismo con temática K-pop.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+     "lat": 37.570038499999995,
+     "lng": 126.99960379999997,
+     "title": "Mercado de Gwangjang",
+     "memo": "Comida callejera; muchos locales cierran pasadas las 15:00.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ8xRYr29FezUR3AtFqx2pIlw",
+     "lat": 37.5665256,
+     "lng": 127.00922360000001,
+     "title": "Dongdaemun Design Plaza (DDP)",
+     "memo": "Obra de Zaha Hadid; entrada libre, algunas exposiciones de pago.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Gangnam y río Han",
+   "items": [
+    {
+     "place_id": "ChIJu7dpc45FezURhLMS5U5eaJk",
+     "lat": 37.5125295,
+     "lng": 127.10230500000002,
+     "title": "Lotte World Tower (Seoul Sky)",
+     "memo": "555 m; entrada online y llegar 30 min antes del atardecer.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJu5Gg2hWkfDURl7NN7FpFnis",
+     "lat": 37.5102133,
+     "lng": 127.06001859999999,
+     "title": "Biblioteca Starfield (COEX)",
+     "memo": "Gratis, dentro del centro comercial COEX; mejor ir temprano.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJeVnK5X-hfDURv2fEEK-332M",
+     "lat": 37.5126335,
+     "lng": 126.99847829999999,
+     "title": "Fuente del puente Banpo",
+     "memo": "La fuente sobre puente más larga del mundo; aprox. de abril a octubre.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

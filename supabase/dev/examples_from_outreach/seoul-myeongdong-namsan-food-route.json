@@ -1,0 +1,110 @@
+{
+ "owner": "pinwith_zhtw",
+ "lang": "zh-TW",
+ "slug": "seoul-myeongdong-namsan-food-route",
+ "title": "明洞・南山一日美食路線：11個必訪地點",
+ "desc": "以首爾明洞為中心，串聯南山與光化門一帶的美食與景點，依路線順序排列。",
+ "kind": "course",
+ "themes": [
+  "首爾",
+  "明洞",
+  "美食",
+  "米其林",
+  "藍緞帶"
+ ],
+ "sections": [
+  {
+   "name": null,
+   "items": [
+    {
+     "place_id": "ChIJZRMwxPmjfDURjPe6XKxQRPM",
+     "lat": 37.563280899999995,
+     "lng": 126.9913673,
+     "title": "莎朗房刀削麵 (사랑방칼국수)",
+     "memo": "明洞的刀削麵老店，也有燉雞湯套餐。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJW7FBDfCifDURHTpisLbVUH0",
+     "lat": 37.5610151,
+     "lng": 126.9860829,
+     "title": "明洞餃子 本店 (명동교자)",
+     "memo": "米其林推薦的餃子和刀削麵。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJN7N09qyjfDURqvaRjevwNmI",
+     "lat": 37.5584498,
+     "lng": 126.98629879999999,
+     "title": "明洞在美路 (명동재미로)",
+     "memo": "明洞坡道上的漫畫彩繪街。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJu0peeTSjfDURJ1_Wt6FTfb0",
+     "lat": 37.555322,
+     "lng": 126.98527720000001,
+     "title": "木覓山房 (목멱산방)",
+     "memo": "南山腳下的韓屋餐廳，以米其林推薦的拌飯聞名。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJs2hQTOWifDURk8inZqIttEQ",
+     "lat": 37.5633851,
+     "lng": 126.987436,
+     "title": "明洞聖堂 (명동성당)",
+     "memo": "明洞的哥德式天主教堂。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ_ebK-eqifDURv0tXr2TktaU",
+     "lat": 37.573943199999995,
+     "lng": 126.9779299,
+     "title": "大韓民國歷史博物館 (대한민국역사박물관)",
+     "memo": "免費入場，可從館內眺望景福宮。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJlWSxdY6jfDUResGGH9Bfrak",
+     "lat": 37.5710694,
+     "lng": 126.97892900000001,
+     "title": "OLIVE BETTER 光化門店 (올리브베러 광화문점)",
+     "memo": "光化門的健康食品、保健品專門店。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJk8x74-yifDURXVhW9zZEvZk",
+     "lat": 37.5690744,
+     "lng": 126.97759210000001,
+     "title": "清溪廣場 (청계광장)",
+     "memo": "清溪川起點的廣場。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJxT-vBwCjfDUR9B8Jnh-_t2I",
+     "lat": 37.5572439,
+     "lng": 126.9858525,
+     "title": "南山豬排 本店 (남산돈까스 본점)",
+     "memo": "往南山路上的炸豬排老店。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJDXyPRF-ifDURo-L1LXIXqj8",
+     "lat": 37.554859900000004,
+     "lng": 126.9792405,
+     "title": "南山公園白凡廣場 (남산공원 백범광장)",
+     "memo": "可以看南山塔與城牆的觀景點。",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJxWxiPfGifDURBq3mcWArhHs",
+     "lat": 37.5611575,
+     "lng": 126.9828364,
+     "title": "肉統領 明洞本店 (육통령 명동본점)",
+     "memo": "明洞的韓式烤肉店，適合作為一天的最後一餐。",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

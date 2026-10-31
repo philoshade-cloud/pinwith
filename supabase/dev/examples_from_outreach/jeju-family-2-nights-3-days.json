@@ -1,0 +1,150 @@
+{
+ "owner": "pinwith",
+ "lang": "ko",
+ "slug": "jeju-family-2-nights-3-days",
+ "title": "아이와 함께하는 제주 2박 3일 동부 코스: 15곳",
+ "desc": "제주 동부를 중심으로 한 2박 3일 가족 여행 코스입니다. 일자별로 식사, 카페, 관광지를 순서대로 정리했습니다.",
+ "kind": "course",
+ "themes": [
+  "제주",
+  "가족여행",
+  "2박3일"
+ ],
+ "sections": [
+  {
+   "name": "1일 차",
+   "items": [
+    {
+     "place_id": "ChIJD8OTMwD9DDUR8Lx-gBStBWA",
+     "lat": 33.4887834,
+     "lng": 126.5330693,
+     "title": "김재훈고사리육개장",
+     "memo": "공항 도착 후 첫 식사로 좋은 고사리육개장 집",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJmVjPcCQDDTURapZUEWACgEc",
+     "lat": 33.4485653,
+     "lng": 126.6586582,
+     "title": "제주돌문화공원",
+     "memo": "제주의 돌 문화와 신화를 주제로 한 넓은 야외 공원",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ1wPQN2kdDTURwmI7umNI3xc",
+     "lat": 33.4694997,
+     "lng": 126.6650734,
+     "title": "야원",
+     "memo": "돌문화공원 근처에서 쉬어 가기 좋은 카페",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJMbJyapkeDTURkIp6l1JoLfY",
+     "lat": 33.5433163,
+     "lng": 126.6698513,
+     "title": "함덕서우봉해변",
+     "memo": "에메랄드빛 해변과 서우봉 산책을 함께 즐길 수 있는 곳",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "2일 차",
+   "items": [
+    {
+     "place_id": "ChIJdxF1wn4bDTUR13aRhJtw2Yo",
+     "lat": 33.4843075,
+     "lng": 126.7000836,
+     "title": "선흘방주할머니식당",
+     "memo": "선흘 마을의 아침 식사 장소",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJLfjeK8MbDTUR9QZMV8-zxzU",
+     "lat": 33.4441972,
+     "lng": 126.7783058,
+     "title": "스누피가든",
+     "memo": "스누피와 피너츠 테마의 실내외 정원",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJAcK-iKsRDTURhb27c60bCiM",
+     "lat": 33.4672268,
+     "lng": 126.7817315,
+     "title": "우정원베이커리 제주삼나무점",
+     "memo": "스누피가든 근처 베이커리",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJl9073xgRDTUR2mwxz1DUvsg",
+     "lat": 33.4599676,
+     "lng": 126.831477,
+     "title": "용눈이오름",
+     "memo": "완만한 능선으로 유명한 오름",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJn3jj9rkUDTURS7YjOgUyUVU",
+     "lat": 33.458056,
+     "lng": 126.9425,
+     "title": "성산일출봉",
+     "memo": "유네스코 세계자연유산으로 지정된 일출 명소",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJhV8E4iMVDTURwZlkgN72v_4",
+     "lat": 33.4697941,
+     "lng": 126.9295006,
+     "title": "성산포수협 활어회센터",
+     "memo": "성산항 근처에서 활어회를 맛볼 수 있는 곳",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "3일 차",
+   "items": [
+    {
+     "place_id": "ChIJCxvU0HADDTURH07QGp6rSNw",
+     "lat": 33.4355771,
+     "lng": 126.679635,
+     "title": "우동카덴",
+     "memo": "우동 전문점. 교래손칼국수와 둘 중 하나를 골라도 좋다",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ3xng5GoDDTURZc9HkqAE3AQ",
+     "lat": 33.4362437,
+     "lng": 126.6757682,
+     "title": "원조교래손칼국수",
+     "memo": "교래 마을의 손칼국수 집. 우동카덴 대신 선택 가능",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJCZnaDR8DDTURW0XnZllsHHM",
+     "lat": 33.4273021,
+     "lng": 126.6616589,
+     "title": "사려니숲길",
+     "memo": "삼나무 숲길 산책 코스",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJp-KATVH9DDURX3fRbxTKj98",
+     "lat": 33.4544416,
+     "lng": 126.5866129,
+     "title": "아침미소목장",
+     "memo": "목장 체험과 아이스크림을 즐길 수 있는 곳",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJBdEw_1PjDDUR9XxfgFpYmjw",
+     "lat": 33.5115133,
+     "lng": 126.5262564,
+     "title": "동문시장",
+     "memo": "공항 가기 전 들르기 좋은 제주시 전통시장",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,167 @@
+{
+ "owner": "pinwith_es",
+ "lang": "es",
+ "slug": "seoul-six-day-itinerary",
+ "title": "Itinerario de 6 días por Seúl: 15 lugares imprescindibles",
+ "desc": "Un recorrido de seis días por Seúl organizado por días: palacios, barrios de hanoks, mercados, miradores y zonas de compras.",
+ "kind": "course",
+ "themes": [
+  "Seúl",
+  "Corea del Sur",
+  "palacios",
+  "mercados",
+  "itinerario"
+ ],
+ "sections": [
+  {
+   "name": "Día 1",
+   "items": [
+    {
+     "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+     "lat": 37.5814696,
+     "lng": 126.9849519,
+     "title": "Bukchon Hanok Village (북촌한옥마을)",
+     "memo": "Barrio de hanoks en alto; mejor temprano, y con hanbok si te apetece.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+     "lat": 37.579617,
+     "lng": 126.977041,
+     "title": "Palacio Gyeongbokgung (경복궁)",
+     "memo": "El gran palacio de Seúl; cierra los martes y con hanbok entras gratis.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJIwCT4-yifDUR1E63iG76hr0",
+     "lat": 37.569101499999995,
+     "lng": 126.97866919999998,
+     "title": "Canal Cheonggyecheon (청계천)",
+     "memo": "Antiguo arroyo convertido en paseo verde en pleno centro.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJHYhJ5OmifDURMOSQ2D-6lFY",
+     "lat": 37.5738369,
+     "lng": 126.982202,
+     "title": "Templo Jogyesa (조계사)",
+     "memo": "Templo budista junto a Insadong, con farolillos de colores.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Día 2",
+   "items": [
+    {
+     "place_id": "ChIJOTEaKmiffDURNTst1Jzcm_c",
+     "lat": 37.5149717,
+     "lng": 126.93863420000001,
+     "title": "Mercado de pescado de Noryangjin (노량진수산시장)",
+     "memo": "Gran mercado de pescado y marisco; mejor por la mañana.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ68AiKsWYfDUROpTctLKtxtU",
+     "lat": 37.5561973,
+     "lng": 126.9250341,
+     "title": "Hongdae (홍대)",
+     "memo": "Barrio universitario con tiendas vintage y buena barbacoa coreana.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Día 3",
+   "items": [
+    {
+     "place_id": "ChIJJXcc9--ifDURb8zmFI_J64s",
+     "lat": 37.5641885,
+     "lng": 126.98611799999998,
+     "title": "Myeong-dong (명동)",
+     "memo": "Cosmética coreana y puestos de comida callejera.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJfYjlFvWifDURYSDsoxYbN80",
+     "lat": 37.559277,
+     "lng": 126.9777029,
+     "title": "Mercado de Namdaemun (남대문시장)",
+     "memo": "El mercado más antiguo del país; cierra los domingos.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Día 4",
+   "items": [
+    {
+     "place_id": "ChIJ63NnRS6jfDURt-efnKIjXzs",
+     "lat": 37.5779788,
+     "lng": 127.00719149999999,
+     "title": "Ihwa Mural Village (이화벽화마을)",
+     "memo": "Murales y callejones en lo alto; mejor por la mañana.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+     "lat": 37.570038499999995,
+     "lng": 126.99960379999997,
+     "title": "Mercado de Gwangjang (광장시장)",
+     "memo": "Famoso por las tortitas de judías mungo.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Día 5",
+   "items": [
+    {
+     "place_id": "ChIJQRutlcKifDURiMoaUPYmWX4",
+     "lat": 37.5743024,
+     "lng": 126.9849036,
+     "title": "Ssamziegil, Insadong (쌈지길)",
+     "memo": "En Insadong-gil; dentro hay una cafetería temática de inodoros.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJe4Jbot2ifDUR2zWhruwyaow",
+     "lat": 37.5737132,
+     "lng": 126.99012710000001,
+     "title": "Ikseon-dong (익선동)",
+     "memo": "Callejones de hanoks convertidos en cafés y restaurantes.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+     "lat": 37.5511694,
+     "lng": 126.98822659999999,
+     "title": "N Seoul Tower, Namsan (N서울타워)",
+     "memo": "Vistas desde la montaña, en teleférico o a pie, con candados del amor.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Día 6",
+   "items": [
+    {
+     "place_id": "ChIJo35QAxelfDUR4jt5FPgWSIU",
+     "lat": 37.541151299999996,
+     "lng": 127.0659498,
+     "title": "Common Ground (커먼그라운드)",
+     "memo": "Espacio hecho con contenedores, en la ruta de Seongsu.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJu7dpc45FezURhLMS5U5eaJk",
+     "lat": 37.5125295,
+     "lng": 127.10230500000002,
+     "title": "Seoul Sky, Lotte World Tower (서울스카이)",
+     "memo": "Mirador en la torre más alta de Corea; ideal al atardecer.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

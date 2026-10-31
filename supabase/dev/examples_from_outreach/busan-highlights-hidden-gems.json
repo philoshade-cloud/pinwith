@@ -1,0 +1,147 @@
+{
+ "owner": "pinwith_de",
+ "lang": "de",
+ "slug": "busan-highlights-hidden-gems",
+ "title": "Busan entdecken: 15 Highlights und Geheimtipps",
+ "desc": "Die wichtigsten Sehenswürdigkeiten Busans und weniger bekannte Orte, aufgeteilt in Klassiker und Geheimtipps.",
+ "kind": "collection",
+ "themes": [
+  "Busan",
+  "Südkorea",
+  "Tempel",
+  "Strände",
+  "Geheimtipps"
+ ],
+ "sections": [
+  {
+   "name": "Sehenswürdigkeiten",
+   "items": [
+    {
+     "place_id": "ChIJXwf-DlyNaDURmKxjwdWxY5k",
+     "lat": 35.158697499999995,
+     "lng": 129.16038419999998,
+     "title": "Haeundae Beach (해운대해수욕장)",
+     "memo": "Rund 1,5 km langer Stadtstrand, Busans bekanntester und meistbesuchter.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJnbg-nA2NaDUR3DK_vogcxaI",
+     "lat": 35.1597946,
+     "lng": 129.1699193,
+     "title": "BUSAN X the SKY",
+     "memo": "Aussichtsdeck im höchsten Gebäude Busans mit 360°-Blick; Eintritt kostenpflichtig.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJAeJVSEyMaDURJSl7wzo7GTI",
+     "lat": 35.17861250000001,
+     "lng": 129.19971329999998,
+     "title": "Songjeong Beach (송정해수욕장)",
+     "memo": "Kleinerer, ruhigerer Strand, beliebt bei Surfanfängern.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJwabeuxuMaDURXC4Rb21AQaE",
+     "lat": 35.1884543,
+     "lng": 129.2231109,
+     "title": "Haedong Yonggungsa (해동용궁사)",
+     "memo": "Tempel auf den Klippen am Meer, im 14. Jh. gegründet; abends ruhiger.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJudkrFArpaDURbbCzajeQs0c",
+     "lat": 35.0966339,
+     "lng": 129.0307965,
+     "title": "Jagalchi-Fischmarkt (자갈치시장)",
+     "memo": "Großer Fischmarkt mit lebenden Meerestieren und Restaurants im Obergeschoss.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+     "lat": 35.097393499999995,
+     "lng": 129.0105921,
+     "title": "Gamcheon Culture Village (감천문화마을)",
+     "memo": "Bunte Häuser am Hang; sehr beliebt, früh kommen lohnt sich.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Geheimtipps",
+   "items": [
+    {
+     "place_id": "ChIJSwlooCvpaDURdRvrkd-H0bs",
+     "lat": 35.0979479,
+     "lng": 129.0367383,
+     "title": "Dachterrasse Lotte Kaufhaus Gwangbok (롯데백화점 광복점 하늘전망대)",
+     "memo": "Kostenlose Dachterrasse (ca. 10–20 Uhr) mit Hafenblick; Eingang etwas versteckt.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJseGsfh7paDURigYilgTVojA",
+     "lat": 35.0782798,
+     "lng": 129.0453198,
+     "title": "Huinnyeoul Culture Village (흰여울문화마을)",
+     "memo": "Weiß getünchtes Hangdorf auf Yeongdo, einst Heimat von Geflüchteten.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJaWN272fraDURAU2hpzzh4Ig",
+     "lat": 35.162726899999996,
+     "lng": 129.0613381,
+     "title": "Bujeon-Markt (부전시장)",
+     "memo": "Weitläufiger Markt für Essen, Kleidung und Alltagswaren.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJYeuKwGTraDUR-U5PAfT2Uoo",
+     "lat": 35.155398999999996,
+     "lng": 129.0673266,
+     "title": "Jeonpo Cafe Street (전포카페거리)",
+     "memo": "Café-Straße in Jeonpo mit vielen kleinen, unabhängigen Cafés.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ-4yc9TvraDURorjIIUAF0uU",
+     "lat": 35.175428800000006,
+     "lng": 129.04338819999998,
+     "title": "Samgwangsa (삼광사)",
+     "memo": "Tempel am Hang nördlich von Bujeon mit detailreichen Schnitzereien und Malereien.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJsQ63-9KWaDURQmHr0J6VF_4",
+     "lat": 35.2839899,
+     "lng": 129.0687639,
+     "title": "Beomeosa (범어사)",
+     "memo": "Im Jahr 678 gegründeter Waldtempel am Berg Geumjeongsan.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJGSXy6PSUaDURzoq9VP9osUg",
+     "lat": 35.221508299999996,
+     "lng": 129.0488444,
+     "title": "Seokbulsa (석불사)",
+     "memo": "In den Fels gehauene Buddha-Figuren, zu Fuß ab Beomeosa erreichbar.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJDT_5v8aSaDURXW8rEbumGh8",
+     "lat": 35.168233799999996,
+     "lng": 129.1295279,
+     "title": "Spa Land Centum City (스파랜드)",
+     "memo": "Große, moderne Wellness-Badeanlage in Centum City.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJIRoZUbLpaDURbFFQrCefAYg",
+     "lat": 35.0615805,
+     "lng": 129.0205254,
+     "title": "Songdo Sky Park (송도 스카이파크)",
+     "memo": "Mit der Seilbahn über das Meer erreichbar; schöner Blick auf die Küste.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

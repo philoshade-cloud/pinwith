@@ -1,0 +1,98 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "kdrama-filming-spots-gyeonggi-busan",
+ "title": "K-drama filming locations: 9 spots in Gyeonggi & Busan",
+ "desc": "Well-known K-drama filming locations around Gyeonggi province and Busan, grouped by region.",
+ "kind": "collection",
+ "themes": [
+  "K-drama",
+  "filming locations",
+  "Busan",
+  "Gyeonggi"
+ ],
+ "sections": [
+  {
+   "name": "Gyeonggi",
+   "items": [
+    {
+     "place_id": "ChIJuy6oD8pcezURQRbto2vkJhM",
+     "lat": 37.2871202,
+     "lng": 127.01193789999999,
+     "title": "Suwon Hwaseong Fortress (수원 화성)",
+     "memo": "UNESCO-listed fortress walls; a backdrop for Mr. Sunshine and many period dramas.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJUSM8XqVaezUR65ah4DglaD4",
+     "lat": 37.258939,
+     "lng": 127.11811259999999,
+     "title": "Korean Folk Village (한국민속촌)",
+     "memo": "Open-air folk village in Yongin, a frequent set for historical dramas.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJcTadCoqLfDURjHexFkzDstI",
+     "lat": 37.788841399999995,
+     "lng": 126.69872199999999,
+     "title": "Heyri Art Village (헤이리 예술마을)",
+     "memo": "Art village in Paju with galleries and cafes; used for indie-style drama scenes.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Busan",
+   "items": [
+    {
+     "place_id": "ChIJ07EMAkXoaDURr8d2uGJp5pk",
+     "lat": 35.0754546,
+     "lng": 129.016761,
+     "title": "Songdo Beach (송도해수욕장)",
+     "memo": "Descendants of the Sun beach walk and sunset scenes were filmed here.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJL1scg6DpaDURxXQZg1kWGZ4",
+     "lat": 35.098243,
+     "lng": 129.029212,
+     "title": "BIFF Square (BIFF 광장)",
+     "memo": "Festival street near Nampo Station; Descendants of the Sun street scenes.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJOfX1e0zpaDURWq5Hp5x4-SM",
+     "lat": 35.05307,
+     "lng": 129.0872,
+     "title": "Taejongdae (태종대)",
+     "memo": "Coastal cliffs seen in the final episodes of Descendants of the Sun.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJUToRo7fpaDURo_ZMItcBfpc",
+     "lat": 35.097393499999995,
+     "lng": 129.0105921,
+     "title": "Gamcheon Culture Village (감천문화마을)",
+     "memo": "Colourful hillside alleys seen in Descendants of the Sun and Moonlight Drawn by Clouds.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJudkrFArpaDURbbCzajeQs0c",
+     "lat": 35.0966339,
+     "lng": 129.0307965,
+     "title": "Jagalchi Market (자갈치시장)",
+     "memo": "Busan's big fish market, often used for street-food and local-life scenes.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJlZH9YqmSaDURWj1_pgMoFIo",
+     "lat": 35.1522807,
+     "lng": 129.15136479999998,
+     "title": "Nurimaru APEC House (누리마루 APEC하우스)",
+     "memo": "Seaside APEC venue on Dongbaek Island; appears as a wealthy residence in Goblin.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

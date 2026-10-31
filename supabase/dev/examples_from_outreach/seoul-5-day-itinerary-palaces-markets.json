@@ -1,0 +1,161 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "seoul-5-day-itinerary-palaces-markets",
+ "title": "Seoul in 5 days: 15 stops for palaces, markets and food",
+ "desc": "A five-day Seoul route covering palaces, hanok villages, markets and local food, organised day by day.",
+ "kind": "course",
+ "themes": [
+  "Seoul",
+  "itinerary",
+  "palaces",
+  "5 days"
+ ],
+ "sections": [
+  {
+   "name": "Day 1",
+   "items": [
+    {
+     "place_id": "ChIJ6xwTRt6jfDUR7FQKdD1sSp0",
+     "lat": 37.5780502,
+     "lng": 126.9798327,
+     "title": "Nuldam Space, Gyeongbokgung (늘담 경복궁점)",
+     "memo": "Cafe where you write a letter to your future self, mailed to you later.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJT8H4r9qifDURmuXJ_6m6vM0",
+     "lat": 37.5814696,
+     "lng": 126.9849519,
+     "title": "Bukchon Hanok Village (북촌한옥마을)",
+     "memo": "Hanok lanes open to visitors 10am-5pm; residents live here, so keep noise down.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJI9JAR8-ifDURSFjz37c33lE",
+     "lat": 37.584565,
+     "lng": 126.98193709999998,
+     "title": "Samcheongdong Sujebi (삼청동수제비)",
+     "memo": "Michelin-listed hand-pulled dough soup and potato pancakes.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Day 2",
+   "items": [
+    {
+     "place_id": "ChIJLXL2BvijfDURmTrYFPQIGUc",
+     "lat": 37.5776235,
+     "lng": 126.9865541,
+     "title": "Cafe Onion Anguk (카페어니언 안국)",
+     "memo": "Opens 7am on weekdays; busy by 9am.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJod7tSseifDUR9hXHLFNGMIs",
+     "lat": 37.579617,
+     "lng": 126.977041,
+     "title": "Gyeongbokgung Palace (경복궁)",
+     "memo": "Joseon palace from 1395; closed Tuesdays.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ-53H9-mjfDURpOg-_9us6qo",
+     "lat": 37.573986600000005,
+     "lng": 126.9896822,
+     "title": "Oncheonjip (온천집)",
+     "memo": "Shabu-shabu in an Ikseon-dong courtyard; reserve ahead.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+     "lat": 37.570038499999995,
+     "lng": 126.99960379999997,
+     "title": "Gwangjang Market (광장시장)",
+     "memo": "Night food tour: about 2.5 hours and a dozen tastings.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Day 3",
+   "items": [
+    {
+     "place_id": "ChIJ4wh0zluifDURaFBW2pdrKf8",
+     "lat": 37.5794309,
+     "lng": 126.9910426,
+     "title": "Changdeokgung Palace (창덕궁)",
+     "memo": "UNESCO palace from 1405; Secret Garden needs its own ticket.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJW7FBDfCifDURHTpisLbVUH0",
+     "lat": 37.5610151,
+     "lng": 126.9860829,
+     "title": "Myeongdong Kyoja (명동교자 본점)",
+     "memo": "Michelin-listed hand-cut noodle soup and dumplings.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJedlDzuWifDURBaOCaa5hkL4",
+     "lat": 37.5665301,
+     "lng": 126.98859359999999,
+     "title": "Coffee Hanyakbang (커피한약방)",
+     "memo": "Retro coffee shop tucked in an alley.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Day 4",
+   "items": [
+    {
+     "place_id": "ChIJfYjlFvWifDURYSDsoxYbN80",
+     "lat": 37.559277,
+     "lng": 126.9777029,
+     "title": "Namdaemun Market (남대문시장)",
+     "memo": "Big, less touristy market; look for hotteok and wang mandu.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ3Z9DalijfDURF9-yJz0H3xE",
+     "lat": 37.534071399999995,
+     "lng": 126.9938508,
+     "title": "Kyochon Pilbang (교촌필방)",
+     "memo": "Speakeasy-style fried chicken; booking recommended.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJqWqOqFeifDURpYJ5LnxX-Fw",
+     "lat": 37.5511694,
+     "lng": 126.98822659999999,
+     "title": "N Seoul Tower (N서울타워)",
+     "memo": "Take the cable car up about two hours before sunset.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Day 5",
+   "items": [
+    {
+     "place_id": "ChIJu5Gg2hWkfDURl7NN7FpFnis",
+     "lat": 37.5102133,
+     "lng": 127.06001859999999,
+     "title": "Starfield Library (별마당 도서관)",
+     "memo": "Towering book walls inside COEX Mall; free, a quick stop if nearby.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJK_b0UX2jfDURmkYPvmWYm90",
+     "lat": 37.544387799999996,
+     "lng": 127.03744239999999,
+     "title": "Seoul Forest Park (서울숲)",
+     "memo": "Large park next to Seongsu, good for a walk.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

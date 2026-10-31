@@ -1,0 +1,146 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "lisbon-restaurants-15-places",
+ "title": "Where to eat in Lisbon: 15 restaurants, tascas and pastry shops",
+ "desc": "Lisbon restaurants, tavernas, sandwich counters and pastry shops, split into sit-down meals and quick bites, sweets & drinks.",
+ "kind": "collection",
+ "themes": [
+  "Lisbon",
+  "Portuguese food",
+  "restaurants",
+  "pastel de nata"
+ ],
+ "sections": [
+  {
+   "name": "Restaurants",
+   "items": [
+    {
+     "place_id": "ChIJOQn7KKc1GQ0RAUvlcVJ9ED4",
+     "lat": 38.7083708,
+     "lng": -9.1545246,
+     "title": "Parra Wine Bistro",
+     "memo": "Campo de Ourique wine bistro; go for the Alentejo black pork. Around EUR 50+ each.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJk7yhcn8zGQ0RB6jq9Zbf5q8",
+     "lat": 38.716009199999995,
+     "lng": -9.1469233,
+     "title": "Faz Frio",
+     "memo": "Principe Real classic; save room for the chocolate mousse.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ-aZhRHU0GQ0RU45DdYW7dgg",
+     "lat": 38.7136987,
+     "lng": -9.1244447,
+     "title": "Taberna Sal Grosso",
+     "memo": "Small Alfama taberna; the cod a Bras is the dish to order.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJFRKbo3g0GQ0RA8gIAmZnrlw",
+     "lat": 38.7128137,
+     "lng": -9.138901700000002,
+     "title": "A Merendinha do Arco Bandeira",
+     "memo": "Baixa spot for clams in garlic and herb oil, about EUR 15-25.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJU0ckwHg0GQ0RGFRTQgsiyxU",
+     "lat": 38.7120295,
+     "lng": -9.1386951,
+     "title": "Uma Marisqueira",
+     "memo": "Known for one thing: arroz de marisco (seafood rice).",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJZbVi6Hk0GQ0Rq4JVFFIOZTY",
+     "lat": 38.7088608,
+     "lng": -9.1394106,
+     "title": "Trobadores",
+     "memo": "Medieval-style tavern; order the flaming chorizo.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJX1Nrb_U1GQ0RB0dclRNZ3s4",
+     "lat": 38.7126452,
+     "lng": -9.1274606,
+     "title": "O Segredo D'Alfama",
+     "memo": "Three-course dinner with Fado in Alfama.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJhxULUjgzGQ0RtvgNjsTUF7g",
+     "lat": 38.7148222,
+     "lng": -9.1314773,
+     "title": "Ourives Petisqueira",
+     "memo": "Petiscos to share, like shrimp and calamari, from about EUR 20.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJK9HRyvk1GQ0Rjw5V-wU8oC4",
+     "lat": 38.711931899999996,
+     "lng": -9.1457444,
+     "title": "Arca Bistro",
+     "memo": "Piri piri chicken served with tzatziki; about EUR 30-50.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Quick bites, sweets & drinks",
+   "items": [
+    {
+     "place_id": "ChIJt9EjN3g0GQ0RXBlIfrm39tQ",
+     "lat": 38.7115249,
+     "lng": -9.135691999999999,
+     "title": "As Bifanas do Afonso",
+     "memo": "Pork bifana sandwich for roughly EUR 3-5.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJvYd_nHg0GQ0R4705aijT_s4",
+     "lat": 38.7131861,
+     "lng": -9.1379474,
+     "title": "Confeitaria Nacional",
+     "memo": "Old Praca da Figueira pastry shop; try the bolo de berlim.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJK1ToqQ41GQ0RCsk4nxl42os",
+     "lat": 38.7115206,
+     "lng": -9.1381154,
+     "title": "Manteigaria (Rua Augusta)",
+     "memo": "Pastel de nata on Rua Augusta, EUR 3-5.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJdWBeWYc0GQ0RktxySU7hjxM",
+     "lat": 38.7070608,
+     "lng": -9.1456691,
+     "title": "Time Out Market",
+     "memo": "Food hall in Mercado da Ribeira; Iberian ham is the pick.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJW3H9LkXLHg0RZZZttMb27_8",
+     "lat": 38.6975105,
+     "lng": -9.203227600000002,
+     "title": "Pasteis de Belem",
+     "memo": "The original Belem custard tarts.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJmWBZR4czGQ0R0us-gvCVW3g",
+     "lat": 38.7147387,
+     "lng": -9.1390797,
+     "title": "A Ginjinha",
+     "memo": "Cherry liqueur shot near Rossio, about EUR 1.50.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

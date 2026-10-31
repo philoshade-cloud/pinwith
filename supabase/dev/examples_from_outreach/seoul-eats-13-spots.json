@@ -1,0 +1,140 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "seoul-eats-13-spots",
+ "title": "Seoul eats: 13 spots from classics to burgers",
+ "desc": "Seoul restaurants grouped into Korean classics, noodles and dumplings, chicken and BBQ, and burgers.",
+ "kind": "collection",
+ "themes": [
+  "Seoul",
+  "food",
+  "Korean classics",
+  "noodles"
+ ],
+ "sections": [
+  {
+   "name": "Korean classics",
+   "items": [
+    {
+     "place_id": "ChIJb5OOGL6ifDURU29ID3t8aOA",
+     "lat": 37.577778599999995,
+     "lng": 126.9715909,
+     "title": "Tosokchon Samgyetang (토속촌 삼계탕)",
+     "memo": "Ginseng chicken soup in a hanok near Gyeongbokgung, served with ginseng wine.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJU-tNF72jfDUR74otWmzssuk",
+     "lat": 37.57420380000001,
+     "lng": 126.99064529999998,
+     "title": "Ikseon Tonkatsu (익선돈가스)",
+     "memo": "Big, tender Korean-style pork cutlets with curry sauce.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ2c4g_d2ifDUR_4RLSsQ4PtE",
+     "lat": 37.5713198,
+     "lng": 126.99151289999999,
+     "title": "Yeongchunok (영춘옥)",
+     "memo": "75+ years old; gomtang with a rich, milky beef bone broth.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJm3V0fu2ifDURRJ8IMUijVtY",
+     "lat": 37.570038499999995,
+     "lng": 126.99960379999997,
+     "title": "Gwangjang Market (광장시장)",
+     "memo": "Market from 1905; go for crispy mung bean bindaetteok.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Noodles & dumplings",
+   "items": [
+    {
+     "place_id": "ChIJZ1rutVGjfDURwHcw6YZ3hQU",
+     "lat": 37.5745113,
+     "lng": 126.98462479999999,
+     "title": "Gossine Donghae Makguksu, Jongno (고씨네동해막국수 종로직영점)",
+     "memo": "Hanok-style spot for bibimbap and cold buckwheat noodles.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJJUs1xLOjfDURw5XbT68PJxs",
+     "lat": 37.5732895,
+     "lng": 126.9863115,
+     "title": "Bangtae Makguksu (방태막국수)",
+     "memo": "Bibim and mul makguksu, plus bossam pork belly.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJBWL6TCWjfDURDXNNGmciff8",
+     "lat": 37.5784958,
+     "lng": 126.982261,
+     "title": "Bukchon Son-mandu, Samcheong-dong (북촌손만두 삼청동)",
+     "memo": "Steamed and fried mandu platters and mandu soup near Bukchon.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJW7FBDfCifDURHTpisLbVUH0",
+     "lat": 37.5610151,
+     "lng": 126.9860829,
+     "title": "Myeongdong Kyoja (명동교자 본점)",
+     "memo": "50+ years, four-item menu: kalguksu and steamed mandu.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Chicken, BBQ & ramen",
+   "items": [
+    {
+     "place_id": "ChIJv-poNdyifDURL47z4YZAxyM",
+     "lat": 37.5735959,
+     "lng": 126.9904693,
+     "title": "Art Monster Ikseon-dong (아트몬스터 익선동)",
+     "memo": "Cozy chimaek: double-fried chicken with craft beer.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJH1tJyXGjfDUR6WfVPaL-fq8",
+     "lat": 37.5778278,
+     "lng": 126.98648270000001,
+     "title": "Anguk Restaurant Doma (도마)",
+     "memo": "Mostly Korean BBQ; the yuzu ramen is a standout.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Burgers & Western",
+   "items": [
+    {
+     "place_id": "ChIJTUzsMwCjfDURcb7FpHabQwM",
+     "lat": 37.534993899999996,
+     "lng": 126.99689470000001,
+     "title": "Smoke Town (스모크타운)",
+     "memo": "American BBQ platters, brisket and pulled pork, with robot waiters.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJa8qYawCjfDURyrvQYn1WxcM",
+     "lat": 37.5248974,
+     "lng": 127.0392938,
+     "title": "Se7en Patty Burger (세븐패티버거)",
+     "memo": "Smash burgers and fries.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ33Z6sm-jfDURwxUtbQimVt8",
+     "lat": 37.5671469,
+     "lng": 126.98129739999999,
+     "title": "Daily Fix Euljiro (데일리픽스 을지로)",
+     "memo": "Known for its truffle burger.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

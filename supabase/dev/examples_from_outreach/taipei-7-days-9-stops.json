@@ -1,0 +1,93 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "taipei-7-days-9-stops",
+ "title": "One week in Taipei: 9 essential stops",
+ "desc": "Nine classic Taipei stops for a week-long trip: temples, old streets, night markets, a viewpoint hike and a day trip to Jiufen.",
+ "kind": "collection",
+ "themes": [
+  "Taipei",
+  "night markets",
+  "temples",
+  "7 days"
+ ],
+ "sections": [
+  {
+   "name": null,
+   "items": [
+    {
+     "place_id": "ChIJCd7n16ipQjQRihzEWF4z6Pg",
+     "lat": 25.037310599999998,
+     "lng": 121.49986539999999,
+     "title": "Longshan Temple (艋舺龍山寺)",
+     "memo": "One of Taipei's oldest temples; pair it with a Taiwanese breakfast nearby.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJeXELiROpQjQR1REJMdOO8Xo",
+     "lat": 25.0551019,
+     "lng": 121.50998299999998,
+     "title": "Dihua Street (迪化街)",
+     "memo": "Historic street of dried goods, tea shops and old shophouses.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJTZ-x02upQjQR-DecmBEnFcw",
+     "lat": 25.0553262,
+     "lng": 121.519628,
+     "title": "Chifeng Street (赤峰街)",
+     "memo": "Quiet lanes of indie shops and cafés near Zhongshan.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJu8BdQQmpQjQRyAwMGhhFVD8",
+     "lat": 25.0440334,
+     "lng": 121.5073206,
+     "title": "Ximending (西門町)",
+     "memo": "Busy pedestrian shopping and street-food district.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJxUXPVmupQjQRtBB6oj-S5qI",
+     "lat": 25.0566808,
+     "lng": 121.51536410000001,
+     "title": "Ningxia Night Market (寧夏夜市)",
+     "memo": "Compact night market known for traditional Taiwanese snacks.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJTamiuZ2pQjQRsmnfkkID6UM",
+     "lat": 25.035501999999997,
+     "lng": 121.5201832,
+     "title": "Chiang Kai-shek Memorial Hall (中正紀念堂)",
+     "memo": "Landmark memorial hall with a vast plaza; see the changing of the guard.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJcZT7-hdFXTQR0qekplqCFV8",
+     "lat": 25.109806,
+     "lng": 121.84522299999999,
+     "title": "Jiufen Old Street (九份老街)",
+     "memo": "Hillside old street; an easy day trip from Taipei.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJI1oAUBmrQjQR9nmyvzkOe5A",
+     "lat": 25.027375,
+     "lng": 121.57096190000001,
+     "title": "Elephant Mountain Trail (象山步道)",
+     "memo": "Short, steep hike with classic views of Taipei 101.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJg6W0DZyrQjQR9vZdgYMRoj0",
+     "lat": 25.0508854,
+     "lng": 121.5774891,
+     "title": "Raohe Street Night Market (饒河街觀光夜市)",
+     "memo": "Popular night market by Songshan Ciyou Temple; try the pepper buns.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,143 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "seongsu-flagships-bakeries-guide",
+ "title": "Seongsu-dong flagships, bakeries and more: 14 spots",
+ "desc": "Seoul's Seongsu-dong on one map: brand flagships and concept stores, cafés and bakeries, plus Seoul Forest and a taproom.",
+ "kind": "collection",
+ "themes": [
+  "Seongsu",
+  "shopping",
+  "cafes",
+  "Seoul"
+ ],
+ "sections": [
+  {
+   "name": "Shops & flagships",
+   "items": [
+    {
+     "place_id": "ChIJo35QAxelfDUR4jt5FPgWSIU",
+     "lat": 37.541151299999996,
+     "lng": 127.0659498,
+     "title": "Common Ground (커먼그라운드)",
+     "memo": "Three-level mall of painted shipping containers, open since 2015.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJoz23m--lfDURUrMO6ZaR9FA",
+     "lat": 37.5448781,
+     "lng": 127.04371269999999,
+     "title": "KWANGYA Seoul (광야)",
+     "memo": "K-pop merch flagship in the SM Entertainment building basement.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ14znQAClfDURT1IQuqyAwlA",
+     "lat": 37.544115100000006,
+     "lng": 127.05455599999999,
+     "title": "Olive Young N Seongsu (올리브영N 성수)",
+     "memo": "Five-floor, 12-zone beauty flagship with a cafe.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJWTP6EbylfDURiLzaVEe1_Zg",
+     "lat": 37.5380654,
+     "lng": 127.05894859999998,
+     "title": "HAUS NOWHERE SEOUL (하우스 노웨어 서울)",
+     "memo": "Opened Sept 2025: Gentle Monster store, rotating pop-ups and a cafe.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJv1xwXQClfDURJFemcDcFo5U",
+     "lat": 37.5437612,
+     "lng": 127.05116029999999,
+     "title": "Blue Elephant Seongsu Flagship (블루엘리펀트 성수)",
+     "memo": "Eyewear flagship from late 2025 with media art and a rooftop garden.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJhSRPNXelfDURV_ooK2_9Ij0",
+     "lat": 37.5415518,
+     "lng": 127.0563869,
+     "title": "Musinsa Store Seongsu @ Daelim Changgo (무신사 스토어 성수)",
+     "memo": "Musinsa's third shop, known for its sneaker wall.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJY8CkmHqlfDUR2PPJ26BlhrA",
+     "lat": 37.5419619,
+     "lng": 127.0560176,
+     "title": "LINE FRIENDS SQUARE Seongsu (라인프렌즈 스퀘어 성수)",
+     "memo": "Brown and Cony goods; opened in 2024.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJbUkwYnqlfDURflC3LBLEhUo",
+     "lat": 37.543139499999995,
+     "lng": 127.05553719999999,
+     "title": "SEVY House (쎄비 하우스)",
+     "memo": "Seven-floor knitting and craft store with lounge, cafe and rooftop.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Cafes & bakeries",
+   "items": [
+    {
+     "place_id": "ChIJi_M445OkfDURBV_ePY2qCHo",
+     "lat": 37.541838399999996,
+     "lng": 127.0564636,
+     "title": "Daelim Changgo (대림창고)",
+     "memo": "Warehouse cafe-bakery with art installations and pop-up shows.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJHb1ypJWkfDURb2d4XCjLluM",
+     "lat": 37.5447328,
+     "lng": 127.0582091,
+     "title": "Cafe Onion Seongsu (카페어니언 성수)",
+     "memo": "Rustic industrial cafe with pastries and a rooftop.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJf5seGgClfDURTfd1UENPyV8",
+     "lat": 37.541684499999995,
+     "lng": 127.0612531,
+     "title": "Standard Bread (스탠다드브레드)",
+     "memo": "Bakery-cafe with a cottage-style courtyard.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJqW7Uqo2lfDURHss_BAbwIkk",
+     "lat": 37.542301699999996,
+     "lng": 127.05545819999999,
+     "title": "Jayeondo Sogeumppang Seongsu (자연도소금빵 성수)",
+     "memo": "Four salt breads for 12,000 won; queues are normal.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Park & beer",
+   "items": [
+    {
+     "place_id": "ChIJK_b0UX2jfDURmkYPvmWYm90",
+     "lat": 37.544387799999996,
+     "lng": 127.03744239999999,
+     "title": "Seoul Forest Park (서울숲)",
+     "memo": "Big park with a deer corral, butterfly house and aerial walkway.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJd6CRWtmlfDURuLrYFt5gOV0",
+     "lat": 37.5430267,
+     "lng": 127.05241520000001,
+     "title": "Seoul Brewery Seongsu (서울브루어리 성수)",
+     "memo": "Taproom opened April 2023 in a minimalist space.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}

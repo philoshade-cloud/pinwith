@@ -1,0 +1,151 @@
+{
+ "owner": "pinwith_en",
+ "lang": "en",
+ "slug": "chiang-mai-cafes-15-picks",
+ "title": "Chiang Mai cafés: 15 picks for work, coffee and gardens",
+ "desc": "Fifteen cafés around Chiang Mai, grouped into laptop-friendly spots, coffee and brunch, and garden hangouts.",
+ "kind": "collection",
+ "themes": [
+  "Chiang Mai",
+  "cafes",
+  "work-friendly",
+  "coffee"
+ ],
+ "sections": [
+  {
+   "name": "Good for work",
+   "items": [
+    {
+     "place_id": "ChIJkZyVmJs62jARav_dgGLEBr0",
+     "lat": 18.7883705,
+     "lng": 98.9831919,
+     "title": "Akha Ama Phrasingh",
+     "memo": "Fast Wi-Fi but no power outlets; try the soda lemon drink.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJcUsSde072jARmm1KV_VWDdc",
+     "lat": 18.7896578,
+     "lng": 98.9645828,
+     "title": "General Coffee",
+     "memo": "Free Wi-Fi and plenty of plugs; blueberry cheesecake square.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJdzmGkns62jARwQV4eGmoUHs",
+     "lat": 18.789704099999998,
+     "lng": 98.9624077,
+     "title": "Maled Coffee Roasters (โรงคั่วเมล็ด)",
+     "memo": "Roasts in-house; banoffee cake sells out, so go before 1 pm.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ_6jLpRI72jARDuzOmvtod04",
+     "lat": 18.7870605,
+     "lng": 99.00887809999999,
+     "title": "GRAPH Contemporary",
+     "memo": "Lots of plugs and seats in whitewashed brick; square butter cake.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ7QFAccox2jARVVmcCm8rc3g",
+     "lat": 18.7761779,
+     "lng": 98.9860262,
+     "title": "Beam&Col. coffee bar",
+     "memo": "Coworking in a former ice factory at Weave Artisan Society; carrot cake.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ-xSCcH462jARWWlZ5Q_jBT0",
+     "lat": 18.7874528,
+     "lng": 98.96658649999999,
+     "title": "The Barn Eatery And Design",
+     "memo": "Greenhouse-style spot for working late, busy with students.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Coffee & brunch",
+   "items": [
+    {
+     "place_id": "ChIJrb2zRAw72jARrpEEmKjGnXI",
+     "lat": 18.7931194,
+     "lng": 98.9721762,
+     "title": "GRAPH quarter",
+     "memo": "Bakery hub for all GRAPH branches; craft-soda coffee with seaweed.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJIdQIQbc72jARb7Z3AF_aLSg",
+     "lat": 18.7990977,
+     "lng": 98.9672264,
+     "title": "Ristr8to Original (Nimman)",
+     "memo": "Coconut mocha; small with no A/C, better for coffee than laptops.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJ4Y9ZNjs72jARKQrxPkI-8tY",
+     "lat": 18.7783552,
+     "lng": 98.9508931,
+     "title": "Sensation Coffee Roasters",
+     "memo": "Roasts in-house; cappuccino with chocolate mousse cake.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJhZLPLWI62jARkfYqJJsDaFA",
+     "lat": 18.799068,
+     "lng": 98.966128,
+     "title": "The Larder Cafe & Bar",
+     "memo": "Aussie-style brunch, smoked-salmon open sandwich; often a queue.",
+     "ts_url": null
+    }
+   ]
+  },
+  {
+   "name": "Gardens & hangouts",
+   "items": [
+    {
+     "place_id": "ChIJ9T2bGy872jARyAyAWix9M0o",
+     "lat": 18.789947899999998,
+     "lng": 98.9516702,
+     "title": "The Baristro Asian Style",
+     "memo": "Japanese zen garden setting with a slow matcha bar.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJsyN09PE72jARrFl9p-zWaWE",
+     "lat": 18.8104759,
+     "lng": 98.9670261,
+     "title": "Cafe Arte",
+     "memo": "Rooms, courtyards and gardens; brownies; closed Thursdays.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJTf9571sx2jARn6X9sNgW-dM",
+     "lat": 18.7615467,
+     "lng": 98.9349448,
+     "title": "Fernpresso at Lake",
+     "memo": "Big lawn on the CMU campus plus an A/C room with plugs.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJXRCq688x2jAReOyg1GvocIY",
+     "lat": 18.7618421,
+     "lng": 98.98931490000001,
+     "title": "Much Room Cafe",
+     "memo": "Shaded by Lanna trees; chicken tikka masala with naan.",
+     "ts_url": null
+    },
+    {
+     "place_id": "ChIJi8wcuYE72jARx4JZzJi6olg",
+     "lat": 18.7942225,
+     "lng": 99.00111559999999,
+     "title": "Fringe.th Cafe and Restaurant",
+     "memo": "Eclectic decor; turns into a bar with live music at night.",
+     "ts_url": null
+    }
+   ]
+  }
+ ]
+}
