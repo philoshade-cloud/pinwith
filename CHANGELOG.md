@@ -10,6 +10,9 @@
 
 ---
 
+## v0.75 — 링크 카드 그림 오류 고침 (2026-10-31)
+- 0.75-1 링크 카드(opengraph-image) 글꼴을 문자 체계별로 받음(라틴·키릴: Noto Sans, 아랍어·힌디어·태국어·일본어·중국어 간체/번체 전용 글꼴, 한글: Noto Sans KR). 예전엔 한국어 글꼴 하나라 아랍어 리스트 카드가 'failed to pipe response'로 깨졌음(Googlebot-Image, /@ex_ar1/istanbul-4-days-friends). 그림을 다 만든 뒤 보내고, 실패하면 'PinWith' 기본 카드를 보냄. 아랍어 제목은 오른쪽 정렬
+
 ## v0.74 — 소개·문의 페이지 (2026-10-31)
 - 0.74-1 `/about`(PinWith 소개: 할 수 있는 일, 크리에이터·가게, '예시' 리스트는 팀이 공개 정보로 만든 것이고 특정 크리에이터와 무관, 운영 주체와 연락처)과 `/contact`(문의 종류, 콘텐츠 삭제 요청, support@pinwith.me) 새 페이지(한국어·영어). AdSense 재심사 대비
 - 0.74-2 문서 하단·시작 화면·My 아래 링크, sitemap, llms.txt에 추가

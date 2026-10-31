@@ -96,10 +96,20 @@ export async function getCuratorPreview(rawHandle: string): Promise<Preview | nu
 }
 
 // 링크 미리보기 그림에 쓸 한글 글꼴. 그림에 들어가는 글자만 구글 글꼴에서 받아 온다.
-export async function loadKoreanFont(text: string): Promise<ArrayBuffer | null> {
+// 링크 카드 글꼴: 글자에 든 문자 체계마다 구글 글꼴을 그 글자만큼만 받는다.
+// 한국어 글꼴 하나만 쓰면 아랍어·힌디어·태국어 등은 글자가 없어 그림 생성기가 글꼴을 따로 찾다가 응답이 깨졌다(10-30 오류).
+const FONT_RULES: { test: RegExp; family: string }[] = [
+  { test: /[\u0600-\u06ff\u0750-\u077f\ufb50-\ufdff\ufe70-\ufeff]/, family: "Noto+Sans+Arabic" },
+  { test: /[\u0900-\u097f]/, family: "Noto+Sans+Devanagari" },
+  { test: /[\u0e00-\u0e7f]/, family: "Noto+Sans+Thai" },
+  { test: /[\u3040-\u30ff]/, family: "Noto+Sans+JP" },
+];
+const HAN = /[\u3400-\u9fff\uf900-\ufaff]/;
+
+async function fetchFont(family: string, text: string): Promise<ArrayBuffer | null> {
   try {
     const css = await (
-      await fetch(`https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&text=${encodeURIComponent(text)}`, {
+      await fetch(`https://fonts.googleapis.com/css2?family=${family}:wght@700&text=${encodeURIComponent(text)}`, {
         // 옛 브라우저처럼 요청하면 woff2 대신 truetype을 준다(그림 생성기가 woff2를 못 읽음)
         headers: { "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/534.30 (KHTML, like Gecko) Safari/534.30" },
       })
@@ -110,6 +120,17 @@ export async function loadKoreanFont(text: string): Promise<ArrayBuffer | null> 
   } catch {
     return null;
   }
+}
+
+// 고른 순서대로 쓰인다: 라틴·키릴·베트남어(Noto Sans) → 문자 체계별 → 한글·나머지(Noto Sans KR)
+export async function loadPreviewFonts(text: string, lang: string): Promise<{ name: string; data: ArrayBuffer }[]> {
+  const families = ["Noto+Sans"];
+  for (const r of FONT_RULES) if (r.test.test(text)) families.push(r.family);
+  if (HAN.test(text)) families.push(lang === "zh-CN" ? "Noto+Sans+SC" : lang === "zh-TW" ? "Noto+Sans+TC" : lang === "ja" ? "Noto+Sans+JP" : "Noto+Sans+KR");
+  families.push("Noto+Sans+KR");
+  const uniq = [...new Set(families)];
+  const data = await Promise.all(uniq.map((f) => fetchFont(f, text)));
+  return uniq.flatMap((f, i) => (data[i] ? [{ name: f.replace(/\+/g, " "), data: data[i]! }] : []));
 }
 
 // 검색엔진·광고 심사 로봇이 찾을 수 있게 공개 리스트 주소를 모은다(sitemap.xml)

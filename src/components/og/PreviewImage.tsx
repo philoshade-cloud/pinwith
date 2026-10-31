@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { loadKoreanFont, type Preview } from "@/lib/public";
+import { loadPreviewFonts, type Preview } from "@/lib/public";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 
@@ -15,7 +15,8 @@ export async function renderPreview(p: Preview | null, kind: "list" | "curator")
     : "아는 곳을 핀으로 꽂아, 링크 하나로";
   const themes = (p?.themes ?? []).slice(0, 4).map((t) => `#${t}`).join("  ");
   const text = `${title}${sub}${themes}PinWith0123456789·`;
-  const font = await loadKoreanFont(text);
+  const fonts = await loadPreviewFonts(text, p?.lang ?? "ko");
+  const rtl = /[\u0600-\u06ff]/.test(title);
 
   // 핀 좌표를 그림 안 상자(440×470)에 맞춘다
   const W = 440, H = 470, PAD = 40;
@@ -29,13 +30,14 @@ export async function renderPreview(p: Preview | null, kind: "list" | "curator")
     y: H / 2 - (x.lat - (minLat + maxLat) / 2) * k,
   }));
 
-  return new ImageResponse(
+  const draw = (withFonts: boolean) =>
+    new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", background: "#ffffff", fontFamily: "NotoKR" }}>
+      <div style={{ width: "100%", height: "100%", display: "flex", background: "#ffffff", fontFamily: fonts.map((f) => `"${f.name}"`).join(", ") || undefined }}>
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "64px 56px", width: 700 }}>
           <div style={{ display: "flex", fontSize: 34, color: "#e0146e", fontWeight: 700 }}>PinWith</div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ display: "flex", fontSize: title.length > 18 ? 56 : 68, lineHeight: 1.15, color: "#18222f", fontWeight: 700 }}>
+            <div style={{ display: "flex", fontSize: title.length > 18 ? 56 : 68, lineHeight: 1.15, color: "#18222f", fontWeight: 700, justifyContent: rtl ? "flex-end" : "flex-start", textAlign: rtl ? "right" : "left" }}>
               {title}
             </div>
             <div style={{ display: "flex", marginTop: 24, fontSize: 32, color: "#5b6878" }}>{sub}</div>
@@ -81,7 +83,27 @@ export async function renderPreview(p: Preview | null, kind: "list" | "curator")
         </div>
       </div>
     ),
-    // 한글 글꼴을 못 받으면 기본 글꼴로 그린다
-    font ? { ...OG_SIZE, fonts: [{ name: "NotoKR", data: font, weight: 700, style: "normal" }] } : OG_SIZE,
+    withFonts && fonts.length
+      ? { ...OG_SIZE, fonts: fonts.map((f) => ({ name: f.name, data: f.data, weight: 700 as const, style: "normal" as const })) }
+      : OG_SIZE,
+  );
+
+  // 그림을 끝까지 만든 뒤 보낸다. 중간에 깨지면(글꼴 없는 글자 등) 제목 없이 기본 카드라도 보낸다.
+  try {
+    const buf = await draw(true).arrayBuffer();
+    return new Response(buf, { headers: { "Content-Type": "image/png", "Cache-Control": "public, max-age=3600" } });
+  } catch {
+    return renderFallback();
+  }
+}
+
+function renderFallback() {
+  return new ImageResponse(
+    (
+      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#ffffff" }}>
+        <div style={{ display: "flex", fontSize: 96, color: "#e0146e", fontWeight: 700 }}>PinWith</div>
+      </div>
+    ),
+    OG_SIZE,
   );
 }
